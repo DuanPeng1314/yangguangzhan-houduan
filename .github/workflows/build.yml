@@ -3,32 +3,34 @@
 name: Build, Release and Publish with GoReleaser
 
 on:
-  # 手动触发构建
+  # 推送到 main 分支时自动触发
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  # 手动触发（可选）
   workflow_dispatch:
     inputs:
       build_type:
         description: '构建类型'
         required: true
-        default: 'test'
+        default: 'release'
         type: choice
         options:
           - test      # 仅测试构建
-          - release   # 发布版本（需要打tag）
-  # 只有打tag时才自动触发发布
-  push:
-    tags:
-      - "v*"
+          - release   # 发布版本
 
 permissions:
   contents: write
   packages: write
 
 jobs:
-  # 开发构建和测试作业（手动触发 test 或非 tag 推送）
+  # 开发构建和测试作业（推送到 main 分支时自动触发）
   test:
     name: Test and Build (Development)
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.build_type == 'test' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && !startsWith(github.ref, 'refs/tags/') }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
