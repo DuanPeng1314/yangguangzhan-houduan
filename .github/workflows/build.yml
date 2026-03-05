@@ -24,15 +24,6 @@ jobs:
           submodules: "recursive"
           token: ${{ secrets.GH_PAT || github.token }}
 
-      - name: Update frontend submodule to latest
-        run: |
-          echo "🔄 Updating frontend submodule to latest commit..."
-          cd frontend
-          git pull origin main
-          cd ..
-          echo "✅ Frontend submodule updated"
-          git submodule status
-
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
