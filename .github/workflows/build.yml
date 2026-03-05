@@ -3,25 +3,32 @@
 name: Build, Release and Publish with GoReleaser
 
 on:
+  # 手动触发构建
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: '构建类型'
+        required: true
+        default: 'test'
+        type: choice
+        options:
+          - test      # 仅测试构建
+          - release   # 发布版本（需要打tag）
+  # 只有打tag时才自动触发发布
   push:
-    branches:
-      - main
     tags:
       - "v*"
-  pull_request:
-    branches:
-      - main
 
 permissions:
   contents: write
   packages: write
 
 jobs:
-  # 开发构建和测试作业（非 tag 推送）
+  # 开发构建和测试作业（手动触发 test 或非 tag 推送）
   test:
     name: Test and Build (Development)
     runs-on: ubuntu-latest
-    if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.build_type == 'test' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -29,6 +36,15 @@ jobs:
           fetch-depth: 0
           submodules: "recursive"
           token: ${{ secrets.GH_PAT || github.token }}
+
+      - name: Update frontend submodule to latest
+        run: |
+          echo "🔄 Updating frontend submodule to latest commit..."
+          cd frontend
+          git pull origin main
+          cd ..
+          echo "✅ Frontend submodule updated"
+          git submodule status
 
       - name: Set up Go
         uses: actions/setup-go@v5
@@ -153,6 +169,15 @@ jobs:
           submodules: "recursive"
           token: ${{ secrets.GH_PAT || github.token }}
 
+      - name: Update frontend submodule to latest
+        run: |
+          echo "🔄 Updating frontend submodule to latest commit..."
+          cd frontend
+          git pull origin main
+          cd ..
+          echo "✅ Frontend submodule updated"
+          git submodule status
+
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
@@ -177,6 +202,13 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Log in to GitCode Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: gitcode.com
+          username: ${{ secrets.GITCODE_USER }}
+          password: ${{ secrets.GITCODE_TOKEN }}
 
       - name: Free disk space
         run: |
@@ -235,6 +267,44 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DOCKER_CLI_EXPERIMENTAL: enabled
           GORELEASER_PREVIOUS_TAG: ${{ steps.prev_tag.outputs.use_previous_tag == 'true' && steps.prev_tag.outputs.previous_tag || '' }}
+
+      - name: Push images to GitCode Registry
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/}"
+          echo "🔄 Pushing images to GitCode Registry..."
+          
+          # 拉取已构建的镜像并推送到 GitCode
+          docker pull ghcr.io/duanpeng1314/anheyu-backend:${VERSION}-amd64
+          docker pull ghcr.io/duanpeng1314/anheyu-backend:${VERSION}-arm64
+          
+          # 标记为 GitCode 镜像
+          docker tag ghcr.io/duanpeng1314/anheyu-backend:${VERSION}-amd64 gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}-amd64
+          docker tag ghcr.io/duanpeng1314/anheyu-backend:${VERSION}-arm64 gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}-arm64
+          
+          # 推送到 GitCode
+          docker push gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}-amd64
+          docker push gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}-arm64
+          
+          # 创建并推送 manifest（多架构镜像）
+          docker manifest create gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION} \
+            gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}-amd64 \
+            gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}-arm64
+          docker manifest push gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}
+          
+          # 如果是正式版本，也推送 latest 标签
+          if [[ "$VERSION" != *"beta"* ]] && [[ "$VERSION" != *"alpha"* ]] && [[ "$VERSION" != *"rc"* ]]; then
+            docker tag ghcr.io/duanpeng1314/anheyu-backend:latest-amd64 gitcode.com/jiguang7575/yangguangzhan-houduan:latest-amd64 || true
+            docker tag ghcr.io/duanpeng1314/anheyu-backend:latest-arm64 gitcode.com/jiguang7575/yangguangzhan-houduan:latest-arm64 || true
+            docker push gitcode.com/jiguang7575/yangguangzhan-houduan:latest-amd64 || true
+            docker push gitcode.com/jiguang7575/yangguangzhan-houduan:latest-arm64 || true
+            
+            docker manifest create gitcode.com/jiguang7575/yangguangzhan-houduan:latest \
+              gitcode.com/jiguang7575/yangguangzhan-houduan:latest-amd64 \
+              gitcode.com/jiguang7575/yangguangzhan-houduan:latest-arm64 || true
+            docker manifest push gitcode.com/jiguang7575/yangguangzhan-houduan:latest || true
+          fi
+          
+          echo "✅ Images pushed to GitCode Registry successfully!"
 
       # GitHub Packages 不需要单独更新 README，会自动同步
 
