@@ -156,7 +156,7 @@ dockers:
     goarch: amd64
 
     image_templates:
-      - "anheyu/anheyu-backend:{{ .Version }}-amd64"
+      - "a17145757575/anheyu-backend:{{ .Version }}-amd64"
 
     dockerfile: Dockerfile
     use: buildx
@@ -186,7 +186,7 @@ dockers:
     skip_push: '{{ or (contains .Version "beta") (contains .Version "alpha") (contains .Version "rc") }}'
 
     image_templates:
-      - "anheyu/anheyu-backend:latest-amd64"
+      - "a17145757575/anheyu-backend:latest-amd64"
 
     dockerfile: Dockerfile
     use: buildx
@@ -215,7 +215,7 @@ dockers:
     goarch: arm64
 
     image_templates:
-      - "anheyu/anheyu-backend:{{ .Version }}-arm64"
+      - "a17145757575/anheyu-backend:{{ .Version }}-arm64"
 
     dockerfile: Dockerfile
     use: buildx
@@ -245,7 +245,7 @@ dockers:
     skip_push: '{{ or (contains .Version "beta") (contains .Version "alpha") (contains .Version "rc") }}'
 
     image_templates:
-      - "anheyu/anheyu-backend:latest-arm64"
+      - "a17145757575/anheyu-backend:latest-arm64"
 
     dockerfile: Dockerfile
     use: buildx
@@ -275,7 +275,7 @@ dockers:
     skip_push: '{{ not (contains .Version "beta") }}'
 
     image_templates:
-      - "anheyu/anheyu-backend:beta-amd64"
+      - "a17145757575/anheyu-backend:beta-amd64"
 
     dockerfile: Dockerfile
     use: buildx
@@ -302,7 +302,7 @@ dockers:
     skip_push: '{{ not (contains .Version "beta") }}'
 
     image_templates:
-      - "anheyu/anheyu-backend:beta-arm64"
+      - "a17145757575/anheyu-backend:beta-arm64"
 
     dockerfile: Dockerfile
     use: buildx
@@ -329,7 +329,7 @@ dockers:
     skip_push: '{{ not (contains .Version "alpha") }}'
 
     image_templates:
-      - "anheyu/anheyu-backend:alpha-amd64"
+      - "a17145757575/anheyu-backend:alpha-amd64"
 
     dockerfile: Dockerfile
     use: buildx
@@ -356,7 +356,7 @@ dockers:
     skip_push: '{{ not (contains .Version "alpha") }}'
 
     image_templates:
-      - "anheyu/anheyu-backend:alpha-arm64"
+      - "a17145757575/anheyu-backend:alpha-arm64"
 
     dockerfile: Dockerfile
     use: buildx
@@ -383,7 +383,7 @@ dockers:
     skip_push: '{{ not (contains .Version "rc") }}'
 
     image_templates:
-      - "anheyu/anheyu-backend:rc-amd64"
+      - "a17145757575/anheyu-backend:rc-amd64"
 
     dockerfile: Dockerfile
     use: buildx
@@ -410,7 +410,7 @@ dockers:
     skip_push: '{{ not (contains .Version "rc") }}'
 
     image_templates:
-      - "anheyu/anheyu-backend:rc-arm64"
+      - "a17145757575/anheyu-backend:rc-arm64"
 
     dockerfile: Dockerfile
     use: buildx
@@ -433,44 +433,44 @@ dockers:
 # Docker Manifest 配置 - 多架构镜像聚合
 docker_manifests:
   # 版本标签的多架构 manifest（所有版本）
-  - name_template: "anheyu/anheyu-backend:{{ .Version }}"
+  - name_template: "a17145757575/anheyu-backend:{{ .Version }}"
     image_templates:
-      - "anheyu/anheyu-backend:{{ .Version }}-amd64"
-      - "anheyu/anheyu-backend:{{ .Version }}-arm64"
+      - "a17145757575/anheyu-backend:{{ .Version }}-amd64"
+      - "a17145757575/anheyu-backend:{{ .Version }}-arm64"
 
   # latest 标签的多架构 manifest（仅正式版本）
-  - name_template: "anheyu/anheyu-backend:latest"
+  - name_template: "a17145757575/anheyu-backend:latest"
     image_templates:
-      - "anheyu/anheyu-backend:latest-amd64"
-      - "anheyu/anheyu-backend:latest-arm64"
+      - "a17145757575/anheyu-backend:latest-amd64"
+      - "a17145757575/anheyu-backend:latest-arm64"
     skip_push: '{{ or (contains .Version "beta") (contains .Version "alpha") (contains .Version "rc") }}'
 
   # Beta版本的多架构 manifest
-  - name_template: "anheyu/anheyu-backend:beta"
+  - name_template: "a17145757575/anheyu-backend:beta"
     skip_push: '{{ not (contains .Version "beta") }}'
     image_templates:
-      - "anheyu/anheyu-backend:beta-amd64"
-      - "anheyu/anheyu-backend:beta-arm64"
+      - "a17145757575/anheyu-backend:beta-amd64"
+      - "a17145757575/anheyu-backend:beta-arm64"
 
   # Alpha版本的多架构 manifest
-  - name_template: "anheyu/anheyu-backend:alpha"
+  - name_template: "a17145757575/anheyu-backend:alpha"
     skip_push: '{{ not (contains .Version "alpha") }}'
     image_templates:
-      - "anheyu/anheyu-backend:alpha-amd64"
-      - "anheyu/anheyu-backend:alpha-arm64"
+      - "a17145757575/anheyu-backend:alpha-amd64"
+      - "a17145757575/anheyu-backend:alpha-arm64"
 
   # RC版本的多架构 manifest
-  - name_template: "anheyu/anheyu-backend:rc"
+  - name_template: "a17145757575/anheyu-backend:rc"
     skip_push: '{{ not (contains .Version "rc") }}'
     image_templates:
-      - "anheyu/anheyu-backend:rc-amd64"
-      - "anheyu/anheyu-backend:rc-arm64"
+      - "a17145757575/anheyu-backend:rc-amd64"
+      - "a17145757575/anheyu-backend:rc-arm64"
 
 # GitHub Release 配置
 release:
   github:
-    owner: anzhiyu-c
-    name: anheyu-app
+    owner: DuanPeng1314
+    name: yangguangzhan-houduan
 
   # Release 名称
   name_template: "Anheyu App {{ .Tag }}"
