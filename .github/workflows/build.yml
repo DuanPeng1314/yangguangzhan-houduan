@@ -65,7 +65,7 @@ jobs:
       - name: Build Frontend
         run: |
           cd frontend
-          rm -rf .next node_modules
+          rm -rf .next
           npm ci
           npm run build
 
