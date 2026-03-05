@@ -505,6 +505,19 @@ var AllSettings = []Definition{
 	// --- 系统图形验证码配置 ---
 	{Key: constant.KeyImageCaptchaLength, Value: "4", Comment: "图形验证码字符长度 (默认4位)", IsPublic: true},
 	{Key: constant.KeyImageCaptchaExpire, Value: "300", Comment: "图形验证码过期时间（秒，默认300秒/5分钟）", IsPublic: true},
+
+	// --- SEO 推送配置 ---
+	{Key: constant.KeySeoAutoSubmit, Value: "false", Comment: "是否启用 SEO 自动推送 (true/false)，发布或更新文章时自动推送到搜索引擎", IsPublic: true},
+	{Key: constant.KeySeoRetryTimes, Value: "3", Comment: "推送失败重试次数", IsPublic: true},
+	{Key: constant.KeySeoRetryInterval, Value: "1000", Comment: "重试间隔（毫秒）", IsPublic: true},
+	{Key: constant.KeySeoBaiduEnable, Value: "false", Comment: "是否启用百度推送 (true/false)", IsPublic: true},
+	{Key: constant.KeySeoBaiduSite, Value: "", Comment: "百度推送站点地址，如 https://example.com", IsPublic: true},
+	{Key: constant.KeySeoBaiduToken, Value: "", Comment: "百度推送 Token（从百度搜索资源平台获取）", IsPublic: false},
+	{Key: constant.KeySeoBingEnable, Value: "false", Comment: "是否启用 Bing IndexNow 推送 (true/false)", IsPublic: true},
+	{Key: constant.KeySeoBingApiKey, Value: "", Comment: "Bing IndexNow API Key", IsPublic: false},
+	{Key: constant.KeySeoBingSiteUrl, Value: "", Comment: "Bing 站点 URL，如 https://example.com", IsPublic: true},
+	{Key: constant.KeySeoGoogleEnable, Value: "false", Comment: "是否启用 Google Indexing API 推送 (true/false)", IsPublic: true},
+	{Key: constant.KeySeoGoogleCredential, Value: "", Comment: "Google Service Account 凭证 JSON 内容", IsPublic: false},
 }
 
 // AllUserGroups 是所有默认用户组的"单一事实来源"

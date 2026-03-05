@@ -451,6 +451,10 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 	themeSvc := theme.NewThemeService(entClient, userRepo)
 	_ = listener.NewFilePostProcessingListener(eventBus, taskBroker, extractionSvc)
 
+	seoModuleListener := listener.NewSeoModuleListener(settingSvc)
+	seoModuleListener.RegisterHandlers(eventBus)
+	log.Println("✅ SEO 模块监听器已注册")
+
 	// 初始化缓存清理服务（SSR 模式下启用）
 	revalidateSvc := cache.NewRevalidateService()
 	cacheRevalidateListener := listener.NewCacheRevalidateListener(revalidateSvc)

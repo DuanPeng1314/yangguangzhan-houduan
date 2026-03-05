@@ -399,4 +399,17 @@ const (
 	// --- 系统图形验证码配置 ---
 	KeyImageCaptchaLength SettingKey = "image_captcha.length" // 图形验证码字符长度
 	KeyImageCaptchaExpire SettingKey = "image_captcha.expire" // 图形验证码过期时间（秒）
+
+	// --- SEO 推送配置 ---
+	KeySeoAutoSubmit     SettingKey = "seo.auto_submit"      // 是否启用自动推送
+	KeySeoRetryTimes     SettingKey = "seo.retry_times"      // 重试次数
+	KeySeoRetryInterval  SettingKey = "seo.retry_interval"   // 重试间隔（毫秒）
+	KeySeoBaiduEnable    SettingKey = "seo.baidu.enable"     // 启用百度推送
+	KeySeoBaiduSite      SettingKey = "seo.baidu.site"       // 百度站点地址
+	KeySeoBaiduToken     SettingKey = "seo.baidu.token"      // 百度推送 Token
+	KeySeoBingEnable     SettingKey = "seo.bing.enable"      // 启用 Bing 推送
+	KeySeoBingApiKey     SettingKey = "seo.bing.api_key"     // Bing API Key
+	KeySeoBingSiteUrl    SettingKey = "seo.bing.site_url"    // Bing 站点 URL
+	KeySeoGoogleEnable   SettingKey = "seo.google.enable"    // 启用 Google 推送
+	KeySeoGoogleCredential SettingKey = "seo.google.credential" // Google Service Account 凭证
 )
