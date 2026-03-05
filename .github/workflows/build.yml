@@ -74,6 +74,10 @@ jobs:
           rm -rf frontend/node_modules
           echo "✅ Cleaned frontend/node_modules to save disk space"
 
+      - name: Prepare Go version environment
+        run: |
+          echo "GOVERSION=$(go version)" >> $GITHUB_ENV
+
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
