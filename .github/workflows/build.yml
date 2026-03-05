@@ -67,7 +67,6 @@ jobs:
           cd frontend
           rm -rf .next
           npm ci
-          npm rebuild lightningcss
           npm run build
 
       - name: Clean frontend node_modules
