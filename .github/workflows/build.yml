@@ -240,7 +240,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: anheyu/anheyu-backend
+          repository: a17145757575/anheyu-backend
           readme-filepath: ./README.md
         continue-on-error: true
 
