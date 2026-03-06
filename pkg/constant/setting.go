@@ -409,7 +409,6 @@ const (
 	KeySeoBaiduToken     SettingKey = "seo.baidu.token"      // 百度推送 Token
 	KeySeoBingEnable     SettingKey = "seo.bing.enable"      // 启用 Bing 推送
 	KeySeoBingApiKey     SettingKey = "seo.bing.api_key"     // Bing API Key
-	KeySeoBingSiteUrl    SettingKey = "seo.bing.site_url"    // Bing 站点 URL
 	KeySeoGoogleEnable   SettingKey = "seo.google.enable"    // 启用 Google 推送
 	KeySeoGoogleCredential SettingKey = "seo.google.credential" // Google Service Account 凭证
 )

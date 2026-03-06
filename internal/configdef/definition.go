@@ -511,11 +511,10 @@ var AllSettings = []Definition{
 	{Key: constant.KeySeoRetryTimes, Value: "3", Comment: "推送失败重试次数", IsPublic: true},
 	{Key: constant.KeySeoRetryInterval, Value: "1000", Comment: "重试间隔（毫秒）", IsPublic: true},
 	{Key: constant.KeySeoBaiduEnable, Value: "false", Comment: "是否启用百度推送 (true/false)", IsPublic: true},
-	{Key: constant.KeySeoBaiduSite, Value: "", Comment: "百度推送站点地址，如 https://example.com", IsPublic: true},
+	{Key: constant.KeySeoBaiduSite, Value: "", Comment: "百度推送站点地址（不带 https://），如 www.example.com", IsPublic: true},
 	{Key: constant.KeySeoBaiduToken, Value: "", Comment: "百度推送 Token（从百度搜索资源平台获取）", IsPublic: false},
 	{Key: constant.KeySeoBingEnable, Value: "false", Comment: "是否启用 Bing IndexNow 推送 (true/false)", IsPublic: true},
 	{Key: constant.KeySeoBingApiKey, Value: "", Comment: "Bing IndexNow API Key", IsPublic: false},
-	{Key: constant.KeySeoBingSiteUrl, Value: "", Comment: "Bing 站点 URL，如 https://example.com", IsPublic: true},
 	{Key: constant.KeySeoGoogleEnable, Value: "false", Comment: "是否启用 Google Indexing API 推送 (true/false)", IsPublic: true},
 	{Key: constant.KeySeoGoogleCredential, Value: "", Comment: "Google Service Account 凭证 JSON 内容", IsPublic: false},
 }

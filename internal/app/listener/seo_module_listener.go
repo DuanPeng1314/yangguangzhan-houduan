@@ -20,6 +20,12 @@ func NewSeoModuleListener(settingSvc setting.SettingService) *SeoModuleListener 
 	seoModule := seo.NewSeoModule()
 	registry.Register(seoModule)
 
+	if err := seoModule.Init(&modules.ModuleContext{
+		SettingSvc: settingSvc,
+	}); err != nil {
+		log.Printf("[SeoModuleListener] SEO 模块初始化失败: %v", err)
+	}
+
 	return &SeoModuleListener{
 		registry:   registry,
 		settingSvc: settingSvc,
