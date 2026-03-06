@@ -159,12 +159,6 @@ func (s *serviceImpl) SetEventBus(eventBus *event.EventBus) {
 	s.eventBus = eventBus
 }
 
-// ArticleSeoPayload 文章 SEO 推送事件载荷
-type ArticleSeoPayload struct {
-	ID  string
-	URL string
-}
-
 // createArticleHistory 创建文章历史版本（内部方法）
 func (s *serviceImpl) createArticleHistory(ctx context.Context, article *model.Article, editorID uint, changeNote string) {
 	if s.historyRepo == nil {
@@ -1204,10 +1198,15 @@ func (s *serviceImpl) Create(ctx context.Context, req *model.CreateArticleReques
 
 		// 发布文章发布事件（用于 SEO 推送等）
 		if s.eventBus != nil {
-			articleURL := fmt.Sprintf("https://%s/posts/%s", s.settingSvc.Get("site_url"), newArticle.ID)
-			s.eventBus.Publish(event.ArticlePublished, &ArticleSeoPayload{
-				ID:  newArticle.ID,
-				URL: articleURL,
+			slug := newArticle.Abbrlink
+			if slug == "" {
+				slug = newArticle.ID
+			}
+			articleURL := fmt.Sprintf("https://%s/posts/%s", s.settingSvc.Get("site_url"), slug)
+			s.eventBus.Publish(event.ArticlePublished, &event.ArticlePayload{
+				ID:   newArticle.ID,
+				Slug: slug,
+				URL:  articleURL,
 			})
 			log.Printf("[Create] 发布 ArticlePublished 事件: %s", articleURL)
 		}

@@ -18,4 +18,9 @@ buildkitd.toml
 themes
 backup
 static
-DEVELOPMENT_WORKFLOW.mddata/anheyu_app
+DEVELOPMENT_WORKFLOW.md
+data/anheyu_app
+
+# 开发文档（不提交到公开仓库）
+.docs
+.trae

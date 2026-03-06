@@ -16,10 +16,10 @@ type SeoModuleListener struct {
 
 func NewSeoModuleListener(settingSvc setting.SettingService) *SeoModuleListener {
 	registry := modules.GetRegistry()
-	
+
 	seoModule := seo.NewSeoModule()
 	registry.Register(seoModule)
-	
+
 	return &SeoModuleListener{
 		registry:   registry,
 		settingSvc: settingSvc,
@@ -29,23 +29,18 @@ func NewSeoModuleListener(settingSvc setting.SettingService) *SeoModuleListener 
 func (l *SeoModuleListener) RegisterHandlers(bus *event.EventBus) {
 	bus.Subscribe(event.ArticlePublished, l.onArticlePublished)
 	bus.Subscribe(event.ArticleUpdated, l.onArticleUpdated)
-	
+
 	log.Println("[SeoModuleListener] SEO 模块事件监听器已注册")
 }
 
-type ArticleSeoPayload struct {
-	ID  string
-	URL string
-}
-
 func (l *SeoModuleListener) onArticlePublished(payload interface{}) {
-	if p, ok := payload.(*ArticleSeoPayload); ok {
+	if p, ok := payload.(*event.ArticlePayload); ok {
 		l.registry.OnArticlePublished(p.ID, p.URL)
 	}
 }
 
 func (l *SeoModuleListener) onArticleUpdated(payload interface{}) {
-	if p, ok := payload.(*ArticleSeoPayload); ok {
+	if p, ok := payload.(*event.ArticlePayload); ok {
 		l.registry.OnArticleUpdated(p.ID, p.URL)
 	}
 }
