@@ -49,13 +49,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Log in to GitCode Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: gitcode.com
-          username: ${{ secrets.GITCODE_USER }}
-          password: ${{ secrets.GITCODE_TOKEN }}
-
       - name: Free disk space
         run: |
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
@@ -88,44 +81,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DOCKER_CLI_EXPERIMENTAL: enabled
 
-      - name: Push images to GitCode Registry
-        run: |
-          VERSION="${GITHUB_REF#refs/tags/v}"
-          echo "🔄 Pushing images to GitCode Registry..."
-          
-          # 拉取已构建的镜像并推送到 GitCode
-          docker pull ghcr.io/duanpeng1314/anheyu-backend:${VERSION}-amd64
-          docker pull ghcr.io/duanpeng1314/anheyu-backend:${VERSION}-arm64
-          
-          # 标记为 GitCode 镜像
-          docker tag ghcr.io/duanpeng1314/anheyu-backend:${VERSION}-amd64 gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}-amd64
-          docker tag ghcr.io/duanpeng1314/anheyu-backend:${VERSION}-arm64 gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}-arm64
-          
-          # 推送到 GitCode
-          docker push gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}-amd64
-          docker push gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}-arm64
-          
-          # 创建并推送 manifest（多架构镜像）
-          docker manifest create gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION} \
-            gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}-amd64 \
-            gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}-arm64
-          docker manifest push gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}
-          
-          # 如果是正式版本，也推送 latest 标签
-          if [[ "$VERSION" != *"beta"* ]] && [[ "$VERSION" != *"alpha"* ]] && [[ "$VERSION" != *"rc"* ]]; then
-            docker tag ghcr.io/duanpeng1314/anheyu-backend:latest-amd64 gitcode.com/jiguang7575/yangguangzhan-houduan:latest-amd64 || true
-            docker tag ghcr.io/duanpeng1314/anheyu-backend:latest-arm64 gitcode.com/jiguang7575/yangguangzhan-houduan:latest-arm64 || true
-            docker push gitcode.com/jiguang7575/yangguangzhan-houduan:latest-amd64 || true
-            docker push gitcode.com/jiguang7575/yangguangzhan-houduan:latest-arm64 || true
-            
-            docker manifest create gitcode.com/jiguang7575/yangguangzhan-houduan:latest \
-              gitcode.com/jiguang7575/yangguangzhan-houduan:latest-amd64 \
-              gitcode.com/jiguang7575/yangguangzhan-houduan:latest-arm64 || true
-            docker manifest push gitcode.com/jiguang7575/yangguangzhan-houduan:latest || true
-          fi
-          
-          echo "✅ Images pushed to GitCode Registry successfully!"
-
       - name: Create release summary
         run: |
           VERSION="${GITHUB_REF#refs/tags/v}"
@@ -142,11 +97,7 @@ jobs:
           echo "- **Commit**: \`$(git rev-parse --short HEAD)\`" >> $GITHUB_STEP_SUMMARY
           echo "- **Build Date**: \`$(date -u '+%Y-%m-%d %H:%M:%S')\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "###  Docker Pull" >> $GITHUB_STEP_SUMMARY
+          echo "### 🐳 Docker Pull" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "# GitHub Packages" >> $GITHUB_STEP_SUMMARY
           echo "docker pull ghcr.io/duanpeng1314/anheyu-backend:${VERSION}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "# GitCode (国内加速)" >> $GITHUB_STEP_SUMMARY
-          echo "docker pull gitcode.com/jiguang7575/yangguangzhan-houduan:${VERSION}" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
