@@ -1202,7 +1202,8 @@ func (s *serviceImpl) Create(ctx context.Context, req *model.CreateArticleReques
 			if slug == "" {
 				slug = newArticle.ID
 			}
-			articleURL := fmt.Sprintf("https://%s/posts/%s", s.settingSvc.Get("site_url"), slug)
+			siteURL := s.settingSvc.Get("SITE_URL")
+			articleURL := fmt.Sprintf("%s/posts/%s", strings.TrimSuffix(siteURL, "/"), slug)
 			s.eventBus.Publish(event.ArticlePublished, &event.ArticlePayload{
 				ID:   newArticle.ID,
 				Slug: slug,

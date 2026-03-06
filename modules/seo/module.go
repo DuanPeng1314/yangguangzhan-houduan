@@ -2,6 +2,7 @@ package seo
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -12,6 +13,7 @@ import (
 
 	"github.com/anzhiyu-c/anheyu-app/modules"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/setting"
+	"golang.org/x/oauth2/google"
 )
 
 type SeoModule struct {
@@ -268,65 +270,19 @@ func (m *SeoModule) pushToGoogle(url string) error {
 }
 
 func (m *SeoModule) getGoogleAccessToken(credentialJSON string) (string, error) {
-	var cred struct {
-		Type                string `json:"type"`
-		ProjectID           string `json:"project_id"`
-		PrivateKeyID        string `json:"private_key_id"`
-		PrivateKey          string `json:"private_key"`
-		ClientEmail         string `json:"client_email"`
-		ClientID            string `json:"client_id"`
-		AuthURI             string `json:"auth_uri"`
-		TokenURI            string `json:"token_uri"`
-		AuthProviderCertURL string `json:"auth_provider_x509_cert_url"`
-		ClientCertURL       string `json:"client_x509_cert_url"`
-	}
+	ctx := context.Background()
 
-	if err := json.Unmarshal([]byte(credentialJSON), &cred); err != nil {
+	config, err := google.JWTConfigFromJSON([]byte(credentialJSON), "https://www.googleapis.com/auth/indexing")
+	if err != nil {
 		return "", fmt.Errorf("解析凭证 JSON 失败: %w", err)
 	}
 
-	jwtToken, err := m.createJWT(cred.ClientEmail, cred.PrivateKey)
+	token, err := config.TokenSource(ctx).Token()
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("获取 Token 失败: %w", err)
 	}
 
-	tokenURL := "https://oauth2.googleapis.com/token"
-	data := fmt.Sprintf("grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=%s", jwtToken)
-
-	req, err := http.NewRequest("POST", tokenURL, strings.NewReader(data))
-	if err != nil {
-		return "", err
-	}
-	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-
-	resp, err := m.httpClient.Do(req)
-	if err != nil {
-		return "", err
-	}
-	defer resp.Body.Close()
-
-	respBody, _ := io.ReadAll(resp.Body)
-
-	var tokenResp struct {
-		AccessToken string `json:"access_token"`
-		TokenType   string `json:"token_type"`
-		ExpiresIn   int    `json:"expires_in"`
-		Error       string `json:"error,omitempty"`
-	}
-
-	if err := json.Unmarshal(respBody, &tokenResp); err != nil {
-		return "", fmt.Errorf("解析 Token 响应失败: %w", err)
-	}
-
-	if tokenResp.Error != "" {
-		return "", fmt.Errorf("获取 Token 失败: %s", tokenResp.Error)
-	}
-
-	return tokenResp.AccessToken, nil
-}
-
-func (m *SeoModule) createJWT(clientEmail, privateKey string) (string, error) {
-	return "", fmt.Errorf("JWT 生成需要 crypto/rsa 支持，建议使用 google.golang.org/api 库")
+	return token.AccessToken, nil
 }
 
 func parseInt(s string) (int, error) {
