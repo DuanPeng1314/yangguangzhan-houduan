@@ -433,8 +433,8 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 	subscriberSvc := subscriber_service.NewService(entClient, redisClient, emailSvc)
 
 	articleSvc := article_service.NewService(articleRepo, postTagRepo, postCategoryRepo, commentRepo, docSeriesRepo, pageRepo, txManager, cacheSvc, geoSvc, taskBroker, settingSvc, parserSvc, fileSvc, directLinkSvc, searchSvc, primaryColorSvc, cdnSvc, subscriberSvc, userRepo)
-	// 注入文章历史版本仓储
 	articleSvc.SetHistoryRepo(articleHistoryRepo)
+	articleSvc.SetEventBus(eventBus)
 	// articleHistorySvc 已在 taskBroker 之前创建
 	log.Printf("[DEBUG] 正在初始化 PushooService...")
 	pushooSvc := utility.NewPushooService(settingSvc)

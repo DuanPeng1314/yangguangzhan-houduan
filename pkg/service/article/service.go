@@ -17,6 +17,7 @@ import (
 	"unicode"
 
 	"github.com/anzhiyu-c/anheyu-app/internal/app/task"
+	"github.com/anzhiyu-c/anheyu-app/internal/pkg/event"
 	"github.com/anzhiyu-c/anheyu-app/pkg/constant"
 	"github.com/anzhiyu-c/anheyu-app/pkg/domain/model"
 	"github.com/anzhiyu-c/anheyu-app/pkg/domain/repository"
@@ -70,6 +71,9 @@ type Service interface {
 	// SetHistoryRepo 设置文章历史版本仓储（可选注入，用于文章发布时自动记录历史版本）
 	SetHistoryRepo(historyRepo repository.ArticleHistoryRepository)
 
+	// SetEventBus 设置事件总线（可选注入，用于文章发布时触发 SEO 推送等事件）
+	SetEventBus(eventBus *event.EventBus)
+
 	// GetArticleStatistics 获取文章统计数据（用于前台展示）
 	GetArticleStatistics(ctx context.Context) (*model.ArticleStatistics, error)
 }
@@ -96,7 +100,8 @@ type serviceImpl struct {
 	subscriberSvc    *subscriber.Service
 
 	userRepo    repository.UserRepository
-	historyRepo repository.ArticleHistoryRepository // 文章历史版本仓储
+	historyRepo repository.ArticleHistoryRepository
+	eventBus    *event.EventBus
 }
 
 func NewService(
@@ -147,6 +152,17 @@ func NewService(
 // SetHistoryRepo 设置文章历史版本仓储（可选注入）
 func (s *serviceImpl) SetHistoryRepo(historyRepo repository.ArticleHistoryRepository) {
 	s.historyRepo = historyRepo
+}
+
+// SetEventBus 设置事件总线（可选注入）
+func (s *serviceImpl) SetEventBus(eventBus *event.EventBus) {
+	s.eventBus = eventBus
+}
+
+// ArticleSeoPayload 文章 SEO 推送事件载荷
+type ArticleSeoPayload struct {
+	ID  string
+	URL string
 }
 
 // createArticleHistory 创建文章历史版本（内部方法）
@@ -1184,6 +1200,16 @@ func (s *serviceImpl) Create(ctx context.Context, req *model.CreateArticleReques
 	if newArticle.Status == "PUBLISHED" {
 		if err := s.subscriberSvc.NotifyArticlePublished(ctx, newArticle); err != nil {
 			log.Printf("[Create] 触发订阅通知失败: %v", err)
+		}
+
+		// 发布文章发布事件（用于 SEO 推送等）
+		if s.eventBus != nil {
+			articleURL := fmt.Sprintf("https://%s/posts/%s", s.settingSvc.Get("site_url"), newArticle.ID)
+			s.eventBus.Publish(event.ArticlePublished, &ArticleSeoPayload{
+				ID:  newArticle.ID,
+				URL: articleURL,
+			})
+			log.Printf("[Create] 发布 ArticlePublished 事件: %s", articleURL)
 		}
 
 		// 创建历史版本记录（仅在发布时记录）
