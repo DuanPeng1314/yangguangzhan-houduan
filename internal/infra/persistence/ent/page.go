@@ -54,8 +54,16 @@ func (r *EntPageRepository) GetByID(ctx context.Context, id string) (*model.Page
 		return nil, fmt.Errorf("无效的页面ID: %w", err)
 	}
 
-	entPage, err := r.client.Page.Get(ctx, uint(idUint))
+	entPage, err := r.client.Page.Query().
+		Where(
+			page.ID(uint(idUint)),
+			page.DeletedAtIsNil(),
+		).
+		Only(ctx)
 	if err != nil {
+		if ent.IsNotFound(err) {
+			return nil, fmt.Errorf("页面不存在: %s", id)
+		}
 		return nil, fmt.Errorf("获取页面失败: %w", err)
 	}
 
@@ -71,7 +79,10 @@ func (r *EntPageRepository) GetByPath(ctx context.Context, path string) (*model.
 	}
 
 	entPage, err := r.client.Page.Query().
-		Where(page.Path(queryPath)).
+		Where(
+			page.Path(queryPath),
+			page.DeletedAtIsNil(),
+		).
 		First(ctx)
 
 	if err != nil {
@@ -87,7 +98,7 @@ func (r *EntPageRepository) GetByPath(ctx context.Context, path string) (*model.
 
 // List 列出页面
 func (r *EntPageRepository) List(ctx context.Context, options *model.ListPagesOptions) ([]*model.Page, int, error) {
-	query := r.client.Page.Query()
+	query := r.client.Page.Query().Where(page.DeletedAtIsNil())
 
 	// 搜索条件
 	if options.Search != "" {
@@ -209,7 +220,10 @@ func (r *EntPageRepository) Delete(ctx context.Context, id string) error {
 
 // ExistsByPath 检查路径是否存在
 func (r *EntPageRepository) ExistsByPath(ctx context.Context, path string, excludeID string) (bool, error) {
-	query := r.client.Page.Query().Where(page.Path(path))
+	query := r.client.Page.Query().Where(
+		page.Path(path),
+		page.DeletedAtIsNil(),
+	)
 
 	if excludeID != "" {
 		// 将string ID转换为uint
