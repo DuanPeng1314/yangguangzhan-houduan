@@ -25,316 +25,316 @@ type ArticleHistoryUpdate struct {
 }
 
 // Where appends a list predicates to the ArticleHistoryUpdate builder.
-func (_u *ArticleHistoryUpdate) Where(ps ...predicate.ArticleHistory) *ArticleHistoryUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (ahu *ArticleHistoryUpdate) Where(ps ...predicate.ArticleHistory) *ArticleHistoryUpdate {
+	ahu.mutation.Where(ps...)
+	return ahu
 }
 
 // SetArticleID sets the "article_id" field.
-func (_u *ArticleHistoryUpdate) SetArticleID(v uint) *ArticleHistoryUpdate {
-	_u.mutation.SetArticleID(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetArticleID(u uint) *ArticleHistoryUpdate {
+	ahu.mutation.SetArticleID(u)
+	return ahu
 }
 
 // SetNillableArticleID sets the "article_id" field if the given value is not nil.
-func (_u *ArticleHistoryUpdate) SetNillableArticleID(v *uint) *ArticleHistoryUpdate {
-	if v != nil {
-		_u.SetArticleID(*v)
+func (ahu *ArticleHistoryUpdate) SetNillableArticleID(u *uint) *ArticleHistoryUpdate {
+	if u != nil {
+		ahu.SetArticleID(*u)
 	}
-	return _u
+	return ahu
 }
 
 // SetVersion sets the "version" field.
-func (_u *ArticleHistoryUpdate) SetVersion(v int) *ArticleHistoryUpdate {
-	_u.mutation.ResetVersion()
-	_u.mutation.SetVersion(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetVersion(i int) *ArticleHistoryUpdate {
+	ahu.mutation.ResetVersion()
+	ahu.mutation.SetVersion(i)
+	return ahu
 }
 
 // SetNillableVersion sets the "version" field if the given value is not nil.
-func (_u *ArticleHistoryUpdate) SetNillableVersion(v *int) *ArticleHistoryUpdate {
-	if v != nil {
-		_u.SetVersion(*v)
+func (ahu *ArticleHistoryUpdate) SetNillableVersion(i *int) *ArticleHistoryUpdate {
+	if i != nil {
+		ahu.SetVersion(*i)
 	}
-	return _u
+	return ahu
 }
 
-// AddVersion adds value to the "version" field.
-func (_u *ArticleHistoryUpdate) AddVersion(v int) *ArticleHistoryUpdate {
-	_u.mutation.AddVersion(v)
-	return _u
+// AddVersion adds i to the "version" field.
+func (ahu *ArticleHistoryUpdate) AddVersion(i int) *ArticleHistoryUpdate {
+	ahu.mutation.AddVersion(i)
+	return ahu
 }
 
 // SetTitle sets the "title" field.
-func (_u *ArticleHistoryUpdate) SetTitle(v string) *ArticleHistoryUpdate {
-	_u.mutation.SetTitle(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetTitle(s string) *ArticleHistoryUpdate {
+	ahu.mutation.SetTitle(s)
+	return ahu
 }
 
 // SetNillableTitle sets the "title" field if the given value is not nil.
-func (_u *ArticleHistoryUpdate) SetNillableTitle(v *string) *ArticleHistoryUpdate {
-	if v != nil {
-		_u.SetTitle(*v)
+func (ahu *ArticleHistoryUpdate) SetNillableTitle(s *string) *ArticleHistoryUpdate {
+	if s != nil {
+		ahu.SetTitle(*s)
 	}
-	return _u
+	return ahu
 }
 
 // SetContentMd sets the "content_md" field.
-func (_u *ArticleHistoryUpdate) SetContentMd(v string) *ArticleHistoryUpdate {
-	_u.mutation.SetContentMd(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetContentMd(s string) *ArticleHistoryUpdate {
+	ahu.mutation.SetContentMd(s)
+	return ahu
 }
 
 // SetNillableContentMd sets the "content_md" field if the given value is not nil.
-func (_u *ArticleHistoryUpdate) SetNillableContentMd(v *string) *ArticleHistoryUpdate {
-	if v != nil {
-		_u.SetContentMd(*v)
+func (ahu *ArticleHistoryUpdate) SetNillableContentMd(s *string) *ArticleHistoryUpdate {
+	if s != nil {
+		ahu.SetContentMd(*s)
 	}
-	return _u
+	return ahu
 }
 
 // ClearContentMd clears the value of the "content_md" field.
-func (_u *ArticleHistoryUpdate) ClearContentMd() *ArticleHistoryUpdate {
-	_u.mutation.ClearContentMd()
-	return _u
+func (ahu *ArticleHistoryUpdate) ClearContentMd() *ArticleHistoryUpdate {
+	ahu.mutation.ClearContentMd()
+	return ahu
 }
 
 // SetContentHTML sets the "content_html" field.
-func (_u *ArticleHistoryUpdate) SetContentHTML(v string) *ArticleHistoryUpdate {
-	_u.mutation.SetContentHTML(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetContentHTML(s string) *ArticleHistoryUpdate {
+	ahu.mutation.SetContentHTML(s)
+	return ahu
 }
 
 // SetNillableContentHTML sets the "content_html" field if the given value is not nil.
-func (_u *ArticleHistoryUpdate) SetNillableContentHTML(v *string) *ArticleHistoryUpdate {
-	if v != nil {
-		_u.SetContentHTML(*v)
+func (ahu *ArticleHistoryUpdate) SetNillableContentHTML(s *string) *ArticleHistoryUpdate {
+	if s != nil {
+		ahu.SetContentHTML(*s)
 	}
-	return _u
+	return ahu
 }
 
 // ClearContentHTML clears the value of the "content_html" field.
-func (_u *ArticleHistoryUpdate) ClearContentHTML() *ArticleHistoryUpdate {
-	_u.mutation.ClearContentHTML()
-	return _u
+func (ahu *ArticleHistoryUpdate) ClearContentHTML() *ArticleHistoryUpdate {
+	ahu.mutation.ClearContentHTML()
+	return ahu
 }
 
 // SetCoverURL sets the "cover_url" field.
-func (_u *ArticleHistoryUpdate) SetCoverURL(v string) *ArticleHistoryUpdate {
-	_u.mutation.SetCoverURL(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetCoverURL(s string) *ArticleHistoryUpdate {
+	ahu.mutation.SetCoverURL(s)
+	return ahu
 }
 
 // SetNillableCoverURL sets the "cover_url" field if the given value is not nil.
-func (_u *ArticleHistoryUpdate) SetNillableCoverURL(v *string) *ArticleHistoryUpdate {
-	if v != nil {
-		_u.SetCoverURL(*v)
+func (ahu *ArticleHistoryUpdate) SetNillableCoverURL(s *string) *ArticleHistoryUpdate {
+	if s != nil {
+		ahu.SetCoverURL(*s)
 	}
-	return _u
+	return ahu
 }
 
 // ClearCoverURL clears the value of the "cover_url" field.
-func (_u *ArticleHistoryUpdate) ClearCoverURL() *ArticleHistoryUpdate {
-	_u.mutation.ClearCoverURL()
-	return _u
+func (ahu *ArticleHistoryUpdate) ClearCoverURL() *ArticleHistoryUpdate {
+	ahu.mutation.ClearCoverURL()
+	return ahu
 }
 
 // SetTopImgURL sets the "top_img_url" field.
-func (_u *ArticleHistoryUpdate) SetTopImgURL(v string) *ArticleHistoryUpdate {
-	_u.mutation.SetTopImgURL(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetTopImgURL(s string) *ArticleHistoryUpdate {
+	ahu.mutation.SetTopImgURL(s)
+	return ahu
 }
 
 // SetNillableTopImgURL sets the "top_img_url" field if the given value is not nil.
-func (_u *ArticleHistoryUpdate) SetNillableTopImgURL(v *string) *ArticleHistoryUpdate {
-	if v != nil {
-		_u.SetTopImgURL(*v)
+func (ahu *ArticleHistoryUpdate) SetNillableTopImgURL(s *string) *ArticleHistoryUpdate {
+	if s != nil {
+		ahu.SetTopImgURL(*s)
 	}
-	return _u
+	return ahu
 }
 
 // ClearTopImgURL clears the value of the "top_img_url" field.
-func (_u *ArticleHistoryUpdate) ClearTopImgURL() *ArticleHistoryUpdate {
-	_u.mutation.ClearTopImgURL()
-	return _u
+func (ahu *ArticleHistoryUpdate) ClearTopImgURL() *ArticleHistoryUpdate {
+	ahu.mutation.ClearTopImgURL()
+	return ahu
 }
 
 // SetPrimaryColor sets the "primary_color" field.
-func (_u *ArticleHistoryUpdate) SetPrimaryColor(v string) *ArticleHistoryUpdate {
-	_u.mutation.SetPrimaryColor(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetPrimaryColor(s string) *ArticleHistoryUpdate {
+	ahu.mutation.SetPrimaryColor(s)
+	return ahu
 }
 
 // SetNillablePrimaryColor sets the "primary_color" field if the given value is not nil.
-func (_u *ArticleHistoryUpdate) SetNillablePrimaryColor(v *string) *ArticleHistoryUpdate {
-	if v != nil {
-		_u.SetPrimaryColor(*v)
+func (ahu *ArticleHistoryUpdate) SetNillablePrimaryColor(s *string) *ArticleHistoryUpdate {
+	if s != nil {
+		ahu.SetPrimaryColor(*s)
 	}
-	return _u
+	return ahu
 }
 
 // ClearPrimaryColor clears the value of the "primary_color" field.
-func (_u *ArticleHistoryUpdate) ClearPrimaryColor() *ArticleHistoryUpdate {
-	_u.mutation.ClearPrimaryColor()
-	return _u
+func (ahu *ArticleHistoryUpdate) ClearPrimaryColor() *ArticleHistoryUpdate {
+	ahu.mutation.ClearPrimaryColor()
+	return ahu
 }
 
 // SetSummaries sets the "summaries" field.
-func (_u *ArticleHistoryUpdate) SetSummaries(v []string) *ArticleHistoryUpdate {
-	_u.mutation.SetSummaries(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetSummaries(s []string) *ArticleHistoryUpdate {
+	ahu.mutation.SetSummaries(s)
+	return ahu
 }
 
-// AppendSummaries appends value to the "summaries" field.
-func (_u *ArticleHistoryUpdate) AppendSummaries(v []string) *ArticleHistoryUpdate {
-	_u.mutation.AppendSummaries(v)
-	return _u
+// AppendSummaries appends s to the "summaries" field.
+func (ahu *ArticleHistoryUpdate) AppendSummaries(s []string) *ArticleHistoryUpdate {
+	ahu.mutation.AppendSummaries(s)
+	return ahu
 }
 
 // ClearSummaries clears the value of the "summaries" field.
-func (_u *ArticleHistoryUpdate) ClearSummaries() *ArticleHistoryUpdate {
-	_u.mutation.ClearSummaries()
-	return _u
+func (ahu *ArticleHistoryUpdate) ClearSummaries() *ArticleHistoryUpdate {
+	ahu.mutation.ClearSummaries()
+	return ahu
 }
 
 // SetWordCount sets the "word_count" field.
-func (_u *ArticleHistoryUpdate) SetWordCount(v int) *ArticleHistoryUpdate {
-	_u.mutation.ResetWordCount()
-	_u.mutation.SetWordCount(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetWordCount(i int) *ArticleHistoryUpdate {
+	ahu.mutation.ResetWordCount()
+	ahu.mutation.SetWordCount(i)
+	return ahu
 }
 
 // SetNillableWordCount sets the "word_count" field if the given value is not nil.
-func (_u *ArticleHistoryUpdate) SetNillableWordCount(v *int) *ArticleHistoryUpdate {
-	if v != nil {
-		_u.SetWordCount(*v)
+func (ahu *ArticleHistoryUpdate) SetNillableWordCount(i *int) *ArticleHistoryUpdate {
+	if i != nil {
+		ahu.SetWordCount(*i)
 	}
-	return _u
+	return ahu
 }
 
-// AddWordCount adds value to the "word_count" field.
-func (_u *ArticleHistoryUpdate) AddWordCount(v int) *ArticleHistoryUpdate {
-	_u.mutation.AddWordCount(v)
-	return _u
+// AddWordCount adds i to the "word_count" field.
+func (ahu *ArticleHistoryUpdate) AddWordCount(i int) *ArticleHistoryUpdate {
+	ahu.mutation.AddWordCount(i)
+	return ahu
 }
 
 // SetKeywords sets the "keywords" field.
-func (_u *ArticleHistoryUpdate) SetKeywords(v string) *ArticleHistoryUpdate {
-	_u.mutation.SetKeywords(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetKeywords(s string) *ArticleHistoryUpdate {
+	ahu.mutation.SetKeywords(s)
+	return ahu
 }
 
 // SetNillableKeywords sets the "keywords" field if the given value is not nil.
-func (_u *ArticleHistoryUpdate) SetNillableKeywords(v *string) *ArticleHistoryUpdate {
-	if v != nil {
-		_u.SetKeywords(*v)
+func (ahu *ArticleHistoryUpdate) SetNillableKeywords(s *string) *ArticleHistoryUpdate {
+	if s != nil {
+		ahu.SetKeywords(*s)
 	}
-	return _u
+	return ahu
 }
 
 // ClearKeywords clears the value of the "keywords" field.
-func (_u *ArticleHistoryUpdate) ClearKeywords() *ArticleHistoryUpdate {
-	_u.mutation.ClearKeywords()
-	return _u
+func (ahu *ArticleHistoryUpdate) ClearKeywords() *ArticleHistoryUpdate {
+	ahu.mutation.ClearKeywords()
+	return ahu
 }
 
 // SetEditorID sets the "editor_id" field.
-func (_u *ArticleHistoryUpdate) SetEditorID(v uint) *ArticleHistoryUpdate {
-	_u.mutation.ResetEditorID()
-	_u.mutation.SetEditorID(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetEditorID(u uint) *ArticleHistoryUpdate {
+	ahu.mutation.ResetEditorID()
+	ahu.mutation.SetEditorID(u)
+	return ahu
 }
 
 // SetNillableEditorID sets the "editor_id" field if the given value is not nil.
-func (_u *ArticleHistoryUpdate) SetNillableEditorID(v *uint) *ArticleHistoryUpdate {
-	if v != nil {
-		_u.SetEditorID(*v)
+func (ahu *ArticleHistoryUpdate) SetNillableEditorID(u *uint) *ArticleHistoryUpdate {
+	if u != nil {
+		ahu.SetEditorID(*u)
 	}
-	return _u
+	return ahu
 }
 
-// AddEditorID adds value to the "editor_id" field.
-func (_u *ArticleHistoryUpdate) AddEditorID(v int) *ArticleHistoryUpdate {
-	_u.mutation.AddEditorID(v)
-	return _u
+// AddEditorID adds u to the "editor_id" field.
+func (ahu *ArticleHistoryUpdate) AddEditorID(u int) *ArticleHistoryUpdate {
+	ahu.mutation.AddEditorID(u)
+	return ahu
 }
 
 // SetEditorNickname sets the "editor_nickname" field.
-func (_u *ArticleHistoryUpdate) SetEditorNickname(v string) *ArticleHistoryUpdate {
-	_u.mutation.SetEditorNickname(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetEditorNickname(s string) *ArticleHistoryUpdate {
+	ahu.mutation.SetEditorNickname(s)
+	return ahu
 }
 
 // SetNillableEditorNickname sets the "editor_nickname" field if the given value is not nil.
-func (_u *ArticleHistoryUpdate) SetNillableEditorNickname(v *string) *ArticleHistoryUpdate {
-	if v != nil {
-		_u.SetEditorNickname(*v)
+func (ahu *ArticleHistoryUpdate) SetNillableEditorNickname(s *string) *ArticleHistoryUpdate {
+	if s != nil {
+		ahu.SetEditorNickname(*s)
 	}
-	return _u
+	return ahu
 }
 
 // ClearEditorNickname clears the value of the "editor_nickname" field.
-func (_u *ArticleHistoryUpdate) ClearEditorNickname() *ArticleHistoryUpdate {
-	_u.mutation.ClearEditorNickname()
-	return _u
+func (ahu *ArticleHistoryUpdate) ClearEditorNickname() *ArticleHistoryUpdate {
+	ahu.mutation.ClearEditorNickname()
+	return ahu
 }
 
 // SetChangeNote sets the "change_note" field.
-func (_u *ArticleHistoryUpdate) SetChangeNote(v string) *ArticleHistoryUpdate {
-	_u.mutation.SetChangeNote(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetChangeNote(s string) *ArticleHistoryUpdate {
+	ahu.mutation.SetChangeNote(s)
+	return ahu
 }
 
 // SetNillableChangeNote sets the "change_note" field if the given value is not nil.
-func (_u *ArticleHistoryUpdate) SetNillableChangeNote(v *string) *ArticleHistoryUpdate {
-	if v != nil {
-		_u.SetChangeNote(*v)
+func (ahu *ArticleHistoryUpdate) SetNillableChangeNote(s *string) *ArticleHistoryUpdate {
+	if s != nil {
+		ahu.SetChangeNote(*s)
 	}
-	return _u
+	return ahu
 }
 
 // ClearChangeNote clears the value of the "change_note" field.
-func (_u *ArticleHistoryUpdate) ClearChangeNote() *ArticleHistoryUpdate {
-	_u.mutation.ClearChangeNote()
-	return _u
+func (ahu *ArticleHistoryUpdate) ClearChangeNote() *ArticleHistoryUpdate {
+	ahu.mutation.ClearChangeNote()
+	return ahu
 }
 
 // SetExtraData sets the "extra_data" field.
-func (_u *ArticleHistoryUpdate) SetExtraData(v map[string]interface{}) *ArticleHistoryUpdate {
-	_u.mutation.SetExtraData(v)
-	return _u
+func (ahu *ArticleHistoryUpdate) SetExtraData(m map[string]interface{}) *ArticleHistoryUpdate {
+	ahu.mutation.SetExtraData(m)
+	return ahu
 }
 
 // ClearExtraData clears the value of the "extra_data" field.
-func (_u *ArticleHistoryUpdate) ClearExtraData() *ArticleHistoryUpdate {
-	_u.mutation.ClearExtraData()
-	return _u
+func (ahu *ArticleHistoryUpdate) ClearExtraData() *ArticleHistoryUpdate {
+	ahu.mutation.ClearExtraData()
+	return ahu
 }
 
 // SetArticle sets the "article" edge to the Article entity.
-func (_u *ArticleHistoryUpdate) SetArticle(v *Article) *ArticleHistoryUpdate {
-	return _u.SetArticleID(v.ID)
+func (ahu *ArticleHistoryUpdate) SetArticle(a *Article) *ArticleHistoryUpdate {
+	return ahu.SetArticleID(a.ID)
 }
 
 // Mutation returns the ArticleHistoryMutation object of the builder.
-func (_u *ArticleHistoryUpdate) Mutation() *ArticleHistoryMutation {
-	return _u.mutation
+func (ahu *ArticleHistoryUpdate) Mutation() *ArticleHistoryMutation {
+	return ahu.mutation
 }
 
 // ClearArticle clears the "article" edge to the Article entity.
-func (_u *ArticleHistoryUpdate) ClearArticle() *ArticleHistoryUpdate {
-	_u.mutation.ClearArticle()
-	return _u
+func (ahu *ArticleHistoryUpdate) ClearArticle() *ArticleHistoryUpdate {
+	ahu.mutation.ClearArticle()
+	return ahu
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *ArticleHistoryUpdate) Save(ctx context.Context) (int, error) {
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (ahu *ArticleHistoryUpdate) Save(ctx context.Context) (int, error) {
+	return withHooks(ctx, ahu.sqlSave, ahu.mutation, ahu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *ArticleHistoryUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (ahu *ArticleHistoryUpdate) SaveX(ctx context.Context) int {
+	affected, err := ahu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -342,151 +342,151 @@ func (_u *ArticleHistoryUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *ArticleHistoryUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (ahu *ArticleHistoryUpdate) Exec(ctx context.Context) error {
+	_, err := ahu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *ArticleHistoryUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (ahu *ArticleHistoryUpdate) ExecX(ctx context.Context) {
+	if err := ahu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *ArticleHistoryUpdate) check() error {
-	if v, ok := _u.mutation.Version(); ok {
+func (ahu *ArticleHistoryUpdate) check() error {
+	if v, ok := ahu.mutation.Version(); ok {
 		if err := articlehistory.VersionValidator(v); err != nil {
 			return &ValidationError{Name: "version", err: fmt.Errorf(`ent: validator failed for field "ArticleHistory.version": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Title(); ok {
+	if v, ok := ahu.mutation.Title(); ok {
 		if err := articlehistory.TitleValidator(v); err != nil {
 			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "ArticleHistory.title": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.WordCount(); ok {
+	if v, ok := ahu.mutation.WordCount(); ok {
 		if err := articlehistory.WordCountValidator(v); err != nil {
 			return &ValidationError{Name: "word_count", err: fmt.Errorf(`ent: validator failed for field "ArticleHistory.word_count": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.ChangeNote(); ok {
+	if v, ok := ahu.mutation.ChangeNote(); ok {
 		if err := articlehistory.ChangeNoteValidator(v); err != nil {
 			return &ValidationError{Name: "change_note", err: fmt.Errorf(`ent: validator failed for field "ArticleHistory.change_note": %w`, err)}
 		}
 	}
-	if _u.mutation.ArticleCleared() && len(_u.mutation.ArticleIDs()) > 0 {
+	if ahu.mutation.ArticleCleared() && len(ahu.mutation.ArticleIDs()) > 0 {
 		return errors.New(`ent: clearing a required unique edge "ArticleHistory.article"`)
 	}
 	return nil
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *ArticleHistoryUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *ArticleHistoryUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (ahu *ArticleHistoryUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *ArticleHistoryUpdate {
+	ahu.modifiers = append(ahu.modifiers, modifiers...)
+	return ahu
 }
 
-func (_u *ArticleHistoryUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (ahu *ArticleHistoryUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := ahu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(articlehistory.Table, articlehistory.Columns, sqlgraph.NewFieldSpec(articlehistory.FieldID, field.TypeUint))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := ahu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.Version(); ok {
+	if value, ok := ahu.mutation.Version(); ok {
 		_spec.SetField(articlehistory.FieldVersion, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedVersion(); ok {
+	if value, ok := ahu.mutation.AddedVersion(); ok {
 		_spec.AddField(articlehistory.FieldVersion, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.Title(); ok {
+	if value, ok := ahu.mutation.Title(); ok {
 		_spec.SetField(articlehistory.FieldTitle, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.ContentMd(); ok {
+	if value, ok := ahu.mutation.ContentMd(); ok {
 		_spec.SetField(articlehistory.FieldContentMd, field.TypeString, value)
 	}
-	if _u.mutation.ContentMdCleared() {
+	if ahu.mutation.ContentMdCleared() {
 		_spec.ClearField(articlehistory.FieldContentMd, field.TypeString)
 	}
-	if value, ok := _u.mutation.ContentHTML(); ok {
+	if value, ok := ahu.mutation.ContentHTML(); ok {
 		_spec.SetField(articlehistory.FieldContentHTML, field.TypeString, value)
 	}
-	if _u.mutation.ContentHTMLCleared() {
+	if ahu.mutation.ContentHTMLCleared() {
 		_spec.ClearField(articlehistory.FieldContentHTML, field.TypeString)
 	}
-	if value, ok := _u.mutation.CoverURL(); ok {
+	if value, ok := ahu.mutation.CoverURL(); ok {
 		_spec.SetField(articlehistory.FieldCoverURL, field.TypeString, value)
 	}
-	if _u.mutation.CoverURLCleared() {
+	if ahu.mutation.CoverURLCleared() {
 		_spec.ClearField(articlehistory.FieldCoverURL, field.TypeString)
 	}
-	if value, ok := _u.mutation.TopImgURL(); ok {
+	if value, ok := ahu.mutation.TopImgURL(); ok {
 		_spec.SetField(articlehistory.FieldTopImgURL, field.TypeString, value)
 	}
-	if _u.mutation.TopImgURLCleared() {
+	if ahu.mutation.TopImgURLCleared() {
 		_spec.ClearField(articlehistory.FieldTopImgURL, field.TypeString)
 	}
-	if value, ok := _u.mutation.PrimaryColor(); ok {
+	if value, ok := ahu.mutation.PrimaryColor(); ok {
 		_spec.SetField(articlehistory.FieldPrimaryColor, field.TypeString, value)
 	}
-	if _u.mutation.PrimaryColorCleared() {
+	if ahu.mutation.PrimaryColorCleared() {
 		_spec.ClearField(articlehistory.FieldPrimaryColor, field.TypeString)
 	}
-	if value, ok := _u.mutation.Summaries(); ok {
+	if value, ok := ahu.mutation.Summaries(); ok {
 		_spec.SetField(articlehistory.FieldSummaries, field.TypeJSON, value)
 	}
-	if value, ok := _u.mutation.AppendedSummaries(); ok {
+	if value, ok := ahu.mutation.AppendedSummaries(); ok {
 		_spec.AddModifier(func(u *sql.UpdateBuilder) {
 			sqljson.Append(u, articlehistory.FieldSummaries, value)
 		})
 	}
-	if _u.mutation.SummariesCleared() {
+	if ahu.mutation.SummariesCleared() {
 		_spec.ClearField(articlehistory.FieldSummaries, field.TypeJSON)
 	}
-	if value, ok := _u.mutation.WordCount(); ok {
+	if value, ok := ahu.mutation.WordCount(); ok {
 		_spec.SetField(articlehistory.FieldWordCount, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedWordCount(); ok {
+	if value, ok := ahu.mutation.AddedWordCount(); ok {
 		_spec.AddField(articlehistory.FieldWordCount, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.Keywords(); ok {
+	if value, ok := ahu.mutation.Keywords(); ok {
 		_spec.SetField(articlehistory.FieldKeywords, field.TypeString, value)
 	}
-	if _u.mutation.KeywordsCleared() {
+	if ahu.mutation.KeywordsCleared() {
 		_spec.ClearField(articlehistory.FieldKeywords, field.TypeString)
 	}
-	if value, ok := _u.mutation.EditorID(); ok {
+	if value, ok := ahu.mutation.EditorID(); ok {
 		_spec.SetField(articlehistory.FieldEditorID, field.TypeUint, value)
 	}
-	if value, ok := _u.mutation.AddedEditorID(); ok {
+	if value, ok := ahu.mutation.AddedEditorID(); ok {
 		_spec.AddField(articlehistory.FieldEditorID, field.TypeUint, value)
 	}
-	if value, ok := _u.mutation.EditorNickname(); ok {
+	if value, ok := ahu.mutation.EditorNickname(); ok {
 		_spec.SetField(articlehistory.FieldEditorNickname, field.TypeString, value)
 	}
-	if _u.mutation.EditorNicknameCleared() {
+	if ahu.mutation.EditorNicknameCleared() {
 		_spec.ClearField(articlehistory.FieldEditorNickname, field.TypeString)
 	}
-	if value, ok := _u.mutation.ChangeNote(); ok {
+	if value, ok := ahu.mutation.ChangeNote(); ok {
 		_spec.SetField(articlehistory.FieldChangeNote, field.TypeString, value)
 	}
-	if _u.mutation.ChangeNoteCleared() {
+	if ahu.mutation.ChangeNoteCleared() {
 		_spec.ClearField(articlehistory.FieldChangeNote, field.TypeString)
 	}
-	if value, ok := _u.mutation.ExtraData(); ok {
+	if value, ok := ahu.mutation.ExtraData(); ok {
 		_spec.SetField(articlehistory.FieldExtraData, field.TypeJSON, value)
 	}
-	if _u.mutation.ExtraDataCleared() {
+	if ahu.mutation.ExtraDataCleared() {
 		_spec.ClearField(articlehistory.FieldExtraData, field.TypeJSON)
 	}
-	if _u.mutation.ArticleCleared() {
+	if ahu.mutation.ArticleCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -499,7 +499,7 @@ func (_u *ArticleHistoryUpdate) sqlSave(ctx context.Context) (_node int, err err
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.ArticleIDs(); len(nodes) > 0 {
+	if nodes := ahu.mutation.ArticleIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -515,8 +515,8 @@ func (_u *ArticleHistoryUpdate) sqlSave(ctx context.Context) (_node int, err err
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(ahu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, ahu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{articlehistory.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -524,8 +524,8 @@ func (_u *ArticleHistoryUpdate) sqlSave(ctx context.Context) (_node int, err err
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	ahu.mutation.done = true
+	return n, nil
 }
 
 // ArticleHistoryUpdateOne is the builder for updating a single ArticleHistory entity.
@@ -538,323 +538,323 @@ type ArticleHistoryUpdateOne struct {
 }
 
 // SetArticleID sets the "article_id" field.
-func (_u *ArticleHistoryUpdateOne) SetArticleID(v uint) *ArticleHistoryUpdateOne {
-	_u.mutation.SetArticleID(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetArticleID(u uint) *ArticleHistoryUpdateOne {
+	ahuo.mutation.SetArticleID(u)
+	return ahuo
 }
 
 // SetNillableArticleID sets the "article_id" field if the given value is not nil.
-func (_u *ArticleHistoryUpdateOne) SetNillableArticleID(v *uint) *ArticleHistoryUpdateOne {
-	if v != nil {
-		_u.SetArticleID(*v)
+func (ahuo *ArticleHistoryUpdateOne) SetNillableArticleID(u *uint) *ArticleHistoryUpdateOne {
+	if u != nil {
+		ahuo.SetArticleID(*u)
 	}
-	return _u
+	return ahuo
 }
 
 // SetVersion sets the "version" field.
-func (_u *ArticleHistoryUpdateOne) SetVersion(v int) *ArticleHistoryUpdateOne {
-	_u.mutation.ResetVersion()
-	_u.mutation.SetVersion(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetVersion(i int) *ArticleHistoryUpdateOne {
+	ahuo.mutation.ResetVersion()
+	ahuo.mutation.SetVersion(i)
+	return ahuo
 }
 
 // SetNillableVersion sets the "version" field if the given value is not nil.
-func (_u *ArticleHistoryUpdateOne) SetNillableVersion(v *int) *ArticleHistoryUpdateOne {
-	if v != nil {
-		_u.SetVersion(*v)
+func (ahuo *ArticleHistoryUpdateOne) SetNillableVersion(i *int) *ArticleHistoryUpdateOne {
+	if i != nil {
+		ahuo.SetVersion(*i)
 	}
-	return _u
+	return ahuo
 }
 
-// AddVersion adds value to the "version" field.
-func (_u *ArticleHistoryUpdateOne) AddVersion(v int) *ArticleHistoryUpdateOne {
-	_u.mutation.AddVersion(v)
-	return _u
+// AddVersion adds i to the "version" field.
+func (ahuo *ArticleHistoryUpdateOne) AddVersion(i int) *ArticleHistoryUpdateOne {
+	ahuo.mutation.AddVersion(i)
+	return ahuo
 }
 
 // SetTitle sets the "title" field.
-func (_u *ArticleHistoryUpdateOne) SetTitle(v string) *ArticleHistoryUpdateOne {
-	_u.mutation.SetTitle(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetTitle(s string) *ArticleHistoryUpdateOne {
+	ahuo.mutation.SetTitle(s)
+	return ahuo
 }
 
 // SetNillableTitle sets the "title" field if the given value is not nil.
-func (_u *ArticleHistoryUpdateOne) SetNillableTitle(v *string) *ArticleHistoryUpdateOne {
-	if v != nil {
-		_u.SetTitle(*v)
+func (ahuo *ArticleHistoryUpdateOne) SetNillableTitle(s *string) *ArticleHistoryUpdateOne {
+	if s != nil {
+		ahuo.SetTitle(*s)
 	}
-	return _u
+	return ahuo
 }
 
 // SetContentMd sets the "content_md" field.
-func (_u *ArticleHistoryUpdateOne) SetContentMd(v string) *ArticleHistoryUpdateOne {
-	_u.mutation.SetContentMd(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetContentMd(s string) *ArticleHistoryUpdateOne {
+	ahuo.mutation.SetContentMd(s)
+	return ahuo
 }
 
 // SetNillableContentMd sets the "content_md" field if the given value is not nil.
-func (_u *ArticleHistoryUpdateOne) SetNillableContentMd(v *string) *ArticleHistoryUpdateOne {
-	if v != nil {
-		_u.SetContentMd(*v)
+func (ahuo *ArticleHistoryUpdateOne) SetNillableContentMd(s *string) *ArticleHistoryUpdateOne {
+	if s != nil {
+		ahuo.SetContentMd(*s)
 	}
-	return _u
+	return ahuo
 }
 
 // ClearContentMd clears the value of the "content_md" field.
-func (_u *ArticleHistoryUpdateOne) ClearContentMd() *ArticleHistoryUpdateOne {
-	_u.mutation.ClearContentMd()
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) ClearContentMd() *ArticleHistoryUpdateOne {
+	ahuo.mutation.ClearContentMd()
+	return ahuo
 }
 
 // SetContentHTML sets the "content_html" field.
-func (_u *ArticleHistoryUpdateOne) SetContentHTML(v string) *ArticleHistoryUpdateOne {
-	_u.mutation.SetContentHTML(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetContentHTML(s string) *ArticleHistoryUpdateOne {
+	ahuo.mutation.SetContentHTML(s)
+	return ahuo
 }
 
 // SetNillableContentHTML sets the "content_html" field if the given value is not nil.
-func (_u *ArticleHistoryUpdateOne) SetNillableContentHTML(v *string) *ArticleHistoryUpdateOne {
-	if v != nil {
-		_u.SetContentHTML(*v)
+func (ahuo *ArticleHistoryUpdateOne) SetNillableContentHTML(s *string) *ArticleHistoryUpdateOne {
+	if s != nil {
+		ahuo.SetContentHTML(*s)
 	}
-	return _u
+	return ahuo
 }
 
 // ClearContentHTML clears the value of the "content_html" field.
-func (_u *ArticleHistoryUpdateOne) ClearContentHTML() *ArticleHistoryUpdateOne {
-	_u.mutation.ClearContentHTML()
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) ClearContentHTML() *ArticleHistoryUpdateOne {
+	ahuo.mutation.ClearContentHTML()
+	return ahuo
 }
 
 // SetCoverURL sets the "cover_url" field.
-func (_u *ArticleHistoryUpdateOne) SetCoverURL(v string) *ArticleHistoryUpdateOne {
-	_u.mutation.SetCoverURL(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetCoverURL(s string) *ArticleHistoryUpdateOne {
+	ahuo.mutation.SetCoverURL(s)
+	return ahuo
 }
 
 // SetNillableCoverURL sets the "cover_url" field if the given value is not nil.
-func (_u *ArticleHistoryUpdateOne) SetNillableCoverURL(v *string) *ArticleHistoryUpdateOne {
-	if v != nil {
-		_u.SetCoverURL(*v)
+func (ahuo *ArticleHistoryUpdateOne) SetNillableCoverURL(s *string) *ArticleHistoryUpdateOne {
+	if s != nil {
+		ahuo.SetCoverURL(*s)
 	}
-	return _u
+	return ahuo
 }
 
 // ClearCoverURL clears the value of the "cover_url" field.
-func (_u *ArticleHistoryUpdateOne) ClearCoverURL() *ArticleHistoryUpdateOne {
-	_u.mutation.ClearCoverURL()
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) ClearCoverURL() *ArticleHistoryUpdateOne {
+	ahuo.mutation.ClearCoverURL()
+	return ahuo
 }
 
 // SetTopImgURL sets the "top_img_url" field.
-func (_u *ArticleHistoryUpdateOne) SetTopImgURL(v string) *ArticleHistoryUpdateOne {
-	_u.mutation.SetTopImgURL(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetTopImgURL(s string) *ArticleHistoryUpdateOne {
+	ahuo.mutation.SetTopImgURL(s)
+	return ahuo
 }
 
 // SetNillableTopImgURL sets the "top_img_url" field if the given value is not nil.
-func (_u *ArticleHistoryUpdateOne) SetNillableTopImgURL(v *string) *ArticleHistoryUpdateOne {
-	if v != nil {
-		_u.SetTopImgURL(*v)
+func (ahuo *ArticleHistoryUpdateOne) SetNillableTopImgURL(s *string) *ArticleHistoryUpdateOne {
+	if s != nil {
+		ahuo.SetTopImgURL(*s)
 	}
-	return _u
+	return ahuo
 }
 
 // ClearTopImgURL clears the value of the "top_img_url" field.
-func (_u *ArticleHistoryUpdateOne) ClearTopImgURL() *ArticleHistoryUpdateOne {
-	_u.mutation.ClearTopImgURL()
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) ClearTopImgURL() *ArticleHistoryUpdateOne {
+	ahuo.mutation.ClearTopImgURL()
+	return ahuo
 }
 
 // SetPrimaryColor sets the "primary_color" field.
-func (_u *ArticleHistoryUpdateOne) SetPrimaryColor(v string) *ArticleHistoryUpdateOne {
-	_u.mutation.SetPrimaryColor(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetPrimaryColor(s string) *ArticleHistoryUpdateOne {
+	ahuo.mutation.SetPrimaryColor(s)
+	return ahuo
 }
 
 // SetNillablePrimaryColor sets the "primary_color" field if the given value is not nil.
-func (_u *ArticleHistoryUpdateOne) SetNillablePrimaryColor(v *string) *ArticleHistoryUpdateOne {
-	if v != nil {
-		_u.SetPrimaryColor(*v)
+func (ahuo *ArticleHistoryUpdateOne) SetNillablePrimaryColor(s *string) *ArticleHistoryUpdateOne {
+	if s != nil {
+		ahuo.SetPrimaryColor(*s)
 	}
-	return _u
+	return ahuo
 }
 
 // ClearPrimaryColor clears the value of the "primary_color" field.
-func (_u *ArticleHistoryUpdateOne) ClearPrimaryColor() *ArticleHistoryUpdateOne {
-	_u.mutation.ClearPrimaryColor()
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) ClearPrimaryColor() *ArticleHistoryUpdateOne {
+	ahuo.mutation.ClearPrimaryColor()
+	return ahuo
 }
 
 // SetSummaries sets the "summaries" field.
-func (_u *ArticleHistoryUpdateOne) SetSummaries(v []string) *ArticleHistoryUpdateOne {
-	_u.mutation.SetSummaries(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetSummaries(s []string) *ArticleHistoryUpdateOne {
+	ahuo.mutation.SetSummaries(s)
+	return ahuo
 }
 
-// AppendSummaries appends value to the "summaries" field.
-func (_u *ArticleHistoryUpdateOne) AppendSummaries(v []string) *ArticleHistoryUpdateOne {
-	_u.mutation.AppendSummaries(v)
-	return _u
+// AppendSummaries appends s to the "summaries" field.
+func (ahuo *ArticleHistoryUpdateOne) AppendSummaries(s []string) *ArticleHistoryUpdateOne {
+	ahuo.mutation.AppendSummaries(s)
+	return ahuo
 }
 
 // ClearSummaries clears the value of the "summaries" field.
-func (_u *ArticleHistoryUpdateOne) ClearSummaries() *ArticleHistoryUpdateOne {
-	_u.mutation.ClearSummaries()
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) ClearSummaries() *ArticleHistoryUpdateOne {
+	ahuo.mutation.ClearSummaries()
+	return ahuo
 }
 
 // SetWordCount sets the "word_count" field.
-func (_u *ArticleHistoryUpdateOne) SetWordCount(v int) *ArticleHistoryUpdateOne {
-	_u.mutation.ResetWordCount()
-	_u.mutation.SetWordCount(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetWordCount(i int) *ArticleHistoryUpdateOne {
+	ahuo.mutation.ResetWordCount()
+	ahuo.mutation.SetWordCount(i)
+	return ahuo
 }
 
 // SetNillableWordCount sets the "word_count" field if the given value is not nil.
-func (_u *ArticleHistoryUpdateOne) SetNillableWordCount(v *int) *ArticleHistoryUpdateOne {
-	if v != nil {
-		_u.SetWordCount(*v)
+func (ahuo *ArticleHistoryUpdateOne) SetNillableWordCount(i *int) *ArticleHistoryUpdateOne {
+	if i != nil {
+		ahuo.SetWordCount(*i)
 	}
-	return _u
+	return ahuo
 }
 
-// AddWordCount adds value to the "word_count" field.
-func (_u *ArticleHistoryUpdateOne) AddWordCount(v int) *ArticleHistoryUpdateOne {
-	_u.mutation.AddWordCount(v)
-	return _u
+// AddWordCount adds i to the "word_count" field.
+func (ahuo *ArticleHistoryUpdateOne) AddWordCount(i int) *ArticleHistoryUpdateOne {
+	ahuo.mutation.AddWordCount(i)
+	return ahuo
 }
 
 // SetKeywords sets the "keywords" field.
-func (_u *ArticleHistoryUpdateOne) SetKeywords(v string) *ArticleHistoryUpdateOne {
-	_u.mutation.SetKeywords(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetKeywords(s string) *ArticleHistoryUpdateOne {
+	ahuo.mutation.SetKeywords(s)
+	return ahuo
 }
 
 // SetNillableKeywords sets the "keywords" field if the given value is not nil.
-func (_u *ArticleHistoryUpdateOne) SetNillableKeywords(v *string) *ArticleHistoryUpdateOne {
-	if v != nil {
-		_u.SetKeywords(*v)
+func (ahuo *ArticleHistoryUpdateOne) SetNillableKeywords(s *string) *ArticleHistoryUpdateOne {
+	if s != nil {
+		ahuo.SetKeywords(*s)
 	}
-	return _u
+	return ahuo
 }
 
 // ClearKeywords clears the value of the "keywords" field.
-func (_u *ArticleHistoryUpdateOne) ClearKeywords() *ArticleHistoryUpdateOne {
-	_u.mutation.ClearKeywords()
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) ClearKeywords() *ArticleHistoryUpdateOne {
+	ahuo.mutation.ClearKeywords()
+	return ahuo
 }
 
 // SetEditorID sets the "editor_id" field.
-func (_u *ArticleHistoryUpdateOne) SetEditorID(v uint) *ArticleHistoryUpdateOne {
-	_u.mutation.ResetEditorID()
-	_u.mutation.SetEditorID(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetEditorID(u uint) *ArticleHistoryUpdateOne {
+	ahuo.mutation.ResetEditorID()
+	ahuo.mutation.SetEditorID(u)
+	return ahuo
 }
 
 // SetNillableEditorID sets the "editor_id" field if the given value is not nil.
-func (_u *ArticleHistoryUpdateOne) SetNillableEditorID(v *uint) *ArticleHistoryUpdateOne {
-	if v != nil {
-		_u.SetEditorID(*v)
+func (ahuo *ArticleHistoryUpdateOne) SetNillableEditorID(u *uint) *ArticleHistoryUpdateOne {
+	if u != nil {
+		ahuo.SetEditorID(*u)
 	}
-	return _u
+	return ahuo
 }
 
-// AddEditorID adds value to the "editor_id" field.
-func (_u *ArticleHistoryUpdateOne) AddEditorID(v int) *ArticleHistoryUpdateOne {
-	_u.mutation.AddEditorID(v)
-	return _u
+// AddEditorID adds u to the "editor_id" field.
+func (ahuo *ArticleHistoryUpdateOne) AddEditorID(u int) *ArticleHistoryUpdateOne {
+	ahuo.mutation.AddEditorID(u)
+	return ahuo
 }
 
 // SetEditorNickname sets the "editor_nickname" field.
-func (_u *ArticleHistoryUpdateOne) SetEditorNickname(v string) *ArticleHistoryUpdateOne {
-	_u.mutation.SetEditorNickname(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetEditorNickname(s string) *ArticleHistoryUpdateOne {
+	ahuo.mutation.SetEditorNickname(s)
+	return ahuo
 }
 
 // SetNillableEditorNickname sets the "editor_nickname" field if the given value is not nil.
-func (_u *ArticleHistoryUpdateOne) SetNillableEditorNickname(v *string) *ArticleHistoryUpdateOne {
-	if v != nil {
-		_u.SetEditorNickname(*v)
+func (ahuo *ArticleHistoryUpdateOne) SetNillableEditorNickname(s *string) *ArticleHistoryUpdateOne {
+	if s != nil {
+		ahuo.SetEditorNickname(*s)
 	}
-	return _u
+	return ahuo
 }
 
 // ClearEditorNickname clears the value of the "editor_nickname" field.
-func (_u *ArticleHistoryUpdateOne) ClearEditorNickname() *ArticleHistoryUpdateOne {
-	_u.mutation.ClearEditorNickname()
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) ClearEditorNickname() *ArticleHistoryUpdateOne {
+	ahuo.mutation.ClearEditorNickname()
+	return ahuo
 }
 
 // SetChangeNote sets the "change_note" field.
-func (_u *ArticleHistoryUpdateOne) SetChangeNote(v string) *ArticleHistoryUpdateOne {
-	_u.mutation.SetChangeNote(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetChangeNote(s string) *ArticleHistoryUpdateOne {
+	ahuo.mutation.SetChangeNote(s)
+	return ahuo
 }
 
 // SetNillableChangeNote sets the "change_note" field if the given value is not nil.
-func (_u *ArticleHistoryUpdateOne) SetNillableChangeNote(v *string) *ArticleHistoryUpdateOne {
-	if v != nil {
-		_u.SetChangeNote(*v)
+func (ahuo *ArticleHistoryUpdateOne) SetNillableChangeNote(s *string) *ArticleHistoryUpdateOne {
+	if s != nil {
+		ahuo.SetChangeNote(*s)
 	}
-	return _u
+	return ahuo
 }
 
 // ClearChangeNote clears the value of the "change_note" field.
-func (_u *ArticleHistoryUpdateOne) ClearChangeNote() *ArticleHistoryUpdateOne {
-	_u.mutation.ClearChangeNote()
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) ClearChangeNote() *ArticleHistoryUpdateOne {
+	ahuo.mutation.ClearChangeNote()
+	return ahuo
 }
 
 // SetExtraData sets the "extra_data" field.
-func (_u *ArticleHistoryUpdateOne) SetExtraData(v map[string]interface{}) *ArticleHistoryUpdateOne {
-	_u.mutation.SetExtraData(v)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) SetExtraData(m map[string]interface{}) *ArticleHistoryUpdateOne {
+	ahuo.mutation.SetExtraData(m)
+	return ahuo
 }
 
 // ClearExtraData clears the value of the "extra_data" field.
-func (_u *ArticleHistoryUpdateOne) ClearExtraData() *ArticleHistoryUpdateOne {
-	_u.mutation.ClearExtraData()
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) ClearExtraData() *ArticleHistoryUpdateOne {
+	ahuo.mutation.ClearExtraData()
+	return ahuo
 }
 
 // SetArticle sets the "article" edge to the Article entity.
-func (_u *ArticleHistoryUpdateOne) SetArticle(v *Article) *ArticleHistoryUpdateOne {
-	return _u.SetArticleID(v.ID)
+func (ahuo *ArticleHistoryUpdateOne) SetArticle(a *Article) *ArticleHistoryUpdateOne {
+	return ahuo.SetArticleID(a.ID)
 }
 
 // Mutation returns the ArticleHistoryMutation object of the builder.
-func (_u *ArticleHistoryUpdateOne) Mutation() *ArticleHistoryMutation {
-	return _u.mutation
+func (ahuo *ArticleHistoryUpdateOne) Mutation() *ArticleHistoryMutation {
+	return ahuo.mutation
 }
 
 // ClearArticle clears the "article" edge to the Article entity.
-func (_u *ArticleHistoryUpdateOne) ClearArticle() *ArticleHistoryUpdateOne {
-	_u.mutation.ClearArticle()
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) ClearArticle() *ArticleHistoryUpdateOne {
+	ahuo.mutation.ClearArticle()
+	return ahuo
 }
 
 // Where appends a list predicates to the ArticleHistoryUpdate builder.
-func (_u *ArticleHistoryUpdateOne) Where(ps ...predicate.ArticleHistory) *ArticleHistoryUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) Where(ps ...predicate.ArticleHistory) *ArticleHistoryUpdateOne {
+	ahuo.mutation.Where(ps...)
+	return ahuo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *ArticleHistoryUpdateOne) Select(field string, fields ...string) *ArticleHistoryUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) Select(field string, fields ...string) *ArticleHistoryUpdateOne {
+	ahuo.fields = append([]string{field}, fields...)
+	return ahuo
 }
 
 // Save executes the query and returns the updated ArticleHistory entity.
-func (_u *ArticleHistoryUpdateOne) Save(ctx context.Context) (*ArticleHistory, error) {
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (ahuo *ArticleHistoryUpdateOne) Save(ctx context.Context) (*ArticleHistory, error) {
+	return withHooks(ctx, ahuo.sqlSave, ahuo.mutation, ahuo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *ArticleHistoryUpdateOne) SaveX(ctx context.Context) *ArticleHistory {
-	node, err := _u.Save(ctx)
+func (ahuo *ArticleHistoryUpdateOne) SaveX(ctx context.Context) *ArticleHistory {
+	node, err := ahuo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -862,63 +862,63 @@ func (_u *ArticleHistoryUpdateOne) SaveX(ctx context.Context) *ArticleHistory {
 }
 
 // Exec executes the query on the entity.
-func (_u *ArticleHistoryUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (ahuo *ArticleHistoryUpdateOne) Exec(ctx context.Context) error {
+	_, err := ahuo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *ArticleHistoryUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (ahuo *ArticleHistoryUpdateOne) ExecX(ctx context.Context) {
+	if err := ahuo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *ArticleHistoryUpdateOne) check() error {
-	if v, ok := _u.mutation.Version(); ok {
+func (ahuo *ArticleHistoryUpdateOne) check() error {
+	if v, ok := ahuo.mutation.Version(); ok {
 		if err := articlehistory.VersionValidator(v); err != nil {
 			return &ValidationError{Name: "version", err: fmt.Errorf(`ent: validator failed for field "ArticleHistory.version": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Title(); ok {
+	if v, ok := ahuo.mutation.Title(); ok {
 		if err := articlehistory.TitleValidator(v); err != nil {
 			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "ArticleHistory.title": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.WordCount(); ok {
+	if v, ok := ahuo.mutation.WordCount(); ok {
 		if err := articlehistory.WordCountValidator(v); err != nil {
 			return &ValidationError{Name: "word_count", err: fmt.Errorf(`ent: validator failed for field "ArticleHistory.word_count": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.ChangeNote(); ok {
+	if v, ok := ahuo.mutation.ChangeNote(); ok {
 		if err := articlehistory.ChangeNoteValidator(v); err != nil {
 			return &ValidationError{Name: "change_note", err: fmt.Errorf(`ent: validator failed for field "ArticleHistory.change_note": %w`, err)}
 		}
 	}
-	if _u.mutation.ArticleCleared() && len(_u.mutation.ArticleIDs()) > 0 {
+	if ahuo.mutation.ArticleCleared() && len(ahuo.mutation.ArticleIDs()) > 0 {
 		return errors.New(`ent: clearing a required unique edge "ArticleHistory.article"`)
 	}
 	return nil
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *ArticleHistoryUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *ArticleHistoryUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (ahuo *ArticleHistoryUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *ArticleHistoryUpdateOne {
+	ahuo.modifiers = append(ahuo.modifiers, modifiers...)
+	return ahuo
 }
 
-func (_u *ArticleHistoryUpdateOne) sqlSave(ctx context.Context) (_node *ArticleHistory, err error) {
-	if err := _u.check(); err != nil {
+func (ahuo *ArticleHistoryUpdateOne) sqlSave(ctx context.Context) (_node *ArticleHistory, err error) {
+	if err := ahuo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(articlehistory.Table, articlehistory.Columns, sqlgraph.NewFieldSpec(articlehistory.FieldID, field.TypeUint))
-	id, ok := _u.mutation.ID()
+	id, ok := ahuo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "ArticleHistory.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := ahuo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, articlehistory.FieldID)
 		for _, f := range fields {
@@ -930,100 +930,100 @@ func (_u *ArticleHistoryUpdateOne) sqlSave(ctx context.Context) (_node *ArticleH
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := ahuo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.Version(); ok {
+	if value, ok := ahuo.mutation.Version(); ok {
 		_spec.SetField(articlehistory.FieldVersion, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedVersion(); ok {
+	if value, ok := ahuo.mutation.AddedVersion(); ok {
 		_spec.AddField(articlehistory.FieldVersion, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.Title(); ok {
+	if value, ok := ahuo.mutation.Title(); ok {
 		_spec.SetField(articlehistory.FieldTitle, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.ContentMd(); ok {
+	if value, ok := ahuo.mutation.ContentMd(); ok {
 		_spec.SetField(articlehistory.FieldContentMd, field.TypeString, value)
 	}
-	if _u.mutation.ContentMdCleared() {
+	if ahuo.mutation.ContentMdCleared() {
 		_spec.ClearField(articlehistory.FieldContentMd, field.TypeString)
 	}
-	if value, ok := _u.mutation.ContentHTML(); ok {
+	if value, ok := ahuo.mutation.ContentHTML(); ok {
 		_spec.SetField(articlehistory.FieldContentHTML, field.TypeString, value)
 	}
-	if _u.mutation.ContentHTMLCleared() {
+	if ahuo.mutation.ContentHTMLCleared() {
 		_spec.ClearField(articlehistory.FieldContentHTML, field.TypeString)
 	}
-	if value, ok := _u.mutation.CoverURL(); ok {
+	if value, ok := ahuo.mutation.CoverURL(); ok {
 		_spec.SetField(articlehistory.FieldCoverURL, field.TypeString, value)
 	}
-	if _u.mutation.CoverURLCleared() {
+	if ahuo.mutation.CoverURLCleared() {
 		_spec.ClearField(articlehistory.FieldCoverURL, field.TypeString)
 	}
-	if value, ok := _u.mutation.TopImgURL(); ok {
+	if value, ok := ahuo.mutation.TopImgURL(); ok {
 		_spec.SetField(articlehistory.FieldTopImgURL, field.TypeString, value)
 	}
-	if _u.mutation.TopImgURLCleared() {
+	if ahuo.mutation.TopImgURLCleared() {
 		_spec.ClearField(articlehistory.FieldTopImgURL, field.TypeString)
 	}
-	if value, ok := _u.mutation.PrimaryColor(); ok {
+	if value, ok := ahuo.mutation.PrimaryColor(); ok {
 		_spec.SetField(articlehistory.FieldPrimaryColor, field.TypeString, value)
 	}
-	if _u.mutation.PrimaryColorCleared() {
+	if ahuo.mutation.PrimaryColorCleared() {
 		_spec.ClearField(articlehistory.FieldPrimaryColor, field.TypeString)
 	}
-	if value, ok := _u.mutation.Summaries(); ok {
+	if value, ok := ahuo.mutation.Summaries(); ok {
 		_spec.SetField(articlehistory.FieldSummaries, field.TypeJSON, value)
 	}
-	if value, ok := _u.mutation.AppendedSummaries(); ok {
+	if value, ok := ahuo.mutation.AppendedSummaries(); ok {
 		_spec.AddModifier(func(u *sql.UpdateBuilder) {
 			sqljson.Append(u, articlehistory.FieldSummaries, value)
 		})
 	}
-	if _u.mutation.SummariesCleared() {
+	if ahuo.mutation.SummariesCleared() {
 		_spec.ClearField(articlehistory.FieldSummaries, field.TypeJSON)
 	}
-	if value, ok := _u.mutation.WordCount(); ok {
+	if value, ok := ahuo.mutation.WordCount(); ok {
 		_spec.SetField(articlehistory.FieldWordCount, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedWordCount(); ok {
+	if value, ok := ahuo.mutation.AddedWordCount(); ok {
 		_spec.AddField(articlehistory.FieldWordCount, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.Keywords(); ok {
+	if value, ok := ahuo.mutation.Keywords(); ok {
 		_spec.SetField(articlehistory.FieldKeywords, field.TypeString, value)
 	}
-	if _u.mutation.KeywordsCleared() {
+	if ahuo.mutation.KeywordsCleared() {
 		_spec.ClearField(articlehistory.FieldKeywords, field.TypeString)
 	}
-	if value, ok := _u.mutation.EditorID(); ok {
+	if value, ok := ahuo.mutation.EditorID(); ok {
 		_spec.SetField(articlehistory.FieldEditorID, field.TypeUint, value)
 	}
-	if value, ok := _u.mutation.AddedEditorID(); ok {
+	if value, ok := ahuo.mutation.AddedEditorID(); ok {
 		_spec.AddField(articlehistory.FieldEditorID, field.TypeUint, value)
 	}
-	if value, ok := _u.mutation.EditorNickname(); ok {
+	if value, ok := ahuo.mutation.EditorNickname(); ok {
 		_spec.SetField(articlehistory.FieldEditorNickname, field.TypeString, value)
 	}
-	if _u.mutation.EditorNicknameCleared() {
+	if ahuo.mutation.EditorNicknameCleared() {
 		_spec.ClearField(articlehistory.FieldEditorNickname, field.TypeString)
 	}
-	if value, ok := _u.mutation.ChangeNote(); ok {
+	if value, ok := ahuo.mutation.ChangeNote(); ok {
 		_spec.SetField(articlehistory.FieldChangeNote, field.TypeString, value)
 	}
-	if _u.mutation.ChangeNoteCleared() {
+	if ahuo.mutation.ChangeNoteCleared() {
 		_spec.ClearField(articlehistory.FieldChangeNote, field.TypeString)
 	}
-	if value, ok := _u.mutation.ExtraData(); ok {
+	if value, ok := ahuo.mutation.ExtraData(); ok {
 		_spec.SetField(articlehistory.FieldExtraData, field.TypeJSON, value)
 	}
-	if _u.mutation.ExtraDataCleared() {
+	if ahuo.mutation.ExtraDataCleared() {
 		_spec.ClearField(articlehistory.FieldExtraData, field.TypeJSON)
 	}
-	if _u.mutation.ArticleCleared() {
+	if ahuo.mutation.ArticleCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -1036,7 +1036,7 @@ func (_u *ArticleHistoryUpdateOne) sqlSave(ctx context.Context) (_node *ArticleH
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.ArticleIDs(); len(nodes) > 0 {
+	if nodes := ahuo.mutation.ArticleIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -1052,11 +1052,11 @@ func (_u *ArticleHistoryUpdateOne) sqlSave(ctx context.Context) (_node *ArticleH
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &ArticleHistory{config: _u.config}
+	_spec.AddModifiers(ahuo.modifiers...)
+	_node = &ArticleHistory{config: ahuo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, ahuo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{articlehistory.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -1064,6 +1064,6 @@ func (_u *ArticleHistoryUpdateOne) sqlSave(ctx context.Context) (_node *ArticleH
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	ahuo.mutation.done = true
 	return _node, nil
 }

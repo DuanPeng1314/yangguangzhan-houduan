@@ -23,74 +23,74 @@ type AlbumCategoryCreate struct {
 }
 
 // SetName sets the "name" field.
-func (_c *AlbumCategoryCreate) SetName(v string) *AlbumCategoryCreate {
-	_c.mutation.SetName(v)
-	return _c
+func (acc *AlbumCategoryCreate) SetName(s string) *AlbumCategoryCreate {
+	acc.mutation.SetName(s)
+	return acc
 }
 
 // SetDescription sets the "description" field.
-func (_c *AlbumCategoryCreate) SetDescription(v string) *AlbumCategoryCreate {
-	_c.mutation.SetDescription(v)
-	return _c
+func (acc *AlbumCategoryCreate) SetDescription(s string) *AlbumCategoryCreate {
+	acc.mutation.SetDescription(s)
+	return acc
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_c *AlbumCategoryCreate) SetNillableDescription(v *string) *AlbumCategoryCreate {
-	if v != nil {
-		_c.SetDescription(*v)
+func (acc *AlbumCategoryCreate) SetNillableDescription(s *string) *AlbumCategoryCreate {
+	if s != nil {
+		acc.SetDescription(*s)
 	}
-	return _c
+	return acc
 }
 
 // SetDisplayOrder sets the "display_order" field.
-func (_c *AlbumCategoryCreate) SetDisplayOrder(v int) *AlbumCategoryCreate {
-	_c.mutation.SetDisplayOrder(v)
-	return _c
+func (acc *AlbumCategoryCreate) SetDisplayOrder(i int) *AlbumCategoryCreate {
+	acc.mutation.SetDisplayOrder(i)
+	return acc
 }
 
 // SetNillableDisplayOrder sets the "display_order" field if the given value is not nil.
-func (_c *AlbumCategoryCreate) SetNillableDisplayOrder(v *int) *AlbumCategoryCreate {
-	if v != nil {
-		_c.SetDisplayOrder(*v)
+func (acc *AlbumCategoryCreate) SetNillableDisplayOrder(i *int) *AlbumCategoryCreate {
+	if i != nil {
+		acc.SetDisplayOrder(*i)
 	}
-	return _c
+	return acc
 }
 
 // SetID sets the "id" field.
-func (_c *AlbumCategoryCreate) SetID(v uint) *AlbumCategoryCreate {
-	_c.mutation.SetID(v)
-	return _c
+func (acc *AlbumCategoryCreate) SetID(u uint) *AlbumCategoryCreate {
+	acc.mutation.SetID(u)
+	return acc
 }
 
 // AddAlbumIDs adds the "albums" edge to the Album entity by IDs.
-func (_c *AlbumCategoryCreate) AddAlbumIDs(ids ...uint) *AlbumCategoryCreate {
-	_c.mutation.AddAlbumIDs(ids...)
-	return _c
+func (acc *AlbumCategoryCreate) AddAlbumIDs(ids ...uint) *AlbumCategoryCreate {
+	acc.mutation.AddAlbumIDs(ids...)
+	return acc
 }
 
 // AddAlbums adds the "albums" edges to the Album entity.
-func (_c *AlbumCategoryCreate) AddAlbums(v ...*Album) *AlbumCategoryCreate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (acc *AlbumCategoryCreate) AddAlbums(a ...*Album) *AlbumCategoryCreate {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _c.AddAlbumIDs(ids...)
+	return acc.AddAlbumIDs(ids...)
 }
 
 // Mutation returns the AlbumCategoryMutation object of the builder.
-func (_c *AlbumCategoryCreate) Mutation() *AlbumCategoryMutation {
-	return _c.mutation
+func (acc *AlbumCategoryCreate) Mutation() *AlbumCategoryMutation {
+	return acc.mutation
 }
 
 // Save creates the AlbumCategory in the database.
-func (_c *AlbumCategoryCreate) Save(ctx context.Context) (*AlbumCategory, error) {
-	_c.defaults()
-	return withHooks(ctx, _c.sqlSave, _c.mutation, _c.hooks)
+func (acc *AlbumCategoryCreate) Save(ctx context.Context) (*AlbumCategory, error) {
+	acc.defaults()
+	return withHooks(ctx, acc.sqlSave, acc.mutation, acc.hooks)
 }
 
 // SaveX calls Save and panics if Save returns an error.
-func (_c *AlbumCategoryCreate) SaveX(ctx context.Context) *AlbumCategory {
-	v, err := _c.Save(ctx)
+func (acc *AlbumCategoryCreate) SaveX(ctx context.Context) *AlbumCategory {
+	v, err := acc.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -98,48 +98,48 @@ func (_c *AlbumCategoryCreate) SaveX(ctx context.Context) *AlbumCategory {
 }
 
 // Exec executes the query.
-func (_c *AlbumCategoryCreate) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (acc *AlbumCategoryCreate) Exec(ctx context.Context) error {
+	_, err := acc.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *AlbumCategoryCreate) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (acc *AlbumCategoryCreate) ExecX(ctx context.Context) {
+	if err := acc.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_c *AlbumCategoryCreate) defaults() {
-	if _, ok := _c.mutation.DisplayOrder(); !ok {
+func (acc *AlbumCategoryCreate) defaults() {
+	if _, ok := acc.mutation.DisplayOrder(); !ok {
 		v := albumcategory.DefaultDisplayOrder
-		_c.mutation.SetDisplayOrder(v)
+		acc.mutation.SetDisplayOrder(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_c *AlbumCategoryCreate) check() error {
-	if _, ok := _c.mutation.Name(); !ok {
+func (acc *AlbumCategoryCreate) check() error {
+	if _, ok := acc.mutation.Name(); !ok {
 		return &ValidationError{Name: "name", err: errors.New(`ent: missing required field "AlbumCategory.name"`)}
 	}
-	if v, ok := _c.mutation.Name(); ok {
+	if v, ok := acc.mutation.Name(); ok {
 		if err := albumcategory.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "AlbumCategory.name": %w`, err)}
 		}
 	}
-	if _, ok := _c.mutation.DisplayOrder(); !ok {
+	if _, ok := acc.mutation.DisplayOrder(); !ok {
 		return &ValidationError{Name: "display_order", err: errors.New(`ent: missing required field "AlbumCategory.display_order"`)}
 	}
 	return nil
 }
 
-func (_c *AlbumCategoryCreate) sqlSave(ctx context.Context) (*AlbumCategory, error) {
-	if err := _c.check(); err != nil {
+func (acc *AlbumCategoryCreate) sqlSave(ctx context.Context) (*AlbumCategory, error) {
+	if err := acc.check(); err != nil {
 		return nil, err
 	}
-	_node, _spec := _c.createSpec()
-	if err := sqlgraph.CreateNode(ctx, _c.driver, _spec); err != nil {
+	_node, _spec := acc.createSpec()
+	if err := sqlgraph.CreateNode(ctx, acc.driver, _spec); err != nil {
 		if sqlgraph.IsConstraintError(err) {
 			err = &ConstraintError{msg: err.Error(), wrap: err}
 		}
@@ -149,34 +149,34 @@ func (_c *AlbumCategoryCreate) sqlSave(ctx context.Context) (*AlbumCategory, err
 		id := _spec.ID.Value.(int64)
 		_node.ID = uint(id)
 	}
-	_c.mutation.id = &_node.ID
-	_c.mutation.done = true
+	acc.mutation.id = &_node.ID
+	acc.mutation.done = true
 	return _node, nil
 }
 
-func (_c *AlbumCategoryCreate) createSpec() (*AlbumCategory, *sqlgraph.CreateSpec) {
+func (acc *AlbumCategoryCreate) createSpec() (*AlbumCategory, *sqlgraph.CreateSpec) {
 	var (
-		_node = &AlbumCategory{config: _c.config}
+		_node = &AlbumCategory{config: acc.config}
 		_spec = sqlgraph.NewCreateSpec(albumcategory.Table, sqlgraph.NewFieldSpec(albumcategory.FieldID, field.TypeUint))
 	)
-	_spec.OnConflict = _c.conflict
-	if id, ok := _c.mutation.ID(); ok {
+	_spec.OnConflict = acc.conflict
+	if id, ok := acc.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
 	}
-	if value, ok := _c.mutation.Name(); ok {
+	if value, ok := acc.mutation.Name(); ok {
 		_spec.SetField(albumcategory.FieldName, field.TypeString, value)
 		_node.Name = value
 	}
-	if value, ok := _c.mutation.Description(); ok {
+	if value, ok := acc.mutation.Description(); ok {
 		_spec.SetField(albumcategory.FieldDescription, field.TypeString, value)
 		_node.Description = value
 	}
-	if value, ok := _c.mutation.DisplayOrder(); ok {
+	if value, ok := acc.mutation.DisplayOrder(); ok {
 		_spec.SetField(albumcategory.FieldDisplayOrder, field.TypeInt, value)
 		_node.DisplayOrder = value
 	}
-	if nodes := _c.mutation.AlbumsIDs(); len(nodes) > 0 {
+	if nodes := acc.mutation.AlbumsIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -211,10 +211,10 @@ func (_c *AlbumCategoryCreate) createSpec() (*AlbumCategory, *sqlgraph.CreateSpe
 //			SetName(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *AlbumCategoryCreate) OnConflict(opts ...sql.ConflictOption) *AlbumCategoryUpsertOne {
-	_c.conflict = opts
+func (acc *AlbumCategoryCreate) OnConflict(opts ...sql.ConflictOption) *AlbumCategoryUpsertOne {
+	acc.conflict = opts
 	return &AlbumCategoryUpsertOne{
-		create: _c,
+		create: acc,
 	}
 }
 
@@ -224,10 +224,10 @@ func (_c *AlbumCategoryCreate) OnConflict(opts ...sql.ConflictOption) *AlbumCate
 //	client.AlbumCategory.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *AlbumCategoryCreate) OnConflictColumns(columns ...string) *AlbumCategoryUpsertOne {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (acc *AlbumCategoryCreate) OnConflictColumns(columns ...string) *AlbumCategoryUpsertOne {
+	acc.conflict = append(acc.conflict, sql.ConflictColumns(columns...))
 	return &AlbumCategoryUpsertOne{
-		create: _c,
+		create: acc,
 	}
 }
 
@@ -438,16 +438,16 @@ type AlbumCategoryCreateBulk struct {
 }
 
 // Save creates the AlbumCategory entities in the database.
-func (_c *AlbumCategoryCreateBulk) Save(ctx context.Context) ([]*AlbumCategory, error) {
-	if _c.err != nil {
-		return nil, _c.err
+func (accb *AlbumCategoryCreateBulk) Save(ctx context.Context) ([]*AlbumCategory, error) {
+	if accb.err != nil {
+		return nil, accb.err
 	}
-	specs := make([]*sqlgraph.CreateSpec, len(_c.builders))
-	nodes := make([]*AlbumCategory, len(_c.builders))
-	mutators := make([]Mutator, len(_c.builders))
-	for i := range _c.builders {
+	specs := make([]*sqlgraph.CreateSpec, len(accb.builders))
+	nodes := make([]*AlbumCategory, len(accb.builders))
+	mutators := make([]Mutator, len(accb.builders))
+	for i := range accb.builders {
 		func(i int, root context.Context) {
-			builder := _c.builders[i]
+			builder := accb.builders[i]
 			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*AlbumCategoryMutation)
@@ -461,12 +461,12 @@ func (_c *AlbumCategoryCreateBulk) Save(ctx context.Context) ([]*AlbumCategory, 
 				var err error
 				nodes[i], specs[i] = builder.createSpec()
 				if i < len(mutators)-1 {
-					_, err = mutators[i+1].Mutate(root, _c.builders[i+1].mutation)
+					_, err = mutators[i+1].Mutate(root, accb.builders[i+1].mutation)
 				} else {
 					spec := &sqlgraph.BatchCreateSpec{Nodes: specs}
-					spec.OnConflict = _c.conflict
+					spec.OnConflict = accb.conflict
 					// Invoke the actual operation on the latest mutation in the chain.
-					if err = sqlgraph.BatchCreate(ctx, _c.driver, spec); err != nil {
+					if err = sqlgraph.BatchCreate(ctx, accb.driver, spec); err != nil {
 						if sqlgraph.IsConstraintError(err) {
 							err = &ConstraintError{msg: err.Error(), wrap: err}
 						}
@@ -490,7 +490,7 @@ func (_c *AlbumCategoryCreateBulk) Save(ctx context.Context) ([]*AlbumCategory, 
 		}(i, ctx)
 	}
 	if len(mutators) > 0 {
-		if _, err := mutators[0].Mutate(ctx, _c.builders[0].mutation); err != nil {
+		if _, err := mutators[0].Mutate(ctx, accb.builders[0].mutation); err != nil {
 			return nil, err
 		}
 	}
@@ -498,8 +498,8 @@ func (_c *AlbumCategoryCreateBulk) Save(ctx context.Context) ([]*AlbumCategory, 
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_c *AlbumCategoryCreateBulk) SaveX(ctx context.Context) []*AlbumCategory {
-	v, err := _c.Save(ctx)
+func (accb *AlbumCategoryCreateBulk) SaveX(ctx context.Context) []*AlbumCategory {
+	v, err := accb.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -507,14 +507,14 @@ func (_c *AlbumCategoryCreateBulk) SaveX(ctx context.Context) []*AlbumCategory {
 }
 
 // Exec executes the query.
-func (_c *AlbumCategoryCreateBulk) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (accb *AlbumCategoryCreateBulk) Exec(ctx context.Context) error {
+	_, err := accb.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *AlbumCategoryCreateBulk) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (accb *AlbumCategoryCreateBulk) ExecX(ctx context.Context) {
+	if err := accb.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
@@ -534,10 +534,10 @@ func (_c *AlbumCategoryCreateBulk) ExecX(ctx context.Context) {
 //			SetName(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *AlbumCategoryCreateBulk) OnConflict(opts ...sql.ConflictOption) *AlbumCategoryUpsertBulk {
-	_c.conflict = opts
+func (accb *AlbumCategoryCreateBulk) OnConflict(opts ...sql.ConflictOption) *AlbumCategoryUpsertBulk {
+	accb.conflict = opts
 	return &AlbumCategoryUpsertBulk{
-		create: _c,
+		create: accb,
 	}
 }
 
@@ -547,10 +547,10 @@ func (_c *AlbumCategoryCreateBulk) OnConflict(opts ...sql.ConflictOption) *Album
 //	client.AlbumCategory.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *AlbumCategoryCreateBulk) OnConflictColumns(columns ...string) *AlbumCategoryUpsertBulk {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (accb *AlbumCategoryCreateBulk) OnConflictColumns(columns ...string) *AlbumCategoryUpsertBulk {
+	accb.conflict = append(accb.conflict, sql.ConflictColumns(columns...))
 	return &AlbumCategoryUpsertBulk{
-		create: _c,
+		create: accb,
 	}
 }
 

@@ -72,7 +72,7 @@ func (*VisitorLog) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the VisitorLog fields.
-func (_m *VisitorLog) assignValues(columns []string, values []any) error {
+func (vl *VisitorLog) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -83,108 +83,108 @@ func (_m *VisitorLog) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint(value.Int64)
+			vl.ID = uint(value.Int64)
 		case visitorlog.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
 			} else if value.Valid {
-				_m.CreatedAt = value.Time
+				vl.CreatedAt = value.Time
 			}
 		case visitorlog.FieldVisitorID:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field visitor_id", values[i])
 			} else if value.Valid {
-				_m.VisitorID = value.String
+				vl.VisitorID = value.String
 			}
 		case visitorlog.FieldSessionID:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field session_id", values[i])
 			} else if value.Valid {
-				_m.SessionID = new(string)
-				*_m.SessionID = value.String
+				vl.SessionID = new(string)
+				*vl.SessionID = value.String
 			}
 		case visitorlog.FieldIPAddress:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field ip_address", values[i])
 			} else if value.Valid {
-				_m.IPAddress = value.String
+				vl.IPAddress = value.String
 			}
 		case visitorlog.FieldUserAgent:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field user_agent", values[i])
 			} else if value.Valid {
-				_m.UserAgent = new(string)
-				*_m.UserAgent = value.String
+				vl.UserAgent = new(string)
+				*vl.UserAgent = value.String
 			}
 		case visitorlog.FieldReferer:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field referer", values[i])
 			} else if value.Valid {
-				_m.Referer = new(string)
-				*_m.Referer = value.String
+				vl.Referer = new(string)
+				*vl.Referer = value.String
 			}
 		case visitorlog.FieldURLPath:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field url_path", values[i])
 			} else if value.Valid {
-				_m.URLPath = value.String
+				vl.URLPath = value.String
 			}
 		case visitorlog.FieldCountry:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field country", values[i])
 			} else if value.Valid {
-				_m.Country = new(string)
-				*_m.Country = value.String
+				vl.Country = new(string)
+				*vl.Country = value.String
 			}
 		case visitorlog.FieldRegion:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field region", values[i])
 			} else if value.Valid {
-				_m.Region = new(string)
-				*_m.Region = value.String
+				vl.Region = new(string)
+				*vl.Region = value.String
 			}
 		case visitorlog.FieldCity:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field city", values[i])
 			} else if value.Valid {
-				_m.City = new(string)
-				*_m.City = value.String
+				vl.City = new(string)
+				*vl.City = value.String
 			}
 		case visitorlog.FieldBrowser:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field browser", values[i])
 			} else if value.Valid {
-				_m.Browser = new(string)
-				*_m.Browser = value.String
+				vl.Browser = new(string)
+				*vl.Browser = value.String
 			}
 		case visitorlog.FieldOs:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field os", values[i])
 			} else if value.Valid {
-				_m.Os = new(string)
-				*_m.Os = value.String
+				vl.Os = new(string)
+				*vl.Os = value.String
 			}
 		case visitorlog.FieldDevice:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field device", values[i])
 			} else if value.Valid {
-				_m.Device = new(string)
-				*_m.Device = value.String
+				vl.Device = new(string)
+				*vl.Device = value.String
 			}
 		case visitorlog.FieldDuration:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field duration", values[i])
 			} else if value.Valid {
-				_m.Duration = int(value.Int64)
+				vl.Duration = int(value.Int64)
 			}
 		case visitorlog.FieldIsBounce:
 			if value, ok := values[i].(*sql.NullBool); !ok {
 				return fmt.Errorf("unexpected type %T for field is_bounce", values[i])
 			} else if value.Valid {
-				_m.IsBounce = value.Bool
+				vl.IsBounce = value.Bool
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			vl.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -192,95 +192,95 @@ func (_m *VisitorLog) assignValues(columns []string, values []any) error {
 
 // Value returns the ent.Value that was dynamically selected and assigned to the VisitorLog.
 // This includes values selected through modifiers, order, etc.
-func (_m *VisitorLog) Value(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (vl *VisitorLog) Value(name string) (ent.Value, error) {
+	return vl.selectValues.Get(name)
 }
 
 // Update returns a builder for updating this VisitorLog.
 // Note that you need to call VisitorLog.Unwrap() before calling this method if this VisitorLog
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *VisitorLog) Update() *VisitorLogUpdateOne {
-	return NewVisitorLogClient(_m.config).UpdateOne(_m)
+func (vl *VisitorLog) Update() *VisitorLogUpdateOne {
+	return NewVisitorLogClient(vl.config).UpdateOne(vl)
 }
 
 // Unwrap unwraps the VisitorLog entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *VisitorLog) Unwrap() *VisitorLog {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (vl *VisitorLog) Unwrap() *VisitorLog {
+	_tx, ok := vl.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: VisitorLog is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	vl.config.driver = _tx.drv
+	return vl
 }
 
 // String implements the fmt.Stringer.
-func (_m *VisitorLog) String() string {
+func (vl *VisitorLog) String() string {
 	var builder strings.Builder
 	builder.WriteString("VisitorLog(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
+	builder.WriteString(fmt.Sprintf("id=%v, ", vl.ID))
 	builder.WriteString("created_at=")
-	builder.WriteString(_m.CreatedAt.Format(time.ANSIC))
+	builder.WriteString(vl.CreatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("visitor_id=")
-	builder.WriteString(_m.VisitorID)
+	builder.WriteString(vl.VisitorID)
 	builder.WriteString(", ")
-	if v := _m.SessionID; v != nil {
+	if v := vl.SessionID; v != nil {
 		builder.WriteString("session_id=")
 		builder.WriteString(*v)
 	}
 	builder.WriteString(", ")
 	builder.WriteString("ip_address=")
-	builder.WriteString(_m.IPAddress)
+	builder.WriteString(vl.IPAddress)
 	builder.WriteString(", ")
-	if v := _m.UserAgent; v != nil {
+	if v := vl.UserAgent; v != nil {
 		builder.WriteString("user_agent=")
 		builder.WriteString(*v)
 	}
 	builder.WriteString(", ")
-	if v := _m.Referer; v != nil {
+	if v := vl.Referer; v != nil {
 		builder.WriteString("referer=")
 		builder.WriteString(*v)
 	}
 	builder.WriteString(", ")
 	builder.WriteString("url_path=")
-	builder.WriteString(_m.URLPath)
+	builder.WriteString(vl.URLPath)
 	builder.WriteString(", ")
-	if v := _m.Country; v != nil {
+	if v := vl.Country; v != nil {
 		builder.WriteString("country=")
 		builder.WriteString(*v)
 	}
 	builder.WriteString(", ")
-	if v := _m.Region; v != nil {
+	if v := vl.Region; v != nil {
 		builder.WriteString("region=")
 		builder.WriteString(*v)
 	}
 	builder.WriteString(", ")
-	if v := _m.City; v != nil {
+	if v := vl.City; v != nil {
 		builder.WriteString("city=")
 		builder.WriteString(*v)
 	}
 	builder.WriteString(", ")
-	if v := _m.Browser; v != nil {
+	if v := vl.Browser; v != nil {
 		builder.WriteString("browser=")
 		builder.WriteString(*v)
 	}
 	builder.WriteString(", ")
-	if v := _m.Os; v != nil {
+	if v := vl.Os; v != nil {
 		builder.WriteString("os=")
 		builder.WriteString(*v)
 	}
 	builder.WriteString(", ")
-	if v := _m.Device; v != nil {
+	if v := vl.Device; v != nil {
 		builder.WriteString("device=")
 		builder.WriteString(*v)
 	}
 	builder.WriteString(", ")
 	builder.WriteString("duration=")
-	builder.WriteString(fmt.Sprintf("%v", _m.Duration))
+	builder.WriteString(fmt.Sprintf("%v", vl.Duration))
 	builder.WriteString(", ")
 	builder.WriteString("is_bounce=")
-	builder.WriteString(fmt.Sprintf("%v", _m.IsBounce))
+	builder.WriteString(fmt.Sprintf("%v", vl.IsBounce))
 	builder.WriteByte(')')
 	return builder.String()
 }

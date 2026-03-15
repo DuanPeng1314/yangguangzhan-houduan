@@ -31,44 +31,44 @@ type ArticleHistoryQuery struct {
 }
 
 // Where adds a new predicate for the ArticleHistoryQuery builder.
-func (_q *ArticleHistoryQuery) Where(ps ...predicate.ArticleHistory) *ArticleHistoryQuery {
-	_q.predicates = append(_q.predicates, ps...)
-	return _q
+func (ahq *ArticleHistoryQuery) Where(ps ...predicate.ArticleHistory) *ArticleHistoryQuery {
+	ahq.predicates = append(ahq.predicates, ps...)
+	return ahq
 }
 
 // Limit the number of records to be returned by this query.
-func (_q *ArticleHistoryQuery) Limit(limit int) *ArticleHistoryQuery {
-	_q.ctx.Limit = &limit
-	return _q
+func (ahq *ArticleHistoryQuery) Limit(limit int) *ArticleHistoryQuery {
+	ahq.ctx.Limit = &limit
+	return ahq
 }
 
 // Offset to start from.
-func (_q *ArticleHistoryQuery) Offset(offset int) *ArticleHistoryQuery {
-	_q.ctx.Offset = &offset
-	return _q
+func (ahq *ArticleHistoryQuery) Offset(offset int) *ArticleHistoryQuery {
+	ahq.ctx.Offset = &offset
+	return ahq
 }
 
 // Unique configures the query builder to filter duplicate records on query.
 // By default, unique is set to true, and can be disabled using this method.
-func (_q *ArticleHistoryQuery) Unique(unique bool) *ArticleHistoryQuery {
-	_q.ctx.Unique = &unique
-	return _q
+func (ahq *ArticleHistoryQuery) Unique(unique bool) *ArticleHistoryQuery {
+	ahq.ctx.Unique = &unique
+	return ahq
 }
 
 // Order specifies how the records should be ordered.
-func (_q *ArticleHistoryQuery) Order(o ...articlehistory.OrderOption) *ArticleHistoryQuery {
-	_q.order = append(_q.order, o...)
-	return _q
+func (ahq *ArticleHistoryQuery) Order(o ...articlehistory.OrderOption) *ArticleHistoryQuery {
+	ahq.order = append(ahq.order, o...)
+	return ahq
 }
 
 // QueryArticle chains the current query on the "article" edge.
-func (_q *ArticleHistoryQuery) QueryArticle() *ArticleQuery {
-	query := (&ArticleClient{config: _q.config}).Query()
+func (ahq *ArticleHistoryQuery) QueryArticle() *ArticleQuery {
+	query := (&ArticleClient{config: ahq.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
+		if err := ahq.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := _q.sqlQuery(ctx)
+		selector := ahq.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -77,7 +77,7 @@ func (_q *ArticleHistoryQuery) QueryArticle() *ArticleQuery {
 			sqlgraph.To(article.Table, article.FieldID),
 			sqlgraph.Edge(sqlgraph.M2O, true, articlehistory.ArticleTable, articlehistory.ArticleColumn),
 		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(ahq.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
@@ -85,8 +85,8 @@ func (_q *ArticleHistoryQuery) QueryArticle() *ArticleQuery {
 
 // First returns the first ArticleHistory entity from the query.
 // Returns a *NotFoundError when no ArticleHistory was found.
-func (_q *ArticleHistoryQuery) First(ctx context.Context) (*ArticleHistory, error) {
-	nodes, err := _q.Limit(1).All(setContextOp(ctx, _q.ctx, ent.OpQueryFirst))
+func (ahq *ArticleHistoryQuery) First(ctx context.Context) (*ArticleHistory, error) {
+	nodes, err := ahq.Limit(1).All(setContextOp(ctx, ahq.ctx, ent.OpQueryFirst))
 	if err != nil {
 		return nil, err
 	}
@@ -97,8 +97,8 @@ func (_q *ArticleHistoryQuery) First(ctx context.Context) (*ArticleHistory, erro
 }
 
 // FirstX is like First, but panics if an error occurs.
-func (_q *ArticleHistoryQuery) FirstX(ctx context.Context) *ArticleHistory {
-	node, err := _q.First(ctx)
+func (ahq *ArticleHistoryQuery) FirstX(ctx context.Context) *ArticleHistory {
+	node, err := ahq.First(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -107,9 +107,9 @@ func (_q *ArticleHistoryQuery) FirstX(ctx context.Context) *ArticleHistory {
 
 // FirstID returns the first ArticleHistory ID from the query.
 // Returns a *NotFoundError when no ArticleHistory ID was found.
-func (_q *ArticleHistoryQuery) FirstID(ctx context.Context) (id uint, err error) {
+func (ahq *ArticleHistoryQuery) FirstID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
+	if ids, err = ahq.Limit(1).IDs(setContextOp(ctx, ahq.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
 	if len(ids) == 0 {
@@ -120,8 +120,8 @@ func (_q *ArticleHistoryQuery) FirstID(ctx context.Context) (id uint, err error)
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (_q *ArticleHistoryQuery) FirstIDX(ctx context.Context) uint {
-	id, err := _q.FirstID(ctx)
+func (ahq *ArticleHistoryQuery) FirstIDX(ctx context.Context) uint {
+	id, err := ahq.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -131,8 +131,8 @@ func (_q *ArticleHistoryQuery) FirstIDX(ctx context.Context) uint {
 // Only returns a single ArticleHistory entity found by the query, ensuring it only returns one.
 // Returns a *NotSingularError when more than one ArticleHistory entity is found.
 // Returns a *NotFoundError when no ArticleHistory entities are found.
-func (_q *ArticleHistoryQuery) Only(ctx context.Context) (*ArticleHistory, error) {
-	nodes, err := _q.Limit(2).All(setContextOp(ctx, _q.ctx, ent.OpQueryOnly))
+func (ahq *ArticleHistoryQuery) Only(ctx context.Context) (*ArticleHistory, error) {
+	nodes, err := ahq.Limit(2).All(setContextOp(ctx, ahq.ctx, ent.OpQueryOnly))
 	if err != nil {
 		return nil, err
 	}
@@ -147,8 +147,8 @@ func (_q *ArticleHistoryQuery) Only(ctx context.Context) (*ArticleHistory, error
 }
 
 // OnlyX is like Only, but panics if an error occurs.
-func (_q *ArticleHistoryQuery) OnlyX(ctx context.Context) *ArticleHistory {
-	node, err := _q.Only(ctx)
+func (ahq *ArticleHistoryQuery) OnlyX(ctx context.Context) *ArticleHistory {
+	node, err := ahq.Only(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -158,9 +158,9 @@ func (_q *ArticleHistoryQuery) OnlyX(ctx context.Context) *ArticleHistory {
 // OnlyID is like Only, but returns the only ArticleHistory ID in the query.
 // Returns a *NotSingularError when more than one ArticleHistory ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (_q *ArticleHistoryQuery) OnlyID(ctx context.Context) (id uint, err error) {
+func (ahq *ArticleHistoryQuery) OnlyID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
+	if ids, err = ahq.Limit(2).IDs(setContextOp(ctx, ahq.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
 	switch len(ids) {
@@ -175,8 +175,8 @@ func (_q *ArticleHistoryQuery) OnlyID(ctx context.Context) (id uint, err error) 
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (_q *ArticleHistoryQuery) OnlyIDX(ctx context.Context) uint {
-	id, err := _q.OnlyID(ctx)
+func (ahq *ArticleHistoryQuery) OnlyIDX(ctx context.Context) uint {
+	id, err := ahq.OnlyID(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -184,18 +184,18 @@ func (_q *ArticleHistoryQuery) OnlyIDX(ctx context.Context) uint {
 }
 
 // All executes the query and returns a list of ArticleHistories.
-func (_q *ArticleHistoryQuery) All(ctx context.Context) ([]*ArticleHistory, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryAll)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (ahq *ArticleHistoryQuery) All(ctx context.Context) ([]*ArticleHistory, error) {
+	ctx = setContextOp(ctx, ahq.ctx, ent.OpQueryAll)
+	if err := ahq.prepareQuery(ctx); err != nil {
 		return nil, err
 	}
 	qr := querierAll[[]*ArticleHistory, *ArticleHistoryQuery]()
-	return withInterceptors[[]*ArticleHistory](ctx, _q, qr, _q.inters)
+	return withInterceptors[[]*ArticleHistory](ctx, ahq, qr, ahq.inters)
 }
 
 // AllX is like All, but panics if an error occurs.
-func (_q *ArticleHistoryQuery) AllX(ctx context.Context) []*ArticleHistory {
-	nodes, err := _q.All(ctx)
+func (ahq *ArticleHistoryQuery) AllX(ctx context.Context) []*ArticleHistory {
+	nodes, err := ahq.All(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -203,20 +203,20 @@ func (_q *ArticleHistoryQuery) AllX(ctx context.Context) []*ArticleHistory {
 }
 
 // IDs executes the query and returns a list of ArticleHistory IDs.
-func (_q *ArticleHistoryQuery) IDs(ctx context.Context) (ids []uint, err error) {
-	if _q.ctx.Unique == nil && _q.path != nil {
-		_q.Unique(true)
+func (ahq *ArticleHistoryQuery) IDs(ctx context.Context) (ids []uint, err error) {
+	if ahq.ctx.Unique == nil && ahq.path != nil {
+		ahq.Unique(true)
 	}
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryIDs)
-	if err = _q.Select(articlehistory.FieldID).Scan(ctx, &ids); err != nil {
+	ctx = setContextOp(ctx, ahq.ctx, ent.OpQueryIDs)
+	if err = ahq.Select(articlehistory.FieldID).Scan(ctx, &ids); err != nil {
 		return nil, err
 	}
 	return ids, nil
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (_q *ArticleHistoryQuery) IDsX(ctx context.Context) []uint {
-	ids, err := _q.IDs(ctx)
+func (ahq *ArticleHistoryQuery) IDsX(ctx context.Context) []uint {
+	ids, err := ahq.IDs(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -224,17 +224,17 @@ func (_q *ArticleHistoryQuery) IDsX(ctx context.Context) []uint {
 }
 
 // Count returns the count of the given query.
-func (_q *ArticleHistoryQuery) Count(ctx context.Context) (int, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryCount)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (ahq *ArticleHistoryQuery) Count(ctx context.Context) (int, error) {
+	ctx = setContextOp(ctx, ahq.ctx, ent.OpQueryCount)
+	if err := ahq.prepareQuery(ctx); err != nil {
 		return 0, err
 	}
-	return withInterceptors[int](ctx, _q, querierCount[*ArticleHistoryQuery](), _q.inters)
+	return withInterceptors[int](ctx, ahq, querierCount[*ArticleHistoryQuery](), ahq.inters)
 }
 
 // CountX is like Count, but panics if an error occurs.
-func (_q *ArticleHistoryQuery) CountX(ctx context.Context) int {
-	count, err := _q.Count(ctx)
+func (ahq *ArticleHistoryQuery) CountX(ctx context.Context) int {
+	count, err := ahq.Count(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -242,9 +242,9 @@ func (_q *ArticleHistoryQuery) CountX(ctx context.Context) int {
 }
 
 // Exist returns true if the query has elements in the graph.
-func (_q *ArticleHistoryQuery) Exist(ctx context.Context) (bool, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryExist)
-	switch _, err := _q.FirstID(ctx); {
+func (ahq *ArticleHistoryQuery) Exist(ctx context.Context) (bool, error) {
+	ctx = setContextOp(ctx, ahq.ctx, ent.OpQueryExist)
+	switch _, err := ahq.FirstID(ctx); {
 	case IsNotFound(err):
 		return false, nil
 	case err != nil:
@@ -255,8 +255,8 @@ func (_q *ArticleHistoryQuery) Exist(ctx context.Context) (bool, error) {
 }
 
 // ExistX is like Exist, but panics if an error occurs.
-func (_q *ArticleHistoryQuery) ExistX(ctx context.Context) bool {
-	exist, err := _q.Exist(ctx)
+func (ahq *ArticleHistoryQuery) ExistX(ctx context.Context) bool {
+	exist, err := ahq.Exist(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -265,33 +265,33 @@ func (_q *ArticleHistoryQuery) ExistX(ctx context.Context) bool {
 
 // Clone returns a duplicate of the ArticleHistoryQuery builder, including all associated steps. It can be
 // used to prepare common query builders and use them differently after the clone is made.
-func (_q *ArticleHistoryQuery) Clone() *ArticleHistoryQuery {
-	if _q == nil {
+func (ahq *ArticleHistoryQuery) Clone() *ArticleHistoryQuery {
+	if ahq == nil {
 		return nil
 	}
 	return &ArticleHistoryQuery{
-		config:      _q.config,
-		ctx:         _q.ctx.Clone(),
-		order:       append([]articlehistory.OrderOption{}, _q.order...),
-		inters:      append([]Interceptor{}, _q.inters...),
-		predicates:  append([]predicate.ArticleHistory{}, _q.predicates...),
-		withArticle: _q.withArticle.Clone(),
+		config:      ahq.config,
+		ctx:         ahq.ctx.Clone(),
+		order:       append([]articlehistory.OrderOption{}, ahq.order...),
+		inters:      append([]Interceptor{}, ahq.inters...),
+		predicates:  append([]predicate.ArticleHistory{}, ahq.predicates...),
+		withArticle: ahq.withArticle.Clone(),
 		// clone intermediate query.
-		sql:       _q.sql.Clone(),
-		path:      _q.path,
-		modifiers: append([]func(*sql.Selector){}, _q.modifiers...),
+		sql:       ahq.sql.Clone(),
+		path:      ahq.path,
+		modifiers: append([]func(*sql.Selector){}, ahq.modifiers...),
 	}
 }
 
 // WithArticle tells the query-builder to eager-load the nodes that are connected to
 // the "article" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *ArticleHistoryQuery) WithArticle(opts ...func(*ArticleQuery)) *ArticleHistoryQuery {
-	query := (&ArticleClient{config: _q.config}).Query()
+func (ahq *ArticleHistoryQuery) WithArticle(opts ...func(*ArticleQuery)) *ArticleHistoryQuery {
+	query := (&ArticleClient{config: ahq.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withArticle = query
-	return _q
+	ahq.withArticle = query
+	return ahq
 }
 
 // GroupBy is used to group vertices by one or more fields/columns.
@@ -308,10 +308,10 @@ func (_q *ArticleHistoryQuery) WithArticle(opts ...func(*ArticleQuery)) *Article
 //		GroupBy(articlehistory.FieldArticleID).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
-func (_q *ArticleHistoryQuery) GroupBy(field string, fields ...string) *ArticleHistoryGroupBy {
-	_q.ctx.Fields = append([]string{field}, fields...)
-	grbuild := &ArticleHistoryGroupBy{build: _q}
-	grbuild.flds = &_q.ctx.Fields
+func (ahq *ArticleHistoryQuery) GroupBy(field string, fields ...string) *ArticleHistoryGroupBy {
+	ahq.ctx.Fields = append([]string{field}, fields...)
+	grbuild := &ArticleHistoryGroupBy{build: ahq}
+	grbuild.flds = &ahq.ctx.Fields
 	grbuild.label = articlehistory.Label
 	grbuild.scan = grbuild.Scan
 	return grbuild
@@ -329,76 +329,76 @@ func (_q *ArticleHistoryQuery) GroupBy(field string, fields ...string) *ArticleH
 //	client.ArticleHistory.Query().
 //		Select(articlehistory.FieldArticleID).
 //		Scan(ctx, &v)
-func (_q *ArticleHistoryQuery) Select(fields ...string) *ArticleHistorySelect {
-	_q.ctx.Fields = append(_q.ctx.Fields, fields...)
-	sbuild := &ArticleHistorySelect{ArticleHistoryQuery: _q}
+func (ahq *ArticleHistoryQuery) Select(fields ...string) *ArticleHistorySelect {
+	ahq.ctx.Fields = append(ahq.ctx.Fields, fields...)
+	sbuild := &ArticleHistorySelect{ArticleHistoryQuery: ahq}
 	sbuild.label = articlehistory.Label
-	sbuild.flds, sbuild.scan = &_q.ctx.Fields, sbuild.Scan
+	sbuild.flds, sbuild.scan = &ahq.ctx.Fields, sbuild.Scan
 	return sbuild
 }
 
 // Aggregate returns a ArticleHistorySelect configured with the given aggregations.
-func (_q *ArticleHistoryQuery) Aggregate(fns ...AggregateFunc) *ArticleHistorySelect {
-	return _q.Select().Aggregate(fns...)
+func (ahq *ArticleHistoryQuery) Aggregate(fns ...AggregateFunc) *ArticleHistorySelect {
+	return ahq.Select().Aggregate(fns...)
 }
 
-func (_q *ArticleHistoryQuery) prepareQuery(ctx context.Context) error {
-	for _, inter := range _q.inters {
+func (ahq *ArticleHistoryQuery) prepareQuery(ctx context.Context) error {
+	for _, inter := range ahq.inters {
 		if inter == nil {
 			return fmt.Errorf("ent: uninitialized interceptor (forgotten import ent/runtime?)")
 		}
 		if trv, ok := inter.(Traverser); ok {
-			if err := trv.Traverse(ctx, _q); err != nil {
+			if err := trv.Traverse(ctx, ahq); err != nil {
 				return err
 			}
 		}
 	}
-	for _, f := range _q.ctx.Fields {
+	for _, f := range ahq.ctx.Fields {
 		if !articlehistory.ValidColumn(f) {
 			return &ValidationError{Name: f, err: fmt.Errorf("ent: invalid field %q for query", f)}
 		}
 	}
-	if _q.path != nil {
-		prev, err := _q.path(ctx)
+	if ahq.path != nil {
+		prev, err := ahq.path(ctx)
 		if err != nil {
 			return err
 		}
-		_q.sql = prev
+		ahq.sql = prev
 	}
 	return nil
 }
 
-func (_q *ArticleHistoryQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*ArticleHistory, error) {
+func (ahq *ArticleHistoryQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*ArticleHistory, error) {
 	var (
 		nodes       = []*ArticleHistory{}
-		_spec       = _q.querySpec()
+		_spec       = ahq.querySpec()
 		loadedTypes = [1]bool{
-			_q.withArticle != nil,
+			ahq.withArticle != nil,
 		}
 	)
 	_spec.ScanValues = func(columns []string) ([]any, error) {
 		return (*ArticleHistory).scanValues(nil, columns)
 	}
 	_spec.Assign = func(columns []string, values []any) error {
-		node := &ArticleHistory{config: _q.config}
+		node := &ArticleHistory{config: ahq.config}
 		nodes = append(nodes, node)
 		node.Edges.loadedTypes = loadedTypes
 		return node.assignValues(columns, values)
 	}
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+	if len(ahq.modifiers) > 0 {
+		_spec.Modifiers = ahq.modifiers
 	}
 	for i := range hooks {
 		hooks[i](ctx, _spec)
 	}
-	if err := sqlgraph.QueryNodes(ctx, _q.driver, _spec); err != nil {
+	if err := sqlgraph.QueryNodes(ctx, ahq.driver, _spec); err != nil {
 		return nil, err
 	}
 	if len(nodes) == 0 {
 		return nodes, nil
 	}
-	if query := _q.withArticle; query != nil {
-		if err := _q.loadArticle(ctx, query, nodes, nil,
+	if query := ahq.withArticle; query != nil {
+		if err := ahq.loadArticle(ctx, query, nodes, nil,
 			func(n *ArticleHistory, e *Article) { n.Edges.Article = e }); err != nil {
 			return nil, err
 		}
@@ -406,7 +406,7 @@ func (_q *ArticleHistoryQuery) sqlAll(ctx context.Context, hooks ...queryHook) (
 	return nodes, nil
 }
 
-func (_q *ArticleHistoryQuery) loadArticle(ctx context.Context, query *ArticleQuery, nodes []*ArticleHistory, init func(*ArticleHistory), assign func(*ArticleHistory, *Article)) error {
+func (ahq *ArticleHistoryQuery) loadArticle(ctx context.Context, query *ArticleQuery, nodes []*ArticleHistory, init func(*ArticleHistory), assign func(*ArticleHistory, *Article)) error {
 	ids := make([]uint, 0, len(nodes))
 	nodeids := make(map[uint][]*ArticleHistory)
 	for i := range nodes {
@@ -436,27 +436,27 @@ func (_q *ArticleHistoryQuery) loadArticle(ctx context.Context, query *ArticleQu
 	return nil
 }
 
-func (_q *ArticleHistoryQuery) sqlCount(ctx context.Context) (int, error) {
-	_spec := _q.querySpec()
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+func (ahq *ArticleHistoryQuery) sqlCount(ctx context.Context) (int, error) {
+	_spec := ahq.querySpec()
+	if len(ahq.modifiers) > 0 {
+		_spec.Modifiers = ahq.modifiers
 	}
-	_spec.Node.Columns = _q.ctx.Fields
-	if len(_q.ctx.Fields) > 0 {
-		_spec.Unique = _q.ctx.Unique != nil && *_q.ctx.Unique
+	_spec.Node.Columns = ahq.ctx.Fields
+	if len(ahq.ctx.Fields) > 0 {
+		_spec.Unique = ahq.ctx.Unique != nil && *ahq.ctx.Unique
 	}
-	return sqlgraph.CountNodes(ctx, _q.driver, _spec)
+	return sqlgraph.CountNodes(ctx, ahq.driver, _spec)
 }
 
-func (_q *ArticleHistoryQuery) querySpec() *sqlgraph.QuerySpec {
+func (ahq *ArticleHistoryQuery) querySpec() *sqlgraph.QuerySpec {
 	_spec := sqlgraph.NewQuerySpec(articlehistory.Table, articlehistory.Columns, sqlgraph.NewFieldSpec(articlehistory.FieldID, field.TypeUint))
-	_spec.From = _q.sql
-	if unique := _q.ctx.Unique; unique != nil {
+	_spec.From = ahq.sql
+	if unique := ahq.ctx.Unique; unique != nil {
 		_spec.Unique = *unique
-	} else if _q.path != nil {
+	} else if ahq.path != nil {
 		_spec.Unique = true
 	}
-	if fields := _q.ctx.Fields; len(fields) > 0 {
+	if fields := ahq.ctx.Fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, articlehistory.FieldID)
 		for i := range fields {
@@ -464,24 +464,24 @@ func (_q *ArticleHistoryQuery) querySpec() *sqlgraph.QuerySpec {
 				_spec.Node.Columns = append(_spec.Node.Columns, fields[i])
 			}
 		}
-		if _q.withArticle != nil {
+		if ahq.withArticle != nil {
 			_spec.Node.AddColumnOnce(articlehistory.FieldArticleID)
 		}
 	}
-	if ps := _q.predicates; len(ps) > 0 {
+	if ps := ahq.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := ahq.ctx.Limit; limit != nil {
 		_spec.Limit = *limit
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := ahq.ctx.Offset; offset != nil {
 		_spec.Offset = *offset
 	}
-	if ps := _q.order; len(ps) > 0 {
+	if ps := ahq.order; len(ps) > 0 {
 		_spec.Order = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
@@ -491,45 +491,45 @@ func (_q *ArticleHistoryQuery) querySpec() *sqlgraph.QuerySpec {
 	return _spec
 }
 
-func (_q *ArticleHistoryQuery) sqlQuery(ctx context.Context) *sql.Selector {
-	builder := sql.Dialect(_q.driver.Dialect())
+func (ahq *ArticleHistoryQuery) sqlQuery(ctx context.Context) *sql.Selector {
+	builder := sql.Dialect(ahq.driver.Dialect())
 	t1 := builder.Table(articlehistory.Table)
-	columns := _q.ctx.Fields
+	columns := ahq.ctx.Fields
 	if len(columns) == 0 {
 		columns = articlehistory.Columns
 	}
 	selector := builder.Select(t1.Columns(columns...)...).From(t1)
-	if _q.sql != nil {
-		selector = _q.sql
+	if ahq.sql != nil {
+		selector = ahq.sql
 		selector.Select(selector.Columns(columns...)...)
 	}
-	if _q.ctx.Unique != nil && *_q.ctx.Unique {
+	if ahq.ctx.Unique != nil && *ahq.ctx.Unique {
 		selector.Distinct()
 	}
-	for _, m := range _q.modifiers {
+	for _, m := range ahq.modifiers {
 		m(selector)
 	}
-	for _, p := range _q.predicates {
+	for _, p := range ahq.predicates {
 		p(selector)
 	}
-	for _, p := range _q.order {
+	for _, p := range ahq.order {
 		p(selector)
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := ahq.ctx.Offset; offset != nil {
 		// limit is mandatory for offset clause. We start
 		// with default value, and override it below if needed.
 		selector.Offset(*offset).Limit(math.MaxInt32)
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := ahq.ctx.Limit; limit != nil {
 		selector.Limit(*limit)
 	}
 	return selector
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_q *ArticleHistoryQuery) Modify(modifiers ...func(s *sql.Selector)) *ArticleHistorySelect {
-	_q.modifiers = append(_q.modifiers, modifiers...)
-	return _q.Select()
+func (ahq *ArticleHistoryQuery) Modify(modifiers ...func(s *sql.Selector)) *ArticleHistorySelect {
+	ahq.modifiers = append(ahq.modifiers, modifiers...)
+	return ahq.Select()
 }
 
 // ArticleHistoryGroupBy is the group-by builder for ArticleHistory entities.
@@ -539,41 +539,41 @@ type ArticleHistoryGroupBy struct {
 }
 
 // Aggregate adds the given aggregation functions to the group-by query.
-func (_g *ArticleHistoryGroupBy) Aggregate(fns ...AggregateFunc) *ArticleHistoryGroupBy {
-	_g.fns = append(_g.fns, fns...)
-	return _g
+func (ahgb *ArticleHistoryGroupBy) Aggregate(fns ...AggregateFunc) *ArticleHistoryGroupBy {
+	ahgb.fns = append(ahgb.fns, fns...)
+	return ahgb
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_g *ArticleHistoryGroupBy) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _g.build.ctx, ent.OpQueryGroupBy)
-	if err := _g.build.prepareQuery(ctx); err != nil {
+func (ahgb *ArticleHistoryGroupBy) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, ahgb.build.ctx, ent.OpQueryGroupBy)
+	if err := ahgb.build.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*ArticleHistoryQuery, *ArticleHistoryGroupBy](ctx, _g.build, _g, _g.build.inters, v)
+	return scanWithInterceptors[*ArticleHistoryQuery, *ArticleHistoryGroupBy](ctx, ahgb.build, ahgb, ahgb.build.inters, v)
 }
 
-func (_g *ArticleHistoryGroupBy) sqlScan(ctx context.Context, root *ArticleHistoryQuery, v any) error {
+func (ahgb *ArticleHistoryGroupBy) sqlScan(ctx context.Context, root *ArticleHistoryQuery, v any) error {
 	selector := root.sqlQuery(ctx).Select()
-	aggregation := make([]string, 0, len(_g.fns))
-	for _, fn := range _g.fns {
+	aggregation := make([]string, 0, len(ahgb.fns))
+	for _, fn := range ahgb.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
 	if len(selector.SelectedColumns()) == 0 {
-		columns := make([]string, 0, len(*_g.flds)+len(_g.fns))
-		for _, f := range *_g.flds {
+		columns := make([]string, 0, len(*ahgb.flds)+len(ahgb.fns))
+		for _, f := range *ahgb.flds {
 			columns = append(columns, selector.C(f))
 		}
 		columns = append(columns, aggregation...)
 		selector.Select(columns...)
 	}
-	selector.GroupBy(selector.Columns(*_g.flds...)...)
+	selector.GroupBy(selector.Columns(*ahgb.flds...)...)
 	if err := selector.Err(); err != nil {
 		return err
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _g.build.driver.Query(ctx, query, args, rows); err != nil {
+	if err := ahgb.build.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -587,27 +587,27 @@ type ArticleHistorySelect struct {
 }
 
 // Aggregate adds the given aggregation functions to the selector query.
-func (_s *ArticleHistorySelect) Aggregate(fns ...AggregateFunc) *ArticleHistorySelect {
-	_s.fns = append(_s.fns, fns...)
-	return _s
+func (ahs *ArticleHistorySelect) Aggregate(fns ...AggregateFunc) *ArticleHistorySelect {
+	ahs.fns = append(ahs.fns, fns...)
+	return ahs
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_s *ArticleHistorySelect) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _s.ctx, ent.OpQuerySelect)
-	if err := _s.prepareQuery(ctx); err != nil {
+func (ahs *ArticleHistorySelect) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, ahs.ctx, ent.OpQuerySelect)
+	if err := ahs.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*ArticleHistoryQuery, *ArticleHistorySelect](ctx, _s.ArticleHistoryQuery, _s, _s.inters, v)
+	return scanWithInterceptors[*ArticleHistoryQuery, *ArticleHistorySelect](ctx, ahs.ArticleHistoryQuery, ahs, ahs.inters, v)
 }
 
-func (_s *ArticleHistorySelect) sqlScan(ctx context.Context, root *ArticleHistoryQuery, v any) error {
+func (ahs *ArticleHistorySelect) sqlScan(ctx context.Context, root *ArticleHistoryQuery, v any) error {
 	selector := root.sqlQuery(ctx)
-	aggregation := make([]string, 0, len(_s.fns))
-	for _, fn := range _s.fns {
+	aggregation := make([]string, 0, len(ahs.fns))
+	for _, fn := range ahs.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
-	switch n := len(*_s.selector.flds); {
+	switch n := len(*ahs.selector.flds); {
 	case n == 0 && len(aggregation) > 0:
 		selector.Select(aggregation...)
 	case n != 0 && len(aggregation) > 0:
@@ -615,7 +615,7 @@ func (_s *ArticleHistorySelect) sqlScan(ctx context.Context, root *ArticleHistor
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _s.driver.Query(ctx, query, args, rows); err != nil {
+	if err := ahs.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -623,7 +623,7 @@ func (_s *ArticleHistorySelect) sqlScan(ctx context.Context, root *ArticleHistor
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_s *ArticleHistorySelect) Modify(modifiers ...func(s *sql.Selector)) *ArticleHistorySelect {
-	_s.modifiers = append(_s.modifiers, modifiers...)
-	return _s
+func (ahs *ArticleHistorySelect) Modify(modifiers ...func(s *sql.Selector)) *ArticleHistorySelect {
+	ahs.modifiers = append(ahs.modifiers, modifiers...)
+	return ahs
 }

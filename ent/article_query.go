@@ -40,44 +40,44 @@ type ArticleQuery struct {
 }
 
 // Where adds a new predicate for the ArticleQuery builder.
-func (_q *ArticleQuery) Where(ps ...predicate.Article) *ArticleQuery {
-	_q.predicates = append(_q.predicates, ps...)
-	return _q
+func (aq *ArticleQuery) Where(ps ...predicate.Article) *ArticleQuery {
+	aq.predicates = append(aq.predicates, ps...)
+	return aq
 }
 
 // Limit the number of records to be returned by this query.
-func (_q *ArticleQuery) Limit(limit int) *ArticleQuery {
-	_q.ctx.Limit = &limit
-	return _q
+func (aq *ArticleQuery) Limit(limit int) *ArticleQuery {
+	aq.ctx.Limit = &limit
+	return aq
 }
 
 // Offset to start from.
-func (_q *ArticleQuery) Offset(offset int) *ArticleQuery {
-	_q.ctx.Offset = &offset
-	return _q
+func (aq *ArticleQuery) Offset(offset int) *ArticleQuery {
+	aq.ctx.Offset = &offset
+	return aq
 }
 
 // Unique configures the query builder to filter duplicate records on query.
 // By default, unique is set to true, and can be disabled using this method.
-func (_q *ArticleQuery) Unique(unique bool) *ArticleQuery {
-	_q.ctx.Unique = &unique
-	return _q
+func (aq *ArticleQuery) Unique(unique bool) *ArticleQuery {
+	aq.ctx.Unique = &unique
+	return aq
 }
 
 // Order specifies how the records should be ordered.
-func (_q *ArticleQuery) Order(o ...article.OrderOption) *ArticleQuery {
-	_q.order = append(_q.order, o...)
-	return _q
+func (aq *ArticleQuery) Order(o ...article.OrderOption) *ArticleQuery {
+	aq.order = append(aq.order, o...)
+	return aq
 }
 
 // QueryPostTags chains the current query on the "post_tags" edge.
-func (_q *ArticleQuery) QueryPostTags() *PostTagQuery {
-	query := (&PostTagClient{config: _q.config}).Query()
+func (aq *ArticleQuery) QueryPostTags() *PostTagQuery {
+	query := (&PostTagClient{config: aq.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
+		if err := aq.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := _q.sqlQuery(ctx)
+		selector := aq.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -86,20 +86,20 @@ func (_q *ArticleQuery) QueryPostTags() *PostTagQuery {
 			sqlgraph.To(posttag.Table, posttag.FieldID),
 			sqlgraph.Edge(sqlgraph.M2M, false, article.PostTagsTable, article.PostTagsPrimaryKey...),
 		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(aq.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
 }
 
 // QueryPostCategories chains the current query on the "post_categories" edge.
-func (_q *ArticleQuery) QueryPostCategories() *PostCategoryQuery {
-	query := (&PostCategoryClient{config: _q.config}).Query()
+func (aq *ArticleQuery) QueryPostCategories() *PostCategoryQuery {
+	query := (&PostCategoryClient{config: aq.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
+		if err := aq.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := _q.sqlQuery(ctx)
+		selector := aq.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -108,20 +108,20 @@ func (_q *ArticleQuery) QueryPostCategories() *PostCategoryQuery {
 			sqlgraph.To(postcategory.Table, postcategory.FieldID),
 			sqlgraph.Edge(sqlgraph.M2M, false, article.PostCategoriesTable, article.PostCategoriesPrimaryKey...),
 		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(aq.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
 }
 
 // QueryComments chains the current query on the "comments" edge.
-func (_q *ArticleQuery) QueryComments() *CommentQuery {
-	query := (&CommentClient{config: _q.config}).Query()
+func (aq *ArticleQuery) QueryComments() *CommentQuery {
+	query := (&CommentClient{config: aq.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
+		if err := aq.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := _q.sqlQuery(ctx)
+		selector := aq.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -130,20 +130,20 @@ func (_q *ArticleQuery) QueryComments() *CommentQuery {
 			sqlgraph.To(comment.Table, comment.FieldID),
 			sqlgraph.Edge(sqlgraph.O2M, false, article.CommentsTable, article.CommentsColumn),
 		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(aq.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
 }
 
 // QueryHistories chains the current query on the "histories" edge.
-func (_q *ArticleQuery) QueryHistories() *ArticleHistoryQuery {
-	query := (&ArticleHistoryClient{config: _q.config}).Query()
+func (aq *ArticleQuery) QueryHistories() *ArticleHistoryQuery {
+	query := (&ArticleHistoryClient{config: aq.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
+		if err := aq.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := _q.sqlQuery(ctx)
+		selector := aq.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -152,20 +152,20 @@ func (_q *ArticleQuery) QueryHistories() *ArticleHistoryQuery {
 			sqlgraph.To(articlehistory.Table, articlehistory.FieldID),
 			sqlgraph.Edge(sqlgraph.O2M, false, article.HistoriesTable, article.HistoriesColumn),
 		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(aq.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
 }
 
 // QueryDocSeries chains the current query on the "doc_series" edge.
-func (_q *ArticleQuery) QueryDocSeries() *DocSeriesQuery {
-	query := (&DocSeriesClient{config: _q.config}).Query()
+func (aq *ArticleQuery) QueryDocSeries() *DocSeriesQuery {
+	query := (&DocSeriesClient{config: aq.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
+		if err := aq.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := _q.sqlQuery(ctx)
+		selector := aq.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -174,7 +174,7 @@ func (_q *ArticleQuery) QueryDocSeries() *DocSeriesQuery {
 			sqlgraph.To(docseries.Table, docseries.FieldID),
 			sqlgraph.Edge(sqlgraph.M2O, true, article.DocSeriesTable, article.DocSeriesColumn),
 		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(aq.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
@@ -182,8 +182,8 @@ func (_q *ArticleQuery) QueryDocSeries() *DocSeriesQuery {
 
 // First returns the first Article entity from the query.
 // Returns a *NotFoundError when no Article was found.
-func (_q *ArticleQuery) First(ctx context.Context) (*Article, error) {
-	nodes, err := _q.Limit(1).All(setContextOp(ctx, _q.ctx, ent.OpQueryFirst))
+func (aq *ArticleQuery) First(ctx context.Context) (*Article, error) {
+	nodes, err := aq.Limit(1).All(setContextOp(ctx, aq.ctx, ent.OpQueryFirst))
 	if err != nil {
 		return nil, err
 	}
@@ -194,8 +194,8 @@ func (_q *ArticleQuery) First(ctx context.Context) (*Article, error) {
 }
 
 // FirstX is like First, but panics if an error occurs.
-func (_q *ArticleQuery) FirstX(ctx context.Context) *Article {
-	node, err := _q.First(ctx)
+func (aq *ArticleQuery) FirstX(ctx context.Context) *Article {
+	node, err := aq.First(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -204,9 +204,9 @@ func (_q *ArticleQuery) FirstX(ctx context.Context) *Article {
 
 // FirstID returns the first Article ID from the query.
 // Returns a *NotFoundError when no Article ID was found.
-func (_q *ArticleQuery) FirstID(ctx context.Context) (id uint, err error) {
+func (aq *ArticleQuery) FirstID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
+	if ids, err = aq.Limit(1).IDs(setContextOp(ctx, aq.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
 	if len(ids) == 0 {
@@ -217,8 +217,8 @@ func (_q *ArticleQuery) FirstID(ctx context.Context) (id uint, err error) {
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (_q *ArticleQuery) FirstIDX(ctx context.Context) uint {
-	id, err := _q.FirstID(ctx)
+func (aq *ArticleQuery) FirstIDX(ctx context.Context) uint {
+	id, err := aq.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -228,8 +228,8 @@ func (_q *ArticleQuery) FirstIDX(ctx context.Context) uint {
 // Only returns a single Article entity found by the query, ensuring it only returns one.
 // Returns a *NotSingularError when more than one Article entity is found.
 // Returns a *NotFoundError when no Article entities are found.
-func (_q *ArticleQuery) Only(ctx context.Context) (*Article, error) {
-	nodes, err := _q.Limit(2).All(setContextOp(ctx, _q.ctx, ent.OpQueryOnly))
+func (aq *ArticleQuery) Only(ctx context.Context) (*Article, error) {
+	nodes, err := aq.Limit(2).All(setContextOp(ctx, aq.ctx, ent.OpQueryOnly))
 	if err != nil {
 		return nil, err
 	}
@@ -244,8 +244,8 @@ func (_q *ArticleQuery) Only(ctx context.Context) (*Article, error) {
 }
 
 // OnlyX is like Only, but panics if an error occurs.
-func (_q *ArticleQuery) OnlyX(ctx context.Context) *Article {
-	node, err := _q.Only(ctx)
+func (aq *ArticleQuery) OnlyX(ctx context.Context) *Article {
+	node, err := aq.Only(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -255,9 +255,9 @@ func (_q *ArticleQuery) OnlyX(ctx context.Context) *Article {
 // OnlyID is like Only, but returns the only Article ID in the query.
 // Returns a *NotSingularError when more than one Article ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (_q *ArticleQuery) OnlyID(ctx context.Context) (id uint, err error) {
+func (aq *ArticleQuery) OnlyID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
+	if ids, err = aq.Limit(2).IDs(setContextOp(ctx, aq.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
 	switch len(ids) {
@@ -272,8 +272,8 @@ func (_q *ArticleQuery) OnlyID(ctx context.Context) (id uint, err error) {
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (_q *ArticleQuery) OnlyIDX(ctx context.Context) uint {
-	id, err := _q.OnlyID(ctx)
+func (aq *ArticleQuery) OnlyIDX(ctx context.Context) uint {
+	id, err := aq.OnlyID(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -281,18 +281,18 @@ func (_q *ArticleQuery) OnlyIDX(ctx context.Context) uint {
 }
 
 // All executes the query and returns a list of Articles.
-func (_q *ArticleQuery) All(ctx context.Context) ([]*Article, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryAll)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (aq *ArticleQuery) All(ctx context.Context) ([]*Article, error) {
+	ctx = setContextOp(ctx, aq.ctx, ent.OpQueryAll)
+	if err := aq.prepareQuery(ctx); err != nil {
 		return nil, err
 	}
 	qr := querierAll[[]*Article, *ArticleQuery]()
-	return withInterceptors[[]*Article](ctx, _q, qr, _q.inters)
+	return withInterceptors[[]*Article](ctx, aq, qr, aq.inters)
 }
 
 // AllX is like All, but panics if an error occurs.
-func (_q *ArticleQuery) AllX(ctx context.Context) []*Article {
-	nodes, err := _q.All(ctx)
+func (aq *ArticleQuery) AllX(ctx context.Context) []*Article {
+	nodes, err := aq.All(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -300,20 +300,20 @@ func (_q *ArticleQuery) AllX(ctx context.Context) []*Article {
 }
 
 // IDs executes the query and returns a list of Article IDs.
-func (_q *ArticleQuery) IDs(ctx context.Context) (ids []uint, err error) {
-	if _q.ctx.Unique == nil && _q.path != nil {
-		_q.Unique(true)
+func (aq *ArticleQuery) IDs(ctx context.Context) (ids []uint, err error) {
+	if aq.ctx.Unique == nil && aq.path != nil {
+		aq.Unique(true)
 	}
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryIDs)
-	if err = _q.Select(article.FieldID).Scan(ctx, &ids); err != nil {
+	ctx = setContextOp(ctx, aq.ctx, ent.OpQueryIDs)
+	if err = aq.Select(article.FieldID).Scan(ctx, &ids); err != nil {
 		return nil, err
 	}
 	return ids, nil
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (_q *ArticleQuery) IDsX(ctx context.Context) []uint {
-	ids, err := _q.IDs(ctx)
+func (aq *ArticleQuery) IDsX(ctx context.Context) []uint {
+	ids, err := aq.IDs(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -321,17 +321,17 @@ func (_q *ArticleQuery) IDsX(ctx context.Context) []uint {
 }
 
 // Count returns the count of the given query.
-func (_q *ArticleQuery) Count(ctx context.Context) (int, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryCount)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (aq *ArticleQuery) Count(ctx context.Context) (int, error) {
+	ctx = setContextOp(ctx, aq.ctx, ent.OpQueryCount)
+	if err := aq.prepareQuery(ctx); err != nil {
 		return 0, err
 	}
-	return withInterceptors[int](ctx, _q, querierCount[*ArticleQuery](), _q.inters)
+	return withInterceptors[int](ctx, aq, querierCount[*ArticleQuery](), aq.inters)
 }
 
 // CountX is like Count, but panics if an error occurs.
-func (_q *ArticleQuery) CountX(ctx context.Context) int {
-	count, err := _q.Count(ctx)
+func (aq *ArticleQuery) CountX(ctx context.Context) int {
+	count, err := aq.Count(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -339,9 +339,9 @@ func (_q *ArticleQuery) CountX(ctx context.Context) int {
 }
 
 // Exist returns true if the query has elements in the graph.
-func (_q *ArticleQuery) Exist(ctx context.Context) (bool, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryExist)
-	switch _, err := _q.FirstID(ctx); {
+func (aq *ArticleQuery) Exist(ctx context.Context) (bool, error) {
+	ctx = setContextOp(ctx, aq.ctx, ent.OpQueryExist)
+	switch _, err := aq.FirstID(ctx); {
 	case IsNotFound(err):
 		return false, nil
 	case err != nil:
@@ -352,8 +352,8 @@ func (_q *ArticleQuery) Exist(ctx context.Context) (bool, error) {
 }
 
 // ExistX is like Exist, but panics if an error occurs.
-func (_q *ArticleQuery) ExistX(ctx context.Context) bool {
-	exist, err := _q.Exist(ctx)
+func (aq *ArticleQuery) ExistX(ctx context.Context) bool {
+	exist, err := aq.Exist(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -362,81 +362,81 @@ func (_q *ArticleQuery) ExistX(ctx context.Context) bool {
 
 // Clone returns a duplicate of the ArticleQuery builder, including all associated steps. It can be
 // used to prepare common query builders and use them differently after the clone is made.
-func (_q *ArticleQuery) Clone() *ArticleQuery {
-	if _q == nil {
+func (aq *ArticleQuery) Clone() *ArticleQuery {
+	if aq == nil {
 		return nil
 	}
 	return &ArticleQuery{
-		config:             _q.config,
-		ctx:                _q.ctx.Clone(),
-		order:              append([]article.OrderOption{}, _q.order...),
-		inters:             append([]Interceptor{}, _q.inters...),
-		predicates:         append([]predicate.Article{}, _q.predicates...),
-		withPostTags:       _q.withPostTags.Clone(),
-		withPostCategories: _q.withPostCategories.Clone(),
-		withComments:       _q.withComments.Clone(),
-		withHistories:      _q.withHistories.Clone(),
-		withDocSeries:      _q.withDocSeries.Clone(),
+		config:             aq.config,
+		ctx:                aq.ctx.Clone(),
+		order:              append([]article.OrderOption{}, aq.order...),
+		inters:             append([]Interceptor{}, aq.inters...),
+		predicates:         append([]predicate.Article{}, aq.predicates...),
+		withPostTags:       aq.withPostTags.Clone(),
+		withPostCategories: aq.withPostCategories.Clone(),
+		withComments:       aq.withComments.Clone(),
+		withHistories:      aq.withHistories.Clone(),
+		withDocSeries:      aq.withDocSeries.Clone(),
 		// clone intermediate query.
-		sql:       _q.sql.Clone(),
-		path:      _q.path,
-		modifiers: append([]func(*sql.Selector){}, _q.modifiers...),
+		sql:       aq.sql.Clone(),
+		path:      aq.path,
+		modifiers: append([]func(*sql.Selector){}, aq.modifiers...),
 	}
 }
 
 // WithPostTags tells the query-builder to eager-load the nodes that are connected to
 // the "post_tags" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *ArticleQuery) WithPostTags(opts ...func(*PostTagQuery)) *ArticleQuery {
-	query := (&PostTagClient{config: _q.config}).Query()
+func (aq *ArticleQuery) WithPostTags(opts ...func(*PostTagQuery)) *ArticleQuery {
+	query := (&PostTagClient{config: aq.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withPostTags = query
-	return _q
+	aq.withPostTags = query
+	return aq
 }
 
 // WithPostCategories tells the query-builder to eager-load the nodes that are connected to
 // the "post_categories" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *ArticleQuery) WithPostCategories(opts ...func(*PostCategoryQuery)) *ArticleQuery {
-	query := (&PostCategoryClient{config: _q.config}).Query()
+func (aq *ArticleQuery) WithPostCategories(opts ...func(*PostCategoryQuery)) *ArticleQuery {
+	query := (&PostCategoryClient{config: aq.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withPostCategories = query
-	return _q
+	aq.withPostCategories = query
+	return aq
 }
 
 // WithComments tells the query-builder to eager-load the nodes that are connected to
 // the "comments" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *ArticleQuery) WithComments(opts ...func(*CommentQuery)) *ArticleQuery {
-	query := (&CommentClient{config: _q.config}).Query()
+func (aq *ArticleQuery) WithComments(opts ...func(*CommentQuery)) *ArticleQuery {
+	query := (&CommentClient{config: aq.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withComments = query
-	return _q
+	aq.withComments = query
+	return aq
 }
 
 // WithHistories tells the query-builder to eager-load the nodes that are connected to
 // the "histories" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *ArticleQuery) WithHistories(opts ...func(*ArticleHistoryQuery)) *ArticleQuery {
-	query := (&ArticleHistoryClient{config: _q.config}).Query()
+func (aq *ArticleQuery) WithHistories(opts ...func(*ArticleHistoryQuery)) *ArticleQuery {
+	query := (&ArticleHistoryClient{config: aq.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withHistories = query
-	return _q
+	aq.withHistories = query
+	return aq
 }
 
 // WithDocSeries tells the query-builder to eager-load the nodes that are connected to
 // the "doc_series" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *ArticleQuery) WithDocSeries(opts ...func(*DocSeriesQuery)) *ArticleQuery {
-	query := (&DocSeriesClient{config: _q.config}).Query()
+func (aq *ArticleQuery) WithDocSeries(opts ...func(*DocSeriesQuery)) *ArticleQuery {
+	query := (&DocSeriesClient{config: aq.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withDocSeries = query
-	return _q
+	aq.withDocSeries = query
+	return aq
 }
 
 // GroupBy is used to group vertices by one or more fields/columns.
@@ -453,10 +453,10 @@ func (_q *ArticleQuery) WithDocSeries(opts ...func(*DocSeriesQuery)) *ArticleQue
 //		GroupBy(article.FieldDeletedAt).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
-func (_q *ArticleQuery) GroupBy(field string, fields ...string) *ArticleGroupBy {
-	_q.ctx.Fields = append([]string{field}, fields...)
-	grbuild := &ArticleGroupBy{build: _q}
-	grbuild.flds = &_q.ctx.Fields
+func (aq *ArticleQuery) GroupBy(field string, fields ...string) *ArticleGroupBy {
+	aq.ctx.Fields = append([]string{field}, fields...)
+	grbuild := &ArticleGroupBy{build: aq}
+	grbuild.flds = &aq.ctx.Fields
 	grbuild.label = article.Label
 	grbuild.scan = grbuild.Scan
 	return grbuild
@@ -474,108 +474,108 @@ func (_q *ArticleQuery) GroupBy(field string, fields ...string) *ArticleGroupBy 
 //	client.Article.Query().
 //		Select(article.FieldDeletedAt).
 //		Scan(ctx, &v)
-func (_q *ArticleQuery) Select(fields ...string) *ArticleSelect {
-	_q.ctx.Fields = append(_q.ctx.Fields, fields...)
-	sbuild := &ArticleSelect{ArticleQuery: _q}
+func (aq *ArticleQuery) Select(fields ...string) *ArticleSelect {
+	aq.ctx.Fields = append(aq.ctx.Fields, fields...)
+	sbuild := &ArticleSelect{ArticleQuery: aq}
 	sbuild.label = article.Label
-	sbuild.flds, sbuild.scan = &_q.ctx.Fields, sbuild.Scan
+	sbuild.flds, sbuild.scan = &aq.ctx.Fields, sbuild.Scan
 	return sbuild
 }
 
 // Aggregate returns a ArticleSelect configured with the given aggregations.
-func (_q *ArticleQuery) Aggregate(fns ...AggregateFunc) *ArticleSelect {
-	return _q.Select().Aggregate(fns...)
+func (aq *ArticleQuery) Aggregate(fns ...AggregateFunc) *ArticleSelect {
+	return aq.Select().Aggregate(fns...)
 }
 
-func (_q *ArticleQuery) prepareQuery(ctx context.Context) error {
-	for _, inter := range _q.inters {
+func (aq *ArticleQuery) prepareQuery(ctx context.Context) error {
+	for _, inter := range aq.inters {
 		if inter == nil {
 			return fmt.Errorf("ent: uninitialized interceptor (forgotten import ent/runtime?)")
 		}
 		if trv, ok := inter.(Traverser); ok {
-			if err := trv.Traverse(ctx, _q); err != nil {
+			if err := trv.Traverse(ctx, aq); err != nil {
 				return err
 			}
 		}
 	}
-	for _, f := range _q.ctx.Fields {
+	for _, f := range aq.ctx.Fields {
 		if !article.ValidColumn(f) {
 			return &ValidationError{Name: f, err: fmt.Errorf("ent: invalid field %q for query", f)}
 		}
 	}
-	if _q.path != nil {
-		prev, err := _q.path(ctx)
+	if aq.path != nil {
+		prev, err := aq.path(ctx)
 		if err != nil {
 			return err
 		}
-		_q.sql = prev
+		aq.sql = prev
 	}
 	return nil
 }
 
-func (_q *ArticleQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Article, error) {
+func (aq *ArticleQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Article, error) {
 	var (
 		nodes       = []*Article{}
-		_spec       = _q.querySpec()
+		_spec       = aq.querySpec()
 		loadedTypes = [5]bool{
-			_q.withPostTags != nil,
-			_q.withPostCategories != nil,
-			_q.withComments != nil,
-			_q.withHistories != nil,
-			_q.withDocSeries != nil,
+			aq.withPostTags != nil,
+			aq.withPostCategories != nil,
+			aq.withComments != nil,
+			aq.withHistories != nil,
+			aq.withDocSeries != nil,
 		}
 	)
 	_spec.ScanValues = func(columns []string) ([]any, error) {
 		return (*Article).scanValues(nil, columns)
 	}
 	_spec.Assign = func(columns []string, values []any) error {
-		node := &Article{config: _q.config}
+		node := &Article{config: aq.config}
 		nodes = append(nodes, node)
 		node.Edges.loadedTypes = loadedTypes
 		return node.assignValues(columns, values)
 	}
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+	if len(aq.modifiers) > 0 {
+		_spec.Modifiers = aq.modifiers
 	}
 	for i := range hooks {
 		hooks[i](ctx, _spec)
 	}
-	if err := sqlgraph.QueryNodes(ctx, _q.driver, _spec); err != nil {
+	if err := sqlgraph.QueryNodes(ctx, aq.driver, _spec); err != nil {
 		return nil, err
 	}
 	if len(nodes) == 0 {
 		return nodes, nil
 	}
-	if query := _q.withPostTags; query != nil {
-		if err := _q.loadPostTags(ctx, query, nodes,
+	if query := aq.withPostTags; query != nil {
+		if err := aq.loadPostTags(ctx, query, nodes,
 			func(n *Article) { n.Edges.PostTags = []*PostTag{} },
 			func(n *Article, e *PostTag) { n.Edges.PostTags = append(n.Edges.PostTags, e) }); err != nil {
 			return nil, err
 		}
 	}
-	if query := _q.withPostCategories; query != nil {
-		if err := _q.loadPostCategories(ctx, query, nodes,
+	if query := aq.withPostCategories; query != nil {
+		if err := aq.loadPostCategories(ctx, query, nodes,
 			func(n *Article) { n.Edges.PostCategories = []*PostCategory{} },
 			func(n *Article, e *PostCategory) { n.Edges.PostCategories = append(n.Edges.PostCategories, e) }); err != nil {
 			return nil, err
 		}
 	}
-	if query := _q.withComments; query != nil {
-		if err := _q.loadComments(ctx, query, nodes,
+	if query := aq.withComments; query != nil {
+		if err := aq.loadComments(ctx, query, nodes,
 			func(n *Article) { n.Edges.Comments = []*Comment{} },
 			func(n *Article, e *Comment) { n.Edges.Comments = append(n.Edges.Comments, e) }); err != nil {
 			return nil, err
 		}
 	}
-	if query := _q.withHistories; query != nil {
-		if err := _q.loadHistories(ctx, query, nodes,
+	if query := aq.withHistories; query != nil {
+		if err := aq.loadHistories(ctx, query, nodes,
 			func(n *Article) { n.Edges.Histories = []*ArticleHistory{} },
 			func(n *Article, e *ArticleHistory) { n.Edges.Histories = append(n.Edges.Histories, e) }); err != nil {
 			return nil, err
 		}
 	}
-	if query := _q.withDocSeries; query != nil {
-		if err := _q.loadDocSeries(ctx, query, nodes, nil,
+	if query := aq.withDocSeries; query != nil {
+		if err := aq.loadDocSeries(ctx, query, nodes, nil,
 			func(n *Article, e *DocSeries) { n.Edges.DocSeries = e }); err != nil {
 			return nil, err
 		}
@@ -583,7 +583,7 @@ func (_q *ArticleQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Arti
 	return nodes, nil
 }
 
-func (_q *ArticleQuery) loadPostTags(ctx context.Context, query *PostTagQuery, nodes []*Article, init func(*Article), assign func(*Article, *PostTag)) error {
+func (aq *ArticleQuery) loadPostTags(ctx context.Context, query *PostTagQuery, nodes []*Article, init func(*Article), assign func(*Article, *PostTag)) error {
 	edgeIDs := make([]driver.Value, len(nodes))
 	byID := make(map[uint]*Article)
 	nids := make(map[uint]map[*Article]struct{})
@@ -644,7 +644,7 @@ func (_q *ArticleQuery) loadPostTags(ctx context.Context, query *PostTagQuery, n
 	}
 	return nil
 }
-func (_q *ArticleQuery) loadPostCategories(ctx context.Context, query *PostCategoryQuery, nodes []*Article, init func(*Article), assign func(*Article, *PostCategory)) error {
+func (aq *ArticleQuery) loadPostCategories(ctx context.Context, query *PostCategoryQuery, nodes []*Article, init func(*Article), assign func(*Article, *PostCategory)) error {
 	edgeIDs := make([]driver.Value, len(nodes))
 	byID := make(map[uint]*Article)
 	nids := make(map[uint]map[*Article]struct{})
@@ -705,7 +705,7 @@ func (_q *ArticleQuery) loadPostCategories(ctx context.Context, query *PostCateg
 	}
 	return nil
 }
-func (_q *ArticleQuery) loadComments(ctx context.Context, query *CommentQuery, nodes []*Article, init func(*Article), assign func(*Article, *Comment)) error {
+func (aq *ArticleQuery) loadComments(ctx context.Context, query *CommentQuery, nodes []*Article, init func(*Article), assign func(*Article, *Comment)) error {
 	fks := make([]driver.Value, 0, len(nodes))
 	nodeids := make(map[uint]*Article)
 	for i := range nodes {
@@ -736,7 +736,7 @@ func (_q *ArticleQuery) loadComments(ctx context.Context, query *CommentQuery, n
 	}
 	return nil
 }
-func (_q *ArticleQuery) loadHistories(ctx context.Context, query *ArticleHistoryQuery, nodes []*Article, init func(*Article), assign func(*Article, *ArticleHistory)) error {
+func (aq *ArticleQuery) loadHistories(ctx context.Context, query *ArticleHistoryQuery, nodes []*Article, init func(*Article), assign func(*Article, *ArticleHistory)) error {
 	fks := make([]driver.Value, 0, len(nodes))
 	nodeids := make(map[uint]*Article)
 	for i := range nodes {
@@ -766,7 +766,7 @@ func (_q *ArticleQuery) loadHistories(ctx context.Context, query *ArticleHistory
 	}
 	return nil
 }
-func (_q *ArticleQuery) loadDocSeries(ctx context.Context, query *DocSeriesQuery, nodes []*Article, init func(*Article), assign func(*Article, *DocSeries)) error {
+func (aq *ArticleQuery) loadDocSeries(ctx context.Context, query *DocSeriesQuery, nodes []*Article, init func(*Article), assign func(*Article, *DocSeries)) error {
 	ids := make([]uint, 0, len(nodes))
 	nodeids := make(map[uint][]*Article)
 	for i := range nodes {
@@ -799,27 +799,27 @@ func (_q *ArticleQuery) loadDocSeries(ctx context.Context, query *DocSeriesQuery
 	return nil
 }
 
-func (_q *ArticleQuery) sqlCount(ctx context.Context) (int, error) {
-	_spec := _q.querySpec()
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+func (aq *ArticleQuery) sqlCount(ctx context.Context) (int, error) {
+	_spec := aq.querySpec()
+	if len(aq.modifiers) > 0 {
+		_spec.Modifiers = aq.modifiers
 	}
-	_spec.Node.Columns = _q.ctx.Fields
-	if len(_q.ctx.Fields) > 0 {
-		_spec.Unique = _q.ctx.Unique != nil && *_q.ctx.Unique
+	_spec.Node.Columns = aq.ctx.Fields
+	if len(aq.ctx.Fields) > 0 {
+		_spec.Unique = aq.ctx.Unique != nil && *aq.ctx.Unique
 	}
-	return sqlgraph.CountNodes(ctx, _q.driver, _spec)
+	return sqlgraph.CountNodes(ctx, aq.driver, _spec)
 }
 
-func (_q *ArticleQuery) querySpec() *sqlgraph.QuerySpec {
+func (aq *ArticleQuery) querySpec() *sqlgraph.QuerySpec {
 	_spec := sqlgraph.NewQuerySpec(article.Table, article.Columns, sqlgraph.NewFieldSpec(article.FieldID, field.TypeUint))
-	_spec.From = _q.sql
-	if unique := _q.ctx.Unique; unique != nil {
+	_spec.From = aq.sql
+	if unique := aq.ctx.Unique; unique != nil {
 		_spec.Unique = *unique
-	} else if _q.path != nil {
+	} else if aq.path != nil {
 		_spec.Unique = true
 	}
-	if fields := _q.ctx.Fields; len(fields) > 0 {
+	if fields := aq.ctx.Fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, article.FieldID)
 		for i := range fields {
@@ -827,24 +827,24 @@ func (_q *ArticleQuery) querySpec() *sqlgraph.QuerySpec {
 				_spec.Node.Columns = append(_spec.Node.Columns, fields[i])
 			}
 		}
-		if _q.withDocSeries != nil {
+		if aq.withDocSeries != nil {
 			_spec.Node.AddColumnOnce(article.FieldDocSeriesID)
 		}
 	}
-	if ps := _q.predicates; len(ps) > 0 {
+	if ps := aq.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := aq.ctx.Limit; limit != nil {
 		_spec.Limit = *limit
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := aq.ctx.Offset; offset != nil {
 		_spec.Offset = *offset
 	}
-	if ps := _q.order; len(ps) > 0 {
+	if ps := aq.order; len(ps) > 0 {
 		_spec.Order = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
@@ -854,45 +854,45 @@ func (_q *ArticleQuery) querySpec() *sqlgraph.QuerySpec {
 	return _spec
 }
 
-func (_q *ArticleQuery) sqlQuery(ctx context.Context) *sql.Selector {
-	builder := sql.Dialect(_q.driver.Dialect())
+func (aq *ArticleQuery) sqlQuery(ctx context.Context) *sql.Selector {
+	builder := sql.Dialect(aq.driver.Dialect())
 	t1 := builder.Table(article.Table)
-	columns := _q.ctx.Fields
+	columns := aq.ctx.Fields
 	if len(columns) == 0 {
 		columns = article.Columns
 	}
 	selector := builder.Select(t1.Columns(columns...)...).From(t1)
-	if _q.sql != nil {
-		selector = _q.sql
+	if aq.sql != nil {
+		selector = aq.sql
 		selector.Select(selector.Columns(columns...)...)
 	}
-	if _q.ctx.Unique != nil && *_q.ctx.Unique {
+	if aq.ctx.Unique != nil && *aq.ctx.Unique {
 		selector.Distinct()
 	}
-	for _, m := range _q.modifiers {
+	for _, m := range aq.modifiers {
 		m(selector)
 	}
-	for _, p := range _q.predicates {
+	for _, p := range aq.predicates {
 		p(selector)
 	}
-	for _, p := range _q.order {
+	for _, p := range aq.order {
 		p(selector)
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := aq.ctx.Offset; offset != nil {
 		// limit is mandatory for offset clause. We start
 		// with default value, and override it below if needed.
 		selector.Offset(*offset).Limit(math.MaxInt32)
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := aq.ctx.Limit; limit != nil {
 		selector.Limit(*limit)
 	}
 	return selector
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_q *ArticleQuery) Modify(modifiers ...func(s *sql.Selector)) *ArticleSelect {
-	_q.modifiers = append(_q.modifiers, modifiers...)
-	return _q.Select()
+func (aq *ArticleQuery) Modify(modifiers ...func(s *sql.Selector)) *ArticleSelect {
+	aq.modifiers = append(aq.modifiers, modifiers...)
+	return aq.Select()
 }
 
 // ArticleGroupBy is the group-by builder for Article entities.
@@ -902,41 +902,41 @@ type ArticleGroupBy struct {
 }
 
 // Aggregate adds the given aggregation functions to the group-by query.
-func (_g *ArticleGroupBy) Aggregate(fns ...AggregateFunc) *ArticleGroupBy {
-	_g.fns = append(_g.fns, fns...)
-	return _g
+func (agb *ArticleGroupBy) Aggregate(fns ...AggregateFunc) *ArticleGroupBy {
+	agb.fns = append(agb.fns, fns...)
+	return agb
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_g *ArticleGroupBy) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _g.build.ctx, ent.OpQueryGroupBy)
-	if err := _g.build.prepareQuery(ctx); err != nil {
+func (agb *ArticleGroupBy) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, agb.build.ctx, ent.OpQueryGroupBy)
+	if err := agb.build.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*ArticleQuery, *ArticleGroupBy](ctx, _g.build, _g, _g.build.inters, v)
+	return scanWithInterceptors[*ArticleQuery, *ArticleGroupBy](ctx, agb.build, agb, agb.build.inters, v)
 }
 
-func (_g *ArticleGroupBy) sqlScan(ctx context.Context, root *ArticleQuery, v any) error {
+func (agb *ArticleGroupBy) sqlScan(ctx context.Context, root *ArticleQuery, v any) error {
 	selector := root.sqlQuery(ctx).Select()
-	aggregation := make([]string, 0, len(_g.fns))
-	for _, fn := range _g.fns {
+	aggregation := make([]string, 0, len(agb.fns))
+	for _, fn := range agb.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
 	if len(selector.SelectedColumns()) == 0 {
-		columns := make([]string, 0, len(*_g.flds)+len(_g.fns))
-		for _, f := range *_g.flds {
+		columns := make([]string, 0, len(*agb.flds)+len(agb.fns))
+		for _, f := range *agb.flds {
 			columns = append(columns, selector.C(f))
 		}
 		columns = append(columns, aggregation...)
 		selector.Select(columns...)
 	}
-	selector.GroupBy(selector.Columns(*_g.flds...)...)
+	selector.GroupBy(selector.Columns(*agb.flds...)...)
 	if err := selector.Err(); err != nil {
 		return err
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _g.build.driver.Query(ctx, query, args, rows); err != nil {
+	if err := agb.build.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -950,27 +950,27 @@ type ArticleSelect struct {
 }
 
 // Aggregate adds the given aggregation functions to the selector query.
-func (_s *ArticleSelect) Aggregate(fns ...AggregateFunc) *ArticleSelect {
-	_s.fns = append(_s.fns, fns...)
-	return _s
+func (as *ArticleSelect) Aggregate(fns ...AggregateFunc) *ArticleSelect {
+	as.fns = append(as.fns, fns...)
+	return as
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_s *ArticleSelect) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _s.ctx, ent.OpQuerySelect)
-	if err := _s.prepareQuery(ctx); err != nil {
+func (as *ArticleSelect) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, as.ctx, ent.OpQuerySelect)
+	if err := as.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*ArticleQuery, *ArticleSelect](ctx, _s.ArticleQuery, _s, _s.inters, v)
+	return scanWithInterceptors[*ArticleQuery, *ArticleSelect](ctx, as.ArticleQuery, as, as.inters, v)
 }
 
-func (_s *ArticleSelect) sqlScan(ctx context.Context, root *ArticleQuery, v any) error {
+func (as *ArticleSelect) sqlScan(ctx context.Context, root *ArticleQuery, v any) error {
 	selector := root.sqlQuery(ctx)
-	aggregation := make([]string, 0, len(_s.fns))
-	for _, fn := range _s.fns {
+	aggregation := make([]string, 0, len(as.fns))
+	for _, fn := range as.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
-	switch n := len(*_s.selector.flds); {
+	switch n := len(*as.selector.flds); {
 	case n == 0 && len(aggregation) > 0:
 		selector.Select(aggregation...)
 	case n != 0 && len(aggregation) > 0:
@@ -978,7 +978,7 @@ func (_s *ArticleSelect) sqlScan(ctx context.Context, root *ArticleQuery, v any)
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _s.driver.Query(ctx, query, args, rows); err != nil {
+	if err := as.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -986,7 +986,7 @@ func (_s *ArticleSelect) sqlScan(ctx context.Context, root *ArticleQuery, v any)
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_s *ArticleSelect) Modify(modifiers ...func(s *sql.Selector)) *ArticleSelect {
-	_s.modifiers = append(_s.modifiers, modifiers...)
-	return _s
+func (as *ArticleSelect) Modify(modifiers ...func(s *sql.Selector)) *ArticleSelect {
+	as.modifiers = append(as.modifiers, modifiers...)
+	return as
 }

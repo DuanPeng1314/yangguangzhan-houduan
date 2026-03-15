@@ -73,7 +73,7 @@ func (*PostTag) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the PostTag fields.
-func (_m *PostTag) assignValues(columns []string, values []any) error {
+func (pt *PostTag) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -84,47 +84,47 @@ func (_m *PostTag) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint(value.Int64)
+			pt.ID = uint(value.Int64)
 		case posttag.FieldDeletedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field deleted_at", values[i])
 			} else if value.Valid {
-				_m.DeletedAt = new(time.Time)
-				*_m.DeletedAt = value.Time
+				pt.DeletedAt = new(time.Time)
+				*pt.DeletedAt = value.Time
 			}
 		case posttag.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
 			} else if value.Valid {
-				_m.CreatedAt = value.Time
+				pt.CreatedAt = value.Time
 			}
 		case posttag.FieldUpdatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field updated_at", values[i])
 			} else if value.Valid {
-				_m.UpdatedAt = value.Time
+				pt.UpdatedAt = value.Time
 			}
 		case posttag.FieldName:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field name", values[i])
 			} else if value.Valid {
-				_m.Name = value.String
+				pt.Name = value.String
 			}
 		case posttag.FieldSlug:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field slug", values[i])
 			} else if value.Valid {
-				_m.Slug = new(string)
-				*_m.Slug = value.String
+				pt.Slug = new(string)
+				*pt.Slug = value.String
 			}
 		case posttag.FieldCount:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field count", values[i])
 			} else if value.Valid {
-				_m.Count = int(value.Int64)
+				pt.Count = int(value.Int64)
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			pt.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -132,59 +132,59 @@ func (_m *PostTag) assignValues(columns []string, values []any) error {
 
 // Value returns the ent.Value that was dynamically selected and assigned to the PostTag.
 // This includes values selected through modifiers, order, etc.
-func (_m *PostTag) Value(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (pt *PostTag) Value(name string) (ent.Value, error) {
+	return pt.selectValues.Get(name)
 }
 
 // QueryArticles queries the "articles" edge of the PostTag entity.
-func (_m *PostTag) QueryArticles() *ArticleQuery {
-	return NewPostTagClient(_m.config).QueryArticles(_m)
+func (pt *PostTag) QueryArticles() *ArticleQuery {
+	return NewPostTagClient(pt.config).QueryArticles(pt)
 }
 
 // Update returns a builder for updating this PostTag.
 // Note that you need to call PostTag.Unwrap() before calling this method if this PostTag
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *PostTag) Update() *PostTagUpdateOne {
-	return NewPostTagClient(_m.config).UpdateOne(_m)
+func (pt *PostTag) Update() *PostTagUpdateOne {
+	return NewPostTagClient(pt.config).UpdateOne(pt)
 }
 
 // Unwrap unwraps the PostTag entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *PostTag) Unwrap() *PostTag {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (pt *PostTag) Unwrap() *PostTag {
+	_tx, ok := pt.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: PostTag is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	pt.config.driver = _tx.drv
+	return pt
 }
 
 // String implements the fmt.Stringer.
-func (_m *PostTag) String() string {
+func (pt *PostTag) String() string {
 	var builder strings.Builder
 	builder.WriteString("PostTag(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
-	if v := _m.DeletedAt; v != nil {
+	builder.WriteString(fmt.Sprintf("id=%v, ", pt.ID))
+	if v := pt.DeletedAt; v != nil {
 		builder.WriteString("deleted_at=")
 		builder.WriteString(v.Format(time.ANSIC))
 	}
 	builder.WriteString(", ")
 	builder.WriteString("created_at=")
-	builder.WriteString(_m.CreatedAt.Format(time.ANSIC))
+	builder.WriteString(pt.CreatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("updated_at=")
-	builder.WriteString(_m.UpdatedAt.Format(time.ANSIC))
+	builder.WriteString(pt.UpdatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("name=")
-	builder.WriteString(_m.Name)
+	builder.WriteString(pt.Name)
 	builder.WriteString(", ")
-	if v := _m.Slug; v != nil {
+	if v := pt.Slug; v != nil {
 		builder.WriteString("slug=")
 		builder.WriteString(*v)
 	}
 	builder.WriteString(", ")
 	builder.WriteString("count=")
-	builder.WriteString(fmt.Sprintf("%v", _m.Count))
+	builder.WriteString(fmt.Sprintf("%v", pt.Count))
 	builder.WriteByte(')')
 	return builder.String()
 }

@@ -99,7 +99,7 @@ func (*UserNotificationConfig) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the UserNotificationConfig fields.
-func (_m *UserNotificationConfig) assignValues(columns []string, values []any) error {
+func (unc *UserNotificationConfig) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -110,42 +110,42 @@ func (_m *UserNotificationConfig) assignValues(columns []string, values []any) e
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint(value.Int64)
+			unc.ID = uint(value.Int64)
 		case usernotificationconfig.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
 			} else if value.Valid {
-				_m.CreatedAt = value.Time
+				unc.CreatedAt = value.Time
 			}
 		case usernotificationconfig.FieldUpdatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field updated_at", values[i])
 			} else if value.Valid {
-				_m.UpdatedAt = value.Time
+				unc.UpdatedAt = value.Time
 			}
 		case usernotificationconfig.FieldUserID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field user_id", values[i])
 			} else if value.Valid {
-				_m.UserID = uint(value.Int64)
+				unc.UserID = uint(value.Int64)
 			}
 		case usernotificationconfig.FieldNotificationTypeID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field notification_type_id", values[i])
 			} else if value.Valid {
-				_m.NotificationTypeID = uint(value.Int64)
+				unc.NotificationTypeID = uint(value.Int64)
 			}
 		case usernotificationconfig.FieldIsEnabled:
 			if value, ok := values[i].(*sql.NullBool); !ok {
 				return fmt.Errorf("unexpected type %T for field is_enabled", values[i])
 			} else if value.Valid {
-				_m.IsEnabled = value.Bool
+				unc.IsEnabled = value.Bool
 			}
 		case usernotificationconfig.FieldEnabledChannels:
 			if value, ok := values[i].(*[]byte); !ok {
 				return fmt.Errorf("unexpected type %T for field enabled_channels", values[i])
 			} else if value != nil && len(*value) > 0 {
-				if err := json.Unmarshal(*value, &_m.EnabledChannels); err != nil {
+				if err := json.Unmarshal(*value, &unc.EnabledChannels); err != nil {
 					return fmt.Errorf("unmarshal field enabled_channels: %w", err)
 				}
 			}
@@ -153,18 +153,18 @@ func (_m *UserNotificationConfig) assignValues(columns []string, values []any) e
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field notification_email", values[i])
 			} else if value.Valid {
-				_m.NotificationEmail = value.String
+				unc.NotificationEmail = value.String
 			}
 		case usernotificationconfig.FieldCustomSettings:
 			if value, ok := values[i].(*[]byte); !ok {
 				return fmt.Errorf("unexpected type %T for field custom_settings", values[i])
 			} else if value != nil && len(*value) > 0 {
-				if err := json.Unmarshal(*value, &_m.CustomSettings); err != nil {
+				if err := json.Unmarshal(*value, &unc.CustomSettings); err != nil {
 					return fmt.Errorf("unmarshal field custom_settings: %w", err)
 				}
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			unc.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -172,66 +172,66 @@ func (_m *UserNotificationConfig) assignValues(columns []string, values []any) e
 
 // Value returns the ent.Value that was dynamically selected and assigned to the UserNotificationConfig.
 // This includes values selected through modifiers, order, etc.
-func (_m *UserNotificationConfig) Value(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (unc *UserNotificationConfig) Value(name string) (ent.Value, error) {
+	return unc.selectValues.Get(name)
 }
 
 // QueryUser queries the "user" edge of the UserNotificationConfig entity.
-func (_m *UserNotificationConfig) QueryUser() *UserQuery {
-	return NewUserNotificationConfigClient(_m.config).QueryUser(_m)
+func (unc *UserNotificationConfig) QueryUser() *UserQuery {
+	return NewUserNotificationConfigClient(unc.config).QueryUser(unc)
 }
 
 // QueryNotificationType queries the "notification_type" edge of the UserNotificationConfig entity.
-func (_m *UserNotificationConfig) QueryNotificationType() *NotificationTypeQuery {
-	return NewUserNotificationConfigClient(_m.config).QueryNotificationType(_m)
+func (unc *UserNotificationConfig) QueryNotificationType() *NotificationTypeQuery {
+	return NewUserNotificationConfigClient(unc.config).QueryNotificationType(unc)
 }
 
 // Update returns a builder for updating this UserNotificationConfig.
 // Note that you need to call UserNotificationConfig.Unwrap() before calling this method if this UserNotificationConfig
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *UserNotificationConfig) Update() *UserNotificationConfigUpdateOne {
-	return NewUserNotificationConfigClient(_m.config).UpdateOne(_m)
+func (unc *UserNotificationConfig) Update() *UserNotificationConfigUpdateOne {
+	return NewUserNotificationConfigClient(unc.config).UpdateOne(unc)
 }
 
 // Unwrap unwraps the UserNotificationConfig entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *UserNotificationConfig) Unwrap() *UserNotificationConfig {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (unc *UserNotificationConfig) Unwrap() *UserNotificationConfig {
+	_tx, ok := unc.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: UserNotificationConfig is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	unc.config.driver = _tx.drv
+	return unc
 }
 
 // String implements the fmt.Stringer.
-func (_m *UserNotificationConfig) String() string {
+func (unc *UserNotificationConfig) String() string {
 	var builder strings.Builder
 	builder.WriteString("UserNotificationConfig(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
+	builder.WriteString(fmt.Sprintf("id=%v, ", unc.ID))
 	builder.WriteString("created_at=")
-	builder.WriteString(_m.CreatedAt.Format(time.ANSIC))
+	builder.WriteString(unc.CreatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("updated_at=")
-	builder.WriteString(_m.UpdatedAt.Format(time.ANSIC))
+	builder.WriteString(unc.UpdatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("user_id=")
-	builder.WriteString(fmt.Sprintf("%v", _m.UserID))
+	builder.WriteString(fmt.Sprintf("%v", unc.UserID))
 	builder.WriteString(", ")
 	builder.WriteString("notification_type_id=")
-	builder.WriteString(fmt.Sprintf("%v", _m.NotificationTypeID))
+	builder.WriteString(fmt.Sprintf("%v", unc.NotificationTypeID))
 	builder.WriteString(", ")
 	builder.WriteString("is_enabled=")
-	builder.WriteString(fmt.Sprintf("%v", _m.IsEnabled))
+	builder.WriteString(fmt.Sprintf("%v", unc.IsEnabled))
 	builder.WriteString(", ")
 	builder.WriteString("enabled_channels=")
-	builder.WriteString(fmt.Sprintf("%v", _m.EnabledChannels))
+	builder.WriteString(fmt.Sprintf("%v", unc.EnabledChannels))
 	builder.WriteString(", ")
 	builder.WriteString("notification_email=")
-	builder.WriteString(_m.NotificationEmail)
+	builder.WriteString(unc.NotificationEmail)
 	builder.WriteString(", ")
 	builder.WriteString("custom_settings=")
-	builder.WriteString(fmt.Sprintf("%v", _m.CustomSettings))
+	builder.WriteString(fmt.Sprintf("%v", unc.CustomSettings))
 	builder.WriteByte(')')
 	return builder.String()
 }

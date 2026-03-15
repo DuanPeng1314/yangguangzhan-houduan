@@ -25,294 +25,294 @@ type LinkUpdate struct {
 }
 
 // Where appends a list predicates to the LinkUpdate builder.
-func (_u *LinkUpdate) Where(ps ...predicate.Link) *LinkUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (lu *LinkUpdate) Where(ps ...predicate.Link) *LinkUpdate {
+	lu.mutation.Where(ps...)
+	return lu
 }
 
 // SetName sets the "name" field.
-func (_u *LinkUpdate) SetName(v string) *LinkUpdate {
-	_u.mutation.SetName(v)
-	return _u
+func (lu *LinkUpdate) SetName(s string) *LinkUpdate {
+	lu.mutation.SetName(s)
+	return lu
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *LinkUpdate) SetNillableName(v *string) *LinkUpdate {
-	if v != nil {
-		_u.SetName(*v)
+func (lu *LinkUpdate) SetNillableName(s *string) *LinkUpdate {
+	if s != nil {
+		lu.SetName(*s)
 	}
-	return _u
+	return lu
 }
 
 // SetURL sets the "url" field.
-func (_u *LinkUpdate) SetURL(v string) *LinkUpdate {
-	_u.mutation.SetURL(v)
-	return _u
+func (lu *LinkUpdate) SetURL(s string) *LinkUpdate {
+	lu.mutation.SetURL(s)
+	return lu
 }
 
 // SetNillableURL sets the "url" field if the given value is not nil.
-func (_u *LinkUpdate) SetNillableURL(v *string) *LinkUpdate {
-	if v != nil {
-		_u.SetURL(*v)
+func (lu *LinkUpdate) SetNillableURL(s *string) *LinkUpdate {
+	if s != nil {
+		lu.SetURL(*s)
 	}
-	return _u
+	return lu
 }
 
 // SetLogo sets the "logo" field.
-func (_u *LinkUpdate) SetLogo(v string) *LinkUpdate {
-	_u.mutation.SetLogo(v)
-	return _u
+func (lu *LinkUpdate) SetLogo(s string) *LinkUpdate {
+	lu.mutation.SetLogo(s)
+	return lu
 }
 
 // SetNillableLogo sets the "logo" field if the given value is not nil.
-func (_u *LinkUpdate) SetNillableLogo(v *string) *LinkUpdate {
-	if v != nil {
-		_u.SetLogo(*v)
+func (lu *LinkUpdate) SetNillableLogo(s *string) *LinkUpdate {
+	if s != nil {
+		lu.SetLogo(*s)
 	}
-	return _u
+	return lu
 }
 
 // ClearLogo clears the value of the "logo" field.
-func (_u *LinkUpdate) ClearLogo() *LinkUpdate {
-	_u.mutation.ClearLogo()
-	return _u
+func (lu *LinkUpdate) ClearLogo() *LinkUpdate {
+	lu.mutation.ClearLogo()
+	return lu
 }
 
 // SetDescription sets the "description" field.
-func (_u *LinkUpdate) SetDescription(v string) *LinkUpdate {
-	_u.mutation.SetDescription(v)
-	return _u
+func (lu *LinkUpdate) SetDescription(s string) *LinkUpdate {
+	lu.mutation.SetDescription(s)
+	return lu
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *LinkUpdate) SetNillableDescription(v *string) *LinkUpdate {
-	if v != nil {
-		_u.SetDescription(*v)
+func (lu *LinkUpdate) SetNillableDescription(s *string) *LinkUpdate {
+	if s != nil {
+		lu.SetDescription(*s)
 	}
-	return _u
+	return lu
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *LinkUpdate) ClearDescription() *LinkUpdate {
-	_u.mutation.ClearDescription()
-	return _u
+func (lu *LinkUpdate) ClearDescription() *LinkUpdate {
+	lu.mutation.ClearDescription()
+	return lu
 }
 
 // SetStatus sets the "status" field.
-func (_u *LinkUpdate) SetStatus(v link.Status) *LinkUpdate {
-	_u.mutation.SetStatus(v)
-	return _u
+func (lu *LinkUpdate) SetStatus(l link.Status) *LinkUpdate {
+	lu.mutation.SetStatus(l)
+	return lu
 }
 
 // SetNillableStatus sets the "status" field if the given value is not nil.
-func (_u *LinkUpdate) SetNillableStatus(v *link.Status) *LinkUpdate {
-	if v != nil {
-		_u.SetStatus(*v)
+func (lu *LinkUpdate) SetNillableStatus(l *link.Status) *LinkUpdate {
+	if l != nil {
+		lu.SetStatus(*l)
 	}
-	return _u
+	return lu
 }
 
 // SetSiteshot sets the "siteshot" field.
-func (_u *LinkUpdate) SetSiteshot(v string) *LinkUpdate {
-	_u.mutation.SetSiteshot(v)
-	return _u
+func (lu *LinkUpdate) SetSiteshot(s string) *LinkUpdate {
+	lu.mutation.SetSiteshot(s)
+	return lu
 }
 
 // SetNillableSiteshot sets the "siteshot" field if the given value is not nil.
-func (_u *LinkUpdate) SetNillableSiteshot(v *string) *LinkUpdate {
-	if v != nil {
-		_u.SetSiteshot(*v)
+func (lu *LinkUpdate) SetNillableSiteshot(s *string) *LinkUpdate {
+	if s != nil {
+		lu.SetSiteshot(*s)
 	}
-	return _u
+	return lu
 }
 
 // ClearSiteshot clears the value of the "siteshot" field.
-func (_u *LinkUpdate) ClearSiteshot() *LinkUpdate {
-	_u.mutation.ClearSiteshot()
-	return _u
+func (lu *LinkUpdate) ClearSiteshot() *LinkUpdate {
+	lu.mutation.ClearSiteshot()
+	return lu
 }
 
 // SetEmail sets the "email" field.
-func (_u *LinkUpdate) SetEmail(v string) *LinkUpdate {
-	_u.mutation.SetEmail(v)
-	return _u
+func (lu *LinkUpdate) SetEmail(s string) *LinkUpdate {
+	lu.mutation.SetEmail(s)
+	return lu
 }
 
 // SetNillableEmail sets the "email" field if the given value is not nil.
-func (_u *LinkUpdate) SetNillableEmail(v *string) *LinkUpdate {
-	if v != nil {
-		_u.SetEmail(*v)
+func (lu *LinkUpdate) SetNillableEmail(s *string) *LinkUpdate {
+	if s != nil {
+		lu.SetEmail(*s)
 	}
-	return _u
+	return lu
 }
 
 // ClearEmail clears the value of the "email" field.
-func (_u *LinkUpdate) ClearEmail() *LinkUpdate {
-	_u.mutation.ClearEmail()
-	return _u
+func (lu *LinkUpdate) ClearEmail() *LinkUpdate {
+	lu.mutation.ClearEmail()
+	return lu
 }
 
 // SetType sets the "type" field.
-func (_u *LinkUpdate) SetType(v link.Type) *LinkUpdate {
-	_u.mutation.SetType(v)
-	return _u
+func (lu *LinkUpdate) SetType(l link.Type) *LinkUpdate {
+	lu.mutation.SetType(l)
+	return lu
 }
 
 // SetNillableType sets the "type" field if the given value is not nil.
-func (_u *LinkUpdate) SetNillableType(v *link.Type) *LinkUpdate {
-	if v != nil {
-		_u.SetType(*v)
+func (lu *LinkUpdate) SetNillableType(l *link.Type) *LinkUpdate {
+	if l != nil {
+		lu.SetType(*l)
 	}
-	return _u
+	return lu
 }
 
 // ClearType clears the value of the "type" field.
-func (_u *LinkUpdate) ClearType() *LinkUpdate {
-	_u.mutation.ClearType()
-	return _u
+func (lu *LinkUpdate) ClearType() *LinkUpdate {
+	lu.mutation.ClearType()
+	return lu
 }
 
 // SetOriginalURL sets the "original_url" field.
-func (_u *LinkUpdate) SetOriginalURL(v string) *LinkUpdate {
-	_u.mutation.SetOriginalURL(v)
-	return _u
+func (lu *LinkUpdate) SetOriginalURL(s string) *LinkUpdate {
+	lu.mutation.SetOriginalURL(s)
+	return lu
 }
 
 // SetNillableOriginalURL sets the "original_url" field if the given value is not nil.
-func (_u *LinkUpdate) SetNillableOriginalURL(v *string) *LinkUpdate {
-	if v != nil {
-		_u.SetOriginalURL(*v)
+func (lu *LinkUpdate) SetNillableOriginalURL(s *string) *LinkUpdate {
+	if s != nil {
+		lu.SetOriginalURL(*s)
 	}
-	return _u
+	return lu
 }
 
 // ClearOriginalURL clears the value of the "original_url" field.
-func (_u *LinkUpdate) ClearOriginalURL() *LinkUpdate {
-	_u.mutation.ClearOriginalURL()
-	return _u
+func (lu *LinkUpdate) ClearOriginalURL() *LinkUpdate {
+	lu.mutation.ClearOriginalURL()
+	return lu
 }
 
 // SetUpdateReason sets the "update_reason" field.
-func (_u *LinkUpdate) SetUpdateReason(v string) *LinkUpdate {
-	_u.mutation.SetUpdateReason(v)
-	return _u
+func (lu *LinkUpdate) SetUpdateReason(s string) *LinkUpdate {
+	lu.mutation.SetUpdateReason(s)
+	return lu
 }
 
 // SetNillableUpdateReason sets the "update_reason" field if the given value is not nil.
-func (_u *LinkUpdate) SetNillableUpdateReason(v *string) *LinkUpdate {
-	if v != nil {
-		_u.SetUpdateReason(*v)
+func (lu *LinkUpdate) SetNillableUpdateReason(s *string) *LinkUpdate {
+	if s != nil {
+		lu.SetUpdateReason(*s)
 	}
-	return _u
+	return lu
 }
 
 // ClearUpdateReason clears the value of the "update_reason" field.
-func (_u *LinkUpdate) ClearUpdateReason() *LinkUpdate {
-	_u.mutation.ClearUpdateReason()
-	return _u
+func (lu *LinkUpdate) ClearUpdateReason() *LinkUpdate {
+	lu.mutation.ClearUpdateReason()
+	return lu
 }
 
 // SetSortOrder sets the "sort_order" field.
-func (_u *LinkUpdate) SetSortOrder(v int) *LinkUpdate {
-	_u.mutation.ResetSortOrder()
-	_u.mutation.SetSortOrder(v)
-	return _u
+func (lu *LinkUpdate) SetSortOrder(i int) *LinkUpdate {
+	lu.mutation.ResetSortOrder()
+	lu.mutation.SetSortOrder(i)
+	return lu
 }
 
 // SetNillableSortOrder sets the "sort_order" field if the given value is not nil.
-func (_u *LinkUpdate) SetNillableSortOrder(v *int) *LinkUpdate {
-	if v != nil {
-		_u.SetSortOrder(*v)
+func (lu *LinkUpdate) SetNillableSortOrder(i *int) *LinkUpdate {
+	if i != nil {
+		lu.SetSortOrder(*i)
 	}
-	return _u
+	return lu
 }
 
-// AddSortOrder adds value to the "sort_order" field.
-func (_u *LinkUpdate) AddSortOrder(v int) *LinkUpdate {
-	_u.mutation.AddSortOrder(v)
-	return _u
+// AddSortOrder adds i to the "sort_order" field.
+func (lu *LinkUpdate) AddSortOrder(i int) *LinkUpdate {
+	lu.mutation.AddSortOrder(i)
+	return lu
 }
 
 // SetSkipHealthCheck sets the "skip_health_check" field.
-func (_u *LinkUpdate) SetSkipHealthCheck(v bool) *LinkUpdate {
-	_u.mutation.SetSkipHealthCheck(v)
-	return _u
+func (lu *LinkUpdate) SetSkipHealthCheck(b bool) *LinkUpdate {
+	lu.mutation.SetSkipHealthCheck(b)
+	return lu
 }
 
 // SetNillableSkipHealthCheck sets the "skip_health_check" field if the given value is not nil.
-func (_u *LinkUpdate) SetNillableSkipHealthCheck(v *bool) *LinkUpdate {
-	if v != nil {
-		_u.SetSkipHealthCheck(*v)
+func (lu *LinkUpdate) SetNillableSkipHealthCheck(b *bool) *LinkUpdate {
+	if b != nil {
+		lu.SetSkipHealthCheck(*b)
 	}
-	return _u
+	return lu
 }
 
 // SetCategoryID sets the "category" edge to the LinkCategory entity by ID.
-func (_u *LinkUpdate) SetCategoryID(id int) *LinkUpdate {
-	_u.mutation.SetCategoryID(id)
-	return _u
+func (lu *LinkUpdate) SetCategoryID(id int) *LinkUpdate {
+	lu.mutation.SetCategoryID(id)
+	return lu
 }
 
 // SetCategory sets the "category" edge to the LinkCategory entity.
-func (_u *LinkUpdate) SetCategory(v *LinkCategory) *LinkUpdate {
-	return _u.SetCategoryID(v.ID)
+func (lu *LinkUpdate) SetCategory(l *LinkCategory) *LinkUpdate {
+	return lu.SetCategoryID(l.ID)
 }
 
 // AddTagIDs adds the "tags" edge to the LinkTag entity by IDs.
-func (_u *LinkUpdate) AddTagIDs(ids ...int) *LinkUpdate {
-	_u.mutation.AddTagIDs(ids...)
-	return _u
+func (lu *LinkUpdate) AddTagIDs(ids ...int) *LinkUpdate {
+	lu.mutation.AddTagIDs(ids...)
+	return lu
 }
 
 // AddTags adds the "tags" edges to the LinkTag entity.
-func (_u *LinkUpdate) AddTags(v ...*LinkTag) *LinkUpdate {
-	ids := make([]int, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (lu *LinkUpdate) AddTags(l ...*LinkTag) *LinkUpdate {
+	ids := make([]int, len(l))
+	for i := range l {
+		ids[i] = l[i].ID
 	}
-	return _u.AddTagIDs(ids...)
+	return lu.AddTagIDs(ids...)
 }
 
 // Mutation returns the LinkMutation object of the builder.
-func (_u *LinkUpdate) Mutation() *LinkMutation {
-	return _u.mutation
+func (lu *LinkUpdate) Mutation() *LinkMutation {
+	return lu.mutation
 }
 
 // ClearCategory clears the "category" edge to the LinkCategory entity.
-func (_u *LinkUpdate) ClearCategory() *LinkUpdate {
-	_u.mutation.ClearCategory()
-	return _u
+func (lu *LinkUpdate) ClearCategory() *LinkUpdate {
+	lu.mutation.ClearCategory()
+	return lu
 }
 
 // ClearTags clears all "tags" edges to the LinkTag entity.
-func (_u *LinkUpdate) ClearTags() *LinkUpdate {
-	_u.mutation.ClearTags()
-	return _u
+func (lu *LinkUpdate) ClearTags() *LinkUpdate {
+	lu.mutation.ClearTags()
+	return lu
 }
 
 // RemoveTagIDs removes the "tags" edge to LinkTag entities by IDs.
-func (_u *LinkUpdate) RemoveTagIDs(ids ...int) *LinkUpdate {
-	_u.mutation.RemoveTagIDs(ids...)
-	return _u
+func (lu *LinkUpdate) RemoveTagIDs(ids ...int) *LinkUpdate {
+	lu.mutation.RemoveTagIDs(ids...)
+	return lu
 }
 
 // RemoveTags removes "tags" edges to LinkTag entities.
-func (_u *LinkUpdate) RemoveTags(v ...*LinkTag) *LinkUpdate {
-	ids := make([]int, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (lu *LinkUpdate) RemoveTags(l ...*LinkTag) *LinkUpdate {
+	ids := make([]int, len(l))
+	for i := range l {
+		ids[i] = l[i].ID
 	}
-	return _u.RemoveTagIDs(ids...)
+	return lu.RemoveTagIDs(ids...)
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *LinkUpdate) Save(ctx context.Context) (int, error) {
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (lu *LinkUpdate) Save(ctx context.Context) (int, error) {
+	return withHooks(ctx, lu.sqlSave, lu.mutation, lu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *LinkUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (lu *LinkUpdate) SaveX(ctx context.Context) int {
+	affected, err := lu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -320,125 +320,125 @@ func (_u *LinkUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *LinkUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (lu *LinkUpdate) Exec(ctx context.Context) error {
+	_, err := lu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *LinkUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (lu *LinkUpdate) ExecX(ctx context.Context) {
+	if err := lu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *LinkUpdate) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (lu *LinkUpdate) check() error {
+	if v, ok := lu.mutation.Name(); ok {
 		if err := link.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "Link.name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.URL(); ok {
+	if v, ok := lu.mutation.URL(); ok {
 		if err := link.URLValidator(v); err != nil {
 			return &ValidationError{Name: "url", err: fmt.Errorf(`ent: validator failed for field "Link.url": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Status(); ok {
+	if v, ok := lu.mutation.Status(); ok {
 		if err := link.StatusValidator(v); err != nil {
 			return &ValidationError{Name: "status", err: fmt.Errorf(`ent: validator failed for field "Link.status": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.GetType(); ok {
+	if v, ok := lu.mutation.GetType(); ok {
 		if err := link.TypeValidator(v); err != nil {
 			return &ValidationError{Name: "type", err: fmt.Errorf(`ent: validator failed for field "Link.type": %w`, err)}
 		}
 	}
-	if _u.mutation.CategoryCleared() && len(_u.mutation.CategoryIDs()) > 0 {
+	if lu.mutation.CategoryCleared() && len(lu.mutation.CategoryIDs()) > 0 {
 		return errors.New(`ent: clearing a required unique edge "Link.category"`)
 	}
 	return nil
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *LinkUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *LinkUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (lu *LinkUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *LinkUpdate {
+	lu.modifiers = append(lu.modifiers, modifiers...)
+	return lu
 }
 
-func (_u *LinkUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (lu *LinkUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := lu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(link.Table, link.Columns, sqlgraph.NewFieldSpec(link.FieldID, field.TypeInt))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := lu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := lu.mutation.Name(); ok {
 		_spec.SetField(link.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.URL(); ok {
+	if value, ok := lu.mutation.URL(); ok {
 		_spec.SetField(link.FieldURL, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Logo(); ok {
+	if value, ok := lu.mutation.Logo(); ok {
 		_spec.SetField(link.FieldLogo, field.TypeString, value)
 	}
-	if _u.mutation.LogoCleared() {
+	if lu.mutation.LogoCleared() {
 		_spec.ClearField(link.FieldLogo, field.TypeString)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := lu.mutation.Description(); ok {
 		_spec.SetField(link.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if lu.mutation.DescriptionCleared() {
 		_spec.ClearField(link.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.Status(); ok {
+	if value, ok := lu.mutation.Status(); ok {
 		_spec.SetField(link.FieldStatus, field.TypeEnum, value)
 	}
-	if value, ok := _u.mutation.Siteshot(); ok {
+	if value, ok := lu.mutation.Siteshot(); ok {
 		_spec.SetField(link.FieldSiteshot, field.TypeString, value)
 	}
-	if _u.mutation.SiteshotCleared() {
+	if lu.mutation.SiteshotCleared() {
 		_spec.ClearField(link.FieldSiteshot, field.TypeString)
 	}
-	if value, ok := _u.mutation.Email(); ok {
+	if value, ok := lu.mutation.Email(); ok {
 		_spec.SetField(link.FieldEmail, field.TypeString, value)
 	}
-	if _u.mutation.EmailCleared() {
+	if lu.mutation.EmailCleared() {
 		_spec.ClearField(link.FieldEmail, field.TypeString)
 	}
-	if value, ok := _u.mutation.GetType(); ok {
+	if value, ok := lu.mutation.GetType(); ok {
 		_spec.SetField(link.FieldType, field.TypeEnum, value)
 	}
-	if _u.mutation.TypeCleared() {
+	if lu.mutation.TypeCleared() {
 		_spec.ClearField(link.FieldType, field.TypeEnum)
 	}
-	if value, ok := _u.mutation.OriginalURL(); ok {
+	if value, ok := lu.mutation.OriginalURL(); ok {
 		_spec.SetField(link.FieldOriginalURL, field.TypeString, value)
 	}
-	if _u.mutation.OriginalURLCleared() {
+	if lu.mutation.OriginalURLCleared() {
 		_spec.ClearField(link.FieldOriginalURL, field.TypeString)
 	}
-	if value, ok := _u.mutation.UpdateReason(); ok {
+	if value, ok := lu.mutation.UpdateReason(); ok {
 		_spec.SetField(link.FieldUpdateReason, field.TypeString, value)
 	}
-	if _u.mutation.UpdateReasonCleared() {
+	if lu.mutation.UpdateReasonCleared() {
 		_spec.ClearField(link.FieldUpdateReason, field.TypeString)
 	}
-	if value, ok := _u.mutation.SortOrder(); ok {
+	if value, ok := lu.mutation.SortOrder(); ok {
 		_spec.SetField(link.FieldSortOrder, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedSortOrder(); ok {
+	if value, ok := lu.mutation.AddedSortOrder(); ok {
 		_spec.AddField(link.FieldSortOrder, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.SkipHealthCheck(); ok {
+	if value, ok := lu.mutation.SkipHealthCheck(); ok {
 		_spec.SetField(link.FieldSkipHealthCheck, field.TypeBool, value)
 	}
-	if _u.mutation.CategoryCleared() {
+	if lu.mutation.CategoryCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -451,7 +451,7 @@ func (_u *LinkUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.CategoryIDs(); len(nodes) > 0 {
+	if nodes := lu.mutation.CategoryIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -467,7 +467,7 @@ func (_u *LinkUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	if _u.mutation.TagsCleared() {
+	if lu.mutation.TagsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: false,
@@ -480,7 +480,7 @@ func (_u *LinkUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedTagsIDs(); len(nodes) > 0 && !_u.mutation.TagsCleared() {
+	if nodes := lu.mutation.RemovedTagsIDs(); len(nodes) > 0 && !lu.mutation.TagsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: false,
@@ -496,7 +496,7 @@ func (_u *LinkUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.TagsIDs(); len(nodes) > 0 {
+	if nodes := lu.mutation.TagsIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: false,
@@ -512,8 +512,8 @@ func (_u *LinkUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(lu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, lu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{link.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -521,8 +521,8 @@ func (_u *LinkUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	lu.mutation.done = true
+	return n, nil
 }
 
 // LinkUpdateOne is the builder for updating a single Link entity.
@@ -535,301 +535,301 @@ type LinkUpdateOne struct {
 }
 
 // SetName sets the "name" field.
-func (_u *LinkUpdateOne) SetName(v string) *LinkUpdateOne {
-	_u.mutation.SetName(v)
-	return _u
+func (luo *LinkUpdateOne) SetName(s string) *LinkUpdateOne {
+	luo.mutation.SetName(s)
+	return luo
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *LinkUpdateOne) SetNillableName(v *string) *LinkUpdateOne {
-	if v != nil {
-		_u.SetName(*v)
+func (luo *LinkUpdateOne) SetNillableName(s *string) *LinkUpdateOne {
+	if s != nil {
+		luo.SetName(*s)
 	}
-	return _u
+	return luo
 }
 
 // SetURL sets the "url" field.
-func (_u *LinkUpdateOne) SetURL(v string) *LinkUpdateOne {
-	_u.mutation.SetURL(v)
-	return _u
+func (luo *LinkUpdateOne) SetURL(s string) *LinkUpdateOne {
+	luo.mutation.SetURL(s)
+	return luo
 }
 
 // SetNillableURL sets the "url" field if the given value is not nil.
-func (_u *LinkUpdateOne) SetNillableURL(v *string) *LinkUpdateOne {
-	if v != nil {
-		_u.SetURL(*v)
+func (luo *LinkUpdateOne) SetNillableURL(s *string) *LinkUpdateOne {
+	if s != nil {
+		luo.SetURL(*s)
 	}
-	return _u
+	return luo
 }
 
 // SetLogo sets the "logo" field.
-func (_u *LinkUpdateOne) SetLogo(v string) *LinkUpdateOne {
-	_u.mutation.SetLogo(v)
-	return _u
+func (luo *LinkUpdateOne) SetLogo(s string) *LinkUpdateOne {
+	luo.mutation.SetLogo(s)
+	return luo
 }
 
 // SetNillableLogo sets the "logo" field if the given value is not nil.
-func (_u *LinkUpdateOne) SetNillableLogo(v *string) *LinkUpdateOne {
-	if v != nil {
-		_u.SetLogo(*v)
+func (luo *LinkUpdateOne) SetNillableLogo(s *string) *LinkUpdateOne {
+	if s != nil {
+		luo.SetLogo(*s)
 	}
-	return _u
+	return luo
 }
 
 // ClearLogo clears the value of the "logo" field.
-func (_u *LinkUpdateOne) ClearLogo() *LinkUpdateOne {
-	_u.mutation.ClearLogo()
-	return _u
+func (luo *LinkUpdateOne) ClearLogo() *LinkUpdateOne {
+	luo.mutation.ClearLogo()
+	return luo
 }
 
 // SetDescription sets the "description" field.
-func (_u *LinkUpdateOne) SetDescription(v string) *LinkUpdateOne {
-	_u.mutation.SetDescription(v)
-	return _u
+func (luo *LinkUpdateOne) SetDescription(s string) *LinkUpdateOne {
+	luo.mutation.SetDescription(s)
+	return luo
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *LinkUpdateOne) SetNillableDescription(v *string) *LinkUpdateOne {
-	if v != nil {
-		_u.SetDescription(*v)
+func (luo *LinkUpdateOne) SetNillableDescription(s *string) *LinkUpdateOne {
+	if s != nil {
+		luo.SetDescription(*s)
 	}
-	return _u
+	return luo
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *LinkUpdateOne) ClearDescription() *LinkUpdateOne {
-	_u.mutation.ClearDescription()
-	return _u
+func (luo *LinkUpdateOne) ClearDescription() *LinkUpdateOne {
+	luo.mutation.ClearDescription()
+	return luo
 }
 
 // SetStatus sets the "status" field.
-func (_u *LinkUpdateOne) SetStatus(v link.Status) *LinkUpdateOne {
-	_u.mutation.SetStatus(v)
-	return _u
+func (luo *LinkUpdateOne) SetStatus(l link.Status) *LinkUpdateOne {
+	luo.mutation.SetStatus(l)
+	return luo
 }
 
 // SetNillableStatus sets the "status" field if the given value is not nil.
-func (_u *LinkUpdateOne) SetNillableStatus(v *link.Status) *LinkUpdateOne {
-	if v != nil {
-		_u.SetStatus(*v)
+func (luo *LinkUpdateOne) SetNillableStatus(l *link.Status) *LinkUpdateOne {
+	if l != nil {
+		luo.SetStatus(*l)
 	}
-	return _u
+	return luo
 }
 
 // SetSiteshot sets the "siteshot" field.
-func (_u *LinkUpdateOne) SetSiteshot(v string) *LinkUpdateOne {
-	_u.mutation.SetSiteshot(v)
-	return _u
+func (luo *LinkUpdateOne) SetSiteshot(s string) *LinkUpdateOne {
+	luo.mutation.SetSiteshot(s)
+	return luo
 }
 
 // SetNillableSiteshot sets the "siteshot" field if the given value is not nil.
-func (_u *LinkUpdateOne) SetNillableSiteshot(v *string) *LinkUpdateOne {
-	if v != nil {
-		_u.SetSiteshot(*v)
+func (luo *LinkUpdateOne) SetNillableSiteshot(s *string) *LinkUpdateOne {
+	if s != nil {
+		luo.SetSiteshot(*s)
 	}
-	return _u
+	return luo
 }
 
 // ClearSiteshot clears the value of the "siteshot" field.
-func (_u *LinkUpdateOne) ClearSiteshot() *LinkUpdateOne {
-	_u.mutation.ClearSiteshot()
-	return _u
+func (luo *LinkUpdateOne) ClearSiteshot() *LinkUpdateOne {
+	luo.mutation.ClearSiteshot()
+	return luo
 }
 
 // SetEmail sets the "email" field.
-func (_u *LinkUpdateOne) SetEmail(v string) *LinkUpdateOne {
-	_u.mutation.SetEmail(v)
-	return _u
+func (luo *LinkUpdateOne) SetEmail(s string) *LinkUpdateOne {
+	luo.mutation.SetEmail(s)
+	return luo
 }
 
 // SetNillableEmail sets the "email" field if the given value is not nil.
-func (_u *LinkUpdateOne) SetNillableEmail(v *string) *LinkUpdateOne {
-	if v != nil {
-		_u.SetEmail(*v)
+func (luo *LinkUpdateOne) SetNillableEmail(s *string) *LinkUpdateOne {
+	if s != nil {
+		luo.SetEmail(*s)
 	}
-	return _u
+	return luo
 }
 
 // ClearEmail clears the value of the "email" field.
-func (_u *LinkUpdateOne) ClearEmail() *LinkUpdateOne {
-	_u.mutation.ClearEmail()
-	return _u
+func (luo *LinkUpdateOne) ClearEmail() *LinkUpdateOne {
+	luo.mutation.ClearEmail()
+	return luo
 }
 
 // SetType sets the "type" field.
-func (_u *LinkUpdateOne) SetType(v link.Type) *LinkUpdateOne {
-	_u.mutation.SetType(v)
-	return _u
+func (luo *LinkUpdateOne) SetType(l link.Type) *LinkUpdateOne {
+	luo.mutation.SetType(l)
+	return luo
 }
 
 // SetNillableType sets the "type" field if the given value is not nil.
-func (_u *LinkUpdateOne) SetNillableType(v *link.Type) *LinkUpdateOne {
-	if v != nil {
-		_u.SetType(*v)
+func (luo *LinkUpdateOne) SetNillableType(l *link.Type) *LinkUpdateOne {
+	if l != nil {
+		luo.SetType(*l)
 	}
-	return _u
+	return luo
 }
 
 // ClearType clears the value of the "type" field.
-func (_u *LinkUpdateOne) ClearType() *LinkUpdateOne {
-	_u.mutation.ClearType()
-	return _u
+func (luo *LinkUpdateOne) ClearType() *LinkUpdateOne {
+	luo.mutation.ClearType()
+	return luo
 }
 
 // SetOriginalURL sets the "original_url" field.
-func (_u *LinkUpdateOne) SetOriginalURL(v string) *LinkUpdateOne {
-	_u.mutation.SetOriginalURL(v)
-	return _u
+func (luo *LinkUpdateOne) SetOriginalURL(s string) *LinkUpdateOne {
+	luo.mutation.SetOriginalURL(s)
+	return luo
 }
 
 // SetNillableOriginalURL sets the "original_url" field if the given value is not nil.
-func (_u *LinkUpdateOne) SetNillableOriginalURL(v *string) *LinkUpdateOne {
-	if v != nil {
-		_u.SetOriginalURL(*v)
+func (luo *LinkUpdateOne) SetNillableOriginalURL(s *string) *LinkUpdateOne {
+	if s != nil {
+		luo.SetOriginalURL(*s)
 	}
-	return _u
+	return luo
 }
 
 // ClearOriginalURL clears the value of the "original_url" field.
-func (_u *LinkUpdateOne) ClearOriginalURL() *LinkUpdateOne {
-	_u.mutation.ClearOriginalURL()
-	return _u
+func (luo *LinkUpdateOne) ClearOriginalURL() *LinkUpdateOne {
+	luo.mutation.ClearOriginalURL()
+	return luo
 }
 
 // SetUpdateReason sets the "update_reason" field.
-func (_u *LinkUpdateOne) SetUpdateReason(v string) *LinkUpdateOne {
-	_u.mutation.SetUpdateReason(v)
-	return _u
+func (luo *LinkUpdateOne) SetUpdateReason(s string) *LinkUpdateOne {
+	luo.mutation.SetUpdateReason(s)
+	return luo
 }
 
 // SetNillableUpdateReason sets the "update_reason" field if the given value is not nil.
-func (_u *LinkUpdateOne) SetNillableUpdateReason(v *string) *LinkUpdateOne {
-	if v != nil {
-		_u.SetUpdateReason(*v)
+func (luo *LinkUpdateOne) SetNillableUpdateReason(s *string) *LinkUpdateOne {
+	if s != nil {
+		luo.SetUpdateReason(*s)
 	}
-	return _u
+	return luo
 }
 
 // ClearUpdateReason clears the value of the "update_reason" field.
-func (_u *LinkUpdateOne) ClearUpdateReason() *LinkUpdateOne {
-	_u.mutation.ClearUpdateReason()
-	return _u
+func (luo *LinkUpdateOne) ClearUpdateReason() *LinkUpdateOne {
+	luo.mutation.ClearUpdateReason()
+	return luo
 }
 
 // SetSortOrder sets the "sort_order" field.
-func (_u *LinkUpdateOne) SetSortOrder(v int) *LinkUpdateOne {
-	_u.mutation.ResetSortOrder()
-	_u.mutation.SetSortOrder(v)
-	return _u
+func (luo *LinkUpdateOne) SetSortOrder(i int) *LinkUpdateOne {
+	luo.mutation.ResetSortOrder()
+	luo.mutation.SetSortOrder(i)
+	return luo
 }
 
 // SetNillableSortOrder sets the "sort_order" field if the given value is not nil.
-func (_u *LinkUpdateOne) SetNillableSortOrder(v *int) *LinkUpdateOne {
-	if v != nil {
-		_u.SetSortOrder(*v)
+func (luo *LinkUpdateOne) SetNillableSortOrder(i *int) *LinkUpdateOne {
+	if i != nil {
+		luo.SetSortOrder(*i)
 	}
-	return _u
+	return luo
 }
 
-// AddSortOrder adds value to the "sort_order" field.
-func (_u *LinkUpdateOne) AddSortOrder(v int) *LinkUpdateOne {
-	_u.mutation.AddSortOrder(v)
-	return _u
+// AddSortOrder adds i to the "sort_order" field.
+func (luo *LinkUpdateOne) AddSortOrder(i int) *LinkUpdateOne {
+	luo.mutation.AddSortOrder(i)
+	return luo
 }
 
 // SetSkipHealthCheck sets the "skip_health_check" field.
-func (_u *LinkUpdateOne) SetSkipHealthCheck(v bool) *LinkUpdateOne {
-	_u.mutation.SetSkipHealthCheck(v)
-	return _u
+func (luo *LinkUpdateOne) SetSkipHealthCheck(b bool) *LinkUpdateOne {
+	luo.mutation.SetSkipHealthCheck(b)
+	return luo
 }
 
 // SetNillableSkipHealthCheck sets the "skip_health_check" field if the given value is not nil.
-func (_u *LinkUpdateOne) SetNillableSkipHealthCheck(v *bool) *LinkUpdateOne {
-	if v != nil {
-		_u.SetSkipHealthCheck(*v)
+func (luo *LinkUpdateOne) SetNillableSkipHealthCheck(b *bool) *LinkUpdateOne {
+	if b != nil {
+		luo.SetSkipHealthCheck(*b)
 	}
-	return _u
+	return luo
 }
 
 // SetCategoryID sets the "category" edge to the LinkCategory entity by ID.
-func (_u *LinkUpdateOne) SetCategoryID(id int) *LinkUpdateOne {
-	_u.mutation.SetCategoryID(id)
-	return _u
+func (luo *LinkUpdateOne) SetCategoryID(id int) *LinkUpdateOne {
+	luo.mutation.SetCategoryID(id)
+	return luo
 }
 
 // SetCategory sets the "category" edge to the LinkCategory entity.
-func (_u *LinkUpdateOne) SetCategory(v *LinkCategory) *LinkUpdateOne {
-	return _u.SetCategoryID(v.ID)
+func (luo *LinkUpdateOne) SetCategory(l *LinkCategory) *LinkUpdateOne {
+	return luo.SetCategoryID(l.ID)
 }
 
 // AddTagIDs adds the "tags" edge to the LinkTag entity by IDs.
-func (_u *LinkUpdateOne) AddTagIDs(ids ...int) *LinkUpdateOne {
-	_u.mutation.AddTagIDs(ids...)
-	return _u
+func (luo *LinkUpdateOne) AddTagIDs(ids ...int) *LinkUpdateOne {
+	luo.mutation.AddTagIDs(ids...)
+	return luo
 }
 
 // AddTags adds the "tags" edges to the LinkTag entity.
-func (_u *LinkUpdateOne) AddTags(v ...*LinkTag) *LinkUpdateOne {
-	ids := make([]int, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (luo *LinkUpdateOne) AddTags(l ...*LinkTag) *LinkUpdateOne {
+	ids := make([]int, len(l))
+	for i := range l {
+		ids[i] = l[i].ID
 	}
-	return _u.AddTagIDs(ids...)
+	return luo.AddTagIDs(ids...)
 }
 
 // Mutation returns the LinkMutation object of the builder.
-func (_u *LinkUpdateOne) Mutation() *LinkMutation {
-	return _u.mutation
+func (luo *LinkUpdateOne) Mutation() *LinkMutation {
+	return luo.mutation
 }
 
 // ClearCategory clears the "category" edge to the LinkCategory entity.
-func (_u *LinkUpdateOne) ClearCategory() *LinkUpdateOne {
-	_u.mutation.ClearCategory()
-	return _u
+func (luo *LinkUpdateOne) ClearCategory() *LinkUpdateOne {
+	luo.mutation.ClearCategory()
+	return luo
 }
 
 // ClearTags clears all "tags" edges to the LinkTag entity.
-func (_u *LinkUpdateOne) ClearTags() *LinkUpdateOne {
-	_u.mutation.ClearTags()
-	return _u
+func (luo *LinkUpdateOne) ClearTags() *LinkUpdateOne {
+	luo.mutation.ClearTags()
+	return luo
 }
 
 // RemoveTagIDs removes the "tags" edge to LinkTag entities by IDs.
-func (_u *LinkUpdateOne) RemoveTagIDs(ids ...int) *LinkUpdateOne {
-	_u.mutation.RemoveTagIDs(ids...)
-	return _u
+func (luo *LinkUpdateOne) RemoveTagIDs(ids ...int) *LinkUpdateOne {
+	luo.mutation.RemoveTagIDs(ids...)
+	return luo
 }
 
 // RemoveTags removes "tags" edges to LinkTag entities.
-func (_u *LinkUpdateOne) RemoveTags(v ...*LinkTag) *LinkUpdateOne {
-	ids := make([]int, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (luo *LinkUpdateOne) RemoveTags(l ...*LinkTag) *LinkUpdateOne {
+	ids := make([]int, len(l))
+	for i := range l {
+		ids[i] = l[i].ID
 	}
-	return _u.RemoveTagIDs(ids...)
+	return luo.RemoveTagIDs(ids...)
 }
 
 // Where appends a list predicates to the LinkUpdate builder.
-func (_u *LinkUpdateOne) Where(ps ...predicate.Link) *LinkUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (luo *LinkUpdateOne) Where(ps ...predicate.Link) *LinkUpdateOne {
+	luo.mutation.Where(ps...)
+	return luo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *LinkUpdateOne) Select(field string, fields ...string) *LinkUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (luo *LinkUpdateOne) Select(field string, fields ...string) *LinkUpdateOne {
+	luo.fields = append([]string{field}, fields...)
+	return luo
 }
 
 // Save executes the query and returns the updated Link entity.
-func (_u *LinkUpdateOne) Save(ctx context.Context) (*Link, error) {
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (luo *LinkUpdateOne) Save(ctx context.Context) (*Link, error) {
+	return withHooks(ctx, luo.sqlSave, luo.mutation, luo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *LinkUpdateOne) SaveX(ctx context.Context) *Link {
-	node, err := _u.Save(ctx)
+func (luo *LinkUpdateOne) SaveX(ctx context.Context) *Link {
+	node, err := luo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -837,63 +837,63 @@ func (_u *LinkUpdateOne) SaveX(ctx context.Context) *Link {
 }
 
 // Exec executes the query on the entity.
-func (_u *LinkUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (luo *LinkUpdateOne) Exec(ctx context.Context) error {
+	_, err := luo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *LinkUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (luo *LinkUpdateOne) ExecX(ctx context.Context) {
+	if err := luo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *LinkUpdateOne) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (luo *LinkUpdateOne) check() error {
+	if v, ok := luo.mutation.Name(); ok {
 		if err := link.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "Link.name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.URL(); ok {
+	if v, ok := luo.mutation.URL(); ok {
 		if err := link.URLValidator(v); err != nil {
 			return &ValidationError{Name: "url", err: fmt.Errorf(`ent: validator failed for field "Link.url": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Status(); ok {
+	if v, ok := luo.mutation.Status(); ok {
 		if err := link.StatusValidator(v); err != nil {
 			return &ValidationError{Name: "status", err: fmt.Errorf(`ent: validator failed for field "Link.status": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.GetType(); ok {
+	if v, ok := luo.mutation.GetType(); ok {
 		if err := link.TypeValidator(v); err != nil {
 			return &ValidationError{Name: "type", err: fmt.Errorf(`ent: validator failed for field "Link.type": %w`, err)}
 		}
 	}
-	if _u.mutation.CategoryCleared() && len(_u.mutation.CategoryIDs()) > 0 {
+	if luo.mutation.CategoryCleared() && len(luo.mutation.CategoryIDs()) > 0 {
 		return errors.New(`ent: clearing a required unique edge "Link.category"`)
 	}
 	return nil
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *LinkUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *LinkUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (luo *LinkUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *LinkUpdateOne {
+	luo.modifiers = append(luo.modifiers, modifiers...)
+	return luo
 }
 
-func (_u *LinkUpdateOne) sqlSave(ctx context.Context) (_node *Link, err error) {
-	if err := _u.check(); err != nil {
+func (luo *LinkUpdateOne) sqlSave(ctx context.Context) (_node *Link, err error) {
+	if err := luo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(link.Table, link.Columns, sqlgraph.NewFieldSpec(link.FieldID, field.TypeInt))
-	id, ok := _u.mutation.ID()
+	id, ok := luo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "Link.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := luo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, link.FieldID)
 		for _, f := range fields {
@@ -905,74 +905,74 @@ func (_u *LinkUpdateOne) sqlSave(ctx context.Context) (_node *Link, err error) {
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := luo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := luo.mutation.Name(); ok {
 		_spec.SetField(link.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.URL(); ok {
+	if value, ok := luo.mutation.URL(); ok {
 		_spec.SetField(link.FieldURL, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Logo(); ok {
+	if value, ok := luo.mutation.Logo(); ok {
 		_spec.SetField(link.FieldLogo, field.TypeString, value)
 	}
-	if _u.mutation.LogoCleared() {
+	if luo.mutation.LogoCleared() {
 		_spec.ClearField(link.FieldLogo, field.TypeString)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := luo.mutation.Description(); ok {
 		_spec.SetField(link.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if luo.mutation.DescriptionCleared() {
 		_spec.ClearField(link.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.Status(); ok {
+	if value, ok := luo.mutation.Status(); ok {
 		_spec.SetField(link.FieldStatus, field.TypeEnum, value)
 	}
-	if value, ok := _u.mutation.Siteshot(); ok {
+	if value, ok := luo.mutation.Siteshot(); ok {
 		_spec.SetField(link.FieldSiteshot, field.TypeString, value)
 	}
-	if _u.mutation.SiteshotCleared() {
+	if luo.mutation.SiteshotCleared() {
 		_spec.ClearField(link.FieldSiteshot, field.TypeString)
 	}
-	if value, ok := _u.mutation.Email(); ok {
+	if value, ok := luo.mutation.Email(); ok {
 		_spec.SetField(link.FieldEmail, field.TypeString, value)
 	}
-	if _u.mutation.EmailCleared() {
+	if luo.mutation.EmailCleared() {
 		_spec.ClearField(link.FieldEmail, field.TypeString)
 	}
-	if value, ok := _u.mutation.GetType(); ok {
+	if value, ok := luo.mutation.GetType(); ok {
 		_spec.SetField(link.FieldType, field.TypeEnum, value)
 	}
-	if _u.mutation.TypeCleared() {
+	if luo.mutation.TypeCleared() {
 		_spec.ClearField(link.FieldType, field.TypeEnum)
 	}
-	if value, ok := _u.mutation.OriginalURL(); ok {
+	if value, ok := luo.mutation.OriginalURL(); ok {
 		_spec.SetField(link.FieldOriginalURL, field.TypeString, value)
 	}
-	if _u.mutation.OriginalURLCleared() {
+	if luo.mutation.OriginalURLCleared() {
 		_spec.ClearField(link.FieldOriginalURL, field.TypeString)
 	}
-	if value, ok := _u.mutation.UpdateReason(); ok {
+	if value, ok := luo.mutation.UpdateReason(); ok {
 		_spec.SetField(link.FieldUpdateReason, field.TypeString, value)
 	}
-	if _u.mutation.UpdateReasonCleared() {
+	if luo.mutation.UpdateReasonCleared() {
 		_spec.ClearField(link.FieldUpdateReason, field.TypeString)
 	}
-	if value, ok := _u.mutation.SortOrder(); ok {
+	if value, ok := luo.mutation.SortOrder(); ok {
 		_spec.SetField(link.FieldSortOrder, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedSortOrder(); ok {
+	if value, ok := luo.mutation.AddedSortOrder(); ok {
 		_spec.AddField(link.FieldSortOrder, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.SkipHealthCheck(); ok {
+	if value, ok := luo.mutation.SkipHealthCheck(); ok {
 		_spec.SetField(link.FieldSkipHealthCheck, field.TypeBool, value)
 	}
-	if _u.mutation.CategoryCleared() {
+	if luo.mutation.CategoryCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -985,7 +985,7 @@ func (_u *LinkUpdateOne) sqlSave(ctx context.Context) (_node *Link, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.CategoryIDs(); len(nodes) > 0 {
+	if nodes := luo.mutation.CategoryIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -1001,7 +1001,7 @@ func (_u *LinkUpdateOne) sqlSave(ctx context.Context) (_node *Link, err error) {
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	if _u.mutation.TagsCleared() {
+	if luo.mutation.TagsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: false,
@@ -1014,7 +1014,7 @@ func (_u *LinkUpdateOne) sqlSave(ctx context.Context) (_node *Link, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedTagsIDs(); len(nodes) > 0 && !_u.mutation.TagsCleared() {
+	if nodes := luo.mutation.RemovedTagsIDs(); len(nodes) > 0 && !luo.mutation.TagsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: false,
@@ -1030,7 +1030,7 @@ func (_u *LinkUpdateOne) sqlSave(ctx context.Context) (_node *Link, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.TagsIDs(); len(nodes) > 0 {
+	if nodes := luo.mutation.TagsIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: false,
@@ -1046,11 +1046,11 @@ func (_u *LinkUpdateOne) sqlSave(ctx context.Context) (_node *Link, err error) {
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &Link{config: _u.config}
+	_spec.AddModifiers(luo.modifiers...)
+	_node = &Link{config: luo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, luo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{link.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -1058,6 +1058,6 @@ func (_u *LinkUpdateOne) sqlSave(ctx context.Context) (_node *Link, err error) {
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	luo.mutation.done = true
 	return _node, nil
 }

@@ -20,56 +20,56 @@ type UserInstalledThemeDelete struct {
 }
 
 // Where appends a list predicates to the UserInstalledThemeDelete builder.
-func (_d *UserInstalledThemeDelete) Where(ps ...predicate.UserInstalledTheme) *UserInstalledThemeDelete {
-	_d.mutation.Where(ps...)
-	return _d
+func (uitd *UserInstalledThemeDelete) Where(ps ...predicate.UserInstalledTheme) *UserInstalledThemeDelete {
+	uitd.mutation.Where(ps...)
+	return uitd
 }
 
 // Exec executes the deletion query and returns how many vertices were deleted.
-func (_d *UserInstalledThemeDelete) Exec(ctx context.Context) (int, error) {
-	return withHooks(ctx, _d.sqlExec, _d.mutation, _d.hooks)
+func (uitd *UserInstalledThemeDelete) Exec(ctx context.Context) (int, error) {
+	return withHooks(ctx, uitd.sqlExec, uitd.mutation, uitd.hooks)
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *UserInstalledThemeDelete) ExecX(ctx context.Context) int {
-	n, err := _d.Exec(ctx)
+func (uitd *UserInstalledThemeDelete) ExecX(ctx context.Context) int {
+	n, err := uitd.Exec(ctx)
 	if err != nil {
 		panic(err)
 	}
 	return n
 }
 
-func (_d *UserInstalledThemeDelete) sqlExec(ctx context.Context) (int, error) {
+func (uitd *UserInstalledThemeDelete) sqlExec(ctx context.Context) (int, error) {
 	_spec := sqlgraph.NewDeleteSpec(userinstalledtheme.Table, sqlgraph.NewFieldSpec(userinstalledtheme.FieldID, field.TypeUint))
-	if ps := _d.mutation.predicates; len(ps) > 0 {
+	if ps := uitd.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	affected, err := sqlgraph.DeleteNodes(ctx, _d.driver, _spec)
+	affected, err := sqlgraph.DeleteNodes(ctx, uitd.driver, _spec)
 	if err != nil && sqlgraph.IsConstraintError(err) {
 		err = &ConstraintError{msg: err.Error(), wrap: err}
 	}
-	_d.mutation.done = true
+	uitd.mutation.done = true
 	return affected, err
 }
 
 // UserInstalledThemeDeleteOne is the builder for deleting a single UserInstalledTheme entity.
 type UserInstalledThemeDeleteOne struct {
-	_d *UserInstalledThemeDelete
+	uitd *UserInstalledThemeDelete
 }
 
 // Where appends a list predicates to the UserInstalledThemeDelete builder.
-func (_d *UserInstalledThemeDeleteOne) Where(ps ...predicate.UserInstalledTheme) *UserInstalledThemeDeleteOne {
-	_d._d.mutation.Where(ps...)
-	return _d
+func (uitdo *UserInstalledThemeDeleteOne) Where(ps ...predicate.UserInstalledTheme) *UserInstalledThemeDeleteOne {
+	uitdo.uitd.mutation.Where(ps...)
+	return uitdo
 }
 
 // Exec executes the deletion query.
-func (_d *UserInstalledThemeDeleteOne) Exec(ctx context.Context) error {
-	n, err := _d._d.Exec(ctx)
+func (uitdo *UserInstalledThemeDeleteOne) Exec(ctx context.Context) error {
+	n, err := uitdo.uitd.Exec(ctx)
 	switch {
 	case err != nil:
 		return err
@@ -81,8 +81,8 @@ func (_d *UserInstalledThemeDeleteOne) Exec(ctx context.Context) error {
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *UserInstalledThemeDeleteOne) ExecX(ctx context.Context) {
-	if err := _d.Exec(ctx); err != nil {
+func (uitdo *UserInstalledThemeDeleteOne) ExecX(ctx context.Context) {
+	if err := uitdo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }

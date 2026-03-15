@@ -64,7 +64,7 @@ func (*AlbumCategory) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the AlbumCategory fields.
-func (_m *AlbumCategory) assignValues(columns []string, values []any) error {
+func (ac *AlbumCategory) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -75,27 +75,27 @@ func (_m *AlbumCategory) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint(value.Int64)
+			ac.ID = uint(value.Int64)
 		case albumcategory.FieldName:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field name", values[i])
 			} else if value.Valid {
-				_m.Name = value.String
+				ac.Name = value.String
 			}
 		case albumcategory.FieldDescription:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field description", values[i])
 			} else if value.Valid {
-				_m.Description = value.String
+				ac.Description = value.String
 			}
 		case albumcategory.FieldDisplayOrder:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field display_order", values[i])
 			} else if value.Valid {
-				_m.DisplayOrder = int(value.Int64)
+				ac.DisplayOrder = int(value.Int64)
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			ac.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -103,46 +103,46 @@ func (_m *AlbumCategory) assignValues(columns []string, values []any) error {
 
 // Value returns the ent.Value that was dynamically selected and assigned to the AlbumCategory.
 // This includes values selected through modifiers, order, etc.
-func (_m *AlbumCategory) Value(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (ac *AlbumCategory) Value(name string) (ent.Value, error) {
+	return ac.selectValues.Get(name)
 }
 
 // QueryAlbums queries the "albums" edge of the AlbumCategory entity.
-func (_m *AlbumCategory) QueryAlbums() *AlbumQuery {
-	return NewAlbumCategoryClient(_m.config).QueryAlbums(_m)
+func (ac *AlbumCategory) QueryAlbums() *AlbumQuery {
+	return NewAlbumCategoryClient(ac.config).QueryAlbums(ac)
 }
 
 // Update returns a builder for updating this AlbumCategory.
 // Note that you need to call AlbumCategory.Unwrap() before calling this method if this AlbumCategory
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *AlbumCategory) Update() *AlbumCategoryUpdateOne {
-	return NewAlbumCategoryClient(_m.config).UpdateOne(_m)
+func (ac *AlbumCategory) Update() *AlbumCategoryUpdateOne {
+	return NewAlbumCategoryClient(ac.config).UpdateOne(ac)
 }
 
 // Unwrap unwraps the AlbumCategory entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *AlbumCategory) Unwrap() *AlbumCategory {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (ac *AlbumCategory) Unwrap() *AlbumCategory {
+	_tx, ok := ac.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: AlbumCategory is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	ac.config.driver = _tx.drv
+	return ac
 }
 
 // String implements the fmt.Stringer.
-func (_m *AlbumCategory) String() string {
+func (ac *AlbumCategory) String() string {
 	var builder strings.Builder
 	builder.WriteString("AlbumCategory(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
+	builder.WriteString(fmt.Sprintf("id=%v, ", ac.ID))
 	builder.WriteString("name=")
-	builder.WriteString(_m.Name)
+	builder.WriteString(ac.Name)
 	builder.WriteString(", ")
 	builder.WriteString("description=")
-	builder.WriteString(_m.Description)
+	builder.WriteString(ac.Description)
 	builder.WriteString(", ")
 	builder.WriteString("display_order=")
-	builder.WriteString(fmt.Sprintf("%v", _m.DisplayOrder))
+	builder.WriteString(fmt.Sprintf("%v", ac.DisplayOrder))
 	builder.WriteByte(')')
 	return builder.String()
 }

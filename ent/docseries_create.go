@@ -24,130 +24,130 @@ type DocSeriesCreate struct {
 }
 
 // SetCreatedAt sets the "created_at" field.
-func (_c *DocSeriesCreate) SetCreatedAt(v time.Time) *DocSeriesCreate {
-	_c.mutation.SetCreatedAt(v)
-	return _c
+func (dsc *DocSeriesCreate) SetCreatedAt(t time.Time) *DocSeriesCreate {
+	dsc.mutation.SetCreatedAt(t)
+	return dsc
 }
 
 // SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (_c *DocSeriesCreate) SetNillableCreatedAt(v *time.Time) *DocSeriesCreate {
-	if v != nil {
-		_c.SetCreatedAt(*v)
+func (dsc *DocSeriesCreate) SetNillableCreatedAt(t *time.Time) *DocSeriesCreate {
+	if t != nil {
+		dsc.SetCreatedAt(*t)
 	}
-	return _c
+	return dsc
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_c *DocSeriesCreate) SetUpdatedAt(v time.Time) *DocSeriesCreate {
-	_c.mutation.SetUpdatedAt(v)
-	return _c
+func (dsc *DocSeriesCreate) SetUpdatedAt(t time.Time) *DocSeriesCreate {
+	dsc.mutation.SetUpdatedAt(t)
+	return dsc
 }
 
 // SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
-func (_c *DocSeriesCreate) SetNillableUpdatedAt(v *time.Time) *DocSeriesCreate {
-	if v != nil {
-		_c.SetUpdatedAt(*v)
+func (dsc *DocSeriesCreate) SetNillableUpdatedAt(t *time.Time) *DocSeriesCreate {
+	if t != nil {
+		dsc.SetUpdatedAt(*t)
 	}
-	return _c
+	return dsc
 }
 
 // SetName sets the "name" field.
-func (_c *DocSeriesCreate) SetName(v string) *DocSeriesCreate {
-	_c.mutation.SetName(v)
-	return _c
+func (dsc *DocSeriesCreate) SetName(s string) *DocSeriesCreate {
+	dsc.mutation.SetName(s)
+	return dsc
 }
 
 // SetDescription sets the "description" field.
-func (_c *DocSeriesCreate) SetDescription(v string) *DocSeriesCreate {
-	_c.mutation.SetDescription(v)
-	return _c
+func (dsc *DocSeriesCreate) SetDescription(s string) *DocSeriesCreate {
+	dsc.mutation.SetDescription(s)
+	return dsc
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_c *DocSeriesCreate) SetNillableDescription(v *string) *DocSeriesCreate {
-	if v != nil {
-		_c.SetDescription(*v)
+func (dsc *DocSeriesCreate) SetNillableDescription(s *string) *DocSeriesCreate {
+	if s != nil {
+		dsc.SetDescription(*s)
 	}
-	return _c
+	return dsc
 }
 
 // SetCoverURL sets the "cover_url" field.
-func (_c *DocSeriesCreate) SetCoverURL(v string) *DocSeriesCreate {
-	_c.mutation.SetCoverURL(v)
-	return _c
+func (dsc *DocSeriesCreate) SetCoverURL(s string) *DocSeriesCreate {
+	dsc.mutation.SetCoverURL(s)
+	return dsc
 }
 
 // SetNillableCoverURL sets the "cover_url" field if the given value is not nil.
-func (_c *DocSeriesCreate) SetNillableCoverURL(v *string) *DocSeriesCreate {
-	if v != nil {
-		_c.SetCoverURL(*v)
+func (dsc *DocSeriesCreate) SetNillableCoverURL(s *string) *DocSeriesCreate {
+	if s != nil {
+		dsc.SetCoverURL(*s)
 	}
-	return _c
+	return dsc
 }
 
 // SetSort sets the "sort" field.
-func (_c *DocSeriesCreate) SetSort(v int) *DocSeriesCreate {
-	_c.mutation.SetSort(v)
-	return _c
+func (dsc *DocSeriesCreate) SetSort(i int) *DocSeriesCreate {
+	dsc.mutation.SetSort(i)
+	return dsc
 }
 
 // SetNillableSort sets the "sort" field if the given value is not nil.
-func (_c *DocSeriesCreate) SetNillableSort(v *int) *DocSeriesCreate {
-	if v != nil {
-		_c.SetSort(*v)
+func (dsc *DocSeriesCreate) SetNillableSort(i *int) *DocSeriesCreate {
+	if i != nil {
+		dsc.SetSort(*i)
 	}
-	return _c
+	return dsc
 }
 
 // SetDocCount sets the "doc_count" field.
-func (_c *DocSeriesCreate) SetDocCount(v int) *DocSeriesCreate {
-	_c.mutation.SetDocCount(v)
-	return _c
+func (dsc *DocSeriesCreate) SetDocCount(i int) *DocSeriesCreate {
+	dsc.mutation.SetDocCount(i)
+	return dsc
 }
 
 // SetNillableDocCount sets the "doc_count" field if the given value is not nil.
-func (_c *DocSeriesCreate) SetNillableDocCount(v *int) *DocSeriesCreate {
-	if v != nil {
-		_c.SetDocCount(*v)
+func (dsc *DocSeriesCreate) SetNillableDocCount(i *int) *DocSeriesCreate {
+	if i != nil {
+		dsc.SetDocCount(*i)
 	}
-	return _c
+	return dsc
 }
 
 // SetID sets the "id" field.
-func (_c *DocSeriesCreate) SetID(v uint) *DocSeriesCreate {
-	_c.mutation.SetID(v)
-	return _c
+func (dsc *DocSeriesCreate) SetID(u uint) *DocSeriesCreate {
+	dsc.mutation.SetID(u)
+	return dsc
 }
 
 // AddArticleIDs adds the "articles" edge to the Article entity by IDs.
-func (_c *DocSeriesCreate) AddArticleIDs(ids ...uint) *DocSeriesCreate {
-	_c.mutation.AddArticleIDs(ids...)
-	return _c
+func (dsc *DocSeriesCreate) AddArticleIDs(ids ...uint) *DocSeriesCreate {
+	dsc.mutation.AddArticleIDs(ids...)
+	return dsc
 }
 
 // AddArticles adds the "articles" edges to the Article entity.
-func (_c *DocSeriesCreate) AddArticles(v ...*Article) *DocSeriesCreate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (dsc *DocSeriesCreate) AddArticles(a ...*Article) *DocSeriesCreate {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _c.AddArticleIDs(ids...)
+	return dsc.AddArticleIDs(ids...)
 }
 
 // Mutation returns the DocSeriesMutation object of the builder.
-func (_c *DocSeriesCreate) Mutation() *DocSeriesMutation {
-	return _c.mutation
+func (dsc *DocSeriesCreate) Mutation() *DocSeriesMutation {
+	return dsc.mutation
 }
 
 // Save creates the DocSeries in the database.
-func (_c *DocSeriesCreate) Save(ctx context.Context) (*DocSeries, error) {
-	_c.defaults()
-	return withHooks(ctx, _c.sqlSave, _c.mutation, _c.hooks)
+func (dsc *DocSeriesCreate) Save(ctx context.Context) (*DocSeries, error) {
+	dsc.defaults()
+	return withHooks(ctx, dsc.sqlSave, dsc.mutation, dsc.hooks)
 }
 
 // SaveX calls Save and panics if Save returns an error.
-func (_c *DocSeriesCreate) SaveX(ctx context.Context) *DocSeries {
-	v, err := _c.Save(ctx)
+func (dsc *DocSeriesCreate) SaveX(ctx context.Context) *DocSeries {
+	v, err := dsc.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -155,66 +155,66 @@ func (_c *DocSeriesCreate) SaveX(ctx context.Context) *DocSeries {
 }
 
 // Exec executes the query.
-func (_c *DocSeriesCreate) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (dsc *DocSeriesCreate) Exec(ctx context.Context) error {
+	_, err := dsc.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *DocSeriesCreate) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (dsc *DocSeriesCreate) ExecX(ctx context.Context) {
+	if err := dsc.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_c *DocSeriesCreate) defaults() {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (dsc *DocSeriesCreate) defaults() {
+	if _, ok := dsc.mutation.CreatedAt(); !ok {
 		v := docseries.DefaultCreatedAt()
-		_c.mutation.SetCreatedAt(v)
+		dsc.mutation.SetCreatedAt(v)
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := dsc.mutation.UpdatedAt(); !ok {
 		v := docseries.DefaultUpdatedAt()
-		_c.mutation.SetUpdatedAt(v)
+		dsc.mutation.SetUpdatedAt(v)
 	}
-	if _, ok := _c.mutation.Sort(); !ok {
+	if _, ok := dsc.mutation.Sort(); !ok {
 		v := docseries.DefaultSort
-		_c.mutation.SetSort(v)
+		dsc.mutation.SetSort(v)
 	}
-	if _, ok := _c.mutation.DocCount(); !ok {
+	if _, ok := dsc.mutation.DocCount(); !ok {
 		v := docseries.DefaultDocCount
-		_c.mutation.SetDocCount(v)
+		dsc.mutation.SetDocCount(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_c *DocSeriesCreate) check() error {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (dsc *DocSeriesCreate) check() error {
+	if _, ok := dsc.mutation.CreatedAt(); !ok {
 		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "DocSeries.created_at"`)}
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := dsc.mutation.UpdatedAt(); !ok {
 		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "DocSeries.updated_at"`)}
 	}
-	if _, ok := _c.mutation.Name(); !ok {
+	if _, ok := dsc.mutation.Name(); !ok {
 		return &ValidationError{Name: "name", err: errors.New(`ent: missing required field "DocSeries.name"`)}
 	}
-	if v, ok := _c.mutation.Name(); ok {
+	if v, ok := dsc.mutation.Name(); ok {
 		if err := docseries.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "DocSeries.name": %w`, err)}
 		}
 	}
-	if _, ok := _c.mutation.Sort(); !ok {
+	if _, ok := dsc.mutation.Sort(); !ok {
 		return &ValidationError{Name: "sort", err: errors.New(`ent: missing required field "DocSeries.sort"`)}
 	}
-	if v, ok := _c.mutation.Sort(); ok {
+	if v, ok := dsc.mutation.Sort(); ok {
 		if err := docseries.SortValidator(v); err != nil {
 			return &ValidationError{Name: "sort", err: fmt.Errorf(`ent: validator failed for field "DocSeries.sort": %w`, err)}
 		}
 	}
-	if _, ok := _c.mutation.DocCount(); !ok {
+	if _, ok := dsc.mutation.DocCount(); !ok {
 		return &ValidationError{Name: "doc_count", err: errors.New(`ent: missing required field "DocSeries.doc_count"`)}
 	}
-	if v, ok := _c.mutation.DocCount(); ok {
+	if v, ok := dsc.mutation.DocCount(); ok {
 		if err := docseries.DocCountValidator(v); err != nil {
 			return &ValidationError{Name: "doc_count", err: fmt.Errorf(`ent: validator failed for field "DocSeries.doc_count": %w`, err)}
 		}
@@ -222,12 +222,12 @@ func (_c *DocSeriesCreate) check() error {
 	return nil
 }
 
-func (_c *DocSeriesCreate) sqlSave(ctx context.Context) (*DocSeries, error) {
-	if err := _c.check(); err != nil {
+func (dsc *DocSeriesCreate) sqlSave(ctx context.Context) (*DocSeries, error) {
+	if err := dsc.check(); err != nil {
 		return nil, err
 	}
-	_node, _spec := _c.createSpec()
-	if err := sqlgraph.CreateNode(ctx, _c.driver, _spec); err != nil {
+	_node, _spec := dsc.createSpec()
+	if err := sqlgraph.CreateNode(ctx, dsc.driver, _spec); err != nil {
 		if sqlgraph.IsConstraintError(err) {
 			err = &ConstraintError{msg: err.Error(), wrap: err}
 		}
@@ -237,50 +237,50 @@ func (_c *DocSeriesCreate) sqlSave(ctx context.Context) (*DocSeries, error) {
 		id := _spec.ID.Value.(int64)
 		_node.ID = uint(id)
 	}
-	_c.mutation.id = &_node.ID
-	_c.mutation.done = true
+	dsc.mutation.id = &_node.ID
+	dsc.mutation.done = true
 	return _node, nil
 }
 
-func (_c *DocSeriesCreate) createSpec() (*DocSeries, *sqlgraph.CreateSpec) {
+func (dsc *DocSeriesCreate) createSpec() (*DocSeries, *sqlgraph.CreateSpec) {
 	var (
-		_node = &DocSeries{config: _c.config}
+		_node = &DocSeries{config: dsc.config}
 		_spec = sqlgraph.NewCreateSpec(docseries.Table, sqlgraph.NewFieldSpec(docseries.FieldID, field.TypeUint))
 	)
-	_spec.OnConflict = _c.conflict
-	if id, ok := _c.mutation.ID(); ok {
+	_spec.OnConflict = dsc.conflict
+	if id, ok := dsc.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
 	}
-	if value, ok := _c.mutation.CreatedAt(); ok {
+	if value, ok := dsc.mutation.CreatedAt(); ok {
 		_spec.SetField(docseries.FieldCreatedAt, field.TypeTime, value)
 		_node.CreatedAt = value
 	}
-	if value, ok := _c.mutation.UpdatedAt(); ok {
+	if value, ok := dsc.mutation.UpdatedAt(); ok {
 		_spec.SetField(docseries.FieldUpdatedAt, field.TypeTime, value)
 		_node.UpdatedAt = value
 	}
-	if value, ok := _c.mutation.Name(); ok {
+	if value, ok := dsc.mutation.Name(); ok {
 		_spec.SetField(docseries.FieldName, field.TypeString, value)
 		_node.Name = value
 	}
-	if value, ok := _c.mutation.Description(); ok {
+	if value, ok := dsc.mutation.Description(); ok {
 		_spec.SetField(docseries.FieldDescription, field.TypeString, value)
 		_node.Description = value
 	}
-	if value, ok := _c.mutation.CoverURL(); ok {
+	if value, ok := dsc.mutation.CoverURL(); ok {
 		_spec.SetField(docseries.FieldCoverURL, field.TypeString, value)
 		_node.CoverURL = value
 	}
-	if value, ok := _c.mutation.Sort(); ok {
+	if value, ok := dsc.mutation.Sort(); ok {
 		_spec.SetField(docseries.FieldSort, field.TypeInt, value)
 		_node.Sort = value
 	}
-	if value, ok := _c.mutation.DocCount(); ok {
+	if value, ok := dsc.mutation.DocCount(); ok {
 		_spec.SetField(docseries.FieldDocCount, field.TypeInt, value)
 		_node.DocCount = value
 	}
-	if nodes := _c.mutation.ArticlesIDs(); len(nodes) > 0 {
+	if nodes := dsc.mutation.ArticlesIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -315,10 +315,10 @@ func (_c *DocSeriesCreate) createSpec() (*DocSeries, *sqlgraph.CreateSpec) {
 //			SetCreatedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *DocSeriesCreate) OnConflict(opts ...sql.ConflictOption) *DocSeriesUpsertOne {
-	_c.conflict = opts
+func (dsc *DocSeriesCreate) OnConflict(opts ...sql.ConflictOption) *DocSeriesUpsertOne {
+	dsc.conflict = opts
 	return &DocSeriesUpsertOne{
-		create: _c,
+		create: dsc,
 	}
 }
 
@@ -328,10 +328,10 @@ func (_c *DocSeriesCreate) OnConflict(opts ...sql.ConflictOption) *DocSeriesUpse
 //	client.DocSeries.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *DocSeriesCreate) OnConflictColumns(columns ...string) *DocSeriesUpsertOne {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (dsc *DocSeriesCreate) OnConflictColumns(columns ...string) *DocSeriesUpsertOne {
+	dsc.conflict = append(dsc.conflict, sql.ConflictColumns(columns...))
 	return &DocSeriesUpsertOne{
-		create: _c,
+		create: dsc,
 	}
 }
 
@@ -649,16 +649,16 @@ type DocSeriesCreateBulk struct {
 }
 
 // Save creates the DocSeries entities in the database.
-func (_c *DocSeriesCreateBulk) Save(ctx context.Context) ([]*DocSeries, error) {
-	if _c.err != nil {
-		return nil, _c.err
+func (dscb *DocSeriesCreateBulk) Save(ctx context.Context) ([]*DocSeries, error) {
+	if dscb.err != nil {
+		return nil, dscb.err
 	}
-	specs := make([]*sqlgraph.CreateSpec, len(_c.builders))
-	nodes := make([]*DocSeries, len(_c.builders))
-	mutators := make([]Mutator, len(_c.builders))
-	for i := range _c.builders {
+	specs := make([]*sqlgraph.CreateSpec, len(dscb.builders))
+	nodes := make([]*DocSeries, len(dscb.builders))
+	mutators := make([]Mutator, len(dscb.builders))
+	for i := range dscb.builders {
 		func(i int, root context.Context) {
-			builder := _c.builders[i]
+			builder := dscb.builders[i]
 			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*DocSeriesMutation)
@@ -672,12 +672,12 @@ func (_c *DocSeriesCreateBulk) Save(ctx context.Context) ([]*DocSeries, error) {
 				var err error
 				nodes[i], specs[i] = builder.createSpec()
 				if i < len(mutators)-1 {
-					_, err = mutators[i+1].Mutate(root, _c.builders[i+1].mutation)
+					_, err = mutators[i+1].Mutate(root, dscb.builders[i+1].mutation)
 				} else {
 					spec := &sqlgraph.BatchCreateSpec{Nodes: specs}
-					spec.OnConflict = _c.conflict
+					spec.OnConflict = dscb.conflict
 					// Invoke the actual operation on the latest mutation in the chain.
-					if err = sqlgraph.BatchCreate(ctx, _c.driver, spec); err != nil {
+					if err = sqlgraph.BatchCreate(ctx, dscb.driver, spec); err != nil {
 						if sqlgraph.IsConstraintError(err) {
 							err = &ConstraintError{msg: err.Error(), wrap: err}
 						}
@@ -701,7 +701,7 @@ func (_c *DocSeriesCreateBulk) Save(ctx context.Context) ([]*DocSeries, error) {
 		}(i, ctx)
 	}
 	if len(mutators) > 0 {
-		if _, err := mutators[0].Mutate(ctx, _c.builders[0].mutation); err != nil {
+		if _, err := mutators[0].Mutate(ctx, dscb.builders[0].mutation); err != nil {
 			return nil, err
 		}
 	}
@@ -709,8 +709,8 @@ func (_c *DocSeriesCreateBulk) Save(ctx context.Context) ([]*DocSeries, error) {
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_c *DocSeriesCreateBulk) SaveX(ctx context.Context) []*DocSeries {
-	v, err := _c.Save(ctx)
+func (dscb *DocSeriesCreateBulk) SaveX(ctx context.Context) []*DocSeries {
+	v, err := dscb.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -718,14 +718,14 @@ func (_c *DocSeriesCreateBulk) SaveX(ctx context.Context) []*DocSeries {
 }
 
 // Exec executes the query.
-func (_c *DocSeriesCreateBulk) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (dscb *DocSeriesCreateBulk) Exec(ctx context.Context) error {
+	_, err := dscb.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *DocSeriesCreateBulk) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (dscb *DocSeriesCreateBulk) ExecX(ctx context.Context) {
+	if err := dscb.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
@@ -745,10 +745,10 @@ func (_c *DocSeriesCreateBulk) ExecX(ctx context.Context) {
 //			SetCreatedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *DocSeriesCreateBulk) OnConflict(opts ...sql.ConflictOption) *DocSeriesUpsertBulk {
-	_c.conflict = opts
+func (dscb *DocSeriesCreateBulk) OnConflict(opts ...sql.ConflictOption) *DocSeriesUpsertBulk {
+	dscb.conflict = opts
 	return &DocSeriesUpsertBulk{
-		create: _c,
+		create: dscb,
 	}
 }
 
@@ -758,10 +758,10 @@ func (_c *DocSeriesCreateBulk) OnConflict(opts ...sql.ConflictOption) *DocSeries
 //	client.DocSeries.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *DocSeriesCreateBulk) OnConflictColumns(columns ...string) *DocSeriesUpsertBulk {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (dscb *DocSeriesCreateBulk) OnConflictColumns(columns ...string) *DocSeriesUpsertBulk {
+	dscb.conflict = append(dscb.conflict, sql.ConflictColumns(columns...))
 	return &DocSeriesUpsertBulk{
-		create: _c,
+		create: dscb,
 	}
 }
 

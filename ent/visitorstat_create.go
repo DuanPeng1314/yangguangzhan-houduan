@@ -23,115 +23,115 @@ type VisitorStatCreate struct {
 }
 
 // SetCreatedAt sets the "created_at" field.
-func (_c *VisitorStatCreate) SetCreatedAt(v time.Time) *VisitorStatCreate {
-	_c.mutation.SetCreatedAt(v)
-	return _c
+func (vsc *VisitorStatCreate) SetCreatedAt(t time.Time) *VisitorStatCreate {
+	vsc.mutation.SetCreatedAt(t)
+	return vsc
 }
 
 // SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (_c *VisitorStatCreate) SetNillableCreatedAt(v *time.Time) *VisitorStatCreate {
-	if v != nil {
-		_c.SetCreatedAt(*v)
+func (vsc *VisitorStatCreate) SetNillableCreatedAt(t *time.Time) *VisitorStatCreate {
+	if t != nil {
+		vsc.SetCreatedAt(*t)
 	}
-	return _c
+	return vsc
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_c *VisitorStatCreate) SetUpdatedAt(v time.Time) *VisitorStatCreate {
-	_c.mutation.SetUpdatedAt(v)
-	return _c
+func (vsc *VisitorStatCreate) SetUpdatedAt(t time.Time) *VisitorStatCreate {
+	vsc.mutation.SetUpdatedAt(t)
+	return vsc
 }
 
 // SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
-func (_c *VisitorStatCreate) SetNillableUpdatedAt(v *time.Time) *VisitorStatCreate {
-	if v != nil {
-		_c.SetUpdatedAt(*v)
+func (vsc *VisitorStatCreate) SetNillableUpdatedAt(t *time.Time) *VisitorStatCreate {
+	if t != nil {
+		vsc.SetUpdatedAt(*t)
 	}
-	return _c
+	return vsc
 }
 
 // SetDate sets the "date" field.
-func (_c *VisitorStatCreate) SetDate(v time.Time) *VisitorStatCreate {
-	_c.mutation.SetDate(v)
-	return _c
+func (vsc *VisitorStatCreate) SetDate(t time.Time) *VisitorStatCreate {
+	vsc.mutation.SetDate(t)
+	return vsc
 }
 
 // SetUniqueVisitors sets the "unique_visitors" field.
-func (_c *VisitorStatCreate) SetUniqueVisitors(v int64) *VisitorStatCreate {
-	_c.mutation.SetUniqueVisitors(v)
-	return _c
+func (vsc *VisitorStatCreate) SetUniqueVisitors(i int64) *VisitorStatCreate {
+	vsc.mutation.SetUniqueVisitors(i)
+	return vsc
 }
 
 // SetNillableUniqueVisitors sets the "unique_visitors" field if the given value is not nil.
-func (_c *VisitorStatCreate) SetNillableUniqueVisitors(v *int64) *VisitorStatCreate {
-	if v != nil {
-		_c.SetUniqueVisitors(*v)
+func (vsc *VisitorStatCreate) SetNillableUniqueVisitors(i *int64) *VisitorStatCreate {
+	if i != nil {
+		vsc.SetUniqueVisitors(*i)
 	}
-	return _c
+	return vsc
 }
 
 // SetTotalViews sets the "total_views" field.
-func (_c *VisitorStatCreate) SetTotalViews(v int64) *VisitorStatCreate {
-	_c.mutation.SetTotalViews(v)
-	return _c
+func (vsc *VisitorStatCreate) SetTotalViews(i int64) *VisitorStatCreate {
+	vsc.mutation.SetTotalViews(i)
+	return vsc
 }
 
 // SetNillableTotalViews sets the "total_views" field if the given value is not nil.
-func (_c *VisitorStatCreate) SetNillableTotalViews(v *int64) *VisitorStatCreate {
-	if v != nil {
-		_c.SetTotalViews(*v)
+func (vsc *VisitorStatCreate) SetNillableTotalViews(i *int64) *VisitorStatCreate {
+	if i != nil {
+		vsc.SetTotalViews(*i)
 	}
-	return _c
+	return vsc
 }
 
 // SetPageViews sets the "page_views" field.
-func (_c *VisitorStatCreate) SetPageViews(v int64) *VisitorStatCreate {
-	_c.mutation.SetPageViews(v)
-	return _c
+func (vsc *VisitorStatCreate) SetPageViews(i int64) *VisitorStatCreate {
+	vsc.mutation.SetPageViews(i)
+	return vsc
 }
 
 // SetNillablePageViews sets the "page_views" field if the given value is not nil.
-func (_c *VisitorStatCreate) SetNillablePageViews(v *int64) *VisitorStatCreate {
-	if v != nil {
-		_c.SetPageViews(*v)
+func (vsc *VisitorStatCreate) SetNillablePageViews(i *int64) *VisitorStatCreate {
+	if i != nil {
+		vsc.SetPageViews(*i)
 	}
-	return _c
+	return vsc
 }
 
 // SetBounceCount sets the "bounce_count" field.
-func (_c *VisitorStatCreate) SetBounceCount(v int64) *VisitorStatCreate {
-	_c.mutation.SetBounceCount(v)
-	return _c
+func (vsc *VisitorStatCreate) SetBounceCount(i int64) *VisitorStatCreate {
+	vsc.mutation.SetBounceCount(i)
+	return vsc
 }
 
 // SetNillableBounceCount sets the "bounce_count" field if the given value is not nil.
-func (_c *VisitorStatCreate) SetNillableBounceCount(v *int64) *VisitorStatCreate {
-	if v != nil {
-		_c.SetBounceCount(*v)
+func (vsc *VisitorStatCreate) SetNillableBounceCount(i *int64) *VisitorStatCreate {
+	if i != nil {
+		vsc.SetBounceCount(*i)
 	}
-	return _c
+	return vsc
 }
 
 // SetID sets the "id" field.
-func (_c *VisitorStatCreate) SetID(v uint) *VisitorStatCreate {
-	_c.mutation.SetID(v)
-	return _c
+func (vsc *VisitorStatCreate) SetID(u uint) *VisitorStatCreate {
+	vsc.mutation.SetID(u)
+	return vsc
 }
 
 // Mutation returns the VisitorStatMutation object of the builder.
-func (_c *VisitorStatCreate) Mutation() *VisitorStatMutation {
-	return _c.mutation
+func (vsc *VisitorStatCreate) Mutation() *VisitorStatMutation {
+	return vsc.mutation
 }
 
 // Save creates the VisitorStat in the database.
-func (_c *VisitorStatCreate) Save(ctx context.Context) (*VisitorStat, error) {
-	_c.defaults()
-	return withHooks(ctx, _c.sqlSave, _c.mutation, _c.hooks)
+func (vsc *VisitorStatCreate) Save(ctx context.Context) (*VisitorStat, error) {
+	vsc.defaults()
+	return withHooks(ctx, vsc.sqlSave, vsc.mutation, vsc.hooks)
 }
 
 // SaveX calls Save and panics if Save returns an error.
-func (_c *VisitorStatCreate) SaveX(ctx context.Context) *VisitorStat {
-	v, err := _c.Save(ctx)
+func (vsc *VisitorStatCreate) SaveX(ctx context.Context) *VisitorStat {
+	v, err := vsc.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -139,78 +139,78 @@ func (_c *VisitorStatCreate) SaveX(ctx context.Context) *VisitorStat {
 }
 
 // Exec executes the query.
-func (_c *VisitorStatCreate) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (vsc *VisitorStatCreate) Exec(ctx context.Context) error {
+	_, err := vsc.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *VisitorStatCreate) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (vsc *VisitorStatCreate) ExecX(ctx context.Context) {
+	if err := vsc.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_c *VisitorStatCreate) defaults() {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (vsc *VisitorStatCreate) defaults() {
+	if _, ok := vsc.mutation.CreatedAt(); !ok {
 		v := visitorstat.DefaultCreatedAt()
-		_c.mutation.SetCreatedAt(v)
+		vsc.mutation.SetCreatedAt(v)
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := vsc.mutation.UpdatedAt(); !ok {
 		v := visitorstat.DefaultUpdatedAt()
-		_c.mutation.SetUpdatedAt(v)
+		vsc.mutation.SetUpdatedAt(v)
 	}
-	if _, ok := _c.mutation.UniqueVisitors(); !ok {
+	if _, ok := vsc.mutation.UniqueVisitors(); !ok {
 		v := visitorstat.DefaultUniqueVisitors
-		_c.mutation.SetUniqueVisitors(v)
+		vsc.mutation.SetUniqueVisitors(v)
 	}
-	if _, ok := _c.mutation.TotalViews(); !ok {
+	if _, ok := vsc.mutation.TotalViews(); !ok {
 		v := visitorstat.DefaultTotalViews
-		_c.mutation.SetTotalViews(v)
+		vsc.mutation.SetTotalViews(v)
 	}
-	if _, ok := _c.mutation.PageViews(); !ok {
+	if _, ok := vsc.mutation.PageViews(); !ok {
 		v := visitorstat.DefaultPageViews
-		_c.mutation.SetPageViews(v)
+		vsc.mutation.SetPageViews(v)
 	}
-	if _, ok := _c.mutation.BounceCount(); !ok {
+	if _, ok := vsc.mutation.BounceCount(); !ok {
 		v := visitorstat.DefaultBounceCount
-		_c.mutation.SetBounceCount(v)
+		vsc.mutation.SetBounceCount(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_c *VisitorStatCreate) check() error {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (vsc *VisitorStatCreate) check() error {
+	if _, ok := vsc.mutation.CreatedAt(); !ok {
 		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "VisitorStat.created_at"`)}
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := vsc.mutation.UpdatedAt(); !ok {
 		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "VisitorStat.updated_at"`)}
 	}
-	if _, ok := _c.mutation.Date(); !ok {
+	if _, ok := vsc.mutation.Date(); !ok {
 		return &ValidationError{Name: "date", err: errors.New(`ent: missing required field "VisitorStat.date"`)}
 	}
-	if _, ok := _c.mutation.UniqueVisitors(); !ok {
+	if _, ok := vsc.mutation.UniqueVisitors(); !ok {
 		return &ValidationError{Name: "unique_visitors", err: errors.New(`ent: missing required field "VisitorStat.unique_visitors"`)}
 	}
-	if _, ok := _c.mutation.TotalViews(); !ok {
+	if _, ok := vsc.mutation.TotalViews(); !ok {
 		return &ValidationError{Name: "total_views", err: errors.New(`ent: missing required field "VisitorStat.total_views"`)}
 	}
-	if _, ok := _c.mutation.PageViews(); !ok {
+	if _, ok := vsc.mutation.PageViews(); !ok {
 		return &ValidationError{Name: "page_views", err: errors.New(`ent: missing required field "VisitorStat.page_views"`)}
 	}
-	if _, ok := _c.mutation.BounceCount(); !ok {
+	if _, ok := vsc.mutation.BounceCount(); !ok {
 		return &ValidationError{Name: "bounce_count", err: errors.New(`ent: missing required field "VisitorStat.bounce_count"`)}
 	}
 	return nil
 }
 
-func (_c *VisitorStatCreate) sqlSave(ctx context.Context) (*VisitorStat, error) {
-	if err := _c.check(); err != nil {
+func (vsc *VisitorStatCreate) sqlSave(ctx context.Context) (*VisitorStat, error) {
+	if err := vsc.check(); err != nil {
 		return nil, err
 	}
-	_node, _spec := _c.createSpec()
-	if err := sqlgraph.CreateNode(ctx, _c.driver, _spec); err != nil {
+	_node, _spec := vsc.createSpec()
+	if err := sqlgraph.CreateNode(ctx, vsc.driver, _spec); err != nil {
 		if sqlgraph.IsConstraintError(err) {
 			err = &ConstraintError{msg: err.Error(), wrap: err}
 		}
@@ -220,46 +220,46 @@ func (_c *VisitorStatCreate) sqlSave(ctx context.Context) (*VisitorStat, error) 
 		id := _spec.ID.Value.(int64)
 		_node.ID = uint(id)
 	}
-	_c.mutation.id = &_node.ID
-	_c.mutation.done = true
+	vsc.mutation.id = &_node.ID
+	vsc.mutation.done = true
 	return _node, nil
 }
 
-func (_c *VisitorStatCreate) createSpec() (*VisitorStat, *sqlgraph.CreateSpec) {
+func (vsc *VisitorStatCreate) createSpec() (*VisitorStat, *sqlgraph.CreateSpec) {
 	var (
-		_node = &VisitorStat{config: _c.config}
+		_node = &VisitorStat{config: vsc.config}
 		_spec = sqlgraph.NewCreateSpec(visitorstat.Table, sqlgraph.NewFieldSpec(visitorstat.FieldID, field.TypeUint))
 	)
-	_spec.OnConflict = _c.conflict
-	if id, ok := _c.mutation.ID(); ok {
+	_spec.OnConflict = vsc.conflict
+	if id, ok := vsc.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
 	}
-	if value, ok := _c.mutation.CreatedAt(); ok {
+	if value, ok := vsc.mutation.CreatedAt(); ok {
 		_spec.SetField(visitorstat.FieldCreatedAt, field.TypeTime, value)
 		_node.CreatedAt = value
 	}
-	if value, ok := _c.mutation.UpdatedAt(); ok {
+	if value, ok := vsc.mutation.UpdatedAt(); ok {
 		_spec.SetField(visitorstat.FieldUpdatedAt, field.TypeTime, value)
 		_node.UpdatedAt = value
 	}
-	if value, ok := _c.mutation.Date(); ok {
+	if value, ok := vsc.mutation.Date(); ok {
 		_spec.SetField(visitorstat.FieldDate, field.TypeTime, value)
 		_node.Date = value
 	}
-	if value, ok := _c.mutation.UniqueVisitors(); ok {
+	if value, ok := vsc.mutation.UniqueVisitors(); ok {
 		_spec.SetField(visitorstat.FieldUniqueVisitors, field.TypeInt64, value)
 		_node.UniqueVisitors = value
 	}
-	if value, ok := _c.mutation.TotalViews(); ok {
+	if value, ok := vsc.mutation.TotalViews(); ok {
 		_spec.SetField(visitorstat.FieldTotalViews, field.TypeInt64, value)
 		_node.TotalViews = value
 	}
-	if value, ok := _c.mutation.PageViews(); ok {
+	if value, ok := vsc.mutation.PageViews(); ok {
 		_spec.SetField(visitorstat.FieldPageViews, field.TypeInt64, value)
 		_node.PageViews = value
 	}
-	if value, ok := _c.mutation.BounceCount(); ok {
+	if value, ok := vsc.mutation.BounceCount(); ok {
 		_spec.SetField(visitorstat.FieldBounceCount, field.TypeInt64, value)
 		_node.BounceCount = value
 	}
@@ -282,10 +282,10 @@ func (_c *VisitorStatCreate) createSpec() (*VisitorStat, *sqlgraph.CreateSpec) {
 //			SetCreatedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *VisitorStatCreate) OnConflict(opts ...sql.ConflictOption) *VisitorStatUpsertOne {
-	_c.conflict = opts
+func (vsc *VisitorStatCreate) OnConflict(opts ...sql.ConflictOption) *VisitorStatUpsertOne {
+	vsc.conflict = opts
 	return &VisitorStatUpsertOne{
-		create: _c,
+		create: vsc,
 	}
 }
 
@@ -295,10 +295,10 @@ func (_c *VisitorStatCreate) OnConflict(opts ...sql.ConflictOption) *VisitorStat
 //	client.VisitorStat.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *VisitorStatCreate) OnConflictColumns(columns ...string) *VisitorStatUpsertOne {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (vsc *VisitorStatCreate) OnConflictColumns(columns ...string) *VisitorStatUpsertOne {
+	vsc.conflict = append(vsc.conflict, sql.ConflictColumns(columns...))
 	return &VisitorStatUpsertOne{
-		create: _c,
+		create: vsc,
 	}
 }
 
@@ -616,16 +616,16 @@ type VisitorStatCreateBulk struct {
 }
 
 // Save creates the VisitorStat entities in the database.
-func (_c *VisitorStatCreateBulk) Save(ctx context.Context) ([]*VisitorStat, error) {
-	if _c.err != nil {
-		return nil, _c.err
+func (vscb *VisitorStatCreateBulk) Save(ctx context.Context) ([]*VisitorStat, error) {
+	if vscb.err != nil {
+		return nil, vscb.err
 	}
-	specs := make([]*sqlgraph.CreateSpec, len(_c.builders))
-	nodes := make([]*VisitorStat, len(_c.builders))
-	mutators := make([]Mutator, len(_c.builders))
-	for i := range _c.builders {
+	specs := make([]*sqlgraph.CreateSpec, len(vscb.builders))
+	nodes := make([]*VisitorStat, len(vscb.builders))
+	mutators := make([]Mutator, len(vscb.builders))
+	for i := range vscb.builders {
 		func(i int, root context.Context) {
-			builder := _c.builders[i]
+			builder := vscb.builders[i]
 			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*VisitorStatMutation)
@@ -639,12 +639,12 @@ func (_c *VisitorStatCreateBulk) Save(ctx context.Context) ([]*VisitorStat, erro
 				var err error
 				nodes[i], specs[i] = builder.createSpec()
 				if i < len(mutators)-1 {
-					_, err = mutators[i+1].Mutate(root, _c.builders[i+1].mutation)
+					_, err = mutators[i+1].Mutate(root, vscb.builders[i+1].mutation)
 				} else {
 					spec := &sqlgraph.BatchCreateSpec{Nodes: specs}
-					spec.OnConflict = _c.conflict
+					spec.OnConflict = vscb.conflict
 					// Invoke the actual operation on the latest mutation in the chain.
-					if err = sqlgraph.BatchCreate(ctx, _c.driver, spec); err != nil {
+					if err = sqlgraph.BatchCreate(ctx, vscb.driver, spec); err != nil {
 						if sqlgraph.IsConstraintError(err) {
 							err = &ConstraintError{msg: err.Error(), wrap: err}
 						}
@@ -668,7 +668,7 @@ func (_c *VisitorStatCreateBulk) Save(ctx context.Context) ([]*VisitorStat, erro
 		}(i, ctx)
 	}
 	if len(mutators) > 0 {
-		if _, err := mutators[0].Mutate(ctx, _c.builders[0].mutation); err != nil {
+		if _, err := mutators[0].Mutate(ctx, vscb.builders[0].mutation); err != nil {
 			return nil, err
 		}
 	}
@@ -676,8 +676,8 @@ func (_c *VisitorStatCreateBulk) Save(ctx context.Context) ([]*VisitorStat, erro
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_c *VisitorStatCreateBulk) SaveX(ctx context.Context) []*VisitorStat {
-	v, err := _c.Save(ctx)
+func (vscb *VisitorStatCreateBulk) SaveX(ctx context.Context) []*VisitorStat {
+	v, err := vscb.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -685,14 +685,14 @@ func (_c *VisitorStatCreateBulk) SaveX(ctx context.Context) []*VisitorStat {
 }
 
 // Exec executes the query.
-func (_c *VisitorStatCreateBulk) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (vscb *VisitorStatCreateBulk) Exec(ctx context.Context) error {
+	_, err := vscb.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *VisitorStatCreateBulk) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (vscb *VisitorStatCreateBulk) ExecX(ctx context.Context) {
+	if err := vscb.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
@@ -712,10 +712,10 @@ func (_c *VisitorStatCreateBulk) ExecX(ctx context.Context) {
 //			SetCreatedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *VisitorStatCreateBulk) OnConflict(opts ...sql.ConflictOption) *VisitorStatUpsertBulk {
-	_c.conflict = opts
+func (vscb *VisitorStatCreateBulk) OnConflict(opts ...sql.ConflictOption) *VisitorStatUpsertBulk {
+	vscb.conflict = opts
 	return &VisitorStatUpsertBulk{
-		create: _c,
+		create: vscb,
 	}
 }
 
@@ -725,10 +725,10 @@ func (_c *VisitorStatCreateBulk) OnConflict(opts ...sql.ConflictOption) *Visitor
 //	client.VisitorStat.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *VisitorStatCreateBulk) OnConflictColumns(columns ...string) *VisitorStatUpsertBulk {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (vscb *VisitorStatCreateBulk) OnConflictColumns(columns ...string) *VisitorStatUpsertBulk {
+	vscb.conflict = append(vscb.conflict, sql.ConflictColumns(columns...))
 	return &VisitorStatUpsertBulk{
-		create: _c,
+		create: vscb,
 	}
 }
 

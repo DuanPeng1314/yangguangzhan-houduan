@@ -24,227 +24,227 @@ type StoragePolicyCreate struct {
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_c *StoragePolicyCreate) SetDeletedAt(v time.Time) *StoragePolicyCreate {
-	_c.mutation.SetDeletedAt(v)
-	return _c
+func (spc *StoragePolicyCreate) SetDeletedAt(t time.Time) *StoragePolicyCreate {
+	spc.mutation.SetDeletedAt(t)
+	return spc
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_c *StoragePolicyCreate) SetNillableDeletedAt(v *time.Time) *StoragePolicyCreate {
-	if v != nil {
-		_c.SetDeletedAt(*v)
+func (spc *StoragePolicyCreate) SetNillableDeletedAt(t *time.Time) *StoragePolicyCreate {
+	if t != nil {
+		spc.SetDeletedAt(*t)
 	}
-	return _c
+	return spc
 }
 
 // SetCreatedAt sets the "created_at" field.
-func (_c *StoragePolicyCreate) SetCreatedAt(v time.Time) *StoragePolicyCreate {
-	_c.mutation.SetCreatedAt(v)
-	return _c
+func (spc *StoragePolicyCreate) SetCreatedAt(t time.Time) *StoragePolicyCreate {
+	spc.mutation.SetCreatedAt(t)
+	return spc
 }
 
 // SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (_c *StoragePolicyCreate) SetNillableCreatedAt(v *time.Time) *StoragePolicyCreate {
-	if v != nil {
-		_c.SetCreatedAt(*v)
+func (spc *StoragePolicyCreate) SetNillableCreatedAt(t *time.Time) *StoragePolicyCreate {
+	if t != nil {
+		spc.SetCreatedAt(*t)
 	}
-	return _c
+	return spc
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_c *StoragePolicyCreate) SetUpdatedAt(v time.Time) *StoragePolicyCreate {
-	_c.mutation.SetUpdatedAt(v)
-	return _c
+func (spc *StoragePolicyCreate) SetUpdatedAt(t time.Time) *StoragePolicyCreate {
+	spc.mutation.SetUpdatedAt(t)
+	return spc
 }
 
 // SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
-func (_c *StoragePolicyCreate) SetNillableUpdatedAt(v *time.Time) *StoragePolicyCreate {
-	if v != nil {
-		_c.SetUpdatedAt(*v)
+func (spc *StoragePolicyCreate) SetNillableUpdatedAt(t *time.Time) *StoragePolicyCreate {
+	if t != nil {
+		spc.SetUpdatedAt(*t)
 	}
-	return _c
+	return spc
 }
 
 // SetName sets the "name" field.
-func (_c *StoragePolicyCreate) SetName(v string) *StoragePolicyCreate {
-	_c.mutation.SetName(v)
-	return _c
+func (spc *StoragePolicyCreate) SetName(s string) *StoragePolicyCreate {
+	spc.mutation.SetName(s)
+	return spc
 }
 
 // SetType sets the "type" field.
-func (_c *StoragePolicyCreate) SetType(v string) *StoragePolicyCreate {
-	_c.mutation.SetType(v)
-	return _c
+func (spc *StoragePolicyCreate) SetType(s string) *StoragePolicyCreate {
+	spc.mutation.SetType(s)
+	return spc
 }
 
 // SetFlag sets the "flag" field.
-func (_c *StoragePolicyCreate) SetFlag(v string) *StoragePolicyCreate {
-	_c.mutation.SetFlag(v)
-	return _c
+func (spc *StoragePolicyCreate) SetFlag(s string) *StoragePolicyCreate {
+	spc.mutation.SetFlag(s)
+	return spc
 }
 
 // SetNillableFlag sets the "flag" field if the given value is not nil.
-func (_c *StoragePolicyCreate) SetNillableFlag(v *string) *StoragePolicyCreate {
-	if v != nil {
-		_c.SetFlag(*v)
+func (spc *StoragePolicyCreate) SetNillableFlag(s *string) *StoragePolicyCreate {
+	if s != nil {
+		spc.SetFlag(*s)
 	}
-	return _c
+	return spc
 }
 
 // SetServer sets the "server" field.
-func (_c *StoragePolicyCreate) SetServer(v string) *StoragePolicyCreate {
-	_c.mutation.SetServer(v)
-	return _c
+func (spc *StoragePolicyCreate) SetServer(s string) *StoragePolicyCreate {
+	spc.mutation.SetServer(s)
+	return spc
 }
 
 // SetNillableServer sets the "server" field if the given value is not nil.
-func (_c *StoragePolicyCreate) SetNillableServer(v *string) *StoragePolicyCreate {
-	if v != nil {
-		_c.SetServer(*v)
+func (spc *StoragePolicyCreate) SetNillableServer(s *string) *StoragePolicyCreate {
+	if s != nil {
+		spc.SetServer(*s)
 	}
-	return _c
+	return spc
 }
 
 // SetBucketName sets the "bucket_name" field.
-func (_c *StoragePolicyCreate) SetBucketName(v string) *StoragePolicyCreate {
-	_c.mutation.SetBucketName(v)
-	return _c
+func (spc *StoragePolicyCreate) SetBucketName(s string) *StoragePolicyCreate {
+	spc.mutation.SetBucketName(s)
+	return spc
 }
 
 // SetNillableBucketName sets the "bucket_name" field if the given value is not nil.
-func (_c *StoragePolicyCreate) SetNillableBucketName(v *string) *StoragePolicyCreate {
-	if v != nil {
-		_c.SetBucketName(*v)
+func (spc *StoragePolicyCreate) SetNillableBucketName(s *string) *StoragePolicyCreate {
+	if s != nil {
+		spc.SetBucketName(*s)
 	}
-	return _c
+	return spc
 }
 
 // SetIsPrivate sets the "is_private" field.
-func (_c *StoragePolicyCreate) SetIsPrivate(v bool) *StoragePolicyCreate {
-	_c.mutation.SetIsPrivate(v)
-	return _c
+func (spc *StoragePolicyCreate) SetIsPrivate(b bool) *StoragePolicyCreate {
+	spc.mutation.SetIsPrivate(b)
+	return spc
 }
 
 // SetNillableIsPrivate sets the "is_private" field if the given value is not nil.
-func (_c *StoragePolicyCreate) SetNillableIsPrivate(v *bool) *StoragePolicyCreate {
-	if v != nil {
-		_c.SetIsPrivate(*v)
+func (spc *StoragePolicyCreate) SetNillableIsPrivate(b *bool) *StoragePolicyCreate {
+	if b != nil {
+		spc.SetIsPrivate(*b)
 	}
-	return _c
+	return spc
 }
 
 // SetAccessKey sets the "access_key" field.
-func (_c *StoragePolicyCreate) SetAccessKey(v string) *StoragePolicyCreate {
-	_c.mutation.SetAccessKey(v)
-	return _c
+func (spc *StoragePolicyCreate) SetAccessKey(s string) *StoragePolicyCreate {
+	spc.mutation.SetAccessKey(s)
+	return spc
 }
 
 // SetNillableAccessKey sets the "access_key" field if the given value is not nil.
-func (_c *StoragePolicyCreate) SetNillableAccessKey(v *string) *StoragePolicyCreate {
-	if v != nil {
-		_c.SetAccessKey(*v)
+func (spc *StoragePolicyCreate) SetNillableAccessKey(s *string) *StoragePolicyCreate {
+	if s != nil {
+		spc.SetAccessKey(*s)
 	}
-	return _c
+	return spc
 }
 
 // SetSecretKey sets the "secret_key" field.
-func (_c *StoragePolicyCreate) SetSecretKey(v string) *StoragePolicyCreate {
-	_c.mutation.SetSecretKey(v)
-	return _c
+func (spc *StoragePolicyCreate) SetSecretKey(s string) *StoragePolicyCreate {
+	spc.mutation.SetSecretKey(s)
+	return spc
 }
 
 // SetNillableSecretKey sets the "secret_key" field if the given value is not nil.
-func (_c *StoragePolicyCreate) SetNillableSecretKey(v *string) *StoragePolicyCreate {
-	if v != nil {
-		_c.SetSecretKey(*v)
+func (spc *StoragePolicyCreate) SetNillableSecretKey(s *string) *StoragePolicyCreate {
+	if s != nil {
+		spc.SetSecretKey(*s)
 	}
-	return _c
+	return spc
 }
 
 // SetMaxSize sets the "max_size" field.
-func (_c *StoragePolicyCreate) SetMaxSize(v int64) *StoragePolicyCreate {
-	_c.mutation.SetMaxSize(v)
-	return _c
+func (spc *StoragePolicyCreate) SetMaxSize(i int64) *StoragePolicyCreate {
+	spc.mutation.SetMaxSize(i)
+	return spc
 }
 
 // SetNillableMaxSize sets the "max_size" field if the given value is not nil.
-func (_c *StoragePolicyCreate) SetNillableMaxSize(v *int64) *StoragePolicyCreate {
-	if v != nil {
-		_c.SetMaxSize(*v)
+func (spc *StoragePolicyCreate) SetNillableMaxSize(i *int64) *StoragePolicyCreate {
+	if i != nil {
+		spc.SetMaxSize(*i)
 	}
-	return _c
+	return spc
 }
 
 // SetBasePath sets the "base_path" field.
-func (_c *StoragePolicyCreate) SetBasePath(v string) *StoragePolicyCreate {
-	_c.mutation.SetBasePath(v)
-	return _c
+func (spc *StoragePolicyCreate) SetBasePath(s string) *StoragePolicyCreate {
+	spc.mutation.SetBasePath(s)
+	return spc
 }
 
 // SetNillableBasePath sets the "base_path" field if the given value is not nil.
-func (_c *StoragePolicyCreate) SetNillableBasePath(v *string) *StoragePolicyCreate {
-	if v != nil {
-		_c.SetBasePath(*v)
+func (spc *StoragePolicyCreate) SetNillableBasePath(s *string) *StoragePolicyCreate {
+	if s != nil {
+		spc.SetBasePath(*s)
 	}
-	return _c
+	return spc
 }
 
 // SetVirtualPath sets the "virtual_path" field.
-func (_c *StoragePolicyCreate) SetVirtualPath(v string) *StoragePolicyCreate {
-	_c.mutation.SetVirtualPath(v)
-	return _c
+func (spc *StoragePolicyCreate) SetVirtualPath(s string) *StoragePolicyCreate {
+	spc.mutation.SetVirtualPath(s)
+	return spc
 }
 
 // SetNillableVirtualPath sets the "virtual_path" field if the given value is not nil.
-func (_c *StoragePolicyCreate) SetNillableVirtualPath(v *string) *StoragePolicyCreate {
-	if v != nil {
-		_c.SetVirtualPath(*v)
+func (spc *StoragePolicyCreate) SetNillableVirtualPath(s *string) *StoragePolicyCreate {
+	if s != nil {
+		spc.SetVirtualPath(*s)
 	}
-	return _c
+	return spc
 }
 
 // SetSettings sets the "settings" field.
-func (_c *StoragePolicyCreate) SetSettings(v model.StoragePolicySettings) *StoragePolicyCreate {
-	_c.mutation.SetSettings(v)
-	return _c
+func (spc *StoragePolicyCreate) SetSettings(mps model.StoragePolicySettings) *StoragePolicyCreate {
+	spc.mutation.SetSettings(mps)
+	return spc
 }
 
 // SetNodeID sets the "node_id" field.
-func (_c *StoragePolicyCreate) SetNodeID(v uint) *StoragePolicyCreate {
-	_c.mutation.SetNodeID(v)
-	return _c
+func (spc *StoragePolicyCreate) SetNodeID(u uint) *StoragePolicyCreate {
+	spc.mutation.SetNodeID(u)
+	return spc
 }
 
 // SetNillableNodeID sets the "node_id" field if the given value is not nil.
-func (_c *StoragePolicyCreate) SetNillableNodeID(v *uint) *StoragePolicyCreate {
-	if v != nil {
-		_c.SetNodeID(*v)
+func (spc *StoragePolicyCreate) SetNillableNodeID(u *uint) *StoragePolicyCreate {
+	if u != nil {
+		spc.SetNodeID(*u)
 	}
-	return _c
+	return spc
 }
 
 // SetID sets the "id" field.
-func (_c *StoragePolicyCreate) SetID(v uint) *StoragePolicyCreate {
-	_c.mutation.SetID(v)
-	return _c
+func (spc *StoragePolicyCreate) SetID(u uint) *StoragePolicyCreate {
+	spc.mutation.SetID(u)
+	return spc
 }
 
 // Mutation returns the StoragePolicyMutation object of the builder.
-func (_c *StoragePolicyCreate) Mutation() *StoragePolicyMutation {
-	return _c.mutation
+func (spc *StoragePolicyCreate) Mutation() *StoragePolicyMutation {
+	return spc.mutation
 }
 
 // Save creates the StoragePolicy in the database.
-func (_c *StoragePolicyCreate) Save(ctx context.Context) (*StoragePolicy, error) {
-	if err := _c.defaults(); err != nil {
+func (spc *StoragePolicyCreate) Save(ctx context.Context) (*StoragePolicy, error) {
+	if err := spc.defaults(); err != nil {
 		return nil, err
 	}
-	return withHooks(ctx, _c.sqlSave, _c.mutation, _c.hooks)
+	return withHooks(ctx, spc.sqlSave, spc.mutation, spc.hooks)
 }
 
 // SaveX calls Save and panics if Save returns an error.
-func (_c *StoragePolicyCreate) SaveX(ctx context.Context) *StoragePolicy {
-	v, err := _c.Save(ctx)
+func (spc *StoragePolicyCreate) SaveX(ctx context.Context) *StoragePolicy {
+	v, err := spc.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -252,82 +252,82 @@ func (_c *StoragePolicyCreate) SaveX(ctx context.Context) *StoragePolicy {
 }
 
 // Exec executes the query.
-func (_c *StoragePolicyCreate) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (spc *StoragePolicyCreate) Exec(ctx context.Context) error {
+	_, err := spc.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *StoragePolicyCreate) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (spc *StoragePolicyCreate) ExecX(ctx context.Context) {
+	if err := spc.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_c *StoragePolicyCreate) defaults() error {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (spc *StoragePolicyCreate) defaults() error {
+	if _, ok := spc.mutation.CreatedAt(); !ok {
 		if storagepolicy.DefaultCreatedAt == nil {
 			return fmt.Errorf("ent: uninitialized storagepolicy.DefaultCreatedAt (forgotten import ent/runtime?)")
 		}
 		v := storagepolicy.DefaultCreatedAt()
-		_c.mutation.SetCreatedAt(v)
+		spc.mutation.SetCreatedAt(v)
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := spc.mutation.UpdatedAt(); !ok {
 		if storagepolicy.DefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized storagepolicy.DefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := storagepolicy.DefaultUpdatedAt()
-		_c.mutation.SetUpdatedAt(v)
+		spc.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_c *StoragePolicyCreate) check() error {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (spc *StoragePolicyCreate) check() error {
+	if _, ok := spc.mutation.CreatedAt(); !ok {
 		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "StoragePolicy.created_at"`)}
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := spc.mutation.UpdatedAt(); !ok {
 		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "StoragePolicy.updated_at"`)}
 	}
-	if _, ok := _c.mutation.Name(); !ok {
+	if _, ok := spc.mutation.Name(); !ok {
 		return &ValidationError{Name: "name", err: errors.New(`ent: missing required field "StoragePolicy.name"`)}
 	}
-	if v, ok := _c.mutation.Name(); ok {
+	if v, ok := spc.mutation.Name(); ok {
 		if err := storagepolicy.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "StoragePolicy.name": %w`, err)}
 		}
 	}
-	if _, ok := _c.mutation.GetType(); !ok {
+	if _, ok := spc.mutation.GetType(); !ok {
 		return &ValidationError{Name: "type", err: errors.New(`ent: missing required field "StoragePolicy.type"`)}
 	}
-	if v, ok := _c.mutation.GetType(); ok {
+	if v, ok := spc.mutation.GetType(); ok {
 		if err := storagepolicy.TypeValidator(v); err != nil {
 			return &ValidationError{Name: "type", err: fmt.Errorf(`ent: validator failed for field "StoragePolicy.type": %w`, err)}
 		}
 	}
-	if v, ok := _c.mutation.Flag(); ok {
+	if v, ok := spc.mutation.Flag(); ok {
 		if err := storagepolicy.FlagValidator(v); err != nil {
 			return &ValidationError{Name: "flag", err: fmt.Errorf(`ent: validator failed for field "StoragePolicy.flag": %w`, err)}
 		}
 	}
-	if v, ok := _c.mutation.Server(); ok {
+	if v, ok := spc.mutation.Server(); ok {
 		if err := storagepolicy.ServerValidator(v); err != nil {
 			return &ValidationError{Name: "server", err: fmt.Errorf(`ent: validator failed for field "StoragePolicy.server": %w`, err)}
 		}
 	}
-	if v, ok := _c.mutation.BucketName(); ok {
+	if v, ok := spc.mutation.BucketName(); ok {
 		if err := storagepolicy.BucketNameValidator(v); err != nil {
 			return &ValidationError{Name: "bucket_name", err: fmt.Errorf(`ent: validator failed for field "StoragePolicy.bucket_name": %w`, err)}
 		}
 	}
-	if v, ok := _c.mutation.BasePath(); ok {
+	if v, ok := spc.mutation.BasePath(); ok {
 		if err := storagepolicy.BasePathValidator(v); err != nil {
 			return &ValidationError{Name: "base_path", err: fmt.Errorf(`ent: validator failed for field "StoragePolicy.base_path": %w`, err)}
 		}
 	}
-	if v, ok := _c.mutation.VirtualPath(); ok {
+	if v, ok := spc.mutation.VirtualPath(); ok {
 		if err := storagepolicy.VirtualPathValidator(v); err != nil {
 			return &ValidationError{Name: "virtual_path", err: fmt.Errorf(`ent: validator failed for field "StoragePolicy.virtual_path": %w`, err)}
 		}
@@ -335,12 +335,12 @@ func (_c *StoragePolicyCreate) check() error {
 	return nil
 }
 
-func (_c *StoragePolicyCreate) sqlSave(ctx context.Context) (*StoragePolicy, error) {
-	if err := _c.check(); err != nil {
+func (spc *StoragePolicyCreate) sqlSave(ctx context.Context) (*StoragePolicy, error) {
+	if err := spc.check(); err != nil {
 		return nil, err
 	}
-	_node, _spec := _c.createSpec()
-	if err := sqlgraph.CreateNode(ctx, _c.driver, _spec); err != nil {
+	_node, _spec := spc.createSpec()
+	if err := sqlgraph.CreateNode(ctx, spc.driver, _spec); err != nil {
 		if sqlgraph.IsConstraintError(err) {
 			err = &ConstraintError{msg: err.Error(), wrap: err}
 		}
@@ -350,82 +350,82 @@ func (_c *StoragePolicyCreate) sqlSave(ctx context.Context) (*StoragePolicy, err
 		id := _spec.ID.Value.(int64)
 		_node.ID = uint(id)
 	}
-	_c.mutation.id = &_node.ID
-	_c.mutation.done = true
+	spc.mutation.id = &_node.ID
+	spc.mutation.done = true
 	return _node, nil
 }
 
-func (_c *StoragePolicyCreate) createSpec() (*StoragePolicy, *sqlgraph.CreateSpec) {
+func (spc *StoragePolicyCreate) createSpec() (*StoragePolicy, *sqlgraph.CreateSpec) {
 	var (
-		_node = &StoragePolicy{config: _c.config}
+		_node = &StoragePolicy{config: spc.config}
 		_spec = sqlgraph.NewCreateSpec(storagepolicy.Table, sqlgraph.NewFieldSpec(storagepolicy.FieldID, field.TypeUint))
 	)
-	_spec.OnConflict = _c.conflict
-	if id, ok := _c.mutation.ID(); ok {
+	_spec.OnConflict = spc.conflict
+	if id, ok := spc.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
 	}
-	if value, ok := _c.mutation.DeletedAt(); ok {
+	if value, ok := spc.mutation.DeletedAt(); ok {
 		_spec.SetField(storagepolicy.FieldDeletedAt, field.TypeTime, value)
 		_node.DeletedAt = &value
 	}
-	if value, ok := _c.mutation.CreatedAt(); ok {
+	if value, ok := spc.mutation.CreatedAt(); ok {
 		_spec.SetField(storagepolicy.FieldCreatedAt, field.TypeTime, value)
 		_node.CreatedAt = value
 	}
-	if value, ok := _c.mutation.UpdatedAt(); ok {
+	if value, ok := spc.mutation.UpdatedAt(); ok {
 		_spec.SetField(storagepolicy.FieldUpdatedAt, field.TypeTime, value)
 		_node.UpdatedAt = value
 	}
-	if value, ok := _c.mutation.Name(); ok {
+	if value, ok := spc.mutation.Name(); ok {
 		_spec.SetField(storagepolicy.FieldName, field.TypeString, value)
 		_node.Name = value
 	}
-	if value, ok := _c.mutation.GetType(); ok {
+	if value, ok := spc.mutation.GetType(); ok {
 		_spec.SetField(storagepolicy.FieldType, field.TypeString, value)
 		_node.Type = value
 	}
-	if value, ok := _c.mutation.Flag(); ok {
+	if value, ok := spc.mutation.Flag(); ok {
 		_spec.SetField(storagepolicy.FieldFlag, field.TypeString, value)
 		_node.Flag = value
 	}
-	if value, ok := _c.mutation.Server(); ok {
+	if value, ok := spc.mutation.Server(); ok {
 		_spec.SetField(storagepolicy.FieldServer, field.TypeString, value)
 		_node.Server = value
 	}
-	if value, ok := _c.mutation.BucketName(); ok {
+	if value, ok := spc.mutation.BucketName(); ok {
 		_spec.SetField(storagepolicy.FieldBucketName, field.TypeString, value)
 		_node.BucketName = value
 	}
-	if value, ok := _c.mutation.IsPrivate(); ok {
+	if value, ok := spc.mutation.IsPrivate(); ok {
 		_spec.SetField(storagepolicy.FieldIsPrivate, field.TypeBool, value)
 		_node.IsPrivate = value
 	}
-	if value, ok := _c.mutation.AccessKey(); ok {
+	if value, ok := spc.mutation.AccessKey(); ok {
 		_spec.SetField(storagepolicy.FieldAccessKey, field.TypeString, value)
 		_node.AccessKey = value
 	}
-	if value, ok := _c.mutation.SecretKey(); ok {
+	if value, ok := spc.mutation.SecretKey(); ok {
 		_spec.SetField(storagepolicy.FieldSecretKey, field.TypeString, value)
 		_node.SecretKey = value
 	}
-	if value, ok := _c.mutation.MaxSize(); ok {
+	if value, ok := spc.mutation.MaxSize(); ok {
 		_spec.SetField(storagepolicy.FieldMaxSize, field.TypeInt64, value)
 		_node.MaxSize = value
 	}
-	if value, ok := _c.mutation.BasePath(); ok {
+	if value, ok := spc.mutation.BasePath(); ok {
 		_spec.SetField(storagepolicy.FieldBasePath, field.TypeString, value)
 		_node.BasePath = value
 	}
-	if value, ok := _c.mutation.VirtualPath(); ok {
+	if value, ok := spc.mutation.VirtualPath(); ok {
 		_spec.SetField(storagepolicy.FieldVirtualPath, field.TypeString, value)
 		_node.VirtualPath = value
 	}
-	if value, ok := _c.mutation.Settings(); ok {
+	if value, ok := spc.mutation.Settings(); ok {
 		_spec.SetField(storagepolicy.FieldSettings, field.TypeOther, value)
 		_node.Settings = value
 	}
-	if value, ok := _c.mutation.NodeID(); ok {
+	if value, ok := spc.mutation.NodeID(); ok {
 		_spec.SetField(storagepolicy.FieldNodeID, field.TypeUint, value)
 		_node.NodeID = &value
 	}
@@ -448,10 +448,10 @@ func (_c *StoragePolicyCreate) createSpec() (*StoragePolicy, *sqlgraph.CreateSpe
 //			SetDeletedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *StoragePolicyCreate) OnConflict(opts ...sql.ConflictOption) *StoragePolicyUpsertOne {
-	_c.conflict = opts
+func (spc *StoragePolicyCreate) OnConflict(opts ...sql.ConflictOption) *StoragePolicyUpsertOne {
+	spc.conflict = opts
 	return &StoragePolicyUpsertOne{
-		create: _c,
+		create: spc,
 	}
 }
 
@@ -461,10 +461,10 @@ func (_c *StoragePolicyCreate) OnConflict(opts ...sql.ConflictOption) *StoragePo
 //	client.StoragePolicy.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *StoragePolicyCreate) OnConflictColumns(columns ...string) *StoragePolicyUpsertOne {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (spc *StoragePolicyCreate) OnConflictColumns(columns ...string) *StoragePolicyUpsertOne {
+	spc.conflict = append(spc.conflict, sql.ConflictColumns(columns...))
 	return &StoragePolicyUpsertOne{
-		create: _c,
+		create: spc,
 	}
 }
 
@@ -1146,16 +1146,16 @@ type StoragePolicyCreateBulk struct {
 }
 
 // Save creates the StoragePolicy entities in the database.
-func (_c *StoragePolicyCreateBulk) Save(ctx context.Context) ([]*StoragePolicy, error) {
-	if _c.err != nil {
-		return nil, _c.err
+func (spcb *StoragePolicyCreateBulk) Save(ctx context.Context) ([]*StoragePolicy, error) {
+	if spcb.err != nil {
+		return nil, spcb.err
 	}
-	specs := make([]*sqlgraph.CreateSpec, len(_c.builders))
-	nodes := make([]*StoragePolicy, len(_c.builders))
-	mutators := make([]Mutator, len(_c.builders))
-	for i := range _c.builders {
+	specs := make([]*sqlgraph.CreateSpec, len(spcb.builders))
+	nodes := make([]*StoragePolicy, len(spcb.builders))
+	mutators := make([]Mutator, len(spcb.builders))
+	for i := range spcb.builders {
 		func(i int, root context.Context) {
-			builder := _c.builders[i]
+			builder := spcb.builders[i]
 			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*StoragePolicyMutation)
@@ -1169,12 +1169,12 @@ func (_c *StoragePolicyCreateBulk) Save(ctx context.Context) ([]*StoragePolicy, 
 				var err error
 				nodes[i], specs[i] = builder.createSpec()
 				if i < len(mutators)-1 {
-					_, err = mutators[i+1].Mutate(root, _c.builders[i+1].mutation)
+					_, err = mutators[i+1].Mutate(root, spcb.builders[i+1].mutation)
 				} else {
 					spec := &sqlgraph.BatchCreateSpec{Nodes: specs}
-					spec.OnConflict = _c.conflict
+					spec.OnConflict = spcb.conflict
 					// Invoke the actual operation on the latest mutation in the chain.
-					if err = sqlgraph.BatchCreate(ctx, _c.driver, spec); err != nil {
+					if err = sqlgraph.BatchCreate(ctx, spcb.driver, spec); err != nil {
 						if sqlgraph.IsConstraintError(err) {
 							err = &ConstraintError{msg: err.Error(), wrap: err}
 						}
@@ -1198,7 +1198,7 @@ func (_c *StoragePolicyCreateBulk) Save(ctx context.Context) ([]*StoragePolicy, 
 		}(i, ctx)
 	}
 	if len(mutators) > 0 {
-		if _, err := mutators[0].Mutate(ctx, _c.builders[0].mutation); err != nil {
+		if _, err := mutators[0].Mutate(ctx, spcb.builders[0].mutation); err != nil {
 			return nil, err
 		}
 	}
@@ -1206,8 +1206,8 @@ func (_c *StoragePolicyCreateBulk) Save(ctx context.Context) ([]*StoragePolicy, 
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_c *StoragePolicyCreateBulk) SaveX(ctx context.Context) []*StoragePolicy {
-	v, err := _c.Save(ctx)
+func (spcb *StoragePolicyCreateBulk) SaveX(ctx context.Context) []*StoragePolicy {
+	v, err := spcb.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -1215,14 +1215,14 @@ func (_c *StoragePolicyCreateBulk) SaveX(ctx context.Context) []*StoragePolicy {
 }
 
 // Exec executes the query.
-func (_c *StoragePolicyCreateBulk) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (spcb *StoragePolicyCreateBulk) Exec(ctx context.Context) error {
+	_, err := spcb.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *StoragePolicyCreateBulk) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (spcb *StoragePolicyCreateBulk) ExecX(ctx context.Context) {
+	if err := spcb.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
@@ -1242,10 +1242,10 @@ func (_c *StoragePolicyCreateBulk) ExecX(ctx context.Context) {
 //			SetDeletedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *StoragePolicyCreateBulk) OnConflict(opts ...sql.ConflictOption) *StoragePolicyUpsertBulk {
-	_c.conflict = opts
+func (spcb *StoragePolicyCreateBulk) OnConflict(opts ...sql.ConflictOption) *StoragePolicyUpsertBulk {
+	spcb.conflict = opts
 	return &StoragePolicyUpsertBulk{
-		create: _c,
+		create: spcb,
 	}
 }
 
@@ -1255,10 +1255,10 @@ func (_c *StoragePolicyCreateBulk) OnConflict(opts ...sql.ConflictOption) *Stora
 //	client.StoragePolicy.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *StoragePolicyCreateBulk) OnConflictColumns(columns ...string) *StoragePolicyUpsertBulk {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (spcb *StoragePolicyCreateBulk) OnConflictColumns(columns ...string) *StoragePolicyUpsertBulk {
+	spcb.conflict = append(spcb.conflict, sql.ConflictColumns(columns...))
 	return &StoragePolicyUpsertBulk{
-		create: _c,
+		create: spcb,
 	}
 }
 

@@ -91,7 +91,7 @@ func (*UserInstalledTheme) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the UserInstalledTheme fields.
-func (_m *UserInstalledTheme) assignValues(columns []string, values []any) error {
+func (uit *UserInstalledTheme) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -102,61 +102,61 @@ func (_m *UserInstalledTheme) assignValues(columns []string, values []any) error
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint(value.Int64)
+			uit.ID = uint(value.Int64)
 		case userinstalledtheme.FieldDeletedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field deleted_at", values[i])
 			} else if value.Valid {
-				_m.DeletedAt = new(time.Time)
-				*_m.DeletedAt = value.Time
+				uit.DeletedAt = new(time.Time)
+				*uit.DeletedAt = value.Time
 			}
 		case userinstalledtheme.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
 			} else if value.Valid {
-				_m.CreatedAt = value.Time
+				uit.CreatedAt = value.Time
 			}
 		case userinstalledtheme.FieldUpdatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field updated_at", values[i])
 			} else if value.Valid {
-				_m.UpdatedAt = value.Time
+				uit.UpdatedAt = value.Time
 			}
 		case userinstalledtheme.FieldUserID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field user_id", values[i])
 			} else if value.Valid {
-				_m.UserID = uint(value.Int64)
+				uit.UserID = uint(value.Int64)
 			}
 		case userinstalledtheme.FieldThemeName:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field theme_name", values[i])
 			} else if value.Valid {
-				_m.ThemeName = value.String
+				uit.ThemeName = value.String
 			}
 		case userinstalledtheme.FieldThemeMarketID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field theme_market_id", values[i])
 			} else if value.Valid {
-				_m.ThemeMarketID = int(value.Int64)
+				uit.ThemeMarketID = int(value.Int64)
 			}
 		case userinstalledtheme.FieldIsCurrent:
 			if value, ok := values[i].(*sql.NullBool); !ok {
 				return fmt.Errorf("unexpected type %T for field is_current", values[i])
 			} else if value.Valid {
-				_m.IsCurrent = value.Bool
+				uit.IsCurrent = value.Bool
 			}
 		case userinstalledtheme.FieldInstallTime:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field install_time", values[i])
 			} else if value.Valid {
-				_m.InstallTime = value.Time
+				uit.InstallTime = value.Time
 			}
 		case userinstalledtheme.FieldUserThemeConfig:
 			if value, ok := values[i].(*[]byte); !ok {
 				return fmt.Errorf("unexpected type %T for field user_theme_config", values[i])
 			} else if value != nil && len(*value) > 0 {
-				if err := json.Unmarshal(*value, &_m.UserThemeConfig); err != nil {
+				if err := json.Unmarshal(*value, &uit.UserThemeConfig); err != nil {
 					return fmt.Errorf("unmarshal field user_theme_config: %w", err)
 				}
 			}
@@ -164,16 +164,16 @@ func (_m *UserInstalledTheme) assignValues(columns []string, values []any) error
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field installed_version", values[i])
 			} else if value.Valid {
-				_m.InstalledVersion = value.String
+				uit.InstalledVersion = value.String
 			}
 		case userinstalledtheme.FieldDeployType:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field deploy_type", values[i])
 			} else if value.Valid {
-				_m.DeployType = userinstalledtheme.DeployType(value.String)
+				uit.DeployType = userinstalledtheme.DeployType(value.String)
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			uit.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -181,72 +181,72 @@ func (_m *UserInstalledTheme) assignValues(columns []string, values []any) error
 
 // Value returns the ent.Value that was dynamically selected and assigned to the UserInstalledTheme.
 // This includes values selected through modifiers, order, etc.
-func (_m *UserInstalledTheme) Value(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (uit *UserInstalledTheme) Value(name string) (ent.Value, error) {
+	return uit.selectValues.Get(name)
 }
 
 // QueryUser queries the "user" edge of the UserInstalledTheme entity.
-func (_m *UserInstalledTheme) QueryUser() *UserQuery {
-	return NewUserInstalledThemeClient(_m.config).QueryUser(_m)
+func (uit *UserInstalledTheme) QueryUser() *UserQuery {
+	return NewUserInstalledThemeClient(uit.config).QueryUser(uit)
 }
 
 // Update returns a builder for updating this UserInstalledTheme.
 // Note that you need to call UserInstalledTheme.Unwrap() before calling this method if this UserInstalledTheme
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *UserInstalledTheme) Update() *UserInstalledThemeUpdateOne {
-	return NewUserInstalledThemeClient(_m.config).UpdateOne(_m)
+func (uit *UserInstalledTheme) Update() *UserInstalledThemeUpdateOne {
+	return NewUserInstalledThemeClient(uit.config).UpdateOne(uit)
 }
 
 // Unwrap unwraps the UserInstalledTheme entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *UserInstalledTheme) Unwrap() *UserInstalledTheme {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (uit *UserInstalledTheme) Unwrap() *UserInstalledTheme {
+	_tx, ok := uit.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: UserInstalledTheme is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	uit.config.driver = _tx.drv
+	return uit
 }
 
 // String implements the fmt.Stringer.
-func (_m *UserInstalledTheme) String() string {
+func (uit *UserInstalledTheme) String() string {
 	var builder strings.Builder
 	builder.WriteString("UserInstalledTheme(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
-	if v := _m.DeletedAt; v != nil {
+	builder.WriteString(fmt.Sprintf("id=%v, ", uit.ID))
+	if v := uit.DeletedAt; v != nil {
 		builder.WriteString("deleted_at=")
 		builder.WriteString(v.Format(time.ANSIC))
 	}
 	builder.WriteString(", ")
 	builder.WriteString("created_at=")
-	builder.WriteString(_m.CreatedAt.Format(time.ANSIC))
+	builder.WriteString(uit.CreatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("updated_at=")
-	builder.WriteString(_m.UpdatedAt.Format(time.ANSIC))
+	builder.WriteString(uit.UpdatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("user_id=")
-	builder.WriteString(fmt.Sprintf("%v", _m.UserID))
+	builder.WriteString(fmt.Sprintf("%v", uit.UserID))
 	builder.WriteString(", ")
 	builder.WriteString("theme_name=")
-	builder.WriteString(_m.ThemeName)
+	builder.WriteString(uit.ThemeName)
 	builder.WriteString(", ")
 	builder.WriteString("theme_market_id=")
-	builder.WriteString(fmt.Sprintf("%v", _m.ThemeMarketID))
+	builder.WriteString(fmt.Sprintf("%v", uit.ThemeMarketID))
 	builder.WriteString(", ")
 	builder.WriteString("is_current=")
-	builder.WriteString(fmt.Sprintf("%v", _m.IsCurrent))
+	builder.WriteString(fmt.Sprintf("%v", uit.IsCurrent))
 	builder.WriteString(", ")
 	builder.WriteString("install_time=")
-	builder.WriteString(_m.InstallTime.Format(time.ANSIC))
+	builder.WriteString(uit.InstallTime.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("user_theme_config=")
-	builder.WriteString(fmt.Sprintf("%v", _m.UserThemeConfig))
+	builder.WriteString(fmt.Sprintf("%v", uit.UserThemeConfig))
 	builder.WriteString(", ")
 	builder.WriteString("installed_version=")
-	builder.WriteString(_m.InstalledVersion)
+	builder.WriteString(uit.InstalledVersion)
 	builder.WriteString(", ")
 	builder.WriteString("deploy_type=")
-	builder.WriteString(fmt.Sprintf("%v", _m.DeployType))
+	builder.WriteString(fmt.Sprintf("%v", uit.DeployType))
 	builder.WriteByte(')')
 	return builder.String()
 }

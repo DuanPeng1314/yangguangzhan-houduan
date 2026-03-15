@@ -20,56 +20,56 @@ type UserNotificationConfigDelete struct {
 }
 
 // Where appends a list predicates to the UserNotificationConfigDelete builder.
-func (_d *UserNotificationConfigDelete) Where(ps ...predicate.UserNotificationConfig) *UserNotificationConfigDelete {
-	_d.mutation.Where(ps...)
-	return _d
+func (uncd *UserNotificationConfigDelete) Where(ps ...predicate.UserNotificationConfig) *UserNotificationConfigDelete {
+	uncd.mutation.Where(ps...)
+	return uncd
 }
 
 // Exec executes the deletion query and returns how many vertices were deleted.
-func (_d *UserNotificationConfigDelete) Exec(ctx context.Context) (int, error) {
-	return withHooks(ctx, _d.sqlExec, _d.mutation, _d.hooks)
+func (uncd *UserNotificationConfigDelete) Exec(ctx context.Context) (int, error) {
+	return withHooks(ctx, uncd.sqlExec, uncd.mutation, uncd.hooks)
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *UserNotificationConfigDelete) ExecX(ctx context.Context) int {
-	n, err := _d.Exec(ctx)
+func (uncd *UserNotificationConfigDelete) ExecX(ctx context.Context) int {
+	n, err := uncd.Exec(ctx)
 	if err != nil {
 		panic(err)
 	}
 	return n
 }
 
-func (_d *UserNotificationConfigDelete) sqlExec(ctx context.Context) (int, error) {
+func (uncd *UserNotificationConfigDelete) sqlExec(ctx context.Context) (int, error) {
 	_spec := sqlgraph.NewDeleteSpec(usernotificationconfig.Table, sqlgraph.NewFieldSpec(usernotificationconfig.FieldID, field.TypeUint))
-	if ps := _d.mutation.predicates; len(ps) > 0 {
+	if ps := uncd.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	affected, err := sqlgraph.DeleteNodes(ctx, _d.driver, _spec)
+	affected, err := sqlgraph.DeleteNodes(ctx, uncd.driver, _spec)
 	if err != nil && sqlgraph.IsConstraintError(err) {
 		err = &ConstraintError{msg: err.Error(), wrap: err}
 	}
-	_d.mutation.done = true
+	uncd.mutation.done = true
 	return affected, err
 }
 
 // UserNotificationConfigDeleteOne is the builder for deleting a single UserNotificationConfig entity.
 type UserNotificationConfigDeleteOne struct {
-	_d *UserNotificationConfigDelete
+	uncd *UserNotificationConfigDelete
 }
 
 // Where appends a list predicates to the UserNotificationConfigDelete builder.
-func (_d *UserNotificationConfigDeleteOne) Where(ps ...predicate.UserNotificationConfig) *UserNotificationConfigDeleteOne {
-	_d._d.mutation.Where(ps...)
-	return _d
+func (uncdo *UserNotificationConfigDeleteOne) Where(ps ...predicate.UserNotificationConfig) *UserNotificationConfigDeleteOne {
+	uncdo.uncd.mutation.Where(ps...)
+	return uncdo
 }
 
 // Exec executes the deletion query.
-func (_d *UserNotificationConfigDeleteOne) Exec(ctx context.Context) error {
-	n, err := _d._d.Exec(ctx)
+func (uncdo *UserNotificationConfigDeleteOne) Exec(ctx context.Context) error {
+	n, err := uncdo.uncd.Exec(ctx)
 	switch {
 	case err != nil:
 		return err
@@ -81,8 +81,8 @@ func (_d *UserNotificationConfigDeleteOne) Exec(ctx context.Context) error {
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *UserNotificationConfigDeleteOne) ExecX(ctx context.Context) {
-	if err := _d.Exec(ctx); err != nil {
+func (uncdo *UserNotificationConfigDeleteOne) ExecX(ctx context.Context) {
+	if err := uncdo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }

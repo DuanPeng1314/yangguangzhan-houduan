@@ -26,175 +26,175 @@ type NotificationTypeUpdate struct {
 }
 
 // Where appends a list predicates to the NotificationTypeUpdate builder.
-func (_u *NotificationTypeUpdate) Where(ps ...predicate.NotificationType) *NotificationTypeUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (ntu *NotificationTypeUpdate) Where(ps ...predicate.NotificationType) *NotificationTypeUpdate {
+	ntu.mutation.Where(ps...)
+	return ntu
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *NotificationTypeUpdate) SetUpdatedAt(v time.Time) *NotificationTypeUpdate {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (ntu *NotificationTypeUpdate) SetUpdatedAt(t time.Time) *NotificationTypeUpdate {
+	ntu.mutation.SetUpdatedAt(t)
+	return ntu
 }
 
 // SetCode sets the "code" field.
-func (_u *NotificationTypeUpdate) SetCode(v string) *NotificationTypeUpdate {
-	_u.mutation.SetCode(v)
-	return _u
+func (ntu *NotificationTypeUpdate) SetCode(s string) *NotificationTypeUpdate {
+	ntu.mutation.SetCode(s)
+	return ntu
 }
 
 // SetNillableCode sets the "code" field if the given value is not nil.
-func (_u *NotificationTypeUpdate) SetNillableCode(v *string) *NotificationTypeUpdate {
-	if v != nil {
-		_u.SetCode(*v)
+func (ntu *NotificationTypeUpdate) SetNillableCode(s *string) *NotificationTypeUpdate {
+	if s != nil {
+		ntu.SetCode(*s)
 	}
-	return _u
+	return ntu
 }
 
 // SetName sets the "name" field.
-func (_u *NotificationTypeUpdate) SetName(v string) *NotificationTypeUpdate {
-	_u.mutation.SetName(v)
-	return _u
+func (ntu *NotificationTypeUpdate) SetName(s string) *NotificationTypeUpdate {
+	ntu.mutation.SetName(s)
+	return ntu
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *NotificationTypeUpdate) SetNillableName(v *string) *NotificationTypeUpdate {
-	if v != nil {
-		_u.SetName(*v)
+func (ntu *NotificationTypeUpdate) SetNillableName(s *string) *NotificationTypeUpdate {
+	if s != nil {
+		ntu.SetName(*s)
 	}
-	return _u
+	return ntu
 }
 
 // SetDescription sets the "description" field.
-func (_u *NotificationTypeUpdate) SetDescription(v string) *NotificationTypeUpdate {
-	_u.mutation.SetDescription(v)
-	return _u
+func (ntu *NotificationTypeUpdate) SetDescription(s string) *NotificationTypeUpdate {
+	ntu.mutation.SetDescription(s)
+	return ntu
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *NotificationTypeUpdate) SetNillableDescription(v *string) *NotificationTypeUpdate {
-	if v != nil {
-		_u.SetDescription(*v)
+func (ntu *NotificationTypeUpdate) SetNillableDescription(s *string) *NotificationTypeUpdate {
+	if s != nil {
+		ntu.SetDescription(*s)
 	}
-	return _u
+	return ntu
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *NotificationTypeUpdate) ClearDescription() *NotificationTypeUpdate {
-	_u.mutation.ClearDescription()
-	return _u
+func (ntu *NotificationTypeUpdate) ClearDescription() *NotificationTypeUpdate {
+	ntu.mutation.ClearDescription()
+	return ntu
 }
 
 // SetCategory sets the "category" field.
-func (_u *NotificationTypeUpdate) SetCategory(v string) *NotificationTypeUpdate {
-	_u.mutation.SetCategory(v)
-	return _u
+func (ntu *NotificationTypeUpdate) SetCategory(s string) *NotificationTypeUpdate {
+	ntu.mutation.SetCategory(s)
+	return ntu
 }
 
 // SetNillableCategory sets the "category" field if the given value is not nil.
-func (_u *NotificationTypeUpdate) SetNillableCategory(v *string) *NotificationTypeUpdate {
-	if v != nil {
-		_u.SetCategory(*v)
+func (ntu *NotificationTypeUpdate) SetNillableCategory(s *string) *NotificationTypeUpdate {
+	if s != nil {
+		ntu.SetCategory(*s)
 	}
-	return _u
+	return ntu
 }
 
 // SetIsActive sets the "is_active" field.
-func (_u *NotificationTypeUpdate) SetIsActive(v bool) *NotificationTypeUpdate {
-	_u.mutation.SetIsActive(v)
-	return _u
+func (ntu *NotificationTypeUpdate) SetIsActive(b bool) *NotificationTypeUpdate {
+	ntu.mutation.SetIsActive(b)
+	return ntu
 }
 
 // SetNillableIsActive sets the "is_active" field if the given value is not nil.
-func (_u *NotificationTypeUpdate) SetNillableIsActive(v *bool) *NotificationTypeUpdate {
-	if v != nil {
-		_u.SetIsActive(*v)
+func (ntu *NotificationTypeUpdate) SetNillableIsActive(b *bool) *NotificationTypeUpdate {
+	if b != nil {
+		ntu.SetIsActive(*b)
 	}
-	return _u
+	return ntu
 }
 
 // SetDefaultEnabled sets the "default_enabled" field.
-func (_u *NotificationTypeUpdate) SetDefaultEnabled(v bool) *NotificationTypeUpdate {
-	_u.mutation.SetDefaultEnabled(v)
-	return _u
+func (ntu *NotificationTypeUpdate) SetDefaultEnabled(b bool) *NotificationTypeUpdate {
+	ntu.mutation.SetDefaultEnabled(b)
+	return ntu
 }
 
 // SetNillableDefaultEnabled sets the "default_enabled" field if the given value is not nil.
-func (_u *NotificationTypeUpdate) SetNillableDefaultEnabled(v *bool) *NotificationTypeUpdate {
-	if v != nil {
-		_u.SetDefaultEnabled(*v)
+func (ntu *NotificationTypeUpdate) SetNillableDefaultEnabled(b *bool) *NotificationTypeUpdate {
+	if b != nil {
+		ntu.SetDefaultEnabled(*b)
 	}
-	return _u
+	return ntu
 }
 
 // SetSupportedChannels sets the "supported_channels" field.
-func (_u *NotificationTypeUpdate) SetSupportedChannels(v []string) *NotificationTypeUpdate {
-	_u.mutation.SetSupportedChannels(v)
-	return _u
+func (ntu *NotificationTypeUpdate) SetSupportedChannels(s []string) *NotificationTypeUpdate {
+	ntu.mutation.SetSupportedChannels(s)
+	return ntu
 }
 
-// AppendSupportedChannels appends value to the "supported_channels" field.
-func (_u *NotificationTypeUpdate) AppendSupportedChannels(v []string) *NotificationTypeUpdate {
-	_u.mutation.AppendSupportedChannels(v)
-	return _u
+// AppendSupportedChannels appends s to the "supported_channels" field.
+func (ntu *NotificationTypeUpdate) AppendSupportedChannels(s []string) *NotificationTypeUpdate {
+	ntu.mutation.AppendSupportedChannels(s)
+	return ntu
 }
 
 // ClearSupportedChannels clears the value of the "supported_channels" field.
-func (_u *NotificationTypeUpdate) ClearSupportedChannels() *NotificationTypeUpdate {
-	_u.mutation.ClearSupportedChannels()
-	return _u
+func (ntu *NotificationTypeUpdate) ClearSupportedChannels() *NotificationTypeUpdate {
+	ntu.mutation.ClearSupportedChannels()
+	return ntu
 }
 
 // AddUserConfigIDs adds the "user_configs" edge to the UserNotificationConfig entity by IDs.
-func (_u *NotificationTypeUpdate) AddUserConfigIDs(ids ...uint) *NotificationTypeUpdate {
-	_u.mutation.AddUserConfigIDs(ids...)
-	return _u
+func (ntu *NotificationTypeUpdate) AddUserConfigIDs(ids ...uint) *NotificationTypeUpdate {
+	ntu.mutation.AddUserConfigIDs(ids...)
+	return ntu
 }
 
 // AddUserConfigs adds the "user_configs" edges to the UserNotificationConfig entity.
-func (_u *NotificationTypeUpdate) AddUserConfigs(v ...*UserNotificationConfig) *NotificationTypeUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (ntu *NotificationTypeUpdate) AddUserConfigs(u ...*UserNotificationConfig) *NotificationTypeUpdate {
+	ids := make([]uint, len(u))
+	for i := range u {
+		ids[i] = u[i].ID
 	}
-	return _u.AddUserConfigIDs(ids...)
+	return ntu.AddUserConfigIDs(ids...)
 }
 
 // Mutation returns the NotificationTypeMutation object of the builder.
-func (_u *NotificationTypeUpdate) Mutation() *NotificationTypeMutation {
-	return _u.mutation
+func (ntu *NotificationTypeUpdate) Mutation() *NotificationTypeMutation {
+	return ntu.mutation
 }
 
 // ClearUserConfigs clears all "user_configs" edges to the UserNotificationConfig entity.
-func (_u *NotificationTypeUpdate) ClearUserConfigs() *NotificationTypeUpdate {
-	_u.mutation.ClearUserConfigs()
-	return _u
+func (ntu *NotificationTypeUpdate) ClearUserConfigs() *NotificationTypeUpdate {
+	ntu.mutation.ClearUserConfigs()
+	return ntu
 }
 
 // RemoveUserConfigIDs removes the "user_configs" edge to UserNotificationConfig entities by IDs.
-func (_u *NotificationTypeUpdate) RemoveUserConfigIDs(ids ...uint) *NotificationTypeUpdate {
-	_u.mutation.RemoveUserConfigIDs(ids...)
-	return _u
+func (ntu *NotificationTypeUpdate) RemoveUserConfigIDs(ids ...uint) *NotificationTypeUpdate {
+	ntu.mutation.RemoveUserConfigIDs(ids...)
+	return ntu
 }
 
 // RemoveUserConfigs removes "user_configs" edges to UserNotificationConfig entities.
-func (_u *NotificationTypeUpdate) RemoveUserConfigs(v ...*UserNotificationConfig) *NotificationTypeUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (ntu *NotificationTypeUpdate) RemoveUserConfigs(u ...*UserNotificationConfig) *NotificationTypeUpdate {
+	ids := make([]uint, len(u))
+	for i := range u {
+		ids[i] = u[i].ID
 	}
-	return _u.RemoveUserConfigIDs(ids...)
+	return ntu.RemoveUserConfigIDs(ids...)
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *NotificationTypeUpdate) Save(ctx context.Context) (int, error) {
-	_u.defaults()
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (ntu *NotificationTypeUpdate) Save(ctx context.Context) (int, error) {
+	ntu.defaults()
+	return withHooks(ctx, ntu.sqlSave, ntu.mutation, ntu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *NotificationTypeUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (ntu *NotificationTypeUpdate) SaveX(ctx context.Context) int {
+	affected, err := ntu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -202,44 +202,44 @@ func (_u *NotificationTypeUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *NotificationTypeUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (ntu *NotificationTypeUpdate) Exec(ctx context.Context) error {
+	_, err := ntu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *NotificationTypeUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (ntu *NotificationTypeUpdate) ExecX(ctx context.Context) {
+	if err := ntu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *NotificationTypeUpdate) defaults() {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (ntu *NotificationTypeUpdate) defaults() {
+	if _, ok := ntu.mutation.UpdatedAt(); !ok {
 		v := notificationtype.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		ntu.mutation.SetUpdatedAt(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *NotificationTypeUpdate) check() error {
-	if v, ok := _u.mutation.Code(); ok {
+func (ntu *NotificationTypeUpdate) check() error {
+	if v, ok := ntu.mutation.Code(); ok {
 		if err := notificationtype.CodeValidator(v); err != nil {
 			return &ValidationError{Name: "code", err: fmt.Errorf(`ent: validator failed for field "NotificationType.code": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Name(); ok {
+	if v, ok := ntu.mutation.Name(); ok {
 		if err := notificationtype.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "NotificationType.name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Description(); ok {
+	if v, ok := ntu.mutation.Description(); ok {
 		if err := notificationtype.DescriptionValidator(v); err != nil {
 			return &ValidationError{Name: "description", err: fmt.Errorf(`ent: validator failed for field "NotificationType.description": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Category(); ok {
+	if v, ok := ntu.mutation.Category(); ok {
 		if err := notificationtype.CategoryValidator(v); err != nil {
 			return &ValidationError{Name: "category", err: fmt.Errorf(`ent: validator failed for field "NotificationType.category": %w`, err)}
 		}
@@ -248,59 +248,59 @@ func (_u *NotificationTypeUpdate) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *NotificationTypeUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *NotificationTypeUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (ntu *NotificationTypeUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *NotificationTypeUpdate {
+	ntu.modifiers = append(ntu.modifiers, modifiers...)
+	return ntu
 }
 
-func (_u *NotificationTypeUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (ntu *NotificationTypeUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := ntu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(notificationtype.Table, notificationtype.Columns, sqlgraph.NewFieldSpec(notificationtype.FieldID, field.TypeUint))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := ntu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := ntu.mutation.UpdatedAt(); ok {
 		_spec.SetField(notificationtype.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Code(); ok {
+	if value, ok := ntu.mutation.Code(); ok {
 		_spec.SetField(notificationtype.FieldCode, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := ntu.mutation.Name(); ok {
 		_spec.SetField(notificationtype.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := ntu.mutation.Description(); ok {
 		_spec.SetField(notificationtype.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if ntu.mutation.DescriptionCleared() {
 		_spec.ClearField(notificationtype.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.Category(); ok {
+	if value, ok := ntu.mutation.Category(); ok {
 		_spec.SetField(notificationtype.FieldCategory, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.IsActive(); ok {
+	if value, ok := ntu.mutation.IsActive(); ok {
 		_spec.SetField(notificationtype.FieldIsActive, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.DefaultEnabled(); ok {
+	if value, ok := ntu.mutation.DefaultEnabled(); ok {
 		_spec.SetField(notificationtype.FieldDefaultEnabled, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.SupportedChannels(); ok {
+	if value, ok := ntu.mutation.SupportedChannels(); ok {
 		_spec.SetField(notificationtype.FieldSupportedChannels, field.TypeJSON, value)
 	}
-	if value, ok := _u.mutation.AppendedSupportedChannels(); ok {
+	if value, ok := ntu.mutation.AppendedSupportedChannels(); ok {
 		_spec.AddModifier(func(u *sql.UpdateBuilder) {
 			sqljson.Append(u, notificationtype.FieldSupportedChannels, value)
 		})
 	}
-	if _u.mutation.SupportedChannelsCleared() {
+	if ntu.mutation.SupportedChannelsCleared() {
 		_spec.ClearField(notificationtype.FieldSupportedChannels, field.TypeJSON)
 	}
-	if _u.mutation.UserConfigsCleared() {
+	if ntu.mutation.UserConfigsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -313,7 +313,7 @@ func (_u *NotificationTypeUpdate) sqlSave(ctx context.Context) (_node int, err e
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedUserConfigsIDs(); len(nodes) > 0 && !_u.mutation.UserConfigsCleared() {
+	if nodes := ntu.mutation.RemovedUserConfigsIDs(); len(nodes) > 0 && !ntu.mutation.UserConfigsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -329,7 +329,7 @@ func (_u *NotificationTypeUpdate) sqlSave(ctx context.Context) (_node int, err e
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.UserConfigsIDs(); len(nodes) > 0 {
+	if nodes := ntu.mutation.UserConfigsIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -345,8 +345,8 @@ func (_u *NotificationTypeUpdate) sqlSave(ctx context.Context) (_node int, err e
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(ntu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, ntu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{notificationtype.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -354,8 +354,8 @@ func (_u *NotificationTypeUpdate) sqlSave(ctx context.Context) (_node int, err e
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	ntu.mutation.done = true
+	return n, nil
 }
 
 // NotificationTypeUpdateOne is the builder for updating a single NotificationType entity.
@@ -368,182 +368,182 @@ type NotificationTypeUpdateOne struct {
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *NotificationTypeUpdateOne) SetUpdatedAt(v time.Time) *NotificationTypeUpdateOne {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (ntuo *NotificationTypeUpdateOne) SetUpdatedAt(t time.Time) *NotificationTypeUpdateOne {
+	ntuo.mutation.SetUpdatedAt(t)
+	return ntuo
 }
 
 // SetCode sets the "code" field.
-func (_u *NotificationTypeUpdateOne) SetCode(v string) *NotificationTypeUpdateOne {
-	_u.mutation.SetCode(v)
-	return _u
+func (ntuo *NotificationTypeUpdateOne) SetCode(s string) *NotificationTypeUpdateOne {
+	ntuo.mutation.SetCode(s)
+	return ntuo
 }
 
 // SetNillableCode sets the "code" field if the given value is not nil.
-func (_u *NotificationTypeUpdateOne) SetNillableCode(v *string) *NotificationTypeUpdateOne {
-	if v != nil {
-		_u.SetCode(*v)
+func (ntuo *NotificationTypeUpdateOne) SetNillableCode(s *string) *NotificationTypeUpdateOne {
+	if s != nil {
+		ntuo.SetCode(*s)
 	}
-	return _u
+	return ntuo
 }
 
 // SetName sets the "name" field.
-func (_u *NotificationTypeUpdateOne) SetName(v string) *NotificationTypeUpdateOne {
-	_u.mutation.SetName(v)
-	return _u
+func (ntuo *NotificationTypeUpdateOne) SetName(s string) *NotificationTypeUpdateOne {
+	ntuo.mutation.SetName(s)
+	return ntuo
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *NotificationTypeUpdateOne) SetNillableName(v *string) *NotificationTypeUpdateOne {
-	if v != nil {
-		_u.SetName(*v)
+func (ntuo *NotificationTypeUpdateOne) SetNillableName(s *string) *NotificationTypeUpdateOne {
+	if s != nil {
+		ntuo.SetName(*s)
 	}
-	return _u
+	return ntuo
 }
 
 // SetDescription sets the "description" field.
-func (_u *NotificationTypeUpdateOne) SetDescription(v string) *NotificationTypeUpdateOne {
-	_u.mutation.SetDescription(v)
-	return _u
+func (ntuo *NotificationTypeUpdateOne) SetDescription(s string) *NotificationTypeUpdateOne {
+	ntuo.mutation.SetDescription(s)
+	return ntuo
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *NotificationTypeUpdateOne) SetNillableDescription(v *string) *NotificationTypeUpdateOne {
-	if v != nil {
-		_u.SetDescription(*v)
+func (ntuo *NotificationTypeUpdateOne) SetNillableDescription(s *string) *NotificationTypeUpdateOne {
+	if s != nil {
+		ntuo.SetDescription(*s)
 	}
-	return _u
+	return ntuo
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *NotificationTypeUpdateOne) ClearDescription() *NotificationTypeUpdateOne {
-	_u.mutation.ClearDescription()
-	return _u
+func (ntuo *NotificationTypeUpdateOne) ClearDescription() *NotificationTypeUpdateOne {
+	ntuo.mutation.ClearDescription()
+	return ntuo
 }
 
 // SetCategory sets the "category" field.
-func (_u *NotificationTypeUpdateOne) SetCategory(v string) *NotificationTypeUpdateOne {
-	_u.mutation.SetCategory(v)
-	return _u
+func (ntuo *NotificationTypeUpdateOne) SetCategory(s string) *NotificationTypeUpdateOne {
+	ntuo.mutation.SetCategory(s)
+	return ntuo
 }
 
 // SetNillableCategory sets the "category" field if the given value is not nil.
-func (_u *NotificationTypeUpdateOne) SetNillableCategory(v *string) *NotificationTypeUpdateOne {
-	if v != nil {
-		_u.SetCategory(*v)
+func (ntuo *NotificationTypeUpdateOne) SetNillableCategory(s *string) *NotificationTypeUpdateOne {
+	if s != nil {
+		ntuo.SetCategory(*s)
 	}
-	return _u
+	return ntuo
 }
 
 // SetIsActive sets the "is_active" field.
-func (_u *NotificationTypeUpdateOne) SetIsActive(v bool) *NotificationTypeUpdateOne {
-	_u.mutation.SetIsActive(v)
-	return _u
+func (ntuo *NotificationTypeUpdateOne) SetIsActive(b bool) *NotificationTypeUpdateOne {
+	ntuo.mutation.SetIsActive(b)
+	return ntuo
 }
 
 // SetNillableIsActive sets the "is_active" field if the given value is not nil.
-func (_u *NotificationTypeUpdateOne) SetNillableIsActive(v *bool) *NotificationTypeUpdateOne {
-	if v != nil {
-		_u.SetIsActive(*v)
+func (ntuo *NotificationTypeUpdateOne) SetNillableIsActive(b *bool) *NotificationTypeUpdateOne {
+	if b != nil {
+		ntuo.SetIsActive(*b)
 	}
-	return _u
+	return ntuo
 }
 
 // SetDefaultEnabled sets the "default_enabled" field.
-func (_u *NotificationTypeUpdateOne) SetDefaultEnabled(v bool) *NotificationTypeUpdateOne {
-	_u.mutation.SetDefaultEnabled(v)
-	return _u
+func (ntuo *NotificationTypeUpdateOne) SetDefaultEnabled(b bool) *NotificationTypeUpdateOne {
+	ntuo.mutation.SetDefaultEnabled(b)
+	return ntuo
 }
 
 // SetNillableDefaultEnabled sets the "default_enabled" field if the given value is not nil.
-func (_u *NotificationTypeUpdateOne) SetNillableDefaultEnabled(v *bool) *NotificationTypeUpdateOne {
-	if v != nil {
-		_u.SetDefaultEnabled(*v)
+func (ntuo *NotificationTypeUpdateOne) SetNillableDefaultEnabled(b *bool) *NotificationTypeUpdateOne {
+	if b != nil {
+		ntuo.SetDefaultEnabled(*b)
 	}
-	return _u
+	return ntuo
 }
 
 // SetSupportedChannels sets the "supported_channels" field.
-func (_u *NotificationTypeUpdateOne) SetSupportedChannels(v []string) *NotificationTypeUpdateOne {
-	_u.mutation.SetSupportedChannels(v)
-	return _u
+func (ntuo *NotificationTypeUpdateOne) SetSupportedChannels(s []string) *NotificationTypeUpdateOne {
+	ntuo.mutation.SetSupportedChannels(s)
+	return ntuo
 }
 
-// AppendSupportedChannels appends value to the "supported_channels" field.
-func (_u *NotificationTypeUpdateOne) AppendSupportedChannels(v []string) *NotificationTypeUpdateOne {
-	_u.mutation.AppendSupportedChannels(v)
-	return _u
+// AppendSupportedChannels appends s to the "supported_channels" field.
+func (ntuo *NotificationTypeUpdateOne) AppendSupportedChannels(s []string) *NotificationTypeUpdateOne {
+	ntuo.mutation.AppendSupportedChannels(s)
+	return ntuo
 }
 
 // ClearSupportedChannels clears the value of the "supported_channels" field.
-func (_u *NotificationTypeUpdateOne) ClearSupportedChannels() *NotificationTypeUpdateOne {
-	_u.mutation.ClearSupportedChannels()
-	return _u
+func (ntuo *NotificationTypeUpdateOne) ClearSupportedChannels() *NotificationTypeUpdateOne {
+	ntuo.mutation.ClearSupportedChannels()
+	return ntuo
 }
 
 // AddUserConfigIDs adds the "user_configs" edge to the UserNotificationConfig entity by IDs.
-func (_u *NotificationTypeUpdateOne) AddUserConfigIDs(ids ...uint) *NotificationTypeUpdateOne {
-	_u.mutation.AddUserConfigIDs(ids...)
-	return _u
+func (ntuo *NotificationTypeUpdateOne) AddUserConfigIDs(ids ...uint) *NotificationTypeUpdateOne {
+	ntuo.mutation.AddUserConfigIDs(ids...)
+	return ntuo
 }
 
 // AddUserConfigs adds the "user_configs" edges to the UserNotificationConfig entity.
-func (_u *NotificationTypeUpdateOne) AddUserConfigs(v ...*UserNotificationConfig) *NotificationTypeUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (ntuo *NotificationTypeUpdateOne) AddUserConfigs(u ...*UserNotificationConfig) *NotificationTypeUpdateOne {
+	ids := make([]uint, len(u))
+	for i := range u {
+		ids[i] = u[i].ID
 	}
-	return _u.AddUserConfigIDs(ids...)
+	return ntuo.AddUserConfigIDs(ids...)
 }
 
 // Mutation returns the NotificationTypeMutation object of the builder.
-func (_u *NotificationTypeUpdateOne) Mutation() *NotificationTypeMutation {
-	return _u.mutation
+func (ntuo *NotificationTypeUpdateOne) Mutation() *NotificationTypeMutation {
+	return ntuo.mutation
 }
 
 // ClearUserConfigs clears all "user_configs" edges to the UserNotificationConfig entity.
-func (_u *NotificationTypeUpdateOne) ClearUserConfigs() *NotificationTypeUpdateOne {
-	_u.mutation.ClearUserConfigs()
-	return _u
+func (ntuo *NotificationTypeUpdateOne) ClearUserConfigs() *NotificationTypeUpdateOne {
+	ntuo.mutation.ClearUserConfigs()
+	return ntuo
 }
 
 // RemoveUserConfigIDs removes the "user_configs" edge to UserNotificationConfig entities by IDs.
-func (_u *NotificationTypeUpdateOne) RemoveUserConfigIDs(ids ...uint) *NotificationTypeUpdateOne {
-	_u.mutation.RemoveUserConfigIDs(ids...)
-	return _u
+func (ntuo *NotificationTypeUpdateOne) RemoveUserConfigIDs(ids ...uint) *NotificationTypeUpdateOne {
+	ntuo.mutation.RemoveUserConfigIDs(ids...)
+	return ntuo
 }
 
 // RemoveUserConfigs removes "user_configs" edges to UserNotificationConfig entities.
-func (_u *NotificationTypeUpdateOne) RemoveUserConfigs(v ...*UserNotificationConfig) *NotificationTypeUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (ntuo *NotificationTypeUpdateOne) RemoveUserConfigs(u ...*UserNotificationConfig) *NotificationTypeUpdateOne {
+	ids := make([]uint, len(u))
+	for i := range u {
+		ids[i] = u[i].ID
 	}
-	return _u.RemoveUserConfigIDs(ids...)
+	return ntuo.RemoveUserConfigIDs(ids...)
 }
 
 // Where appends a list predicates to the NotificationTypeUpdate builder.
-func (_u *NotificationTypeUpdateOne) Where(ps ...predicate.NotificationType) *NotificationTypeUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (ntuo *NotificationTypeUpdateOne) Where(ps ...predicate.NotificationType) *NotificationTypeUpdateOne {
+	ntuo.mutation.Where(ps...)
+	return ntuo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *NotificationTypeUpdateOne) Select(field string, fields ...string) *NotificationTypeUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (ntuo *NotificationTypeUpdateOne) Select(field string, fields ...string) *NotificationTypeUpdateOne {
+	ntuo.fields = append([]string{field}, fields...)
+	return ntuo
 }
 
 // Save executes the query and returns the updated NotificationType entity.
-func (_u *NotificationTypeUpdateOne) Save(ctx context.Context) (*NotificationType, error) {
-	_u.defaults()
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (ntuo *NotificationTypeUpdateOne) Save(ctx context.Context) (*NotificationType, error) {
+	ntuo.defaults()
+	return withHooks(ctx, ntuo.sqlSave, ntuo.mutation, ntuo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *NotificationTypeUpdateOne) SaveX(ctx context.Context) *NotificationType {
-	node, err := _u.Save(ctx)
+func (ntuo *NotificationTypeUpdateOne) SaveX(ctx context.Context) *NotificationType {
+	node, err := ntuo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -551,44 +551,44 @@ func (_u *NotificationTypeUpdateOne) SaveX(ctx context.Context) *NotificationTyp
 }
 
 // Exec executes the query on the entity.
-func (_u *NotificationTypeUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (ntuo *NotificationTypeUpdateOne) Exec(ctx context.Context) error {
+	_, err := ntuo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *NotificationTypeUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (ntuo *NotificationTypeUpdateOne) ExecX(ctx context.Context) {
+	if err := ntuo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *NotificationTypeUpdateOne) defaults() {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (ntuo *NotificationTypeUpdateOne) defaults() {
+	if _, ok := ntuo.mutation.UpdatedAt(); !ok {
 		v := notificationtype.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		ntuo.mutation.SetUpdatedAt(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *NotificationTypeUpdateOne) check() error {
-	if v, ok := _u.mutation.Code(); ok {
+func (ntuo *NotificationTypeUpdateOne) check() error {
+	if v, ok := ntuo.mutation.Code(); ok {
 		if err := notificationtype.CodeValidator(v); err != nil {
 			return &ValidationError{Name: "code", err: fmt.Errorf(`ent: validator failed for field "NotificationType.code": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Name(); ok {
+	if v, ok := ntuo.mutation.Name(); ok {
 		if err := notificationtype.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "NotificationType.name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Description(); ok {
+	if v, ok := ntuo.mutation.Description(); ok {
 		if err := notificationtype.DescriptionValidator(v); err != nil {
 			return &ValidationError{Name: "description", err: fmt.Errorf(`ent: validator failed for field "NotificationType.description": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Category(); ok {
+	if v, ok := ntuo.mutation.Category(); ok {
 		if err := notificationtype.CategoryValidator(v); err != nil {
 			return &ValidationError{Name: "category", err: fmt.Errorf(`ent: validator failed for field "NotificationType.category": %w`, err)}
 		}
@@ -597,22 +597,22 @@ func (_u *NotificationTypeUpdateOne) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *NotificationTypeUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *NotificationTypeUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (ntuo *NotificationTypeUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *NotificationTypeUpdateOne {
+	ntuo.modifiers = append(ntuo.modifiers, modifiers...)
+	return ntuo
 }
 
-func (_u *NotificationTypeUpdateOne) sqlSave(ctx context.Context) (_node *NotificationType, err error) {
-	if err := _u.check(); err != nil {
+func (ntuo *NotificationTypeUpdateOne) sqlSave(ctx context.Context) (_node *NotificationType, err error) {
+	if err := ntuo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(notificationtype.Table, notificationtype.Columns, sqlgraph.NewFieldSpec(notificationtype.FieldID, field.TypeUint))
-	id, ok := _u.mutation.ID()
+	id, ok := ntuo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "NotificationType.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := ntuo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, notificationtype.FieldID)
 		for _, f := range fields {
@@ -624,49 +624,49 @@ func (_u *NotificationTypeUpdateOne) sqlSave(ctx context.Context) (_node *Notifi
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := ntuo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := ntuo.mutation.UpdatedAt(); ok {
 		_spec.SetField(notificationtype.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Code(); ok {
+	if value, ok := ntuo.mutation.Code(); ok {
 		_spec.SetField(notificationtype.FieldCode, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := ntuo.mutation.Name(); ok {
 		_spec.SetField(notificationtype.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := ntuo.mutation.Description(); ok {
 		_spec.SetField(notificationtype.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if ntuo.mutation.DescriptionCleared() {
 		_spec.ClearField(notificationtype.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.Category(); ok {
+	if value, ok := ntuo.mutation.Category(); ok {
 		_spec.SetField(notificationtype.FieldCategory, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.IsActive(); ok {
+	if value, ok := ntuo.mutation.IsActive(); ok {
 		_spec.SetField(notificationtype.FieldIsActive, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.DefaultEnabled(); ok {
+	if value, ok := ntuo.mutation.DefaultEnabled(); ok {
 		_spec.SetField(notificationtype.FieldDefaultEnabled, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.SupportedChannels(); ok {
+	if value, ok := ntuo.mutation.SupportedChannels(); ok {
 		_spec.SetField(notificationtype.FieldSupportedChannels, field.TypeJSON, value)
 	}
-	if value, ok := _u.mutation.AppendedSupportedChannels(); ok {
+	if value, ok := ntuo.mutation.AppendedSupportedChannels(); ok {
 		_spec.AddModifier(func(u *sql.UpdateBuilder) {
 			sqljson.Append(u, notificationtype.FieldSupportedChannels, value)
 		})
 	}
-	if _u.mutation.SupportedChannelsCleared() {
+	if ntuo.mutation.SupportedChannelsCleared() {
 		_spec.ClearField(notificationtype.FieldSupportedChannels, field.TypeJSON)
 	}
-	if _u.mutation.UserConfigsCleared() {
+	if ntuo.mutation.UserConfigsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -679,7 +679,7 @@ func (_u *NotificationTypeUpdateOne) sqlSave(ctx context.Context) (_node *Notifi
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedUserConfigsIDs(); len(nodes) > 0 && !_u.mutation.UserConfigsCleared() {
+	if nodes := ntuo.mutation.RemovedUserConfigsIDs(); len(nodes) > 0 && !ntuo.mutation.UserConfigsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -695,7 +695,7 @@ func (_u *NotificationTypeUpdateOne) sqlSave(ctx context.Context) (_node *Notifi
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.UserConfigsIDs(); len(nodes) > 0 {
+	if nodes := ntuo.mutation.UserConfigsIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -711,11 +711,11 @@ func (_u *NotificationTypeUpdateOne) sqlSave(ctx context.Context) (_node *Notifi
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &NotificationType{config: _u.config}
+	_spec.AddModifiers(ntuo.modifiers...)
+	_node = &NotificationType{config: ntuo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, ntuo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{notificationtype.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -723,6 +723,6 @@ func (_u *NotificationTypeUpdateOne) sqlSave(ctx context.Context) (_node *Notifi
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	ntuo.mutation.done = true
 	return _node, nil
 }

@@ -29,40 +29,40 @@ type PageQuery struct {
 }
 
 // Where adds a new predicate for the PageQuery builder.
-func (_q *PageQuery) Where(ps ...predicate.Page) *PageQuery {
-	_q.predicates = append(_q.predicates, ps...)
-	return _q
+func (pq *PageQuery) Where(ps ...predicate.Page) *PageQuery {
+	pq.predicates = append(pq.predicates, ps...)
+	return pq
 }
 
 // Limit the number of records to be returned by this query.
-func (_q *PageQuery) Limit(limit int) *PageQuery {
-	_q.ctx.Limit = &limit
-	return _q
+func (pq *PageQuery) Limit(limit int) *PageQuery {
+	pq.ctx.Limit = &limit
+	return pq
 }
 
 // Offset to start from.
-func (_q *PageQuery) Offset(offset int) *PageQuery {
-	_q.ctx.Offset = &offset
-	return _q
+func (pq *PageQuery) Offset(offset int) *PageQuery {
+	pq.ctx.Offset = &offset
+	return pq
 }
 
 // Unique configures the query builder to filter duplicate records on query.
 // By default, unique is set to true, and can be disabled using this method.
-func (_q *PageQuery) Unique(unique bool) *PageQuery {
-	_q.ctx.Unique = &unique
-	return _q
+func (pq *PageQuery) Unique(unique bool) *PageQuery {
+	pq.ctx.Unique = &unique
+	return pq
 }
 
 // Order specifies how the records should be ordered.
-func (_q *PageQuery) Order(o ...page.OrderOption) *PageQuery {
-	_q.order = append(_q.order, o...)
-	return _q
+func (pq *PageQuery) Order(o ...page.OrderOption) *PageQuery {
+	pq.order = append(pq.order, o...)
+	return pq
 }
 
 // First returns the first Page entity from the query.
 // Returns a *NotFoundError when no Page was found.
-func (_q *PageQuery) First(ctx context.Context) (*Page, error) {
-	nodes, err := _q.Limit(1).All(setContextOp(ctx, _q.ctx, ent.OpQueryFirst))
+func (pq *PageQuery) First(ctx context.Context) (*Page, error) {
+	nodes, err := pq.Limit(1).All(setContextOp(ctx, pq.ctx, ent.OpQueryFirst))
 	if err != nil {
 		return nil, err
 	}
@@ -73,8 +73,8 @@ func (_q *PageQuery) First(ctx context.Context) (*Page, error) {
 }
 
 // FirstX is like First, but panics if an error occurs.
-func (_q *PageQuery) FirstX(ctx context.Context) *Page {
-	node, err := _q.First(ctx)
+func (pq *PageQuery) FirstX(ctx context.Context) *Page {
+	node, err := pq.First(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -83,9 +83,9 @@ func (_q *PageQuery) FirstX(ctx context.Context) *Page {
 
 // FirstID returns the first Page ID from the query.
 // Returns a *NotFoundError when no Page ID was found.
-func (_q *PageQuery) FirstID(ctx context.Context) (id uint, err error) {
+func (pq *PageQuery) FirstID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
+	if ids, err = pq.Limit(1).IDs(setContextOp(ctx, pq.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
 	if len(ids) == 0 {
@@ -96,8 +96,8 @@ func (_q *PageQuery) FirstID(ctx context.Context) (id uint, err error) {
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (_q *PageQuery) FirstIDX(ctx context.Context) uint {
-	id, err := _q.FirstID(ctx)
+func (pq *PageQuery) FirstIDX(ctx context.Context) uint {
+	id, err := pq.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -107,8 +107,8 @@ func (_q *PageQuery) FirstIDX(ctx context.Context) uint {
 // Only returns a single Page entity found by the query, ensuring it only returns one.
 // Returns a *NotSingularError when more than one Page entity is found.
 // Returns a *NotFoundError when no Page entities are found.
-func (_q *PageQuery) Only(ctx context.Context) (*Page, error) {
-	nodes, err := _q.Limit(2).All(setContextOp(ctx, _q.ctx, ent.OpQueryOnly))
+func (pq *PageQuery) Only(ctx context.Context) (*Page, error) {
+	nodes, err := pq.Limit(2).All(setContextOp(ctx, pq.ctx, ent.OpQueryOnly))
 	if err != nil {
 		return nil, err
 	}
@@ -123,8 +123,8 @@ func (_q *PageQuery) Only(ctx context.Context) (*Page, error) {
 }
 
 // OnlyX is like Only, but panics if an error occurs.
-func (_q *PageQuery) OnlyX(ctx context.Context) *Page {
-	node, err := _q.Only(ctx)
+func (pq *PageQuery) OnlyX(ctx context.Context) *Page {
+	node, err := pq.Only(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -134,9 +134,9 @@ func (_q *PageQuery) OnlyX(ctx context.Context) *Page {
 // OnlyID is like Only, but returns the only Page ID in the query.
 // Returns a *NotSingularError when more than one Page ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (_q *PageQuery) OnlyID(ctx context.Context) (id uint, err error) {
+func (pq *PageQuery) OnlyID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
+	if ids, err = pq.Limit(2).IDs(setContextOp(ctx, pq.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
 	switch len(ids) {
@@ -151,8 +151,8 @@ func (_q *PageQuery) OnlyID(ctx context.Context) (id uint, err error) {
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (_q *PageQuery) OnlyIDX(ctx context.Context) uint {
-	id, err := _q.OnlyID(ctx)
+func (pq *PageQuery) OnlyIDX(ctx context.Context) uint {
+	id, err := pq.OnlyID(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -160,18 +160,18 @@ func (_q *PageQuery) OnlyIDX(ctx context.Context) uint {
 }
 
 // All executes the query and returns a list of Pages.
-func (_q *PageQuery) All(ctx context.Context) ([]*Page, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryAll)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (pq *PageQuery) All(ctx context.Context) ([]*Page, error) {
+	ctx = setContextOp(ctx, pq.ctx, ent.OpQueryAll)
+	if err := pq.prepareQuery(ctx); err != nil {
 		return nil, err
 	}
 	qr := querierAll[[]*Page, *PageQuery]()
-	return withInterceptors[[]*Page](ctx, _q, qr, _q.inters)
+	return withInterceptors[[]*Page](ctx, pq, qr, pq.inters)
 }
 
 // AllX is like All, but panics if an error occurs.
-func (_q *PageQuery) AllX(ctx context.Context) []*Page {
-	nodes, err := _q.All(ctx)
+func (pq *PageQuery) AllX(ctx context.Context) []*Page {
+	nodes, err := pq.All(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -179,20 +179,20 @@ func (_q *PageQuery) AllX(ctx context.Context) []*Page {
 }
 
 // IDs executes the query and returns a list of Page IDs.
-func (_q *PageQuery) IDs(ctx context.Context) (ids []uint, err error) {
-	if _q.ctx.Unique == nil && _q.path != nil {
-		_q.Unique(true)
+func (pq *PageQuery) IDs(ctx context.Context) (ids []uint, err error) {
+	if pq.ctx.Unique == nil && pq.path != nil {
+		pq.Unique(true)
 	}
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryIDs)
-	if err = _q.Select(page.FieldID).Scan(ctx, &ids); err != nil {
+	ctx = setContextOp(ctx, pq.ctx, ent.OpQueryIDs)
+	if err = pq.Select(page.FieldID).Scan(ctx, &ids); err != nil {
 		return nil, err
 	}
 	return ids, nil
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (_q *PageQuery) IDsX(ctx context.Context) []uint {
-	ids, err := _q.IDs(ctx)
+func (pq *PageQuery) IDsX(ctx context.Context) []uint {
+	ids, err := pq.IDs(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -200,17 +200,17 @@ func (_q *PageQuery) IDsX(ctx context.Context) []uint {
 }
 
 // Count returns the count of the given query.
-func (_q *PageQuery) Count(ctx context.Context) (int, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryCount)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (pq *PageQuery) Count(ctx context.Context) (int, error) {
+	ctx = setContextOp(ctx, pq.ctx, ent.OpQueryCount)
+	if err := pq.prepareQuery(ctx); err != nil {
 		return 0, err
 	}
-	return withInterceptors[int](ctx, _q, querierCount[*PageQuery](), _q.inters)
+	return withInterceptors[int](ctx, pq, querierCount[*PageQuery](), pq.inters)
 }
 
 // CountX is like Count, but panics if an error occurs.
-func (_q *PageQuery) CountX(ctx context.Context) int {
-	count, err := _q.Count(ctx)
+func (pq *PageQuery) CountX(ctx context.Context) int {
+	count, err := pq.Count(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -218,9 +218,9 @@ func (_q *PageQuery) CountX(ctx context.Context) int {
 }
 
 // Exist returns true if the query has elements in the graph.
-func (_q *PageQuery) Exist(ctx context.Context) (bool, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryExist)
-	switch _, err := _q.FirstID(ctx); {
+func (pq *PageQuery) Exist(ctx context.Context) (bool, error) {
+	ctx = setContextOp(ctx, pq.ctx, ent.OpQueryExist)
+	switch _, err := pq.FirstID(ctx); {
 	case IsNotFound(err):
 		return false, nil
 	case err != nil:
@@ -231,8 +231,8 @@ func (_q *PageQuery) Exist(ctx context.Context) (bool, error) {
 }
 
 // ExistX is like Exist, but panics if an error occurs.
-func (_q *PageQuery) ExistX(ctx context.Context) bool {
-	exist, err := _q.Exist(ctx)
+func (pq *PageQuery) ExistX(ctx context.Context) bool {
+	exist, err := pq.Exist(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -241,20 +241,20 @@ func (_q *PageQuery) ExistX(ctx context.Context) bool {
 
 // Clone returns a duplicate of the PageQuery builder, including all associated steps. It can be
 // used to prepare common query builders and use them differently after the clone is made.
-func (_q *PageQuery) Clone() *PageQuery {
-	if _q == nil {
+func (pq *PageQuery) Clone() *PageQuery {
+	if pq == nil {
 		return nil
 	}
 	return &PageQuery{
-		config:     _q.config,
-		ctx:        _q.ctx.Clone(),
-		order:      append([]page.OrderOption{}, _q.order...),
-		inters:     append([]Interceptor{}, _q.inters...),
-		predicates: append([]predicate.Page{}, _q.predicates...),
+		config:     pq.config,
+		ctx:        pq.ctx.Clone(),
+		order:      append([]page.OrderOption{}, pq.order...),
+		inters:     append([]Interceptor{}, pq.inters...),
+		predicates: append([]predicate.Page{}, pq.predicates...),
 		// clone intermediate query.
-		sql:       _q.sql.Clone(),
-		path:      _q.path,
-		modifiers: append([]func(*sql.Selector){}, _q.modifiers...),
+		sql:       pq.sql.Clone(),
+		path:      pq.path,
+		modifiers: append([]func(*sql.Selector){}, pq.modifiers...),
 	}
 }
 
@@ -272,10 +272,10 @@ func (_q *PageQuery) Clone() *PageQuery {
 //		GroupBy(page.FieldDeletedAt).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
-func (_q *PageQuery) GroupBy(field string, fields ...string) *PageGroupBy {
-	_q.ctx.Fields = append([]string{field}, fields...)
-	grbuild := &PageGroupBy{build: _q}
-	grbuild.flds = &_q.ctx.Fields
+func (pq *PageQuery) GroupBy(field string, fields ...string) *PageGroupBy {
+	pq.ctx.Fields = append([]string{field}, fields...)
+	grbuild := &PageGroupBy{build: pq}
+	grbuild.flds = &pq.ctx.Fields
 	grbuild.label = page.Label
 	grbuild.scan = grbuild.Scan
 	return grbuild
@@ -293,65 +293,65 @@ func (_q *PageQuery) GroupBy(field string, fields ...string) *PageGroupBy {
 //	client.Page.Query().
 //		Select(page.FieldDeletedAt).
 //		Scan(ctx, &v)
-func (_q *PageQuery) Select(fields ...string) *PageSelect {
-	_q.ctx.Fields = append(_q.ctx.Fields, fields...)
-	sbuild := &PageSelect{PageQuery: _q}
+func (pq *PageQuery) Select(fields ...string) *PageSelect {
+	pq.ctx.Fields = append(pq.ctx.Fields, fields...)
+	sbuild := &PageSelect{PageQuery: pq}
 	sbuild.label = page.Label
-	sbuild.flds, sbuild.scan = &_q.ctx.Fields, sbuild.Scan
+	sbuild.flds, sbuild.scan = &pq.ctx.Fields, sbuild.Scan
 	return sbuild
 }
 
 // Aggregate returns a PageSelect configured with the given aggregations.
-func (_q *PageQuery) Aggregate(fns ...AggregateFunc) *PageSelect {
-	return _q.Select().Aggregate(fns...)
+func (pq *PageQuery) Aggregate(fns ...AggregateFunc) *PageSelect {
+	return pq.Select().Aggregate(fns...)
 }
 
-func (_q *PageQuery) prepareQuery(ctx context.Context) error {
-	for _, inter := range _q.inters {
+func (pq *PageQuery) prepareQuery(ctx context.Context) error {
+	for _, inter := range pq.inters {
 		if inter == nil {
 			return fmt.Errorf("ent: uninitialized interceptor (forgotten import ent/runtime?)")
 		}
 		if trv, ok := inter.(Traverser); ok {
-			if err := trv.Traverse(ctx, _q); err != nil {
+			if err := trv.Traverse(ctx, pq); err != nil {
 				return err
 			}
 		}
 	}
-	for _, f := range _q.ctx.Fields {
+	for _, f := range pq.ctx.Fields {
 		if !page.ValidColumn(f) {
 			return &ValidationError{Name: f, err: fmt.Errorf("ent: invalid field %q for query", f)}
 		}
 	}
-	if _q.path != nil {
-		prev, err := _q.path(ctx)
+	if pq.path != nil {
+		prev, err := pq.path(ctx)
 		if err != nil {
 			return err
 		}
-		_q.sql = prev
+		pq.sql = prev
 	}
 	return nil
 }
 
-func (_q *PageQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Page, error) {
+func (pq *PageQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Page, error) {
 	var (
 		nodes = []*Page{}
-		_spec = _q.querySpec()
+		_spec = pq.querySpec()
 	)
 	_spec.ScanValues = func(columns []string) ([]any, error) {
 		return (*Page).scanValues(nil, columns)
 	}
 	_spec.Assign = func(columns []string, values []any) error {
-		node := &Page{config: _q.config}
+		node := &Page{config: pq.config}
 		nodes = append(nodes, node)
 		return node.assignValues(columns, values)
 	}
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+	if len(pq.modifiers) > 0 {
+		_spec.Modifiers = pq.modifiers
 	}
 	for i := range hooks {
 		hooks[i](ctx, _spec)
 	}
-	if err := sqlgraph.QueryNodes(ctx, _q.driver, _spec); err != nil {
+	if err := sqlgraph.QueryNodes(ctx, pq.driver, _spec); err != nil {
 		return nil, err
 	}
 	if len(nodes) == 0 {
@@ -360,27 +360,27 @@ func (_q *PageQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Page, e
 	return nodes, nil
 }
 
-func (_q *PageQuery) sqlCount(ctx context.Context) (int, error) {
-	_spec := _q.querySpec()
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+func (pq *PageQuery) sqlCount(ctx context.Context) (int, error) {
+	_spec := pq.querySpec()
+	if len(pq.modifiers) > 0 {
+		_spec.Modifiers = pq.modifiers
 	}
-	_spec.Node.Columns = _q.ctx.Fields
-	if len(_q.ctx.Fields) > 0 {
-		_spec.Unique = _q.ctx.Unique != nil && *_q.ctx.Unique
+	_spec.Node.Columns = pq.ctx.Fields
+	if len(pq.ctx.Fields) > 0 {
+		_spec.Unique = pq.ctx.Unique != nil && *pq.ctx.Unique
 	}
-	return sqlgraph.CountNodes(ctx, _q.driver, _spec)
+	return sqlgraph.CountNodes(ctx, pq.driver, _spec)
 }
 
-func (_q *PageQuery) querySpec() *sqlgraph.QuerySpec {
+func (pq *PageQuery) querySpec() *sqlgraph.QuerySpec {
 	_spec := sqlgraph.NewQuerySpec(page.Table, page.Columns, sqlgraph.NewFieldSpec(page.FieldID, field.TypeUint))
-	_spec.From = _q.sql
-	if unique := _q.ctx.Unique; unique != nil {
+	_spec.From = pq.sql
+	if unique := pq.ctx.Unique; unique != nil {
 		_spec.Unique = *unique
-	} else if _q.path != nil {
+	} else if pq.path != nil {
 		_spec.Unique = true
 	}
-	if fields := _q.ctx.Fields; len(fields) > 0 {
+	if fields := pq.ctx.Fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, page.FieldID)
 		for i := range fields {
@@ -389,20 +389,20 @@ func (_q *PageQuery) querySpec() *sqlgraph.QuerySpec {
 			}
 		}
 	}
-	if ps := _q.predicates; len(ps) > 0 {
+	if ps := pq.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := pq.ctx.Limit; limit != nil {
 		_spec.Limit = *limit
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := pq.ctx.Offset; offset != nil {
 		_spec.Offset = *offset
 	}
-	if ps := _q.order; len(ps) > 0 {
+	if ps := pq.order; len(ps) > 0 {
 		_spec.Order = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
@@ -412,45 +412,45 @@ func (_q *PageQuery) querySpec() *sqlgraph.QuerySpec {
 	return _spec
 }
 
-func (_q *PageQuery) sqlQuery(ctx context.Context) *sql.Selector {
-	builder := sql.Dialect(_q.driver.Dialect())
+func (pq *PageQuery) sqlQuery(ctx context.Context) *sql.Selector {
+	builder := sql.Dialect(pq.driver.Dialect())
 	t1 := builder.Table(page.Table)
-	columns := _q.ctx.Fields
+	columns := pq.ctx.Fields
 	if len(columns) == 0 {
 		columns = page.Columns
 	}
 	selector := builder.Select(t1.Columns(columns...)...).From(t1)
-	if _q.sql != nil {
-		selector = _q.sql
+	if pq.sql != nil {
+		selector = pq.sql
 		selector.Select(selector.Columns(columns...)...)
 	}
-	if _q.ctx.Unique != nil && *_q.ctx.Unique {
+	if pq.ctx.Unique != nil && *pq.ctx.Unique {
 		selector.Distinct()
 	}
-	for _, m := range _q.modifiers {
+	for _, m := range pq.modifiers {
 		m(selector)
 	}
-	for _, p := range _q.predicates {
+	for _, p := range pq.predicates {
 		p(selector)
 	}
-	for _, p := range _q.order {
+	for _, p := range pq.order {
 		p(selector)
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := pq.ctx.Offset; offset != nil {
 		// limit is mandatory for offset clause. We start
 		// with default value, and override it below if needed.
 		selector.Offset(*offset).Limit(math.MaxInt32)
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := pq.ctx.Limit; limit != nil {
 		selector.Limit(*limit)
 	}
 	return selector
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_q *PageQuery) Modify(modifiers ...func(s *sql.Selector)) *PageSelect {
-	_q.modifiers = append(_q.modifiers, modifiers...)
-	return _q.Select()
+func (pq *PageQuery) Modify(modifiers ...func(s *sql.Selector)) *PageSelect {
+	pq.modifiers = append(pq.modifiers, modifiers...)
+	return pq.Select()
 }
 
 // PageGroupBy is the group-by builder for Page entities.
@@ -460,41 +460,41 @@ type PageGroupBy struct {
 }
 
 // Aggregate adds the given aggregation functions to the group-by query.
-func (_g *PageGroupBy) Aggregate(fns ...AggregateFunc) *PageGroupBy {
-	_g.fns = append(_g.fns, fns...)
-	return _g
+func (pgb *PageGroupBy) Aggregate(fns ...AggregateFunc) *PageGroupBy {
+	pgb.fns = append(pgb.fns, fns...)
+	return pgb
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_g *PageGroupBy) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _g.build.ctx, ent.OpQueryGroupBy)
-	if err := _g.build.prepareQuery(ctx); err != nil {
+func (pgb *PageGroupBy) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, pgb.build.ctx, ent.OpQueryGroupBy)
+	if err := pgb.build.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*PageQuery, *PageGroupBy](ctx, _g.build, _g, _g.build.inters, v)
+	return scanWithInterceptors[*PageQuery, *PageGroupBy](ctx, pgb.build, pgb, pgb.build.inters, v)
 }
 
-func (_g *PageGroupBy) sqlScan(ctx context.Context, root *PageQuery, v any) error {
+func (pgb *PageGroupBy) sqlScan(ctx context.Context, root *PageQuery, v any) error {
 	selector := root.sqlQuery(ctx).Select()
-	aggregation := make([]string, 0, len(_g.fns))
-	for _, fn := range _g.fns {
+	aggregation := make([]string, 0, len(pgb.fns))
+	for _, fn := range pgb.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
 	if len(selector.SelectedColumns()) == 0 {
-		columns := make([]string, 0, len(*_g.flds)+len(_g.fns))
-		for _, f := range *_g.flds {
+		columns := make([]string, 0, len(*pgb.flds)+len(pgb.fns))
+		for _, f := range *pgb.flds {
 			columns = append(columns, selector.C(f))
 		}
 		columns = append(columns, aggregation...)
 		selector.Select(columns...)
 	}
-	selector.GroupBy(selector.Columns(*_g.flds...)...)
+	selector.GroupBy(selector.Columns(*pgb.flds...)...)
 	if err := selector.Err(); err != nil {
 		return err
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _g.build.driver.Query(ctx, query, args, rows); err != nil {
+	if err := pgb.build.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -508,27 +508,27 @@ type PageSelect struct {
 }
 
 // Aggregate adds the given aggregation functions to the selector query.
-func (_s *PageSelect) Aggregate(fns ...AggregateFunc) *PageSelect {
-	_s.fns = append(_s.fns, fns...)
-	return _s
+func (ps *PageSelect) Aggregate(fns ...AggregateFunc) *PageSelect {
+	ps.fns = append(ps.fns, fns...)
+	return ps
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_s *PageSelect) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _s.ctx, ent.OpQuerySelect)
-	if err := _s.prepareQuery(ctx); err != nil {
+func (ps *PageSelect) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, ps.ctx, ent.OpQuerySelect)
+	if err := ps.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*PageQuery, *PageSelect](ctx, _s.PageQuery, _s, _s.inters, v)
+	return scanWithInterceptors[*PageQuery, *PageSelect](ctx, ps.PageQuery, ps, ps.inters, v)
 }
 
-func (_s *PageSelect) sqlScan(ctx context.Context, root *PageQuery, v any) error {
+func (ps *PageSelect) sqlScan(ctx context.Context, root *PageQuery, v any) error {
 	selector := root.sqlQuery(ctx)
-	aggregation := make([]string, 0, len(_s.fns))
-	for _, fn := range _s.fns {
+	aggregation := make([]string, 0, len(ps.fns))
+	for _, fn := range ps.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
-	switch n := len(*_s.selector.flds); {
+	switch n := len(*ps.selector.flds); {
 	case n == 0 && len(aggregation) > 0:
 		selector.Select(aggregation...)
 	case n != 0 && len(aggregation) > 0:
@@ -536,7 +536,7 @@ func (_s *PageSelect) sqlScan(ctx context.Context, root *PageQuery, v any) error
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _s.driver.Query(ctx, query, args, rows); err != nil {
+	if err := ps.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -544,7 +544,7 @@ func (_s *PageSelect) sqlScan(ctx context.Context, root *PageQuery, v any) error
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_s *PageSelect) Modify(modifiers ...func(s *sql.Selector)) *PageSelect {
-	_s.modifiers = append(_s.modifiers, modifiers...)
-	return _s
+func (ps *PageSelect) Modify(modifiers ...func(s *sql.Selector)) *PageSelect {
+	ps.modifiers = append(ps.modifiers, modifiers...)
+	return ps
 }

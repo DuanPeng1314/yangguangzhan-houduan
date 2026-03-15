@@ -52,7 +52,7 @@ func (*Subscriber) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the Subscriber fields.
-func (_m *Subscriber) assignValues(columns []string, values []any) error {
+func (s *Subscriber) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -63,39 +63,39 @@ func (_m *Subscriber) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = int(value.Int64)
+			s.ID = int(value.Int64)
 		case subscriber.FieldEmail:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field email", values[i])
 			} else if value.Valid {
-				_m.Email = value.String
+				s.Email = value.String
 			}
 		case subscriber.FieldIsActive:
 			if value, ok := values[i].(*sql.NullBool); !ok {
 				return fmt.Errorf("unexpected type %T for field is_active", values[i])
 			} else if value.Valid {
-				_m.IsActive = value.Bool
+				s.IsActive = value.Bool
 			}
 		case subscriber.FieldToken:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field token", values[i])
 			} else if value.Valid {
-				_m.Token = value.String
+				s.Token = value.String
 			}
 		case subscriber.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
 			} else if value.Valid {
-				_m.CreatedAt = value.Time
+				s.CreatedAt = value.Time
 			}
 		case subscriber.FieldUpdatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field updated_at", values[i])
 			} else if value.Valid {
-				_m.UpdatedAt = value.Time
+				s.UpdatedAt = value.Time
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			s.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -103,47 +103,47 @@ func (_m *Subscriber) assignValues(columns []string, values []any) error {
 
 // Value returns the ent.Value that was dynamically selected and assigned to the Subscriber.
 // This includes values selected through modifiers, order, etc.
-func (_m *Subscriber) Value(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (s *Subscriber) Value(name string) (ent.Value, error) {
+	return s.selectValues.Get(name)
 }
 
 // Update returns a builder for updating this Subscriber.
 // Note that you need to call Subscriber.Unwrap() before calling this method if this Subscriber
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *Subscriber) Update() *SubscriberUpdateOne {
-	return NewSubscriberClient(_m.config).UpdateOne(_m)
+func (s *Subscriber) Update() *SubscriberUpdateOne {
+	return NewSubscriberClient(s.config).UpdateOne(s)
 }
 
 // Unwrap unwraps the Subscriber entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *Subscriber) Unwrap() *Subscriber {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (s *Subscriber) Unwrap() *Subscriber {
+	_tx, ok := s.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: Subscriber is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	s.config.driver = _tx.drv
+	return s
 }
 
 // String implements the fmt.Stringer.
-func (_m *Subscriber) String() string {
+func (s *Subscriber) String() string {
 	var builder strings.Builder
 	builder.WriteString("Subscriber(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
+	builder.WriteString(fmt.Sprintf("id=%v, ", s.ID))
 	builder.WriteString("email=")
-	builder.WriteString(_m.Email)
+	builder.WriteString(s.Email)
 	builder.WriteString(", ")
 	builder.WriteString("is_active=")
-	builder.WriteString(fmt.Sprintf("%v", _m.IsActive))
+	builder.WriteString(fmt.Sprintf("%v", s.IsActive))
 	builder.WriteString(", ")
 	builder.WriteString("token=")
-	builder.WriteString(_m.Token)
+	builder.WriteString(s.Token)
 	builder.WriteString(", ")
 	builder.WriteString("created_at=")
-	builder.WriteString(_m.CreatedAt.Format(time.ANSIC))
+	builder.WriteString(s.CreatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("updated_at=")
-	builder.WriteString(_m.UpdatedAt.Format(time.ANSIC))
+	builder.WriteString(s.UpdatedAt.Format(time.ANSIC))
 	builder.WriteByte(')')
 	return builder.String()
 }

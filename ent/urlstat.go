@@ -60,7 +60,7 @@ func (*URLStat) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the URLStat fields.
-func (_m *URLStat) assignValues(columns []string, values []any) error {
+func (us *URLStat) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -71,65 +71,65 @@ func (_m *URLStat) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint(value.Int64)
+			us.ID = uint(value.Int64)
 		case urlstat.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
 			} else if value.Valid {
-				_m.CreatedAt = value.Time
+				us.CreatedAt = value.Time
 			}
 		case urlstat.FieldUpdatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field updated_at", values[i])
 			} else if value.Valid {
-				_m.UpdatedAt = value.Time
+				us.UpdatedAt = value.Time
 			}
 		case urlstat.FieldURLPath:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field url_path", values[i])
 			} else if value.Valid {
-				_m.URLPath = value.String
+				us.URLPath = value.String
 			}
 		case urlstat.FieldPageTitle:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field page_title", values[i])
 			} else if value.Valid {
-				_m.PageTitle = new(string)
-				*_m.PageTitle = value.String
+				us.PageTitle = new(string)
+				*us.PageTitle = value.String
 			}
 		case urlstat.FieldTotalViews:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field total_views", values[i])
 			} else if value.Valid {
-				_m.TotalViews = value.Int64
+				us.TotalViews = value.Int64
 			}
 		case urlstat.FieldUniqueViews:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field unique_views", values[i])
 			} else if value.Valid {
-				_m.UniqueViews = value.Int64
+				us.UniqueViews = value.Int64
 			}
 		case urlstat.FieldBounceCount:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field bounce_count", values[i])
 			} else if value.Valid {
-				_m.BounceCount = value.Int64
+				us.BounceCount = value.Int64
 			}
 		case urlstat.FieldAvgDuration:
 			if value, ok := values[i].(*sql.NullFloat64); !ok {
 				return fmt.Errorf("unexpected type %T for field avg_duration", values[i])
 			} else if value.Valid {
-				_m.AvgDuration = value.Float64
+				us.AvgDuration = value.Float64
 			}
 		case urlstat.FieldLastVisitedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field last_visited_at", values[i])
 			} else if value.Valid {
-				_m.LastVisitedAt = new(time.Time)
-				*_m.LastVisitedAt = value.Time
+				us.LastVisitedAt = new(time.Time)
+				*us.LastVisitedAt = value.Time
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			us.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -137,60 +137,60 @@ func (_m *URLStat) assignValues(columns []string, values []any) error {
 
 // Value returns the ent.Value that was dynamically selected and assigned to the URLStat.
 // This includes values selected through modifiers, order, etc.
-func (_m *URLStat) Value(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (us *URLStat) Value(name string) (ent.Value, error) {
+	return us.selectValues.Get(name)
 }
 
 // Update returns a builder for updating this URLStat.
 // Note that you need to call URLStat.Unwrap() before calling this method if this URLStat
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *URLStat) Update() *URLStatUpdateOne {
-	return NewURLStatClient(_m.config).UpdateOne(_m)
+func (us *URLStat) Update() *URLStatUpdateOne {
+	return NewURLStatClient(us.config).UpdateOne(us)
 }
 
 // Unwrap unwraps the URLStat entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *URLStat) Unwrap() *URLStat {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (us *URLStat) Unwrap() *URLStat {
+	_tx, ok := us.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: URLStat is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	us.config.driver = _tx.drv
+	return us
 }
 
 // String implements the fmt.Stringer.
-func (_m *URLStat) String() string {
+func (us *URLStat) String() string {
 	var builder strings.Builder
 	builder.WriteString("URLStat(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
+	builder.WriteString(fmt.Sprintf("id=%v, ", us.ID))
 	builder.WriteString("created_at=")
-	builder.WriteString(_m.CreatedAt.Format(time.ANSIC))
+	builder.WriteString(us.CreatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("updated_at=")
-	builder.WriteString(_m.UpdatedAt.Format(time.ANSIC))
+	builder.WriteString(us.UpdatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("url_path=")
-	builder.WriteString(_m.URLPath)
+	builder.WriteString(us.URLPath)
 	builder.WriteString(", ")
-	if v := _m.PageTitle; v != nil {
+	if v := us.PageTitle; v != nil {
 		builder.WriteString("page_title=")
 		builder.WriteString(*v)
 	}
 	builder.WriteString(", ")
 	builder.WriteString("total_views=")
-	builder.WriteString(fmt.Sprintf("%v", _m.TotalViews))
+	builder.WriteString(fmt.Sprintf("%v", us.TotalViews))
 	builder.WriteString(", ")
 	builder.WriteString("unique_views=")
-	builder.WriteString(fmt.Sprintf("%v", _m.UniqueViews))
+	builder.WriteString(fmt.Sprintf("%v", us.UniqueViews))
 	builder.WriteString(", ")
 	builder.WriteString("bounce_count=")
-	builder.WriteString(fmt.Sprintf("%v", _m.BounceCount))
+	builder.WriteString(fmt.Sprintf("%v", us.BounceCount))
 	builder.WriteString(", ")
 	builder.WriteString("avg_duration=")
-	builder.WriteString(fmt.Sprintf("%v", _m.AvgDuration))
+	builder.WriteString(fmt.Sprintf("%v", us.AvgDuration))
 	builder.WriteString(", ")
-	if v := _m.LastVisitedAt; v != nil {
+	if v := us.LastVisitedAt; v != nil {
 		builder.WriteString("last_visited_at=")
 		builder.WriteString(v.Format(time.ANSIC))
 	}

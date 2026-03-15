@@ -20,56 +20,56 @@ type DirectLinkDelete struct {
 }
 
 // Where appends a list predicates to the DirectLinkDelete builder.
-func (_d *DirectLinkDelete) Where(ps ...predicate.DirectLink) *DirectLinkDelete {
-	_d.mutation.Where(ps...)
-	return _d
+func (dld *DirectLinkDelete) Where(ps ...predicate.DirectLink) *DirectLinkDelete {
+	dld.mutation.Where(ps...)
+	return dld
 }
 
 // Exec executes the deletion query and returns how many vertices were deleted.
-func (_d *DirectLinkDelete) Exec(ctx context.Context) (int, error) {
-	return withHooks(ctx, _d.sqlExec, _d.mutation, _d.hooks)
+func (dld *DirectLinkDelete) Exec(ctx context.Context) (int, error) {
+	return withHooks(ctx, dld.sqlExec, dld.mutation, dld.hooks)
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *DirectLinkDelete) ExecX(ctx context.Context) int {
-	n, err := _d.Exec(ctx)
+func (dld *DirectLinkDelete) ExecX(ctx context.Context) int {
+	n, err := dld.Exec(ctx)
 	if err != nil {
 		panic(err)
 	}
 	return n
 }
 
-func (_d *DirectLinkDelete) sqlExec(ctx context.Context) (int, error) {
+func (dld *DirectLinkDelete) sqlExec(ctx context.Context) (int, error) {
 	_spec := sqlgraph.NewDeleteSpec(directlink.Table, sqlgraph.NewFieldSpec(directlink.FieldID, field.TypeUint))
-	if ps := _d.mutation.predicates; len(ps) > 0 {
+	if ps := dld.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	affected, err := sqlgraph.DeleteNodes(ctx, _d.driver, _spec)
+	affected, err := sqlgraph.DeleteNodes(ctx, dld.driver, _spec)
 	if err != nil && sqlgraph.IsConstraintError(err) {
 		err = &ConstraintError{msg: err.Error(), wrap: err}
 	}
-	_d.mutation.done = true
+	dld.mutation.done = true
 	return affected, err
 }
 
 // DirectLinkDeleteOne is the builder for deleting a single DirectLink entity.
 type DirectLinkDeleteOne struct {
-	_d *DirectLinkDelete
+	dld *DirectLinkDelete
 }
 
 // Where appends a list predicates to the DirectLinkDelete builder.
-func (_d *DirectLinkDeleteOne) Where(ps ...predicate.DirectLink) *DirectLinkDeleteOne {
-	_d._d.mutation.Where(ps...)
-	return _d
+func (dldo *DirectLinkDeleteOne) Where(ps ...predicate.DirectLink) *DirectLinkDeleteOne {
+	dldo.dld.mutation.Where(ps...)
+	return dldo
 }
 
 // Exec executes the deletion query.
-func (_d *DirectLinkDeleteOne) Exec(ctx context.Context) error {
-	n, err := _d._d.Exec(ctx)
+func (dldo *DirectLinkDeleteOne) Exec(ctx context.Context) error {
+	n, err := dldo.dld.Exec(ctx)
 	switch {
 	case err != nil:
 		return err
@@ -81,8 +81,8 @@ func (_d *DirectLinkDeleteOne) Exec(ctx context.Context) error {
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *DirectLinkDeleteOne) ExecX(ctx context.Context) {
-	if err := _d.Exec(ctx); err != nil {
+func (dldo *DirectLinkDeleteOne) ExecX(ctx context.Context) {
+	if err := dldo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }

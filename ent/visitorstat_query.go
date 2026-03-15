@@ -29,40 +29,40 @@ type VisitorStatQuery struct {
 }
 
 // Where adds a new predicate for the VisitorStatQuery builder.
-func (_q *VisitorStatQuery) Where(ps ...predicate.VisitorStat) *VisitorStatQuery {
-	_q.predicates = append(_q.predicates, ps...)
-	return _q
+func (vsq *VisitorStatQuery) Where(ps ...predicate.VisitorStat) *VisitorStatQuery {
+	vsq.predicates = append(vsq.predicates, ps...)
+	return vsq
 }
 
 // Limit the number of records to be returned by this query.
-func (_q *VisitorStatQuery) Limit(limit int) *VisitorStatQuery {
-	_q.ctx.Limit = &limit
-	return _q
+func (vsq *VisitorStatQuery) Limit(limit int) *VisitorStatQuery {
+	vsq.ctx.Limit = &limit
+	return vsq
 }
 
 // Offset to start from.
-func (_q *VisitorStatQuery) Offset(offset int) *VisitorStatQuery {
-	_q.ctx.Offset = &offset
-	return _q
+func (vsq *VisitorStatQuery) Offset(offset int) *VisitorStatQuery {
+	vsq.ctx.Offset = &offset
+	return vsq
 }
 
 // Unique configures the query builder to filter duplicate records on query.
 // By default, unique is set to true, and can be disabled using this method.
-func (_q *VisitorStatQuery) Unique(unique bool) *VisitorStatQuery {
-	_q.ctx.Unique = &unique
-	return _q
+func (vsq *VisitorStatQuery) Unique(unique bool) *VisitorStatQuery {
+	vsq.ctx.Unique = &unique
+	return vsq
 }
 
 // Order specifies how the records should be ordered.
-func (_q *VisitorStatQuery) Order(o ...visitorstat.OrderOption) *VisitorStatQuery {
-	_q.order = append(_q.order, o...)
-	return _q
+func (vsq *VisitorStatQuery) Order(o ...visitorstat.OrderOption) *VisitorStatQuery {
+	vsq.order = append(vsq.order, o...)
+	return vsq
 }
 
 // First returns the first VisitorStat entity from the query.
 // Returns a *NotFoundError when no VisitorStat was found.
-func (_q *VisitorStatQuery) First(ctx context.Context) (*VisitorStat, error) {
-	nodes, err := _q.Limit(1).All(setContextOp(ctx, _q.ctx, ent.OpQueryFirst))
+func (vsq *VisitorStatQuery) First(ctx context.Context) (*VisitorStat, error) {
+	nodes, err := vsq.Limit(1).All(setContextOp(ctx, vsq.ctx, ent.OpQueryFirst))
 	if err != nil {
 		return nil, err
 	}
@@ -73,8 +73,8 @@ func (_q *VisitorStatQuery) First(ctx context.Context) (*VisitorStat, error) {
 }
 
 // FirstX is like First, but panics if an error occurs.
-func (_q *VisitorStatQuery) FirstX(ctx context.Context) *VisitorStat {
-	node, err := _q.First(ctx)
+func (vsq *VisitorStatQuery) FirstX(ctx context.Context) *VisitorStat {
+	node, err := vsq.First(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -83,9 +83,9 @@ func (_q *VisitorStatQuery) FirstX(ctx context.Context) *VisitorStat {
 
 // FirstID returns the first VisitorStat ID from the query.
 // Returns a *NotFoundError when no VisitorStat ID was found.
-func (_q *VisitorStatQuery) FirstID(ctx context.Context) (id uint, err error) {
+func (vsq *VisitorStatQuery) FirstID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
+	if ids, err = vsq.Limit(1).IDs(setContextOp(ctx, vsq.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
 	if len(ids) == 0 {
@@ -96,8 +96,8 @@ func (_q *VisitorStatQuery) FirstID(ctx context.Context) (id uint, err error) {
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (_q *VisitorStatQuery) FirstIDX(ctx context.Context) uint {
-	id, err := _q.FirstID(ctx)
+func (vsq *VisitorStatQuery) FirstIDX(ctx context.Context) uint {
+	id, err := vsq.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -107,8 +107,8 @@ func (_q *VisitorStatQuery) FirstIDX(ctx context.Context) uint {
 // Only returns a single VisitorStat entity found by the query, ensuring it only returns one.
 // Returns a *NotSingularError when more than one VisitorStat entity is found.
 // Returns a *NotFoundError when no VisitorStat entities are found.
-func (_q *VisitorStatQuery) Only(ctx context.Context) (*VisitorStat, error) {
-	nodes, err := _q.Limit(2).All(setContextOp(ctx, _q.ctx, ent.OpQueryOnly))
+func (vsq *VisitorStatQuery) Only(ctx context.Context) (*VisitorStat, error) {
+	nodes, err := vsq.Limit(2).All(setContextOp(ctx, vsq.ctx, ent.OpQueryOnly))
 	if err != nil {
 		return nil, err
 	}
@@ -123,8 +123,8 @@ func (_q *VisitorStatQuery) Only(ctx context.Context) (*VisitorStat, error) {
 }
 
 // OnlyX is like Only, but panics if an error occurs.
-func (_q *VisitorStatQuery) OnlyX(ctx context.Context) *VisitorStat {
-	node, err := _q.Only(ctx)
+func (vsq *VisitorStatQuery) OnlyX(ctx context.Context) *VisitorStat {
+	node, err := vsq.Only(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -134,9 +134,9 @@ func (_q *VisitorStatQuery) OnlyX(ctx context.Context) *VisitorStat {
 // OnlyID is like Only, but returns the only VisitorStat ID in the query.
 // Returns a *NotSingularError when more than one VisitorStat ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (_q *VisitorStatQuery) OnlyID(ctx context.Context) (id uint, err error) {
+func (vsq *VisitorStatQuery) OnlyID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
+	if ids, err = vsq.Limit(2).IDs(setContextOp(ctx, vsq.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
 	switch len(ids) {
@@ -151,8 +151,8 @@ func (_q *VisitorStatQuery) OnlyID(ctx context.Context) (id uint, err error) {
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (_q *VisitorStatQuery) OnlyIDX(ctx context.Context) uint {
-	id, err := _q.OnlyID(ctx)
+func (vsq *VisitorStatQuery) OnlyIDX(ctx context.Context) uint {
+	id, err := vsq.OnlyID(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -160,18 +160,18 @@ func (_q *VisitorStatQuery) OnlyIDX(ctx context.Context) uint {
 }
 
 // All executes the query and returns a list of VisitorStats.
-func (_q *VisitorStatQuery) All(ctx context.Context) ([]*VisitorStat, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryAll)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (vsq *VisitorStatQuery) All(ctx context.Context) ([]*VisitorStat, error) {
+	ctx = setContextOp(ctx, vsq.ctx, ent.OpQueryAll)
+	if err := vsq.prepareQuery(ctx); err != nil {
 		return nil, err
 	}
 	qr := querierAll[[]*VisitorStat, *VisitorStatQuery]()
-	return withInterceptors[[]*VisitorStat](ctx, _q, qr, _q.inters)
+	return withInterceptors[[]*VisitorStat](ctx, vsq, qr, vsq.inters)
 }
 
 // AllX is like All, but panics if an error occurs.
-func (_q *VisitorStatQuery) AllX(ctx context.Context) []*VisitorStat {
-	nodes, err := _q.All(ctx)
+func (vsq *VisitorStatQuery) AllX(ctx context.Context) []*VisitorStat {
+	nodes, err := vsq.All(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -179,20 +179,20 @@ func (_q *VisitorStatQuery) AllX(ctx context.Context) []*VisitorStat {
 }
 
 // IDs executes the query and returns a list of VisitorStat IDs.
-func (_q *VisitorStatQuery) IDs(ctx context.Context) (ids []uint, err error) {
-	if _q.ctx.Unique == nil && _q.path != nil {
-		_q.Unique(true)
+func (vsq *VisitorStatQuery) IDs(ctx context.Context) (ids []uint, err error) {
+	if vsq.ctx.Unique == nil && vsq.path != nil {
+		vsq.Unique(true)
 	}
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryIDs)
-	if err = _q.Select(visitorstat.FieldID).Scan(ctx, &ids); err != nil {
+	ctx = setContextOp(ctx, vsq.ctx, ent.OpQueryIDs)
+	if err = vsq.Select(visitorstat.FieldID).Scan(ctx, &ids); err != nil {
 		return nil, err
 	}
 	return ids, nil
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (_q *VisitorStatQuery) IDsX(ctx context.Context) []uint {
-	ids, err := _q.IDs(ctx)
+func (vsq *VisitorStatQuery) IDsX(ctx context.Context) []uint {
+	ids, err := vsq.IDs(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -200,17 +200,17 @@ func (_q *VisitorStatQuery) IDsX(ctx context.Context) []uint {
 }
 
 // Count returns the count of the given query.
-func (_q *VisitorStatQuery) Count(ctx context.Context) (int, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryCount)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (vsq *VisitorStatQuery) Count(ctx context.Context) (int, error) {
+	ctx = setContextOp(ctx, vsq.ctx, ent.OpQueryCount)
+	if err := vsq.prepareQuery(ctx); err != nil {
 		return 0, err
 	}
-	return withInterceptors[int](ctx, _q, querierCount[*VisitorStatQuery](), _q.inters)
+	return withInterceptors[int](ctx, vsq, querierCount[*VisitorStatQuery](), vsq.inters)
 }
 
 // CountX is like Count, but panics if an error occurs.
-func (_q *VisitorStatQuery) CountX(ctx context.Context) int {
-	count, err := _q.Count(ctx)
+func (vsq *VisitorStatQuery) CountX(ctx context.Context) int {
+	count, err := vsq.Count(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -218,9 +218,9 @@ func (_q *VisitorStatQuery) CountX(ctx context.Context) int {
 }
 
 // Exist returns true if the query has elements in the graph.
-func (_q *VisitorStatQuery) Exist(ctx context.Context) (bool, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryExist)
-	switch _, err := _q.FirstID(ctx); {
+func (vsq *VisitorStatQuery) Exist(ctx context.Context) (bool, error) {
+	ctx = setContextOp(ctx, vsq.ctx, ent.OpQueryExist)
+	switch _, err := vsq.FirstID(ctx); {
 	case IsNotFound(err):
 		return false, nil
 	case err != nil:
@@ -231,8 +231,8 @@ func (_q *VisitorStatQuery) Exist(ctx context.Context) (bool, error) {
 }
 
 // ExistX is like Exist, but panics if an error occurs.
-func (_q *VisitorStatQuery) ExistX(ctx context.Context) bool {
-	exist, err := _q.Exist(ctx)
+func (vsq *VisitorStatQuery) ExistX(ctx context.Context) bool {
+	exist, err := vsq.Exist(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -241,20 +241,20 @@ func (_q *VisitorStatQuery) ExistX(ctx context.Context) bool {
 
 // Clone returns a duplicate of the VisitorStatQuery builder, including all associated steps. It can be
 // used to prepare common query builders and use them differently after the clone is made.
-func (_q *VisitorStatQuery) Clone() *VisitorStatQuery {
-	if _q == nil {
+func (vsq *VisitorStatQuery) Clone() *VisitorStatQuery {
+	if vsq == nil {
 		return nil
 	}
 	return &VisitorStatQuery{
-		config:     _q.config,
-		ctx:        _q.ctx.Clone(),
-		order:      append([]visitorstat.OrderOption{}, _q.order...),
-		inters:     append([]Interceptor{}, _q.inters...),
-		predicates: append([]predicate.VisitorStat{}, _q.predicates...),
+		config:     vsq.config,
+		ctx:        vsq.ctx.Clone(),
+		order:      append([]visitorstat.OrderOption{}, vsq.order...),
+		inters:     append([]Interceptor{}, vsq.inters...),
+		predicates: append([]predicate.VisitorStat{}, vsq.predicates...),
 		// clone intermediate query.
-		sql:       _q.sql.Clone(),
-		path:      _q.path,
-		modifiers: append([]func(*sql.Selector){}, _q.modifiers...),
+		sql:       vsq.sql.Clone(),
+		path:      vsq.path,
+		modifiers: append([]func(*sql.Selector){}, vsq.modifiers...),
 	}
 }
 
@@ -272,10 +272,10 @@ func (_q *VisitorStatQuery) Clone() *VisitorStatQuery {
 //		GroupBy(visitorstat.FieldCreatedAt).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
-func (_q *VisitorStatQuery) GroupBy(field string, fields ...string) *VisitorStatGroupBy {
-	_q.ctx.Fields = append([]string{field}, fields...)
-	grbuild := &VisitorStatGroupBy{build: _q}
-	grbuild.flds = &_q.ctx.Fields
+func (vsq *VisitorStatQuery) GroupBy(field string, fields ...string) *VisitorStatGroupBy {
+	vsq.ctx.Fields = append([]string{field}, fields...)
+	grbuild := &VisitorStatGroupBy{build: vsq}
+	grbuild.flds = &vsq.ctx.Fields
 	grbuild.label = visitorstat.Label
 	grbuild.scan = grbuild.Scan
 	return grbuild
@@ -293,65 +293,65 @@ func (_q *VisitorStatQuery) GroupBy(field string, fields ...string) *VisitorStat
 //	client.VisitorStat.Query().
 //		Select(visitorstat.FieldCreatedAt).
 //		Scan(ctx, &v)
-func (_q *VisitorStatQuery) Select(fields ...string) *VisitorStatSelect {
-	_q.ctx.Fields = append(_q.ctx.Fields, fields...)
-	sbuild := &VisitorStatSelect{VisitorStatQuery: _q}
+func (vsq *VisitorStatQuery) Select(fields ...string) *VisitorStatSelect {
+	vsq.ctx.Fields = append(vsq.ctx.Fields, fields...)
+	sbuild := &VisitorStatSelect{VisitorStatQuery: vsq}
 	sbuild.label = visitorstat.Label
-	sbuild.flds, sbuild.scan = &_q.ctx.Fields, sbuild.Scan
+	sbuild.flds, sbuild.scan = &vsq.ctx.Fields, sbuild.Scan
 	return sbuild
 }
 
 // Aggregate returns a VisitorStatSelect configured with the given aggregations.
-func (_q *VisitorStatQuery) Aggregate(fns ...AggregateFunc) *VisitorStatSelect {
-	return _q.Select().Aggregate(fns...)
+func (vsq *VisitorStatQuery) Aggregate(fns ...AggregateFunc) *VisitorStatSelect {
+	return vsq.Select().Aggregate(fns...)
 }
 
-func (_q *VisitorStatQuery) prepareQuery(ctx context.Context) error {
-	for _, inter := range _q.inters {
+func (vsq *VisitorStatQuery) prepareQuery(ctx context.Context) error {
+	for _, inter := range vsq.inters {
 		if inter == nil {
 			return fmt.Errorf("ent: uninitialized interceptor (forgotten import ent/runtime?)")
 		}
 		if trv, ok := inter.(Traverser); ok {
-			if err := trv.Traverse(ctx, _q); err != nil {
+			if err := trv.Traverse(ctx, vsq); err != nil {
 				return err
 			}
 		}
 	}
-	for _, f := range _q.ctx.Fields {
+	for _, f := range vsq.ctx.Fields {
 		if !visitorstat.ValidColumn(f) {
 			return &ValidationError{Name: f, err: fmt.Errorf("ent: invalid field %q for query", f)}
 		}
 	}
-	if _q.path != nil {
-		prev, err := _q.path(ctx)
+	if vsq.path != nil {
+		prev, err := vsq.path(ctx)
 		if err != nil {
 			return err
 		}
-		_q.sql = prev
+		vsq.sql = prev
 	}
 	return nil
 }
 
-func (_q *VisitorStatQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*VisitorStat, error) {
+func (vsq *VisitorStatQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*VisitorStat, error) {
 	var (
 		nodes = []*VisitorStat{}
-		_spec = _q.querySpec()
+		_spec = vsq.querySpec()
 	)
 	_spec.ScanValues = func(columns []string) ([]any, error) {
 		return (*VisitorStat).scanValues(nil, columns)
 	}
 	_spec.Assign = func(columns []string, values []any) error {
-		node := &VisitorStat{config: _q.config}
+		node := &VisitorStat{config: vsq.config}
 		nodes = append(nodes, node)
 		return node.assignValues(columns, values)
 	}
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+	if len(vsq.modifiers) > 0 {
+		_spec.Modifiers = vsq.modifiers
 	}
 	for i := range hooks {
 		hooks[i](ctx, _spec)
 	}
-	if err := sqlgraph.QueryNodes(ctx, _q.driver, _spec); err != nil {
+	if err := sqlgraph.QueryNodes(ctx, vsq.driver, _spec); err != nil {
 		return nil, err
 	}
 	if len(nodes) == 0 {
@@ -360,27 +360,27 @@ func (_q *VisitorStatQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*
 	return nodes, nil
 }
 
-func (_q *VisitorStatQuery) sqlCount(ctx context.Context) (int, error) {
-	_spec := _q.querySpec()
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+func (vsq *VisitorStatQuery) sqlCount(ctx context.Context) (int, error) {
+	_spec := vsq.querySpec()
+	if len(vsq.modifiers) > 0 {
+		_spec.Modifiers = vsq.modifiers
 	}
-	_spec.Node.Columns = _q.ctx.Fields
-	if len(_q.ctx.Fields) > 0 {
-		_spec.Unique = _q.ctx.Unique != nil && *_q.ctx.Unique
+	_spec.Node.Columns = vsq.ctx.Fields
+	if len(vsq.ctx.Fields) > 0 {
+		_spec.Unique = vsq.ctx.Unique != nil && *vsq.ctx.Unique
 	}
-	return sqlgraph.CountNodes(ctx, _q.driver, _spec)
+	return sqlgraph.CountNodes(ctx, vsq.driver, _spec)
 }
 
-func (_q *VisitorStatQuery) querySpec() *sqlgraph.QuerySpec {
+func (vsq *VisitorStatQuery) querySpec() *sqlgraph.QuerySpec {
 	_spec := sqlgraph.NewQuerySpec(visitorstat.Table, visitorstat.Columns, sqlgraph.NewFieldSpec(visitorstat.FieldID, field.TypeUint))
-	_spec.From = _q.sql
-	if unique := _q.ctx.Unique; unique != nil {
+	_spec.From = vsq.sql
+	if unique := vsq.ctx.Unique; unique != nil {
 		_spec.Unique = *unique
-	} else if _q.path != nil {
+	} else if vsq.path != nil {
 		_spec.Unique = true
 	}
-	if fields := _q.ctx.Fields; len(fields) > 0 {
+	if fields := vsq.ctx.Fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, visitorstat.FieldID)
 		for i := range fields {
@@ -389,20 +389,20 @@ func (_q *VisitorStatQuery) querySpec() *sqlgraph.QuerySpec {
 			}
 		}
 	}
-	if ps := _q.predicates; len(ps) > 0 {
+	if ps := vsq.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := vsq.ctx.Limit; limit != nil {
 		_spec.Limit = *limit
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := vsq.ctx.Offset; offset != nil {
 		_spec.Offset = *offset
 	}
-	if ps := _q.order; len(ps) > 0 {
+	if ps := vsq.order; len(ps) > 0 {
 		_spec.Order = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
@@ -412,45 +412,45 @@ func (_q *VisitorStatQuery) querySpec() *sqlgraph.QuerySpec {
 	return _spec
 }
 
-func (_q *VisitorStatQuery) sqlQuery(ctx context.Context) *sql.Selector {
-	builder := sql.Dialect(_q.driver.Dialect())
+func (vsq *VisitorStatQuery) sqlQuery(ctx context.Context) *sql.Selector {
+	builder := sql.Dialect(vsq.driver.Dialect())
 	t1 := builder.Table(visitorstat.Table)
-	columns := _q.ctx.Fields
+	columns := vsq.ctx.Fields
 	if len(columns) == 0 {
 		columns = visitorstat.Columns
 	}
 	selector := builder.Select(t1.Columns(columns...)...).From(t1)
-	if _q.sql != nil {
-		selector = _q.sql
+	if vsq.sql != nil {
+		selector = vsq.sql
 		selector.Select(selector.Columns(columns...)...)
 	}
-	if _q.ctx.Unique != nil && *_q.ctx.Unique {
+	if vsq.ctx.Unique != nil && *vsq.ctx.Unique {
 		selector.Distinct()
 	}
-	for _, m := range _q.modifiers {
+	for _, m := range vsq.modifiers {
 		m(selector)
 	}
-	for _, p := range _q.predicates {
+	for _, p := range vsq.predicates {
 		p(selector)
 	}
-	for _, p := range _q.order {
+	for _, p := range vsq.order {
 		p(selector)
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := vsq.ctx.Offset; offset != nil {
 		// limit is mandatory for offset clause. We start
 		// with default value, and override it below if needed.
 		selector.Offset(*offset).Limit(math.MaxInt32)
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := vsq.ctx.Limit; limit != nil {
 		selector.Limit(*limit)
 	}
 	return selector
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_q *VisitorStatQuery) Modify(modifiers ...func(s *sql.Selector)) *VisitorStatSelect {
-	_q.modifiers = append(_q.modifiers, modifiers...)
-	return _q.Select()
+func (vsq *VisitorStatQuery) Modify(modifiers ...func(s *sql.Selector)) *VisitorStatSelect {
+	vsq.modifiers = append(vsq.modifiers, modifiers...)
+	return vsq.Select()
 }
 
 // VisitorStatGroupBy is the group-by builder for VisitorStat entities.
@@ -460,41 +460,41 @@ type VisitorStatGroupBy struct {
 }
 
 // Aggregate adds the given aggregation functions to the group-by query.
-func (_g *VisitorStatGroupBy) Aggregate(fns ...AggregateFunc) *VisitorStatGroupBy {
-	_g.fns = append(_g.fns, fns...)
-	return _g
+func (vsgb *VisitorStatGroupBy) Aggregate(fns ...AggregateFunc) *VisitorStatGroupBy {
+	vsgb.fns = append(vsgb.fns, fns...)
+	return vsgb
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_g *VisitorStatGroupBy) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _g.build.ctx, ent.OpQueryGroupBy)
-	if err := _g.build.prepareQuery(ctx); err != nil {
+func (vsgb *VisitorStatGroupBy) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, vsgb.build.ctx, ent.OpQueryGroupBy)
+	if err := vsgb.build.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*VisitorStatQuery, *VisitorStatGroupBy](ctx, _g.build, _g, _g.build.inters, v)
+	return scanWithInterceptors[*VisitorStatQuery, *VisitorStatGroupBy](ctx, vsgb.build, vsgb, vsgb.build.inters, v)
 }
 
-func (_g *VisitorStatGroupBy) sqlScan(ctx context.Context, root *VisitorStatQuery, v any) error {
+func (vsgb *VisitorStatGroupBy) sqlScan(ctx context.Context, root *VisitorStatQuery, v any) error {
 	selector := root.sqlQuery(ctx).Select()
-	aggregation := make([]string, 0, len(_g.fns))
-	for _, fn := range _g.fns {
+	aggregation := make([]string, 0, len(vsgb.fns))
+	for _, fn := range vsgb.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
 	if len(selector.SelectedColumns()) == 0 {
-		columns := make([]string, 0, len(*_g.flds)+len(_g.fns))
-		for _, f := range *_g.flds {
+		columns := make([]string, 0, len(*vsgb.flds)+len(vsgb.fns))
+		for _, f := range *vsgb.flds {
 			columns = append(columns, selector.C(f))
 		}
 		columns = append(columns, aggregation...)
 		selector.Select(columns...)
 	}
-	selector.GroupBy(selector.Columns(*_g.flds...)...)
+	selector.GroupBy(selector.Columns(*vsgb.flds...)...)
 	if err := selector.Err(); err != nil {
 		return err
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _g.build.driver.Query(ctx, query, args, rows); err != nil {
+	if err := vsgb.build.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -508,27 +508,27 @@ type VisitorStatSelect struct {
 }
 
 // Aggregate adds the given aggregation functions to the selector query.
-func (_s *VisitorStatSelect) Aggregate(fns ...AggregateFunc) *VisitorStatSelect {
-	_s.fns = append(_s.fns, fns...)
-	return _s
+func (vss *VisitorStatSelect) Aggregate(fns ...AggregateFunc) *VisitorStatSelect {
+	vss.fns = append(vss.fns, fns...)
+	return vss
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_s *VisitorStatSelect) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _s.ctx, ent.OpQuerySelect)
-	if err := _s.prepareQuery(ctx); err != nil {
+func (vss *VisitorStatSelect) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, vss.ctx, ent.OpQuerySelect)
+	if err := vss.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*VisitorStatQuery, *VisitorStatSelect](ctx, _s.VisitorStatQuery, _s, _s.inters, v)
+	return scanWithInterceptors[*VisitorStatQuery, *VisitorStatSelect](ctx, vss.VisitorStatQuery, vss, vss.inters, v)
 }
 
-func (_s *VisitorStatSelect) sqlScan(ctx context.Context, root *VisitorStatQuery, v any) error {
+func (vss *VisitorStatSelect) sqlScan(ctx context.Context, root *VisitorStatQuery, v any) error {
 	selector := root.sqlQuery(ctx)
-	aggregation := make([]string, 0, len(_s.fns))
-	for _, fn := range _s.fns {
+	aggregation := make([]string, 0, len(vss.fns))
+	for _, fn := range vss.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
-	switch n := len(*_s.selector.flds); {
+	switch n := len(*vss.selector.flds); {
 	case n == 0 && len(aggregation) > 0:
 		selector.Select(aggregation...)
 	case n != 0 && len(aggregation) > 0:
@@ -536,7 +536,7 @@ func (_s *VisitorStatSelect) sqlScan(ctx context.Context, root *VisitorStatQuery
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _s.driver.Query(ctx, query, args, rows); err != nil {
+	if err := vss.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -544,7 +544,7 @@ func (_s *VisitorStatSelect) sqlScan(ctx context.Context, root *VisitorStatQuery
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_s *VisitorStatSelect) Modify(modifiers ...func(s *sql.Selector)) *VisitorStatSelect {
-	_s.modifiers = append(_s.modifiers, modifiers...)
-	return _s
+func (vss *VisitorStatSelect) Modify(modifiers ...func(s *sql.Selector)) *VisitorStatSelect {
+	vss.modifiers = append(vss.modifiers, modifiers...)
+	return vss
 }

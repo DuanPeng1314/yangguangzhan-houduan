@@ -84,7 +84,7 @@ func (*NotificationType) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the NotificationType fields.
-func (_m *NotificationType) assignValues(columns []string, values []any) error {
+func (nt *NotificationType) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -95,65 +95,65 @@ func (_m *NotificationType) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint(value.Int64)
+			nt.ID = uint(value.Int64)
 		case notificationtype.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
 			} else if value.Valid {
-				_m.CreatedAt = value.Time
+				nt.CreatedAt = value.Time
 			}
 		case notificationtype.FieldUpdatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field updated_at", values[i])
 			} else if value.Valid {
-				_m.UpdatedAt = value.Time
+				nt.UpdatedAt = value.Time
 			}
 		case notificationtype.FieldCode:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field code", values[i])
 			} else if value.Valid {
-				_m.Code = value.String
+				nt.Code = value.String
 			}
 		case notificationtype.FieldName:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field name", values[i])
 			} else if value.Valid {
-				_m.Name = value.String
+				nt.Name = value.String
 			}
 		case notificationtype.FieldDescription:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field description", values[i])
 			} else if value.Valid {
-				_m.Description = value.String
+				nt.Description = value.String
 			}
 		case notificationtype.FieldCategory:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field category", values[i])
 			} else if value.Valid {
-				_m.Category = value.String
+				nt.Category = value.String
 			}
 		case notificationtype.FieldIsActive:
 			if value, ok := values[i].(*sql.NullBool); !ok {
 				return fmt.Errorf("unexpected type %T for field is_active", values[i])
 			} else if value.Valid {
-				_m.IsActive = value.Bool
+				nt.IsActive = value.Bool
 			}
 		case notificationtype.FieldDefaultEnabled:
 			if value, ok := values[i].(*sql.NullBool); !ok {
 				return fmt.Errorf("unexpected type %T for field default_enabled", values[i])
 			} else if value.Valid {
-				_m.DefaultEnabled = value.Bool
+				nt.DefaultEnabled = value.Bool
 			}
 		case notificationtype.FieldSupportedChannels:
 			if value, ok := values[i].(*[]byte); !ok {
 				return fmt.Errorf("unexpected type %T for field supported_channels", values[i])
 			} else if value != nil && len(*value) > 0 {
-				if err := json.Unmarshal(*value, &_m.SupportedChannels); err != nil {
+				if err := json.Unmarshal(*value, &nt.SupportedChannels); err != nil {
 					return fmt.Errorf("unmarshal field supported_channels: %w", err)
 				}
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			nt.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -161,64 +161,64 @@ func (_m *NotificationType) assignValues(columns []string, values []any) error {
 
 // Value returns the ent.Value that was dynamically selected and assigned to the NotificationType.
 // This includes values selected through modifiers, order, etc.
-func (_m *NotificationType) Value(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (nt *NotificationType) Value(name string) (ent.Value, error) {
+	return nt.selectValues.Get(name)
 }
 
 // QueryUserConfigs queries the "user_configs" edge of the NotificationType entity.
-func (_m *NotificationType) QueryUserConfigs() *UserNotificationConfigQuery {
-	return NewNotificationTypeClient(_m.config).QueryUserConfigs(_m)
+func (nt *NotificationType) QueryUserConfigs() *UserNotificationConfigQuery {
+	return NewNotificationTypeClient(nt.config).QueryUserConfigs(nt)
 }
 
 // Update returns a builder for updating this NotificationType.
 // Note that you need to call NotificationType.Unwrap() before calling this method if this NotificationType
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *NotificationType) Update() *NotificationTypeUpdateOne {
-	return NewNotificationTypeClient(_m.config).UpdateOne(_m)
+func (nt *NotificationType) Update() *NotificationTypeUpdateOne {
+	return NewNotificationTypeClient(nt.config).UpdateOne(nt)
 }
 
 // Unwrap unwraps the NotificationType entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *NotificationType) Unwrap() *NotificationType {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (nt *NotificationType) Unwrap() *NotificationType {
+	_tx, ok := nt.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: NotificationType is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	nt.config.driver = _tx.drv
+	return nt
 }
 
 // String implements the fmt.Stringer.
-func (_m *NotificationType) String() string {
+func (nt *NotificationType) String() string {
 	var builder strings.Builder
 	builder.WriteString("NotificationType(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
+	builder.WriteString(fmt.Sprintf("id=%v, ", nt.ID))
 	builder.WriteString("created_at=")
-	builder.WriteString(_m.CreatedAt.Format(time.ANSIC))
+	builder.WriteString(nt.CreatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("updated_at=")
-	builder.WriteString(_m.UpdatedAt.Format(time.ANSIC))
+	builder.WriteString(nt.UpdatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("code=")
-	builder.WriteString(_m.Code)
+	builder.WriteString(nt.Code)
 	builder.WriteString(", ")
 	builder.WriteString("name=")
-	builder.WriteString(_m.Name)
+	builder.WriteString(nt.Name)
 	builder.WriteString(", ")
 	builder.WriteString("description=")
-	builder.WriteString(_m.Description)
+	builder.WriteString(nt.Description)
 	builder.WriteString(", ")
 	builder.WriteString("category=")
-	builder.WriteString(_m.Category)
+	builder.WriteString(nt.Category)
 	builder.WriteString(", ")
 	builder.WriteString("is_active=")
-	builder.WriteString(fmt.Sprintf("%v", _m.IsActive))
+	builder.WriteString(fmt.Sprintf("%v", nt.IsActive))
 	builder.WriteString(", ")
 	builder.WriteString("default_enabled=")
-	builder.WriteString(fmt.Sprintf("%v", _m.DefaultEnabled))
+	builder.WriteString(fmt.Sprintf("%v", nt.DefaultEnabled))
 	builder.WriteString(", ")
 	builder.WriteString("supported_channels=")
-	builder.WriteString(fmt.Sprintf("%v", _m.SupportedChannels))
+	builder.WriteString(fmt.Sprintf("%v", nt.SupportedChannels))
 	builder.WriteByte(')')
 	return builder.String()
 }

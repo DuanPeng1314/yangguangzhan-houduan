@@ -178,6 +178,58 @@ var (
 			},
 		},
 	}
+	// ArticlePaymentsColumns holds the columns for the "article_payments" table.
+	ArticlePaymentsColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeUint, Increment: true},
+		{Name: "article_id", Type: field.TypeUint, Comment: "关联文章ID"},
+		{Name: "block_id", Type: field.TypeString, Size: 64, Comment: "付费内容块唯一标识"},
+		{Name: "title", Type: field.TypeString, Comment: "付费内容块标题", Default: "付费内容"},
+		{Name: "price", Type: field.TypeInt, Comment: "价格，单位为分"},
+		{Name: "original_price", Type: field.TypeInt, Nullable: true, Comment: "原价，单位为分"},
+		{Name: "currency", Type: field.TypeString, Comment: "货币符号", Default: "¥"},
+		{Name: "content_length", Type: field.TypeInt, Comment: "内容字数", Default: 0},
+		{Name: "exclude_from_membership", Type: field.TypeBool, Comment: "会员是否也需要单独购买", Default: false},
+		{Name: "created_at", Type: field.TypeTime, Comment: "创建时间"},
+		{Name: "updated_at", Type: field.TypeTime, Comment: "更新时间"},
+	}
+	// ArticlePaymentsTable holds the schema information for the "article_payments" table.
+	ArticlePaymentsTable = &schema.Table{
+		Name:       "article_payments",
+		Comment:    "文章付费内容块表",
+		Columns:    ArticlePaymentsColumns,
+		PrimaryKey: []*schema.Column{ArticlePaymentsColumns[0]},
+		Indexes: []*schema.Index{
+			{
+				Name:    "articlepayment_article_id_block_id",
+				Unique:  true,
+				Columns: []*schema.Column{ArticlePaymentsColumns[1], ArticlePaymentsColumns[2]},
+			},
+		},
+	}
+	// ArticlePurchasesColumns holds the columns for the "article_purchases" table.
+	ArticlePurchasesColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeUint, Increment: true},
+		{Name: "user_id", Type: field.TypeString, Size: 64, Comment: "支付系统用户ID"},
+		{Name: "article_id", Type: field.TypeUint, Comment: "文章ID"},
+		{Name: "block_id", Type: field.TypeString, Size: 64, Comment: "付费内容块ID"},
+		{Name: "price", Type: field.TypeInt, Comment: "购买价格，单位为分"},
+		{Name: "order_no", Type: field.TypeString, Nullable: true, Comment: "订单号"},
+		{Name: "purchased_at", Type: field.TypeTime, Comment: "购买时间"},
+	}
+	// ArticlePurchasesTable holds the schema information for the "article_purchases" table.
+	ArticlePurchasesTable = &schema.Table{
+		Name:       "article_purchases",
+		Comment:    "文章付费购买记录表",
+		Columns:    ArticlePurchasesColumns,
+		PrimaryKey: []*schema.Column{ArticlePurchasesColumns[0]},
+		Indexes: []*schema.Index{
+			{
+				Name:    "articlepurchase_user_id_article_id_block_id",
+				Unique:  true,
+				Columns: []*schema.Column{ArticlePurchasesColumns[1], ArticlePurchasesColumns[2], ArticlePurchasesColumns[3]},
+			},
+		},
+	}
 	// CommentsColumns holds the columns for the "comments" table.
 	CommentsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint, Increment: true},
@@ -1034,6 +1086,8 @@ var (
 		AlbumCategoriesTable,
 		ArticlesTable,
 		ArticleHistoriesTable,
+		ArticlePaymentsTable,
+		ArticlePurchasesTable,
 		CommentsTable,
 		DirectLinksTable,
 		DocSeriesTable,

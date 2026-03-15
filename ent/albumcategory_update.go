@@ -24,115 +24,115 @@ type AlbumCategoryUpdate struct {
 }
 
 // Where appends a list predicates to the AlbumCategoryUpdate builder.
-func (_u *AlbumCategoryUpdate) Where(ps ...predicate.AlbumCategory) *AlbumCategoryUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (acu *AlbumCategoryUpdate) Where(ps ...predicate.AlbumCategory) *AlbumCategoryUpdate {
+	acu.mutation.Where(ps...)
+	return acu
 }
 
 // SetName sets the "name" field.
-func (_u *AlbumCategoryUpdate) SetName(v string) *AlbumCategoryUpdate {
-	_u.mutation.SetName(v)
-	return _u
+func (acu *AlbumCategoryUpdate) SetName(s string) *AlbumCategoryUpdate {
+	acu.mutation.SetName(s)
+	return acu
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *AlbumCategoryUpdate) SetNillableName(v *string) *AlbumCategoryUpdate {
-	if v != nil {
-		_u.SetName(*v)
+func (acu *AlbumCategoryUpdate) SetNillableName(s *string) *AlbumCategoryUpdate {
+	if s != nil {
+		acu.SetName(*s)
 	}
-	return _u
+	return acu
 }
 
 // SetDescription sets the "description" field.
-func (_u *AlbumCategoryUpdate) SetDescription(v string) *AlbumCategoryUpdate {
-	_u.mutation.SetDescription(v)
-	return _u
+func (acu *AlbumCategoryUpdate) SetDescription(s string) *AlbumCategoryUpdate {
+	acu.mutation.SetDescription(s)
+	return acu
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *AlbumCategoryUpdate) SetNillableDescription(v *string) *AlbumCategoryUpdate {
-	if v != nil {
-		_u.SetDescription(*v)
+func (acu *AlbumCategoryUpdate) SetNillableDescription(s *string) *AlbumCategoryUpdate {
+	if s != nil {
+		acu.SetDescription(*s)
 	}
-	return _u
+	return acu
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *AlbumCategoryUpdate) ClearDescription() *AlbumCategoryUpdate {
-	_u.mutation.ClearDescription()
-	return _u
+func (acu *AlbumCategoryUpdate) ClearDescription() *AlbumCategoryUpdate {
+	acu.mutation.ClearDescription()
+	return acu
 }
 
 // SetDisplayOrder sets the "display_order" field.
-func (_u *AlbumCategoryUpdate) SetDisplayOrder(v int) *AlbumCategoryUpdate {
-	_u.mutation.ResetDisplayOrder()
-	_u.mutation.SetDisplayOrder(v)
-	return _u
+func (acu *AlbumCategoryUpdate) SetDisplayOrder(i int) *AlbumCategoryUpdate {
+	acu.mutation.ResetDisplayOrder()
+	acu.mutation.SetDisplayOrder(i)
+	return acu
 }
 
 // SetNillableDisplayOrder sets the "display_order" field if the given value is not nil.
-func (_u *AlbumCategoryUpdate) SetNillableDisplayOrder(v *int) *AlbumCategoryUpdate {
-	if v != nil {
-		_u.SetDisplayOrder(*v)
+func (acu *AlbumCategoryUpdate) SetNillableDisplayOrder(i *int) *AlbumCategoryUpdate {
+	if i != nil {
+		acu.SetDisplayOrder(*i)
 	}
-	return _u
+	return acu
 }
 
-// AddDisplayOrder adds value to the "display_order" field.
-func (_u *AlbumCategoryUpdate) AddDisplayOrder(v int) *AlbumCategoryUpdate {
-	_u.mutation.AddDisplayOrder(v)
-	return _u
+// AddDisplayOrder adds i to the "display_order" field.
+func (acu *AlbumCategoryUpdate) AddDisplayOrder(i int) *AlbumCategoryUpdate {
+	acu.mutation.AddDisplayOrder(i)
+	return acu
 }
 
 // AddAlbumIDs adds the "albums" edge to the Album entity by IDs.
-func (_u *AlbumCategoryUpdate) AddAlbumIDs(ids ...uint) *AlbumCategoryUpdate {
-	_u.mutation.AddAlbumIDs(ids...)
-	return _u
+func (acu *AlbumCategoryUpdate) AddAlbumIDs(ids ...uint) *AlbumCategoryUpdate {
+	acu.mutation.AddAlbumIDs(ids...)
+	return acu
 }
 
 // AddAlbums adds the "albums" edges to the Album entity.
-func (_u *AlbumCategoryUpdate) AddAlbums(v ...*Album) *AlbumCategoryUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (acu *AlbumCategoryUpdate) AddAlbums(a ...*Album) *AlbumCategoryUpdate {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.AddAlbumIDs(ids...)
+	return acu.AddAlbumIDs(ids...)
 }
 
 // Mutation returns the AlbumCategoryMutation object of the builder.
-func (_u *AlbumCategoryUpdate) Mutation() *AlbumCategoryMutation {
-	return _u.mutation
+func (acu *AlbumCategoryUpdate) Mutation() *AlbumCategoryMutation {
+	return acu.mutation
 }
 
 // ClearAlbums clears all "albums" edges to the Album entity.
-func (_u *AlbumCategoryUpdate) ClearAlbums() *AlbumCategoryUpdate {
-	_u.mutation.ClearAlbums()
-	return _u
+func (acu *AlbumCategoryUpdate) ClearAlbums() *AlbumCategoryUpdate {
+	acu.mutation.ClearAlbums()
+	return acu
 }
 
 // RemoveAlbumIDs removes the "albums" edge to Album entities by IDs.
-func (_u *AlbumCategoryUpdate) RemoveAlbumIDs(ids ...uint) *AlbumCategoryUpdate {
-	_u.mutation.RemoveAlbumIDs(ids...)
-	return _u
+func (acu *AlbumCategoryUpdate) RemoveAlbumIDs(ids ...uint) *AlbumCategoryUpdate {
+	acu.mutation.RemoveAlbumIDs(ids...)
+	return acu
 }
 
 // RemoveAlbums removes "albums" edges to Album entities.
-func (_u *AlbumCategoryUpdate) RemoveAlbums(v ...*Album) *AlbumCategoryUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (acu *AlbumCategoryUpdate) RemoveAlbums(a ...*Album) *AlbumCategoryUpdate {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.RemoveAlbumIDs(ids...)
+	return acu.RemoveAlbumIDs(ids...)
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *AlbumCategoryUpdate) Save(ctx context.Context) (int, error) {
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (acu *AlbumCategoryUpdate) Save(ctx context.Context) (int, error) {
+	return withHooks(ctx, acu.sqlSave, acu.mutation, acu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *AlbumCategoryUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (acu *AlbumCategoryUpdate) SaveX(ctx context.Context) int {
+	affected, err := acu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -140,21 +140,21 @@ func (_u *AlbumCategoryUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *AlbumCategoryUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (acu *AlbumCategoryUpdate) Exec(ctx context.Context) error {
+	_, err := acu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *AlbumCategoryUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (acu *AlbumCategoryUpdate) ExecX(ctx context.Context) {
+	if err := acu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *AlbumCategoryUpdate) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (acu *AlbumCategoryUpdate) check() error {
+	if v, ok := acu.mutation.Name(); ok {
 		if err := albumcategory.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "AlbumCategory.name": %w`, err)}
 		}
@@ -163,39 +163,39 @@ func (_u *AlbumCategoryUpdate) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *AlbumCategoryUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *AlbumCategoryUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (acu *AlbumCategoryUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *AlbumCategoryUpdate {
+	acu.modifiers = append(acu.modifiers, modifiers...)
+	return acu
 }
 
-func (_u *AlbumCategoryUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (acu *AlbumCategoryUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := acu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(albumcategory.Table, albumcategory.Columns, sqlgraph.NewFieldSpec(albumcategory.FieldID, field.TypeUint))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := acu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := acu.mutation.Name(); ok {
 		_spec.SetField(albumcategory.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := acu.mutation.Description(); ok {
 		_spec.SetField(albumcategory.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if acu.mutation.DescriptionCleared() {
 		_spec.ClearField(albumcategory.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.DisplayOrder(); ok {
+	if value, ok := acu.mutation.DisplayOrder(); ok {
 		_spec.SetField(albumcategory.FieldDisplayOrder, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedDisplayOrder(); ok {
+	if value, ok := acu.mutation.AddedDisplayOrder(); ok {
 		_spec.AddField(albumcategory.FieldDisplayOrder, field.TypeInt, value)
 	}
-	if _u.mutation.AlbumsCleared() {
+	if acu.mutation.AlbumsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -208,7 +208,7 @@ func (_u *AlbumCategoryUpdate) sqlSave(ctx context.Context) (_node int, err erro
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedAlbumsIDs(); len(nodes) > 0 && !_u.mutation.AlbumsCleared() {
+	if nodes := acu.mutation.RemovedAlbumsIDs(); len(nodes) > 0 && !acu.mutation.AlbumsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -224,7 +224,7 @@ func (_u *AlbumCategoryUpdate) sqlSave(ctx context.Context) (_node int, err erro
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.AlbumsIDs(); len(nodes) > 0 {
+	if nodes := acu.mutation.AlbumsIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -240,8 +240,8 @@ func (_u *AlbumCategoryUpdate) sqlSave(ctx context.Context) (_node int, err erro
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(acu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, acu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{albumcategory.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -249,8 +249,8 @@ func (_u *AlbumCategoryUpdate) sqlSave(ctx context.Context) (_node int, err erro
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	acu.mutation.done = true
+	return n, nil
 }
 
 // AlbumCategoryUpdateOne is the builder for updating a single AlbumCategory entity.
@@ -263,122 +263,122 @@ type AlbumCategoryUpdateOne struct {
 }
 
 // SetName sets the "name" field.
-func (_u *AlbumCategoryUpdateOne) SetName(v string) *AlbumCategoryUpdateOne {
-	_u.mutation.SetName(v)
-	return _u
+func (acuo *AlbumCategoryUpdateOne) SetName(s string) *AlbumCategoryUpdateOne {
+	acuo.mutation.SetName(s)
+	return acuo
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *AlbumCategoryUpdateOne) SetNillableName(v *string) *AlbumCategoryUpdateOne {
-	if v != nil {
-		_u.SetName(*v)
+func (acuo *AlbumCategoryUpdateOne) SetNillableName(s *string) *AlbumCategoryUpdateOne {
+	if s != nil {
+		acuo.SetName(*s)
 	}
-	return _u
+	return acuo
 }
 
 // SetDescription sets the "description" field.
-func (_u *AlbumCategoryUpdateOne) SetDescription(v string) *AlbumCategoryUpdateOne {
-	_u.mutation.SetDescription(v)
-	return _u
+func (acuo *AlbumCategoryUpdateOne) SetDescription(s string) *AlbumCategoryUpdateOne {
+	acuo.mutation.SetDescription(s)
+	return acuo
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *AlbumCategoryUpdateOne) SetNillableDescription(v *string) *AlbumCategoryUpdateOne {
-	if v != nil {
-		_u.SetDescription(*v)
+func (acuo *AlbumCategoryUpdateOne) SetNillableDescription(s *string) *AlbumCategoryUpdateOne {
+	if s != nil {
+		acuo.SetDescription(*s)
 	}
-	return _u
+	return acuo
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *AlbumCategoryUpdateOne) ClearDescription() *AlbumCategoryUpdateOne {
-	_u.mutation.ClearDescription()
-	return _u
+func (acuo *AlbumCategoryUpdateOne) ClearDescription() *AlbumCategoryUpdateOne {
+	acuo.mutation.ClearDescription()
+	return acuo
 }
 
 // SetDisplayOrder sets the "display_order" field.
-func (_u *AlbumCategoryUpdateOne) SetDisplayOrder(v int) *AlbumCategoryUpdateOne {
-	_u.mutation.ResetDisplayOrder()
-	_u.mutation.SetDisplayOrder(v)
-	return _u
+func (acuo *AlbumCategoryUpdateOne) SetDisplayOrder(i int) *AlbumCategoryUpdateOne {
+	acuo.mutation.ResetDisplayOrder()
+	acuo.mutation.SetDisplayOrder(i)
+	return acuo
 }
 
 // SetNillableDisplayOrder sets the "display_order" field if the given value is not nil.
-func (_u *AlbumCategoryUpdateOne) SetNillableDisplayOrder(v *int) *AlbumCategoryUpdateOne {
-	if v != nil {
-		_u.SetDisplayOrder(*v)
+func (acuo *AlbumCategoryUpdateOne) SetNillableDisplayOrder(i *int) *AlbumCategoryUpdateOne {
+	if i != nil {
+		acuo.SetDisplayOrder(*i)
 	}
-	return _u
+	return acuo
 }
 
-// AddDisplayOrder adds value to the "display_order" field.
-func (_u *AlbumCategoryUpdateOne) AddDisplayOrder(v int) *AlbumCategoryUpdateOne {
-	_u.mutation.AddDisplayOrder(v)
-	return _u
+// AddDisplayOrder adds i to the "display_order" field.
+func (acuo *AlbumCategoryUpdateOne) AddDisplayOrder(i int) *AlbumCategoryUpdateOne {
+	acuo.mutation.AddDisplayOrder(i)
+	return acuo
 }
 
 // AddAlbumIDs adds the "albums" edge to the Album entity by IDs.
-func (_u *AlbumCategoryUpdateOne) AddAlbumIDs(ids ...uint) *AlbumCategoryUpdateOne {
-	_u.mutation.AddAlbumIDs(ids...)
-	return _u
+func (acuo *AlbumCategoryUpdateOne) AddAlbumIDs(ids ...uint) *AlbumCategoryUpdateOne {
+	acuo.mutation.AddAlbumIDs(ids...)
+	return acuo
 }
 
 // AddAlbums adds the "albums" edges to the Album entity.
-func (_u *AlbumCategoryUpdateOne) AddAlbums(v ...*Album) *AlbumCategoryUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (acuo *AlbumCategoryUpdateOne) AddAlbums(a ...*Album) *AlbumCategoryUpdateOne {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.AddAlbumIDs(ids...)
+	return acuo.AddAlbumIDs(ids...)
 }
 
 // Mutation returns the AlbumCategoryMutation object of the builder.
-func (_u *AlbumCategoryUpdateOne) Mutation() *AlbumCategoryMutation {
-	return _u.mutation
+func (acuo *AlbumCategoryUpdateOne) Mutation() *AlbumCategoryMutation {
+	return acuo.mutation
 }
 
 // ClearAlbums clears all "albums" edges to the Album entity.
-func (_u *AlbumCategoryUpdateOne) ClearAlbums() *AlbumCategoryUpdateOne {
-	_u.mutation.ClearAlbums()
-	return _u
+func (acuo *AlbumCategoryUpdateOne) ClearAlbums() *AlbumCategoryUpdateOne {
+	acuo.mutation.ClearAlbums()
+	return acuo
 }
 
 // RemoveAlbumIDs removes the "albums" edge to Album entities by IDs.
-func (_u *AlbumCategoryUpdateOne) RemoveAlbumIDs(ids ...uint) *AlbumCategoryUpdateOne {
-	_u.mutation.RemoveAlbumIDs(ids...)
-	return _u
+func (acuo *AlbumCategoryUpdateOne) RemoveAlbumIDs(ids ...uint) *AlbumCategoryUpdateOne {
+	acuo.mutation.RemoveAlbumIDs(ids...)
+	return acuo
 }
 
 // RemoveAlbums removes "albums" edges to Album entities.
-func (_u *AlbumCategoryUpdateOne) RemoveAlbums(v ...*Album) *AlbumCategoryUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (acuo *AlbumCategoryUpdateOne) RemoveAlbums(a ...*Album) *AlbumCategoryUpdateOne {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.RemoveAlbumIDs(ids...)
+	return acuo.RemoveAlbumIDs(ids...)
 }
 
 // Where appends a list predicates to the AlbumCategoryUpdate builder.
-func (_u *AlbumCategoryUpdateOne) Where(ps ...predicate.AlbumCategory) *AlbumCategoryUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (acuo *AlbumCategoryUpdateOne) Where(ps ...predicate.AlbumCategory) *AlbumCategoryUpdateOne {
+	acuo.mutation.Where(ps...)
+	return acuo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *AlbumCategoryUpdateOne) Select(field string, fields ...string) *AlbumCategoryUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (acuo *AlbumCategoryUpdateOne) Select(field string, fields ...string) *AlbumCategoryUpdateOne {
+	acuo.fields = append([]string{field}, fields...)
+	return acuo
 }
 
 // Save executes the query and returns the updated AlbumCategory entity.
-func (_u *AlbumCategoryUpdateOne) Save(ctx context.Context) (*AlbumCategory, error) {
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (acuo *AlbumCategoryUpdateOne) Save(ctx context.Context) (*AlbumCategory, error) {
+	return withHooks(ctx, acuo.sqlSave, acuo.mutation, acuo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *AlbumCategoryUpdateOne) SaveX(ctx context.Context) *AlbumCategory {
-	node, err := _u.Save(ctx)
+func (acuo *AlbumCategoryUpdateOne) SaveX(ctx context.Context) *AlbumCategory {
+	node, err := acuo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -386,21 +386,21 @@ func (_u *AlbumCategoryUpdateOne) SaveX(ctx context.Context) *AlbumCategory {
 }
 
 // Exec executes the query on the entity.
-func (_u *AlbumCategoryUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (acuo *AlbumCategoryUpdateOne) Exec(ctx context.Context) error {
+	_, err := acuo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *AlbumCategoryUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (acuo *AlbumCategoryUpdateOne) ExecX(ctx context.Context) {
+	if err := acuo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *AlbumCategoryUpdateOne) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (acuo *AlbumCategoryUpdateOne) check() error {
+	if v, ok := acuo.mutation.Name(); ok {
 		if err := albumcategory.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "AlbumCategory.name": %w`, err)}
 		}
@@ -409,22 +409,22 @@ func (_u *AlbumCategoryUpdateOne) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *AlbumCategoryUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *AlbumCategoryUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (acuo *AlbumCategoryUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *AlbumCategoryUpdateOne {
+	acuo.modifiers = append(acuo.modifiers, modifiers...)
+	return acuo
 }
 
-func (_u *AlbumCategoryUpdateOne) sqlSave(ctx context.Context) (_node *AlbumCategory, err error) {
-	if err := _u.check(); err != nil {
+func (acuo *AlbumCategoryUpdateOne) sqlSave(ctx context.Context) (_node *AlbumCategory, err error) {
+	if err := acuo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(albumcategory.Table, albumcategory.Columns, sqlgraph.NewFieldSpec(albumcategory.FieldID, field.TypeUint))
-	id, ok := _u.mutation.ID()
+	id, ok := acuo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "AlbumCategory.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := acuo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, albumcategory.FieldID)
 		for _, f := range fields {
@@ -436,29 +436,29 @@ func (_u *AlbumCategoryUpdateOne) sqlSave(ctx context.Context) (_node *AlbumCate
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := acuo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := acuo.mutation.Name(); ok {
 		_spec.SetField(albumcategory.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := acuo.mutation.Description(); ok {
 		_spec.SetField(albumcategory.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if acuo.mutation.DescriptionCleared() {
 		_spec.ClearField(albumcategory.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.DisplayOrder(); ok {
+	if value, ok := acuo.mutation.DisplayOrder(); ok {
 		_spec.SetField(albumcategory.FieldDisplayOrder, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedDisplayOrder(); ok {
+	if value, ok := acuo.mutation.AddedDisplayOrder(); ok {
 		_spec.AddField(albumcategory.FieldDisplayOrder, field.TypeInt, value)
 	}
-	if _u.mutation.AlbumsCleared() {
+	if acuo.mutation.AlbumsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -471,7 +471,7 @@ func (_u *AlbumCategoryUpdateOne) sqlSave(ctx context.Context) (_node *AlbumCate
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedAlbumsIDs(); len(nodes) > 0 && !_u.mutation.AlbumsCleared() {
+	if nodes := acuo.mutation.RemovedAlbumsIDs(); len(nodes) > 0 && !acuo.mutation.AlbumsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -487,7 +487,7 @@ func (_u *AlbumCategoryUpdateOne) sqlSave(ctx context.Context) (_node *AlbumCate
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.AlbumsIDs(); len(nodes) > 0 {
+	if nodes := acuo.mutation.AlbumsIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -503,11 +503,11 @@ func (_u *AlbumCategoryUpdateOne) sqlSave(ctx context.Context) (_node *AlbumCate
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &AlbumCategory{config: _u.config}
+	_spec.AddModifiers(acuo.modifiers...)
+	_node = &AlbumCategory{config: acuo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, acuo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{albumcategory.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -515,6 +515,6 @@ func (_u *AlbumCategoryUpdateOne) sqlSave(ctx context.Context) (_node *AlbumCate
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	acuo.mutation.done = true
 	return _node, nil
 }

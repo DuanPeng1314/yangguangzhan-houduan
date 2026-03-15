@@ -31,6 +31,9 @@ import (
 	"github.com/anzhiyu-c/anheyu-app/internal/pkg/event"
 	"github.com/anzhiyu-c/anheyu-app/internal/pkg/version"
 	"github.com/anzhiyu-c/anheyu-app/internal/service/cache"
+	"github.com/anzhiyu-c/anheyu-app/modules"
+	payment_handler "github.com/anzhiyu-c/anheyu-app/modules/payment"
+	"github.com/anzhiyu-c/anheyu-app/modules/sso"
 	"github.com/anzhiyu-c/anheyu-app/pkg/config"
 	"github.com/anzhiyu-c/anheyu-app/pkg/constant"
 	"github.com/anzhiyu-c/anheyu-app/pkg/domain/model"
@@ -92,10 +95,10 @@ import (
 	post_category_service "github.com/anzhiyu-c/anheyu-app/pkg/service/post_category"
 	post_tag_service "github.com/anzhiyu-c/anheyu-app/pkg/service/post_tag"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/process"
+	rss_service "github.com/anzhiyu-c/anheyu-app/pkg/service/rss"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/search"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/setting"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/sitemap"
-	rss_service "github.com/anzhiyu-c/anheyu-app/pkg/service/rss"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/statistics"
 	subscriber_service "github.com/anzhiyu-c/anheyu-app/pkg/service/subscriber"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/theme"
@@ -114,33 +117,33 @@ import (
 
 // App 结构体，用于封装应用的所有核心组件
 type App struct {
-	cfg                    *config.Config
-	engine                 *gin.Engine
-	taskBroker             *task.Broker
-	sqlDB                  *sql.DB
-	appVersion             string
-	articleService         article_service.Service
-	directLinkService      direct_link.Service
-	storagePolicyRepo      repository.StoragePolicyRepository
-	storagePolicyService   volume.IStoragePolicyService
-	fileService            file_service.FileService
-	mw                     *middleware.Middleware
-	settingRepo            repository.SettingRepository
-	settingSvc             setting.SettingService
-	tokenSvc               auth.TokenService
-	userSvc                user.UserService
-	fileRepo               repository.FileRepository
-	entityRepo             repository.EntityRepository
-	cacheSvc               utility.CacheService
-	eventBus               *event.EventBus
-	postCategorySvc        *post_category_service.Service
-	postTagSvc             *post_tag_service.Service
-	commentSvc             *comment_service.Service
-	themeSvc               theme.ThemeService
-	themeHandler           *theme_handler.Handler
-	ssrManager             *ssr.Manager
-	ssrThemeHandler        *ssrtheme_handler.Handler
-	configExtensionHolder  *configExtensionHolder // Pro 可通过 SetConfigExtension 注入支付配置导出/导入
+	cfg                   *config.Config
+	engine                *gin.Engine
+	taskBroker            *task.Broker
+	sqlDB                 *sql.DB
+	appVersion            string
+	articleService        article_service.Service
+	directLinkService     direct_link.Service
+	storagePolicyRepo     repository.StoragePolicyRepository
+	storagePolicyService  volume.IStoragePolicyService
+	fileService           file_service.FileService
+	mw                    *middleware.Middleware
+	settingRepo           repository.SettingRepository
+	settingSvc            setting.SettingService
+	tokenSvc              auth.TokenService
+	userSvc               user.UserService
+	fileRepo              repository.FileRepository
+	entityRepo            repository.EntityRepository
+	cacheSvc              utility.CacheService
+	eventBus              *event.EventBus
+	postCategorySvc       *post_category_service.Service
+	postTagSvc            *post_tag_service.Service
+	commentSvc            *comment_service.Service
+	themeSvc              theme.ThemeService
+	themeHandler          *theme_handler.Handler
+	ssrManager            *ssr.Manager
+	ssrThemeHandler       *ssrtheme_handler.Handler
+	configExtensionHolder *configExtensionHolder // Pro 可通过 SetConfigExtension 注入支付配置导出/导入
 }
 
 func (a *App) PrintBanner() {
@@ -451,7 +454,7 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 	themeSvc := theme.NewThemeService(entClient, userRepo)
 	_ = listener.NewFilePostProcessingListener(eventBus, taskBroker, extractionSvc)
 
-	seoModuleListener := listener.NewSeoModuleListener(settingSvc)
+	seoModuleListener := listener.NewSeoModuleListener(settingSvc, entClient)
 	seoModuleListener.RegisterHandlers(eventBus)
 	log.Println("✅ SEO 模块监听器已注册")
 
@@ -567,6 +570,8 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 	docSeriesHandler := doc_series_handler.NewHandler(docSeriesSvc)
 	commentHandler := comment_handler.NewHandler(commentSvc, settingSvc)
 	pageHandler := page_handler.NewHandler(pageSvc)
+	paymentSvc := payment_handler.NewService(entClient)
+	paymentAPIHandler := payment_handler.NewHandler(paymentSvc)
 	searchHandler := search_handler.NewHandler(searchSvc)
 	statisticsHandler := statistics_handler.NewStatisticsHandler(statService)
 	themeHandler := theme_handler.NewHandler(themeSvc, ssrManager)
@@ -581,6 +586,11 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 	configImportExportHandler := config_handler.NewConfigImportExportHandler(configImportExportSvc)
 	subscriberHandler := subscriber_handler.NewHandler(subscriberSvc, captchaSvc)
 	captchaHandler := captcha_handler.NewHandler(captchaSvc)
+	ssoModule := sso.NewModule()
+	if err := ssoModule.Init(&modules.ModuleContext{SettingSvc: settingSvc}); err != nil {
+		return nil, nil, fmt.Errorf("初始化 SSO 模块失败: %w", err)
+	}
+	ssoHandler := sso.NewHandler(ssoModule)
 
 	// --- Phase 7: 初始化路由 ---
 	appRouter := router.NewRouter(
@@ -602,6 +612,7 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 		commentHandler,
 		linkHandler,
 		musicHandler,
+		paymentAPIHandler,
 		pageHandler,
 		statisticsHandler,
 		themeHandler,
@@ -617,6 +628,7 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 		configImportExportHandler,
 		subscriberHandler,
 		captchaHandler,
+		ssoHandler,
 	)
 
 	// --- Phase 8: 配置 Gin 引擎 ---
@@ -669,30 +681,30 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 
 	// 将所有初始化好的组件装配到 App 实例中
 	app := &App{
-		cfg:                  cfg,
-		engine:               engine,
-		taskBroker:           taskBroker,
-		sqlDB:                sqlDB,
-		appVersion:           appVersion,
-		articleService:       articleSvc,
-		directLinkService:    directLinkSvc,
-		storagePolicyRepo:    storagePolicyRepo,
-		storagePolicyService: storagePolicySvc,
-		fileService:          fileSvc,
-		mw:                   mw,
-		settingRepo:          settingRepo,
-		settingSvc:           settingSvc,
-		tokenSvc:             tokenSvc,
-		userSvc:              userSvc,
-		fileRepo:             fileRepo,
-		entityRepo:           entityRepo,
-		cacheSvc:             cacheSvc,
-		eventBus:             eventBus,
-		postCategorySvc:      postCategorySvc,
-		postTagSvc:           postTagSvc,
-		commentSvc:           commentSvc,
-		themeSvc:             themeSvc,
-		themeHandler:         themeHandler,
+		cfg:                   cfg,
+		engine:                engine,
+		taskBroker:            taskBroker,
+		sqlDB:                 sqlDB,
+		appVersion:            appVersion,
+		articleService:        articleSvc,
+		directLinkService:     directLinkSvc,
+		storagePolicyRepo:     storagePolicyRepo,
+		storagePolicyService:  storagePolicySvc,
+		fileService:           fileSvc,
+		mw:                    mw,
+		settingRepo:           settingRepo,
+		settingSvc:            settingSvc,
+		tokenSvc:              tokenSvc,
+		userSvc:               userSvc,
+		fileRepo:              fileRepo,
+		entityRepo:            entityRepo,
+		cacheSvc:              cacheSvc,
+		eventBus:              eventBus,
+		postCategorySvc:       postCategorySvc,
+		postTagSvc:            postTagSvc,
+		commentSvc:            commentSvc,
+		themeSvc:              themeSvc,
+		themeHandler:          themeHandler,
 		ssrManager:            ssrManager,
 		ssrThemeHandler:       ssrThemeHandler,
 		configExtensionHolder: configExtensionHolder,

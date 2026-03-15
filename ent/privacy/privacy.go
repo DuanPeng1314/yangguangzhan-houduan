@@ -206,6 +206,54 @@ func (f ArticleHistoryMutationRuleFunc) EvalMutation(ctx context.Context, m ent.
 	return Denyf("ent/privacy: unexpected mutation type %T, expect *ent.ArticleHistoryMutation", m)
 }
 
+// The ArticlePaymentQueryRuleFunc type is an adapter to allow the use of ordinary
+// functions as a query rule.
+type ArticlePaymentQueryRuleFunc func(context.Context, *ent.ArticlePaymentQuery) error
+
+// EvalQuery return f(ctx, q).
+func (f ArticlePaymentQueryRuleFunc) EvalQuery(ctx context.Context, q ent.Query) error {
+	if q, ok := q.(*ent.ArticlePaymentQuery); ok {
+		return f(ctx, q)
+	}
+	return Denyf("ent/privacy: unexpected query type %T, expect *ent.ArticlePaymentQuery", q)
+}
+
+// The ArticlePaymentMutationRuleFunc type is an adapter to allow the use of ordinary
+// functions as a mutation rule.
+type ArticlePaymentMutationRuleFunc func(context.Context, *ent.ArticlePaymentMutation) error
+
+// EvalMutation calls f(ctx, m).
+func (f ArticlePaymentMutationRuleFunc) EvalMutation(ctx context.Context, m ent.Mutation) error {
+	if m, ok := m.(*ent.ArticlePaymentMutation); ok {
+		return f(ctx, m)
+	}
+	return Denyf("ent/privacy: unexpected mutation type %T, expect *ent.ArticlePaymentMutation", m)
+}
+
+// The ArticlePurchaseQueryRuleFunc type is an adapter to allow the use of ordinary
+// functions as a query rule.
+type ArticlePurchaseQueryRuleFunc func(context.Context, *ent.ArticlePurchaseQuery) error
+
+// EvalQuery return f(ctx, q).
+func (f ArticlePurchaseQueryRuleFunc) EvalQuery(ctx context.Context, q ent.Query) error {
+	if q, ok := q.(*ent.ArticlePurchaseQuery); ok {
+		return f(ctx, q)
+	}
+	return Denyf("ent/privacy: unexpected query type %T, expect *ent.ArticlePurchaseQuery", q)
+}
+
+// The ArticlePurchaseMutationRuleFunc type is an adapter to allow the use of ordinary
+// functions as a mutation rule.
+type ArticlePurchaseMutationRuleFunc func(context.Context, *ent.ArticlePurchaseMutation) error
+
+// EvalMutation calls f(ctx, m).
+func (f ArticlePurchaseMutationRuleFunc) EvalMutation(ctx context.Context, m ent.Mutation) error {
+	if m, ok := m.(*ent.ArticlePurchaseMutation); ok {
+		return f(ctx, m)
+	}
+	return Denyf("ent/privacy: unexpected mutation type %T, expect *ent.ArticlePurchaseMutation", m)
+}
+
 // The CommentQueryRuleFunc type is an adapter to allow the use of ordinary
 // functions as a query rule.
 type CommentQueryRuleFunc func(context.Context, *ent.CommentQuery) error

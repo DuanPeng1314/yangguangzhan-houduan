@@ -20,56 +20,56 @@ type NotificationTypeDelete struct {
 }
 
 // Where appends a list predicates to the NotificationTypeDelete builder.
-func (_d *NotificationTypeDelete) Where(ps ...predicate.NotificationType) *NotificationTypeDelete {
-	_d.mutation.Where(ps...)
-	return _d
+func (ntd *NotificationTypeDelete) Where(ps ...predicate.NotificationType) *NotificationTypeDelete {
+	ntd.mutation.Where(ps...)
+	return ntd
 }
 
 // Exec executes the deletion query and returns how many vertices were deleted.
-func (_d *NotificationTypeDelete) Exec(ctx context.Context) (int, error) {
-	return withHooks(ctx, _d.sqlExec, _d.mutation, _d.hooks)
+func (ntd *NotificationTypeDelete) Exec(ctx context.Context) (int, error) {
+	return withHooks(ctx, ntd.sqlExec, ntd.mutation, ntd.hooks)
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *NotificationTypeDelete) ExecX(ctx context.Context) int {
-	n, err := _d.Exec(ctx)
+func (ntd *NotificationTypeDelete) ExecX(ctx context.Context) int {
+	n, err := ntd.Exec(ctx)
 	if err != nil {
 		panic(err)
 	}
 	return n
 }
 
-func (_d *NotificationTypeDelete) sqlExec(ctx context.Context) (int, error) {
+func (ntd *NotificationTypeDelete) sqlExec(ctx context.Context) (int, error) {
 	_spec := sqlgraph.NewDeleteSpec(notificationtype.Table, sqlgraph.NewFieldSpec(notificationtype.FieldID, field.TypeUint))
-	if ps := _d.mutation.predicates; len(ps) > 0 {
+	if ps := ntd.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	affected, err := sqlgraph.DeleteNodes(ctx, _d.driver, _spec)
+	affected, err := sqlgraph.DeleteNodes(ctx, ntd.driver, _spec)
 	if err != nil && sqlgraph.IsConstraintError(err) {
 		err = &ConstraintError{msg: err.Error(), wrap: err}
 	}
-	_d.mutation.done = true
+	ntd.mutation.done = true
 	return affected, err
 }
 
 // NotificationTypeDeleteOne is the builder for deleting a single NotificationType entity.
 type NotificationTypeDeleteOne struct {
-	_d *NotificationTypeDelete
+	ntd *NotificationTypeDelete
 }
 
 // Where appends a list predicates to the NotificationTypeDelete builder.
-func (_d *NotificationTypeDeleteOne) Where(ps ...predicate.NotificationType) *NotificationTypeDeleteOne {
-	_d._d.mutation.Where(ps...)
-	return _d
+func (ntdo *NotificationTypeDeleteOne) Where(ps ...predicate.NotificationType) *NotificationTypeDeleteOne {
+	ntdo.ntd.mutation.Where(ps...)
+	return ntdo
 }
 
 // Exec executes the deletion query.
-func (_d *NotificationTypeDeleteOne) Exec(ctx context.Context) error {
-	n, err := _d._d.Exec(ctx)
+func (ntdo *NotificationTypeDeleteOne) Exec(ctx context.Context) error {
+	n, err := ntdo.ntd.Exec(ctx)
 	switch {
 	case err != nil:
 		return err
@@ -81,8 +81,8 @@ func (_d *NotificationTypeDeleteOne) Exec(ctx context.Context) error {
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *NotificationTypeDeleteOne) ExecX(ctx context.Context) {
-	if err := _d.Exec(ctx); err != nil {
+func (ntdo *NotificationTypeDeleteOne) ExecX(ctx context.Context) {
+	if err := ntdo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }

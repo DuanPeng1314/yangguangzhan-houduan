@@ -96,7 +96,7 @@ func (*FileEntity) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the FileEntity fields.
-func (_m *FileEntity) assignValues(columns []string, values []any) error {
+func (fe *FileEntity) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -107,60 +107,60 @@ func (_m *FileEntity) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint(value.Int64)
+			fe.ID = uint(value.Int64)
 		case fileentity.FieldDeletedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field deleted_at", values[i])
 			} else if value.Valid {
-				_m.DeletedAt = new(time.Time)
-				*_m.DeletedAt = value.Time
+				fe.DeletedAt = new(time.Time)
+				*fe.DeletedAt = value.Time
 			}
 		case fileentity.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
 			} else if value.Valid {
-				_m.CreatedAt = value.Time
+				fe.CreatedAt = value.Time
 			}
 		case fileentity.FieldUpdatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field updated_at", values[i])
 			} else if value.Valid {
-				_m.UpdatedAt = value.Time
+				fe.UpdatedAt = value.Time
 			}
 		case fileentity.FieldFileID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field file_id", values[i])
 			} else if value.Valid {
-				_m.FileID = uint(value.Int64)
+				fe.FileID = uint(value.Int64)
 			}
 		case fileentity.FieldEntityID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field entity_id", values[i])
 			} else if value.Valid {
-				_m.EntityID = uint(value.Int64)
+				fe.EntityID = uint(value.Int64)
 			}
 		case fileentity.FieldVersion:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field version", values[i])
 			} else if value.Valid {
-				_m.Version = new(string)
-				*_m.Version = value.String
+				fe.Version = new(string)
+				*fe.Version = value.String
 			}
 		case fileentity.FieldIsCurrent:
 			if value, ok := values[i].(*sql.NullBool); !ok {
 				return fmt.Errorf("unexpected type %T for field is_current", values[i])
 			} else if value.Valid {
-				_m.IsCurrent = value.Bool
+				fe.IsCurrent = value.Bool
 			}
 		case fileentity.FieldUploadedByUserID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field uploaded_by_user_id", values[i])
 			} else if value.Valid {
-				_m.UploadedByUserID = new(uint64)
-				*_m.UploadedByUserID = uint64(value.Int64)
+				fe.UploadedByUserID = new(uint64)
+				*fe.UploadedByUserID = uint64(value.Int64)
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			fe.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -168,69 +168,69 @@ func (_m *FileEntity) assignValues(columns []string, values []any) error {
 
 // Value returns the ent.Value that was dynamically selected and assigned to the FileEntity.
 // This includes values selected through modifiers, order, etc.
-func (_m *FileEntity) Value(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (fe *FileEntity) Value(name string) (ent.Value, error) {
+	return fe.selectValues.Get(name)
 }
 
 // QueryFile queries the "file" edge of the FileEntity entity.
-func (_m *FileEntity) QueryFile() *FileQuery {
-	return NewFileEntityClient(_m.config).QueryFile(_m)
+func (fe *FileEntity) QueryFile() *FileQuery {
+	return NewFileEntityClient(fe.config).QueryFile(fe)
 }
 
 // QueryEntity queries the "entity" edge of the FileEntity entity.
-func (_m *FileEntity) QueryEntity() *EntityQuery {
-	return NewFileEntityClient(_m.config).QueryEntity(_m)
+func (fe *FileEntity) QueryEntity() *EntityQuery {
+	return NewFileEntityClient(fe.config).QueryEntity(fe)
 }
 
 // Update returns a builder for updating this FileEntity.
 // Note that you need to call FileEntity.Unwrap() before calling this method if this FileEntity
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *FileEntity) Update() *FileEntityUpdateOne {
-	return NewFileEntityClient(_m.config).UpdateOne(_m)
+func (fe *FileEntity) Update() *FileEntityUpdateOne {
+	return NewFileEntityClient(fe.config).UpdateOne(fe)
 }
 
 // Unwrap unwraps the FileEntity entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *FileEntity) Unwrap() *FileEntity {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (fe *FileEntity) Unwrap() *FileEntity {
+	_tx, ok := fe.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: FileEntity is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	fe.config.driver = _tx.drv
+	return fe
 }
 
 // String implements the fmt.Stringer.
-func (_m *FileEntity) String() string {
+func (fe *FileEntity) String() string {
 	var builder strings.Builder
 	builder.WriteString("FileEntity(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
-	if v := _m.DeletedAt; v != nil {
+	builder.WriteString(fmt.Sprintf("id=%v, ", fe.ID))
+	if v := fe.DeletedAt; v != nil {
 		builder.WriteString("deleted_at=")
 		builder.WriteString(v.Format(time.ANSIC))
 	}
 	builder.WriteString(", ")
 	builder.WriteString("created_at=")
-	builder.WriteString(_m.CreatedAt.Format(time.ANSIC))
+	builder.WriteString(fe.CreatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("updated_at=")
-	builder.WriteString(_m.UpdatedAt.Format(time.ANSIC))
+	builder.WriteString(fe.UpdatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("file_id=")
-	builder.WriteString(fmt.Sprintf("%v", _m.FileID))
+	builder.WriteString(fmt.Sprintf("%v", fe.FileID))
 	builder.WriteString(", ")
 	builder.WriteString("entity_id=")
-	builder.WriteString(fmt.Sprintf("%v", _m.EntityID))
+	builder.WriteString(fmt.Sprintf("%v", fe.EntityID))
 	builder.WriteString(", ")
-	if v := _m.Version; v != nil {
+	if v := fe.Version; v != nil {
 		builder.WriteString("version=")
 		builder.WriteString(*v)
 	}
 	builder.WriteString(", ")
 	builder.WriteString("is_current=")
-	builder.WriteString(fmt.Sprintf("%v", _m.IsCurrent))
+	builder.WriteString(fmt.Sprintf("%v", fe.IsCurrent))
 	builder.WriteString(", ")
-	if v := _m.UploadedByUserID; v != nil {
+	if v := fe.UploadedByUserID; v != nil {
 		builder.WriteString("uploaded_by_user_id=")
 		builder.WriteString(fmt.Sprintf("%v", *v))
 	}

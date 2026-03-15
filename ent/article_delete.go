@@ -20,56 +20,56 @@ type ArticleDelete struct {
 }
 
 // Where appends a list predicates to the ArticleDelete builder.
-func (_d *ArticleDelete) Where(ps ...predicate.Article) *ArticleDelete {
-	_d.mutation.Where(ps...)
-	return _d
+func (ad *ArticleDelete) Where(ps ...predicate.Article) *ArticleDelete {
+	ad.mutation.Where(ps...)
+	return ad
 }
 
 // Exec executes the deletion query and returns how many vertices were deleted.
-func (_d *ArticleDelete) Exec(ctx context.Context) (int, error) {
-	return withHooks(ctx, _d.sqlExec, _d.mutation, _d.hooks)
+func (ad *ArticleDelete) Exec(ctx context.Context) (int, error) {
+	return withHooks(ctx, ad.sqlExec, ad.mutation, ad.hooks)
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *ArticleDelete) ExecX(ctx context.Context) int {
-	n, err := _d.Exec(ctx)
+func (ad *ArticleDelete) ExecX(ctx context.Context) int {
+	n, err := ad.Exec(ctx)
 	if err != nil {
 		panic(err)
 	}
 	return n
 }
 
-func (_d *ArticleDelete) sqlExec(ctx context.Context) (int, error) {
+func (ad *ArticleDelete) sqlExec(ctx context.Context) (int, error) {
 	_spec := sqlgraph.NewDeleteSpec(article.Table, sqlgraph.NewFieldSpec(article.FieldID, field.TypeUint))
-	if ps := _d.mutation.predicates; len(ps) > 0 {
+	if ps := ad.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	affected, err := sqlgraph.DeleteNodes(ctx, _d.driver, _spec)
+	affected, err := sqlgraph.DeleteNodes(ctx, ad.driver, _spec)
 	if err != nil && sqlgraph.IsConstraintError(err) {
 		err = &ConstraintError{msg: err.Error(), wrap: err}
 	}
-	_d.mutation.done = true
+	ad.mutation.done = true
 	return affected, err
 }
 
 // ArticleDeleteOne is the builder for deleting a single Article entity.
 type ArticleDeleteOne struct {
-	_d *ArticleDelete
+	ad *ArticleDelete
 }
 
 // Where appends a list predicates to the ArticleDelete builder.
-func (_d *ArticleDeleteOne) Where(ps ...predicate.Article) *ArticleDeleteOne {
-	_d._d.mutation.Where(ps...)
-	return _d
+func (ado *ArticleDeleteOne) Where(ps ...predicate.Article) *ArticleDeleteOne {
+	ado.ad.mutation.Where(ps...)
+	return ado
 }
 
 // Exec executes the deletion query.
-func (_d *ArticleDeleteOne) Exec(ctx context.Context) error {
-	n, err := _d._d.Exec(ctx)
+func (ado *ArticleDeleteOne) Exec(ctx context.Context) error {
+	n, err := ado.ad.Exec(ctx)
 	switch {
 	case err != nil:
 		return err
@@ -81,8 +81,8 @@ func (_d *ArticleDeleteOne) Exec(ctx context.Context) error {
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *ArticleDeleteOne) ExecX(ctx context.Context) {
-	if err := _d.Exec(ctx); err != nil {
+func (ado *ArticleDeleteOne) ExecX(ctx context.Context) {
+	if err := ado.Exec(ctx); err != nil {
 		panic(err)
 	}
 }

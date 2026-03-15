@@ -9,6 +9,8 @@ import (
 	"github.com/anzhiyu-c/anheyu-app/ent/albumcategory"
 	"github.com/anzhiyu-c/anheyu-app/ent/article"
 	"github.com/anzhiyu-c/anheyu-app/ent/articlehistory"
+	"github.com/anzhiyu-c/anheyu-app/ent/articlepayment"
+	"github.com/anzhiyu-c/anheyu-app/ent/articlepurchase"
 	"github.com/anzhiyu-c/anheyu-app/ent/comment"
 	"github.com/anzhiyu-c/anheyu-app/ent/directlink"
 	"github.com/anzhiyu-c/anheyu-app/ent/docseries"
@@ -266,6 +268,66 @@ func init() {
 	articlehistoryDescCreatedAt := articlehistoryFields[15].Descriptor()
 	// articlehistory.DefaultCreatedAt holds the default value on creation for the created_at field.
 	articlehistory.DefaultCreatedAt = articlehistoryDescCreatedAt.Default.(func() time.Time)
+	articlepaymentFields := schema.ArticlePayment{}.Fields()
+	_ = articlepaymentFields
+	// articlepaymentDescBlockID is the schema descriptor for block_id field.
+	articlepaymentDescBlockID := articlepaymentFields[2].Descriptor()
+	// articlepayment.BlockIDValidator is a validator for the "block_id" field. It is called by the builders before save.
+	articlepayment.BlockIDValidator = articlepaymentDescBlockID.Validators[0].(func(string) error)
+	// articlepaymentDescTitle is the schema descriptor for title field.
+	articlepaymentDescTitle := articlepaymentFields[3].Descriptor()
+	// articlepayment.DefaultTitle holds the default value on creation for the title field.
+	articlepayment.DefaultTitle = articlepaymentDescTitle.Default.(string)
+	// articlepaymentDescPrice is the schema descriptor for price field.
+	articlepaymentDescPrice := articlepaymentFields[4].Descriptor()
+	// articlepayment.PriceValidator is a validator for the "price" field. It is called by the builders before save.
+	articlepayment.PriceValidator = articlepaymentDescPrice.Validators[0].(func(int) error)
+	// articlepaymentDescOriginalPrice is the schema descriptor for original_price field.
+	articlepaymentDescOriginalPrice := articlepaymentFields[5].Descriptor()
+	// articlepayment.OriginalPriceValidator is a validator for the "original_price" field. It is called by the builders before save.
+	articlepayment.OriginalPriceValidator = articlepaymentDescOriginalPrice.Validators[0].(func(int) error)
+	// articlepaymentDescCurrency is the schema descriptor for currency field.
+	articlepaymentDescCurrency := articlepaymentFields[6].Descriptor()
+	// articlepayment.DefaultCurrency holds the default value on creation for the currency field.
+	articlepayment.DefaultCurrency = articlepaymentDescCurrency.Default.(string)
+	// articlepaymentDescContentLength is the schema descriptor for content_length field.
+	articlepaymentDescContentLength := articlepaymentFields[7].Descriptor()
+	// articlepayment.DefaultContentLength holds the default value on creation for the content_length field.
+	articlepayment.DefaultContentLength = articlepaymentDescContentLength.Default.(int)
+	// articlepayment.ContentLengthValidator is a validator for the "content_length" field. It is called by the builders before save.
+	articlepayment.ContentLengthValidator = articlepaymentDescContentLength.Validators[0].(func(int) error)
+	// articlepaymentDescExcludeFromMembership is the schema descriptor for exclude_from_membership field.
+	articlepaymentDescExcludeFromMembership := articlepaymentFields[8].Descriptor()
+	// articlepayment.DefaultExcludeFromMembership holds the default value on creation for the exclude_from_membership field.
+	articlepayment.DefaultExcludeFromMembership = articlepaymentDescExcludeFromMembership.Default.(bool)
+	// articlepaymentDescCreatedAt is the schema descriptor for created_at field.
+	articlepaymentDescCreatedAt := articlepaymentFields[9].Descriptor()
+	// articlepayment.DefaultCreatedAt holds the default value on creation for the created_at field.
+	articlepayment.DefaultCreatedAt = articlepaymentDescCreatedAt.Default.(func() time.Time)
+	// articlepaymentDescUpdatedAt is the schema descriptor for updated_at field.
+	articlepaymentDescUpdatedAt := articlepaymentFields[10].Descriptor()
+	// articlepayment.DefaultUpdatedAt holds the default value on creation for the updated_at field.
+	articlepayment.DefaultUpdatedAt = articlepaymentDescUpdatedAt.Default.(func() time.Time)
+	// articlepayment.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
+	articlepayment.UpdateDefaultUpdatedAt = articlepaymentDescUpdatedAt.UpdateDefault.(func() time.Time)
+	articlepurchaseFields := schema.ArticlePurchase{}.Fields()
+	_ = articlepurchaseFields
+	// articlepurchaseDescUserID is the schema descriptor for user_id field.
+	articlepurchaseDescUserID := articlepurchaseFields[1].Descriptor()
+	// articlepurchase.UserIDValidator is a validator for the "user_id" field. It is called by the builders before save.
+	articlepurchase.UserIDValidator = articlepurchaseDescUserID.Validators[0].(func(string) error)
+	// articlepurchaseDescBlockID is the schema descriptor for block_id field.
+	articlepurchaseDescBlockID := articlepurchaseFields[3].Descriptor()
+	// articlepurchase.BlockIDValidator is a validator for the "block_id" field. It is called by the builders before save.
+	articlepurchase.BlockIDValidator = articlepurchaseDescBlockID.Validators[0].(func(string) error)
+	// articlepurchaseDescPrice is the schema descriptor for price field.
+	articlepurchaseDescPrice := articlepurchaseFields[4].Descriptor()
+	// articlepurchase.PriceValidator is a validator for the "price" field. It is called by the builders before save.
+	articlepurchase.PriceValidator = articlepurchaseDescPrice.Validators[0].(func(int) error)
+	// articlepurchaseDescPurchasedAt is the schema descriptor for purchased_at field.
+	articlepurchaseDescPurchasedAt := articlepurchaseFields[6].Descriptor()
+	// articlepurchase.DefaultPurchasedAt holds the default value on creation for the purchased_at field.
+	articlepurchase.DefaultPurchasedAt = articlepurchaseDescPurchasedAt.Default.(func() time.Time)
 	commentMixin := schema.Comment{}.Mixin()
 	commentMixinHooks0 := commentMixin[0].Hooks()
 	comment.Hooks[0] = commentMixinHooks0[0]
@@ -1247,6 +1309,6 @@ func init() {
 }
 
 const (
-	Version = "v0.14.5"                                         // Version of ent codegen.
-	Sum     = "h1:Rj2WOYJtCkWyFo6a+5wB3EfBRP0rnx1fMk6gGA0UUe4=" // Sum of ent codegen.
+	Version = "v0.14.4"                                         // Version of ent codegen.
+	Sum     = "h1:/DhDraSLXIkBhyiVoJeSshr4ZYi7femzhj6/TckzZuI=" // Sum of ent codegen.
 )

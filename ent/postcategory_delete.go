@@ -20,56 +20,56 @@ type PostCategoryDelete struct {
 }
 
 // Where appends a list predicates to the PostCategoryDelete builder.
-func (_d *PostCategoryDelete) Where(ps ...predicate.PostCategory) *PostCategoryDelete {
-	_d.mutation.Where(ps...)
-	return _d
+func (pcd *PostCategoryDelete) Where(ps ...predicate.PostCategory) *PostCategoryDelete {
+	pcd.mutation.Where(ps...)
+	return pcd
 }
 
 // Exec executes the deletion query and returns how many vertices were deleted.
-func (_d *PostCategoryDelete) Exec(ctx context.Context) (int, error) {
-	return withHooks(ctx, _d.sqlExec, _d.mutation, _d.hooks)
+func (pcd *PostCategoryDelete) Exec(ctx context.Context) (int, error) {
+	return withHooks(ctx, pcd.sqlExec, pcd.mutation, pcd.hooks)
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *PostCategoryDelete) ExecX(ctx context.Context) int {
-	n, err := _d.Exec(ctx)
+func (pcd *PostCategoryDelete) ExecX(ctx context.Context) int {
+	n, err := pcd.Exec(ctx)
 	if err != nil {
 		panic(err)
 	}
 	return n
 }
 
-func (_d *PostCategoryDelete) sqlExec(ctx context.Context) (int, error) {
+func (pcd *PostCategoryDelete) sqlExec(ctx context.Context) (int, error) {
 	_spec := sqlgraph.NewDeleteSpec(postcategory.Table, sqlgraph.NewFieldSpec(postcategory.FieldID, field.TypeUint))
-	if ps := _d.mutation.predicates; len(ps) > 0 {
+	if ps := pcd.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	affected, err := sqlgraph.DeleteNodes(ctx, _d.driver, _spec)
+	affected, err := sqlgraph.DeleteNodes(ctx, pcd.driver, _spec)
 	if err != nil && sqlgraph.IsConstraintError(err) {
 		err = &ConstraintError{msg: err.Error(), wrap: err}
 	}
-	_d.mutation.done = true
+	pcd.mutation.done = true
 	return affected, err
 }
 
 // PostCategoryDeleteOne is the builder for deleting a single PostCategory entity.
 type PostCategoryDeleteOne struct {
-	_d *PostCategoryDelete
+	pcd *PostCategoryDelete
 }
 
 // Where appends a list predicates to the PostCategoryDelete builder.
-func (_d *PostCategoryDeleteOne) Where(ps ...predicate.PostCategory) *PostCategoryDeleteOne {
-	_d._d.mutation.Where(ps...)
-	return _d
+func (pcdo *PostCategoryDeleteOne) Where(ps ...predicate.PostCategory) *PostCategoryDeleteOne {
+	pcdo.pcd.mutation.Where(ps...)
+	return pcdo
 }
 
 // Exec executes the deletion query.
-func (_d *PostCategoryDeleteOne) Exec(ctx context.Context) error {
-	n, err := _d._d.Exec(ctx)
+func (pcdo *PostCategoryDeleteOne) Exec(ctx context.Context) error {
+	n, err := pcdo.pcd.Exec(ctx)
 	switch {
 	case err != nil:
 		return err
@@ -81,8 +81,8 @@ func (_d *PostCategoryDeleteOne) Exec(ctx context.Context) error {
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *PostCategoryDeleteOne) ExecX(ctx context.Context) {
-	if err := _d.Exec(ctx); err != nil {
+func (pcdo *PostCategoryDeleteOne) ExecX(ctx context.Context) {
+	if err := pcdo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }

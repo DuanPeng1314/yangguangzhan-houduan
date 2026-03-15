@@ -52,7 +52,7 @@ func (*Setting) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the Setting fields.
-func (_m *Setting) assignValues(columns []string, values []any) error {
+func (s *Setting) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -63,46 +63,46 @@ func (_m *Setting) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = int(value.Int64)
+			s.ID = int(value.Int64)
 		case setting.FieldDeletedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field deleted_at", values[i])
 			} else if value.Valid {
-				_m.DeletedAt = new(time.Time)
-				*_m.DeletedAt = value.Time
+				s.DeletedAt = new(time.Time)
+				*s.DeletedAt = value.Time
 			}
 		case setting.FieldConfigKey:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field config_key", values[i])
 			} else if value.Valid {
-				_m.ConfigKey = value.String
+				s.ConfigKey = value.String
 			}
 		case setting.FieldValue:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field value", values[i])
 			} else if value.Valid {
-				_m.Value = value.String
+				s.Value = value.String
 			}
 		case setting.FieldComment:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field comment", values[i])
 			} else if value.Valid {
-				_m.Comment = value.String
+				s.Comment = value.String
 			}
 		case setting.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
 			} else if value.Valid {
-				_m.CreatedAt = value.Time
+				s.CreatedAt = value.Time
 			}
 		case setting.FieldUpdatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field updated_at", values[i])
 			} else if value.Valid {
-				_m.UpdatedAt = value.Time
+				s.UpdatedAt = value.Time
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			s.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -110,52 +110,52 @@ func (_m *Setting) assignValues(columns []string, values []any) error {
 
 // GetValue returns the ent.Value that was dynamically selected and assigned to the Setting.
 // This includes values selected through modifiers, order, etc.
-func (_m *Setting) GetValue(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (s *Setting) GetValue(name string) (ent.Value, error) {
+	return s.selectValues.Get(name)
 }
 
 // Update returns a builder for updating this Setting.
 // Note that you need to call Setting.Unwrap() before calling this method if this Setting
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *Setting) Update() *SettingUpdateOne {
-	return NewSettingClient(_m.config).UpdateOne(_m)
+func (s *Setting) Update() *SettingUpdateOne {
+	return NewSettingClient(s.config).UpdateOne(s)
 }
 
 // Unwrap unwraps the Setting entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *Setting) Unwrap() *Setting {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (s *Setting) Unwrap() *Setting {
+	_tx, ok := s.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: Setting is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	s.config.driver = _tx.drv
+	return s
 }
 
 // String implements the fmt.Stringer.
-func (_m *Setting) String() string {
+func (s *Setting) String() string {
 	var builder strings.Builder
 	builder.WriteString("Setting(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
-	if v := _m.DeletedAt; v != nil {
+	builder.WriteString(fmt.Sprintf("id=%v, ", s.ID))
+	if v := s.DeletedAt; v != nil {
 		builder.WriteString("deleted_at=")
 		builder.WriteString(v.Format(time.ANSIC))
 	}
 	builder.WriteString(", ")
 	builder.WriteString("config_key=")
-	builder.WriteString(_m.ConfigKey)
+	builder.WriteString(s.ConfigKey)
 	builder.WriteString(", ")
 	builder.WriteString("value=")
-	builder.WriteString(_m.Value)
+	builder.WriteString(s.Value)
 	builder.WriteString(", ")
 	builder.WriteString("comment=")
-	builder.WriteString(_m.Comment)
+	builder.WriteString(s.Comment)
 	builder.WriteString(", ")
 	builder.WriteString("created_at=")
-	builder.WriteString(_m.CreatedAt.Format(time.ANSIC))
+	builder.WriteString(s.CreatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("updated_at=")
-	builder.WriteString(_m.UpdatedAt.Format(time.ANSIC))
+	builder.WriteString(s.UpdatedAt.Format(time.ANSIC))
 	builder.WriteByte(')')
 	return builder.String()
 }

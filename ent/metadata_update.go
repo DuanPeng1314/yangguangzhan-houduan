@@ -25,112 +25,112 @@ type MetadataUpdate struct {
 }
 
 // Where appends a list predicates to the MetadataUpdate builder.
-func (_u *MetadataUpdate) Where(ps ...predicate.Metadata) *MetadataUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (mu *MetadataUpdate) Where(ps ...predicate.Metadata) *MetadataUpdate {
+	mu.mutation.Where(ps...)
+	return mu
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *MetadataUpdate) SetDeletedAt(v time.Time) *MetadataUpdate {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (mu *MetadataUpdate) SetDeletedAt(t time.Time) *MetadataUpdate {
+	mu.mutation.SetDeletedAt(t)
+	return mu
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *MetadataUpdate) SetNillableDeletedAt(v *time.Time) *MetadataUpdate {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (mu *MetadataUpdate) SetNillableDeletedAt(t *time.Time) *MetadataUpdate {
+	if t != nil {
+		mu.SetDeletedAt(*t)
 	}
-	return _u
+	return mu
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *MetadataUpdate) ClearDeletedAt() *MetadataUpdate {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (mu *MetadataUpdate) ClearDeletedAt() *MetadataUpdate {
+	mu.mutation.ClearDeletedAt()
+	return mu
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *MetadataUpdate) SetUpdatedAt(v time.Time) *MetadataUpdate {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (mu *MetadataUpdate) SetUpdatedAt(t time.Time) *MetadataUpdate {
+	mu.mutation.SetUpdatedAt(t)
+	return mu
 }
 
 // SetName sets the "name" field.
-func (_u *MetadataUpdate) SetName(v string) *MetadataUpdate {
-	_u.mutation.SetName(v)
-	return _u
+func (mu *MetadataUpdate) SetName(s string) *MetadataUpdate {
+	mu.mutation.SetName(s)
+	return mu
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *MetadataUpdate) SetNillableName(v *string) *MetadataUpdate {
-	if v != nil {
-		_u.SetName(*v)
+func (mu *MetadataUpdate) SetNillableName(s *string) *MetadataUpdate {
+	if s != nil {
+		mu.SetName(*s)
 	}
-	return _u
+	return mu
 }
 
 // SetValue sets the "value" field.
-func (_u *MetadataUpdate) SetValue(v string) *MetadataUpdate {
-	_u.mutation.SetValue(v)
-	return _u
+func (mu *MetadataUpdate) SetValue(s string) *MetadataUpdate {
+	mu.mutation.SetValue(s)
+	return mu
 }
 
 // SetNillableValue sets the "value" field if the given value is not nil.
-func (_u *MetadataUpdate) SetNillableValue(v *string) *MetadataUpdate {
-	if v != nil {
-		_u.SetValue(*v)
+func (mu *MetadataUpdate) SetNillableValue(s *string) *MetadataUpdate {
+	if s != nil {
+		mu.SetValue(*s)
 	}
-	return _u
+	return mu
 }
 
 // ClearValue clears the value of the "value" field.
-func (_u *MetadataUpdate) ClearValue() *MetadataUpdate {
-	_u.mutation.ClearValue()
-	return _u
+func (mu *MetadataUpdate) ClearValue() *MetadataUpdate {
+	mu.mutation.ClearValue()
+	return mu
 }
 
 // SetFileID sets the "file_id" field.
-func (_u *MetadataUpdate) SetFileID(v uint) *MetadataUpdate {
-	_u.mutation.SetFileID(v)
-	return _u
+func (mu *MetadataUpdate) SetFileID(u uint) *MetadataUpdate {
+	mu.mutation.SetFileID(u)
+	return mu
 }
 
 // SetNillableFileID sets the "file_id" field if the given value is not nil.
-func (_u *MetadataUpdate) SetNillableFileID(v *uint) *MetadataUpdate {
-	if v != nil {
-		_u.SetFileID(*v)
+func (mu *MetadataUpdate) SetNillableFileID(u *uint) *MetadataUpdate {
+	if u != nil {
+		mu.SetFileID(*u)
 	}
-	return _u
+	return mu
 }
 
 // SetFile sets the "file" edge to the File entity.
-func (_u *MetadataUpdate) SetFile(v *File) *MetadataUpdate {
-	return _u.SetFileID(v.ID)
+func (mu *MetadataUpdate) SetFile(f *File) *MetadataUpdate {
+	return mu.SetFileID(f.ID)
 }
 
 // Mutation returns the MetadataMutation object of the builder.
-func (_u *MetadataUpdate) Mutation() *MetadataMutation {
-	return _u.mutation
+func (mu *MetadataUpdate) Mutation() *MetadataMutation {
+	return mu.mutation
 }
 
 // ClearFile clears the "file" edge to the File entity.
-func (_u *MetadataUpdate) ClearFile() *MetadataUpdate {
-	_u.mutation.ClearFile()
-	return _u
+func (mu *MetadataUpdate) ClearFile() *MetadataUpdate {
+	mu.mutation.ClearFile()
+	return mu
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *MetadataUpdate) Save(ctx context.Context) (int, error) {
-	if err := _u.defaults(); err != nil {
+func (mu *MetadataUpdate) Save(ctx context.Context) (int, error) {
+	if err := mu.defaults(); err != nil {
 		return 0, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, mu.sqlSave, mu.mutation, mu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *MetadataUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (mu *MetadataUpdate) SaveX(ctx context.Context) int {
+	affected, err := mu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -138,80 +138,80 @@ func (_u *MetadataUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *MetadataUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (mu *MetadataUpdate) Exec(ctx context.Context) error {
+	_, err := mu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *MetadataUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (mu *MetadataUpdate) ExecX(ctx context.Context) {
+	if err := mu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *MetadataUpdate) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (mu *MetadataUpdate) defaults() error {
+	if _, ok := mu.mutation.UpdatedAt(); !ok {
 		if metadata.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized metadata.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := metadata.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		mu.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *MetadataUpdate) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (mu *MetadataUpdate) check() error {
+	if v, ok := mu.mutation.Name(); ok {
 		if err := metadata.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "Metadata.name": %w`, err)}
 		}
 	}
-	if _u.mutation.FileCleared() && len(_u.mutation.FileIDs()) > 0 {
+	if mu.mutation.FileCleared() && len(mu.mutation.FileIDs()) > 0 {
 		return errors.New(`ent: clearing a required unique edge "Metadata.file"`)
 	}
 	return nil
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *MetadataUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *MetadataUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (mu *MetadataUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *MetadataUpdate {
+	mu.modifiers = append(mu.modifiers, modifiers...)
+	return mu
 }
 
-func (_u *MetadataUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (mu *MetadataUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := mu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(metadata.Table, metadata.Columns, sqlgraph.NewFieldSpec(metadata.FieldID, field.TypeUint))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := mu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := mu.mutation.DeletedAt(); ok {
 		_spec.SetField(metadata.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if mu.mutation.DeletedAtCleared() {
 		_spec.ClearField(metadata.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := mu.mutation.UpdatedAt(); ok {
 		_spec.SetField(metadata.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := mu.mutation.Name(); ok {
 		_spec.SetField(metadata.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Value(); ok {
+	if value, ok := mu.mutation.Value(); ok {
 		_spec.SetField(metadata.FieldValue, field.TypeString, value)
 	}
-	if _u.mutation.ValueCleared() {
+	if mu.mutation.ValueCleared() {
 		_spec.ClearField(metadata.FieldValue, field.TypeString)
 	}
-	if _u.mutation.FileCleared() {
+	if mu.mutation.FileCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -224,7 +224,7 @@ func (_u *MetadataUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.FileIDs(); len(nodes) > 0 {
+	if nodes := mu.mutation.FileIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -240,8 +240,8 @@ func (_u *MetadataUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(mu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, mu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{metadata.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -249,8 +249,8 @@ func (_u *MetadataUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	mu.mutation.done = true
+	return n, nil
 }
 
 // MetadataUpdateOne is the builder for updating a single Metadata entity.
@@ -263,119 +263,119 @@ type MetadataUpdateOne struct {
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *MetadataUpdateOne) SetDeletedAt(v time.Time) *MetadataUpdateOne {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (muo *MetadataUpdateOne) SetDeletedAt(t time.Time) *MetadataUpdateOne {
+	muo.mutation.SetDeletedAt(t)
+	return muo
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *MetadataUpdateOne) SetNillableDeletedAt(v *time.Time) *MetadataUpdateOne {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (muo *MetadataUpdateOne) SetNillableDeletedAt(t *time.Time) *MetadataUpdateOne {
+	if t != nil {
+		muo.SetDeletedAt(*t)
 	}
-	return _u
+	return muo
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *MetadataUpdateOne) ClearDeletedAt() *MetadataUpdateOne {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (muo *MetadataUpdateOne) ClearDeletedAt() *MetadataUpdateOne {
+	muo.mutation.ClearDeletedAt()
+	return muo
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *MetadataUpdateOne) SetUpdatedAt(v time.Time) *MetadataUpdateOne {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (muo *MetadataUpdateOne) SetUpdatedAt(t time.Time) *MetadataUpdateOne {
+	muo.mutation.SetUpdatedAt(t)
+	return muo
 }
 
 // SetName sets the "name" field.
-func (_u *MetadataUpdateOne) SetName(v string) *MetadataUpdateOne {
-	_u.mutation.SetName(v)
-	return _u
+func (muo *MetadataUpdateOne) SetName(s string) *MetadataUpdateOne {
+	muo.mutation.SetName(s)
+	return muo
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *MetadataUpdateOne) SetNillableName(v *string) *MetadataUpdateOne {
-	if v != nil {
-		_u.SetName(*v)
+func (muo *MetadataUpdateOne) SetNillableName(s *string) *MetadataUpdateOne {
+	if s != nil {
+		muo.SetName(*s)
 	}
-	return _u
+	return muo
 }
 
 // SetValue sets the "value" field.
-func (_u *MetadataUpdateOne) SetValue(v string) *MetadataUpdateOne {
-	_u.mutation.SetValue(v)
-	return _u
+func (muo *MetadataUpdateOne) SetValue(s string) *MetadataUpdateOne {
+	muo.mutation.SetValue(s)
+	return muo
 }
 
 // SetNillableValue sets the "value" field if the given value is not nil.
-func (_u *MetadataUpdateOne) SetNillableValue(v *string) *MetadataUpdateOne {
-	if v != nil {
-		_u.SetValue(*v)
+func (muo *MetadataUpdateOne) SetNillableValue(s *string) *MetadataUpdateOne {
+	if s != nil {
+		muo.SetValue(*s)
 	}
-	return _u
+	return muo
 }
 
 // ClearValue clears the value of the "value" field.
-func (_u *MetadataUpdateOne) ClearValue() *MetadataUpdateOne {
-	_u.mutation.ClearValue()
-	return _u
+func (muo *MetadataUpdateOne) ClearValue() *MetadataUpdateOne {
+	muo.mutation.ClearValue()
+	return muo
 }
 
 // SetFileID sets the "file_id" field.
-func (_u *MetadataUpdateOne) SetFileID(v uint) *MetadataUpdateOne {
-	_u.mutation.SetFileID(v)
-	return _u
+func (muo *MetadataUpdateOne) SetFileID(u uint) *MetadataUpdateOne {
+	muo.mutation.SetFileID(u)
+	return muo
 }
 
 // SetNillableFileID sets the "file_id" field if the given value is not nil.
-func (_u *MetadataUpdateOne) SetNillableFileID(v *uint) *MetadataUpdateOne {
-	if v != nil {
-		_u.SetFileID(*v)
+func (muo *MetadataUpdateOne) SetNillableFileID(u *uint) *MetadataUpdateOne {
+	if u != nil {
+		muo.SetFileID(*u)
 	}
-	return _u
+	return muo
 }
 
 // SetFile sets the "file" edge to the File entity.
-func (_u *MetadataUpdateOne) SetFile(v *File) *MetadataUpdateOne {
-	return _u.SetFileID(v.ID)
+func (muo *MetadataUpdateOne) SetFile(f *File) *MetadataUpdateOne {
+	return muo.SetFileID(f.ID)
 }
 
 // Mutation returns the MetadataMutation object of the builder.
-func (_u *MetadataUpdateOne) Mutation() *MetadataMutation {
-	return _u.mutation
+func (muo *MetadataUpdateOne) Mutation() *MetadataMutation {
+	return muo.mutation
 }
 
 // ClearFile clears the "file" edge to the File entity.
-func (_u *MetadataUpdateOne) ClearFile() *MetadataUpdateOne {
-	_u.mutation.ClearFile()
-	return _u
+func (muo *MetadataUpdateOne) ClearFile() *MetadataUpdateOne {
+	muo.mutation.ClearFile()
+	return muo
 }
 
 // Where appends a list predicates to the MetadataUpdate builder.
-func (_u *MetadataUpdateOne) Where(ps ...predicate.Metadata) *MetadataUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (muo *MetadataUpdateOne) Where(ps ...predicate.Metadata) *MetadataUpdateOne {
+	muo.mutation.Where(ps...)
+	return muo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *MetadataUpdateOne) Select(field string, fields ...string) *MetadataUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (muo *MetadataUpdateOne) Select(field string, fields ...string) *MetadataUpdateOne {
+	muo.fields = append([]string{field}, fields...)
+	return muo
 }
 
 // Save executes the query and returns the updated Metadata entity.
-func (_u *MetadataUpdateOne) Save(ctx context.Context) (*Metadata, error) {
-	if err := _u.defaults(); err != nil {
+func (muo *MetadataUpdateOne) Save(ctx context.Context) (*Metadata, error) {
+	if err := muo.defaults(); err != nil {
 		return nil, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, muo.sqlSave, muo.mutation, muo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *MetadataUpdateOne) SaveX(ctx context.Context) *Metadata {
-	node, err := _u.Save(ctx)
+func (muo *MetadataUpdateOne) SaveX(ctx context.Context) *Metadata {
+	node, err := muo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -383,60 +383,60 @@ func (_u *MetadataUpdateOne) SaveX(ctx context.Context) *Metadata {
 }
 
 // Exec executes the query on the entity.
-func (_u *MetadataUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (muo *MetadataUpdateOne) Exec(ctx context.Context) error {
+	_, err := muo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *MetadataUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (muo *MetadataUpdateOne) ExecX(ctx context.Context) {
+	if err := muo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *MetadataUpdateOne) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (muo *MetadataUpdateOne) defaults() error {
+	if _, ok := muo.mutation.UpdatedAt(); !ok {
 		if metadata.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized metadata.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := metadata.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		muo.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *MetadataUpdateOne) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (muo *MetadataUpdateOne) check() error {
+	if v, ok := muo.mutation.Name(); ok {
 		if err := metadata.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "Metadata.name": %w`, err)}
 		}
 	}
-	if _u.mutation.FileCleared() && len(_u.mutation.FileIDs()) > 0 {
+	if muo.mutation.FileCleared() && len(muo.mutation.FileIDs()) > 0 {
 		return errors.New(`ent: clearing a required unique edge "Metadata.file"`)
 	}
 	return nil
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *MetadataUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *MetadataUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (muo *MetadataUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *MetadataUpdateOne {
+	muo.modifiers = append(muo.modifiers, modifiers...)
+	return muo
 }
 
-func (_u *MetadataUpdateOne) sqlSave(ctx context.Context) (_node *Metadata, err error) {
-	if err := _u.check(); err != nil {
+func (muo *MetadataUpdateOne) sqlSave(ctx context.Context) (_node *Metadata, err error) {
+	if err := muo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(metadata.Table, metadata.Columns, sqlgraph.NewFieldSpec(metadata.FieldID, field.TypeUint))
-	id, ok := _u.mutation.ID()
+	id, ok := muo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "Metadata.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := muo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, metadata.FieldID)
 		for _, f := range fields {
@@ -448,32 +448,32 @@ func (_u *MetadataUpdateOne) sqlSave(ctx context.Context) (_node *Metadata, err 
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := muo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := muo.mutation.DeletedAt(); ok {
 		_spec.SetField(metadata.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if muo.mutation.DeletedAtCleared() {
 		_spec.ClearField(metadata.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := muo.mutation.UpdatedAt(); ok {
 		_spec.SetField(metadata.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := muo.mutation.Name(); ok {
 		_spec.SetField(metadata.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Value(); ok {
+	if value, ok := muo.mutation.Value(); ok {
 		_spec.SetField(metadata.FieldValue, field.TypeString, value)
 	}
-	if _u.mutation.ValueCleared() {
+	if muo.mutation.ValueCleared() {
 		_spec.ClearField(metadata.FieldValue, field.TypeString)
 	}
-	if _u.mutation.FileCleared() {
+	if muo.mutation.FileCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -486,7 +486,7 @@ func (_u *MetadataUpdateOne) sqlSave(ctx context.Context) (_node *Metadata, err 
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.FileIDs(); len(nodes) > 0 {
+	if nodes := muo.mutation.FileIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -502,11 +502,11 @@ func (_u *MetadataUpdateOne) sqlSave(ctx context.Context) (_node *Metadata, err 
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &Metadata{config: _u.config}
+	_spec.AddModifiers(muo.modifiers...)
+	_node = &Metadata{config: muo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, muo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{metadata.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -514,6 +514,6 @@ func (_u *MetadataUpdateOne) sqlSave(ctx context.Context) (_node *Metadata, err 
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	muo.mutation.done = true
 	return _node, nil
 }

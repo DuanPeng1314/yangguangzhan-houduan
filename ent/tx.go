@@ -20,6 +20,10 @@ type Tx struct {
 	Article *ArticleClient
 	// ArticleHistory is the client for interacting with the ArticleHistory builders.
 	ArticleHistory *ArticleHistoryClient
+	// ArticlePayment is the client for interacting with the ArticlePayment builders.
+	ArticlePayment *ArticlePaymentClient
+	// ArticlePurchase is the client for interacting with the ArticlePurchase builders.
+	ArticlePurchase *ArticlePurchaseClient
 	// Comment is the client for interacting with the Comment builders.
 	Comment *CommentClient
 	// DirectLink is the client for interacting with the DirectLink builders.
@@ -205,6 +209,8 @@ func (tx *Tx) init() {
 	tx.AlbumCategory = NewAlbumCategoryClient(tx.config)
 	tx.Article = NewArticleClient(tx.config)
 	tx.ArticleHistory = NewArticleHistoryClient(tx.config)
+	tx.ArticlePayment = NewArticlePaymentClient(tx.config)
+	tx.ArticlePurchase = NewArticlePurchaseClient(tx.config)
 	tx.Comment = NewCommentClient(tx.config)
 	tx.DirectLink = NewDirectLinkClient(tx.config)
 	tx.DocSeries = NewDocSeriesClient(tx.config)

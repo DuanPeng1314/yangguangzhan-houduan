@@ -3,8 +3,10 @@ package listener
 import (
 	"log"
 
+	"github.com/anzhiyu-c/anheyu-app/ent"
 	"github.com/anzhiyu-c/anheyu-app/internal/pkg/event"
 	"github.com/anzhiyu-c/anheyu-app/modules"
+	"github.com/anzhiyu-c/anheyu-app/modules/payment"
 	"github.com/anzhiyu-c/anheyu-app/modules/seo"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/setting"
 )
@@ -14,7 +16,7 @@ type SeoModuleListener struct {
 	settingSvc setting.SettingService
 }
 
-func NewSeoModuleListener(settingSvc setting.SettingService) *SeoModuleListener {
+func NewSeoModuleListener(settingSvc setting.SettingService, db *ent.Client) *SeoModuleListener {
 	registry := modules.GetRegistry()
 
 	seoModule := seo.NewSeoModule()
@@ -22,8 +24,18 @@ func NewSeoModuleListener(settingSvc setting.SettingService) *SeoModuleListener 
 
 	if err := seoModule.Init(&modules.ModuleContext{
 		SettingSvc: settingSvc,
+		DB:         db,
 	}); err != nil {
 		log.Printf("[SeoModuleListener] SEO 模块初始化失败: %v", err)
+	}
+
+	paymentModule := payment.NewPaymentModule()
+	registry.Register(paymentModule)
+	if err := paymentModule.Init(&modules.ModuleContext{
+		SettingSvc: settingSvc,
+		DB:         db,
+	}); err != nil {
+		log.Printf("[SeoModuleListener] Payment 模块初始化失败: %v", err)
 	}
 
 	return &SeoModuleListener{
@@ -36,7 +48,7 @@ func (l *SeoModuleListener) RegisterHandlers(bus *event.EventBus) {
 	bus.Subscribe(event.ArticlePublished, l.onArticlePublished)
 	bus.Subscribe(event.ArticleUpdated, l.onArticleUpdated)
 
-	log.Println("[SeoModuleListener] SEO 模块事件监听器已注册")
+	log.Println("[SeoModuleListener] 模块事件监听器已注册")
 }
 
 func (l *SeoModuleListener) onArticlePublished(payload interface{}) {

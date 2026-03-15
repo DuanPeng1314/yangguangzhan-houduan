@@ -24,79 +24,79 @@ type SubscriberUpdate struct {
 }
 
 // Where appends a list predicates to the SubscriberUpdate builder.
-func (_u *SubscriberUpdate) Where(ps ...predicate.Subscriber) *SubscriberUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (su *SubscriberUpdate) Where(ps ...predicate.Subscriber) *SubscriberUpdate {
+	su.mutation.Where(ps...)
+	return su
 }
 
 // SetEmail sets the "email" field.
-func (_u *SubscriberUpdate) SetEmail(v string) *SubscriberUpdate {
-	_u.mutation.SetEmail(v)
-	return _u
+func (su *SubscriberUpdate) SetEmail(s string) *SubscriberUpdate {
+	su.mutation.SetEmail(s)
+	return su
 }
 
 // SetNillableEmail sets the "email" field if the given value is not nil.
-func (_u *SubscriberUpdate) SetNillableEmail(v *string) *SubscriberUpdate {
-	if v != nil {
-		_u.SetEmail(*v)
+func (su *SubscriberUpdate) SetNillableEmail(s *string) *SubscriberUpdate {
+	if s != nil {
+		su.SetEmail(*s)
 	}
-	return _u
+	return su
 }
 
 // SetIsActive sets the "is_active" field.
-func (_u *SubscriberUpdate) SetIsActive(v bool) *SubscriberUpdate {
-	_u.mutation.SetIsActive(v)
-	return _u
+func (su *SubscriberUpdate) SetIsActive(b bool) *SubscriberUpdate {
+	su.mutation.SetIsActive(b)
+	return su
 }
 
 // SetNillableIsActive sets the "is_active" field if the given value is not nil.
-func (_u *SubscriberUpdate) SetNillableIsActive(v *bool) *SubscriberUpdate {
-	if v != nil {
-		_u.SetIsActive(*v)
+func (su *SubscriberUpdate) SetNillableIsActive(b *bool) *SubscriberUpdate {
+	if b != nil {
+		su.SetIsActive(*b)
 	}
-	return _u
+	return su
 }
 
 // SetToken sets the "token" field.
-func (_u *SubscriberUpdate) SetToken(v string) *SubscriberUpdate {
-	_u.mutation.SetToken(v)
-	return _u
+func (su *SubscriberUpdate) SetToken(s string) *SubscriberUpdate {
+	su.mutation.SetToken(s)
+	return su
 }
 
 // SetNillableToken sets the "token" field if the given value is not nil.
-func (_u *SubscriberUpdate) SetNillableToken(v *string) *SubscriberUpdate {
-	if v != nil {
-		_u.SetToken(*v)
+func (su *SubscriberUpdate) SetNillableToken(s *string) *SubscriberUpdate {
+	if s != nil {
+		su.SetToken(*s)
 	}
-	return _u
+	return su
 }
 
 // ClearToken clears the value of the "token" field.
-func (_u *SubscriberUpdate) ClearToken() *SubscriberUpdate {
-	_u.mutation.ClearToken()
-	return _u
+func (su *SubscriberUpdate) ClearToken() *SubscriberUpdate {
+	su.mutation.ClearToken()
+	return su
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *SubscriberUpdate) SetUpdatedAt(v time.Time) *SubscriberUpdate {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (su *SubscriberUpdate) SetUpdatedAt(t time.Time) *SubscriberUpdate {
+	su.mutation.SetUpdatedAt(t)
+	return su
 }
 
 // Mutation returns the SubscriberMutation object of the builder.
-func (_u *SubscriberUpdate) Mutation() *SubscriberMutation {
-	return _u.mutation
+func (su *SubscriberUpdate) Mutation() *SubscriberMutation {
+	return su.mutation
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *SubscriberUpdate) Save(ctx context.Context) (int, error) {
-	_u.defaults()
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (su *SubscriberUpdate) Save(ctx context.Context) (int, error) {
+	su.defaults()
+	return withHooks(ctx, su.sqlSave, su.mutation, su.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *SubscriberUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (su *SubscriberUpdate) SaveX(ctx context.Context) int {
+	affected, err := su.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -104,34 +104,34 @@ func (_u *SubscriberUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *SubscriberUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (su *SubscriberUpdate) Exec(ctx context.Context) error {
+	_, err := su.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *SubscriberUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (su *SubscriberUpdate) ExecX(ctx context.Context) {
+	if err := su.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *SubscriberUpdate) defaults() {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (su *SubscriberUpdate) defaults() {
+	if _, ok := su.mutation.UpdatedAt(); !ok {
 		v := subscriber.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		su.mutation.SetUpdatedAt(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *SubscriberUpdate) check() error {
-	if v, ok := _u.mutation.Email(); ok {
+func (su *SubscriberUpdate) check() error {
+	if v, ok := su.mutation.Email(); ok {
 		if err := subscriber.EmailValidator(v); err != nil {
 			return &ValidationError{Name: "email", err: fmt.Errorf(`ent: validator failed for field "Subscriber.email": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Token(); ok {
+	if v, ok := su.mutation.Token(); ok {
 		if err := subscriber.TokenValidator(v); err != nil {
 			return &ValidationError{Name: "token", err: fmt.Errorf(`ent: validator failed for field "Subscriber.token": %w`, err)}
 		}
@@ -140,40 +140,40 @@ func (_u *SubscriberUpdate) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *SubscriberUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *SubscriberUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (su *SubscriberUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *SubscriberUpdate {
+	su.modifiers = append(su.modifiers, modifiers...)
+	return su
 }
 
-func (_u *SubscriberUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (su *SubscriberUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := su.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(subscriber.Table, subscriber.Columns, sqlgraph.NewFieldSpec(subscriber.FieldID, field.TypeInt))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := su.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.Email(); ok {
+	if value, ok := su.mutation.Email(); ok {
 		_spec.SetField(subscriber.FieldEmail, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.IsActive(); ok {
+	if value, ok := su.mutation.IsActive(); ok {
 		_spec.SetField(subscriber.FieldIsActive, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.Token(); ok {
+	if value, ok := su.mutation.Token(); ok {
 		_spec.SetField(subscriber.FieldToken, field.TypeString, value)
 	}
-	if _u.mutation.TokenCleared() {
+	if su.mutation.TokenCleared() {
 		_spec.ClearField(subscriber.FieldToken, field.TypeString)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := su.mutation.UpdatedAt(); ok {
 		_spec.SetField(subscriber.FieldUpdatedAt, field.TypeTime, value)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(su.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, su.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{subscriber.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -181,8 +181,8 @@ func (_u *SubscriberUpdate) sqlSave(ctx context.Context) (_node int, err error) 
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	su.mutation.done = true
+	return n, nil
 }
 
 // SubscriberUpdateOne is the builder for updating a single Subscriber entity.
@@ -195,86 +195,86 @@ type SubscriberUpdateOne struct {
 }
 
 // SetEmail sets the "email" field.
-func (_u *SubscriberUpdateOne) SetEmail(v string) *SubscriberUpdateOne {
-	_u.mutation.SetEmail(v)
-	return _u
+func (suo *SubscriberUpdateOne) SetEmail(s string) *SubscriberUpdateOne {
+	suo.mutation.SetEmail(s)
+	return suo
 }
 
 // SetNillableEmail sets the "email" field if the given value is not nil.
-func (_u *SubscriberUpdateOne) SetNillableEmail(v *string) *SubscriberUpdateOne {
-	if v != nil {
-		_u.SetEmail(*v)
+func (suo *SubscriberUpdateOne) SetNillableEmail(s *string) *SubscriberUpdateOne {
+	if s != nil {
+		suo.SetEmail(*s)
 	}
-	return _u
+	return suo
 }
 
 // SetIsActive sets the "is_active" field.
-func (_u *SubscriberUpdateOne) SetIsActive(v bool) *SubscriberUpdateOne {
-	_u.mutation.SetIsActive(v)
-	return _u
+func (suo *SubscriberUpdateOne) SetIsActive(b bool) *SubscriberUpdateOne {
+	suo.mutation.SetIsActive(b)
+	return suo
 }
 
 // SetNillableIsActive sets the "is_active" field if the given value is not nil.
-func (_u *SubscriberUpdateOne) SetNillableIsActive(v *bool) *SubscriberUpdateOne {
-	if v != nil {
-		_u.SetIsActive(*v)
+func (suo *SubscriberUpdateOne) SetNillableIsActive(b *bool) *SubscriberUpdateOne {
+	if b != nil {
+		suo.SetIsActive(*b)
 	}
-	return _u
+	return suo
 }
 
 // SetToken sets the "token" field.
-func (_u *SubscriberUpdateOne) SetToken(v string) *SubscriberUpdateOne {
-	_u.mutation.SetToken(v)
-	return _u
+func (suo *SubscriberUpdateOne) SetToken(s string) *SubscriberUpdateOne {
+	suo.mutation.SetToken(s)
+	return suo
 }
 
 // SetNillableToken sets the "token" field if the given value is not nil.
-func (_u *SubscriberUpdateOne) SetNillableToken(v *string) *SubscriberUpdateOne {
-	if v != nil {
-		_u.SetToken(*v)
+func (suo *SubscriberUpdateOne) SetNillableToken(s *string) *SubscriberUpdateOne {
+	if s != nil {
+		suo.SetToken(*s)
 	}
-	return _u
+	return suo
 }
 
 // ClearToken clears the value of the "token" field.
-func (_u *SubscriberUpdateOne) ClearToken() *SubscriberUpdateOne {
-	_u.mutation.ClearToken()
-	return _u
+func (suo *SubscriberUpdateOne) ClearToken() *SubscriberUpdateOne {
+	suo.mutation.ClearToken()
+	return suo
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *SubscriberUpdateOne) SetUpdatedAt(v time.Time) *SubscriberUpdateOne {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (suo *SubscriberUpdateOne) SetUpdatedAt(t time.Time) *SubscriberUpdateOne {
+	suo.mutation.SetUpdatedAt(t)
+	return suo
 }
 
 // Mutation returns the SubscriberMutation object of the builder.
-func (_u *SubscriberUpdateOne) Mutation() *SubscriberMutation {
-	return _u.mutation
+func (suo *SubscriberUpdateOne) Mutation() *SubscriberMutation {
+	return suo.mutation
 }
 
 // Where appends a list predicates to the SubscriberUpdate builder.
-func (_u *SubscriberUpdateOne) Where(ps ...predicate.Subscriber) *SubscriberUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (suo *SubscriberUpdateOne) Where(ps ...predicate.Subscriber) *SubscriberUpdateOne {
+	suo.mutation.Where(ps...)
+	return suo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *SubscriberUpdateOne) Select(field string, fields ...string) *SubscriberUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (suo *SubscriberUpdateOne) Select(field string, fields ...string) *SubscriberUpdateOne {
+	suo.fields = append([]string{field}, fields...)
+	return suo
 }
 
 // Save executes the query and returns the updated Subscriber entity.
-func (_u *SubscriberUpdateOne) Save(ctx context.Context) (*Subscriber, error) {
-	_u.defaults()
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (suo *SubscriberUpdateOne) Save(ctx context.Context) (*Subscriber, error) {
+	suo.defaults()
+	return withHooks(ctx, suo.sqlSave, suo.mutation, suo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *SubscriberUpdateOne) SaveX(ctx context.Context) *Subscriber {
-	node, err := _u.Save(ctx)
+func (suo *SubscriberUpdateOne) SaveX(ctx context.Context) *Subscriber {
+	node, err := suo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -282,34 +282,34 @@ func (_u *SubscriberUpdateOne) SaveX(ctx context.Context) *Subscriber {
 }
 
 // Exec executes the query on the entity.
-func (_u *SubscriberUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (suo *SubscriberUpdateOne) Exec(ctx context.Context) error {
+	_, err := suo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *SubscriberUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (suo *SubscriberUpdateOne) ExecX(ctx context.Context) {
+	if err := suo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *SubscriberUpdateOne) defaults() {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (suo *SubscriberUpdateOne) defaults() {
+	if _, ok := suo.mutation.UpdatedAt(); !ok {
 		v := subscriber.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		suo.mutation.SetUpdatedAt(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *SubscriberUpdateOne) check() error {
-	if v, ok := _u.mutation.Email(); ok {
+func (suo *SubscriberUpdateOne) check() error {
+	if v, ok := suo.mutation.Email(); ok {
 		if err := subscriber.EmailValidator(v); err != nil {
 			return &ValidationError{Name: "email", err: fmt.Errorf(`ent: validator failed for field "Subscriber.email": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Token(); ok {
+	if v, ok := suo.mutation.Token(); ok {
 		if err := subscriber.TokenValidator(v); err != nil {
 			return &ValidationError{Name: "token", err: fmt.Errorf(`ent: validator failed for field "Subscriber.token": %w`, err)}
 		}
@@ -318,22 +318,22 @@ func (_u *SubscriberUpdateOne) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *SubscriberUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *SubscriberUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (suo *SubscriberUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *SubscriberUpdateOne {
+	suo.modifiers = append(suo.modifiers, modifiers...)
+	return suo
 }
 
-func (_u *SubscriberUpdateOne) sqlSave(ctx context.Context) (_node *Subscriber, err error) {
-	if err := _u.check(); err != nil {
+func (suo *SubscriberUpdateOne) sqlSave(ctx context.Context) (_node *Subscriber, err error) {
+	if err := suo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(subscriber.Table, subscriber.Columns, sqlgraph.NewFieldSpec(subscriber.FieldID, field.TypeInt))
-	id, ok := _u.mutation.ID()
+	id, ok := suo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "Subscriber.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := suo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, subscriber.FieldID)
 		for _, f := range fields {
@@ -345,33 +345,33 @@ func (_u *SubscriberUpdateOne) sqlSave(ctx context.Context) (_node *Subscriber, 
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := suo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.Email(); ok {
+	if value, ok := suo.mutation.Email(); ok {
 		_spec.SetField(subscriber.FieldEmail, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.IsActive(); ok {
+	if value, ok := suo.mutation.IsActive(); ok {
 		_spec.SetField(subscriber.FieldIsActive, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.Token(); ok {
+	if value, ok := suo.mutation.Token(); ok {
 		_spec.SetField(subscriber.FieldToken, field.TypeString, value)
 	}
-	if _u.mutation.TokenCleared() {
+	if suo.mutation.TokenCleared() {
 		_spec.ClearField(subscriber.FieldToken, field.TypeString)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := suo.mutation.UpdatedAt(); ok {
 		_spec.SetField(subscriber.FieldUpdatedAt, field.TypeTime, value)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &Subscriber{config: _u.config}
+	_spec.AddModifiers(suo.modifiers...)
+	_node = &Subscriber{config: suo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, suo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{subscriber.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -379,6 +379,6 @@ func (_u *SubscriberUpdateOne) sqlSave(ctx context.Context) (_node *Subscriber, 
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	suo.mutation.done = true
 	return _node, nil
 }

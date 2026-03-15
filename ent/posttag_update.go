@@ -25,144 +25,144 @@ type PostTagUpdate struct {
 }
 
 // Where appends a list predicates to the PostTagUpdate builder.
-func (_u *PostTagUpdate) Where(ps ...predicate.PostTag) *PostTagUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (ptu *PostTagUpdate) Where(ps ...predicate.PostTag) *PostTagUpdate {
+	ptu.mutation.Where(ps...)
+	return ptu
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *PostTagUpdate) SetDeletedAt(v time.Time) *PostTagUpdate {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (ptu *PostTagUpdate) SetDeletedAt(t time.Time) *PostTagUpdate {
+	ptu.mutation.SetDeletedAt(t)
+	return ptu
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *PostTagUpdate) SetNillableDeletedAt(v *time.Time) *PostTagUpdate {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (ptu *PostTagUpdate) SetNillableDeletedAt(t *time.Time) *PostTagUpdate {
+	if t != nil {
+		ptu.SetDeletedAt(*t)
 	}
-	return _u
+	return ptu
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *PostTagUpdate) ClearDeletedAt() *PostTagUpdate {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (ptu *PostTagUpdate) ClearDeletedAt() *PostTagUpdate {
+	ptu.mutation.ClearDeletedAt()
+	return ptu
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *PostTagUpdate) SetUpdatedAt(v time.Time) *PostTagUpdate {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (ptu *PostTagUpdate) SetUpdatedAt(t time.Time) *PostTagUpdate {
+	ptu.mutation.SetUpdatedAt(t)
+	return ptu
 }
 
 // SetName sets the "name" field.
-func (_u *PostTagUpdate) SetName(v string) *PostTagUpdate {
-	_u.mutation.SetName(v)
-	return _u
+func (ptu *PostTagUpdate) SetName(s string) *PostTagUpdate {
+	ptu.mutation.SetName(s)
+	return ptu
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *PostTagUpdate) SetNillableName(v *string) *PostTagUpdate {
-	if v != nil {
-		_u.SetName(*v)
+func (ptu *PostTagUpdate) SetNillableName(s *string) *PostTagUpdate {
+	if s != nil {
+		ptu.SetName(*s)
 	}
-	return _u
+	return ptu
 }
 
 // SetSlug sets the "slug" field.
-func (_u *PostTagUpdate) SetSlug(v string) *PostTagUpdate {
-	_u.mutation.SetSlug(v)
-	return _u
+func (ptu *PostTagUpdate) SetSlug(s string) *PostTagUpdate {
+	ptu.mutation.SetSlug(s)
+	return ptu
 }
 
 // SetNillableSlug sets the "slug" field if the given value is not nil.
-func (_u *PostTagUpdate) SetNillableSlug(v *string) *PostTagUpdate {
-	if v != nil {
-		_u.SetSlug(*v)
+func (ptu *PostTagUpdate) SetNillableSlug(s *string) *PostTagUpdate {
+	if s != nil {
+		ptu.SetSlug(*s)
 	}
-	return _u
+	return ptu
 }
 
 // ClearSlug clears the value of the "slug" field.
-func (_u *PostTagUpdate) ClearSlug() *PostTagUpdate {
-	_u.mutation.ClearSlug()
-	return _u
+func (ptu *PostTagUpdate) ClearSlug() *PostTagUpdate {
+	ptu.mutation.ClearSlug()
+	return ptu
 }
 
 // SetCount sets the "count" field.
-func (_u *PostTagUpdate) SetCount(v int) *PostTagUpdate {
-	_u.mutation.ResetCount()
-	_u.mutation.SetCount(v)
-	return _u
+func (ptu *PostTagUpdate) SetCount(i int) *PostTagUpdate {
+	ptu.mutation.ResetCount()
+	ptu.mutation.SetCount(i)
+	return ptu
 }
 
 // SetNillableCount sets the "count" field if the given value is not nil.
-func (_u *PostTagUpdate) SetNillableCount(v *int) *PostTagUpdate {
-	if v != nil {
-		_u.SetCount(*v)
+func (ptu *PostTagUpdate) SetNillableCount(i *int) *PostTagUpdate {
+	if i != nil {
+		ptu.SetCount(*i)
 	}
-	return _u
+	return ptu
 }
 
-// AddCount adds value to the "count" field.
-func (_u *PostTagUpdate) AddCount(v int) *PostTagUpdate {
-	_u.mutation.AddCount(v)
-	return _u
+// AddCount adds i to the "count" field.
+func (ptu *PostTagUpdate) AddCount(i int) *PostTagUpdate {
+	ptu.mutation.AddCount(i)
+	return ptu
 }
 
 // AddArticleIDs adds the "articles" edge to the Article entity by IDs.
-func (_u *PostTagUpdate) AddArticleIDs(ids ...uint) *PostTagUpdate {
-	_u.mutation.AddArticleIDs(ids...)
-	return _u
+func (ptu *PostTagUpdate) AddArticleIDs(ids ...uint) *PostTagUpdate {
+	ptu.mutation.AddArticleIDs(ids...)
+	return ptu
 }
 
 // AddArticles adds the "articles" edges to the Article entity.
-func (_u *PostTagUpdate) AddArticles(v ...*Article) *PostTagUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (ptu *PostTagUpdate) AddArticles(a ...*Article) *PostTagUpdate {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.AddArticleIDs(ids...)
+	return ptu.AddArticleIDs(ids...)
 }
 
 // Mutation returns the PostTagMutation object of the builder.
-func (_u *PostTagUpdate) Mutation() *PostTagMutation {
-	return _u.mutation
+func (ptu *PostTagUpdate) Mutation() *PostTagMutation {
+	return ptu.mutation
 }
 
 // ClearArticles clears all "articles" edges to the Article entity.
-func (_u *PostTagUpdate) ClearArticles() *PostTagUpdate {
-	_u.mutation.ClearArticles()
-	return _u
+func (ptu *PostTagUpdate) ClearArticles() *PostTagUpdate {
+	ptu.mutation.ClearArticles()
+	return ptu
 }
 
 // RemoveArticleIDs removes the "articles" edge to Article entities by IDs.
-func (_u *PostTagUpdate) RemoveArticleIDs(ids ...uint) *PostTagUpdate {
-	_u.mutation.RemoveArticleIDs(ids...)
-	return _u
+func (ptu *PostTagUpdate) RemoveArticleIDs(ids ...uint) *PostTagUpdate {
+	ptu.mutation.RemoveArticleIDs(ids...)
+	return ptu
 }
 
 // RemoveArticles removes "articles" edges to Article entities.
-func (_u *PostTagUpdate) RemoveArticles(v ...*Article) *PostTagUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (ptu *PostTagUpdate) RemoveArticles(a ...*Article) *PostTagUpdate {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.RemoveArticleIDs(ids...)
+	return ptu.RemoveArticleIDs(ids...)
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *PostTagUpdate) Save(ctx context.Context) (int, error) {
-	if err := _u.defaults(); err != nil {
+func (ptu *PostTagUpdate) Save(ctx context.Context) (int, error) {
+	if err := ptu.defaults(); err != nil {
 		return 0, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, ptu.sqlSave, ptu.mutation, ptu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *PostTagUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (ptu *PostTagUpdate) SaveX(ctx context.Context) int {
+	affected, err := ptu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -170,43 +170,43 @@ func (_u *PostTagUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *PostTagUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (ptu *PostTagUpdate) Exec(ctx context.Context) error {
+	_, err := ptu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *PostTagUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (ptu *PostTagUpdate) ExecX(ctx context.Context) {
+	if err := ptu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *PostTagUpdate) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (ptu *PostTagUpdate) defaults() error {
+	if _, ok := ptu.mutation.UpdatedAt(); !ok {
 		if posttag.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized posttag.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := posttag.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		ptu.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *PostTagUpdate) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (ptu *PostTagUpdate) check() error {
+	if v, ok := ptu.mutation.Name(); ok {
 		if err := posttag.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "PostTag.name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Slug(); ok {
+	if v, ok := ptu.mutation.Slug(); ok {
 		if err := posttag.SlugValidator(v); err != nil {
 			return &ValidationError{Name: "slug", err: fmt.Errorf(`ent: validator failed for field "PostTag.slug": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Count(); ok {
+	if v, ok := ptu.mutation.Count(); ok {
 		if err := posttag.CountValidator(v); err != nil {
 			return &ValidationError{Name: "count", err: fmt.Errorf(`ent: validator failed for field "PostTag.count": %w`, err)}
 		}
@@ -215,48 +215,48 @@ func (_u *PostTagUpdate) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *PostTagUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *PostTagUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (ptu *PostTagUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *PostTagUpdate {
+	ptu.modifiers = append(ptu.modifiers, modifiers...)
+	return ptu
 }
 
-func (_u *PostTagUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (ptu *PostTagUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := ptu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(posttag.Table, posttag.Columns, sqlgraph.NewFieldSpec(posttag.FieldID, field.TypeUint))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := ptu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := ptu.mutation.DeletedAt(); ok {
 		_spec.SetField(posttag.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if ptu.mutation.DeletedAtCleared() {
 		_spec.ClearField(posttag.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := ptu.mutation.UpdatedAt(); ok {
 		_spec.SetField(posttag.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := ptu.mutation.Name(); ok {
 		_spec.SetField(posttag.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Slug(); ok {
+	if value, ok := ptu.mutation.Slug(); ok {
 		_spec.SetField(posttag.FieldSlug, field.TypeString, value)
 	}
-	if _u.mutation.SlugCleared() {
+	if ptu.mutation.SlugCleared() {
 		_spec.ClearField(posttag.FieldSlug, field.TypeString)
 	}
-	if value, ok := _u.mutation.Count(); ok {
+	if value, ok := ptu.mutation.Count(); ok {
 		_spec.SetField(posttag.FieldCount, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedCount(); ok {
+	if value, ok := ptu.mutation.AddedCount(); ok {
 		_spec.AddField(posttag.FieldCount, field.TypeInt, value)
 	}
-	if _u.mutation.ArticlesCleared() {
+	if ptu.mutation.ArticlesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: true,
@@ -269,7 +269,7 @@ func (_u *PostTagUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedArticlesIDs(); len(nodes) > 0 && !_u.mutation.ArticlesCleared() {
+	if nodes := ptu.mutation.RemovedArticlesIDs(); len(nodes) > 0 && !ptu.mutation.ArticlesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: true,
@@ -285,7 +285,7 @@ func (_u *PostTagUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.ArticlesIDs(); len(nodes) > 0 {
+	if nodes := ptu.mutation.ArticlesIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: true,
@@ -301,8 +301,8 @@ func (_u *PostTagUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(ptu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, ptu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{posttag.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -310,8 +310,8 @@ func (_u *PostTagUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	ptu.mutation.done = true
+	return n, nil
 }
 
 // PostTagUpdateOne is the builder for updating a single PostTag entity.
@@ -324,151 +324,151 @@ type PostTagUpdateOne struct {
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *PostTagUpdateOne) SetDeletedAt(v time.Time) *PostTagUpdateOne {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (ptuo *PostTagUpdateOne) SetDeletedAt(t time.Time) *PostTagUpdateOne {
+	ptuo.mutation.SetDeletedAt(t)
+	return ptuo
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *PostTagUpdateOne) SetNillableDeletedAt(v *time.Time) *PostTagUpdateOne {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (ptuo *PostTagUpdateOne) SetNillableDeletedAt(t *time.Time) *PostTagUpdateOne {
+	if t != nil {
+		ptuo.SetDeletedAt(*t)
 	}
-	return _u
+	return ptuo
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *PostTagUpdateOne) ClearDeletedAt() *PostTagUpdateOne {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (ptuo *PostTagUpdateOne) ClearDeletedAt() *PostTagUpdateOne {
+	ptuo.mutation.ClearDeletedAt()
+	return ptuo
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *PostTagUpdateOne) SetUpdatedAt(v time.Time) *PostTagUpdateOne {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (ptuo *PostTagUpdateOne) SetUpdatedAt(t time.Time) *PostTagUpdateOne {
+	ptuo.mutation.SetUpdatedAt(t)
+	return ptuo
 }
 
 // SetName sets the "name" field.
-func (_u *PostTagUpdateOne) SetName(v string) *PostTagUpdateOne {
-	_u.mutation.SetName(v)
-	return _u
+func (ptuo *PostTagUpdateOne) SetName(s string) *PostTagUpdateOne {
+	ptuo.mutation.SetName(s)
+	return ptuo
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *PostTagUpdateOne) SetNillableName(v *string) *PostTagUpdateOne {
-	if v != nil {
-		_u.SetName(*v)
+func (ptuo *PostTagUpdateOne) SetNillableName(s *string) *PostTagUpdateOne {
+	if s != nil {
+		ptuo.SetName(*s)
 	}
-	return _u
+	return ptuo
 }
 
 // SetSlug sets the "slug" field.
-func (_u *PostTagUpdateOne) SetSlug(v string) *PostTagUpdateOne {
-	_u.mutation.SetSlug(v)
-	return _u
+func (ptuo *PostTagUpdateOne) SetSlug(s string) *PostTagUpdateOne {
+	ptuo.mutation.SetSlug(s)
+	return ptuo
 }
 
 // SetNillableSlug sets the "slug" field if the given value is not nil.
-func (_u *PostTagUpdateOne) SetNillableSlug(v *string) *PostTagUpdateOne {
-	if v != nil {
-		_u.SetSlug(*v)
+func (ptuo *PostTagUpdateOne) SetNillableSlug(s *string) *PostTagUpdateOne {
+	if s != nil {
+		ptuo.SetSlug(*s)
 	}
-	return _u
+	return ptuo
 }
 
 // ClearSlug clears the value of the "slug" field.
-func (_u *PostTagUpdateOne) ClearSlug() *PostTagUpdateOne {
-	_u.mutation.ClearSlug()
-	return _u
+func (ptuo *PostTagUpdateOne) ClearSlug() *PostTagUpdateOne {
+	ptuo.mutation.ClearSlug()
+	return ptuo
 }
 
 // SetCount sets the "count" field.
-func (_u *PostTagUpdateOne) SetCount(v int) *PostTagUpdateOne {
-	_u.mutation.ResetCount()
-	_u.mutation.SetCount(v)
-	return _u
+func (ptuo *PostTagUpdateOne) SetCount(i int) *PostTagUpdateOne {
+	ptuo.mutation.ResetCount()
+	ptuo.mutation.SetCount(i)
+	return ptuo
 }
 
 // SetNillableCount sets the "count" field if the given value is not nil.
-func (_u *PostTagUpdateOne) SetNillableCount(v *int) *PostTagUpdateOne {
-	if v != nil {
-		_u.SetCount(*v)
+func (ptuo *PostTagUpdateOne) SetNillableCount(i *int) *PostTagUpdateOne {
+	if i != nil {
+		ptuo.SetCount(*i)
 	}
-	return _u
+	return ptuo
 }
 
-// AddCount adds value to the "count" field.
-func (_u *PostTagUpdateOne) AddCount(v int) *PostTagUpdateOne {
-	_u.mutation.AddCount(v)
-	return _u
+// AddCount adds i to the "count" field.
+func (ptuo *PostTagUpdateOne) AddCount(i int) *PostTagUpdateOne {
+	ptuo.mutation.AddCount(i)
+	return ptuo
 }
 
 // AddArticleIDs adds the "articles" edge to the Article entity by IDs.
-func (_u *PostTagUpdateOne) AddArticleIDs(ids ...uint) *PostTagUpdateOne {
-	_u.mutation.AddArticleIDs(ids...)
-	return _u
+func (ptuo *PostTagUpdateOne) AddArticleIDs(ids ...uint) *PostTagUpdateOne {
+	ptuo.mutation.AddArticleIDs(ids...)
+	return ptuo
 }
 
 // AddArticles adds the "articles" edges to the Article entity.
-func (_u *PostTagUpdateOne) AddArticles(v ...*Article) *PostTagUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (ptuo *PostTagUpdateOne) AddArticles(a ...*Article) *PostTagUpdateOne {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.AddArticleIDs(ids...)
+	return ptuo.AddArticleIDs(ids...)
 }
 
 // Mutation returns the PostTagMutation object of the builder.
-func (_u *PostTagUpdateOne) Mutation() *PostTagMutation {
-	return _u.mutation
+func (ptuo *PostTagUpdateOne) Mutation() *PostTagMutation {
+	return ptuo.mutation
 }
 
 // ClearArticles clears all "articles" edges to the Article entity.
-func (_u *PostTagUpdateOne) ClearArticles() *PostTagUpdateOne {
-	_u.mutation.ClearArticles()
-	return _u
+func (ptuo *PostTagUpdateOne) ClearArticles() *PostTagUpdateOne {
+	ptuo.mutation.ClearArticles()
+	return ptuo
 }
 
 // RemoveArticleIDs removes the "articles" edge to Article entities by IDs.
-func (_u *PostTagUpdateOne) RemoveArticleIDs(ids ...uint) *PostTagUpdateOne {
-	_u.mutation.RemoveArticleIDs(ids...)
-	return _u
+func (ptuo *PostTagUpdateOne) RemoveArticleIDs(ids ...uint) *PostTagUpdateOne {
+	ptuo.mutation.RemoveArticleIDs(ids...)
+	return ptuo
 }
 
 // RemoveArticles removes "articles" edges to Article entities.
-func (_u *PostTagUpdateOne) RemoveArticles(v ...*Article) *PostTagUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (ptuo *PostTagUpdateOne) RemoveArticles(a ...*Article) *PostTagUpdateOne {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.RemoveArticleIDs(ids...)
+	return ptuo.RemoveArticleIDs(ids...)
 }
 
 // Where appends a list predicates to the PostTagUpdate builder.
-func (_u *PostTagUpdateOne) Where(ps ...predicate.PostTag) *PostTagUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (ptuo *PostTagUpdateOne) Where(ps ...predicate.PostTag) *PostTagUpdateOne {
+	ptuo.mutation.Where(ps...)
+	return ptuo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *PostTagUpdateOne) Select(field string, fields ...string) *PostTagUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (ptuo *PostTagUpdateOne) Select(field string, fields ...string) *PostTagUpdateOne {
+	ptuo.fields = append([]string{field}, fields...)
+	return ptuo
 }
 
 // Save executes the query and returns the updated PostTag entity.
-func (_u *PostTagUpdateOne) Save(ctx context.Context) (*PostTag, error) {
-	if err := _u.defaults(); err != nil {
+func (ptuo *PostTagUpdateOne) Save(ctx context.Context) (*PostTag, error) {
+	if err := ptuo.defaults(); err != nil {
 		return nil, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, ptuo.sqlSave, ptuo.mutation, ptuo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *PostTagUpdateOne) SaveX(ctx context.Context) *PostTag {
-	node, err := _u.Save(ctx)
+func (ptuo *PostTagUpdateOne) SaveX(ctx context.Context) *PostTag {
+	node, err := ptuo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -476,43 +476,43 @@ func (_u *PostTagUpdateOne) SaveX(ctx context.Context) *PostTag {
 }
 
 // Exec executes the query on the entity.
-func (_u *PostTagUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (ptuo *PostTagUpdateOne) Exec(ctx context.Context) error {
+	_, err := ptuo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *PostTagUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (ptuo *PostTagUpdateOne) ExecX(ctx context.Context) {
+	if err := ptuo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *PostTagUpdateOne) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (ptuo *PostTagUpdateOne) defaults() error {
+	if _, ok := ptuo.mutation.UpdatedAt(); !ok {
 		if posttag.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized posttag.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := posttag.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		ptuo.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *PostTagUpdateOne) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (ptuo *PostTagUpdateOne) check() error {
+	if v, ok := ptuo.mutation.Name(); ok {
 		if err := posttag.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "PostTag.name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Slug(); ok {
+	if v, ok := ptuo.mutation.Slug(); ok {
 		if err := posttag.SlugValidator(v); err != nil {
 			return &ValidationError{Name: "slug", err: fmt.Errorf(`ent: validator failed for field "PostTag.slug": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Count(); ok {
+	if v, ok := ptuo.mutation.Count(); ok {
 		if err := posttag.CountValidator(v); err != nil {
 			return &ValidationError{Name: "count", err: fmt.Errorf(`ent: validator failed for field "PostTag.count": %w`, err)}
 		}
@@ -521,22 +521,22 @@ func (_u *PostTagUpdateOne) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *PostTagUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *PostTagUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (ptuo *PostTagUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *PostTagUpdateOne {
+	ptuo.modifiers = append(ptuo.modifiers, modifiers...)
+	return ptuo
 }
 
-func (_u *PostTagUpdateOne) sqlSave(ctx context.Context) (_node *PostTag, err error) {
-	if err := _u.check(); err != nil {
+func (ptuo *PostTagUpdateOne) sqlSave(ctx context.Context) (_node *PostTag, err error) {
+	if err := ptuo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(posttag.Table, posttag.Columns, sqlgraph.NewFieldSpec(posttag.FieldID, field.TypeUint))
-	id, ok := _u.mutation.ID()
+	id, ok := ptuo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "PostTag.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := ptuo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, posttag.FieldID)
 		for _, f := range fields {
@@ -548,38 +548,38 @@ func (_u *PostTagUpdateOne) sqlSave(ctx context.Context) (_node *PostTag, err er
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := ptuo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := ptuo.mutation.DeletedAt(); ok {
 		_spec.SetField(posttag.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if ptuo.mutation.DeletedAtCleared() {
 		_spec.ClearField(posttag.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := ptuo.mutation.UpdatedAt(); ok {
 		_spec.SetField(posttag.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := ptuo.mutation.Name(); ok {
 		_spec.SetField(posttag.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Slug(); ok {
+	if value, ok := ptuo.mutation.Slug(); ok {
 		_spec.SetField(posttag.FieldSlug, field.TypeString, value)
 	}
-	if _u.mutation.SlugCleared() {
+	if ptuo.mutation.SlugCleared() {
 		_spec.ClearField(posttag.FieldSlug, field.TypeString)
 	}
-	if value, ok := _u.mutation.Count(); ok {
+	if value, ok := ptuo.mutation.Count(); ok {
 		_spec.SetField(posttag.FieldCount, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedCount(); ok {
+	if value, ok := ptuo.mutation.AddedCount(); ok {
 		_spec.AddField(posttag.FieldCount, field.TypeInt, value)
 	}
-	if _u.mutation.ArticlesCleared() {
+	if ptuo.mutation.ArticlesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: true,
@@ -592,7 +592,7 @@ func (_u *PostTagUpdateOne) sqlSave(ctx context.Context) (_node *PostTag, err er
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedArticlesIDs(); len(nodes) > 0 && !_u.mutation.ArticlesCleared() {
+	if nodes := ptuo.mutation.RemovedArticlesIDs(); len(nodes) > 0 && !ptuo.mutation.ArticlesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: true,
@@ -608,7 +608,7 @@ func (_u *PostTagUpdateOne) sqlSave(ctx context.Context) (_node *PostTag, err er
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.ArticlesIDs(); len(nodes) > 0 {
+	if nodes := ptuo.mutation.ArticlesIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: true,
@@ -624,11 +624,11 @@ func (_u *PostTagUpdateOne) sqlSave(ctx context.Context) (_node *PostTag, err er
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &PostTag{config: _u.config}
+	_spec.AddModifiers(ptuo.modifiers...)
+	_node = &PostTag{config: ptuo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, ptuo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{posttag.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -636,6 +636,6 @@ func (_u *PostTagUpdateOne) sqlSave(ctx context.Context) (_node *PostTag, err er
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	ptuo.mutation.done = true
 	return _node, nil
 }

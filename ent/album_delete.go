@@ -20,56 +20,56 @@ type AlbumDelete struct {
 }
 
 // Where appends a list predicates to the AlbumDelete builder.
-func (_d *AlbumDelete) Where(ps ...predicate.Album) *AlbumDelete {
-	_d.mutation.Where(ps...)
-	return _d
+func (ad *AlbumDelete) Where(ps ...predicate.Album) *AlbumDelete {
+	ad.mutation.Where(ps...)
+	return ad
 }
 
 // Exec executes the deletion query and returns how many vertices were deleted.
-func (_d *AlbumDelete) Exec(ctx context.Context) (int, error) {
-	return withHooks(ctx, _d.sqlExec, _d.mutation, _d.hooks)
+func (ad *AlbumDelete) Exec(ctx context.Context) (int, error) {
+	return withHooks(ctx, ad.sqlExec, ad.mutation, ad.hooks)
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *AlbumDelete) ExecX(ctx context.Context) int {
-	n, err := _d.Exec(ctx)
+func (ad *AlbumDelete) ExecX(ctx context.Context) int {
+	n, err := ad.Exec(ctx)
 	if err != nil {
 		panic(err)
 	}
 	return n
 }
 
-func (_d *AlbumDelete) sqlExec(ctx context.Context) (int, error) {
+func (ad *AlbumDelete) sqlExec(ctx context.Context) (int, error) {
 	_spec := sqlgraph.NewDeleteSpec(album.Table, sqlgraph.NewFieldSpec(album.FieldID, field.TypeUint))
-	if ps := _d.mutation.predicates; len(ps) > 0 {
+	if ps := ad.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	affected, err := sqlgraph.DeleteNodes(ctx, _d.driver, _spec)
+	affected, err := sqlgraph.DeleteNodes(ctx, ad.driver, _spec)
 	if err != nil && sqlgraph.IsConstraintError(err) {
 		err = &ConstraintError{msg: err.Error(), wrap: err}
 	}
-	_d.mutation.done = true
+	ad.mutation.done = true
 	return affected, err
 }
 
 // AlbumDeleteOne is the builder for deleting a single Album entity.
 type AlbumDeleteOne struct {
-	_d *AlbumDelete
+	ad *AlbumDelete
 }
 
 // Where appends a list predicates to the AlbumDelete builder.
-func (_d *AlbumDeleteOne) Where(ps ...predicate.Album) *AlbumDeleteOne {
-	_d._d.mutation.Where(ps...)
-	return _d
+func (ado *AlbumDeleteOne) Where(ps ...predicate.Album) *AlbumDeleteOne {
+	ado.ad.mutation.Where(ps...)
+	return ado
 }
 
 // Exec executes the deletion query.
-func (_d *AlbumDeleteOne) Exec(ctx context.Context) error {
-	n, err := _d._d.Exec(ctx)
+func (ado *AlbumDeleteOne) Exec(ctx context.Context) error {
+	n, err := ado.ad.Exec(ctx)
 	switch {
 	case err != nil:
 		return err
@@ -81,8 +81,8 @@ func (_d *AlbumDeleteOne) Exec(ctx context.Context) error {
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *AlbumDeleteOne) ExecX(ctx context.Context) {
-	if err := _d.Exec(ctx); err != nil {
+func (ado *AlbumDeleteOne) ExecX(ctx context.Context) {
+	if err := ado.Exec(ctx); err != nil {
 		panic(err)
 	}
 }

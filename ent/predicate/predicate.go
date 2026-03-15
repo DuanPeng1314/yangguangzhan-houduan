@@ -18,6 +18,12 @@ type Article func(*sql.Selector)
 // ArticleHistory is the predicate function for articlehistory builders.
 type ArticleHistory func(*sql.Selector)
 
+// ArticlePayment is the predicate function for articlepayment builders.
+type ArticlePayment func(*sql.Selector)
+
+// ArticlePurchase is the predicate function for articlepurchase builders.
+type ArticlePurchase func(*sql.Selector)
+
 // Comment is the predicate function for comment builders.
 type Comment func(*sql.Selector)
 

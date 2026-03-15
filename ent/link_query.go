@@ -35,44 +35,44 @@ type LinkQuery struct {
 }
 
 // Where adds a new predicate for the LinkQuery builder.
-func (_q *LinkQuery) Where(ps ...predicate.Link) *LinkQuery {
-	_q.predicates = append(_q.predicates, ps...)
-	return _q
+func (lq *LinkQuery) Where(ps ...predicate.Link) *LinkQuery {
+	lq.predicates = append(lq.predicates, ps...)
+	return lq
 }
 
 // Limit the number of records to be returned by this query.
-func (_q *LinkQuery) Limit(limit int) *LinkQuery {
-	_q.ctx.Limit = &limit
-	return _q
+func (lq *LinkQuery) Limit(limit int) *LinkQuery {
+	lq.ctx.Limit = &limit
+	return lq
 }
 
 // Offset to start from.
-func (_q *LinkQuery) Offset(offset int) *LinkQuery {
-	_q.ctx.Offset = &offset
-	return _q
+func (lq *LinkQuery) Offset(offset int) *LinkQuery {
+	lq.ctx.Offset = &offset
+	return lq
 }
 
 // Unique configures the query builder to filter duplicate records on query.
 // By default, unique is set to true, and can be disabled using this method.
-func (_q *LinkQuery) Unique(unique bool) *LinkQuery {
-	_q.ctx.Unique = &unique
-	return _q
+func (lq *LinkQuery) Unique(unique bool) *LinkQuery {
+	lq.ctx.Unique = &unique
+	return lq
 }
 
 // Order specifies how the records should be ordered.
-func (_q *LinkQuery) Order(o ...link.OrderOption) *LinkQuery {
-	_q.order = append(_q.order, o...)
-	return _q
+func (lq *LinkQuery) Order(o ...link.OrderOption) *LinkQuery {
+	lq.order = append(lq.order, o...)
+	return lq
 }
 
 // QueryCategory chains the current query on the "category" edge.
-func (_q *LinkQuery) QueryCategory() *LinkCategoryQuery {
-	query := (&LinkCategoryClient{config: _q.config}).Query()
+func (lq *LinkQuery) QueryCategory() *LinkCategoryQuery {
+	query := (&LinkCategoryClient{config: lq.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
+		if err := lq.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := _q.sqlQuery(ctx)
+		selector := lq.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -81,20 +81,20 @@ func (_q *LinkQuery) QueryCategory() *LinkCategoryQuery {
 			sqlgraph.To(linkcategory.Table, linkcategory.FieldID),
 			sqlgraph.Edge(sqlgraph.M2O, true, link.CategoryTable, link.CategoryColumn),
 		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(lq.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
 }
 
 // QueryTags chains the current query on the "tags" edge.
-func (_q *LinkQuery) QueryTags() *LinkTagQuery {
-	query := (&LinkTagClient{config: _q.config}).Query()
+func (lq *LinkQuery) QueryTags() *LinkTagQuery {
+	query := (&LinkTagClient{config: lq.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
+		if err := lq.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := _q.sqlQuery(ctx)
+		selector := lq.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -103,7 +103,7 @@ func (_q *LinkQuery) QueryTags() *LinkTagQuery {
 			sqlgraph.To(linktag.Table, linktag.FieldID),
 			sqlgraph.Edge(sqlgraph.M2M, false, link.TagsTable, link.TagsPrimaryKey...),
 		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(lq.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
@@ -111,8 +111,8 @@ func (_q *LinkQuery) QueryTags() *LinkTagQuery {
 
 // First returns the first Link entity from the query.
 // Returns a *NotFoundError when no Link was found.
-func (_q *LinkQuery) First(ctx context.Context) (*Link, error) {
-	nodes, err := _q.Limit(1).All(setContextOp(ctx, _q.ctx, ent.OpQueryFirst))
+func (lq *LinkQuery) First(ctx context.Context) (*Link, error) {
+	nodes, err := lq.Limit(1).All(setContextOp(ctx, lq.ctx, ent.OpQueryFirst))
 	if err != nil {
 		return nil, err
 	}
@@ -123,8 +123,8 @@ func (_q *LinkQuery) First(ctx context.Context) (*Link, error) {
 }
 
 // FirstX is like First, but panics if an error occurs.
-func (_q *LinkQuery) FirstX(ctx context.Context) *Link {
-	node, err := _q.First(ctx)
+func (lq *LinkQuery) FirstX(ctx context.Context) *Link {
+	node, err := lq.First(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -133,9 +133,9 @@ func (_q *LinkQuery) FirstX(ctx context.Context) *Link {
 
 // FirstID returns the first Link ID from the query.
 // Returns a *NotFoundError when no Link ID was found.
-func (_q *LinkQuery) FirstID(ctx context.Context) (id int, err error) {
+func (lq *LinkQuery) FirstID(ctx context.Context) (id int, err error) {
 	var ids []int
-	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
+	if ids, err = lq.Limit(1).IDs(setContextOp(ctx, lq.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
 	if len(ids) == 0 {
@@ -146,8 +146,8 @@ func (_q *LinkQuery) FirstID(ctx context.Context) (id int, err error) {
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (_q *LinkQuery) FirstIDX(ctx context.Context) int {
-	id, err := _q.FirstID(ctx)
+func (lq *LinkQuery) FirstIDX(ctx context.Context) int {
+	id, err := lq.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -157,8 +157,8 @@ func (_q *LinkQuery) FirstIDX(ctx context.Context) int {
 // Only returns a single Link entity found by the query, ensuring it only returns one.
 // Returns a *NotSingularError when more than one Link entity is found.
 // Returns a *NotFoundError when no Link entities are found.
-func (_q *LinkQuery) Only(ctx context.Context) (*Link, error) {
-	nodes, err := _q.Limit(2).All(setContextOp(ctx, _q.ctx, ent.OpQueryOnly))
+func (lq *LinkQuery) Only(ctx context.Context) (*Link, error) {
+	nodes, err := lq.Limit(2).All(setContextOp(ctx, lq.ctx, ent.OpQueryOnly))
 	if err != nil {
 		return nil, err
 	}
@@ -173,8 +173,8 @@ func (_q *LinkQuery) Only(ctx context.Context) (*Link, error) {
 }
 
 // OnlyX is like Only, but panics if an error occurs.
-func (_q *LinkQuery) OnlyX(ctx context.Context) *Link {
-	node, err := _q.Only(ctx)
+func (lq *LinkQuery) OnlyX(ctx context.Context) *Link {
+	node, err := lq.Only(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -184,9 +184,9 @@ func (_q *LinkQuery) OnlyX(ctx context.Context) *Link {
 // OnlyID is like Only, but returns the only Link ID in the query.
 // Returns a *NotSingularError when more than one Link ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (_q *LinkQuery) OnlyID(ctx context.Context) (id int, err error) {
+func (lq *LinkQuery) OnlyID(ctx context.Context) (id int, err error) {
 	var ids []int
-	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
+	if ids, err = lq.Limit(2).IDs(setContextOp(ctx, lq.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
 	switch len(ids) {
@@ -201,8 +201,8 @@ func (_q *LinkQuery) OnlyID(ctx context.Context) (id int, err error) {
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (_q *LinkQuery) OnlyIDX(ctx context.Context) int {
-	id, err := _q.OnlyID(ctx)
+func (lq *LinkQuery) OnlyIDX(ctx context.Context) int {
+	id, err := lq.OnlyID(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -210,18 +210,18 @@ func (_q *LinkQuery) OnlyIDX(ctx context.Context) int {
 }
 
 // All executes the query and returns a list of Links.
-func (_q *LinkQuery) All(ctx context.Context) ([]*Link, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryAll)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (lq *LinkQuery) All(ctx context.Context) ([]*Link, error) {
+	ctx = setContextOp(ctx, lq.ctx, ent.OpQueryAll)
+	if err := lq.prepareQuery(ctx); err != nil {
 		return nil, err
 	}
 	qr := querierAll[[]*Link, *LinkQuery]()
-	return withInterceptors[[]*Link](ctx, _q, qr, _q.inters)
+	return withInterceptors[[]*Link](ctx, lq, qr, lq.inters)
 }
 
 // AllX is like All, but panics if an error occurs.
-func (_q *LinkQuery) AllX(ctx context.Context) []*Link {
-	nodes, err := _q.All(ctx)
+func (lq *LinkQuery) AllX(ctx context.Context) []*Link {
+	nodes, err := lq.All(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -229,20 +229,20 @@ func (_q *LinkQuery) AllX(ctx context.Context) []*Link {
 }
 
 // IDs executes the query and returns a list of Link IDs.
-func (_q *LinkQuery) IDs(ctx context.Context) (ids []int, err error) {
-	if _q.ctx.Unique == nil && _q.path != nil {
-		_q.Unique(true)
+func (lq *LinkQuery) IDs(ctx context.Context) (ids []int, err error) {
+	if lq.ctx.Unique == nil && lq.path != nil {
+		lq.Unique(true)
 	}
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryIDs)
-	if err = _q.Select(link.FieldID).Scan(ctx, &ids); err != nil {
+	ctx = setContextOp(ctx, lq.ctx, ent.OpQueryIDs)
+	if err = lq.Select(link.FieldID).Scan(ctx, &ids); err != nil {
 		return nil, err
 	}
 	return ids, nil
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (_q *LinkQuery) IDsX(ctx context.Context) []int {
-	ids, err := _q.IDs(ctx)
+func (lq *LinkQuery) IDsX(ctx context.Context) []int {
+	ids, err := lq.IDs(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -250,17 +250,17 @@ func (_q *LinkQuery) IDsX(ctx context.Context) []int {
 }
 
 // Count returns the count of the given query.
-func (_q *LinkQuery) Count(ctx context.Context) (int, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryCount)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (lq *LinkQuery) Count(ctx context.Context) (int, error) {
+	ctx = setContextOp(ctx, lq.ctx, ent.OpQueryCount)
+	if err := lq.prepareQuery(ctx); err != nil {
 		return 0, err
 	}
-	return withInterceptors[int](ctx, _q, querierCount[*LinkQuery](), _q.inters)
+	return withInterceptors[int](ctx, lq, querierCount[*LinkQuery](), lq.inters)
 }
 
 // CountX is like Count, but panics if an error occurs.
-func (_q *LinkQuery) CountX(ctx context.Context) int {
-	count, err := _q.Count(ctx)
+func (lq *LinkQuery) CountX(ctx context.Context) int {
+	count, err := lq.Count(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -268,9 +268,9 @@ func (_q *LinkQuery) CountX(ctx context.Context) int {
 }
 
 // Exist returns true if the query has elements in the graph.
-func (_q *LinkQuery) Exist(ctx context.Context) (bool, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryExist)
-	switch _, err := _q.FirstID(ctx); {
+func (lq *LinkQuery) Exist(ctx context.Context) (bool, error) {
+	ctx = setContextOp(ctx, lq.ctx, ent.OpQueryExist)
+	switch _, err := lq.FirstID(ctx); {
 	case IsNotFound(err):
 		return false, nil
 	case err != nil:
@@ -281,8 +281,8 @@ func (_q *LinkQuery) Exist(ctx context.Context) (bool, error) {
 }
 
 // ExistX is like Exist, but panics if an error occurs.
-func (_q *LinkQuery) ExistX(ctx context.Context) bool {
-	exist, err := _q.Exist(ctx)
+func (lq *LinkQuery) ExistX(ctx context.Context) bool {
+	exist, err := lq.Exist(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -291,45 +291,45 @@ func (_q *LinkQuery) ExistX(ctx context.Context) bool {
 
 // Clone returns a duplicate of the LinkQuery builder, including all associated steps. It can be
 // used to prepare common query builders and use them differently after the clone is made.
-func (_q *LinkQuery) Clone() *LinkQuery {
-	if _q == nil {
+func (lq *LinkQuery) Clone() *LinkQuery {
+	if lq == nil {
 		return nil
 	}
 	return &LinkQuery{
-		config:       _q.config,
-		ctx:          _q.ctx.Clone(),
-		order:        append([]link.OrderOption{}, _q.order...),
-		inters:       append([]Interceptor{}, _q.inters...),
-		predicates:   append([]predicate.Link{}, _q.predicates...),
-		withCategory: _q.withCategory.Clone(),
-		withTags:     _q.withTags.Clone(),
+		config:       lq.config,
+		ctx:          lq.ctx.Clone(),
+		order:        append([]link.OrderOption{}, lq.order...),
+		inters:       append([]Interceptor{}, lq.inters...),
+		predicates:   append([]predicate.Link{}, lq.predicates...),
+		withCategory: lq.withCategory.Clone(),
+		withTags:     lq.withTags.Clone(),
 		// clone intermediate query.
-		sql:       _q.sql.Clone(),
-		path:      _q.path,
-		modifiers: append([]func(*sql.Selector){}, _q.modifiers...),
+		sql:       lq.sql.Clone(),
+		path:      lq.path,
+		modifiers: append([]func(*sql.Selector){}, lq.modifiers...),
 	}
 }
 
 // WithCategory tells the query-builder to eager-load the nodes that are connected to
 // the "category" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *LinkQuery) WithCategory(opts ...func(*LinkCategoryQuery)) *LinkQuery {
-	query := (&LinkCategoryClient{config: _q.config}).Query()
+func (lq *LinkQuery) WithCategory(opts ...func(*LinkCategoryQuery)) *LinkQuery {
+	query := (&LinkCategoryClient{config: lq.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withCategory = query
-	return _q
+	lq.withCategory = query
+	return lq
 }
 
 // WithTags tells the query-builder to eager-load the nodes that are connected to
 // the "tags" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *LinkQuery) WithTags(opts ...func(*LinkTagQuery)) *LinkQuery {
-	query := (&LinkTagClient{config: _q.config}).Query()
+func (lq *LinkQuery) WithTags(opts ...func(*LinkTagQuery)) *LinkQuery {
+	query := (&LinkTagClient{config: lq.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withTags = query
-	return _q
+	lq.withTags = query
+	return lq
 }
 
 // GroupBy is used to group vertices by one or more fields/columns.
@@ -346,10 +346,10 @@ func (_q *LinkQuery) WithTags(opts ...func(*LinkTagQuery)) *LinkQuery {
 //		GroupBy(link.FieldName).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
-func (_q *LinkQuery) GroupBy(field string, fields ...string) *LinkGroupBy {
-	_q.ctx.Fields = append([]string{field}, fields...)
-	grbuild := &LinkGroupBy{build: _q}
-	grbuild.flds = &_q.ctx.Fields
+func (lq *LinkQuery) GroupBy(field string, fields ...string) *LinkGroupBy {
+	lq.ctx.Fields = append([]string{field}, fields...)
+	grbuild := &LinkGroupBy{build: lq}
+	grbuild.flds = &lq.ctx.Fields
 	grbuild.label = link.Label
 	grbuild.scan = grbuild.Scan
 	return grbuild
@@ -367,56 +367,56 @@ func (_q *LinkQuery) GroupBy(field string, fields ...string) *LinkGroupBy {
 //	client.Link.Query().
 //		Select(link.FieldName).
 //		Scan(ctx, &v)
-func (_q *LinkQuery) Select(fields ...string) *LinkSelect {
-	_q.ctx.Fields = append(_q.ctx.Fields, fields...)
-	sbuild := &LinkSelect{LinkQuery: _q}
+func (lq *LinkQuery) Select(fields ...string) *LinkSelect {
+	lq.ctx.Fields = append(lq.ctx.Fields, fields...)
+	sbuild := &LinkSelect{LinkQuery: lq}
 	sbuild.label = link.Label
-	sbuild.flds, sbuild.scan = &_q.ctx.Fields, sbuild.Scan
+	sbuild.flds, sbuild.scan = &lq.ctx.Fields, sbuild.Scan
 	return sbuild
 }
 
 // Aggregate returns a LinkSelect configured with the given aggregations.
-func (_q *LinkQuery) Aggregate(fns ...AggregateFunc) *LinkSelect {
-	return _q.Select().Aggregate(fns...)
+func (lq *LinkQuery) Aggregate(fns ...AggregateFunc) *LinkSelect {
+	return lq.Select().Aggregate(fns...)
 }
 
-func (_q *LinkQuery) prepareQuery(ctx context.Context) error {
-	for _, inter := range _q.inters {
+func (lq *LinkQuery) prepareQuery(ctx context.Context) error {
+	for _, inter := range lq.inters {
 		if inter == nil {
 			return fmt.Errorf("ent: uninitialized interceptor (forgotten import ent/runtime?)")
 		}
 		if trv, ok := inter.(Traverser); ok {
-			if err := trv.Traverse(ctx, _q); err != nil {
+			if err := trv.Traverse(ctx, lq); err != nil {
 				return err
 			}
 		}
 	}
-	for _, f := range _q.ctx.Fields {
+	for _, f := range lq.ctx.Fields {
 		if !link.ValidColumn(f) {
 			return &ValidationError{Name: f, err: fmt.Errorf("ent: invalid field %q for query", f)}
 		}
 	}
-	if _q.path != nil {
-		prev, err := _q.path(ctx)
+	if lq.path != nil {
+		prev, err := lq.path(ctx)
 		if err != nil {
 			return err
 		}
-		_q.sql = prev
+		lq.sql = prev
 	}
 	return nil
 }
 
-func (_q *LinkQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Link, error) {
+func (lq *LinkQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Link, error) {
 	var (
 		nodes       = []*Link{}
-		withFKs     = _q.withFKs
-		_spec       = _q.querySpec()
+		withFKs     = lq.withFKs
+		_spec       = lq.querySpec()
 		loadedTypes = [2]bool{
-			_q.withCategory != nil,
-			_q.withTags != nil,
+			lq.withCategory != nil,
+			lq.withTags != nil,
 		}
 	)
-	if _q.withCategory != nil {
+	if lq.withCategory != nil {
 		withFKs = true
 	}
 	if withFKs {
@@ -426,31 +426,31 @@ func (_q *LinkQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Link, e
 		return (*Link).scanValues(nil, columns)
 	}
 	_spec.Assign = func(columns []string, values []any) error {
-		node := &Link{config: _q.config}
+		node := &Link{config: lq.config}
 		nodes = append(nodes, node)
 		node.Edges.loadedTypes = loadedTypes
 		return node.assignValues(columns, values)
 	}
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+	if len(lq.modifiers) > 0 {
+		_spec.Modifiers = lq.modifiers
 	}
 	for i := range hooks {
 		hooks[i](ctx, _spec)
 	}
-	if err := sqlgraph.QueryNodes(ctx, _q.driver, _spec); err != nil {
+	if err := sqlgraph.QueryNodes(ctx, lq.driver, _spec); err != nil {
 		return nil, err
 	}
 	if len(nodes) == 0 {
 		return nodes, nil
 	}
-	if query := _q.withCategory; query != nil {
-		if err := _q.loadCategory(ctx, query, nodes, nil,
+	if query := lq.withCategory; query != nil {
+		if err := lq.loadCategory(ctx, query, nodes, nil,
 			func(n *Link, e *LinkCategory) { n.Edges.Category = e }); err != nil {
 			return nil, err
 		}
 	}
-	if query := _q.withTags; query != nil {
-		if err := _q.loadTags(ctx, query, nodes,
+	if query := lq.withTags; query != nil {
+		if err := lq.loadTags(ctx, query, nodes,
 			func(n *Link) { n.Edges.Tags = []*LinkTag{} },
 			func(n *Link, e *LinkTag) { n.Edges.Tags = append(n.Edges.Tags, e) }); err != nil {
 			return nil, err
@@ -459,7 +459,7 @@ func (_q *LinkQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Link, e
 	return nodes, nil
 }
 
-func (_q *LinkQuery) loadCategory(ctx context.Context, query *LinkCategoryQuery, nodes []*Link, init func(*Link), assign func(*Link, *LinkCategory)) error {
+func (lq *LinkQuery) loadCategory(ctx context.Context, query *LinkCategoryQuery, nodes []*Link, init func(*Link), assign func(*Link, *LinkCategory)) error {
 	ids := make([]int, 0, len(nodes))
 	nodeids := make(map[int][]*Link)
 	for i := range nodes {
@@ -491,7 +491,7 @@ func (_q *LinkQuery) loadCategory(ctx context.Context, query *LinkCategoryQuery,
 	}
 	return nil
 }
-func (_q *LinkQuery) loadTags(ctx context.Context, query *LinkTagQuery, nodes []*Link, init func(*Link), assign func(*Link, *LinkTag)) error {
+func (lq *LinkQuery) loadTags(ctx context.Context, query *LinkTagQuery, nodes []*Link, init func(*Link), assign func(*Link, *LinkTag)) error {
 	edgeIDs := make([]driver.Value, len(nodes))
 	byID := make(map[int]*Link)
 	nids := make(map[int]map[*Link]struct{})
@@ -553,27 +553,27 @@ func (_q *LinkQuery) loadTags(ctx context.Context, query *LinkTagQuery, nodes []
 	return nil
 }
 
-func (_q *LinkQuery) sqlCount(ctx context.Context) (int, error) {
-	_spec := _q.querySpec()
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+func (lq *LinkQuery) sqlCount(ctx context.Context) (int, error) {
+	_spec := lq.querySpec()
+	if len(lq.modifiers) > 0 {
+		_spec.Modifiers = lq.modifiers
 	}
-	_spec.Node.Columns = _q.ctx.Fields
-	if len(_q.ctx.Fields) > 0 {
-		_spec.Unique = _q.ctx.Unique != nil && *_q.ctx.Unique
+	_spec.Node.Columns = lq.ctx.Fields
+	if len(lq.ctx.Fields) > 0 {
+		_spec.Unique = lq.ctx.Unique != nil && *lq.ctx.Unique
 	}
-	return sqlgraph.CountNodes(ctx, _q.driver, _spec)
+	return sqlgraph.CountNodes(ctx, lq.driver, _spec)
 }
 
-func (_q *LinkQuery) querySpec() *sqlgraph.QuerySpec {
+func (lq *LinkQuery) querySpec() *sqlgraph.QuerySpec {
 	_spec := sqlgraph.NewQuerySpec(link.Table, link.Columns, sqlgraph.NewFieldSpec(link.FieldID, field.TypeInt))
-	_spec.From = _q.sql
-	if unique := _q.ctx.Unique; unique != nil {
+	_spec.From = lq.sql
+	if unique := lq.ctx.Unique; unique != nil {
 		_spec.Unique = *unique
-	} else if _q.path != nil {
+	} else if lq.path != nil {
 		_spec.Unique = true
 	}
-	if fields := _q.ctx.Fields; len(fields) > 0 {
+	if fields := lq.ctx.Fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, link.FieldID)
 		for i := range fields {
@@ -582,20 +582,20 @@ func (_q *LinkQuery) querySpec() *sqlgraph.QuerySpec {
 			}
 		}
 	}
-	if ps := _q.predicates; len(ps) > 0 {
+	if ps := lq.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := lq.ctx.Limit; limit != nil {
 		_spec.Limit = *limit
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := lq.ctx.Offset; offset != nil {
 		_spec.Offset = *offset
 	}
-	if ps := _q.order; len(ps) > 0 {
+	if ps := lq.order; len(ps) > 0 {
 		_spec.Order = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
@@ -605,45 +605,45 @@ func (_q *LinkQuery) querySpec() *sqlgraph.QuerySpec {
 	return _spec
 }
 
-func (_q *LinkQuery) sqlQuery(ctx context.Context) *sql.Selector {
-	builder := sql.Dialect(_q.driver.Dialect())
+func (lq *LinkQuery) sqlQuery(ctx context.Context) *sql.Selector {
+	builder := sql.Dialect(lq.driver.Dialect())
 	t1 := builder.Table(link.Table)
-	columns := _q.ctx.Fields
+	columns := lq.ctx.Fields
 	if len(columns) == 0 {
 		columns = link.Columns
 	}
 	selector := builder.Select(t1.Columns(columns...)...).From(t1)
-	if _q.sql != nil {
-		selector = _q.sql
+	if lq.sql != nil {
+		selector = lq.sql
 		selector.Select(selector.Columns(columns...)...)
 	}
-	if _q.ctx.Unique != nil && *_q.ctx.Unique {
+	if lq.ctx.Unique != nil && *lq.ctx.Unique {
 		selector.Distinct()
 	}
-	for _, m := range _q.modifiers {
+	for _, m := range lq.modifiers {
 		m(selector)
 	}
-	for _, p := range _q.predicates {
+	for _, p := range lq.predicates {
 		p(selector)
 	}
-	for _, p := range _q.order {
+	for _, p := range lq.order {
 		p(selector)
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := lq.ctx.Offset; offset != nil {
 		// limit is mandatory for offset clause. We start
 		// with default value, and override it below if needed.
 		selector.Offset(*offset).Limit(math.MaxInt32)
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := lq.ctx.Limit; limit != nil {
 		selector.Limit(*limit)
 	}
 	return selector
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_q *LinkQuery) Modify(modifiers ...func(s *sql.Selector)) *LinkSelect {
-	_q.modifiers = append(_q.modifiers, modifiers...)
-	return _q.Select()
+func (lq *LinkQuery) Modify(modifiers ...func(s *sql.Selector)) *LinkSelect {
+	lq.modifiers = append(lq.modifiers, modifiers...)
+	return lq.Select()
 }
 
 // LinkGroupBy is the group-by builder for Link entities.
@@ -653,41 +653,41 @@ type LinkGroupBy struct {
 }
 
 // Aggregate adds the given aggregation functions to the group-by query.
-func (_g *LinkGroupBy) Aggregate(fns ...AggregateFunc) *LinkGroupBy {
-	_g.fns = append(_g.fns, fns...)
-	return _g
+func (lgb *LinkGroupBy) Aggregate(fns ...AggregateFunc) *LinkGroupBy {
+	lgb.fns = append(lgb.fns, fns...)
+	return lgb
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_g *LinkGroupBy) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _g.build.ctx, ent.OpQueryGroupBy)
-	if err := _g.build.prepareQuery(ctx); err != nil {
+func (lgb *LinkGroupBy) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, lgb.build.ctx, ent.OpQueryGroupBy)
+	if err := lgb.build.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*LinkQuery, *LinkGroupBy](ctx, _g.build, _g, _g.build.inters, v)
+	return scanWithInterceptors[*LinkQuery, *LinkGroupBy](ctx, lgb.build, lgb, lgb.build.inters, v)
 }
 
-func (_g *LinkGroupBy) sqlScan(ctx context.Context, root *LinkQuery, v any) error {
+func (lgb *LinkGroupBy) sqlScan(ctx context.Context, root *LinkQuery, v any) error {
 	selector := root.sqlQuery(ctx).Select()
-	aggregation := make([]string, 0, len(_g.fns))
-	for _, fn := range _g.fns {
+	aggregation := make([]string, 0, len(lgb.fns))
+	for _, fn := range lgb.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
 	if len(selector.SelectedColumns()) == 0 {
-		columns := make([]string, 0, len(*_g.flds)+len(_g.fns))
-		for _, f := range *_g.flds {
+		columns := make([]string, 0, len(*lgb.flds)+len(lgb.fns))
+		for _, f := range *lgb.flds {
 			columns = append(columns, selector.C(f))
 		}
 		columns = append(columns, aggregation...)
 		selector.Select(columns...)
 	}
-	selector.GroupBy(selector.Columns(*_g.flds...)...)
+	selector.GroupBy(selector.Columns(*lgb.flds...)...)
 	if err := selector.Err(); err != nil {
 		return err
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _g.build.driver.Query(ctx, query, args, rows); err != nil {
+	if err := lgb.build.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -701,27 +701,27 @@ type LinkSelect struct {
 }
 
 // Aggregate adds the given aggregation functions to the selector query.
-func (_s *LinkSelect) Aggregate(fns ...AggregateFunc) *LinkSelect {
-	_s.fns = append(_s.fns, fns...)
-	return _s
+func (ls *LinkSelect) Aggregate(fns ...AggregateFunc) *LinkSelect {
+	ls.fns = append(ls.fns, fns...)
+	return ls
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_s *LinkSelect) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _s.ctx, ent.OpQuerySelect)
-	if err := _s.prepareQuery(ctx); err != nil {
+func (ls *LinkSelect) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, ls.ctx, ent.OpQuerySelect)
+	if err := ls.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*LinkQuery, *LinkSelect](ctx, _s.LinkQuery, _s, _s.inters, v)
+	return scanWithInterceptors[*LinkQuery, *LinkSelect](ctx, ls.LinkQuery, ls, ls.inters, v)
 }
 
-func (_s *LinkSelect) sqlScan(ctx context.Context, root *LinkQuery, v any) error {
+func (ls *LinkSelect) sqlScan(ctx context.Context, root *LinkQuery, v any) error {
 	selector := root.sqlQuery(ctx)
-	aggregation := make([]string, 0, len(_s.fns))
-	for _, fn := range _s.fns {
+	aggregation := make([]string, 0, len(ls.fns))
+	for _, fn := range ls.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
-	switch n := len(*_s.selector.flds); {
+	switch n := len(*ls.selector.flds); {
 	case n == 0 && len(aggregation) > 0:
 		selector.Select(aggregation...)
 	case n != 0 && len(aggregation) > 0:
@@ -729,7 +729,7 @@ func (_s *LinkSelect) sqlScan(ctx context.Context, root *LinkQuery, v any) error
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _s.driver.Query(ctx, query, args, rows); err != nil {
+	if err := ls.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -737,7 +737,7 @@ func (_s *LinkSelect) sqlScan(ctx context.Context, root *LinkQuery, v any) error
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_s *LinkSelect) Modify(modifiers ...func(s *sql.Selector)) *LinkSelect {
-	_s.modifiers = append(_s.modifiers, modifiers...)
-	return _s
+func (ls *LinkSelect) Modify(modifiers ...func(s *sql.Selector)) *LinkSelect {
+	ls.modifiers = append(ls.modifiers, modifiers...)
+	return ls
 }

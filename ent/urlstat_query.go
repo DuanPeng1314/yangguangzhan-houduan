@@ -29,40 +29,40 @@ type URLStatQuery struct {
 }
 
 // Where adds a new predicate for the URLStatQuery builder.
-func (_q *URLStatQuery) Where(ps ...predicate.URLStat) *URLStatQuery {
-	_q.predicates = append(_q.predicates, ps...)
-	return _q
+func (usq *URLStatQuery) Where(ps ...predicate.URLStat) *URLStatQuery {
+	usq.predicates = append(usq.predicates, ps...)
+	return usq
 }
 
 // Limit the number of records to be returned by this query.
-func (_q *URLStatQuery) Limit(limit int) *URLStatQuery {
-	_q.ctx.Limit = &limit
-	return _q
+func (usq *URLStatQuery) Limit(limit int) *URLStatQuery {
+	usq.ctx.Limit = &limit
+	return usq
 }
 
 // Offset to start from.
-func (_q *URLStatQuery) Offset(offset int) *URLStatQuery {
-	_q.ctx.Offset = &offset
-	return _q
+func (usq *URLStatQuery) Offset(offset int) *URLStatQuery {
+	usq.ctx.Offset = &offset
+	return usq
 }
 
 // Unique configures the query builder to filter duplicate records on query.
 // By default, unique is set to true, and can be disabled using this method.
-func (_q *URLStatQuery) Unique(unique bool) *URLStatQuery {
-	_q.ctx.Unique = &unique
-	return _q
+func (usq *URLStatQuery) Unique(unique bool) *URLStatQuery {
+	usq.ctx.Unique = &unique
+	return usq
 }
 
 // Order specifies how the records should be ordered.
-func (_q *URLStatQuery) Order(o ...urlstat.OrderOption) *URLStatQuery {
-	_q.order = append(_q.order, o...)
-	return _q
+func (usq *URLStatQuery) Order(o ...urlstat.OrderOption) *URLStatQuery {
+	usq.order = append(usq.order, o...)
+	return usq
 }
 
 // First returns the first URLStat entity from the query.
 // Returns a *NotFoundError when no URLStat was found.
-func (_q *URLStatQuery) First(ctx context.Context) (*URLStat, error) {
-	nodes, err := _q.Limit(1).All(setContextOp(ctx, _q.ctx, ent.OpQueryFirst))
+func (usq *URLStatQuery) First(ctx context.Context) (*URLStat, error) {
+	nodes, err := usq.Limit(1).All(setContextOp(ctx, usq.ctx, ent.OpQueryFirst))
 	if err != nil {
 		return nil, err
 	}
@@ -73,8 +73,8 @@ func (_q *URLStatQuery) First(ctx context.Context) (*URLStat, error) {
 }
 
 // FirstX is like First, but panics if an error occurs.
-func (_q *URLStatQuery) FirstX(ctx context.Context) *URLStat {
-	node, err := _q.First(ctx)
+func (usq *URLStatQuery) FirstX(ctx context.Context) *URLStat {
+	node, err := usq.First(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -83,9 +83,9 @@ func (_q *URLStatQuery) FirstX(ctx context.Context) *URLStat {
 
 // FirstID returns the first URLStat ID from the query.
 // Returns a *NotFoundError when no URLStat ID was found.
-func (_q *URLStatQuery) FirstID(ctx context.Context) (id uint, err error) {
+func (usq *URLStatQuery) FirstID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
+	if ids, err = usq.Limit(1).IDs(setContextOp(ctx, usq.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
 	if len(ids) == 0 {
@@ -96,8 +96,8 @@ func (_q *URLStatQuery) FirstID(ctx context.Context) (id uint, err error) {
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (_q *URLStatQuery) FirstIDX(ctx context.Context) uint {
-	id, err := _q.FirstID(ctx)
+func (usq *URLStatQuery) FirstIDX(ctx context.Context) uint {
+	id, err := usq.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -107,8 +107,8 @@ func (_q *URLStatQuery) FirstIDX(ctx context.Context) uint {
 // Only returns a single URLStat entity found by the query, ensuring it only returns one.
 // Returns a *NotSingularError when more than one URLStat entity is found.
 // Returns a *NotFoundError when no URLStat entities are found.
-func (_q *URLStatQuery) Only(ctx context.Context) (*URLStat, error) {
-	nodes, err := _q.Limit(2).All(setContextOp(ctx, _q.ctx, ent.OpQueryOnly))
+func (usq *URLStatQuery) Only(ctx context.Context) (*URLStat, error) {
+	nodes, err := usq.Limit(2).All(setContextOp(ctx, usq.ctx, ent.OpQueryOnly))
 	if err != nil {
 		return nil, err
 	}
@@ -123,8 +123,8 @@ func (_q *URLStatQuery) Only(ctx context.Context) (*URLStat, error) {
 }
 
 // OnlyX is like Only, but panics if an error occurs.
-func (_q *URLStatQuery) OnlyX(ctx context.Context) *URLStat {
-	node, err := _q.Only(ctx)
+func (usq *URLStatQuery) OnlyX(ctx context.Context) *URLStat {
+	node, err := usq.Only(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -134,9 +134,9 @@ func (_q *URLStatQuery) OnlyX(ctx context.Context) *URLStat {
 // OnlyID is like Only, but returns the only URLStat ID in the query.
 // Returns a *NotSingularError when more than one URLStat ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (_q *URLStatQuery) OnlyID(ctx context.Context) (id uint, err error) {
+func (usq *URLStatQuery) OnlyID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
+	if ids, err = usq.Limit(2).IDs(setContextOp(ctx, usq.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
 	switch len(ids) {
@@ -151,8 +151,8 @@ func (_q *URLStatQuery) OnlyID(ctx context.Context) (id uint, err error) {
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (_q *URLStatQuery) OnlyIDX(ctx context.Context) uint {
-	id, err := _q.OnlyID(ctx)
+func (usq *URLStatQuery) OnlyIDX(ctx context.Context) uint {
+	id, err := usq.OnlyID(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -160,18 +160,18 @@ func (_q *URLStatQuery) OnlyIDX(ctx context.Context) uint {
 }
 
 // All executes the query and returns a list of URLStats.
-func (_q *URLStatQuery) All(ctx context.Context) ([]*URLStat, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryAll)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (usq *URLStatQuery) All(ctx context.Context) ([]*URLStat, error) {
+	ctx = setContextOp(ctx, usq.ctx, ent.OpQueryAll)
+	if err := usq.prepareQuery(ctx); err != nil {
 		return nil, err
 	}
 	qr := querierAll[[]*URLStat, *URLStatQuery]()
-	return withInterceptors[[]*URLStat](ctx, _q, qr, _q.inters)
+	return withInterceptors[[]*URLStat](ctx, usq, qr, usq.inters)
 }
 
 // AllX is like All, but panics if an error occurs.
-func (_q *URLStatQuery) AllX(ctx context.Context) []*URLStat {
-	nodes, err := _q.All(ctx)
+func (usq *URLStatQuery) AllX(ctx context.Context) []*URLStat {
+	nodes, err := usq.All(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -179,20 +179,20 @@ func (_q *URLStatQuery) AllX(ctx context.Context) []*URLStat {
 }
 
 // IDs executes the query and returns a list of URLStat IDs.
-func (_q *URLStatQuery) IDs(ctx context.Context) (ids []uint, err error) {
-	if _q.ctx.Unique == nil && _q.path != nil {
-		_q.Unique(true)
+func (usq *URLStatQuery) IDs(ctx context.Context) (ids []uint, err error) {
+	if usq.ctx.Unique == nil && usq.path != nil {
+		usq.Unique(true)
 	}
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryIDs)
-	if err = _q.Select(urlstat.FieldID).Scan(ctx, &ids); err != nil {
+	ctx = setContextOp(ctx, usq.ctx, ent.OpQueryIDs)
+	if err = usq.Select(urlstat.FieldID).Scan(ctx, &ids); err != nil {
 		return nil, err
 	}
 	return ids, nil
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (_q *URLStatQuery) IDsX(ctx context.Context) []uint {
-	ids, err := _q.IDs(ctx)
+func (usq *URLStatQuery) IDsX(ctx context.Context) []uint {
+	ids, err := usq.IDs(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -200,17 +200,17 @@ func (_q *URLStatQuery) IDsX(ctx context.Context) []uint {
 }
 
 // Count returns the count of the given query.
-func (_q *URLStatQuery) Count(ctx context.Context) (int, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryCount)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (usq *URLStatQuery) Count(ctx context.Context) (int, error) {
+	ctx = setContextOp(ctx, usq.ctx, ent.OpQueryCount)
+	if err := usq.prepareQuery(ctx); err != nil {
 		return 0, err
 	}
-	return withInterceptors[int](ctx, _q, querierCount[*URLStatQuery](), _q.inters)
+	return withInterceptors[int](ctx, usq, querierCount[*URLStatQuery](), usq.inters)
 }
 
 // CountX is like Count, but panics if an error occurs.
-func (_q *URLStatQuery) CountX(ctx context.Context) int {
-	count, err := _q.Count(ctx)
+func (usq *URLStatQuery) CountX(ctx context.Context) int {
+	count, err := usq.Count(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -218,9 +218,9 @@ func (_q *URLStatQuery) CountX(ctx context.Context) int {
 }
 
 // Exist returns true if the query has elements in the graph.
-func (_q *URLStatQuery) Exist(ctx context.Context) (bool, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryExist)
-	switch _, err := _q.FirstID(ctx); {
+func (usq *URLStatQuery) Exist(ctx context.Context) (bool, error) {
+	ctx = setContextOp(ctx, usq.ctx, ent.OpQueryExist)
+	switch _, err := usq.FirstID(ctx); {
 	case IsNotFound(err):
 		return false, nil
 	case err != nil:
@@ -231,8 +231,8 @@ func (_q *URLStatQuery) Exist(ctx context.Context) (bool, error) {
 }
 
 // ExistX is like Exist, but panics if an error occurs.
-func (_q *URLStatQuery) ExistX(ctx context.Context) bool {
-	exist, err := _q.Exist(ctx)
+func (usq *URLStatQuery) ExistX(ctx context.Context) bool {
+	exist, err := usq.Exist(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -241,20 +241,20 @@ func (_q *URLStatQuery) ExistX(ctx context.Context) bool {
 
 // Clone returns a duplicate of the URLStatQuery builder, including all associated steps. It can be
 // used to prepare common query builders and use them differently after the clone is made.
-func (_q *URLStatQuery) Clone() *URLStatQuery {
-	if _q == nil {
+func (usq *URLStatQuery) Clone() *URLStatQuery {
+	if usq == nil {
 		return nil
 	}
 	return &URLStatQuery{
-		config:     _q.config,
-		ctx:        _q.ctx.Clone(),
-		order:      append([]urlstat.OrderOption{}, _q.order...),
-		inters:     append([]Interceptor{}, _q.inters...),
-		predicates: append([]predicate.URLStat{}, _q.predicates...),
+		config:     usq.config,
+		ctx:        usq.ctx.Clone(),
+		order:      append([]urlstat.OrderOption{}, usq.order...),
+		inters:     append([]Interceptor{}, usq.inters...),
+		predicates: append([]predicate.URLStat{}, usq.predicates...),
 		// clone intermediate query.
-		sql:       _q.sql.Clone(),
-		path:      _q.path,
-		modifiers: append([]func(*sql.Selector){}, _q.modifiers...),
+		sql:       usq.sql.Clone(),
+		path:      usq.path,
+		modifiers: append([]func(*sql.Selector){}, usq.modifiers...),
 	}
 }
 
@@ -272,10 +272,10 @@ func (_q *URLStatQuery) Clone() *URLStatQuery {
 //		GroupBy(urlstat.FieldCreatedAt).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
-func (_q *URLStatQuery) GroupBy(field string, fields ...string) *URLStatGroupBy {
-	_q.ctx.Fields = append([]string{field}, fields...)
-	grbuild := &URLStatGroupBy{build: _q}
-	grbuild.flds = &_q.ctx.Fields
+func (usq *URLStatQuery) GroupBy(field string, fields ...string) *URLStatGroupBy {
+	usq.ctx.Fields = append([]string{field}, fields...)
+	grbuild := &URLStatGroupBy{build: usq}
+	grbuild.flds = &usq.ctx.Fields
 	grbuild.label = urlstat.Label
 	grbuild.scan = grbuild.Scan
 	return grbuild
@@ -293,65 +293,65 @@ func (_q *URLStatQuery) GroupBy(field string, fields ...string) *URLStatGroupBy 
 //	client.URLStat.Query().
 //		Select(urlstat.FieldCreatedAt).
 //		Scan(ctx, &v)
-func (_q *URLStatQuery) Select(fields ...string) *URLStatSelect {
-	_q.ctx.Fields = append(_q.ctx.Fields, fields...)
-	sbuild := &URLStatSelect{URLStatQuery: _q}
+func (usq *URLStatQuery) Select(fields ...string) *URLStatSelect {
+	usq.ctx.Fields = append(usq.ctx.Fields, fields...)
+	sbuild := &URLStatSelect{URLStatQuery: usq}
 	sbuild.label = urlstat.Label
-	sbuild.flds, sbuild.scan = &_q.ctx.Fields, sbuild.Scan
+	sbuild.flds, sbuild.scan = &usq.ctx.Fields, sbuild.Scan
 	return sbuild
 }
 
 // Aggregate returns a URLStatSelect configured with the given aggregations.
-func (_q *URLStatQuery) Aggregate(fns ...AggregateFunc) *URLStatSelect {
-	return _q.Select().Aggregate(fns...)
+func (usq *URLStatQuery) Aggregate(fns ...AggregateFunc) *URLStatSelect {
+	return usq.Select().Aggregate(fns...)
 }
 
-func (_q *URLStatQuery) prepareQuery(ctx context.Context) error {
-	for _, inter := range _q.inters {
+func (usq *URLStatQuery) prepareQuery(ctx context.Context) error {
+	for _, inter := range usq.inters {
 		if inter == nil {
 			return fmt.Errorf("ent: uninitialized interceptor (forgotten import ent/runtime?)")
 		}
 		if trv, ok := inter.(Traverser); ok {
-			if err := trv.Traverse(ctx, _q); err != nil {
+			if err := trv.Traverse(ctx, usq); err != nil {
 				return err
 			}
 		}
 	}
-	for _, f := range _q.ctx.Fields {
+	for _, f := range usq.ctx.Fields {
 		if !urlstat.ValidColumn(f) {
 			return &ValidationError{Name: f, err: fmt.Errorf("ent: invalid field %q for query", f)}
 		}
 	}
-	if _q.path != nil {
-		prev, err := _q.path(ctx)
+	if usq.path != nil {
+		prev, err := usq.path(ctx)
 		if err != nil {
 			return err
 		}
-		_q.sql = prev
+		usq.sql = prev
 	}
 	return nil
 }
 
-func (_q *URLStatQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*URLStat, error) {
+func (usq *URLStatQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*URLStat, error) {
 	var (
 		nodes = []*URLStat{}
-		_spec = _q.querySpec()
+		_spec = usq.querySpec()
 	)
 	_spec.ScanValues = func(columns []string) ([]any, error) {
 		return (*URLStat).scanValues(nil, columns)
 	}
 	_spec.Assign = func(columns []string, values []any) error {
-		node := &URLStat{config: _q.config}
+		node := &URLStat{config: usq.config}
 		nodes = append(nodes, node)
 		return node.assignValues(columns, values)
 	}
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+	if len(usq.modifiers) > 0 {
+		_spec.Modifiers = usq.modifiers
 	}
 	for i := range hooks {
 		hooks[i](ctx, _spec)
 	}
-	if err := sqlgraph.QueryNodes(ctx, _q.driver, _spec); err != nil {
+	if err := sqlgraph.QueryNodes(ctx, usq.driver, _spec); err != nil {
 		return nil, err
 	}
 	if len(nodes) == 0 {
@@ -360,27 +360,27 @@ func (_q *URLStatQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*URLS
 	return nodes, nil
 }
 
-func (_q *URLStatQuery) sqlCount(ctx context.Context) (int, error) {
-	_spec := _q.querySpec()
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+func (usq *URLStatQuery) sqlCount(ctx context.Context) (int, error) {
+	_spec := usq.querySpec()
+	if len(usq.modifiers) > 0 {
+		_spec.Modifiers = usq.modifiers
 	}
-	_spec.Node.Columns = _q.ctx.Fields
-	if len(_q.ctx.Fields) > 0 {
-		_spec.Unique = _q.ctx.Unique != nil && *_q.ctx.Unique
+	_spec.Node.Columns = usq.ctx.Fields
+	if len(usq.ctx.Fields) > 0 {
+		_spec.Unique = usq.ctx.Unique != nil && *usq.ctx.Unique
 	}
-	return sqlgraph.CountNodes(ctx, _q.driver, _spec)
+	return sqlgraph.CountNodes(ctx, usq.driver, _spec)
 }
 
-func (_q *URLStatQuery) querySpec() *sqlgraph.QuerySpec {
+func (usq *URLStatQuery) querySpec() *sqlgraph.QuerySpec {
 	_spec := sqlgraph.NewQuerySpec(urlstat.Table, urlstat.Columns, sqlgraph.NewFieldSpec(urlstat.FieldID, field.TypeUint))
-	_spec.From = _q.sql
-	if unique := _q.ctx.Unique; unique != nil {
+	_spec.From = usq.sql
+	if unique := usq.ctx.Unique; unique != nil {
 		_spec.Unique = *unique
-	} else if _q.path != nil {
+	} else if usq.path != nil {
 		_spec.Unique = true
 	}
-	if fields := _q.ctx.Fields; len(fields) > 0 {
+	if fields := usq.ctx.Fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, urlstat.FieldID)
 		for i := range fields {
@@ -389,20 +389,20 @@ func (_q *URLStatQuery) querySpec() *sqlgraph.QuerySpec {
 			}
 		}
 	}
-	if ps := _q.predicates; len(ps) > 0 {
+	if ps := usq.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := usq.ctx.Limit; limit != nil {
 		_spec.Limit = *limit
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := usq.ctx.Offset; offset != nil {
 		_spec.Offset = *offset
 	}
-	if ps := _q.order; len(ps) > 0 {
+	if ps := usq.order; len(ps) > 0 {
 		_spec.Order = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
@@ -412,45 +412,45 @@ func (_q *URLStatQuery) querySpec() *sqlgraph.QuerySpec {
 	return _spec
 }
 
-func (_q *URLStatQuery) sqlQuery(ctx context.Context) *sql.Selector {
-	builder := sql.Dialect(_q.driver.Dialect())
+func (usq *URLStatQuery) sqlQuery(ctx context.Context) *sql.Selector {
+	builder := sql.Dialect(usq.driver.Dialect())
 	t1 := builder.Table(urlstat.Table)
-	columns := _q.ctx.Fields
+	columns := usq.ctx.Fields
 	if len(columns) == 0 {
 		columns = urlstat.Columns
 	}
 	selector := builder.Select(t1.Columns(columns...)...).From(t1)
-	if _q.sql != nil {
-		selector = _q.sql
+	if usq.sql != nil {
+		selector = usq.sql
 		selector.Select(selector.Columns(columns...)...)
 	}
-	if _q.ctx.Unique != nil && *_q.ctx.Unique {
+	if usq.ctx.Unique != nil && *usq.ctx.Unique {
 		selector.Distinct()
 	}
-	for _, m := range _q.modifiers {
+	for _, m := range usq.modifiers {
 		m(selector)
 	}
-	for _, p := range _q.predicates {
+	for _, p := range usq.predicates {
 		p(selector)
 	}
-	for _, p := range _q.order {
+	for _, p := range usq.order {
 		p(selector)
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := usq.ctx.Offset; offset != nil {
 		// limit is mandatory for offset clause. We start
 		// with default value, and override it below if needed.
 		selector.Offset(*offset).Limit(math.MaxInt32)
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := usq.ctx.Limit; limit != nil {
 		selector.Limit(*limit)
 	}
 	return selector
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_q *URLStatQuery) Modify(modifiers ...func(s *sql.Selector)) *URLStatSelect {
-	_q.modifiers = append(_q.modifiers, modifiers...)
-	return _q.Select()
+func (usq *URLStatQuery) Modify(modifiers ...func(s *sql.Selector)) *URLStatSelect {
+	usq.modifiers = append(usq.modifiers, modifiers...)
+	return usq.Select()
 }
 
 // URLStatGroupBy is the group-by builder for URLStat entities.
@@ -460,41 +460,41 @@ type URLStatGroupBy struct {
 }
 
 // Aggregate adds the given aggregation functions to the group-by query.
-func (_g *URLStatGroupBy) Aggregate(fns ...AggregateFunc) *URLStatGroupBy {
-	_g.fns = append(_g.fns, fns...)
-	return _g
+func (usgb *URLStatGroupBy) Aggregate(fns ...AggregateFunc) *URLStatGroupBy {
+	usgb.fns = append(usgb.fns, fns...)
+	return usgb
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_g *URLStatGroupBy) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _g.build.ctx, ent.OpQueryGroupBy)
-	if err := _g.build.prepareQuery(ctx); err != nil {
+func (usgb *URLStatGroupBy) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, usgb.build.ctx, ent.OpQueryGroupBy)
+	if err := usgb.build.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*URLStatQuery, *URLStatGroupBy](ctx, _g.build, _g, _g.build.inters, v)
+	return scanWithInterceptors[*URLStatQuery, *URLStatGroupBy](ctx, usgb.build, usgb, usgb.build.inters, v)
 }
 
-func (_g *URLStatGroupBy) sqlScan(ctx context.Context, root *URLStatQuery, v any) error {
+func (usgb *URLStatGroupBy) sqlScan(ctx context.Context, root *URLStatQuery, v any) error {
 	selector := root.sqlQuery(ctx).Select()
-	aggregation := make([]string, 0, len(_g.fns))
-	for _, fn := range _g.fns {
+	aggregation := make([]string, 0, len(usgb.fns))
+	for _, fn := range usgb.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
 	if len(selector.SelectedColumns()) == 0 {
-		columns := make([]string, 0, len(*_g.flds)+len(_g.fns))
-		for _, f := range *_g.flds {
+		columns := make([]string, 0, len(*usgb.flds)+len(usgb.fns))
+		for _, f := range *usgb.flds {
 			columns = append(columns, selector.C(f))
 		}
 		columns = append(columns, aggregation...)
 		selector.Select(columns...)
 	}
-	selector.GroupBy(selector.Columns(*_g.flds...)...)
+	selector.GroupBy(selector.Columns(*usgb.flds...)...)
 	if err := selector.Err(); err != nil {
 		return err
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _g.build.driver.Query(ctx, query, args, rows); err != nil {
+	if err := usgb.build.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -508,27 +508,27 @@ type URLStatSelect struct {
 }
 
 // Aggregate adds the given aggregation functions to the selector query.
-func (_s *URLStatSelect) Aggregate(fns ...AggregateFunc) *URLStatSelect {
-	_s.fns = append(_s.fns, fns...)
-	return _s
+func (uss *URLStatSelect) Aggregate(fns ...AggregateFunc) *URLStatSelect {
+	uss.fns = append(uss.fns, fns...)
+	return uss
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_s *URLStatSelect) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _s.ctx, ent.OpQuerySelect)
-	if err := _s.prepareQuery(ctx); err != nil {
+func (uss *URLStatSelect) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, uss.ctx, ent.OpQuerySelect)
+	if err := uss.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*URLStatQuery, *URLStatSelect](ctx, _s.URLStatQuery, _s, _s.inters, v)
+	return scanWithInterceptors[*URLStatQuery, *URLStatSelect](ctx, uss.URLStatQuery, uss, uss.inters, v)
 }
 
-func (_s *URLStatSelect) sqlScan(ctx context.Context, root *URLStatQuery, v any) error {
+func (uss *URLStatSelect) sqlScan(ctx context.Context, root *URLStatQuery, v any) error {
 	selector := root.sqlQuery(ctx)
-	aggregation := make([]string, 0, len(_s.fns))
-	for _, fn := range _s.fns {
+	aggregation := make([]string, 0, len(uss.fns))
+	for _, fn := range uss.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
-	switch n := len(*_s.selector.flds); {
+	switch n := len(*uss.selector.flds); {
 	case n == 0 && len(aggregation) > 0:
 		selector.Select(aggregation...)
 	case n != 0 && len(aggregation) > 0:
@@ -536,7 +536,7 @@ func (_s *URLStatSelect) sqlScan(ctx context.Context, root *URLStatQuery, v any)
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _s.driver.Query(ctx, query, args, rows); err != nil {
+	if err := uss.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -544,7 +544,7 @@ func (_s *URLStatSelect) sqlScan(ctx context.Context, root *URLStatQuery, v any)
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_s *URLStatSelect) Modify(modifiers ...func(s *sql.Selector)) *URLStatSelect {
-	_s.modifiers = append(_s.modifiers, modifiers...)
-	return _s
+func (uss *URLStatSelect) Modify(modifiers ...func(s *sql.Selector)) *URLStatSelect {
+	uss.modifiers = append(uss.modifiers, modifiers...)
+	return uss
 }

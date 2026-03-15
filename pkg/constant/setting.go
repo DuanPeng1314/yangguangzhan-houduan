@@ -55,7 +55,7 @@ const (
 	KeyUploadAllowedExtensions   SettingKey = "UPLOAD_ALLOWED_EXTENSIONS"
 	KeyUploadDeniedExtensions    SettingKey = "UPLOAD_DENIED_EXTENSIONS"
 	KeyEnableExternalLinkWarning SettingKey = "ENABLE_EXTERNAL_LINK_WARNING"
-	KeyRespectReducedMotion     SettingKey = "RESPECT_REDUCED_MOTION"
+	KeyRespectReducedMotion      SettingKey = "RESPECT_REDUCED_MOTION"
 	KeyEnableVipsGenerator       SettingKey = "ENABLE_VIPS_GENERATOR"
 	KeyVipsPath                  SettingKey = "VIPS_PATH"
 	KeyVipsSupportedExts         SettingKey = "VIPS_SUPPORTED_EXTS"
@@ -402,14 +402,19 @@ const (
 	KeyImageCaptchaExpire SettingKey = "image_captcha.expire" // 图形验证码过期时间（秒）
 
 	// --- SEO 推送配置 ---
-	KeySeoAutoSubmit     SettingKey = "seo.auto_submit"      // 是否启用自动推送
-	KeySeoRetryTimes     SettingKey = "seo.retry_times"      // 重试次数
-	KeySeoRetryInterval  SettingKey = "seo.retry_interval"   // 重试间隔（毫秒）
-	KeySeoBaiduEnable    SettingKey = "seo.baidu.enable"     // 启用百度推送
-	KeySeoBaiduSite      SettingKey = "seo.baidu.site"       // 百度站点地址
-	KeySeoBaiduToken     SettingKey = "seo.baidu.token"      // 百度推送 Token
-	KeySeoBingEnable     SettingKey = "seo.bing.enable"      // 启用 Bing 推送
-	KeySeoBingApiKey     SettingKey = "seo.bing.api_key"     // Bing API Key
-	KeySeoGoogleEnable   SettingKey = "seo.google.enable"    // 启用 Google 推送
+	KeySeoAutoSubmit       SettingKey = "seo.auto_submit"       // 是否启用自动推送
+	KeySeoRetryTimes       SettingKey = "seo.retry_times"       // 重试次数
+	KeySeoRetryInterval    SettingKey = "seo.retry_interval"    // 重试间隔（毫秒）
+	KeySeoBaiduEnable      SettingKey = "seo.baidu.enable"      // 启用百度推送
+	KeySeoBaiduSite        SettingKey = "seo.baidu.site"        // 百度站点地址
+	KeySeoBaiduToken       SettingKey = "seo.baidu.token"       // 百度推送 Token
+	KeySeoBingEnable       SettingKey = "seo.bing.enable"       // 启用 Bing 推送
+	KeySeoBingApiKey       SettingKey = "seo.bing.api_key"      // Bing API Key
+	KeySeoGoogleEnable     SettingKey = "seo.google.enable"     // 启用 Google 推送
 	KeySeoGoogleCredential SettingKey = "seo.google.credential" // Google Service Account 凭证
+
+	KeySsoEnabled       SettingKey = "sso.enabled"
+	KeySsoSiteID        SettingKey = "sso.site_id"
+	KeySsoSiteSecret    SettingKey = "sso.site_secret"
+	KeySsoAuthCenterURL SettingKey = "sso.auth_center_url"
 )

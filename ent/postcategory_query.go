@@ -32,44 +32,44 @@ type PostCategoryQuery struct {
 }
 
 // Where adds a new predicate for the PostCategoryQuery builder.
-func (_q *PostCategoryQuery) Where(ps ...predicate.PostCategory) *PostCategoryQuery {
-	_q.predicates = append(_q.predicates, ps...)
-	return _q
+func (pcq *PostCategoryQuery) Where(ps ...predicate.PostCategory) *PostCategoryQuery {
+	pcq.predicates = append(pcq.predicates, ps...)
+	return pcq
 }
 
 // Limit the number of records to be returned by this query.
-func (_q *PostCategoryQuery) Limit(limit int) *PostCategoryQuery {
-	_q.ctx.Limit = &limit
-	return _q
+func (pcq *PostCategoryQuery) Limit(limit int) *PostCategoryQuery {
+	pcq.ctx.Limit = &limit
+	return pcq
 }
 
 // Offset to start from.
-func (_q *PostCategoryQuery) Offset(offset int) *PostCategoryQuery {
-	_q.ctx.Offset = &offset
-	return _q
+func (pcq *PostCategoryQuery) Offset(offset int) *PostCategoryQuery {
+	pcq.ctx.Offset = &offset
+	return pcq
 }
 
 // Unique configures the query builder to filter duplicate records on query.
 // By default, unique is set to true, and can be disabled using this method.
-func (_q *PostCategoryQuery) Unique(unique bool) *PostCategoryQuery {
-	_q.ctx.Unique = &unique
-	return _q
+func (pcq *PostCategoryQuery) Unique(unique bool) *PostCategoryQuery {
+	pcq.ctx.Unique = &unique
+	return pcq
 }
 
 // Order specifies how the records should be ordered.
-func (_q *PostCategoryQuery) Order(o ...postcategory.OrderOption) *PostCategoryQuery {
-	_q.order = append(_q.order, o...)
-	return _q
+func (pcq *PostCategoryQuery) Order(o ...postcategory.OrderOption) *PostCategoryQuery {
+	pcq.order = append(pcq.order, o...)
+	return pcq
 }
 
 // QueryArticles chains the current query on the "articles" edge.
-func (_q *PostCategoryQuery) QueryArticles() *ArticleQuery {
-	query := (&ArticleClient{config: _q.config}).Query()
+func (pcq *PostCategoryQuery) QueryArticles() *ArticleQuery {
+	query := (&ArticleClient{config: pcq.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
+		if err := pcq.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := _q.sqlQuery(ctx)
+		selector := pcq.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -78,7 +78,7 @@ func (_q *PostCategoryQuery) QueryArticles() *ArticleQuery {
 			sqlgraph.To(article.Table, article.FieldID),
 			sqlgraph.Edge(sqlgraph.M2M, true, postcategory.ArticlesTable, postcategory.ArticlesPrimaryKey...),
 		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(pcq.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
@@ -86,8 +86,8 @@ func (_q *PostCategoryQuery) QueryArticles() *ArticleQuery {
 
 // First returns the first PostCategory entity from the query.
 // Returns a *NotFoundError when no PostCategory was found.
-func (_q *PostCategoryQuery) First(ctx context.Context) (*PostCategory, error) {
-	nodes, err := _q.Limit(1).All(setContextOp(ctx, _q.ctx, ent.OpQueryFirst))
+func (pcq *PostCategoryQuery) First(ctx context.Context) (*PostCategory, error) {
+	nodes, err := pcq.Limit(1).All(setContextOp(ctx, pcq.ctx, ent.OpQueryFirst))
 	if err != nil {
 		return nil, err
 	}
@@ -98,8 +98,8 @@ func (_q *PostCategoryQuery) First(ctx context.Context) (*PostCategory, error) {
 }
 
 // FirstX is like First, but panics if an error occurs.
-func (_q *PostCategoryQuery) FirstX(ctx context.Context) *PostCategory {
-	node, err := _q.First(ctx)
+func (pcq *PostCategoryQuery) FirstX(ctx context.Context) *PostCategory {
+	node, err := pcq.First(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -108,9 +108,9 @@ func (_q *PostCategoryQuery) FirstX(ctx context.Context) *PostCategory {
 
 // FirstID returns the first PostCategory ID from the query.
 // Returns a *NotFoundError when no PostCategory ID was found.
-func (_q *PostCategoryQuery) FirstID(ctx context.Context) (id uint, err error) {
+func (pcq *PostCategoryQuery) FirstID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
+	if ids, err = pcq.Limit(1).IDs(setContextOp(ctx, pcq.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
 	if len(ids) == 0 {
@@ -121,8 +121,8 @@ func (_q *PostCategoryQuery) FirstID(ctx context.Context) (id uint, err error) {
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (_q *PostCategoryQuery) FirstIDX(ctx context.Context) uint {
-	id, err := _q.FirstID(ctx)
+func (pcq *PostCategoryQuery) FirstIDX(ctx context.Context) uint {
+	id, err := pcq.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -132,8 +132,8 @@ func (_q *PostCategoryQuery) FirstIDX(ctx context.Context) uint {
 // Only returns a single PostCategory entity found by the query, ensuring it only returns one.
 // Returns a *NotSingularError when more than one PostCategory entity is found.
 // Returns a *NotFoundError when no PostCategory entities are found.
-func (_q *PostCategoryQuery) Only(ctx context.Context) (*PostCategory, error) {
-	nodes, err := _q.Limit(2).All(setContextOp(ctx, _q.ctx, ent.OpQueryOnly))
+func (pcq *PostCategoryQuery) Only(ctx context.Context) (*PostCategory, error) {
+	nodes, err := pcq.Limit(2).All(setContextOp(ctx, pcq.ctx, ent.OpQueryOnly))
 	if err != nil {
 		return nil, err
 	}
@@ -148,8 +148,8 @@ func (_q *PostCategoryQuery) Only(ctx context.Context) (*PostCategory, error) {
 }
 
 // OnlyX is like Only, but panics if an error occurs.
-func (_q *PostCategoryQuery) OnlyX(ctx context.Context) *PostCategory {
-	node, err := _q.Only(ctx)
+func (pcq *PostCategoryQuery) OnlyX(ctx context.Context) *PostCategory {
+	node, err := pcq.Only(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -159,9 +159,9 @@ func (_q *PostCategoryQuery) OnlyX(ctx context.Context) *PostCategory {
 // OnlyID is like Only, but returns the only PostCategory ID in the query.
 // Returns a *NotSingularError when more than one PostCategory ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (_q *PostCategoryQuery) OnlyID(ctx context.Context) (id uint, err error) {
+func (pcq *PostCategoryQuery) OnlyID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
+	if ids, err = pcq.Limit(2).IDs(setContextOp(ctx, pcq.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
 	switch len(ids) {
@@ -176,8 +176,8 @@ func (_q *PostCategoryQuery) OnlyID(ctx context.Context) (id uint, err error) {
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (_q *PostCategoryQuery) OnlyIDX(ctx context.Context) uint {
-	id, err := _q.OnlyID(ctx)
+func (pcq *PostCategoryQuery) OnlyIDX(ctx context.Context) uint {
+	id, err := pcq.OnlyID(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -185,18 +185,18 @@ func (_q *PostCategoryQuery) OnlyIDX(ctx context.Context) uint {
 }
 
 // All executes the query and returns a list of PostCategories.
-func (_q *PostCategoryQuery) All(ctx context.Context) ([]*PostCategory, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryAll)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (pcq *PostCategoryQuery) All(ctx context.Context) ([]*PostCategory, error) {
+	ctx = setContextOp(ctx, pcq.ctx, ent.OpQueryAll)
+	if err := pcq.prepareQuery(ctx); err != nil {
 		return nil, err
 	}
 	qr := querierAll[[]*PostCategory, *PostCategoryQuery]()
-	return withInterceptors[[]*PostCategory](ctx, _q, qr, _q.inters)
+	return withInterceptors[[]*PostCategory](ctx, pcq, qr, pcq.inters)
 }
 
 // AllX is like All, but panics if an error occurs.
-func (_q *PostCategoryQuery) AllX(ctx context.Context) []*PostCategory {
-	nodes, err := _q.All(ctx)
+func (pcq *PostCategoryQuery) AllX(ctx context.Context) []*PostCategory {
+	nodes, err := pcq.All(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -204,20 +204,20 @@ func (_q *PostCategoryQuery) AllX(ctx context.Context) []*PostCategory {
 }
 
 // IDs executes the query and returns a list of PostCategory IDs.
-func (_q *PostCategoryQuery) IDs(ctx context.Context) (ids []uint, err error) {
-	if _q.ctx.Unique == nil && _q.path != nil {
-		_q.Unique(true)
+func (pcq *PostCategoryQuery) IDs(ctx context.Context) (ids []uint, err error) {
+	if pcq.ctx.Unique == nil && pcq.path != nil {
+		pcq.Unique(true)
 	}
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryIDs)
-	if err = _q.Select(postcategory.FieldID).Scan(ctx, &ids); err != nil {
+	ctx = setContextOp(ctx, pcq.ctx, ent.OpQueryIDs)
+	if err = pcq.Select(postcategory.FieldID).Scan(ctx, &ids); err != nil {
 		return nil, err
 	}
 	return ids, nil
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (_q *PostCategoryQuery) IDsX(ctx context.Context) []uint {
-	ids, err := _q.IDs(ctx)
+func (pcq *PostCategoryQuery) IDsX(ctx context.Context) []uint {
+	ids, err := pcq.IDs(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -225,17 +225,17 @@ func (_q *PostCategoryQuery) IDsX(ctx context.Context) []uint {
 }
 
 // Count returns the count of the given query.
-func (_q *PostCategoryQuery) Count(ctx context.Context) (int, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryCount)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (pcq *PostCategoryQuery) Count(ctx context.Context) (int, error) {
+	ctx = setContextOp(ctx, pcq.ctx, ent.OpQueryCount)
+	if err := pcq.prepareQuery(ctx); err != nil {
 		return 0, err
 	}
-	return withInterceptors[int](ctx, _q, querierCount[*PostCategoryQuery](), _q.inters)
+	return withInterceptors[int](ctx, pcq, querierCount[*PostCategoryQuery](), pcq.inters)
 }
 
 // CountX is like Count, but panics if an error occurs.
-func (_q *PostCategoryQuery) CountX(ctx context.Context) int {
-	count, err := _q.Count(ctx)
+func (pcq *PostCategoryQuery) CountX(ctx context.Context) int {
+	count, err := pcq.Count(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -243,9 +243,9 @@ func (_q *PostCategoryQuery) CountX(ctx context.Context) int {
 }
 
 // Exist returns true if the query has elements in the graph.
-func (_q *PostCategoryQuery) Exist(ctx context.Context) (bool, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryExist)
-	switch _, err := _q.FirstID(ctx); {
+func (pcq *PostCategoryQuery) Exist(ctx context.Context) (bool, error) {
+	ctx = setContextOp(ctx, pcq.ctx, ent.OpQueryExist)
+	switch _, err := pcq.FirstID(ctx); {
 	case IsNotFound(err):
 		return false, nil
 	case err != nil:
@@ -256,8 +256,8 @@ func (_q *PostCategoryQuery) Exist(ctx context.Context) (bool, error) {
 }
 
 // ExistX is like Exist, but panics if an error occurs.
-func (_q *PostCategoryQuery) ExistX(ctx context.Context) bool {
-	exist, err := _q.Exist(ctx)
+func (pcq *PostCategoryQuery) ExistX(ctx context.Context) bool {
+	exist, err := pcq.Exist(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -266,33 +266,33 @@ func (_q *PostCategoryQuery) ExistX(ctx context.Context) bool {
 
 // Clone returns a duplicate of the PostCategoryQuery builder, including all associated steps. It can be
 // used to prepare common query builders and use them differently after the clone is made.
-func (_q *PostCategoryQuery) Clone() *PostCategoryQuery {
-	if _q == nil {
+func (pcq *PostCategoryQuery) Clone() *PostCategoryQuery {
+	if pcq == nil {
 		return nil
 	}
 	return &PostCategoryQuery{
-		config:       _q.config,
-		ctx:          _q.ctx.Clone(),
-		order:        append([]postcategory.OrderOption{}, _q.order...),
-		inters:       append([]Interceptor{}, _q.inters...),
-		predicates:   append([]predicate.PostCategory{}, _q.predicates...),
-		withArticles: _q.withArticles.Clone(),
+		config:       pcq.config,
+		ctx:          pcq.ctx.Clone(),
+		order:        append([]postcategory.OrderOption{}, pcq.order...),
+		inters:       append([]Interceptor{}, pcq.inters...),
+		predicates:   append([]predicate.PostCategory{}, pcq.predicates...),
+		withArticles: pcq.withArticles.Clone(),
 		// clone intermediate query.
-		sql:       _q.sql.Clone(),
-		path:      _q.path,
-		modifiers: append([]func(*sql.Selector){}, _q.modifiers...),
+		sql:       pcq.sql.Clone(),
+		path:      pcq.path,
+		modifiers: append([]func(*sql.Selector){}, pcq.modifiers...),
 	}
 }
 
 // WithArticles tells the query-builder to eager-load the nodes that are connected to
 // the "articles" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *PostCategoryQuery) WithArticles(opts ...func(*ArticleQuery)) *PostCategoryQuery {
-	query := (&ArticleClient{config: _q.config}).Query()
+func (pcq *PostCategoryQuery) WithArticles(opts ...func(*ArticleQuery)) *PostCategoryQuery {
+	query := (&ArticleClient{config: pcq.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withArticles = query
-	return _q
+	pcq.withArticles = query
+	return pcq
 }
 
 // GroupBy is used to group vertices by one or more fields/columns.
@@ -309,10 +309,10 @@ func (_q *PostCategoryQuery) WithArticles(opts ...func(*ArticleQuery)) *PostCate
 //		GroupBy(postcategory.FieldDeletedAt).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
-func (_q *PostCategoryQuery) GroupBy(field string, fields ...string) *PostCategoryGroupBy {
-	_q.ctx.Fields = append([]string{field}, fields...)
-	grbuild := &PostCategoryGroupBy{build: _q}
-	grbuild.flds = &_q.ctx.Fields
+func (pcq *PostCategoryQuery) GroupBy(field string, fields ...string) *PostCategoryGroupBy {
+	pcq.ctx.Fields = append([]string{field}, fields...)
+	grbuild := &PostCategoryGroupBy{build: pcq}
+	grbuild.flds = &pcq.ctx.Fields
 	grbuild.label = postcategory.Label
 	grbuild.scan = grbuild.Scan
 	return grbuild
@@ -330,76 +330,76 @@ func (_q *PostCategoryQuery) GroupBy(field string, fields ...string) *PostCatego
 //	client.PostCategory.Query().
 //		Select(postcategory.FieldDeletedAt).
 //		Scan(ctx, &v)
-func (_q *PostCategoryQuery) Select(fields ...string) *PostCategorySelect {
-	_q.ctx.Fields = append(_q.ctx.Fields, fields...)
-	sbuild := &PostCategorySelect{PostCategoryQuery: _q}
+func (pcq *PostCategoryQuery) Select(fields ...string) *PostCategorySelect {
+	pcq.ctx.Fields = append(pcq.ctx.Fields, fields...)
+	sbuild := &PostCategorySelect{PostCategoryQuery: pcq}
 	sbuild.label = postcategory.Label
-	sbuild.flds, sbuild.scan = &_q.ctx.Fields, sbuild.Scan
+	sbuild.flds, sbuild.scan = &pcq.ctx.Fields, sbuild.Scan
 	return sbuild
 }
 
 // Aggregate returns a PostCategorySelect configured with the given aggregations.
-func (_q *PostCategoryQuery) Aggregate(fns ...AggregateFunc) *PostCategorySelect {
-	return _q.Select().Aggregate(fns...)
+func (pcq *PostCategoryQuery) Aggregate(fns ...AggregateFunc) *PostCategorySelect {
+	return pcq.Select().Aggregate(fns...)
 }
 
-func (_q *PostCategoryQuery) prepareQuery(ctx context.Context) error {
-	for _, inter := range _q.inters {
+func (pcq *PostCategoryQuery) prepareQuery(ctx context.Context) error {
+	for _, inter := range pcq.inters {
 		if inter == nil {
 			return fmt.Errorf("ent: uninitialized interceptor (forgotten import ent/runtime?)")
 		}
 		if trv, ok := inter.(Traverser); ok {
-			if err := trv.Traverse(ctx, _q); err != nil {
+			if err := trv.Traverse(ctx, pcq); err != nil {
 				return err
 			}
 		}
 	}
-	for _, f := range _q.ctx.Fields {
+	for _, f := range pcq.ctx.Fields {
 		if !postcategory.ValidColumn(f) {
 			return &ValidationError{Name: f, err: fmt.Errorf("ent: invalid field %q for query", f)}
 		}
 	}
-	if _q.path != nil {
-		prev, err := _q.path(ctx)
+	if pcq.path != nil {
+		prev, err := pcq.path(ctx)
 		if err != nil {
 			return err
 		}
-		_q.sql = prev
+		pcq.sql = prev
 	}
 	return nil
 }
 
-func (_q *PostCategoryQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*PostCategory, error) {
+func (pcq *PostCategoryQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*PostCategory, error) {
 	var (
 		nodes       = []*PostCategory{}
-		_spec       = _q.querySpec()
+		_spec       = pcq.querySpec()
 		loadedTypes = [1]bool{
-			_q.withArticles != nil,
+			pcq.withArticles != nil,
 		}
 	)
 	_spec.ScanValues = func(columns []string) ([]any, error) {
 		return (*PostCategory).scanValues(nil, columns)
 	}
 	_spec.Assign = func(columns []string, values []any) error {
-		node := &PostCategory{config: _q.config}
+		node := &PostCategory{config: pcq.config}
 		nodes = append(nodes, node)
 		node.Edges.loadedTypes = loadedTypes
 		return node.assignValues(columns, values)
 	}
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+	if len(pcq.modifiers) > 0 {
+		_spec.Modifiers = pcq.modifiers
 	}
 	for i := range hooks {
 		hooks[i](ctx, _spec)
 	}
-	if err := sqlgraph.QueryNodes(ctx, _q.driver, _spec); err != nil {
+	if err := sqlgraph.QueryNodes(ctx, pcq.driver, _spec); err != nil {
 		return nil, err
 	}
 	if len(nodes) == 0 {
 		return nodes, nil
 	}
-	if query := _q.withArticles; query != nil {
-		if err := _q.loadArticles(ctx, query, nodes,
+	if query := pcq.withArticles; query != nil {
+		if err := pcq.loadArticles(ctx, query, nodes,
 			func(n *PostCategory) { n.Edges.Articles = []*Article{} },
 			func(n *PostCategory, e *Article) { n.Edges.Articles = append(n.Edges.Articles, e) }); err != nil {
 			return nil, err
@@ -408,7 +408,7 @@ func (_q *PostCategoryQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]
 	return nodes, nil
 }
 
-func (_q *PostCategoryQuery) loadArticles(ctx context.Context, query *ArticleQuery, nodes []*PostCategory, init func(*PostCategory), assign func(*PostCategory, *Article)) error {
+func (pcq *PostCategoryQuery) loadArticles(ctx context.Context, query *ArticleQuery, nodes []*PostCategory, init func(*PostCategory), assign func(*PostCategory, *Article)) error {
 	edgeIDs := make([]driver.Value, len(nodes))
 	byID := make(map[uint]*PostCategory)
 	nids := make(map[uint]map[*PostCategory]struct{})
@@ -470,27 +470,27 @@ func (_q *PostCategoryQuery) loadArticles(ctx context.Context, query *ArticleQue
 	return nil
 }
 
-func (_q *PostCategoryQuery) sqlCount(ctx context.Context) (int, error) {
-	_spec := _q.querySpec()
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+func (pcq *PostCategoryQuery) sqlCount(ctx context.Context) (int, error) {
+	_spec := pcq.querySpec()
+	if len(pcq.modifiers) > 0 {
+		_spec.Modifiers = pcq.modifiers
 	}
-	_spec.Node.Columns = _q.ctx.Fields
-	if len(_q.ctx.Fields) > 0 {
-		_spec.Unique = _q.ctx.Unique != nil && *_q.ctx.Unique
+	_spec.Node.Columns = pcq.ctx.Fields
+	if len(pcq.ctx.Fields) > 0 {
+		_spec.Unique = pcq.ctx.Unique != nil && *pcq.ctx.Unique
 	}
-	return sqlgraph.CountNodes(ctx, _q.driver, _spec)
+	return sqlgraph.CountNodes(ctx, pcq.driver, _spec)
 }
 
-func (_q *PostCategoryQuery) querySpec() *sqlgraph.QuerySpec {
+func (pcq *PostCategoryQuery) querySpec() *sqlgraph.QuerySpec {
 	_spec := sqlgraph.NewQuerySpec(postcategory.Table, postcategory.Columns, sqlgraph.NewFieldSpec(postcategory.FieldID, field.TypeUint))
-	_spec.From = _q.sql
-	if unique := _q.ctx.Unique; unique != nil {
+	_spec.From = pcq.sql
+	if unique := pcq.ctx.Unique; unique != nil {
 		_spec.Unique = *unique
-	} else if _q.path != nil {
+	} else if pcq.path != nil {
 		_spec.Unique = true
 	}
-	if fields := _q.ctx.Fields; len(fields) > 0 {
+	if fields := pcq.ctx.Fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, postcategory.FieldID)
 		for i := range fields {
@@ -499,20 +499,20 @@ func (_q *PostCategoryQuery) querySpec() *sqlgraph.QuerySpec {
 			}
 		}
 	}
-	if ps := _q.predicates; len(ps) > 0 {
+	if ps := pcq.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := pcq.ctx.Limit; limit != nil {
 		_spec.Limit = *limit
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := pcq.ctx.Offset; offset != nil {
 		_spec.Offset = *offset
 	}
-	if ps := _q.order; len(ps) > 0 {
+	if ps := pcq.order; len(ps) > 0 {
 		_spec.Order = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
@@ -522,45 +522,45 @@ func (_q *PostCategoryQuery) querySpec() *sqlgraph.QuerySpec {
 	return _spec
 }
 
-func (_q *PostCategoryQuery) sqlQuery(ctx context.Context) *sql.Selector {
-	builder := sql.Dialect(_q.driver.Dialect())
+func (pcq *PostCategoryQuery) sqlQuery(ctx context.Context) *sql.Selector {
+	builder := sql.Dialect(pcq.driver.Dialect())
 	t1 := builder.Table(postcategory.Table)
-	columns := _q.ctx.Fields
+	columns := pcq.ctx.Fields
 	if len(columns) == 0 {
 		columns = postcategory.Columns
 	}
 	selector := builder.Select(t1.Columns(columns...)...).From(t1)
-	if _q.sql != nil {
-		selector = _q.sql
+	if pcq.sql != nil {
+		selector = pcq.sql
 		selector.Select(selector.Columns(columns...)...)
 	}
-	if _q.ctx.Unique != nil && *_q.ctx.Unique {
+	if pcq.ctx.Unique != nil && *pcq.ctx.Unique {
 		selector.Distinct()
 	}
-	for _, m := range _q.modifiers {
+	for _, m := range pcq.modifiers {
 		m(selector)
 	}
-	for _, p := range _q.predicates {
+	for _, p := range pcq.predicates {
 		p(selector)
 	}
-	for _, p := range _q.order {
+	for _, p := range pcq.order {
 		p(selector)
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := pcq.ctx.Offset; offset != nil {
 		// limit is mandatory for offset clause. We start
 		// with default value, and override it below if needed.
 		selector.Offset(*offset).Limit(math.MaxInt32)
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := pcq.ctx.Limit; limit != nil {
 		selector.Limit(*limit)
 	}
 	return selector
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_q *PostCategoryQuery) Modify(modifiers ...func(s *sql.Selector)) *PostCategorySelect {
-	_q.modifiers = append(_q.modifiers, modifiers...)
-	return _q.Select()
+func (pcq *PostCategoryQuery) Modify(modifiers ...func(s *sql.Selector)) *PostCategorySelect {
+	pcq.modifiers = append(pcq.modifiers, modifiers...)
+	return pcq.Select()
 }
 
 // PostCategoryGroupBy is the group-by builder for PostCategory entities.
@@ -570,41 +570,41 @@ type PostCategoryGroupBy struct {
 }
 
 // Aggregate adds the given aggregation functions to the group-by query.
-func (_g *PostCategoryGroupBy) Aggregate(fns ...AggregateFunc) *PostCategoryGroupBy {
-	_g.fns = append(_g.fns, fns...)
-	return _g
+func (pcgb *PostCategoryGroupBy) Aggregate(fns ...AggregateFunc) *PostCategoryGroupBy {
+	pcgb.fns = append(pcgb.fns, fns...)
+	return pcgb
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_g *PostCategoryGroupBy) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _g.build.ctx, ent.OpQueryGroupBy)
-	if err := _g.build.prepareQuery(ctx); err != nil {
+func (pcgb *PostCategoryGroupBy) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, pcgb.build.ctx, ent.OpQueryGroupBy)
+	if err := pcgb.build.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*PostCategoryQuery, *PostCategoryGroupBy](ctx, _g.build, _g, _g.build.inters, v)
+	return scanWithInterceptors[*PostCategoryQuery, *PostCategoryGroupBy](ctx, pcgb.build, pcgb, pcgb.build.inters, v)
 }
 
-func (_g *PostCategoryGroupBy) sqlScan(ctx context.Context, root *PostCategoryQuery, v any) error {
+func (pcgb *PostCategoryGroupBy) sqlScan(ctx context.Context, root *PostCategoryQuery, v any) error {
 	selector := root.sqlQuery(ctx).Select()
-	aggregation := make([]string, 0, len(_g.fns))
-	for _, fn := range _g.fns {
+	aggregation := make([]string, 0, len(pcgb.fns))
+	for _, fn := range pcgb.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
 	if len(selector.SelectedColumns()) == 0 {
-		columns := make([]string, 0, len(*_g.flds)+len(_g.fns))
-		for _, f := range *_g.flds {
+		columns := make([]string, 0, len(*pcgb.flds)+len(pcgb.fns))
+		for _, f := range *pcgb.flds {
 			columns = append(columns, selector.C(f))
 		}
 		columns = append(columns, aggregation...)
 		selector.Select(columns...)
 	}
-	selector.GroupBy(selector.Columns(*_g.flds...)...)
+	selector.GroupBy(selector.Columns(*pcgb.flds...)...)
 	if err := selector.Err(); err != nil {
 		return err
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _g.build.driver.Query(ctx, query, args, rows); err != nil {
+	if err := pcgb.build.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -618,27 +618,27 @@ type PostCategorySelect struct {
 }
 
 // Aggregate adds the given aggregation functions to the selector query.
-func (_s *PostCategorySelect) Aggregate(fns ...AggregateFunc) *PostCategorySelect {
-	_s.fns = append(_s.fns, fns...)
-	return _s
+func (pcs *PostCategorySelect) Aggregate(fns ...AggregateFunc) *PostCategorySelect {
+	pcs.fns = append(pcs.fns, fns...)
+	return pcs
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_s *PostCategorySelect) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _s.ctx, ent.OpQuerySelect)
-	if err := _s.prepareQuery(ctx); err != nil {
+func (pcs *PostCategorySelect) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, pcs.ctx, ent.OpQuerySelect)
+	if err := pcs.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*PostCategoryQuery, *PostCategorySelect](ctx, _s.PostCategoryQuery, _s, _s.inters, v)
+	return scanWithInterceptors[*PostCategoryQuery, *PostCategorySelect](ctx, pcs.PostCategoryQuery, pcs, pcs.inters, v)
 }
 
-func (_s *PostCategorySelect) sqlScan(ctx context.Context, root *PostCategoryQuery, v any) error {
+func (pcs *PostCategorySelect) sqlScan(ctx context.Context, root *PostCategoryQuery, v any) error {
 	selector := root.sqlQuery(ctx)
-	aggregation := make([]string, 0, len(_s.fns))
-	for _, fn := range _s.fns {
+	aggregation := make([]string, 0, len(pcs.fns))
+	for _, fn := range pcs.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
-	switch n := len(*_s.selector.flds); {
+	switch n := len(*pcs.selector.flds); {
 	case n == 0 && len(aggregation) > 0:
 		selector.Select(aggregation...)
 	case n != 0 && len(aggregation) > 0:
@@ -646,7 +646,7 @@ func (_s *PostCategorySelect) sqlScan(ctx context.Context, root *PostCategoryQue
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _s.driver.Query(ctx, query, args, rows); err != nil {
+	if err := pcs.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -654,7 +654,7 @@ func (_s *PostCategorySelect) sqlScan(ctx context.Context, root *PostCategoryQue
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_s *PostCategorySelect) Modify(modifiers ...func(s *sql.Selector)) *PostCategorySelect {
-	_s.modifiers = append(_s.modifiers, modifiers...)
-	return _s
+func (pcs *PostCategorySelect) Modify(modifiers ...func(s *sql.Selector)) *PostCategorySelect {
+	pcs.modifiers = append(pcs.modifiers, modifiers...)
+	return pcs
 }

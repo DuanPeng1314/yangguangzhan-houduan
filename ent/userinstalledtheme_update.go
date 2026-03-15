@@ -25,193 +25,193 @@ type UserInstalledThemeUpdate struct {
 }
 
 // Where appends a list predicates to the UserInstalledThemeUpdate builder.
-func (_u *UserInstalledThemeUpdate) Where(ps ...predicate.UserInstalledTheme) *UserInstalledThemeUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (uitu *UserInstalledThemeUpdate) Where(ps ...predicate.UserInstalledTheme) *UserInstalledThemeUpdate {
+	uitu.mutation.Where(ps...)
+	return uitu
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *UserInstalledThemeUpdate) SetDeletedAt(v time.Time) *UserInstalledThemeUpdate {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (uitu *UserInstalledThemeUpdate) SetDeletedAt(t time.Time) *UserInstalledThemeUpdate {
+	uitu.mutation.SetDeletedAt(t)
+	return uitu
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdate) SetNillableDeletedAt(v *time.Time) *UserInstalledThemeUpdate {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (uitu *UserInstalledThemeUpdate) SetNillableDeletedAt(t *time.Time) *UserInstalledThemeUpdate {
+	if t != nil {
+		uitu.SetDeletedAt(*t)
 	}
-	return _u
+	return uitu
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *UserInstalledThemeUpdate) ClearDeletedAt() *UserInstalledThemeUpdate {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (uitu *UserInstalledThemeUpdate) ClearDeletedAt() *UserInstalledThemeUpdate {
+	uitu.mutation.ClearDeletedAt()
+	return uitu
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *UserInstalledThemeUpdate) SetUpdatedAt(v time.Time) *UserInstalledThemeUpdate {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (uitu *UserInstalledThemeUpdate) SetUpdatedAt(t time.Time) *UserInstalledThemeUpdate {
+	uitu.mutation.SetUpdatedAt(t)
+	return uitu
 }
 
 // SetUserID sets the "user_id" field.
-func (_u *UserInstalledThemeUpdate) SetUserID(v uint) *UserInstalledThemeUpdate {
-	_u.mutation.SetUserID(v)
-	return _u
+func (uitu *UserInstalledThemeUpdate) SetUserID(u uint) *UserInstalledThemeUpdate {
+	uitu.mutation.SetUserID(u)
+	return uitu
 }
 
 // SetNillableUserID sets the "user_id" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdate) SetNillableUserID(v *uint) *UserInstalledThemeUpdate {
-	if v != nil {
-		_u.SetUserID(*v)
+func (uitu *UserInstalledThemeUpdate) SetNillableUserID(u *uint) *UserInstalledThemeUpdate {
+	if u != nil {
+		uitu.SetUserID(*u)
 	}
-	return _u
+	return uitu
 }
 
 // SetThemeName sets the "theme_name" field.
-func (_u *UserInstalledThemeUpdate) SetThemeName(v string) *UserInstalledThemeUpdate {
-	_u.mutation.SetThemeName(v)
-	return _u
+func (uitu *UserInstalledThemeUpdate) SetThemeName(s string) *UserInstalledThemeUpdate {
+	uitu.mutation.SetThemeName(s)
+	return uitu
 }
 
 // SetNillableThemeName sets the "theme_name" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdate) SetNillableThemeName(v *string) *UserInstalledThemeUpdate {
-	if v != nil {
-		_u.SetThemeName(*v)
+func (uitu *UserInstalledThemeUpdate) SetNillableThemeName(s *string) *UserInstalledThemeUpdate {
+	if s != nil {
+		uitu.SetThemeName(*s)
 	}
-	return _u
+	return uitu
 }
 
 // SetThemeMarketID sets the "theme_market_id" field.
-func (_u *UserInstalledThemeUpdate) SetThemeMarketID(v int) *UserInstalledThemeUpdate {
-	_u.mutation.ResetThemeMarketID()
-	_u.mutation.SetThemeMarketID(v)
-	return _u
+func (uitu *UserInstalledThemeUpdate) SetThemeMarketID(i int) *UserInstalledThemeUpdate {
+	uitu.mutation.ResetThemeMarketID()
+	uitu.mutation.SetThemeMarketID(i)
+	return uitu
 }
 
 // SetNillableThemeMarketID sets the "theme_market_id" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdate) SetNillableThemeMarketID(v *int) *UserInstalledThemeUpdate {
-	if v != nil {
-		_u.SetThemeMarketID(*v)
+func (uitu *UserInstalledThemeUpdate) SetNillableThemeMarketID(i *int) *UserInstalledThemeUpdate {
+	if i != nil {
+		uitu.SetThemeMarketID(*i)
 	}
-	return _u
+	return uitu
 }
 
-// AddThemeMarketID adds value to the "theme_market_id" field.
-func (_u *UserInstalledThemeUpdate) AddThemeMarketID(v int) *UserInstalledThemeUpdate {
-	_u.mutation.AddThemeMarketID(v)
-	return _u
+// AddThemeMarketID adds i to the "theme_market_id" field.
+func (uitu *UserInstalledThemeUpdate) AddThemeMarketID(i int) *UserInstalledThemeUpdate {
+	uitu.mutation.AddThemeMarketID(i)
+	return uitu
 }
 
 // ClearThemeMarketID clears the value of the "theme_market_id" field.
-func (_u *UserInstalledThemeUpdate) ClearThemeMarketID() *UserInstalledThemeUpdate {
-	_u.mutation.ClearThemeMarketID()
-	return _u
+func (uitu *UserInstalledThemeUpdate) ClearThemeMarketID() *UserInstalledThemeUpdate {
+	uitu.mutation.ClearThemeMarketID()
+	return uitu
 }
 
 // SetIsCurrent sets the "is_current" field.
-func (_u *UserInstalledThemeUpdate) SetIsCurrent(v bool) *UserInstalledThemeUpdate {
-	_u.mutation.SetIsCurrent(v)
-	return _u
+func (uitu *UserInstalledThemeUpdate) SetIsCurrent(b bool) *UserInstalledThemeUpdate {
+	uitu.mutation.SetIsCurrent(b)
+	return uitu
 }
 
 // SetNillableIsCurrent sets the "is_current" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdate) SetNillableIsCurrent(v *bool) *UserInstalledThemeUpdate {
-	if v != nil {
-		_u.SetIsCurrent(*v)
+func (uitu *UserInstalledThemeUpdate) SetNillableIsCurrent(b *bool) *UserInstalledThemeUpdate {
+	if b != nil {
+		uitu.SetIsCurrent(*b)
 	}
-	return _u
+	return uitu
 }
 
 // SetInstallTime sets the "install_time" field.
-func (_u *UserInstalledThemeUpdate) SetInstallTime(v time.Time) *UserInstalledThemeUpdate {
-	_u.mutation.SetInstallTime(v)
-	return _u
+func (uitu *UserInstalledThemeUpdate) SetInstallTime(t time.Time) *UserInstalledThemeUpdate {
+	uitu.mutation.SetInstallTime(t)
+	return uitu
 }
 
 // SetNillableInstallTime sets the "install_time" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdate) SetNillableInstallTime(v *time.Time) *UserInstalledThemeUpdate {
-	if v != nil {
-		_u.SetInstallTime(*v)
+func (uitu *UserInstalledThemeUpdate) SetNillableInstallTime(t *time.Time) *UserInstalledThemeUpdate {
+	if t != nil {
+		uitu.SetInstallTime(*t)
 	}
-	return _u
+	return uitu
 }
 
 // SetUserThemeConfig sets the "user_theme_config" field.
-func (_u *UserInstalledThemeUpdate) SetUserThemeConfig(v map[string]interface{}) *UserInstalledThemeUpdate {
-	_u.mutation.SetUserThemeConfig(v)
-	return _u
+func (uitu *UserInstalledThemeUpdate) SetUserThemeConfig(m map[string]interface{}) *UserInstalledThemeUpdate {
+	uitu.mutation.SetUserThemeConfig(m)
+	return uitu
 }
 
 // ClearUserThemeConfig clears the value of the "user_theme_config" field.
-func (_u *UserInstalledThemeUpdate) ClearUserThemeConfig() *UserInstalledThemeUpdate {
-	_u.mutation.ClearUserThemeConfig()
-	return _u
+func (uitu *UserInstalledThemeUpdate) ClearUserThemeConfig() *UserInstalledThemeUpdate {
+	uitu.mutation.ClearUserThemeConfig()
+	return uitu
 }
 
 // SetInstalledVersion sets the "installed_version" field.
-func (_u *UserInstalledThemeUpdate) SetInstalledVersion(v string) *UserInstalledThemeUpdate {
-	_u.mutation.SetInstalledVersion(v)
-	return _u
+func (uitu *UserInstalledThemeUpdate) SetInstalledVersion(s string) *UserInstalledThemeUpdate {
+	uitu.mutation.SetInstalledVersion(s)
+	return uitu
 }
 
 // SetNillableInstalledVersion sets the "installed_version" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdate) SetNillableInstalledVersion(v *string) *UserInstalledThemeUpdate {
-	if v != nil {
-		_u.SetInstalledVersion(*v)
+func (uitu *UserInstalledThemeUpdate) SetNillableInstalledVersion(s *string) *UserInstalledThemeUpdate {
+	if s != nil {
+		uitu.SetInstalledVersion(*s)
 	}
-	return _u
+	return uitu
 }
 
 // ClearInstalledVersion clears the value of the "installed_version" field.
-func (_u *UserInstalledThemeUpdate) ClearInstalledVersion() *UserInstalledThemeUpdate {
-	_u.mutation.ClearInstalledVersion()
-	return _u
+func (uitu *UserInstalledThemeUpdate) ClearInstalledVersion() *UserInstalledThemeUpdate {
+	uitu.mutation.ClearInstalledVersion()
+	return uitu
 }
 
 // SetDeployType sets the "deploy_type" field.
-func (_u *UserInstalledThemeUpdate) SetDeployType(v userinstalledtheme.DeployType) *UserInstalledThemeUpdate {
-	_u.mutation.SetDeployType(v)
-	return _u
+func (uitu *UserInstalledThemeUpdate) SetDeployType(ut userinstalledtheme.DeployType) *UserInstalledThemeUpdate {
+	uitu.mutation.SetDeployType(ut)
+	return uitu
 }
 
 // SetNillableDeployType sets the "deploy_type" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdate) SetNillableDeployType(v *userinstalledtheme.DeployType) *UserInstalledThemeUpdate {
-	if v != nil {
-		_u.SetDeployType(*v)
+func (uitu *UserInstalledThemeUpdate) SetNillableDeployType(ut *userinstalledtheme.DeployType) *UserInstalledThemeUpdate {
+	if ut != nil {
+		uitu.SetDeployType(*ut)
 	}
-	return _u
+	return uitu
 }
 
 // SetUser sets the "user" edge to the User entity.
-func (_u *UserInstalledThemeUpdate) SetUser(v *User) *UserInstalledThemeUpdate {
-	return _u.SetUserID(v.ID)
+func (uitu *UserInstalledThemeUpdate) SetUser(u *User) *UserInstalledThemeUpdate {
+	return uitu.SetUserID(u.ID)
 }
 
 // Mutation returns the UserInstalledThemeMutation object of the builder.
-func (_u *UserInstalledThemeUpdate) Mutation() *UserInstalledThemeMutation {
-	return _u.mutation
+func (uitu *UserInstalledThemeUpdate) Mutation() *UserInstalledThemeMutation {
+	return uitu.mutation
 }
 
 // ClearUser clears the "user" edge to the User entity.
-func (_u *UserInstalledThemeUpdate) ClearUser() *UserInstalledThemeUpdate {
-	_u.mutation.ClearUser()
-	return _u
+func (uitu *UserInstalledThemeUpdate) ClearUser() *UserInstalledThemeUpdate {
+	uitu.mutation.ClearUser()
+	return uitu
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *UserInstalledThemeUpdate) Save(ctx context.Context) (int, error) {
-	if err := _u.defaults(); err != nil {
+func (uitu *UserInstalledThemeUpdate) Save(ctx context.Context) (int, error) {
+	if err := uitu.defaults(); err != nil {
 		return 0, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, uitu.sqlSave, uitu.mutation, uitu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *UserInstalledThemeUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (uitu *UserInstalledThemeUpdate) SaveX(ctx context.Context) int {
+	affected, err := uitu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -219,114 +219,114 @@ func (_u *UserInstalledThemeUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *UserInstalledThemeUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (uitu *UserInstalledThemeUpdate) Exec(ctx context.Context) error {
+	_, err := uitu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *UserInstalledThemeUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (uitu *UserInstalledThemeUpdate) ExecX(ctx context.Context) {
+	if err := uitu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *UserInstalledThemeUpdate) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (uitu *UserInstalledThemeUpdate) defaults() error {
+	if _, ok := uitu.mutation.UpdatedAt(); !ok {
 		if userinstalledtheme.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized userinstalledtheme.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := userinstalledtheme.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		uitu.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *UserInstalledThemeUpdate) check() error {
-	if v, ok := _u.mutation.ThemeName(); ok {
+func (uitu *UserInstalledThemeUpdate) check() error {
+	if v, ok := uitu.mutation.ThemeName(); ok {
 		if err := userinstalledtheme.ThemeNameValidator(v); err != nil {
 			return &ValidationError{Name: "theme_name", err: fmt.Errorf(`ent: validator failed for field "UserInstalledTheme.theme_name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.InstalledVersion(); ok {
+	if v, ok := uitu.mutation.InstalledVersion(); ok {
 		if err := userinstalledtheme.InstalledVersionValidator(v); err != nil {
 			return &ValidationError{Name: "installed_version", err: fmt.Errorf(`ent: validator failed for field "UserInstalledTheme.installed_version": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.DeployType(); ok {
+	if v, ok := uitu.mutation.DeployType(); ok {
 		if err := userinstalledtheme.DeployTypeValidator(v); err != nil {
 			return &ValidationError{Name: "deploy_type", err: fmt.Errorf(`ent: validator failed for field "UserInstalledTheme.deploy_type": %w`, err)}
 		}
 	}
-	if _u.mutation.UserCleared() && len(_u.mutation.UserIDs()) > 0 {
+	if uitu.mutation.UserCleared() && len(uitu.mutation.UserIDs()) > 0 {
 		return errors.New(`ent: clearing a required unique edge "UserInstalledTheme.user"`)
 	}
 	return nil
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *UserInstalledThemeUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *UserInstalledThemeUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (uitu *UserInstalledThemeUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *UserInstalledThemeUpdate {
+	uitu.modifiers = append(uitu.modifiers, modifiers...)
+	return uitu
 }
 
-func (_u *UserInstalledThemeUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (uitu *UserInstalledThemeUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := uitu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(userinstalledtheme.Table, userinstalledtheme.Columns, sqlgraph.NewFieldSpec(userinstalledtheme.FieldID, field.TypeUint))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := uitu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := uitu.mutation.DeletedAt(); ok {
 		_spec.SetField(userinstalledtheme.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if uitu.mutation.DeletedAtCleared() {
 		_spec.ClearField(userinstalledtheme.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := uitu.mutation.UpdatedAt(); ok {
 		_spec.SetField(userinstalledtheme.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.ThemeName(); ok {
+	if value, ok := uitu.mutation.ThemeName(); ok {
 		_spec.SetField(userinstalledtheme.FieldThemeName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.ThemeMarketID(); ok {
+	if value, ok := uitu.mutation.ThemeMarketID(); ok {
 		_spec.SetField(userinstalledtheme.FieldThemeMarketID, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedThemeMarketID(); ok {
+	if value, ok := uitu.mutation.AddedThemeMarketID(); ok {
 		_spec.AddField(userinstalledtheme.FieldThemeMarketID, field.TypeInt, value)
 	}
-	if _u.mutation.ThemeMarketIDCleared() {
+	if uitu.mutation.ThemeMarketIDCleared() {
 		_spec.ClearField(userinstalledtheme.FieldThemeMarketID, field.TypeInt)
 	}
-	if value, ok := _u.mutation.IsCurrent(); ok {
+	if value, ok := uitu.mutation.IsCurrent(); ok {
 		_spec.SetField(userinstalledtheme.FieldIsCurrent, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.InstallTime(); ok {
+	if value, ok := uitu.mutation.InstallTime(); ok {
 		_spec.SetField(userinstalledtheme.FieldInstallTime, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.UserThemeConfig(); ok {
+	if value, ok := uitu.mutation.UserThemeConfig(); ok {
 		_spec.SetField(userinstalledtheme.FieldUserThemeConfig, field.TypeJSON, value)
 	}
-	if _u.mutation.UserThemeConfigCleared() {
+	if uitu.mutation.UserThemeConfigCleared() {
 		_spec.ClearField(userinstalledtheme.FieldUserThemeConfig, field.TypeJSON)
 	}
-	if value, ok := _u.mutation.InstalledVersion(); ok {
+	if value, ok := uitu.mutation.InstalledVersion(); ok {
 		_spec.SetField(userinstalledtheme.FieldInstalledVersion, field.TypeString, value)
 	}
-	if _u.mutation.InstalledVersionCleared() {
+	if uitu.mutation.InstalledVersionCleared() {
 		_spec.ClearField(userinstalledtheme.FieldInstalledVersion, field.TypeString)
 	}
-	if value, ok := _u.mutation.DeployType(); ok {
+	if value, ok := uitu.mutation.DeployType(); ok {
 		_spec.SetField(userinstalledtheme.FieldDeployType, field.TypeEnum, value)
 	}
-	if _u.mutation.UserCleared() {
+	if uitu.mutation.UserCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -339,7 +339,7 @@ func (_u *UserInstalledThemeUpdate) sqlSave(ctx context.Context) (_node int, err
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.UserIDs(); len(nodes) > 0 {
+	if nodes := uitu.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -355,8 +355,8 @@ func (_u *UserInstalledThemeUpdate) sqlSave(ctx context.Context) (_node int, err
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(uitu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, uitu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{userinstalledtheme.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -364,8 +364,8 @@ func (_u *UserInstalledThemeUpdate) sqlSave(ctx context.Context) (_node int, err
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	uitu.mutation.done = true
+	return n, nil
 }
 
 // UserInstalledThemeUpdateOne is the builder for updating a single UserInstalledTheme entity.
@@ -378,200 +378,200 @@ type UserInstalledThemeUpdateOne struct {
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *UserInstalledThemeUpdateOne) SetDeletedAt(v time.Time) *UserInstalledThemeUpdateOne {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) SetDeletedAt(t time.Time) *UserInstalledThemeUpdateOne {
+	uituo.mutation.SetDeletedAt(t)
+	return uituo
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdateOne) SetNillableDeletedAt(v *time.Time) *UserInstalledThemeUpdateOne {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (uituo *UserInstalledThemeUpdateOne) SetNillableDeletedAt(t *time.Time) *UserInstalledThemeUpdateOne {
+	if t != nil {
+		uituo.SetDeletedAt(*t)
 	}
-	return _u
+	return uituo
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *UserInstalledThemeUpdateOne) ClearDeletedAt() *UserInstalledThemeUpdateOne {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) ClearDeletedAt() *UserInstalledThemeUpdateOne {
+	uituo.mutation.ClearDeletedAt()
+	return uituo
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *UserInstalledThemeUpdateOne) SetUpdatedAt(v time.Time) *UserInstalledThemeUpdateOne {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) SetUpdatedAt(t time.Time) *UserInstalledThemeUpdateOne {
+	uituo.mutation.SetUpdatedAt(t)
+	return uituo
 }
 
 // SetUserID sets the "user_id" field.
-func (_u *UserInstalledThemeUpdateOne) SetUserID(v uint) *UserInstalledThemeUpdateOne {
-	_u.mutation.SetUserID(v)
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) SetUserID(u uint) *UserInstalledThemeUpdateOne {
+	uituo.mutation.SetUserID(u)
+	return uituo
 }
 
 // SetNillableUserID sets the "user_id" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdateOne) SetNillableUserID(v *uint) *UserInstalledThemeUpdateOne {
-	if v != nil {
-		_u.SetUserID(*v)
+func (uituo *UserInstalledThemeUpdateOne) SetNillableUserID(u *uint) *UserInstalledThemeUpdateOne {
+	if u != nil {
+		uituo.SetUserID(*u)
 	}
-	return _u
+	return uituo
 }
 
 // SetThemeName sets the "theme_name" field.
-func (_u *UserInstalledThemeUpdateOne) SetThemeName(v string) *UserInstalledThemeUpdateOne {
-	_u.mutation.SetThemeName(v)
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) SetThemeName(s string) *UserInstalledThemeUpdateOne {
+	uituo.mutation.SetThemeName(s)
+	return uituo
 }
 
 // SetNillableThemeName sets the "theme_name" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdateOne) SetNillableThemeName(v *string) *UserInstalledThemeUpdateOne {
-	if v != nil {
-		_u.SetThemeName(*v)
+func (uituo *UserInstalledThemeUpdateOne) SetNillableThemeName(s *string) *UserInstalledThemeUpdateOne {
+	if s != nil {
+		uituo.SetThemeName(*s)
 	}
-	return _u
+	return uituo
 }
 
 // SetThemeMarketID sets the "theme_market_id" field.
-func (_u *UserInstalledThemeUpdateOne) SetThemeMarketID(v int) *UserInstalledThemeUpdateOne {
-	_u.mutation.ResetThemeMarketID()
-	_u.mutation.SetThemeMarketID(v)
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) SetThemeMarketID(i int) *UserInstalledThemeUpdateOne {
+	uituo.mutation.ResetThemeMarketID()
+	uituo.mutation.SetThemeMarketID(i)
+	return uituo
 }
 
 // SetNillableThemeMarketID sets the "theme_market_id" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdateOne) SetNillableThemeMarketID(v *int) *UserInstalledThemeUpdateOne {
-	if v != nil {
-		_u.SetThemeMarketID(*v)
+func (uituo *UserInstalledThemeUpdateOne) SetNillableThemeMarketID(i *int) *UserInstalledThemeUpdateOne {
+	if i != nil {
+		uituo.SetThemeMarketID(*i)
 	}
-	return _u
+	return uituo
 }
 
-// AddThemeMarketID adds value to the "theme_market_id" field.
-func (_u *UserInstalledThemeUpdateOne) AddThemeMarketID(v int) *UserInstalledThemeUpdateOne {
-	_u.mutation.AddThemeMarketID(v)
-	return _u
+// AddThemeMarketID adds i to the "theme_market_id" field.
+func (uituo *UserInstalledThemeUpdateOne) AddThemeMarketID(i int) *UserInstalledThemeUpdateOne {
+	uituo.mutation.AddThemeMarketID(i)
+	return uituo
 }
 
 // ClearThemeMarketID clears the value of the "theme_market_id" field.
-func (_u *UserInstalledThemeUpdateOne) ClearThemeMarketID() *UserInstalledThemeUpdateOne {
-	_u.mutation.ClearThemeMarketID()
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) ClearThemeMarketID() *UserInstalledThemeUpdateOne {
+	uituo.mutation.ClearThemeMarketID()
+	return uituo
 }
 
 // SetIsCurrent sets the "is_current" field.
-func (_u *UserInstalledThemeUpdateOne) SetIsCurrent(v bool) *UserInstalledThemeUpdateOne {
-	_u.mutation.SetIsCurrent(v)
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) SetIsCurrent(b bool) *UserInstalledThemeUpdateOne {
+	uituo.mutation.SetIsCurrent(b)
+	return uituo
 }
 
 // SetNillableIsCurrent sets the "is_current" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdateOne) SetNillableIsCurrent(v *bool) *UserInstalledThemeUpdateOne {
-	if v != nil {
-		_u.SetIsCurrent(*v)
+func (uituo *UserInstalledThemeUpdateOne) SetNillableIsCurrent(b *bool) *UserInstalledThemeUpdateOne {
+	if b != nil {
+		uituo.SetIsCurrent(*b)
 	}
-	return _u
+	return uituo
 }
 
 // SetInstallTime sets the "install_time" field.
-func (_u *UserInstalledThemeUpdateOne) SetInstallTime(v time.Time) *UserInstalledThemeUpdateOne {
-	_u.mutation.SetInstallTime(v)
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) SetInstallTime(t time.Time) *UserInstalledThemeUpdateOne {
+	uituo.mutation.SetInstallTime(t)
+	return uituo
 }
 
 // SetNillableInstallTime sets the "install_time" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdateOne) SetNillableInstallTime(v *time.Time) *UserInstalledThemeUpdateOne {
-	if v != nil {
-		_u.SetInstallTime(*v)
+func (uituo *UserInstalledThemeUpdateOne) SetNillableInstallTime(t *time.Time) *UserInstalledThemeUpdateOne {
+	if t != nil {
+		uituo.SetInstallTime(*t)
 	}
-	return _u
+	return uituo
 }
 
 // SetUserThemeConfig sets the "user_theme_config" field.
-func (_u *UserInstalledThemeUpdateOne) SetUserThemeConfig(v map[string]interface{}) *UserInstalledThemeUpdateOne {
-	_u.mutation.SetUserThemeConfig(v)
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) SetUserThemeConfig(m map[string]interface{}) *UserInstalledThemeUpdateOne {
+	uituo.mutation.SetUserThemeConfig(m)
+	return uituo
 }
 
 // ClearUserThemeConfig clears the value of the "user_theme_config" field.
-func (_u *UserInstalledThemeUpdateOne) ClearUserThemeConfig() *UserInstalledThemeUpdateOne {
-	_u.mutation.ClearUserThemeConfig()
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) ClearUserThemeConfig() *UserInstalledThemeUpdateOne {
+	uituo.mutation.ClearUserThemeConfig()
+	return uituo
 }
 
 // SetInstalledVersion sets the "installed_version" field.
-func (_u *UserInstalledThemeUpdateOne) SetInstalledVersion(v string) *UserInstalledThemeUpdateOne {
-	_u.mutation.SetInstalledVersion(v)
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) SetInstalledVersion(s string) *UserInstalledThemeUpdateOne {
+	uituo.mutation.SetInstalledVersion(s)
+	return uituo
 }
 
 // SetNillableInstalledVersion sets the "installed_version" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdateOne) SetNillableInstalledVersion(v *string) *UserInstalledThemeUpdateOne {
-	if v != nil {
-		_u.SetInstalledVersion(*v)
+func (uituo *UserInstalledThemeUpdateOne) SetNillableInstalledVersion(s *string) *UserInstalledThemeUpdateOne {
+	if s != nil {
+		uituo.SetInstalledVersion(*s)
 	}
-	return _u
+	return uituo
 }
 
 // ClearInstalledVersion clears the value of the "installed_version" field.
-func (_u *UserInstalledThemeUpdateOne) ClearInstalledVersion() *UserInstalledThemeUpdateOne {
-	_u.mutation.ClearInstalledVersion()
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) ClearInstalledVersion() *UserInstalledThemeUpdateOne {
+	uituo.mutation.ClearInstalledVersion()
+	return uituo
 }
 
 // SetDeployType sets the "deploy_type" field.
-func (_u *UserInstalledThemeUpdateOne) SetDeployType(v userinstalledtheme.DeployType) *UserInstalledThemeUpdateOne {
-	_u.mutation.SetDeployType(v)
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) SetDeployType(ut userinstalledtheme.DeployType) *UserInstalledThemeUpdateOne {
+	uituo.mutation.SetDeployType(ut)
+	return uituo
 }
 
 // SetNillableDeployType sets the "deploy_type" field if the given value is not nil.
-func (_u *UserInstalledThemeUpdateOne) SetNillableDeployType(v *userinstalledtheme.DeployType) *UserInstalledThemeUpdateOne {
-	if v != nil {
-		_u.SetDeployType(*v)
+func (uituo *UserInstalledThemeUpdateOne) SetNillableDeployType(ut *userinstalledtheme.DeployType) *UserInstalledThemeUpdateOne {
+	if ut != nil {
+		uituo.SetDeployType(*ut)
 	}
-	return _u
+	return uituo
 }
 
 // SetUser sets the "user" edge to the User entity.
-func (_u *UserInstalledThemeUpdateOne) SetUser(v *User) *UserInstalledThemeUpdateOne {
-	return _u.SetUserID(v.ID)
+func (uituo *UserInstalledThemeUpdateOne) SetUser(u *User) *UserInstalledThemeUpdateOne {
+	return uituo.SetUserID(u.ID)
 }
 
 // Mutation returns the UserInstalledThemeMutation object of the builder.
-func (_u *UserInstalledThemeUpdateOne) Mutation() *UserInstalledThemeMutation {
-	return _u.mutation
+func (uituo *UserInstalledThemeUpdateOne) Mutation() *UserInstalledThemeMutation {
+	return uituo.mutation
 }
 
 // ClearUser clears the "user" edge to the User entity.
-func (_u *UserInstalledThemeUpdateOne) ClearUser() *UserInstalledThemeUpdateOne {
-	_u.mutation.ClearUser()
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) ClearUser() *UserInstalledThemeUpdateOne {
+	uituo.mutation.ClearUser()
+	return uituo
 }
 
 // Where appends a list predicates to the UserInstalledThemeUpdate builder.
-func (_u *UserInstalledThemeUpdateOne) Where(ps ...predicate.UserInstalledTheme) *UserInstalledThemeUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) Where(ps ...predicate.UserInstalledTheme) *UserInstalledThemeUpdateOne {
+	uituo.mutation.Where(ps...)
+	return uituo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *UserInstalledThemeUpdateOne) Select(field string, fields ...string) *UserInstalledThemeUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) Select(field string, fields ...string) *UserInstalledThemeUpdateOne {
+	uituo.fields = append([]string{field}, fields...)
+	return uituo
 }
 
 // Save executes the query and returns the updated UserInstalledTheme entity.
-func (_u *UserInstalledThemeUpdateOne) Save(ctx context.Context) (*UserInstalledTheme, error) {
-	if err := _u.defaults(); err != nil {
+func (uituo *UserInstalledThemeUpdateOne) Save(ctx context.Context) (*UserInstalledTheme, error) {
+	if err := uituo.defaults(); err != nil {
 		return nil, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, uituo.sqlSave, uituo.mutation, uituo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *UserInstalledThemeUpdateOne) SaveX(ctx context.Context) *UserInstalledTheme {
-	node, err := _u.Save(ctx)
+func (uituo *UserInstalledThemeUpdateOne) SaveX(ctx context.Context) *UserInstalledTheme {
+	node, err := uituo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -579,70 +579,70 @@ func (_u *UserInstalledThemeUpdateOne) SaveX(ctx context.Context) *UserInstalled
 }
 
 // Exec executes the query on the entity.
-func (_u *UserInstalledThemeUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (uituo *UserInstalledThemeUpdateOne) Exec(ctx context.Context) error {
+	_, err := uituo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *UserInstalledThemeUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (uituo *UserInstalledThemeUpdateOne) ExecX(ctx context.Context) {
+	if err := uituo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *UserInstalledThemeUpdateOne) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (uituo *UserInstalledThemeUpdateOne) defaults() error {
+	if _, ok := uituo.mutation.UpdatedAt(); !ok {
 		if userinstalledtheme.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized userinstalledtheme.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := userinstalledtheme.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		uituo.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *UserInstalledThemeUpdateOne) check() error {
-	if v, ok := _u.mutation.ThemeName(); ok {
+func (uituo *UserInstalledThemeUpdateOne) check() error {
+	if v, ok := uituo.mutation.ThemeName(); ok {
 		if err := userinstalledtheme.ThemeNameValidator(v); err != nil {
 			return &ValidationError{Name: "theme_name", err: fmt.Errorf(`ent: validator failed for field "UserInstalledTheme.theme_name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.InstalledVersion(); ok {
+	if v, ok := uituo.mutation.InstalledVersion(); ok {
 		if err := userinstalledtheme.InstalledVersionValidator(v); err != nil {
 			return &ValidationError{Name: "installed_version", err: fmt.Errorf(`ent: validator failed for field "UserInstalledTheme.installed_version": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.DeployType(); ok {
+	if v, ok := uituo.mutation.DeployType(); ok {
 		if err := userinstalledtheme.DeployTypeValidator(v); err != nil {
 			return &ValidationError{Name: "deploy_type", err: fmt.Errorf(`ent: validator failed for field "UserInstalledTheme.deploy_type": %w`, err)}
 		}
 	}
-	if _u.mutation.UserCleared() && len(_u.mutation.UserIDs()) > 0 {
+	if uituo.mutation.UserCleared() && len(uituo.mutation.UserIDs()) > 0 {
 		return errors.New(`ent: clearing a required unique edge "UserInstalledTheme.user"`)
 	}
 	return nil
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *UserInstalledThemeUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *UserInstalledThemeUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (uituo *UserInstalledThemeUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *UserInstalledThemeUpdateOne {
+	uituo.modifiers = append(uituo.modifiers, modifiers...)
+	return uituo
 }
 
-func (_u *UserInstalledThemeUpdateOne) sqlSave(ctx context.Context) (_node *UserInstalledTheme, err error) {
-	if err := _u.check(); err != nil {
+func (uituo *UserInstalledThemeUpdateOne) sqlSave(ctx context.Context) (_node *UserInstalledTheme, err error) {
+	if err := uituo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(userinstalledtheme.Table, userinstalledtheme.Columns, sqlgraph.NewFieldSpec(userinstalledtheme.FieldID, field.TypeUint))
-	id, ok := _u.mutation.ID()
+	id, ok := uituo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "UserInstalledTheme.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := uituo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, userinstalledtheme.FieldID)
 		for _, f := range fields {
@@ -654,56 +654,56 @@ func (_u *UserInstalledThemeUpdateOne) sqlSave(ctx context.Context) (_node *User
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := uituo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := uituo.mutation.DeletedAt(); ok {
 		_spec.SetField(userinstalledtheme.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if uituo.mutation.DeletedAtCleared() {
 		_spec.ClearField(userinstalledtheme.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := uituo.mutation.UpdatedAt(); ok {
 		_spec.SetField(userinstalledtheme.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.ThemeName(); ok {
+	if value, ok := uituo.mutation.ThemeName(); ok {
 		_spec.SetField(userinstalledtheme.FieldThemeName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.ThemeMarketID(); ok {
+	if value, ok := uituo.mutation.ThemeMarketID(); ok {
 		_spec.SetField(userinstalledtheme.FieldThemeMarketID, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedThemeMarketID(); ok {
+	if value, ok := uituo.mutation.AddedThemeMarketID(); ok {
 		_spec.AddField(userinstalledtheme.FieldThemeMarketID, field.TypeInt, value)
 	}
-	if _u.mutation.ThemeMarketIDCleared() {
+	if uituo.mutation.ThemeMarketIDCleared() {
 		_spec.ClearField(userinstalledtheme.FieldThemeMarketID, field.TypeInt)
 	}
-	if value, ok := _u.mutation.IsCurrent(); ok {
+	if value, ok := uituo.mutation.IsCurrent(); ok {
 		_spec.SetField(userinstalledtheme.FieldIsCurrent, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.InstallTime(); ok {
+	if value, ok := uituo.mutation.InstallTime(); ok {
 		_spec.SetField(userinstalledtheme.FieldInstallTime, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.UserThemeConfig(); ok {
+	if value, ok := uituo.mutation.UserThemeConfig(); ok {
 		_spec.SetField(userinstalledtheme.FieldUserThemeConfig, field.TypeJSON, value)
 	}
-	if _u.mutation.UserThemeConfigCleared() {
+	if uituo.mutation.UserThemeConfigCleared() {
 		_spec.ClearField(userinstalledtheme.FieldUserThemeConfig, field.TypeJSON)
 	}
-	if value, ok := _u.mutation.InstalledVersion(); ok {
+	if value, ok := uituo.mutation.InstalledVersion(); ok {
 		_spec.SetField(userinstalledtheme.FieldInstalledVersion, field.TypeString, value)
 	}
-	if _u.mutation.InstalledVersionCleared() {
+	if uituo.mutation.InstalledVersionCleared() {
 		_spec.ClearField(userinstalledtheme.FieldInstalledVersion, field.TypeString)
 	}
-	if value, ok := _u.mutation.DeployType(); ok {
+	if value, ok := uituo.mutation.DeployType(); ok {
 		_spec.SetField(userinstalledtheme.FieldDeployType, field.TypeEnum, value)
 	}
-	if _u.mutation.UserCleared() {
+	if uituo.mutation.UserCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -716,7 +716,7 @@ func (_u *UserInstalledThemeUpdateOne) sqlSave(ctx context.Context) (_node *User
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.UserIDs(); len(nodes) > 0 {
+	if nodes := uituo.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -732,11 +732,11 @@ func (_u *UserInstalledThemeUpdateOne) sqlSave(ctx context.Context) (_node *User
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &UserInstalledTheme{config: _u.config}
+	_spec.AddModifiers(uituo.modifiers...)
+	_node = &UserInstalledTheme{config: uituo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, uituo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{userinstalledtheme.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -744,6 +744,6 @@ func (_u *UserInstalledThemeUpdateOne) sqlSave(ctx context.Context) (_node *User
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	uituo.mutation.done = true
 	return _node, nil
 }

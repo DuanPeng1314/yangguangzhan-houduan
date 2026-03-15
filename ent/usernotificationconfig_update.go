@@ -27,145 +27,145 @@ type UserNotificationConfigUpdate struct {
 }
 
 // Where appends a list predicates to the UserNotificationConfigUpdate builder.
-func (_u *UserNotificationConfigUpdate) Where(ps ...predicate.UserNotificationConfig) *UserNotificationConfigUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (uncu *UserNotificationConfigUpdate) Where(ps ...predicate.UserNotificationConfig) *UserNotificationConfigUpdate {
+	uncu.mutation.Where(ps...)
+	return uncu
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *UserNotificationConfigUpdate) SetUpdatedAt(v time.Time) *UserNotificationConfigUpdate {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (uncu *UserNotificationConfigUpdate) SetUpdatedAt(t time.Time) *UserNotificationConfigUpdate {
+	uncu.mutation.SetUpdatedAt(t)
+	return uncu
 }
 
 // SetUserID sets the "user_id" field.
-func (_u *UserNotificationConfigUpdate) SetUserID(v uint) *UserNotificationConfigUpdate {
-	_u.mutation.SetUserID(v)
-	return _u
+func (uncu *UserNotificationConfigUpdate) SetUserID(u uint) *UserNotificationConfigUpdate {
+	uncu.mutation.SetUserID(u)
+	return uncu
 }
 
 // SetNillableUserID sets the "user_id" field if the given value is not nil.
-func (_u *UserNotificationConfigUpdate) SetNillableUserID(v *uint) *UserNotificationConfigUpdate {
-	if v != nil {
-		_u.SetUserID(*v)
+func (uncu *UserNotificationConfigUpdate) SetNillableUserID(u *uint) *UserNotificationConfigUpdate {
+	if u != nil {
+		uncu.SetUserID(*u)
 	}
-	return _u
+	return uncu
 }
 
 // SetNotificationTypeID sets the "notification_type_id" field.
-func (_u *UserNotificationConfigUpdate) SetNotificationTypeID(v uint) *UserNotificationConfigUpdate {
-	_u.mutation.SetNotificationTypeID(v)
-	return _u
+func (uncu *UserNotificationConfigUpdate) SetNotificationTypeID(u uint) *UserNotificationConfigUpdate {
+	uncu.mutation.SetNotificationTypeID(u)
+	return uncu
 }
 
 // SetNillableNotificationTypeID sets the "notification_type_id" field if the given value is not nil.
-func (_u *UserNotificationConfigUpdate) SetNillableNotificationTypeID(v *uint) *UserNotificationConfigUpdate {
-	if v != nil {
-		_u.SetNotificationTypeID(*v)
+func (uncu *UserNotificationConfigUpdate) SetNillableNotificationTypeID(u *uint) *UserNotificationConfigUpdate {
+	if u != nil {
+		uncu.SetNotificationTypeID(*u)
 	}
-	return _u
+	return uncu
 }
 
 // SetIsEnabled sets the "is_enabled" field.
-func (_u *UserNotificationConfigUpdate) SetIsEnabled(v bool) *UserNotificationConfigUpdate {
-	_u.mutation.SetIsEnabled(v)
-	return _u
+func (uncu *UserNotificationConfigUpdate) SetIsEnabled(b bool) *UserNotificationConfigUpdate {
+	uncu.mutation.SetIsEnabled(b)
+	return uncu
 }
 
 // SetNillableIsEnabled sets the "is_enabled" field if the given value is not nil.
-func (_u *UserNotificationConfigUpdate) SetNillableIsEnabled(v *bool) *UserNotificationConfigUpdate {
-	if v != nil {
-		_u.SetIsEnabled(*v)
+func (uncu *UserNotificationConfigUpdate) SetNillableIsEnabled(b *bool) *UserNotificationConfigUpdate {
+	if b != nil {
+		uncu.SetIsEnabled(*b)
 	}
-	return _u
+	return uncu
 }
 
 // SetEnabledChannels sets the "enabled_channels" field.
-func (_u *UserNotificationConfigUpdate) SetEnabledChannels(v []string) *UserNotificationConfigUpdate {
-	_u.mutation.SetEnabledChannels(v)
-	return _u
+func (uncu *UserNotificationConfigUpdate) SetEnabledChannels(s []string) *UserNotificationConfigUpdate {
+	uncu.mutation.SetEnabledChannels(s)
+	return uncu
 }
 
-// AppendEnabledChannels appends value to the "enabled_channels" field.
-func (_u *UserNotificationConfigUpdate) AppendEnabledChannels(v []string) *UserNotificationConfigUpdate {
-	_u.mutation.AppendEnabledChannels(v)
-	return _u
+// AppendEnabledChannels appends s to the "enabled_channels" field.
+func (uncu *UserNotificationConfigUpdate) AppendEnabledChannels(s []string) *UserNotificationConfigUpdate {
+	uncu.mutation.AppendEnabledChannels(s)
+	return uncu
 }
 
 // ClearEnabledChannels clears the value of the "enabled_channels" field.
-func (_u *UserNotificationConfigUpdate) ClearEnabledChannels() *UserNotificationConfigUpdate {
-	_u.mutation.ClearEnabledChannels()
-	return _u
+func (uncu *UserNotificationConfigUpdate) ClearEnabledChannels() *UserNotificationConfigUpdate {
+	uncu.mutation.ClearEnabledChannels()
+	return uncu
 }
 
 // SetNotificationEmail sets the "notification_email" field.
-func (_u *UserNotificationConfigUpdate) SetNotificationEmail(v string) *UserNotificationConfigUpdate {
-	_u.mutation.SetNotificationEmail(v)
-	return _u
+func (uncu *UserNotificationConfigUpdate) SetNotificationEmail(s string) *UserNotificationConfigUpdate {
+	uncu.mutation.SetNotificationEmail(s)
+	return uncu
 }
 
 // SetNillableNotificationEmail sets the "notification_email" field if the given value is not nil.
-func (_u *UserNotificationConfigUpdate) SetNillableNotificationEmail(v *string) *UserNotificationConfigUpdate {
-	if v != nil {
-		_u.SetNotificationEmail(*v)
+func (uncu *UserNotificationConfigUpdate) SetNillableNotificationEmail(s *string) *UserNotificationConfigUpdate {
+	if s != nil {
+		uncu.SetNotificationEmail(*s)
 	}
-	return _u
+	return uncu
 }
 
 // ClearNotificationEmail clears the value of the "notification_email" field.
-func (_u *UserNotificationConfigUpdate) ClearNotificationEmail() *UserNotificationConfigUpdate {
-	_u.mutation.ClearNotificationEmail()
-	return _u
+func (uncu *UserNotificationConfigUpdate) ClearNotificationEmail() *UserNotificationConfigUpdate {
+	uncu.mutation.ClearNotificationEmail()
+	return uncu
 }
 
 // SetCustomSettings sets the "custom_settings" field.
-func (_u *UserNotificationConfigUpdate) SetCustomSettings(v map[string]interface{}) *UserNotificationConfigUpdate {
-	_u.mutation.SetCustomSettings(v)
-	return _u
+func (uncu *UserNotificationConfigUpdate) SetCustomSettings(m map[string]interface{}) *UserNotificationConfigUpdate {
+	uncu.mutation.SetCustomSettings(m)
+	return uncu
 }
 
 // ClearCustomSettings clears the value of the "custom_settings" field.
-func (_u *UserNotificationConfigUpdate) ClearCustomSettings() *UserNotificationConfigUpdate {
-	_u.mutation.ClearCustomSettings()
-	return _u
+func (uncu *UserNotificationConfigUpdate) ClearCustomSettings() *UserNotificationConfigUpdate {
+	uncu.mutation.ClearCustomSettings()
+	return uncu
 }
 
 // SetUser sets the "user" edge to the User entity.
-func (_u *UserNotificationConfigUpdate) SetUser(v *User) *UserNotificationConfigUpdate {
-	return _u.SetUserID(v.ID)
+func (uncu *UserNotificationConfigUpdate) SetUser(u *User) *UserNotificationConfigUpdate {
+	return uncu.SetUserID(u.ID)
 }
 
 // SetNotificationType sets the "notification_type" edge to the NotificationType entity.
-func (_u *UserNotificationConfigUpdate) SetNotificationType(v *NotificationType) *UserNotificationConfigUpdate {
-	return _u.SetNotificationTypeID(v.ID)
+func (uncu *UserNotificationConfigUpdate) SetNotificationType(n *NotificationType) *UserNotificationConfigUpdate {
+	return uncu.SetNotificationTypeID(n.ID)
 }
 
 // Mutation returns the UserNotificationConfigMutation object of the builder.
-func (_u *UserNotificationConfigUpdate) Mutation() *UserNotificationConfigMutation {
-	return _u.mutation
+func (uncu *UserNotificationConfigUpdate) Mutation() *UserNotificationConfigMutation {
+	return uncu.mutation
 }
 
 // ClearUser clears the "user" edge to the User entity.
-func (_u *UserNotificationConfigUpdate) ClearUser() *UserNotificationConfigUpdate {
-	_u.mutation.ClearUser()
-	return _u
+func (uncu *UserNotificationConfigUpdate) ClearUser() *UserNotificationConfigUpdate {
+	uncu.mutation.ClearUser()
+	return uncu
 }
 
 // ClearNotificationType clears the "notification_type" edge to the NotificationType entity.
-func (_u *UserNotificationConfigUpdate) ClearNotificationType() *UserNotificationConfigUpdate {
-	_u.mutation.ClearNotificationType()
-	return _u
+func (uncu *UserNotificationConfigUpdate) ClearNotificationType() *UserNotificationConfigUpdate {
+	uncu.mutation.ClearNotificationType()
+	return uncu
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *UserNotificationConfigUpdate) Save(ctx context.Context) (int, error) {
-	_u.defaults()
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (uncu *UserNotificationConfigUpdate) Save(ctx context.Context) (int, error) {
+	uncu.defaults()
+	return withHooks(ctx, uncu.sqlSave, uncu.mutation, uncu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *UserNotificationConfigUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (uncu *UserNotificationConfigUpdate) SaveX(ctx context.Context) int {
+	affected, err := uncu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -173,90 +173,90 @@ func (_u *UserNotificationConfigUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *UserNotificationConfigUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (uncu *UserNotificationConfigUpdate) Exec(ctx context.Context) error {
+	_, err := uncu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *UserNotificationConfigUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (uncu *UserNotificationConfigUpdate) ExecX(ctx context.Context) {
+	if err := uncu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *UserNotificationConfigUpdate) defaults() {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (uncu *UserNotificationConfigUpdate) defaults() {
+	if _, ok := uncu.mutation.UpdatedAt(); !ok {
 		v := usernotificationconfig.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		uncu.mutation.SetUpdatedAt(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *UserNotificationConfigUpdate) check() error {
-	if v, ok := _u.mutation.NotificationEmail(); ok {
+func (uncu *UserNotificationConfigUpdate) check() error {
+	if v, ok := uncu.mutation.NotificationEmail(); ok {
 		if err := usernotificationconfig.NotificationEmailValidator(v); err != nil {
 			return &ValidationError{Name: "notification_email", err: fmt.Errorf(`ent: validator failed for field "UserNotificationConfig.notification_email": %w`, err)}
 		}
 	}
-	if _u.mutation.UserCleared() && len(_u.mutation.UserIDs()) > 0 {
+	if uncu.mutation.UserCleared() && len(uncu.mutation.UserIDs()) > 0 {
 		return errors.New(`ent: clearing a required unique edge "UserNotificationConfig.user"`)
 	}
-	if _u.mutation.NotificationTypeCleared() && len(_u.mutation.NotificationTypeIDs()) > 0 {
+	if uncu.mutation.NotificationTypeCleared() && len(uncu.mutation.NotificationTypeIDs()) > 0 {
 		return errors.New(`ent: clearing a required unique edge "UserNotificationConfig.notification_type"`)
 	}
 	return nil
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *UserNotificationConfigUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *UserNotificationConfigUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (uncu *UserNotificationConfigUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *UserNotificationConfigUpdate {
+	uncu.modifiers = append(uncu.modifiers, modifiers...)
+	return uncu
 }
 
-func (_u *UserNotificationConfigUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (uncu *UserNotificationConfigUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := uncu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(usernotificationconfig.Table, usernotificationconfig.Columns, sqlgraph.NewFieldSpec(usernotificationconfig.FieldID, field.TypeUint))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := uncu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := uncu.mutation.UpdatedAt(); ok {
 		_spec.SetField(usernotificationconfig.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.IsEnabled(); ok {
+	if value, ok := uncu.mutation.IsEnabled(); ok {
 		_spec.SetField(usernotificationconfig.FieldIsEnabled, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.EnabledChannels(); ok {
+	if value, ok := uncu.mutation.EnabledChannels(); ok {
 		_spec.SetField(usernotificationconfig.FieldEnabledChannels, field.TypeJSON, value)
 	}
-	if value, ok := _u.mutation.AppendedEnabledChannels(); ok {
+	if value, ok := uncu.mutation.AppendedEnabledChannels(); ok {
 		_spec.AddModifier(func(u *sql.UpdateBuilder) {
 			sqljson.Append(u, usernotificationconfig.FieldEnabledChannels, value)
 		})
 	}
-	if _u.mutation.EnabledChannelsCleared() {
+	if uncu.mutation.EnabledChannelsCleared() {
 		_spec.ClearField(usernotificationconfig.FieldEnabledChannels, field.TypeJSON)
 	}
-	if value, ok := _u.mutation.NotificationEmail(); ok {
+	if value, ok := uncu.mutation.NotificationEmail(); ok {
 		_spec.SetField(usernotificationconfig.FieldNotificationEmail, field.TypeString, value)
 	}
-	if _u.mutation.NotificationEmailCleared() {
+	if uncu.mutation.NotificationEmailCleared() {
 		_spec.ClearField(usernotificationconfig.FieldNotificationEmail, field.TypeString)
 	}
-	if value, ok := _u.mutation.CustomSettings(); ok {
+	if value, ok := uncu.mutation.CustomSettings(); ok {
 		_spec.SetField(usernotificationconfig.FieldCustomSettings, field.TypeJSON, value)
 	}
-	if _u.mutation.CustomSettingsCleared() {
+	if uncu.mutation.CustomSettingsCleared() {
 		_spec.ClearField(usernotificationconfig.FieldCustomSettings, field.TypeJSON)
 	}
-	if _u.mutation.UserCleared() {
+	if uncu.mutation.UserCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -269,7 +269,7 @@ func (_u *UserNotificationConfigUpdate) sqlSave(ctx context.Context) (_node int,
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.UserIDs(); len(nodes) > 0 {
+	if nodes := uncu.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -285,7 +285,7 @@ func (_u *UserNotificationConfigUpdate) sqlSave(ctx context.Context) (_node int,
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	if _u.mutation.NotificationTypeCleared() {
+	if uncu.mutation.NotificationTypeCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -298,7 +298,7 @@ func (_u *UserNotificationConfigUpdate) sqlSave(ctx context.Context) (_node int,
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.NotificationTypeIDs(); len(nodes) > 0 {
+	if nodes := uncu.mutation.NotificationTypeIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -314,8 +314,8 @@ func (_u *UserNotificationConfigUpdate) sqlSave(ctx context.Context) (_node int,
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(uncu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, uncu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{usernotificationconfig.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -323,8 +323,8 @@ func (_u *UserNotificationConfigUpdate) sqlSave(ctx context.Context) (_node int,
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	uncu.mutation.done = true
+	return n, nil
 }
 
 // UserNotificationConfigUpdateOne is the builder for updating a single UserNotificationConfig entity.
@@ -337,152 +337,152 @@ type UserNotificationConfigUpdateOne struct {
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *UserNotificationConfigUpdateOne) SetUpdatedAt(v time.Time) *UserNotificationConfigUpdateOne {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) SetUpdatedAt(t time.Time) *UserNotificationConfigUpdateOne {
+	uncuo.mutation.SetUpdatedAt(t)
+	return uncuo
 }
 
 // SetUserID sets the "user_id" field.
-func (_u *UserNotificationConfigUpdateOne) SetUserID(v uint) *UserNotificationConfigUpdateOne {
-	_u.mutation.SetUserID(v)
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) SetUserID(u uint) *UserNotificationConfigUpdateOne {
+	uncuo.mutation.SetUserID(u)
+	return uncuo
 }
 
 // SetNillableUserID sets the "user_id" field if the given value is not nil.
-func (_u *UserNotificationConfigUpdateOne) SetNillableUserID(v *uint) *UserNotificationConfigUpdateOne {
-	if v != nil {
-		_u.SetUserID(*v)
+func (uncuo *UserNotificationConfigUpdateOne) SetNillableUserID(u *uint) *UserNotificationConfigUpdateOne {
+	if u != nil {
+		uncuo.SetUserID(*u)
 	}
-	return _u
+	return uncuo
 }
 
 // SetNotificationTypeID sets the "notification_type_id" field.
-func (_u *UserNotificationConfigUpdateOne) SetNotificationTypeID(v uint) *UserNotificationConfigUpdateOne {
-	_u.mutation.SetNotificationTypeID(v)
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) SetNotificationTypeID(u uint) *UserNotificationConfigUpdateOne {
+	uncuo.mutation.SetNotificationTypeID(u)
+	return uncuo
 }
 
 // SetNillableNotificationTypeID sets the "notification_type_id" field if the given value is not nil.
-func (_u *UserNotificationConfigUpdateOne) SetNillableNotificationTypeID(v *uint) *UserNotificationConfigUpdateOne {
-	if v != nil {
-		_u.SetNotificationTypeID(*v)
+func (uncuo *UserNotificationConfigUpdateOne) SetNillableNotificationTypeID(u *uint) *UserNotificationConfigUpdateOne {
+	if u != nil {
+		uncuo.SetNotificationTypeID(*u)
 	}
-	return _u
+	return uncuo
 }
 
 // SetIsEnabled sets the "is_enabled" field.
-func (_u *UserNotificationConfigUpdateOne) SetIsEnabled(v bool) *UserNotificationConfigUpdateOne {
-	_u.mutation.SetIsEnabled(v)
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) SetIsEnabled(b bool) *UserNotificationConfigUpdateOne {
+	uncuo.mutation.SetIsEnabled(b)
+	return uncuo
 }
 
 // SetNillableIsEnabled sets the "is_enabled" field if the given value is not nil.
-func (_u *UserNotificationConfigUpdateOne) SetNillableIsEnabled(v *bool) *UserNotificationConfigUpdateOne {
-	if v != nil {
-		_u.SetIsEnabled(*v)
+func (uncuo *UserNotificationConfigUpdateOne) SetNillableIsEnabled(b *bool) *UserNotificationConfigUpdateOne {
+	if b != nil {
+		uncuo.SetIsEnabled(*b)
 	}
-	return _u
+	return uncuo
 }
 
 // SetEnabledChannels sets the "enabled_channels" field.
-func (_u *UserNotificationConfigUpdateOne) SetEnabledChannels(v []string) *UserNotificationConfigUpdateOne {
-	_u.mutation.SetEnabledChannels(v)
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) SetEnabledChannels(s []string) *UserNotificationConfigUpdateOne {
+	uncuo.mutation.SetEnabledChannels(s)
+	return uncuo
 }
 
-// AppendEnabledChannels appends value to the "enabled_channels" field.
-func (_u *UserNotificationConfigUpdateOne) AppendEnabledChannels(v []string) *UserNotificationConfigUpdateOne {
-	_u.mutation.AppendEnabledChannels(v)
-	return _u
+// AppendEnabledChannels appends s to the "enabled_channels" field.
+func (uncuo *UserNotificationConfigUpdateOne) AppendEnabledChannels(s []string) *UserNotificationConfigUpdateOne {
+	uncuo.mutation.AppendEnabledChannels(s)
+	return uncuo
 }
 
 // ClearEnabledChannels clears the value of the "enabled_channels" field.
-func (_u *UserNotificationConfigUpdateOne) ClearEnabledChannels() *UserNotificationConfigUpdateOne {
-	_u.mutation.ClearEnabledChannels()
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) ClearEnabledChannels() *UserNotificationConfigUpdateOne {
+	uncuo.mutation.ClearEnabledChannels()
+	return uncuo
 }
 
 // SetNotificationEmail sets the "notification_email" field.
-func (_u *UserNotificationConfigUpdateOne) SetNotificationEmail(v string) *UserNotificationConfigUpdateOne {
-	_u.mutation.SetNotificationEmail(v)
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) SetNotificationEmail(s string) *UserNotificationConfigUpdateOne {
+	uncuo.mutation.SetNotificationEmail(s)
+	return uncuo
 }
 
 // SetNillableNotificationEmail sets the "notification_email" field if the given value is not nil.
-func (_u *UserNotificationConfigUpdateOne) SetNillableNotificationEmail(v *string) *UserNotificationConfigUpdateOne {
-	if v != nil {
-		_u.SetNotificationEmail(*v)
+func (uncuo *UserNotificationConfigUpdateOne) SetNillableNotificationEmail(s *string) *UserNotificationConfigUpdateOne {
+	if s != nil {
+		uncuo.SetNotificationEmail(*s)
 	}
-	return _u
+	return uncuo
 }
 
 // ClearNotificationEmail clears the value of the "notification_email" field.
-func (_u *UserNotificationConfigUpdateOne) ClearNotificationEmail() *UserNotificationConfigUpdateOne {
-	_u.mutation.ClearNotificationEmail()
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) ClearNotificationEmail() *UserNotificationConfigUpdateOne {
+	uncuo.mutation.ClearNotificationEmail()
+	return uncuo
 }
 
 // SetCustomSettings sets the "custom_settings" field.
-func (_u *UserNotificationConfigUpdateOne) SetCustomSettings(v map[string]interface{}) *UserNotificationConfigUpdateOne {
-	_u.mutation.SetCustomSettings(v)
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) SetCustomSettings(m map[string]interface{}) *UserNotificationConfigUpdateOne {
+	uncuo.mutation.SetCustomSettings(m)
+	return uncuo
 }
 
 // ClearCustomSettings clears the value of the "custom_settings" field.
-func (_u *UserNotificationConfigUpdateOne) ClearCustomSettings() *UserNotificationConfigUpdateOne {
-	_u.mutation.ClearCustomSettings()
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) ClearCustomSettings() *UserNotificationConfigUpdateOne {
+	uncuo.mutation.ClearCustomSettings()
+	return uncuo
 }
 
 // SetUser sets the "user" edge to the User entity.
-func (_u *UserNotificationConfigUpdateOne) SetUser(v *User) *UserNotificationConfigUpdateOne {
-	return _u.SetUserID(v.ID)
+func (uncuo *UserNotificationConfigUpdateOne) SetUser(u *User) *UserNotificationConfigUpdateOne {
+	return uncuo.SetUserID(u.ID)
 }
 
 // SetNotificationType sets the "notification_type" edge to the NotificationType entity.
-func (_u *UserNotificationConfigUpdateOne) SetNotificationType(v *NotificationType) *UserNotificationConfigUpdateOne {
-	return _u.SetNotificationTypeID(v.ID)
+func (uncuo *UserNotificationConfigUpdateOne) SetNotificationType(n *NotificationType) *UserNotificationConfigUpdateOne {
+	return uncuo.SetNotificationTypeID(n.ID)
 }
 
 // Mutation returns the UserNotificationConfigMutation object of the builder.
-func (_u *UserNotificationConfigUpdateOne) Mutation() *UserNotificationConfigMutation {
-	return _u.mutation
+func (uncuo *UserNotificationConfigUpdateOne) Mutation() *UserNotificationConfigMutation {
+	return uncuo.mutation
 }
 
 // ClearUser clears the "user" edge to the User entity.
-func (_u *UserNotificationConfigUpdateOne) ClearUser() *UserNotificationConfigUpdateOne {
-	_u.mutation.ClearUser()
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) ClearUser() *UserNotificationConfigUpdateOne {
+	uncuo.mutation.ClearUser()
+	return uncuo
 }
 
 // ClearNotificationType clears the "notification_type" edge to the NotificationType entity.
-func (_u *UserNotificationConfigUpdateOne) ClearNotificationType() *UserNotificationConfigUpdateOne {
-	_u.mutation.ClearNotificationType()
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) ClearNotificationType() *UserNotificationConfigUpdateOne {
+	uncuo.mutation.ClearNotificationType()
+	return uncuo
 }
 
 // Where appends a list predicates to the UserNotificationConfigUpdate builder.
-func (_u *UserNotificationConfigUpdateOne) Where(ps ...predicate.UserNotificationConfig) *UserNotificationConfigUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) Where(ps ...predicate.UserNotificationConfig) *UserNotificationConfigUpdateOne {
+	uncuo.mutation.Where(ps...)
+	return uncuo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *UserNotificationConfigUpdateOne) Select(field string, fields ...string) *UserNotificationConfigUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) Select(field string, fields ...string) *UserNotificationConfigUpdateOne {
+	uncuo.fields = append([]string{field}, fields...)
+	return uncuo
 }
 
 // Save executes the query and returns the updated UserNotificationConfig entity.
-func (_u *UserNotificationConfigUpdateOne) Save(ctx context.Context) (*UserNotificationConfig, error) {
-	_u.defaults()
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (uncuo *UserNotificationConfigUpdateOne) Save(ctx context.Context) (*UserNotificationConfig, error) {
+	uncuo.defaults()
+	return withHooks(ctx, uncuo.sqlSave, uncuo.mutation, uncuo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *UserNotificationConfigUpdateOne) SaveX(ctx context.Context) *UserNotificationConfig {
-	node, err := _u.Save(ctx)
+func (uncuo *UserNotificationConfigUpdateOne) SaveX(ctx context.Context) *UserNotificationConfig {
+	node, err := uncuo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -490,59 +490,59 @@ func (_u *UserNotificationConfigUpdateOne) SaveX(ctx context.Context) *UserNotif
 }
 
 // Exec executes the query on the entity.
-func (_u *UserNotificationConfigUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (uncuo *UserNotificationConfigUpdateOne) Exec(ctx context.Context) error {
+	_, err := uncuo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *UserNotificationConfigUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (uncuo *UserNotificationConfigUpdateOne) ExecX(ctx context.Context) {
+	if err := uncuo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *UserNotificationConfigUpdateOne) defaults() {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (uncuo *UserNotificationConfigUpdateOne) defaults() {
+	if _, ok := uncuo.mutation.UpdatedAt(); !ok {
 		v := usernotificationconfig.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		uncuo.mutation.SetUpdatedAt(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *UserNotificationConfigUpdateOne) check() error {
-	if v, ok := _u.mutation.NotificationEmail(); ok {
+func (uncuo *UserNotificationConfigUpdateOne) check() error {
+	if v, ok := uncuo.mutation.NotificationEmail(); ok {
 		if err := usernotificationconfig.NotificationEmailValidator(v); err != nil {
 			return &ValidationError{Name: "notification_email", err: fmt.Errorf(`ent: validator failed for field "UserNotificationConfig.notification_email": %w`, err)}
 		}
 	}
-	if _u.mutation.UserCleared() && len(_u.mutation.UserIDs()) > 0 {
+	if uncuo.mutation.UserCleared() && len(uncuo.mutation.UserIDs()) > 0 {
 		return errors.New(`ent: clearing a required unique edge "UserNotificationConfig.user"`)
 	}
-	if _u.mutation.NotificationTypeCleared() && len(_u.mutation.NotificationTypeIDs()) > 0 {
+	if uncuo.mutation.NotificationTypeCleared() && len(uncuo.mutation.NotificationTypeIDs()) > 0 {
 		return errors.New(`ent: clearing a required unique edge "UserNotificationConfig.notification_type"`)
 	}
 	return nil
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *UserNotificationConfigUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *UserNotificationConfigUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (uncuo *UserNotificationConfigUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *UserNotificationConfigUpdateOne {
+	uncuo.modifiers = append(uncuo.modifiers, modifiers...)
+	return uncuo
 }
 
-func (_u *UserNotificationConfigUpdateOne) sqlSave(ctx context.Context) (_node *UserNotificationConfig, err error) {
-	if err := _u.check(); err != nil {
+func (uncuo *UserNotificationConfigUpdateOne) sqlSave(ctx context.Context) (_node *UserNotificationConfig, err error) {
+	if err := uncuo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(usernotificationconfig.Table, usernotificationconfig.Columns, sqlgraph.NewFieldSpec(usernotificationconfig.FieldID, field.TypeUint))
-	id, ok := _u.mutation.ID()
+	id, ok := uncuo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "UserNotificationConfig.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := uncuo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, usernotificationconfig.FieldID)
 		for _, f := range fields {
@@ -554,43 +554,43 @@ func (_u *UserNotificationConfigUpdateOne) sqlSave(ctx context.Context) (_node *
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := uncuo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := uncuo.mutation.UpdatedAt(); ok {
 		_spec.SetField(usernotificationconfig.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.IsEnabled(); ok {
+	if value, ok := uncuo.mutation.IsEnabled(); ok {
 		_spec.SetField(usernotificationconfig.FieldIsEnabled, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.EnabledChannels(); ok {
+	if value, ok := uncuo.mutation.EnabledChannels(); ok {
 		_spec.SetField(usernotificationconfig.FieldEnabledChannels, field.TypeJSON, value)
 	}
-	if value, ok := _u.mutation.AppendedEnabledChannels(); ok {
+	if value, ok := uncuo.mutation.AppendedEnabledChannels(); ok {
 		_spec.AddModifier(func(u *sql.UpdateBuilder) {
 			sqljson.Append(u, usernotificationconfig.FieldEnabledChannels, value)
 		})
 	}
-	if _u.mutation.EnabledChannelsCleared() {
+	if uncuo.mutation.EnabledChannelsCleared() {
 		_spec.ClearField(usernotificationconfig.FieldEnabledChannels, field.TypeJSON)
 	}
-	if value, ok := _u.mutation.NotificationEmail(); ok {
+	if value, ok := uncuo.mutation.NotificationEmail(); ok {
 		_spec.SetField(usernotificationconfig.FieldNotificationEmail, field.TypeString, value)
 	}
-	if _u.mutation.NotificationEmailCleared() {
+	if uncuo.mutation.NotificationEmailCleared() {
 		_spec.ClearField(usernotificationconfig.FieldNotificationEmail, field.TypeString)
 	}
-	if value, ok := _u.mutation.CustomSettings(); ok {
+	if value, ok := uncuo.mutation.CustomSettings(); ok {
 		_spec.SetField(usernotificationconfig.FieldCustomSettings, field.TypeJSON, value)
 	}
-	if _u.mutation.CustomSettingsCleared() {
+	if uncuo.mutation.CustomSettingsCleared() {
 		_spec.ClearField(usernotificationconfig.FieldCustomSettings, field.TypeJSON)
 	}
-	if _u.mutation.UserCleared() {
+	if uncuo.mutation.UserCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -603,7 +603,7 @@ func (_u *UserNotificationConfigUpdateOne) sqlSave(ctx context.Context) (_node *
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.UserIDs(); len(nodes) > 0 {
+	if nodes := uncuo.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -619,7 +619,7 @@ func (_u *UserNotificationConfigUpdateOne) sqlSave(ctx context.Context) (_node *
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	if _u.mutation.NotificationTypeCleared() {
+	if uncuo.mutation.NotificationTypeCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -632,7 +632,7 @@ func (_u *UserNotificationConfigUpdateOne) sqlSave(ctx context.Context) (_node *
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.NotificationTypeIDs(); len(nodes) > 0 {
+	if nodes := uncuo.mutation.NotificationTypeIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -648,11 +648,11 @@ func (_u *UserNotificationConfigUpdateOne) sqlSave(ctx context.Context) (_node *
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &UserNotificationConfig{config: _u.config}
+	_spec.AddModifiers(uncuo.modifiers...)
+	_node = &UserNotificationConfig{config: uncuo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, uncuo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{usernotificationconfig.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -660,6 +660,6 @@ func (_u *UserNotificationConfigUpdateOne) sqlSave(ctx context.Context) (_node *
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	uncuo.mutation.done = true
 	return _node, nil
 }

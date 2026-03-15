@@ -75,7 +75,7 @@ func (*DocSeries) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the DocSeries fields.
-func (_m *DocSeries) assignValues(columns []string, values []any) error {
+func (ds *DocSeries) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -86,51 +86,51 @@ func (_m *DocSeries) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint(value.Int64)
+			ds.ID = uint(value.Int64)
 		case docseries.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
 			} else if value.Valid {
-				_m.CreatedAt = value.Time
+				ds.CreatedAt = value.Time
 			}
 		case docseries.FieldUpdatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field updated_at", values[i])
 			} else if value.Valid {
-				_m.UpdatedAt = value.Time
+				ds.UpdatedAt = value.Time
 			}
 		case docseries.FieldName:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field name", values[i])
 			} else if value.Valid {
-				_m.Name = value.String
+				ds.Name = value.String
 			}
 		case docseries.FieldDescription:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field description", values[i])
 			} else if value.Valid {
-				_m.Description = value.String
+				ds.Description = value.String
 			}
 		case docseries.FieldCoverURL:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field cover_url", values[i])
 			} else if value.Valid {
-				_m.CoverURL = value.String
+				ds.CoverURL = value.String
 			}
 		case docseries.FieldSort:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field sort", values[i])
 			} else if value.Valid {
-				_m.Sort = int(value.Int64)
+				ds.Sort = int(value.Int64)
 			}
 		case docseries.FieldDocCount:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field doc_count", values[i])
 			} else if value.Valid {
-				_m.DocCount = int(value.Int64)
+				ds.DocCount = int(value.Int64)
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			ds.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -138,58 +138,58 @@ func (_m *DocSeries) assignValues(columns []string, values []any) error {
 
 // Value returns the ent.Value that was dynamically selected and assigned to the DocSeries.
 // This includes values selected through modifiers, order, etc.
-func (_m *DocSeries) Value(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (ds *DocSeries) Value(name string) (ent.Value, error) {
+	return ds.selectValues.Get(name)
 }
 
 // QueryArticles queries the "articles" edge of the DocSeries entity.
-func (_m *DocSeries) QueryArticles() *ArticleQuery {
-	return NewDocSeriesClient(_m.config).QueryArticles(_m)
+func (ds *DocSeries) QueryArticles() *ArticleQuery {
+	return NewDocSeriesClient(ds.config).QueryArticles(ds)
 }
 
 // Update returns a builder for updating this DocSeries.
 // Note that you need to call DocSeries.Unwrap() before calling this method if this DocSeries
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *DocSeries) Update() *DocSeriesUpdateOne {
-	return NewDocSeriesClient(_m.config).UpdateOne(_m)
+func (ds *DocSeries) Update() *DocSeriesUpdateOne {
+	return NewDocSeriesClient(ds.config).UpdateOne(ds)
 }
 
 // Unwrap unwraps the DocSeries entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *DocSeries) Unwrap() *DocSeries {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (ds *DocSeries) Unwrap() *DocSeries {
+	_tx, ok := ds.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: DocSeries is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	ds.config.driver = _tx.drv
+	return ds
 }
 
 // String implements the fmt.Stringer.
-func (_m *DocSeries) String() string {
+func (ds *DocSeries) String() string {
 	var builder strings.Builder
 	builder.WriteString("DocSeries(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
+	builder.WriteString(fmt.Sprintf("id=%v, ", ds.ID))
 	builder.WriteString("created_at=")
-	builder.WriteString(_m.CreatedAt.Format(time.ANSIC))
+	builder.WriteString(ds.CreatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("updated_at=")
-	builder.WriteString(_m.UpdatedAt.Format(time.ANSIC))
+	builder.WriteString(ds.UpdatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("name=")
-	builder.WriteString(_m.Name)
+	builder.WriteString(ds.Name)
 	builder.WriteString(", ")
 	builder.WriteString("description=")
-	builder.WriteString(_m.Description)
+	builder.WriteString(ds.Description)
 	builder.WriteString(", ")
 	builder.WriteString("cover_url=")
-	builder.WriteString(_m.CoverURL)
+	builder.WriteString(ds.CoverURL)
 	builder.WriteString(", ")
 	builder.WriteString("sort=")
-	builder.WriteString(fmt.Sprintf("%v", _m.Sort))
+	builder.WriteString(fmt.Sprintf("%v", ds.Sort))
 	builder.WriteString(", ")
 	builder.WriteString("doc_count=")
-	builder.WriteString(fmt.Sprintf("%v", _m.DocCount))
+	builder.WriteString(fmt.Sprintf("%v", ds.DocCount))
 	builder.WriteByte(')')
 	return builder.String()
 }

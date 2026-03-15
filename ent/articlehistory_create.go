@@ -24,206 +24,206 @@ type ArticleHistoryCreate struct {
 }
 
 // SetArticleID sets the "article_id" field.
-func (_c *ArticleHistoryCreate) SetArticleID(v uint) *ArticleHistoryCreate {
-	_c.mutation.SetArticleID(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetArticleID(u uint) *ArticleHistoryCreate {
+	ahc.mutation.SetArticleID(u)
+	return ahc
 }
 
 // SetVersion sets the "version" field.
-func (_c *ArticleHistoryCreate) SetVersion(v int) *ArticleHistoryCreate {
-	_c.mutation.SetVersion(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetVersion(i int) *ArticleHistoryCreate {
+	ahc.mutation.SetVersion(i)
+	return ahc
 }
 
 // SetTitle sets the "title" field.
-func (_c *ArticleHistoryCreate) SetTitle(v string) *ArticleHistoryCreate {
-	_c.mutation.SetTitle(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetTitle(s string) *ArticleHistoryCreate {
+	ahc.mutation.SetTitle(s)
+	return ahc
 }
 
 // SetContentMd sets the "content_md" field.
-func (_c *ArticleHistoryCreate) SetContentMd(v string) *ArticleHistoryCreate {
-	_c.mutation.SetContentMd(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetContentMd(s string) *ArticleHistoryCreate {
+	ahc.mutation.SetContentMd(s)
+	return ahc
 }
 
 // SetNillableContentMd sets the "content_md" field if the given value is not nil.
-func (_c *ArticleHistoryCreate) SetNillableContentMd(v *string) *ArticleHistoryCreate {
-	if v != nil {
-		_c.SetContentMd(*v)
+func (ahc *ArticleHistoryCreate) SetNillableContentMd(s *string) *ArticleHistoryCreate {
+	if s != nil {
+		ahc.SetContentMd(*s)
 	}
-	return _c
+	return ahc
 }
 
 // SetContentHTML sets the "content_html" field.
-func (_c *ArticleHistoryCreate) SetContentHTML(v string) *ArticleHistoryCreate {
-	_c.mutation.SetContentHTML(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetContentHTML(s string) *ArticleHistoryCreate {
+	ahc.mutation.SetContentHTML(s)
+	return ahc
 }
 
 // SetNillableContentHTML sets the "content_html" field if the given value is not nil.
-func (_c *ArticleHistoryCreate) SetNillableContentHTML(v *string) *ArticleHistoryCreate {
-	if v != nil {
-		_c.SetContentHTML(*v)
+func (ahc *ArticleHistoryCreate) SetNillableContentHTML(s *string) *ArticleHistoryCreate {
+	if s != nil {
+		ahc.SetContentHTML(*s)
 	}
-	return _c
+	return ahc
 }
 
 // SetCoverURL sets the "cover_url" field.
-func (_c *ArticleHistoryCreate) SetCoverURL(v string) *ArticleHistoryCreate {
-	_c.mutation.SetCoverURL(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetCoverURL(s string) *ArticleHistoryCreate {
+	ahc.mutation.SetCoverURL(s)
+	return ahc
 }
 
 // SetNillableCoverURL sets the "cover_url" field if the given value is not nil.
-func (_c *ArticleHistoryCreate) SetNillableCoverURL(v *string) *ArticleHistoryCreate {
-	if v != nil {
-		_c.SetCoverURL(*v)
+func (ahc *ArticleHistoryCreate) SetNillableCoverURL(s *string) *ArticleHistoryCreate {
+	if s != nil {
+		ahc.SetCoverURL(*s)
 	}
-	return _c
+	return ahc
 }
 
 // SetTopImgURL sets the "top_img_url" field.
-func (_c *ArticleHistoryCreate) SetTopImgURL(v string) *ArticleHistoryCreate {
-	_c.mutation.SetTopImgURL(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetTopImgURL(s string) *ArticleHistoryCreate {
+	ahc.mutation.SetTopImgURL(s)
+	return ahc
 }
 
 // SetNillableTopImgURL sets the "top_img_url" field if the given value is not nil.
-func (_c *ArticleHistoryCreate) SetNillableTopImgURL(v *string) *ArticleHistoryCreate {
-	if v != nil {
-		_c.SetTopImgURL(*v)
+func (ahc *ArticleHistoryCreate) SetNillableTopImgURL(s *string) *ArticleHistoryCreate {
+	if s != nil {
+		ahc.SetTopImgURL(*s)
 	}
-	return _c
+	return ahc
 }
 
 // SetPrimaryColor sets the "primary_color" field.
-func (_c *ArticleHistoryCreate) SetPrimaryColor(v string) *ArticleHistoryCreate {
-	_c.mutation.SetPrimaryColor(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetPrimaryColor(s string) *ArticleHistoryCreate {
+	ahc.mutation.SetPrimaryColor(s)
+	return ahc
 }
 
 // SetNillablePrimaryColor sets the "primary_color" field if the given value is not nil.
-func (_c *ArticleHistoryCreate) SetNillablePrimaryColor(v *string) *ArticleHistoryCreate {
-	if v != nil {
-		_c.SetPrimaryColor(*v)
+func (ahc *ArticleHistoryCreate) SetNillablePrimaryColor(s *string) *ArticleHistoryCreate {
+	if s != nil {
+		ahc.SetPrimaryColor(*s)
 	}
-	return _c
+	return ahc
 }
 
 // SetSummaries sets the "summaries" field.
-func (_c *ArticleHistoryCreate) SetSummaries(v []string) *ArticleHistoryCreate {
-	_c.mutation.SetSummaries(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetSummaries(s []string) *ArticleHistoryCreate {
+	ahc.mutation.SetSummaries(s)
+	return ahc
 }
 
 // SetWordCount sets the "word_count" field.
-func (_c *ArticleHistoryCreate) SetWordCount(v int) *ArticleHistoryCreate {
-	_c.mutation.SetWordCount(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetWordCount(i int) *ArticleHistoryCreate {
+	ahc.mutation.SetWordCount(i)
+	return ahc
 }
 
 // SetNillableWordCount sets the "word_count" field if the given value is not nil.
-func (_c *ArticleHistoryCreate) SetNillableWordCount(v *int) *ArticleHistoryCreate {
-	if v != nil {
-		_c.SetWordCount(*v)
+func (ahc *ArticleHistoryCreate) SetNillableWordCount(i *int) *ArticleHistoryCreate {
+	if i != nil {
+		ahc.SetWordCount(*i)
 	}
-	return _c
+	return ahc
 }
 
 // SetKeywords sets the "keywords" field.
-func (_c *ArticleHistoryCreate) SetKeywords(v string) *ArticleHistoryCreate {
-	_c.mutation.SetKeywords(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetKeywords(s string) *ArticleHistoryCreate {
+	ahc.mutation.SetKeywords(s)
+	return ahc
 }
 
 // SetNillableKeywords sets the "keywords" field if the given value is not nil.
-func (_c *ArticleHistoryCreate) SetNillableKeywords(v *string) *ArticleHistoryCreate {
-	if v != nil {
-		_c.SetKeywords(*v)
+func (ahc *ArticleHistoryCreate) SetNillableKeywords(s *string) *ArticleHistoryCreate {
+	if s != nil {
+		ahc.SetKeywords(*s)
 	}
-	return _c
+	return ahc
 }
 
 // SetEditorID sets the "editor_id" field.
-func (_c *ArticleHistoryCreate) SetEditorID(v uint) *ArticleHistoryCreate {
-	_c.mutation.SetEditorID(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetEditorID(u uint) *ArticleHistoryCreate {
+	ahc.mutation.SetEditorID(u)
+	return ahc
 }
 
 // SetEditorNickname sets the "editor_nickname" field.
-func (_c *ArticleHistoryCreate) SetEditorNickname(v string) *ArticleHistoryCreate {
-	_c.mutation.SetEditorNickname(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetEditorNickname(s string) *ArticleHistoryCreate {
+	ahc.mutation.SetEditorNickname(s)
+	return ahc
 }
 
 // SetNillableEditorNickname sets the "editor_nickname" field if the given value is not nil.
-func (_c *ArticleHistoryCreate) SetNillableEditorNickname(v *string) *ArticleHistoryCreate {
-	if v != nil {
-		_c.SetEditorNickname(*v)
+func (ahc *ArticleHistoryCreate) SetNillableEditorNickname(s *string) *ArticleHistoryCreate {
+	if s != nil {
+		ahc.SetEditorNickname(*s)
 	}
-	return _c
+	return ahc
 }
 
 // SetChangeNote sets the "change_note" field.
-func (_c *ArticleHistoryCreate) SetChangeNote(v string) *ArticleHistoryCreate {
-	_c.mutation.SetChangeNote(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetChangeNote(s string) *ArticleHistoryCreate {
+	ahc.mutation.SetChangeNote(s)
+	return ahc
 }
 
 // SetNillableChangeNote sets the "change_note" field if the given value is not nil.
-func (_c *ArticleHistoryCreate) SetNillableChangeNote(v *string) *ArticleHistoryCreate {
-	if v != nil {
-		_c.SetChangeNote(*v)
+func (ahc *ArticleHistoryCreate) SetNillableChangeNote(s *string) *ArticleHistoryCreate {
+	if s != nil {
+		ahc.SetChangeNote(*s)
 	}
-	return _c
+	return ahc
 }
 
 // SetCreatedAt sets the "created_at" field.
-func (_c *ArticleHistoryCreate) SetCreatedAt(v time.Time) *ArticleHistoryCreate {
-	_c.mutation.SetCreatedAt(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetCreatedAt(t time.Time) *ArticleHistoryCreate {
+	ahc.mutation.SetCreatedAt(t)
+	return ahc
 }
 
 // SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (_c *ArticleHistoryCreate) SetNillableCreatedAt(v *time.Time) *ArticleHistoryCreate {
-	if v != nil {
-		_c.SetCreatedAt(*v)
+func (ahc *ArticleHistoryCreate) SetNillableCreatedAt(t *time.Time) *ArticleHistoryCreate {
+	if t != nil {
+		ahc.SetCreatedAt(*t)
 	}
-	return _c
+	return ahc
 }
 
 // SetExtraData sets the "extra_data" field.
-func (_c *ArticleHistoryCreate) SetExtraData(v map[string]interface{}) *ArticleHistoryCreate {
-	_c.mutation.SetExtraData(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetExtraData(m map[string]interface{}) *ArticleHistoryCreate {
+	ahc.mutation.SetExtraData(m)
+	return ahc
 }
 
 // SetID sets the "id" field.
-func (_c *ArticleHistoryCreate) SetID(v uint) *ArticleHistoryCreate {
-	_c.mutation.SetID(v)
-	return _c
+func (ahc *ArticleHistoryCreate) SetID(u uint) *ArticleHistoryCreate {
+	ahc.mutation.SetID(u)
+	return ahc
 }
 
 // SetArticle sets the "article" edge to the Article entity.
-func (_c *ArticleHistoryCreate) SetArticle(v *Article) *ArticleHistoryCreate {
-	return _c.SetArticleID(v.ID)
+func (ahc *ArticleHistoryCreate) SetArticle(a *Article) *ArticleHistoryCreate {
+	return ahc.SetArticleID(a.ID)
 }
 
 // Mutation returns the ArticleHistoryMutation object of the builder.
-func (_c *ArticleHistoryCreate) Mutation() *ArticleHistoryMutation {
-	return _c.mutation
+func (ahc *ArticleHistoryCreate) Mutation() *ArticleHistoryMutation {
+	return ahc.mutation
 }
 
 // Save creates the ArticleHistory in the database.
-func (_c *ArticleHistoryCreate) Save(ctx context.Context) (*ArticleHistory, error) {
-	_c.defaults()
-	return withHooks(ctx, _c.sqlSave, _c.mutation, _c.hooks)
+func (ahc *ArticleHistoryCreate) Save(ctx context.Context) (*ArticleHistory, error) {
+	ahc.defaults()
+	return withHooks(ctx, ahc.sqlSave, ahc.mutation, ahc.hooks)
 }
 
 // SaveX calls Save and panics if Save returns an error.
-func (_c *ArticleHistoryCreate) SaveX(ctx context.Context) *ArticleHistory {
-	v, err := _c.Save(ctx)
+func (ahc *ArticleHistoryCreate) SaveX(ctx context.Context) *ArticleHistory {
+	v, err := ahc.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -231,82 +231,82 @@ func (_c *ArticleHistoryCreate) SaveX(ctx context.Context) *ArticleHistory {
 }
 
 // Exec executes the query.
-func (_c *ArticleHistoryCreate) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (ahc *ArticleHistoryCreate) Exec(ctx context.Context) error {
+	_, err := ahc.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *ArticleHistoryCreate) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (ahc *ArticleHistoryCreate) ExecX(ctx context.Context) {
+	if err := ahc.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_c *ArticleHistoryCreate) defaults() {
-	if _, ok := _c.mutation.WordCount(); !ok {
+func (ahc *ArticleHistoryCreate) defaults() {
+	if _, ok := ahc.mutation.WordCount(); !ok {
 		v := articlehistory.DefaultWordCount
-		_c.mutation.SetWordCount(v)
+		ahc.mutation.SetWordCount(v)
 	}
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+	if _, ok := ahc.mutation.CreatedAt(); !ok {
 		v := articlehistory.DefaultCreatedAt()
-		_c.mutation.SetCreatedAt(v)
+		ahc.mutation.SetCreatedAt(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_c *ArticleHistoryCreate) check() error {
-	if _, ok := _c.mutation.ArticleID(); !ok {
+func (ahc *ArticleHistoryCreate) check() error {
+	if _, ok := ahc.mutation.ArticleID(); !ok {
 		return &ValidationError{Name: "article_id", err: errors.New(`ent: missing required field "ArticleHistory.article_id"`)}
 	}
-	if _, ok := _c.mutation.Version(); !ok {
+	if _, ok := ahc.mutation.Version(); !ok {
 		return &ValidationError{Name: "version", err: errors.New(`ent: missing required field "ArticleHistory.version"`)}
 	}
-	if v, ok := _c.mutation.Version(); ok {
+	if v, ok := ahc.mutation.Version(); ok {
 		if err := articlehistory.VersionValidator(v); err != nil {
 			return &ValidationError{Name: "version", err: fmt.Errorf(`ent: validator failed for field "ArticleHistory.version": %w`, err)}
 		}
 	}
-	if _, ok := _c.mutation.Title(); !ok {
+	if _, ok := ahc.mutation.Title(); !ok {
 		return &ValidationError{Name: "title", err: errors.New(`ent: missing required field "ArticleHistory.title"`)}
 	}
-	if v, ok := _c.mutation.Title(); ok {
+	if v, ok := ahc.mutation.Title(); ok {
 		if err := articlehistory.TitleValidator(v); err != nil {
 			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "ArticleHistory.title": %w`, err)}
 		}
 	}
-	if _, ok := _c.mutation.WordCount(); !ok {
+	if _, ok := ahc.mutation.WordCount(); !ok {
 		return &ValidationError{Name: "word_count", err: errors.New(`ent: missing required field "ArticleHistory.word_count"`)}
 	}
-	if v, ok := _c.mutation.WordCount(); ok {
+	if v, ok := ahc.mutation.WordCount(); ok {
 		if err := articlehistory.WordCountValidator(v); err != nil {
 			return &ValidationError{Name: "word_count", err: fmt.Errorf(`ent: validator failed for field "ArticleHistory.word_count": %w`, err)}
 		}
 	}
-	if _, ok := _c.mutation.EditorID(); !ok {
+	if _, ok := ahc.mutation.EditorID(); !ok {
 		return &ValidationError{Name: "editor_id", err: errors.New(`ent: missing required field "ArticleHistory.editor_id"`)}
 	}
-	if v, ok := _c.mutation.ChangeNote(); ok {
+	if v, ok := ahc.mutation.ChangeNote(); ok {
 		if err := articlehistory.ChangeNoteValidator(v); err != nil {
 			return &ValidationError{Name: "change_note", err: fmt.Errorf(`ent: validator failed for field "ArticleHistory.change_note": %w`, err)}
 		}
 	}
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+	if _, ok := ahc.mutation.CreatedAt(); !ok {
 		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "ArticleHistory.created_at"`)}
 	}
-	if len(_c.mutation.ArticleIDs()) == 0 {
+	if len(ahc.mutation.ArticleIDs()) == 0 {
 		return &ValidationError{Name: "article", err: errors.New(`ent: missing required edge "ArticleHistory.article"`)}
 	}
 	return nil
 }
 
-func (_c *ArticleHistoryCreate) sqlSave(ctx context.Context) (*ArticleHistory, error) {
-	if err := _c.check(); err != nil {
+func (ahc *ArticleHistoryCreate) sqlSave(ctx context.Context) (*ArticleHistory, error) {
+	if err := ahc.check(); err != nil {
 		return nil, err
 	}
-	_node, _spec := _c.createSpec()
-	if err := sqlgraph.CreateNode(ctx, _c.driver, _spec); err != nil {
+	_node, _spec := ahc.createSpec()
+	if err := sqlgraph.CreateNode(ctx, ahc.driver, _spec); err != nil {
 		if sqlgraph.IsConstraintError(err) {
 			err = &ConstraintError{msg: err.Error(), wrap: err}
 		}
@@ -316,82 +316,82 @@ func (_c *ArticleHistoryCreate) sqlSave(ctx context.Context) (*ArticleHistory, e
 		id := _spec.ID.Value.(int64)
 		_node.ID = uint(id)
 	}
-	_c.mutation.id = &_node.ID
-	_c.mutation.done = true
+	ahc.mutation.id = &_node.ID
+	ahc.mutation.done = true
 	return _node, nil
 }
 
-func (_c *ArticleHistoryCreate) createSpec() (*ArticleHistory, *sqlgraph.CreateSpec) {
+func (ahc *ArticleHistoryCreate) createSpec() (*ArticleHistory, *sqlgraph.CreateSpec) {
 	var (
-		_node = &ArticleHistory{config: _c.config}
+		_node = &ArticleHistory{config: ahc.config}
 		_spec = sqlgraph.NewCreateSpec(articlehistory.Table, sqlgraph.NewFieldSpec(articlehistory.FieldID, field.TypeUint))
 	)
-	_spec.OnConflict = _c.conflict
-	if id, ok := _c.mutation.ID(); ok {
+	_spec.OnConflict = ahc.conflict
+	if id, ok := ahc.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
 	}
-	if value, ok := _c.mutation.Version(); ok {
+	if value, ok := ahc.mutation.Version(); ok {
 		_spec.SetField(articlehistory.FieldVersion, field.TypeInt, value)
 		_node.Version = value
 	}
-	if value, ok := _c.mutation.Title(); ok {
+	if value, ok := ahc.mutation.Title(); ok {
 		_spec.SetField(articlehistory.FieldTitle, field.TypeString, value)
 		_node.Title = value
 	}
-	if value, ok := _c.mutation.ContentMd(); ok {
+	if value, ok := ahc.mutation.ContentMd(); ok {
 		_spec.SetField(articlehistory.FieldContentMd, field.TypeString, value)
 		_node.ContentMd = value
 	}
-	if value, ok := _c.mutation.ContentHTML(); ok {
+	if value, ok := ahc.mutation.ContentHTML(); ok {
 		_spec.SetField(articlehistory.FieldContentHTML, field.TypeString, value)
 		_node.ContentHTML = value
 	}
-	if value, ok := _c.mutation.CoverURL(); ok {
+	if value, ok := ahc.mutation.CoverURL(); ok {
 		_spec.SetField(articlehistory.FieldCoverURL, field.TypeString, value)
 		_node.CoverURL = value
 	}
-	if value, ok := _c.mutation.TopImgURL(); ok {
+	if value, ok := ahc.mutation.TopImgURL(); ok {
 		_spec.SetField(articlehistory.FieldTopImgURL, field.TypeString, value)
 		_node.TopImgURL = value
 	}
-	if value, ok := _c.mutation.PrimaryColor(); ok {
+	if value, ok := ahc.mutation.PrimaryColor(); ok {
 		_spec.SetField(articlehistory.FieldPrimaryColor, field.TypeString, value)
 		_node.PrimaryColor = value
 	}
-	if value, ok := _c.mutation.Summaries(); ok {
+	if value, ok := ahc.mutation.Summaries(); ok {
 		_spec.SetField(articlehistory.FieldSummaries, field.TypeJSON, value)
 		_node.Summaries = value
 	}
-	if value, ok := _c.mutation.WordCount(); ok {
+	if value, ok := ahc.mutation.WordCount(); ok {
 		_spec.SetField(articlehistory.FieldWordCount, field.TypeInt, value)
 		_node.WordCount = value
 	}
-	if value, ok := _c.mutation.Keywords(); ok {
+	if value, ok := ahc.mutation.Keywords(); ok {
 		_spec.SetField(articlehistory.FieldKeywords, field.TypeString, value)
 		_node.Keywords = value
 	}
-	if value, ok := _c.mutation.EditorID(); ok {
+	if value, ok := ahc.mutation.EditorID(); ok {
 		_spec.SetField(articlehistory.FieldEditorID, field.TypeUint, value)
 		_node.EditorID = value
 	}
-	if value, ok := _c.mutation.EditorNickname(); ok {
+	if value, ok := ahc.mutation.EditorNickname(); ok {
 		_spec.SetField(articlehistory.FieldEditorNickname, field.TypeString, value)
 		_node.EditorNickname = value
 	}
-	if value, ok := _c.mutation.ChangeNote(); ok {
+	if value, ok := ahc.mutation.ChangeNote(); ok {
 		_spec.SetField(articlehistory.FieldChangeNote, field.TypeString, value)
 		_node.ChangeNote = value
 	}
-	if value, ok := _c.mutation.CreatedAt(); ok {
+	if value, ok := ahc.mutation.CreatedAt(); ok {
 		_spec.SetField(articlehistory.FieldCreatedAt, field.TypeTime, value)
 		_node.CreatedAt = value
 	}
-	if value, ok := _c.mutation.ExtraData(); ok {
+	if value, ok := ahc.mutation.ExtraData(); ok {
 		_spec.SetField(articlehistory.FieldExtraData, field.TypeJSON, value)
 		_node.ExtraData = value
 	}
-	if nodes := _c.mutation.ArticleIDs(); len(nodes) > 0 {
+	if nodes := ahc.mutation.ArticleIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -427,10 +427,10 @@ func (_c *ArticleHistoryCreate) createSpec() (*ArticleHistory, *sqlgraph.CreateS
 //			SetArticleID(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *ArticleHistoryCreate) OnConflict(opts ...sql.ConflictOption) *ArticleHistoryUpsertOne {
-	_c.conflict = opts
+func (ahc *ArticleHistoryCreate) OnConflict(opts ...sql.ConflictOption) *ArticleHistoryUpsertOne {
+	ahc.conflict = opts
 	return &ArticleHistoryUpsertOne{
-		create: _c,
+		create: ahc,
 	}
 }
 
@@ -440,10 +440,10 @@ func (_c *ArticleHistoryCreate) OnConflict(opts ...sql.ConflictOption) *ArticleH
 //	client.ArticleHistory.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *ArticleHistoryCreate) OnConflictColumns(columns ...string) *ArticleHistoryUpsertOne {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (ahc *ArticleHistoryCreate) OnConflictColumns(columns ...string) *ArticleHistoryUpsertOne {
+	ahc.conflict = append(ahc.conflict, sql.ConflictColumns(columns...))
 	return &ArticleHistoryUpsertOne{
-		create: _c,
+		create: ahc,
 	}
 }
 
@@ -1112,16 +1112,16 @@ type ArticleHistoryCreateBulk struct {
 }
 
 // Save creates the ArticleHistory entities in the database.
-func (_c *ArticleHistoryCreateBulk) Save(ctx context.Context) ([]*ArticleHistory, error) {
-	if _c.err != nil {
-		return nil, _c.err
+func (ahcb *ArticleHistoryCreateBulk) Save(ctx context.Context) ([]*ArticleHistory, error) {
+	if ahcb.err != nil {
+		return nil, ahcb.err
 	}
-	specs := make([]*sqlgraph.CreateSpec, len(_c.builders))
-	nodes := make([]*ArticleHistory, len(_c.builders))
-	mutators := make([]Mutator, len(_c.builders))
-	for i := range _c.builders {
+	specs := make([]*sqlgraph.CreateSpec, len(ahcb.builders))
+	nodes := make([]*ArticleHistory, len(ahcb.builders))
+	mutators := make([]Mutator, len(ahcb.builders))
+	for i := range ahcb.builders {
 		func(i int, root context.Context) {
-			builder := _c.builders[i]
+			builder := ahcb.builders[i]
 			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*ArticleHistoryMutation)
@@ -1135,12 +1135,12 @@ func (_c *ArticleHistoryCreateBulk) Save(ctx context.Context) ([]*ArticleHistory
 				var err error
 				nodes[i], specs[i] = builder.createSpec()
 				if i < len(mutators)-1 {
-					_, err = mutators[i+1].Mutate(root, _c.builders[i+1].mutation)
+					_, err = mutators[i+1].Mutate(root, ahcb.builders[i+1].mutation)
 				} else {
 					spec := &sqlgraph.BatchCreateSpec{Nodes: specs}
-					spec.OnConflict = _c.conflict
+					spec.OnConflict = ahcb.conflict
 					// Invoke the actual operation on the latest mutation in the chain.
-					if err = sqlgraph.BatchCreate(ctx, _c.driver, spec); err != nil {
+					if err = sqlgraph.BatchCreate(ctx, ahcb.driver, spec); err != nil {
 						if sqlgraph.IsConstraintError(err) {
 							err = &ConstraintError{msg: err.Error(), wrap: err}
 						}
@@ -1164,7 +1164,7 @@ func (_c *ArticleHistoryCreateBulk) Save(ctx context.Context) ([]*ArticleHistory
 		}(i, ctx)
 	}
 	if len(mutators) > 0 {
-		if _, err := mutators[0].Mutate(ctx, _c.builders[0].mutation); err != nil {
+		if _, err := mutators[0].Mutate(ctx, ahcb.builders[0].mutation); err != nil {
 			return nil, err
 		}
 	}
@@ -1172,8 +1172,8 @@ func (_c *ArticleHistoryCreateBulk) Save(ctx context.Context) ([]*ArticleHistory
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_c *ArticleHistoryCreateBulk) SaveX(ctx context.Context) []*ArticleHistory {
-	v, err := _c.Save(ctx)
+func (ahcb *ArticleHistoryCreateBulk) SaveX(ctx context.Context) []*ArticleHistory {
+	v, err := ahcb.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -1181,14 +1181,14 @@ func (_c *ArticleHistoryCreateBulk) SaveX(ctx context.Context) []*ArticleHistory
 }
 
 // Exec executes the query.
-func (_c *ArticleHistoryCreateBulk) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (ahcb *ArticleHistoryCreateBulk) Exec(ctx context.Context) error {
+	_, err := ahcb.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *ArticleHistoryCreateBulk) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (ahcb *ArticleHistoryCreateBulk) ExecX(ctx context.Context) {
+	if err := ahcb.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
@@ -1208,10 +1208,10 @@ func (_c *ArticleHistoryCreateBulk) ExecX(ctx context.Context) {
 //			SetArticleID(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *ArticleHistoryCreateBulk) OnConflict(opts ...sql.ConflictOption) *ArticleHistoryUpsertBulk {
-	_c.conflict = opts
+func (ahcb *ArticleHistoryCreateBulk) OnConflict(opts ...sql.ConflictOption) *ArticleHistoryUpsertBulk {
+	ahcb.conflict = opts
 	return &ArticleHistoryUpsertBulk{
-		create: _c,
+		create: ahcb,
 	}
 }
 
@@ -1221,10 +1221,10 @@ func (_c *ArticleHistoryCreateBulk) OnConflict(opts ...sql.ConflictOption) *Arti
 //	client.ArticleHistory.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *ArticleHistoryCreateBulk) OnConflictColumns(columns ...string) *ArticleHistoryUpsertBulk {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (ahcb *ArticleHistoryCreateBulk) OnConflictColumns(columns ...string) *ArticleHistoryUpsertBulk {
+	ahcb.conflict = append(ahcb.conflict, sql.ConflictColumns(columns...))
 	return &ArticleHistoryUpsertBulk{
-		create: _c,
+		create: ahcb,
 	}
 }
 

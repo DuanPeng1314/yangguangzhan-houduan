@@ -32,44 +32,44 @@ type DocSeriesQuery struct {
 }
 
 // Where adds a new predicate for the DocSeriesQuery builder.
-func (_q *DocSeriesQuery) Where(ps ...predicate.DocSeries) *DocSeriesQuery {
-	_q.predicates = append(_q.predicates, ps...)
-	return _q
+func (dsq *DocSeriesQuery) Where(ps ...predicate.DocSeries) *DocSeriesQuery {
+	dsq.predicates = append(dsq.predicates, ps...)
+	return dsq
 }
 
 // Limit the number of records to be returned by this query.
-func (_q *DocSeriesQuery) Limit(limit int) *DocSeriesQuery {
-	_q.ctx.Limit = &limit
-	return _q
+func (dsq *DocSeriesQuery) Limit(limit int) *DocSeriesQuery {
+	dsq.ctx.Limit = &limit
+	return dsq
 }
 
 // Offset to start from.
-func (_q *DocSeriesQuery) Offset(offset int) *DocSeriesQuery {
-	_q.ctx.Offset = &offset
-	return _q
+func (dsq *DocSeriesQuery) Offset(offset int) *DocSeriesQuery {
+	dsq.ctx.Offset = &offset
+	return dsq
 }
 
 // Unique configures the query builder to filter duplicate records on query.
 // By default, unique is set to true, and can be disabled using this method.
-func (_q *DocSeriesQuery) Unique(unique bool) *DocSeriesQuery {
-	_q.ctx.Unique = &unique
-	return _q
+func (dsq *DocSeriesQuery) Unique(unique bool) *DocSeriesQuery {
+	dsq.ctx.Unique = &unique
+	return dsq
 }
 
 // Order specifies how the records should be ordered.
-func (_q *DocSeriesQuery) Order(o ...docseries.OrderOption) *DocSeriesQuery {
-	_q.order = append(_q.order, o...)
-	return _q
+func (dsq *DocSeriesQuery) Order(o ...docseries.OrderOption) *DocSeriesQuery {
+	dsq.order = append(dsq.order, o...)
+	return dsq
 }
 
 // QueryArticles chains the current query on the "articles" edge.
-func (_q *DocSeriesQuery) QueryArticles() *ArticleQuery {
-	query := (&ArticleClient{config: _q.config}).Query()
+func (dsq *DocSeriesQuery) QueryArticles() *ArticleQuery {
+	query := (&ArticleClient{config: dsq.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
+		if err := dsq.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := _q.sqlQuery(ctx)
+		selector := dsq.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -78,7 +78,7 @@ func (_q *DocSeriesQuery) QueryArticles() *ArticleQuery {
 			sqlgraph.To(article.Table, article.FieldID),
 			sqlgraph.Edge(sqlgraph.O2M, false, docseries.ArticlesTable, docseries.ArticlesColumn),
 		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(dsq.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
@@ -86,8 +86,8 @@ func (_q *DocSeriesQuery) QueryArticles() *ArticleQuery {
 
 // First returns the first DocSeries entity from the query.
 // Returns a *NotFoundError when no DocSeries was found.
-func (_q *DocSeriesQuery) First(ctx context.Context) (*DocSeries, error) {
-	nodes, err := _q.Limit(1).All(setContextOp(ctx, _q.ctx, ent.OpQueryFirst))
+func (dsq *DocSeriesQuery) First(ctx context.Context) (*DocSeries, error) {
+	nodes, err := dsq.Limit(1).All(setContextOp(ctx, dsq.ctx, ent.OpQueryFirst))
 	if err != nil {
 		return nil, err
 	}
@@ -98,8 +98,8 @@ func (_q *DocSeriesQuery) First(ctx context.Context) (*DocSeries, error) {
 }
 
 // FirstX is like First, but panics if an error occurs.
-func (_q *DocSeriesQuery) FirstX(ctx context.Context) *DocSeries {
-	node, err := _q.First(ctx)
+func (dsq *DocSeriesQuery) FirstX(ctx context.Context) *DocSeries {
+	node, err := dsq.First(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -108,9 +108,9 @@ func (_q *DocSeriesQuery) FirstX(ctx context.Context) *DocSeries {
 
 // FirstID returns the first DocSeries ID from the query.
 // Returns a *NotFoundError when no DocSeries ID was found.
-func (_q *DocSeriesQuery) FirstID(ctx context.Context) (id uint, err error) {
+func (dsq *DocSeriesQuery) FirstID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
+	if ids, err = dsq.Limit(1).IDs(setContextOp(ctx, dsq.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
 	if len(ids) == 0 {
@@ -121,8 +121,8 @@ func (_q *DocSeriesQuery) FirstID(ctx context.Context) (id uint, err error) {
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (_q *DocSeriesQuery) FirstIDX(ctx context.Context) uint {
-	id, err := _q.FirstID(ctx)
+func (dsq *DocSeriesQuery) FirstIDX(ctx context.Context) uint {
+	id, err := dsq.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -132,8 +132,8 @@ func (_q *DocSeriesQuery) FirstIDX(ctx context.Context) uint {
 // Only returns a single DocSeries entity found by the query, ensuring it only returns one.
 // Returns a *NotSingularError when more than one DocSeries entity is found.
 // Returns a *NotFoundError when no DocSeries entities are found.
-func (_q *DocSeriesQuery) Only(ctx context.Context) (*DocSeries, error) {
-	nodes, err := _q.Limit(2).All(setContextOp(ctx, _q.ctx, ent.OpQueryOnly))
+func (dsq *DocSeriesQuery) Only(ctx context.Context) (*DocSeries, error) {
+	nodes, err := dsq.Limit(2).All(setContextOp(ctx, dsq.ctx, ent.OpQueryOnly))
 	if err != nil {
 		return nil, err
 	}
@@ -148,8 +148,8 @@ func (_q *DocSeriesQuery) Only(ctx context.Context) (*DocSeries, error) {
 }
 
 // OnlyX is like Only, but panics if an error occurs.
-func (_q *DocSeriesQuery) OnlyX(ctx context.Context) *DocSeries {
-	node, err := _q.Only(ctx)
+func (dsq *DocSeriesQuery) OnlyX(ctx context.Context) *DocSeries {
+	node, err := dsq.Only(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -159,9 +159,9 @@ func (_q *DocSeriesQuery) OnlyX(ctx context.Context) *DocSeries {
 // OnlyID is like Only, but returns the only DocSeries ID in the query.
 // Returns a *NotSingularError when more than one DocSeries ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (_q *DocSeriesQuery) OnlyID(ctx context.Context) (id uint, err error) {
+func (dsq *DocSeriesQuery) OnlyID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
+	if ids, err = dsq.Limit(2).IDs(setContextOp(ctx, dsq.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
 	switch len(ids) {
@@ -176,8 +176,8 @@ func (_q *DocSeriesQuery) OnlyID(ctx context.Context) (id uint, err error) {
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (_q *DocSeriesQuery) OnlyIDX(ctx context.Context) uint {
-	id, err := _q.OnlyID(ctx)
+func (dsq *DocSeriesQuery) OnlyIDX(ctx context.Context) uint {
+	id, err := dsq.OnlyID(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -185,18 +185,18 @@ func (_q *DocSeriesQuery) OnlyIDX(ctx context.Context) uint {
 }
 
 // All executes the query and returns a list of DocSeriesSlice.
-func (_q *DocSeriesQuery) All(ctx context.Context) ([]*DocSeries, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryAll)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (dsq *DocSeriesQuery) All(ctx context.Context) ([]*DocSeries, error) {
+	ctx = setContextOp(ctx, dsq.ctx, ent.OpQueryAll)
+	if err := dsq.prepareQuery(ctx); err != nil {
 		return nil, err
 	}
 	qr := querierAll[[]*DocSeries, *DocSeriesQuery]()
-	return withInterceptors[[]*DocSeries](ctx, _q, qr, _q.inters)
+	return withInterceptors[[]*DocSeries](ctx, dsq, qr, dsq.inters)
 }
 
 // AllX is like All, but panics if an error occurs.
-func (_q *DocSeriesQuery) AllX(ctx context.Context) []*DocSeries {
-	nodes, err := _q.All(ctx)
+func (dsq *DocSeriesQuery) AllX(ctx context.Context) []*DocSeries {
+	nodes, err := dsq.All(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -204,20 +204,20 @@ func (_q *DocSeriesQuery) AllX(ctx context.Context) []*DocSeries {
 }
 
 // IDs executes the query and returns a list of DocSeries IDs.
-func (_q *DocSeriesQuery) IDs(ctx context.Context) (ids []uint, err error) {
-	if _q.ctx.Unique == nil && _q.path != nil {
-		_q.Unique(true)
+func (dsq *DocSeriesQuery) IDs(ctx context.Context) (ids []uint, err error) {
+	if dsq.ctx.Unique == nil && dsq.path != nil {
+		dsq.Unique(true)
 	}
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryIDs)
-	if err = _q.Select(docseries.FieldID).Scan(ctx, &ids); err != nil {
+	ctx = setContextOp(ctx, dsq.ctx, ent.OpQueryIDs)
+	if err = dsq.Select(docseries.FieldID).Scan(ctx, &ids); err != nil {
 		return nil, err
 	}
 	return ids, nil
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (_q *DocSeriesQuery) IDsX(ctx context.Context) []uint {
-	ids, err := _q.IDs(ctx)
+func (dsq *DocSeriesQuery) IDsX(ctx context.Context) []uint {
+	ids, err := dsq.IDs(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -225,17 +225,17 @@ func (_q *DocSeriesQuery) IDsX(ctx context.Context) []uint {
 }
 
 // Count returns the count of the given query.
-func (_q *DocSeriesQuery) Count(ctx context.Context) (int, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryCount)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (dsq *DocSeriesQuery) Count(ctx context.Context) (int, error) {
+	ctx = setContextOp(ctx, dsq.ctx, ent.OpQueryCount)
+	if err := dsq.prepareQuery(ctx); err != nil {
 		return 0, err
 	}
-	return withInterceptors[int](ctx, _q, querierCount[*DocSeriesQuery](), _q.inters)
+	return withInterceptors[int](ctx, dsq, querierCount[*DocSeriesQuery](), dsq.inters)
 }
 
 // CountX is like Count, but panics if an error occurs.
-func (_q *DocSeriesQuery) CountX(ctx context.Context) int {
-	count, err := _q.Count(ctx)
+func (dsq *DocSeriesQuery) CountX(ctx context.Context) int {
+	count, err := dsq.Count(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -243,9 +243,9 @@ func (_q *DocSeriesQuery) CountX(ctx context.Context) int {
 }
 
 // Exist returns true if the query has elements in the graph.
-func (_q *DocSeriesQuery) Exist(ctx context.Context) (bool, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryExist)
-	switch _, err := _q.FirstID(ctx); {
+func (dsq *DocSeriesQuery) Exist(ctx context.Context) (bool, error) {
+	ctx = setContextOp(ctx, dsq.ctx, ent.OpQueryExist)
+	switch _, err := dsq.FirstID(ctx); {
 	case IsNotFound(err):
 		return false, nil
 	case err != nil:
@@ -256,8 +256,8 @@ func (_q *DocSeriesQuery) Exist(ctx context.Context) (bool, error) {
 }
 
 // ExistX is like Exist, but panics if an error occurs.
-func (_q *DocSeriesQuery) ExistX(ctx context.Context) bool {
-	exist, err := _q.Exist(ctx)
+func (dsq *DocSeriesQuery) ExistX(ctx context.Context) bool {
+	exist, err := dsq.Exist(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -266,33 +266,33 @@ func (_q *DocSeriesQuery) ExistX(ctx context.Context) bool {
 
 // Clone returns a duplicate of the DocSeriesQuery builder, including all associated steps. It can be
 // used to prepare common query builders and use them differently after the clone is made.
-func (_q *DocSeriesQuery) Clone() *DocSeriesQuery {
-	if _q == nil {
+func (dsq *DocSeriesQuery) Clone() *DocSeriesQuery {
+	if dsq == nil {
 		return nil
 	}
 	return &DocSeriesQuery{
-		config:       _q.config,
-		ctx:          _q.ctx.Clone(),
-		order:        append([]docseries.OrderOption{}, _q.order...),
-		inters:       append([]Interceptor{}, _q.inters...),
-		predicates:   append([]predicate.DocSeries{}, _q.predicates...),
-		withArticles: _q.withArticles.Clone(),
+		config:       dsq.config,
+		ctx:          dsq.ctx.Clone(),
+		order:        append([]docseries.OrderOption{}, dsq.order...),
+		inters:       append([]Interceptor{}, dsq.inters...),
+		predicates:   append([]predicate.DocSeries{}, dsq.predicates...),
+		withArticles: dsq.withArticles.Clone(),
 		// clone intermediate query.
-		sql:       _q.sql.Clone(),
-		path:      _q.path,
-		modifiers: append([]func(*sql.Selector){}, _q.modifiers...),
+		sql:       dsq.sql.Clone(),
+		path:      dsq.path,
+		modifiers: append([]func(*sql.Selector){}, dsq.modifiers...),
 	}
 }
 
 // WithArticles tells the query-builder to eager-load the nodes that are connected to
 // the "articles" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *DocSeriesQuery) WithArticles(opts ...func(*ArticleQuery)) *DocSeriesQuery {
-	query := (&ArticleClient{config: _q.config}).Query()
+func (dsq *DocSeriesQuery) WithArticles(opts ...func(*ArticleQuery)) *DocSeriesQuery {
+	query := (&ArticleClient{config: dsq.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withArticles = query
-	return _q
+	dsq.withArticles = query
+	return dsq
 }
 
 // GroupBy is used to group vertices by one or more fields/columns.
@@ -309,10 +309,10 @@ func (_q *DocSeriesQuery) WithArticles(opts ...func(*ArticleQuery)) *DocSeriesQu
 //		GroupBy(docseries.FieldCreatedAt).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
-func (_q *DocSeriesQuery) GroupBy(field string, fields ...string) *DocSeriesGroupBy {
-	_q.ctx.Fields = append([]string{field}, fields...)
-	grbuild := &DocSeriesGroupBy{build: _q}
-	grbuild.flds = &_q.ctx.Fields
+func (dsq *DocSeriesQuery) GroupBy(field string, fields ...string) *DocSeriesGroupBy {
+	dsq.ctx.Fields = append([]string{field}, fields...)
+	grbuild := &DocSeriesGroupBy{build: dsq}
+	grbuild.flds = &dsq.ctx.Fields
 	grbuild.label = docseries.Label
 	grbuild.scan = grbuild.Scan
 	return grbuild
@@ -330,76 +330,76 @@ func (_q *DocSeriesQuery) GroupBy(field string, fields ...string) *DocSeriesGrou
 //	client.DocSeries.Query().
 //		Select(docseries.FieldCreatedAt).
 //		Scan(ctx, &v)
-func (_q *DocSeriesQuery) Select(fields ...string) *DocSeriesSelect {
-	_q.ctx.Fields = append(_q.ctx.Fields, fields...)
-	sbuild := &DocSeriesSelect{DocSeriesQuery: _q}
+func (dsq *DocSeriesQuery) Select(fields ...string) *DocSeriesSelect {
+	dsq.ctx.Fields = append(dsq.ctx.Fields, fields...)
+	sbuild := &DocSeriesSelect{DocSeriesQuery: dsq}
 	sbuild.label = docseries.Label
-	sbuild.flds, sbuild.scan = &_q.ctx.Fields, sbuild.Scan
+	sbuild.flds, sbuild.scan = &dsq.ctx.Fields, sbuild.Scan
 	return sbuild
 }
 
 // Aggregate returns a DocSeriesSelect configured with the given aggregations.
-func (_q *DocSeriesQuery) Aggregate(fns ...AggregateFunc) *DocSeriesSelect {
-	return _q.Select().Aggregate(fns...)
+func (dsq *DocSeriesQuery) Aggregate(fns ...AggregateFunc) *DocSeriesSelect {
+	return dsq.Select().Aggregate(fns...)
 }
 
-func (_q *DocSeriesQuery) prepareQuery(ctx context.Context) error {
-	for _, inter := range _q.inters {
+func (dsq *DocSeriesQuery) prepareQuery(ctx context.Context) error {
+	for _, inter := range dsq.inters {
 		if inter == nil {
 			return fmt.Errorf("ent: uninitialized interceptor (forgotten import ent/runtime?)")
 		}
 		if trv, ok := inter.(Traverser); ok {
-			if err := trv.Traverse(ctx, _q); err != nil {
+			if err := trv.Traverse(ctx, dsq); err != nil {
 				return err
 			}
 		}
 	}
-	for _, f := range _q.ctx.Fields {
+	for _, f := range dsq.ctx.Fields {
 		if !docseries.ValidColumn(f) {
 			return &ValidationError{Name: f, err: fmt.Errorf("ent: invalid field %q for query", f)}
 		}
 	}
-	if _q.path != nil {
-		prev, err := _q.path(ctx)
+	if dsq.path != nil {
+		prev, err := dsq.path(ctx)
 		if err != nil {
 			return err
 		}
-		_q.sql = prev
+		dsq.sql = prev
 	}
 	return nil
 }
 
-func (_q *DocSeriesQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*DocSeries, error) {
+func (dsq *DocSeriesQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*DocSeries, error) {
 	var (
 		nodes       = []*DocSeries{}
-		_spec       = _q.querySpec()
+		_spec       = dsq.querySpec()
 		loadedTypes = [1]bool{
-			_q.withArticles != nil,
+			dsq.withArticles != nil,
 		}
 	)
 	_spec.ScanValues = func(columns []string) ([]any, error) {
 		return (*DocSeries).scanValues(nil, columns)
 	}
 	_spec.Assign = func(columns []string, values []any) error {
-		node := &DocSeries{config: _q.config}
+		node := &DocSeries{config: dsq.config}
 		nodes = append(nodes, node)
 		node.Edges.loadedTypes = loadedTypes
 		return node.assignValues(columns, values)
 	}
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+	if len(dsq.modifiers) > 0 {
+		_spec.Modifiers = dsq.modifiers
 	}
 	for i := range hooks {
 		hooks[i](ctx, _spec)
 	}
-	if err := sqlgraph.QueryNodes(ctx, _q.driver, _spec); err != nil {
+	if err := sqlgraph.QueryNodes(ctx, dsq.driver, _spec); err != nil {
 		return nil, err
 	}
 	if len(nodes) == 0 {
 		return nodes, nil
 	}
-	if query := _q.withArticles; query != nil {
-		if err := _q.loadArticles(ctx, query, nodes,
+	if query := dsq.withArticles; query != nil {
+		if err := dsq.loadArticles(ctx, query, nodes,
 			func(n *DocSeries) { n.Edges.Articles = []*Article{} },
 			func(n *DocSeries, e *Article) { n.Edges.Articles = append(n.Edges.Articles, e) }); err != nil {
 			return nil, err
@@ -408,7 +408,7 @@ func (_q *DocSeriesQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*Do
 	return nodes, nil
 }
 
-func (_q *DocSeriesQuery) loadArticles(ctx context.Context, query *ArticleQuery, nodes []*DocSeries, init func(*DocSeries), assign func(*DocSeries, *Article)) error {
+func (dsq *DocSeriesQuery) loadArticles(ctx context.Context, query *ArticleQuery, nodes []*DocSeries, init func(*DocSeries), assign func(*DocSeries, *Article)) error {
 	fks := make([]driver.Value, 0, len(nodes))
 	nodeids := make(map[uint]*DocSeries)
 	for i := range nodes {
@@ -442,27 +442,27 @@ func (_q *DocSeriesQuery) loadArticles(ctx context.Context, query *ArticleQuery,
 	return nil
 }
 
-func (_q *DocSeriesQuery) sqlCount(ctx context.Context) (int, error) {
-	_spec := _q.querySpec()
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+func (dsq *DocSeriesQuery) sqlCount(ctx context.Context) (int, error) {
+	_spec := dsq.querySpec()
+	if len(dsq.modifiers) > 0 {
+		_spec.Modifiers = dsq.modifiers
 	}
-	_spec.Node.Columns = _q.ctx.Fields
-	if len(_q.ctx.Fields) > 0 {
-		_spec.Unique = _q.ctx.Unique != nil && *_q.ctx.Unique
+	_spec.Node.Columns = dsq.ctx.Fields
+	if len(dsq.ctx.Fields) > 0 {
+		_spec.Unique = dsq.ctx.Unique != nil && *dsq.ctx.Unique
 	}
-	return sqlgraph.CountNodes(ctx, _q.driver, _spec)
+	return sqlgraph.CountNodes(ctx, dsq.driver, _spec)
 }
 
-func (_q *DocSeriesQuery) querySpec() *sqlgraph.QuerySpec {
+func (dsq *DocSeriesQuery) querySpec() *sqlgraph.QuerySpec {
 	_spec := sqlgraph.NewQuerySpec(docseries.Table, docseries.Columns, sqlgraph.NewFieldSpec(docseries.FieldID, field.TypeUint))
-	_spec.From = _q.sql
-	if unique := _q.ctx.Unique; unique != nil {
+	_spec.From = dsq.sql
+	if unique := dsq.ctx.Unique; unique != nil {
 		_spec.Unique = *unique
-	} else if _q.path != nil {
+	} else if dsq.path != nil {
 		_spec.Unique = true
 	}
-	if fields := _q.ctx.Fields; len(fields) > 0 {
+	if fields := dsq.ctx.Fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, docseries.FieldID)
 		for i := range fields {
@@ -471,20 +471,20 @@ func (_q *DocSeriesQuery) querySpec() *sqlgraph.QuerySpec {
 			}
 		}
 	}
-	if ps := _q.predicates; len(ps) > 0 {
+	if ps := dsq.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := dsq.ctx.Limit; limit != nil {
 		_spec.Limit = *limit
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := dsq.ctx.Offset; offset != nil {
 		_spec.Offset = *offset
 	}
-	if ps := _q.order; len(ps) > 0 {
+	if ps := dsq.order; len(ps) > 0 {
 		_spec.Order = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
@@ -494,45 +494,45 @@ func (_q *DocSeriesQuery) querySpec() *sqlgraph.QuerySpec {
 	return _spec
 }
 
-func (_q *DocSeriesQuery) sqlQuery(ctx context.Context) *sql.Selector {
-	builder := sql.Dialect(_q.driver.Dialect())
+func (dsq *DocSeriesQuery) sqlQuery(ctx context.Context) *sql.Selector {
+	builder := sql.Dialect(dsq.driver.Dialect())
 	t1 := builder.Table(docseries.Table)
-	columns := _q.ctx.Fields
+	columns := dsq.ctx.Fields
 	if len(columns) == 0 {
 		columns = docseries.Columns
 	}
 	selector := builder.Select(t1.Columns(columns...)...).From(t1)
-	if _q.sql != nil {
-		selector = _q.sql
+	if dsq.sql != nil {
+		selector = dsq.sql
 		selector.Select(selector.Columns(columns...)...)
 	}
-	if _q.ctx.Unique != nil && *_q.ctx.Unique {
+	if dsq.ctx.Unique != nil && *dsq.ctx.Unique {
 		selector.Distinct()
 	}
-	for _, m := range _q.modifiers {
+	for _, m := range dsq.modifiers {
 		m(selector)
 	}
-	for _, p := range _q.predicates {
+	for _, p := range dsq.predicates {
 		p(selector)
 	}
-	for _, p := range _q.order {
+	for _, p := range dsq.order {
 		p(selector)
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := dsq.ctx.Offset; offset != nil {
 		// limit is mandatory for offset clause. We start
 		// with default value, and override it below if needed.
 		selector.Offset(*offset).Limit(math.MaxInt32)
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := dsq.ctx.Limit; limit != nil {
 		selector.Limit(*limit)
 	}
 	return selector
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_q *DocSeriesQuery) Modify(modifiers ...func(s *sql.Selector)) *DocSeriesSelect {
-	_q.modifiers = append(_q.modifiers, modifiers...)
-	return _q.Select()
+func (dsq *DocSeriesQuery) Modify(modifiers ...func(s *sql.Selector)) *DocSeriesSelect {
+	dsq.modifiers = append(dsq.modifiers, modifiers...)
+	return dsq.Select()
 }
 
 // DocSeriesGroupBy is the group-by builder for DocSeries entities.
@@ -542,41 +542,41 @@ type DocSeriesGroupBy struct {
 }
 
 // Aggregate adds the given aggregation functions to the group-by query.
-func (_g *DocSeriesGroupBy) Aggregate(fns ...AggregateFunc) *DocSeriesGroupBy {
-	_g.fns = append(_g.fns, fns...)
-	return _g
+func (dsgb *DocSeriesGroupBy) Aggregate(fns ...AggregateFunc) *DocSeriesGroupBy {
+	dsgb.fns = append(dsgb.fns, fns...)
+	return dsgb
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_g *DocSeriesGroupBy) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _g.build.ctx, ent.OpQueryGroupBy)
-	if err := _g.build.prepareQuery(ctx); err != nil {
+func (dsgb *DocSeriesGroupBy) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, dsgb.build.ctx, ent.OpQueryGroupBy)
+	if err := dsgb.build.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*DocSeriesQuery, *DocSeriesGroupBy](ctx, _g.build, _g, _g.build.inters, v)
+	return scanWithInterceptors[*DocSeriesQuery, *DocSeriesGroupBy](ctx, dsgb.build, dsgb, dsgb.build.inters, v)
 }
 
-func (_g *DocSeriesGroupBy) sqlScan(ctx context.Context, root *DocSeriesQuery, v any) error {
+func (dsgb *DocSeriesGroupBy) sqlScan(ctx context.Context, root *DocSeriesQuery, v any) error {
 	selector := root.sqlQuery(ctx).Select()
-	aggregation := make([]string, 0, len(_g.fns))
-	for _, fn := range _g.fns {
+	aggregation := make([]string, 0, len(dsgb.fns))
+	for _, fn := range dsgb.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
 	if len(selector.SelectedColumns()) == 0 {
-		columns := make([]string, 0, len(*_g.flds)+len(_g.fns))
-		for _, f := range *_g.flds {
+		columns := make([]string, 0, len(*dsgb.flds)+len(dsgb.fns))
+		for _, f := range *dsgb.flds {
 			columns = append(columns, selector.C(f))
 		}
 		columns = append(columns, aggregation...)
 		selector.Select(columns...)
 	}
-	selector.GroupBy(selector.Columns(*_g.flds...)...)
+	selector.GroupBy(selector.Columns(*dsgb.flds...)...)
 	if err := selector.Err(); err != nil {
 		return err
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _g.build.driver.Query(ctx, query, args, rows); err != nil {
+	if err := dsgb.build.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -590,27 +590,27 @@ type DocSeriesSelect struct {
 }
 
 // Aggregate adds the given aggregation functions to the selector query.
-func (_s *DocSeriesSelect) Aggregate(fns ...AggregateFunc) *DocSeriesSelect {
-	_s.fns = append(_s.fns, fns...)
-	return _s
+func (dss *DocSeriesSelect) Aggregate(fns ...AggregateFunc) *DocSeriesSelect {
+	dss.fns = append(dss.fns, fns...)
+	return dss
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_s *DocSeriesSelect) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _s.ctx, ent.OpQuerySelect)
-	if err := _s.prepareQuery(ctx); err != nil {
+func (dss *DocSeriesSelect) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, dss.ctx, ent.OpQuerySelect)
+	if err := dss.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*DocSeriesQuery, *DocSeriesSelect](ctx, _s.DocSeriesQuery, _s, _s.inters, v)
+	return scanWithInterceptors[*DocSeriesQuery, *DocSeriesSelect](ctx, dss.DocSeriesQuery, dss, dss.inters, v)
 }
 
-func (_s *DocSeriesSelect) sqlScan(ctx context.Context, root *DocSeriesQuery, v any) error {
+func (dss *DocSeriesSelect) sqlScan(ctx context.Context, root *DocSeriesQuery, v any) error {
 	selector := root.sqlQuery(ctx)
-	aggregation := make([]string, 0, len(_s.fns))
-	for _, fn := range _s.fns {
+	aggregation := make([]string, 0, len(dss.fns))
+	for _, fn := range dss.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
-	switch n := len(*_s.selector.flds); {
+	switch n := len(*dss.selector.flds); {
 	case n == 0 && len(aggregation) > 0:
 		selector.Select(aggregation...)
 	case n != 0 && len(aggregation) > 0:
@@ -618,7 +618,7 @@ func (_s *DocSeriesSelect) sqlScan(ctx context.Context, root *DocSeriesQuery, v 
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _s.driver.Query(ctx, query, args, rows); err != nil {
+	if err := dss.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -626,7 +626,7 @@ func (_s *DocSeriesSelect) sqlScan(ctx context.Context, root *DocSeriesQuery, v 
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_s *DocSeriesSelect) Modify(modifiers ...func(s *sql.Selector)) *DocSeriesSelect {
-	_s.modifiers = append(_s.modifiers, modifiers...)
-	return _s
+func (dss *DocSeriesSelect) Modify(modifiers ...func(s *sql.Selector)) *DocSeriesSelect {
+	dss.modifiers = append(dss.modifiers, modifiers...)
+	return dss
 }

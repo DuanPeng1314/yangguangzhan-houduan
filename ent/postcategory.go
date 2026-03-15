@@ -81,7 +81,7 @@ func (*PostCategory) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the PostCategory fields.
-func (_m *PostCategory) assignValues(columns []string, values []any) error {
+func (pc *PostCategory) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -92,65 +92,65 @@ func (_m *PostCategory) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint(value.Int64)
+			pc.ID = uint(value.Int64)
 		case postcategory.FieldDeletedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field deleted_at", values[i])
 			} else if value.Valid {
-				_m.DeletedAt = new(time.Time)
-				*_m.DeletedAt = value.Time
+				pc.DeletedAt = new(time.Time)
+				*pc.DeletedAt = value.Time
 			}
 		case postcategory.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
 			} else if value.Valid {
-				_m.CreatedAt = value.Time
+				pc.CreatedAt = value.Time
 			}
 		case postcategory.FieldUpdatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field updated_at", values[i])
 			} else if value.Valid {
-				_m.UpdatedAt = value.Time
+				pc.UpdatedAt = value.Time
 			}
 		case postcategory.FieldName:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field name", values[i])
 			} else if value.Valid {
-				_m.Name = value.String
+				pc.Name = value.String
 			}
 		case postcategory.FieldSlug:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field slug", values[i])
 			} else if value.Valid {
-				_m.Slug = new(string)
-				*_m.Slug = value.String
+				pc.Slug = new(string)
+				*pc.Slug = value.String
 			}
 		case postcategory.FieldDescription:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field description", values[i])
 			} else if value.Valid {
-				_m.Description = value.String
+				pc.Description = value.String
 			}
 		case postcategory.FieldCount:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field count", values[i])
 			} else if value.Valid {
-				_m.Count = int(value.Int64)
+				pc.Count = int(value.Int64)
 			}
 		case postcategory.FieldIsSeries:
 			if value, ok := values[i].(*sql.NullBool); !ok {
 				return fmt.Errorf("unexpected type %T for field is_series", values[i])
 			} else if value.Valid {
-				_m.IsSeries = value.Bool
+				pc.IsSeries = value.Bool
 			}
 		case postcategory.FieldSortOrder:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field sort_order", values[i])
 			} else if value.Valid {
-				_m.SortOrder = int(value.Int64)
+				pc.SortOrder = int(value.Int64)
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			pc.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -158,68 +158,68 @@ func (_m *PostCategory) assignValues(columns []string, values []any) error {
 
 // Value returns the ent.Value that was dynamically selected and assigned to the PostCategory.
 // This includes values selected through modifiers, order, etc.
-func (_m *PostCategory) Value(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (pc *PostCategory) Value(name string) (ent.Value, error) {
+	return pc.selectValues.Get(name)
 }
 
 // QueryArticles queries the "articles" edge of the PostCategory entity.
-func (_m *PostCategory) QueryArticles() *ArticleQuery {
-	return NewPostCategoryClient(_m.config).QueryArticles(_m)
+func (pc *PostCategory) QueryArticles() *ArticleQuery {
+	return NewPostCategoryClient(pc.config).QueryArticles(pc)
 }
 
 // Update returns a builder for updating this PostCategory.
 // Note that you need to call PostCategory.Unwrap() before calling this method if this PostCategory
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *PostCategory) Update() *PostCategoryUpdateOne {
-	return NewPostCategoryClient(_m.config).UpdateOne(_m)
+func (pc *PostCategory) Update() *PostCategoryUpdateOne {
+	return NewPostCategoryClient(pc.config).UpdateOne(pc)
 }
 
 // Unwrap unwraps the PostCategory entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *PostCategory) Unwrap() *PostCategory {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (pc *PostCategory) Unwrap() *PostCategory {
+	_tx, ok := pc.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: PostCategory is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	pc.config.driver = _tx.drv
+	return pc
 }
 
 // String implements the fmt.Stringer.
-func (_m *PostCategory) String() string {
+func (pc *PostCategory) String() string {
 	var builder strings.Builder
 	builder.WriteString("PostCategory(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
-	if v := _m.DeletedAt; v != nil {
+	builder.WriteString(fmt.Sprintf("id=%v, ", pc.ID))
+	if v := pc.DeletedAt; v != nil {
 		builder.WriteString("deleted_at=")
 		builder.WriteString(v.Format(time.ANSIC))
 	}
 	builder.WriteString(", ")
 	builder.WriteString("created_at=")
-	builder.WriteString(_m.CreatedAt.Format(time.ANSIC))
+	builder.WriteString(pc.CreatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("updated_at=")
-	builder.WriteString(_m.UpdatedAt.Format(time.ANSIC))
+	builder.WriteString(pc.UpdatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("name=")
-	builder.WriteString(_m.Name)
+	builder.WriteString(pc.Name)
 	builder.WriteString(", ")
-	if v := _m.Slug; v != nil {
+	if v := pc.Slug; v != nil {
 		builder.WriteString("slug=")
 		builder.WriteString(*v)
 	}
 	builder.WriteString(", ")
 	builder.WriteString("description=")
-	builder.WriteString(_m.Description)
+	builder.WriteString(pc.Description)
 	builder.WriteString(", ")
 	builder.WriteString("count=")
-	builder.WriteString(fmt.Sprintf("%v", _m.Count))
+	builder.WriteString(fmt.Sprintf("%v", pc.Count))
 	builder.WriteString(", ")
 	builder.WriteString("is_series=")
-	builder.WriteString(fmt.Sprintf("%v", _m.IsSeries))
+	builder.WriteString(fmt.Sprintf("%v", pc.IsSeries))
 	builder.WriteString(", ")
 	builder.WriteString("sort_order=")
-	builder.WriteString(fmt.Sprintf("%v", _m.SortOrder))
+	builder.WriteString(fmt.Sprintf("%v", pc.SortOrder))
 	builder.WriteByte(')')
 	return builder.String()
 }

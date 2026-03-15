@@ -16,6 +16,8 @@ import (
 	"github.com/anzhiyu-c/anheyu-app/ent/albumcategory"
 	"github.com/anzhiyu-c/anheyu-app/ent/article"
 	"github.com/anzhiyu-c/anheyu-app/ent/articlehistory"
+	"github.com/anzhiyu-c/anheyu-app/ent/articlepayment"
+	"github.com/anzhiyu-c/anheyu-app/ent/articlepurchase"
 	"github.com/anzhiyu-c/anheyu-app/ent/comment"
 	"github.com/anzhiyu-c/anheyu-app/ent/directlink"
 	"github.com/anzhiyu-c/anheyu-app/ent/docseries"
@@ -98,13 +100,15 @@ var (
 )
 
 // checkColumn checks if the column exists in the given table.
-func checkColumn(t, c string) error {
+func checkColumn(table, column string) error {
 	initCheck.Do(func() {
 		columnCheck = sql.NewColumnCheck(map[string]func(string) bool{
 			album.Table:                  album.ValidColumn,
 			albumcategory.Table:          albumcategory.ValidColumn,
 			article.Table:                article.ValidColumn,
 			articlehistory.Table:         articlehistory.ValidColumn,
+			articlepayment.Table:         articlepayment.ValidColumn,
+			articlepurchase.Table:        articlepurchase.ValidColumn,
 			comment.Table:                comment.ValidColumn,
 			directlink.Table:             directlink.ValidColumn,
 			docseries.Table:              docseries.ValidColumn,
@@ -132,7 +136,7 @@ func checkColumn(t, c string) error {
 			visitorstat.Table:            visitorstat.ValidColumn,
 		})
 	})
-	return columnCheck(t, c)
+	return columnCheck(table, column)
 }
 
 // Asc applies the given fields in ASC order.

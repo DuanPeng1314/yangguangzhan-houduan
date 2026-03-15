@@ -14,6 +14,8 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/anzhiyu-c/anheyu-app/internal/app/middleware"
+	payment_handler "github.com/anzhiyu-c/anheyu-app/modules/payment"
+	"github.com/anzhiyu-c/anheyu-app/modules/sso"
 	album_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/album"
 	album_category_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/album_category"
 	article_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/article"
@@ -83,6 +85,7 @@ type Router struct {
 	commentHandler            *comment_handler.Handler
 	linkHandler               *link_handler.Handler
 	musicHandler              *music_handler.MusicHandler
+	paymentHandler            *payment_handler.Handler
 	pageHandler               *page_handler.Handler
 	statisticsHandler         *statistics_handler.StatisticsHandler
 	themeHandler              *theme_handler.Handler
@@ -98,6 +101,7 @@ type Router struct {
 	configImportExportHandler *config_handler.ConfigImportExportHandler
 	subscriberHandler         *subscriber_handler.Handler
 	captchaHandler            *captcha_handler.Handler
+	ssoHandler                *sso.Handler
 }
 
 // NewRouter 是 Router 的构造函数，通过依赖注入接收所有处理器。
@@ -120,6 +124,7 @@ func NewRouter(
 	commentHandler *comment_handler.Handler,
 	linkHandler *link_handler.Handler,
 	musicHandler *music_handler.MusicHandler,
+	paymentHandler *payment_handler.Handler,
 	pageHandler *page_handler.Handler,
 	statisticsHandler *statistics_handler.StatisticsHandler,
 	themeHandler *theme_handler.Handler,
@@ -135,6 +140,7 @@ func NewRouter(
 	configImportExportHandler *config_handler.ConfigImportExportHandler,
 	subscriberHandler *subscriber_handler.Handler,
 	captchaHandler *captcha_handler.Handler,
+	ssoHandler *sso.Handler,
 ) *Router {
 	return &Router{
 		authHandler:               authHandler,
@@ -155,6 +161,7 @@ func NewRouter(
 		commentHandler:            commentHandler,
 		linkHandler:               linkHandler,
 		musicHandler:              musicHandler,
+		paymentHandler:            paymentHandler,
 		pageHandler:               pageHandler,
 		statisticsHandler:         statisticsHandler,
 		themeHandler:              themeHandler,
@@ -170,6 +177,7 @@ func NewRouter(
 		configImportExportHandler: configImportExportHandler,
 		subscriberHandler:         subscriberHandler,
 		captchaHandler:            captchaHandler,
+		ssoHandler:                ssoHandler,
 	}
 }
 
@@ -216,14 +224,31 @@ func (r *Router) Setup(engine *gin.Engine) {
 	r.registerSearchRoutes(apiGroup)
 	r.registerLinkRoutes(apiGroup)
 	r.registerMusicRoutes(apiGroup)
+	r.registerPaymentRoutes(apiGroup)
 	r.registerStatisticsRoutes(apiGroup)
 	r.registerThemeRoutes(apiGroup)
 	r.registerVersionRoutes(apiGroup)
 	r.registerNotificationRoutes(apiGroup)
 	r.registerConfigBackupRoutes(apiGroup)
+	r.registerSSORoutes(apiGroup)
 	r.registerSitemapRoutes(engine)    // 直接注册到engine，不使用/api前缀
-	r.registerRSSRoutes(engine)       // RSS/atom/feed 始终注册，与 SkipFrontend 无关
+	r.registerRSSRoutes(engine)        // RSS/atom/feed 始终注册，与 SkipFrontend 无关
 	r.registerSSRThemeRoutes(apiGroup) // 注册 SSR 主题管理路由
+}
+
+func (r *Router) registerPaymentRoutes(api *gin.RouterGroup) {
+	payment := api.Group("/payment").Use(r.mw.JWTAuthOptional())
+	{
+		payment.POST("/check-access", r.paymentHandler.CheckAccess)
+		payment.POST("/callback", r.paymentHandler.Callback)
+	}
+}
+
+func (r *Router) registerSSORoutes(api *gin.RouterGroup) {
+	ssoGroup := api.Group("/sso")
+	{
+		ssoGroup.GET("/callback", r.ssoHandler.Callback)
+	}
 }
 
 func (r *Router) registerCommentRoutes(api *gin.RouterGroup) {

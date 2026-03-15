@@ -24,118 +24,118 @@ type PostTagCreate struct {
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_c *PostTagCreate) SetDeletedAt(v time.Time) *PostTagCreate {
-	_c.mutation.SetDeletedAt(v)
-	return _c
+func (ptc *PostTagCreate) SetDeletedAt(t time.Time) *PostTagCreate {
+	ptc.mutation.SetDeletedAt(t)
+	return ptc
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_c *PostTagCreate) SetNillableDeletedAt(v *time.Time) *PostTagCreate {
-	if v != nil {
-		_c.SetDeletedAt(*v)
+func (ptc *PostTagCreate) SetNillableDeletedAt(t *time.Time) *PostTagCreate {
+	if t != nil {
+		ptc.SetDeletedAt(*t)
 	}
-	return _c
+	return ptc
 }
 
 // SetCreatedAt sets the "created_at" field.
-func (_c *PostTagCreate) SetCreatedAt(v time.Time) *PostTagCreate {
-	_c.mutation.SetCreatedAt(v)
-	return _c
+func (ptc *PostTagCreate) SetCreatedAt(t time.Time) *PostTagCreate {
+	ptc.mutation.SetCreatedAt(t)
+	return ptc
 }
 
 // SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (_c *PostTagCreate) SetNillableCreatedAt(v *time.Time) *PostTagCreate {
-	if v != nil {
-		_c.SetCreatedAt(*v)
+func (ptc *PostTagCreate) SetNillableCreatedAt(t *time.Time) *PostTagCreate {
+	if t != nil {
+		ptc.SetCreatedAt(*t)
 	}
-	return _c
+	return ptc
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_c *PostTagCreate) SetUpdatedAt(v time.Time) *PostTagCreate {
-	_c.mutation.SetUpdatedAt(v)
-	return _c
+func (ptc *PostTagCreate) SetUpdatedAt(t time.Time) *PostTagCreate {
+	ptc.mutation.SetUpdatedAt(t)
+	return ptc
 }
 
 // SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
-func (_c *PostTagCreate) SetNillableUpdatedAt(v *time.Time) *PostTagCreate {
-	if v != nil {
-		_c.SetUpdatedAt(*v)
+func (ptc *PostTagCreate) SetNillableUpdatedAt(t *time.Time) *PostTagCreate {
+	if t != nil {
+		ptc.SetUpdatedAt(*t)
 	}
-	return _c
+	return ptc
 }
 
 // SetName sets the "name" field.
-func (_c *PostTagCreate) SetName(v string) *PostTagCreate {
-	_c.mutation.SetName(v)
-	return _c
+func (ptc *PostTagCreate) SetName(s string) *PostTagCreate {
+	ptc.mutation.SetName(s)
+	return ptc
 }
 
 // SetSlug sets the "slug" field.
-func (_c *PostTagCreate) SetSlug(v string) *PostTagCreate {
-	_c.mutation.SetSlug(v)
-	return _c
+func (ptc *PostTagCreate) SetSlug(s string) *PostTagCreate {
+	ptc.mutation.SetSlug(s)
+	return ptc
 }
 
 // SetNillableSlug sets the "slug" field if the given value is not nil.
-func (_c *PostTagCreate) SetNillableSlug(v *string) *PostTagCreate {
-	if v != nil {
-		_c.SetSlug(*v)
+func (ptc *PostTagCreate) SetNillableSlug(s *string) *PostTagCreate {
+	if s != nil {
+		ptc.SetSlug(*s)
 	}
-	return _c
+	return ptc
 }
 
 // SetCount sets the "count" field.
-func (_c *PostTagCreate) SetCount(v int) *PostTagCreate {
-	_c.mutation.SetCount(v)
-	return _c
+func (ptc *PostTagCreate) SetCount(i int) *PostTagCreate {
+	ptc.mutation.SetCount(i)
+	return ptc
 }
 
 // SetNillableCount sets the "count" field if the given value is not nil.
-func (_c *PostTagCreate) SetNillableCount(v *int) *PostTagCreate {
-	if v != nil {
-		_c.SetCount(*v)
+func (ptc *PostTagCreate) SetNillableCount(i *int) *PostTagCreate {
+	if i != nil {
+		ptc.SetCount(*i)
 	}
-	return _c
+	return ptc
 }
 
 // SetID sets the "id" field.
-func (_c *PostTagCreate) SetID(v uint) *PostTagCreate {
-	_c.mutation.SetID(v)
-	return _c
+func (ptc *PostTagCreate) SetID(u uint) *PostTagCreate {
+	ptc.mutation.SetID(u)
+	return ptc
 }
 
 // AddArticleIDs adds the "articles" edge to the Article entity by IDs.
-func (_c *PostTagCreate) AddArticleIDs(ids ...uint) *PostTagCreate {
-	_c.mutation.AddArticleIDs(ids...)
-	return _c
+func (ptc *PostTagCreate) AddArticleIDs(ids ...uint) *PostTagCreate {
+	ptc.mutation.AddArticleIDs(ids...)
+	return ptc
 }
 
 // AddArticles adds the "articles" edges to the Article entity.
-func (_c *PostTagCreate) AddArticles(v ...*Article) *PostTagCreate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (ptc *PostTagCreate) AddArticles(a ...*Article) *PostTagCreate {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _c.AddArticleIDs(ids...)
+	return ptc.AddArticleIDs(ids...)
 }
 
 // Mutation returns the PostTagMutation object of the builder.
-func (_c *PostTagCreate) Mutation() *PostTagMutation {
-	return _c.mutation
+func (ptc *PostTagCreate) Mutation() *PostTagMutation {
+	return ptc.mutation
 }
 
 // Save creates the PostTag in the database.
-func (_c *PostTagCreate) Save(ctx context.Context) (*PostTag, error) {
-	if err := _c.defaults(); err != nil {
+func (ptc *PostTagCreate) Save(ctx context.Context) (*PostTag, error) {
+	if err := ptc.defaults(); err != nil {
 		return nil, err
 	}
-	return withHooks(ctx, _c.sqlSave, _c.mutation, _c.hooks)
+	return withHooks(ctx, ptc.sqlSave, ptc.mutation, ptc.hooks)
 }
 
 // SaveX calls Save and panics if Save returns an error.
-func (_c *PostTagCreate) SaveX(ctx context.Context) *PostTag {
-	v, err := _c.Save(ctx)
+func (ptc *PostTagCreate) SaveX(ctx context.Context) *PostTag {
+	v, err := ptc.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -143,66 +143,66 @@ func (_c *PostTagCreate) SaveX(ctx context.Context) *PostTag {
 }
 
 // Exec executes the query.
-func (_c *PostTagCreate) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (ptc *PostTagCreate) Exec(ctx context.Context) error {
+	_, err := ptc.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *PostTagCreate) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (ptc *PostTagCreate) ExecX(ctx context.Context) {
+	if err := ptc.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_c *PostTagCreate) defaults() error {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (ptc *PostTagCreate) defaults() error {
+	if _, ok := ptc.mutation.CreatedAt(); !ok {
 		if posttag.DefaultCreatedAt == nil {
 			return fmt.Errorf("ent: uninitialized posttag.DefaultCreatedAt (forgotten import ent/runtime?)")
 		}
 		v := posttag.DefaultCreatedAt()
-		_c.mutation.SetCreatedAt(v)
+		ptc.mutation.SetCreatedAt(v)
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := ptc.mutation.UpdatedAt(); !ok {
 		if posttag.DefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized posttag.DefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := posttag.DefaultUpdatedAt()
-		_c.mutation.SetUpdatedAt(v)
+		ptc.mutation.SetUpdatedAt(v)
 	}
-	if _, ok := _c.mutation.Count(); !ok {
+	if _, ok := ptc.mutation.Count(); !ok {
 		v := posttag.DefaultCount
-		_c.mutation.SetCount(v)
+		ptc.mutation.SetCount(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_c *PostTagCreate) check() error {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (ptc *PostTagCreate) check() error {
+	if _, ok := ptc.mutation.CreatedAt(); !ok {
 		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "PostTag.created_at"`)}
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := ptc.mutation.UpdatedAt(); !ok {
 		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "PostTag.updated_at"`)}
 	}
-	if _, ok := _c.mutation.Name(); !ok {
+	if _, ok := ptc.mutation.Name(); !ok {
 		return &ValidationError{Name: "name", err: errors.New(`ent: missing required field "PostTag.name"`)}
 	}
-	if v, ok := _c.mutation.Name(); ok {
+	if v, ok := ptc.mutation.Name(); ok {
 		if err := posttag.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "PostTag.name": %w`, err)}
 		}
 	}
-	if v, ok := _c.mutation.Slug(); ok {
+	if v, ok := ptc.mutation.Slug(); ok {
 		if err := posttag.SlugValidator(v); err != nil {
 			return &ValidationError{Name: "slug", err: fmt.Errorf(`ent: validator failed for field "PostTag.slug": %w`, err)}
 		}
 	}
-	if _, ok := _c.mutation.Count(); !ok {
+	if _, ok := ptc.mutation.Count(); !ok {
 		return &ValidationError{Name: "count", err: errors.New(`ent: missing required field "PostTag.count"`)}
 	}
-	if v, ok := _c.mutation.Count(); ok {
+	if v, ok := ptc.mutation.Count(); ok {
 		if err := posttag.CountValidator(v); err != nil {
 			return &ValidationError{Name: "count", err: fmt.Errorf(`ent: validator failed for field "PostTag.count": %w`, err)}
 		}
@@ -210,12 +210,12 @@ func (_c *PostTagCreate) check() error {
 	return nil
 }
 
-func (_c *PostTagCreate) sqlSave(ctx context.Context) (*PostTag, error) {
-	if err := _c.check(); err != nil {
+func (ptc *PostTagCreate) sqlSave(ctx context.Context) (*PostTag, error) {
+	if err := ptc.check(); err != nil {
 		return nil, err
 	}
-	_node, _spec := _c.createSpec()
-	if err := sqlgraph.CreateNode(ctx, _c.driver, _spec); err != nil {
+	_node, _spec := ptc.createSpec()
+	if err := sqlgraph.CreateNode(ctx, ptc.driver, _spec); err != nil {
 		if sqlgraph.IsConstraintError(err) {
 			err = &ConstraintError{msg: err.Error(), wrap: err}
 		}
@@ -225,46 +225,46 @@ func (_c *PostTagCreate) sqlSave(ctx context.Context) (*PostTag, error) {
 		id := _spec.ID.Value.(int64)
 		_node.ID = uint(id)
 	}
-	_c.mutation.id = &_node.ID
-	_c.mutation.done = true
+	ptc.mutation.id = &_node.ID
+	ptc.mutation.done = true
 	return _node, nil
 }
 
-func (_c *PostTagCreate) createSpec() (*PostTag, *sqlgraph.CreateSpec) {
+func (ptc *PostTagCreate) createSpec() (*PostTag, *sqlgraph.CreateSpec) {
 	var (
-		_node = &PostTag{config: _c.config}
+		_node = &PostTag{config: ptc.config}
 		_spec = sqlgraph.NewCreateSpec(posttag.Table, sqlgraph.NewFieldSpec(posttag.FieldID, field.TypeUint))
 	)
-	_spec.OnConflict = _c.conflict
-	if id, ok := _c.mutation.ID(); ok {
+	_spec.OnConflict = ptc.conflict
+	if id, ok := ptc.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
 	}
-	if value, ok := _c.mutation.DeletedAt(); ok {
+	if value, ok := ptc.mutation.DeletedAt(); ok {
 		_spec.SetField(posttag.FieldDeletedAt, field.TypeTime, value)
 		_node.DeletedAt = &value
 	}
-	if value, ok := _c.mutation.CreatedAt(); ok {
+	if value, ok := ptc.mutation.CreatedAt(); ok {
 		_spec.SetField(posttag.FieldCreatedAt, field.TypeTime, value)
 		_node.CreatedAt = value
 	}
-	if value, ok := _c.mutation.UpdatedAt(); ok {
+	if value, ok := ptc.mutation.UpdatedAt(); ok {
 		_spec.SetField(posttag.FieldUpdatedAt, field.TypeTime, value)
 		_node.UpdatedAt = value
 	}
-	if value, ok := _c.mutation.Name(); ok {
+	if value, ok := ptc.mutation.Name(); ok {
 		_spec.SetField(posttag.FieldName, field.TypeString, value)
 		_node.Name = value
 	}
-	if value, ok := _c.mutation.Slug(); ok {
+	if value, ok := ptc.mutation.Slug(); ok {
 		_spec.SetField(posttag.FieldSlug, field.TypeString, value)
 		_node.Slug = &value
 	}
-	if value, ok := _c.mutation.Count(); ok {
+	if value, ok := ptc.mutation.Count(); ok {
 		_spec.SetField(posttag.FieldCount, field.TypeInt, value)
 		_node.Count = value
 	}
-	if nodes := _c.mutation.ArticlesIDs(); len(nodes) > 0 {
+	if nodes := ptc.mutation.ArticlesIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: true,
@@ -299,10 +299,10 @@ func (_c *PostTagCreate) createSpec() (*PostTag, *sqlgraph.CreateSpec) {
 //			SetDeletedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *PostTagCreate) OnConflict(opts ...sql.ConflictOption) *PostTagUpsertOne {
-	_c.conflict = opts
+func (ptc *PostTagCreate) OnConflict(opts ...sql.ConflictOption) *PostTagUpsertOne {
+	ptc.conflict = opts
 	return &PostTagUpsertOne{
-		create: _c,
+		create: ptc,
 	}
 }
 
@@ -312,10 +312,10 @@ func (_c *PostTagCreate) OnConflict(opts ...sql.ConflictOption) *PostTagUpsertOn
 //	client.PostTag.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *PostTagCreate) OnConflictColumns(columns ...string) *PostTagUpsertOne {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (ptc *PostTagCreate) OnConflictColumns(columns ...string) *PostTagUpsertOne {
+	ptc.conflict = append(ptc.conflict, sql.ConflictColumns(columns...))
 	return &PostTagUpsertOne{
-		create: _c,
+		create: ptc,
 	}
 }
 
@@ -594,16 +594,16 @@ type PostTagCreateBulk struct {
 }
 
 // Save creates the PostTag entities in the database.
-func (_c *PostTagCreateBulk) Save(ctx context.Context) ([]*PostTag, error) {
-	if _c.err != nil {
-		return nil, _c.err
+func (ptcb *PostTagCreateBulk) Save(ctx context.Context) ([]*PostTag, error) {
+	if ptcb.err != nil {
+		return nil, ptcb.err
 	}
-	specs := make([]*sqlgraph.CreateSpec, len(_c.builders))
-	nodes := make([]*PostTag, len(_c.builders))
-	mutators := make([]Mutator, len(_c.builders))
-	for i := range _c.builders {
+	specs := make([]*sqlgraph.CreateSpec, len(ptcb.builders))
+	nodes := make([]*PostTag, len(ptcb.builders))
+	mutators := make([]Mutator, len(ptcb.builders))
+	for i := range ptcb.builders {
 		func(i int, root context.Context) {
-			builder := _c.builders[i]
+			builder := ptcb.builders[i]
 			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*PostTagMutation)
@@ -617,12 +617,12 @@ func (_c *PostTagCreateBulk) Save(ctx context.Context) ([]*PostTag, error) {
 				var err error
 				nodes[i], specs[i] = builder.createSpec()
 				if i < len(mutators)-1 {
-					_, err = mutators[i+1].Mutate(root, _c.builders[i+1].mutation)
+					_, err = mutators[i+1].Mutate(root, ptcb.builders[i+1].mutation)
 				} else {
 					spec := &sqlgraph.BatchCreateSpec{Nodes: specs}
-					spec.OnConflict = _c.conflict
+					spec.OnConflict = ptcb.conflict
 					// Invoke the actual operation on the latest mutation in the chain.
-					if err = sqlgraph.BatchCreate(ctx, _c.driver, spec); err != nil {
+					if err = sqlgraph.BatchCreate(ctx, ptcb.driver, spec); err != nil {
 						if sqlgraph.IsConstraintError(err) {
 							err = &ConstraintError{msg: err.Error(), wrap: err}
 						}
@@ -646,7 +646,7 @@ func (_c *PostTagCreateBulk) Save(ctx context.Context) ([]*PostTag, error) {
 		}(i, ctx)
 	}
 	if len(mutators) > 0 {
-		if _, err := mutators[0].Mutate(ctx, _c.builders[0].mutation); err != nil {
+		if _, err := mutators[0].Mutate(ctx, ptcb.builders[0].mutation); err != nil {
 			return nil, err
 		}
 	}
@@ -654,8 +654,8 @@ func (_c *PostTagCreateBulk) Save(ctx context.Context) ([]*PostTag, error) {
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_c *PostTagCreateBulk) SaveX(ctx context.Context) []*PostTag {
-	v, err := _c.Save(ctx)
+func (ptcb *PostTagCreateBulk) SaveX(ctx context.Context) []*PostTag {
+	v, err := ptcb.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -663,14 +663,14 @@ func (_c *PostTagCreateBulk) SaveX(ctx context.Context) []*PostTag {
 }
 
 // Exec executes the query.
-func (_c *PostTagCreateBulk) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (ptcb *PostTagCreateBulk) Exec(ctx context.Context) error {
+	_, err := ptcb.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *PostTagCreateBulk) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (ptcb *PostTagCreateBulk) ExecX(ctx context.Context) {
+	if err := ptcb.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
@@ -690,10 +690,10 @@ func (_c *PostTagCreateBulk) ExecX(ctx context.Context) {
 //			SetDeletedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *PostTagCreateBulk) OnConflict(opts ...sql.ConflictOption) *PostTagUpsertBulk {
-	_c.conflict = opts
+func (ptcb *PostTagCreateBulk) OnConflict(opts ...sql.ConflictOption) *PostTagUpsertBulk {
+	ptcb.conflict = opts
 	return &PostTagUpsertBulk{
-		create: _c,
+		create: ptcb,
 	}
 }
 
@@ -703,10 +703,10 @@ func (_c *PostTagCreateBulk) OnConflict(opts ...sql.ConflictOption) *PostTagUpse
 //	client.PostTag.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *PostTagCreateBulk) OnConflictColumns(columns ...string) *PostTagUpsertBulk {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (ptcb *PostTagCreateBulk) OnConflictColumns(columns ...string) *PostTagUpsertBulk {
+	ptcb.conflict = append(ptcb.conflict, sql.ConflictColumns(columns...))
 	return &PostTagUpsertBulk{
-		create: _c,
+		create: ptcb,
 	}
 }
 

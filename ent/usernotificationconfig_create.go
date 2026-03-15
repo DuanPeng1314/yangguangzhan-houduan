@@ -25,115 +25,115 @@ type UserNotificationConfigCreate struct {
 }
 
 // SetCreatedAt sets the "created_at" field.
-func (_c *UserNotificationConfigCreate) SetCreatedAt(v time.Time) *UserNotificationConfigCreate {
-	_c.mutation.SetCreatedAt(v)
-	return _c
+func (uncc *UserNotificationConfigCreate) SetCreatedAt(t time.Time) *UserNotificationConfigCreate {
+	uncc.mutation.SetCreatedAt(t)
+	return uncc
 }
 
 // SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (_c *UserNotificationConfigCreate) SetNillableCreatedAt(v *time.Time) *UserNotificationConfigCreate {
-	if v != nil {
-		_c.SetCreatedAt(*v)
+func (uncc *UserNotificationConfigCreate) SetNillableCreatedAt(t *time.Time) *UserNotificationConfigCreate {
+	if t != nil {
+		uncc.SetCreatedAt(*t)
 	}
-	return _c
+	return uncc
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_c *UserNotificationConfigCreate) SetUpdatedAt(v time.Time) *UserNotificationConfigCreate {
-	_c.mutation.SetUpdatedAt(v)
-	return _c
+func (uncc *UserNotificationConfigCreate) SetUpdatedAt(t time.Time) *UserNotificationConfigCreate {
+	uncc.mutation.SetUpdatedAt(t)
+	return uncc
 }
 
 // SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
-func (_c *UserNotificationConfigCreate) SetNillableUpdatedAt(v *time.Time) *UserNotificationConfigCreate {
-	if v != nil {
-		_c.SetUpdatedAt(*v)
+func (uncc *UserNotificationConfigCreate) SetNillableUpdatedAt(t *time.Time) *UserNotificationConfigCreate {
+	if t != nil {
+		uncc.SetUpdatedAt(*t)
 	}
-	return _c
+	return uncc
 }
 
 // SetUserID sets the "user_id" field.
-func (_c *UserNotificationConfigCreate) SetUserID(v uint) *UserNotificationConfigCreate {
-	_c.mutation.SetUserID(v)
-	return _c
+func (uncc *UserNotificationConfigCreate) SetUserID(u uint) *UserNotificationConfigCreate {
+	uncc.mutation.SetUserID(u)
+	return uncc
 }
 
 // SetNotificationTypeID sets the "notification_type_id" field.
-func (_c *UserNotificationConfigCreate) SetNotificationTypeID(v uint) *UserNotificationConfigCreate {
-	_c.mutation.SetNotificationTypeID(v)
-	return _c
+func (uncc *UserNotificationConfigCreate) SetNotificationTypeID(u uint) *UserNotificationConfigCreate {
+	uncc.mutation.SetNotificationTypeID(u)
+	return uncc
 }
 
 // SetIsEnabled sets the "is_enabled" field.
-func (_c *UserNotificationConfigCreate) SetIsEnabled(v bool) *UserNotificationConfigCreate {
-	_c.mutation.SetIsEnabled(v)
-	return _c
+func (uncc *UserNotificationConfigCreate) SetIsEnabled(b bool) *UserNotificationConfigCreate {
+	uncc.mutation.SetIsEnabled(b)
+	return uncc
 }
 
 // SetNillableIsEnabled sets the "is_enabled" field if the given value is not nil.
-func (_c *UserNotificationConfigCreate) SetNillableIsEnabled(v *bool) *UserNotificationConfigCreate {
-	if v != nil {
-		_c.SetIsEnabled(*v)
+func (uncc *UserNotificationConfigCreate) SetNillableIsEnabled(b *bool) *UserNotificationConfigCreate {
+	if b != nil {
+		uncc.SetIsEnabled(*b)
 	}
-	return _c
+	return uncc
 }
 
 // SetEnabledChannels sets the "enabled_channels" field.
-func (_c *UserNotificationConfigCreate) SetEnabledChannels(v []string) *UserNotificationConfigCreate {
-	_c.mutation.SetEnabledChannels(v)
-	return _c
+func (uncc *UserNotificationConfigCreate) SetEnabledChannels(s []string) *UserNotificationConfigCreate {
+	uncc.mutation.SetEnabledChannels(s)
+	return uncc
 }
 
 // SetNotificationEmail sets the "notification_email" field.
-func (_c *UserNotificationConfigCreate) SetNotificationEmail(v string) *UserNotificationConfigCreate {
-	_c.mutation.SetNotificationEmail(v)
-	return _c
+func (uncc *UserNotificationConfigCreate) SetNotificationEmail(s string) *UserNotificationConfigCreate {
+	uncc.mutation.SetNotificationEmail(s)
+	return uncc
 }
 
 // SetNillableNotificationEmail sets the "notification_email" field if the given value is not nil.
-func (_c *UserNotificationConfigCreate) SetNillableNotificationEmail(v *string) *UserNotificationConfigCreate {
-	if v != nil {
-		_c.SetNotificationEmail(*v)
+func (uncc *UserNotificationConfigCreate) SetNillableNotificationEmail(s *string) *UserNotificationConfigCreate {
+	if s != nil {
+		uncc.SetNotificationEmail(*s)
 	}
-	return _c
+	return uncc
 }
 
 // SetCustomSettings sets the "custom_settings" field.
-func (_c *UserNotificationConfigCreate) SetCustomSettings(v map[string]interface{}) *UserNotificationConfigCreate {
-	_c.mutation.SetCustomSettings(v)
-	return _c
+func (uncc *UserNotificationConfigCreate) SetCustomSettings(m map[string]interface{}) *UserNotificationConfigCreate {
+	uncc.mutation.SetCustomSettings(m)
+	return uncc
 }
 
 // SetID sets the "id" field.
-func (_c *UserNotificationConfigCreate) SetID(v uint) *UserNotificationConfigCreate {
-	_c.mutation.SetID(v)
-	return _c
+func (uncc *UserNotificationConfigCreate) SetID(u uint) *UserNotificationConfigCreate {
+	uncc.mutation.SetID(u)
+	return uncc
 }
 
 // SetUser sets the "user" edge to the User entity.
-func (_c *UserNotificationConfigCreate) SetUser(v *User) *UserNotificationConfigCreate {
-	return _c.SetUserID(v.ID)
+func (uncc *UserNotificationConfigCreate) SetUser(u *User) *UserNotificationConfigCreate {
+	return uncc.SetUserID(u.ID)
 }
 
 // SetNotificationType sets the "notification_type" edge to the NotificationType entity.
-func (_c *UserNotificationConfigCreate) SetNotificationType(v *NotificationType) *UserNotificationConfigCreate {
-	return _c.SetNotificationTypeID(v.ID)
+func (uncc *UserNotificationConfigCreate) SetNotificationType(n *NotificationType) *UserNotificationConfigCreate {
+	return uncc.SetNotificationTypeID(n.ID)
 }
 
 // Mutation returns the UserNotificationConfigMutation object of the builder.
-func (_c *UserNotificationConfigCreate) Mutation() *UserNotificationConfigMutation {
-	return _c.mutation
+func (uncc *UserNotificationConfigCreate) Mutation() *UserNotificationConfigMutation {
+	return uncc.mutation
 }
 
 // Save creates the UserNotificationConfig in the database.
-func (_c *UserNotificationConfigCreate) Save(ctx context.Context) (*UserNotificationConfig, error) {
-	_c.defaults()
-	return withHooks(ctx, _c.sqlSave, _c.mutation, _c.hooks)
+func (uncc *UserNotificationConfigCreate) Save(ctx context.Context) (*UserNotificationConfig, error) {
+	uncc.defaults()
+	return withHooks(ctx, uncc.sqlSave, uncc.mutation, uncc.hooks)
 }
 
 // SaveX calls Save and panics if Save returns an error.
-func (_c *UserNotificationConfigCreate) SaveX(ctx context.Context) *UserNotificationConfig {
-	v, err := _c.Save(ctx)
+func (uncc *UserNotificationConfigCreate) SaveX(ctx context.Context) *UserNotificationConfig {
+	v, err := uncc.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -141,71 +141,71 @@ func (_c *UserNotificationConfigCreate) SaveX(ctx context.Context) *UserNotifica
 }
 
 // Exec executes the query.
-func (_c *UserNotificationConfigCreate) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (uncc *UserNotificationConfigCreate) Exec(ctx context.Context) error {
+	_, err := uncc.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *UserNotificationConfigCreate) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (uncc *UserNotificationConfigCreate) ExecX(ctx context.Context) {
+	if err := uncc.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_c *UserNotificationConfigCreate) defaults() {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (uncc *UserNotificationConfigCreate) defaults() {
+	if _, ok := uncc.mutation.CreatedAt(); !ok {
 		v := usernotificationconfig.DefaultCreatedAt()
-		_c.mutation.SetCreatedAt(v)
+		uncc.mutation.SetCreatedAt(v)
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := uncc.mutation.UpdatedAt(); !ok {
 		v := usernotificationconfig.DefaultUpdatedAt()
-		_c.mutation.SetUpdatedAt(v)
+		uncc.mutation.SetUpdatedAt(v)
 	}
-	if _, ok := _c.mutation.IsEnabled(); !ok {
+	if _, ok := uncc.mutation.IsEnabled(); !ok {
 		v := usernotificationconfig.DefaultIsEnabled
-		_c.mutation.SetIsEnabled(v)
+		uncc.mutation.SetIsEnabled(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_c *UserNotificationConfigCreate) check() error {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (uncc *UserNotificationConfigCreate) check() error {
+	if _, ok := uncc.mutation.CreatedAt(); !ok {
 		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "UserNotificationConfig.created_at"`)}
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := uncc.mutation.UpdatedAt(); !ok {
 		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "UserNotificationConfig.updated_at"`)}
 	}
-	if _, ok := _c.mutation.UserID(); !ok {
+	if _, ok := uncc.mutation.UserID(); !ok {
 		return &ValidationError{Name: "user_id", err: errors.New(`ent: missing required field "UserNotificationConfig.user_id"`)}
 	}
-	if _, ok := _c.mutation.NotificationTypeID(); !ok {
+	if _, ok := uncc.mutation.NotificationTypeID(); !ok {
 		return &ValidationError{Name: "notification_type_id", err: errors.New(`ent: missing required field "UserNotificationConfig.notification_type_id"`)}
 	}
-	if _, ok := _c.mutation.IsEnabled(); !ok {
+	if _, ok := uncc.mutation.IsEnabled(); !ok {
 		return &ValidationError{Name: "is_enabled", err: errors.New(`ent: missing required field "UserNotificationConfig.is_enabled"`)}
 	}
-	if v, ok := _c.mutation.NotificationEmail(); ok {
+	if v, ok := uncc.mutation.NotificationEmail(); ok {
 		if err := usernotificationconfig.NotificationEmailValidator(v); err != nil {
 			return &ValidationError{Name: "notification_email", err: fmt.Errorf(`ent: validator failed for field "UserNotificationConfig.notification_email": %w`, err)}
 		}
 	}
-	if len(_c.mutation.UserIDs()) == 0 {
+	if len(uncc.mutation.UserIDs()) == 0 {
 		return &ValidationError{Name: "user", err: errors.New(`ent: missing required edge "UserNotificationConfig.user"`)}
 	}
-	if len(_c.mutation.NotificationTypeIDs()) == 0 {
+	if len(uncc.mutation.NotificationTypeIDs()) == 0 {
 		return &ValidationError{Name: "notification_type", err: errors.New(`ent: missing required edge "UserNotificationConfig.notification_type"`)}
 	}
 	return nil
 }
 
-func (_c *UserNotificationConfigCreate) sqlSave(ctx context.Context) (*UserNotificationConfig, error) {
-	if err := _c.check(); err != nil {
+func (uncc *UserNotificationConfigCreate) sqlSave(ctx context.Context) (*UserNotificationConfig, error) {
+	if err := uncc.check(); err != nil {
 		return nil, err
 	}
-	_node, _spec := _c.createSpec()
-	if err := sqlgraph.CreateNode(ctx, _c.driver, _spec); err != nil {
+	_node, _spec := uncc.createSpec()
+	if err := sqlgraph.CreateNode(ctx, uncc.driver, _spec); err != nil {
 		if sqlgraph.IsConstraintError(err) {
 			err = &ConstraintError{msg: err.Error(), wrap: err}
 		}
@@ -215,46 +215,46 @@ func (_c *UserNotificationConfigCreate) sqlSave(ctx context.Context) (*UserNotif
 		id := _spec.ID.Value.(int64)
 		_node.ID = uint(id)
 	}
-	_c.mutation.id = &_node.ID
-	_c.mutation.done = true
+	uncc.mutation.id = &_node.ID
+	uncc.mutation.done = true
 	return _node, nil
 }
 
-func (_c *UserNotificationConfigCreate) createSpec() (*UserNotificationConfig, *sqlgraph.CreateSpec) {
+func (uncc *UserNotificationConfigCreate) createSpec() (*UserNotificationConfig, *sqlgraph.CreateSpec) {
 	var (
-		_node = &UserNotificationConfig{config: _c.config}
+		_node = &UserNotificationConfig{config: uncc.config}
 		_spec = sqlgraph.NewCreateSpec(usernotificationconfig.Table, sqlgraph.NewFieldSpec(usernotificationconfig.FieldID, field.TypeUint))
 	)
-	_spec.OnConflict = _c.conflict
-	if id, ok := _c.mutation.ID(); ok {
+	_spec.OnConflict = uncc.conflict
+	if id, ok := uncc.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
 	}
-	if value, ok := _c.mutation.CreatedAt(); ok {
+	if value, ok := uncc.mutation.CreatedAt(); ok {
 		_spec.SetField(usernotificationconfig.FieldCreatedAt, field.TypeTime, value)
 		_node.CreatedAt = value
 	}
-	if value, ok := _c.mutation.UpdatedAt(); ok {
+	if value, ok := uncc.mutation.UpdatedAt(); ok {
 		_spec.SetField(usernotificationconfig.FieldUpdatedAt, field.TypeTime, value)
 		_node.UpdatedAt = value
 	}
-	if value, ok := _c.mutation.IsEnabled(); ok {
+	if value, ok := uncc.mutation.IsEnabled(); ok {
 		_spec.SetField(usernotificationconfig.FieldIsEnabled, field.TypeBool, value)
 		_node.IsEnabled = value
 	}
-	if value, ok := _c.mutation.EnabledChannels(); ok {
+	if value, ok := uncc.mutation.EnabledChannels(); ok {
 		_spec.SetField(usernotificationconfig.FieldEnabledChannels, field.TypeJSON, value)
 		_node.EnabledChannels = value
 	}
-	if value, ok := _c.mutation.NotificationEmail(); ok {
+	if value, ok := uncc.mutation.NotificationEmail(); ok {
 		_spec.SetField(usernotificationconfig.FieldNotificationEmail, field.TypeString, value)
 		_node.NotificationEmail = value
 	}
-	if value, ok := _c.mutation.CustomSettings(); ok {
+	if value, ok := uncc.mutation.CustomSettings(); ok {
 		_spec.SetField(usernotificationconfig.FieldCustomSettings, field.TypeJSON, value)
 		_node.CustomSettings = value
 	}
-	if nodes := _c.mutation.UserIDs(); len(nodes) > 0 {
+	if nodes := uncc.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -271,7 +271,7 @@ func (_c *UserNotificationConfigCreate) createSpec() (*UserNotificationConfig, *
 		_node.UserID = nodes[0]
 		_spec.Edges = append(_spec.Edges, edge)
 	}
-	if nodes := _c.mutation.NotificationTypeIDs(); len(nodes) > 0 {
+	if nodes := uncc.mutation.NotificationTypeIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -307,10 +307,10 @@ func (_c *UserNotificationConfigCreate) createSpec() (*UserNotificationConfig, *
 //			SetCreatedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *UserNotificationConfigCreate) OnConflict(opts ...sql.ConflictOption) *UserNotificationConfigUpsertOne {
-	_c.conflict = opts
+func (uncc *UserNotificationConfigCreate) OnConflict(opts ...sql.ConflictOption) *UserNotificationConfigUpsertOne {
+	uncc.conflict = opts
 	return &UserNotificationConfigUpsertOne{
-		create: _c,
+		create: uncc,
 	}
 }
 
@@ -320,10 +320,10 @@ func (_c *UserNotificationConfigCreate) OnConflict(opts ...sql.ConflictOption) *
 //	client.UserNotificationConfig.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *UserNotificationConfigCreate) OnConflictColumns(columns ...string) *UserNotificationConfigUpsertOne {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (uncc *UserNotificationConfigCreate) OnConflictColumns(columns ...string) *UserNotificationConfigUpsertOne {
+	uncc.conflict = append(uncc.conflict, sql.ConflictColumns(columns...))
 	return &UserNotificationConfigUpsertOne{
-		create: _c,
+		create: uncc,
 	}
 }
 
@@ -654,16 +654,16 @@ type UserNotificationConfigCreateBulk struct {
 }
 
 // Save creates the UserNotificationConfig entities in the database.
-func (_c *UserNotificationConfigCreateBulk) Save(ctx context.Context) ([]*UserNotificationConfig, error) {
-	if _c.err != nil {
-		return nil, _c.err
+func (unccb *UserNotificationConfigCreateBulk) Save(ctx context.Context) ([]*UserNotificationConfig, error) {
+	if unccb.err != nil {
+		return nil, unccb.err
 	}
-	specs := make([]*sqlgraph.CreateSpec, len(_c.builders))
-	nodes := make([]*UserNotificationConfig, len(_c.builders))
-	mutators := make([]Mutator, len(_c.builders))
-	for i := range _c.builders {
+	specs := make([]*sqlgraph.CreateSpec, len(unccb.builders))
+	nodes := make([]*UserNotificationConfig, len(unccb.builders))
+	mutators := make([]Mutator, len(unccb.builders))
+	for i := range unccb.builders {
 		func(i int, root context.Context) {
-			builder := _c.builders[i]
+			builder := unccb.builders[i]
 			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*UserNotificationConfigMutation)
@@ -677,12 +677,12 @@ func (_c *UserNotificationConfigCreateBulk) Save(ctx context.Context) ([]*UserNo
 				var err error
 				nodes[i], specs[i] = builder.createSpec()
 				if i < len(mutators)-1 {
-					_, err = mutators[i+1].Mutate(root, _c.builders[i+1].mutation)
+					_, err = mutators[i+1].Mutate(root, unccb.builders[i+1].mutation)
 				} else {
 					spec := &sqlgraph.BatchCreateSpec{Nodes: specs}
-					spec.OnConflict = _c.conflict
+					spec.OnConflict = unccb.conflict
 					// Invoke the actual operation on the latest mutation in the chain.
-					if err = sqlgraph.BatchCreate(ctx, _c.driver, spec); err != nil {
+					if err = sqlgraph.BatchCreate(ctx, unccb.driver, spec); err != nil {
 						if sqlgraph.IsConstraintError(err) {
 							err = &ConstraintError{msg: err.Error(), wrap: err}
 						}
@@ -706,7 +706,7 @@ func (_c *UserNotificationConfigCreateBulk) Save(ctx context.Context) ([]*UserNo
 		}(i, ctx)
 	}
 	if len(mutators) > 0 {
-		if _, err := mutators[0].Mutate(ctx, _c.builders[0].mutation); err != nil {
+		if _, err := mutators[0].Mutate(ctx, unccb.builders[0].mutation); err != nil {
 			return nil, err
 		}
 	}
@@ -714,8 +714,8 @@ func (_c *UserNotificationConfigCreateBulk) Save(ctx context.Context) ([]*UserNo
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_c *UserNotificationConfigCreateBulk) SaveX(ctx context.Context) []*UserNotificationConfig {
-	v, err := _c.Save(ctx)
+func (unccb *UserNotificationConfigCreateBulk) SaveX(ctx context.Context) []*UserNotificationConfig {
+	v, err := unccb.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -723,14 +723,14 @@ func (_c *UserNotificationConfigCreateBulk) SaveX(ctx context.Context) []*UserNo
 }
 
 // Exec executes the query.
-func (_c *UserNotificationConfigCreateBulk) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (unccb *UserNotificationConfigCreateBulk) Exec(ctx context.Context) error {
+	_, err := unccb.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *UserNotificationConfigCreateBulk) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (unccb *UserNotificationConfigCreateBulk) ExecX(ctx context.Context) {
+	if err := unccb.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
@@ -750,10 +750,10 @@ func (_c *UserNotificationConfigCreateBulk) ExecX(ctx context.Context) {
 //			SetCreatedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *UserNotificationConfigCreateBulk) OnConflict(opts ...sql.ConflictOption) *UserNotificationConfigUpsertBulk {
-	_c.conflict = opts
+func (unccb *UserNotificationConfigCreateBulk) OnConflict(opts ...sql.ConflictOption) *UserNotificationConfigUpsertBulk {
+	unccb.conflict = opts
 	return &UserNotificationConfigUpsertBulk{
-		create: _c,
+		create: unccb,
 	}
 }
 
@@ -763,10 +763,10 @@ func (_c *UserNotificationConfigCreateBulk) OnConflict(opts ...sql.ConflictOptio
 //	client.UserNotificationConfig.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *UserNotificationConfigCreateBulk) OnConflictColumns(columns ...string) *UserNotificationConfigUpsertBulk {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (unccb *UserNotificationConfigCreateBulk) OnConflictColumns(columns ...string) *UserNotificationConfigUpsertBulk {
+	unccb.conflict = append(unccb.conflict, sql.ConflictColumns(columns...))
 	return &UserNotificationConfigUpsertBulk{
-		create: _c,
+		create: unccb,
 	}
 }
 

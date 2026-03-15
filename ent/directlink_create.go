@@ -24,114 +24,114 @@ type DirectLinkCreate struct {
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_c *DirectLinkCreate) SetDeletedAt(v time.Time) *DirectLinkCreate {
-	_c.mutation.SetDeletedAt(v)
-	return _c
+func (dlc *DirectLinkCreate) SetDeletedAt(t time.Time) *DirectLinkCreate {
+	dlc.mutation.SetDeletedAt(t)
+	return dlc
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_c *DirectLinkCreate) SetNillableDeletedAt(v *time.Time) *DirectLinkCreate {
-	if v != nil {
-		_c.SetDeletedAt(*v)
+func (dlc *DirectLinkCreate) SetNillableDeletedAt(t *time.Time) *DirectLinkCreate {
+	if t != nil {
+		dlc.SetDeletedAt(*t)
 	}
-	return _c
+	return dlc
 }
 
 // SetCreatedAt sets the "created_at" field.
-func (_c *DirectLinkCreate) SetCreatedAt(v time.Time) *DirectLinkCreate {
-	_c.mutation.SetCreatedAt(v)
-	return _c
+func (dlc *DirectLinkCreate) SetCreatedAt(t time.Time) *DirectLinkCreate {
+	dlc.mutation.SetCreatedAt(t)
+	return dlc
 }
 
 // SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (_c *DirectLinkCreate) SetNillableCreatedAt(v *time.Time) *DirectLinkCreate {
-	if v != nil {
-		_c.SetCreatedAt(*v)
+func (dlc *DirectLinkCreate) SetNillableCreatedAt(t *time.Time) *DirectLinkCreate {
+	if t != nil {
+		dlc.SetCreatedAt(*t)
 	}
-	return _c
+	return dlc
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_c *DirectLinkCreate) SetUpdatedAt(v time.Time) *DirectLinkCreate {
-	_c.mutation.SetUpdatedAt(v)
-	return _c
+func (dlc *DirectLinkCreate) SetUpdatedAt(t time.Time) *DirectLinkCreate {
+	dlc.mutation.SetUpdatedAt(t)
+	return dlc
 }
 
 // SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
-func (_c *DirectLinkCreate) SetNillableUpdatedAt(v *time.Time) *DirectLinkCreate {
-	if v != nil {
-		_c.SetUpdatedAt(*v)
+func (dlc *DirectLinkCreate) SetNillableUpdatedAt(t *time.Time) *DirectLinkCreate {
+	if t != nil {
+		dlc.SetUpdatedAt(*t)
 	}
-	return _c
+	return dlc
 }
 
 // SetFileID sets the "file_id" field.
-func (_c *DirectLinkCreate) SetFileID(v uint) *DirectLinkCreate {
-	_c.mutation.SetFileID(v)
-	return _c
+func (dlc *DirectLinkCreate) SetFileID(u uint) *DirectLinkCreate {
+	dlc.mutation.SetFileID(u)
+	return dlc
 }
 
 // SetFileName sets the "file_name" field.
-func (_c *DirectLinkCreate) SetFileName(v string) *DirectLinkCreate {
-	_c.mutation.SetFileName(v)
-	return _c
+func (dlc *DirectLinkCreate) SetFileName(s string) *DirectLinkCreate {
+	dlc.mutation.SetFileName(s)
+	return dlc
 }
 
 // SetSpeedLimit sets the "speed_limit" field.
-func (_c *DirectLinkCreate) SetSpeedLimit(v int64) *DirectLinkCreate {
-	_c.mutation.SetSpeedLimit(v)
-	return _c
+func (dlc *DirectLinkCreate) SetSpeedLimit(i int64) *DirectLinkCreate {
+	dlc.mutation.SetSpeedLimit(i)
+	return dlc
 }
 
 // SetNillableSpeedLimit sets the "speed_limit" field if the given value is not nil.
-func (_c *DirectLinkCreate) SetNillableSpeedLimit(v *int64) *DirectLinkCreate {
-	if v != nil {
-		_c.SetSpeedLimit(*v)
+func (dlc *DirectLinkCreate) SetNillableSpeedLimit(i *int64) *DirectLinkCreate {
+	if i != nil {
+		dlc.SetSpeedLimit(*i)
 	}
-	return _c
+	return dlc
 }
 
 // SetDownloads sets the "downloads" field.
-func (_c *DirectLinkCreate) SetDownloads(v int64) *DirectLinkCreate {
-	_c.mutation.SetDownloads(v)
-	return _c
+func (dlc *DirectLinkCreate) SetDownloads(i int64) *DirectLinkCreate {
+	dlc.mutation.SetDownloads(i)
+	return dlc
 }
 
 // SetNillableDownloads sets the "downloads" field if the given value is not nil.
-func (_c *DirectLinkCreate) SetNillableDownloads(v *int64) *DirectLinkCreate {
-	if v != nil {
-		_c.SetDownloads(*v)
+func (dlc *DirectLinkCreate) SetNillableDownloads(i *int64) *DirectLinkCreate {
+	if i != nil {
+		dlc.SetDownloads(*i)
 	}
-	return _c
+	return dlc
 }
 
 // SetID sets the "id" field.
-func (_c *DirectLinkCreate) SetID(v uint) *DirectLinkCreate {
-	_c.mutation.SetID(v)
-	return _c
+func (dlc *DirectLinkCreate) SetID(u uint) *DirectLinkCreate {
+	dlc.mutation.SetID(u)
+	return dlc
 }
 
 // SetFile sets the "file" edge to the File entity.
-func (_c *DirectLinkCreate) SetFile(v *File) *DirectLinkCreate {
-	return _c.SetFileID(v.ID)
+func (dlc *DirectLinkCreate) SetFile(f *File) *DirectLinkCreate {
+	return dlc.SetFileID(f.ID)
 }
 
 // Mutation returns the DirectLinkMutation object of the builder.
-func (_c *DirectLinkCreate) Mutation() *DirectLinkMutation {
-	return _c.mutation
+func (dlc *DirectLinkCreate) Mutation() *DirectLinkMutation {
+	return dlc.mutation
 }
 
 // Save creates the DirectLink in the database.
-func (_c *DirectLinkCreate) Save(ctx context.Context) (*DirectLink, error) {
-	if err := _c.defaults(); err != nil {
+func (dlc *DirectLinkCreate) Save(ctx context.Context) (*DirectLink, error) {
+	if err := dlc.defaults(); err != nil {
 		return nil, err
 	}
-	return withHooks(ctx, _c.sqlSave, _c.mutation, _c.hooks)
+	return withHooks(ctx, dlc.sqlSave, dlc.mutation, dlc.hooks)
 }
 
 // SaveX calls Save and panics if Save returns an error.
-func (_c *DirectLinkCreate) SaveX(ctx context.Context) *DirectLink {
-	v, err := _c.Save(ctx)
+func (dlc *DirectLinkCreate) SaveX(ctx context.Context) *DirectLink {
+	v, err := dlc.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -139,82 +139,82 @@ func (_c *DirectLinkCreate) SaveX(ctx context.Context) *DirectLink {
 }
 
 // Exec executes the query.
-func (_c *DirectLinkCreate) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (dlc *DirectLinkCreate) Exec(ctx context.Context) error {
+	_, err := dlc.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *DirectLinkCreate) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (dlc *DirectLinkCreate) ExecX(ctx context.Context) {
+	if err := dlc.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_c *DirectLinkCreate) defaults() error {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (dlc *DirectLinkCreate) defaults() error {
+	if _, ok := dlc.mutation.CreatedAt(); !ok {
 		if directlink.DefaultCreatedAt == nil {
 			return fmt.Errorf("ent: uninitialized directlink.DefaultCreatedAt (forgotten import ent/runtime?)")
 		}
 		v := directlink.DefaultCreatedAt()
-		_c.mutation.SetCreatedAt(v)
+		dlc.mutation.SetCreatedAt(v)
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := dlc.mutation.UpdatedAt(); !ok {
 		if directlink.DefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized directlink.DefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := directlink.DefaultUpdatedAt()
-		_c.mutation.SetUpdatedAt(v)
+		dlc.mutation.SetUpdatedAt(v)
 	}
-	if _, ok := _c.mutation.SpeedLimit(); !ok {
+	if _, ok := dlc.mutation.SpeedLimit(); !ok {
 		v := directlink.DefaultSpeedLimit
-		_c.mutation.SetSpeedLimit(v)
+		dlc.mutation.SetSpeedLimit(v)
 	}
-	if _, ok := _c.mutation.Downloads(); !ok {
+	if _, ok := dlc.mutation.Downloads(); !ok {
 		v := directlink.DefaultDownloads
-		_c.mutation.SetDownloads(v)
+		dlc.mutation.SetDownloads(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_c *DirectLinkCreate) check() error {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (dlc *DirectLinkCreate) check() error {
+	if _, ok := dlc.mutation.CreatedAt(); !ok {
 		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "DirectLink.created_at"`)}
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := dlc.mutation.UpdatedAt(); !ok {
 		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "DirectLink.updated_at"`)}
 	}
-	if _, ok := _c.mutation.FileID(); !ok {
+	if _, ok := dlc.mutation.FileID(); !ok {
 		return &ValidationError{Name: "file_id", err: errors.New(`ent: missing required field "DirectLink.file_id"`)}
 	}
-	if _, ok := _c.mutation.FileName(); !ok {
+	if _, ok := dlc.mutation.FileName(); !ok {
 		return &ValidationError{Name: "file_name", err: errors.New(`ent: missing required field "DirectLink.file_name"`)}
 	}
-	if v, ok := _c.mutation.FileName(); ok {
+	if v, ok := dlc.mutation.FileName(); ok {
 		if err := directlink.FileNameValidator(v); err != nil {
 			return &ValidationError{Name: "file_name", err: fmt.Errorf(`ent: validator failed for field "DirectLink.file_name": %w`, err)}
 		}
 	}
-	if _, ok := _c.mutation.SpeedLimit(); !ok {
+	if _, ok := dlc.mutation.SpeedLimit(); !ok {
 		return &ValidationError{Name: "speed_limit", err: errors.New(`ent: missing required field "DirectLink.speed_limit"`)}
 	}
-	if _, ok := _c.mutation.Downloads(); !ok {
+	if _, ok := dlc.mutation.Downloads(); !ok {
 		return &ValidationError{Name: "downloads", err: errors.New(`ent: missing required field "DirectLink.downloads"`)}
 	}
-	if len(_c.mutation.FileIDs()) == 0 {
+	if len(dlc.mutation.FileIDs()) == 0 {
 		return &ValidationError{Name: "file", err: errors.New(`ent: missing required edge "DirectLink.file"`)}
 	}
 	return nil
 }
 
-func (_c *DirectLinkCreate) sqlSave(ctx context.Context) (*DirectLink, error) {
-	if err := _c.check(); err != nil {
+func (dlc *DirectLinkCreate) sqlSave(ctx context.Context) (*DirectLink, error) {
+	if err := dlc.check(); err != nil {
 		return nil, err
 	}
-	_node, _spec := _c.createSpec()
-	if err := sqlgraph.CreateNode(ctx, _c.driver, _spec); err != nil {
+	_node, _spec := dlc.createSpec()
+	if err := sqlgraph.CreateNode(ctx, dlc.driver, _spec); err != nil {
 		if sqlgraph.IsConstraintError(err) {
 			err = &ConstraintError{msg: err.Error(), wrap: err}
 		}
@@ -224,46 +224,46 @@ func (_c *DirectLinkCreate) sqlSave(ctx context.Context) (*DirectLink, error) {
 		id := _spec.ID.Value.(int64)
 		_node.ID = uint(id)
 	}
-	_c.mutation.id = &_node.ID
-	_c.mutation.done = true
+	dlc.mutation.id = &_node.ID
+	dlc.mutation.done = true
 	return _node, nil
 }
 
-func (_c *DirectLinkCreate) createSpec() (*DirectLink, *sqlgraph.CreateSpec) {
+func (dlc *DirectLinkCreate) createSpec() (*DirectLink, *sqlgraph.CreateSpec) {
 	var (
-		_node = &DirectLink{config: _c.config}
+		_node = &DirectLink{config: dlc.config}
 		_spec = sqlgraph.NewCreateSpec(directlink.Table, sqlgraph.NewFieldSpec(directlink.FieldID, field.TypeUint))
 	)
-	_spec.OnConflict = _c.conflict
-	if id, ok := _c.mutation.ID(); ok {
+	_spec.OnConflict = dlc.conflict
+	if id, ok := dlc.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
 	}
-	if value, ok := _c.mutation.DeletedAt(); ok {
+	if value, ok := dlc.mutation.DeletedAt(); ok {
 		_spec.SetField(directlink.FieldDeletedAt, field.TypeTime, value)
 		_node.DeletedAt = &value
 	}
-	if value, ok := _c.mutation.CreatedAt(); ok {
+	if value, ok := dlc.mutation.CreatedAt(); ok {
 		_spec.SetField(directlink.FieldCreatedAt, field.TypeTime, value)
 		_node.CreatedAt = value
 	}
-	if value, ok := _c.mutation.UpdatedAt(); ok {
+	if value, ok := dlc.mutation.UpdatedAt(); ok {
 		_spec.SetField(directlink.FieldUpdatedAt, field.TypeTime, value)
 		_node.UpdatedAt = value
 	}
-	if value, ok := _c.mutation.FileName(); ok {
+	if value, ok := dlc.mutation.FileName(); ok {
 		_spec.SetField(directlink.FieldFileName, field.TypeString, value)
 		_node.FileName = value
 	}
-	if value, ok := _c.mutation.SpeedLimit(); ok {
+	if value, ok := dlc.mutation.SpeedLimit(); ok {
 		_spec.SetField(directlink.FieldSpeedLimit, field.TypeInt64, value)
 		_node.SpeedLimit = value
 	}
-	if value, ok := _c.mutation.Downloads(); ok {
+	if value, ok := dlc.mutation.Downloads(); ok {
 		_spec.SetField(directlink.FieldDownloads, field.TypeInt64, value)
 		_node.Downloads = value
 	}
-	if nodes := _c.mutation.FileIDs(); len(nodes) > 0 {
+	if nodes := dlc.mutation.FileIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2O,
 			Inverse: true,
@@ -299,10 +299,10 @@ func (_c *DirectLinkCreate) createSpec() (*DirectLink, *sqlgraph.CreateSpec) {
 //			SetDeletedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *DirectLinkCreate) OnConflict(opts ...sql.ConflictOption) *DirectLinkUpsertOne {
-	_c.conflict = opts
+func (dlc *DirectLinkCreate) OnConflict(opts ...sql.ConflictOption) *DirectLinkUpsertOne {
+	dlc.conflict = opts
 	return &DirectLinkUpsertOne{
-		create: _c,
+		create: dlc,
 	}
 }
 
@@ -312,10 +312,10 @@ func (_c *DirectLinkCreate) OnConflict(opts ...sql.ConflictOption) *DirectLinkUp
 //	client.DirectLink.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *DirectLinkCreate) OnConflictColumns(columns ...string) *DirectLinkUpsertOne {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (dlc *DirectLinkCreate) OnConflictColumns(columns ...string) *DirectLinkUpsertOne {
+	dlc.conflict = append(dlc.conflict, sql.ConflictColumns(columns...))
 	return &DirectLinkUpsertOne{
-		create: _c,
+		create: dlc,
 	}
 }
 
@@ -620,16 +620,16 @@ type DirectLinkCreateBulk struct {
 }
 
 // Save creates the DirectLink entities in the database.
-func (_c *DirectLinkCreateBulk) Save(ctx context.Context) ([]*DirectLink, error) {
-	if _c.err != nil {
-		return nil, _c.err
+func (dlcb *DirectLinkCreateBulk) Save(ctx context.Context) ([]*DirectLink, error) {
+	if dlcb.err != nil {
+		return nil, dlcb.err
 	}
-	specs := make([]*sqlgraph.CreateSpec, len(_c.builders))
-	nodes := make([]*DirectLink, len(_c.builders))
-	mutators := make([]Mutator, len(_c.builders))
-	for i := range _c.builders {
+	specs := make([]*sqlgraph.CreateSpec, len(dlcb.builders))
+	nodes := make([]*DirectLink, len(dlcb.builders))
+	mutators := make([]Mutator, len(dlcb.builders))
+	for i := range dlcb.builders {
 		func(i int, root context.Context) {
-			builder := _c.builders[i]
+			builder := dlcb.builders[i]
 			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*DirectLinkMutation)
@@ -643,12 +643,12 @@ func (_c *DirectLinkCreateBulk) Save(ctx context.Context) ([]*DirectLink, error)
 				var err error
 				nodes[i], specs[i] = builder.createSpec()
 				if i < len(mutators)-1 {
-					_, err = mutators[i+1].Mutate(root, _c.builders[i+1].mutation)
+					_, err = mutators[i+1].Mutate(root, dlcb.builders[i+1].mutation)
 				} else {
 					spec := &sqlgraph.BatchCreateSpec{Nodes: specs}
-					spec.OnConflict = _c.conflict
+					spec.OnConflict = dlcb.conflict
 					// Invoke the actual operation on the latest mutation in the chain.
-					if err = sqlgraph.BatchCreate(ctx, _c.driver, spec); err != nil {
+					if err = sqlgraph.BatchCreate(ctx, dlcb.driver, spec); err != nil {
 						if sqlgraph.IsConstraintError(err) {
 							err = &ConstraintError{msg: err.Error(), wrap: err}
 						}
@@ -672,7 +672,7 @@ func (_c *DirectLinkCreateBulk) Save(ctx context.Context) ([]*DirectLink, error)
 		}(i, ctx)
 	}
 	if len(mutators) > 0 {
-		if _, err := mutators[0].Mutate(ctx, _c.builders[0].mutation); err != nil {
+		if _, err := mutators[0].Mutate(ctx, dlcb.builders[0].mutation); err != nil {
 			return nil, err
 		}
 	}
@@ -680,8 +680,8 @@ func (_c *DirectLinkCreateBulk) Save(ctx context.Context) ([]*DirectLink, error)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_c *DirectLinkCreateBulk) SaveX(ctx context.Context) []*DirectLink {
-	v, err := _c.Save(ctx)
+func (dlcb *DirectLinkCreateBulk) SaveX(ctx context.Context) []*DirectLink {
+	v, err := dlcb.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -689,14 +689,14 @@ func (_c *DirectLinkCreateBulk) SaveX(ctx context.Context) []*DirectLink {
 }
 
 // Exec executes the query.
-func (_c *DirectLinkCreateBulk) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (dlcb *DirectLinkCreateBulk) Exec(ctx context.Context) error {
+	_, err := dlcb.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *DirectLinkCreateBulk) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (dlcb *DirectLinkCreateBulk) ExecX(ctx context.Context) {
+	if err := dlcb.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
@@ -716,10 +716,10 @@ func (_c *DirectLinkCreateBulk) ExecX(ctx context.Context) {
 //			SetDeletedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *DirectLinkCreateBulk) OnConflict(opts ...sql.ConflictOption) *DirectLinkUpsertBulk {
-	_c.conflict = opts
+func (dlcb *DirectLinkCreateBulk) OnConflict(opts ...sql.ConflictOption) *DirectLinkUpsertBulk {
+	dlcb.conflict = opts
 	return &DirectLinkUpsertBulk{
-		create: _c,
+		create: dlcb,
 	}
 }
 
@@ -729,10 +729,10 @@ func (_c *DirectLinkCreateBulk) OnConflict(opts ...sql.ConflictOption) *DirectLi
 //	client.DirectLink.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *DirectLinkCreateBulk) OnConflictColumns(columns ...string) *DirectLinkUpsertBulk {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (dlcb *DirectLinkCreateBulk) OnConflictColumns(columns ...string) *DirectLinkUpsertBulk {
+	dlcb.conflict = append(dlcb.conflict, sql.ConflictColumns(columns...))
 	return &DirectLinkUpsertBulk{
-		create: _c,
+		create: dlcb,
 	}
 }
 

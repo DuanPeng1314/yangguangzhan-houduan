@@ -31,44 +31,44 @@ type UserInstalledThemeQuery struct {
 }
 
 // Where adds a new predicate for the UserInstalledThemeQuery builder.
-func (_q *UserInstalledThemeQuery) Where(ps ...predicate.UserInstalledTheme) *UserInstalledThemeQuery {
-	_q.predicates = append(_q.predicates, ps...)
-	return _q
+func (uitq *UserInstalledThemeQuery) Where(ps ...predicate.UserInstalledTheme) *UserInstalledThemeQuery {
+	uitq.predicates = append(uitq.predicates, ps...)
+	return uitq
 }
 
 // Limit the number of records to be returned by this query.
-func (_q *UserInstalledThemeQuery) Limit(limit int) *UserInstalledThemeQuery {
-	_q.ctx.Limit = &limit
-	return _q
+func (uitq *UserInstalledThemeQuery) Limit(limit int) *UserInstalledThemeQuery {
+	uitq.ctx.Limit = &limit
+	return uitq
 }
 
 // Offset to start from.
-func (_q *UserInstalledThemeQuery) Offset(offset int) *UserInstalledThemeQuery {
-	_q.ctx.Offset = &offset
-	return _q
+func (uitq *UserInstalledThemeQuery) Offset(offset int) *UserInstalledThemeQuery {
+	uitq.ctx.Offset = &offset
+	return uitq
 }
 
 // Unique configures the query builder to filter duplicate records on query.
 // By default, unique is set to true, and can be disabled using this method.
-func (_q *UserInstalledThemeQuery) Unique(unique bool) *UserInstalledThemeQuery {
-	_q.ctx.Unique = &unique
-	return _q
+func (uitq *UserInstalledThemeQuery) Unique(unique bool) *UserInstalledThemeQuery {
+	uitq.ctx.Unique = &unique
+	return uitq
 }
 
 // Order specifies how the records should be ordered.
-func (_q *UserInstalledThemeQuery) Order(o ...userinstalledtheme.OrderOption) *UserInstalledThemeQuery {
-	_q.order = append(_q.order, o...)
-	return _q
+func (uitq *UserInstalledThemeQuery) Order(o ...userinstalledtheme.OrderOption) *UserInstalledThemeQuery {
+	uitq.order = append(uitq.order, o...)
+	return uitq
 }
 
 // QueryUser chains the current query on the "user" edge.
-func (_q *UserInstalledThemeQuery) QueryUser() *UserQuery {
-	query := (&UserClient{config: _q.config}).Query()
+func (uitq *UserInstalledThemeQuery) QueryUser() *UserQuery {
+	query := (&UserClient{config: uitq.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
+		if err := uitq.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := _q.sqlQuery(ctx)
+		selector := uitq.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -77,7 +77,7 @@ func (_q *UserInstalledThemeQuery) QueryUser() *UserQuery {
 			sqlgraph.To(user.Table, user.FieldID),
 			sqlgraph.Edge(sqlgraph.M2O, true, userinstalledtheme.UserTable, userinstalledtheme.UserColumn),
 		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(uitq.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
@@ -85,8 +85,8 @@ func (_q *UserInstalledThemeQuery) QueryUser() *UserQuery {
 
 // First returns the first UserInstalledTheme entity from the query.
 // Returns a *NotFoundError when no UserInstalledTheme was found.
-func (_q *UserInstalledThemeQuery) First(ctx context.Context) (*UserInstalledTheme, error) {
-	nodes, err := _q.Limit(1).All(setContextOp(ctx, _q.ctx, ent.OpQueryFirst))
+func (uitq *UserInstalledThemeQuery) First(ctx context.Context) (*UserInstalledTheme, error) {
+	nodes, err := uitq.Limit(1).All(setContextOp(ctx, uitq.ctx, ent.OpQueryFirst))
 	if err != nil {
 		return nil, err
 	}
@@ -97,8 +97,8 @@ func (_q *UserInstalledThemeQuery) First(ctx context.Context) (*UserInstalledThe
 }
 
 // FirstX is like First, but panics if an error occurs.
-func (_q *UserInstalledThemeQuery) FirstX(ctx context.Context) *UserInstalledTheme {
-	node, err := _q.First(ctx)
+func (uitq *UserInstalledThemeQuery) FirstX(ctx context.Context) *UserInstalledTheme {
+	node, err := uitq.First(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -107,9 +107,9 @@ func (_q *UserInstalledThemeQuery) FirstX(ctx context.Context) *UserInstalledThe
 
 // FirstID returns the first UserInstalledTheme ID from the query.
 // Returns a *NotFoundError when no UserInstalledTheme ID was found.
-func (_q *UserInstalledThemeQuery) FirstID(ctx context.Context) (id uint, err error) {
+func (uitq *UserInstalledThemeQuery) FirstID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
+	if ids, err = uitq.Limit(1).IDs(setContextOp(ctx, uitq.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
 	if len(ids) == 0 {
@@ -120,8 +120,8 @@ func (_q *UserInstalledThemeQuery) FirstID(ctx context.Context) (id uint, err er
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (_q *UserInstalledThemeQuery) FirstIDX(ctx context.Context) uint {
-	id, err := _q.FirstID(ctx)
+func (uitq *UserInstalledThemeQuery) FirstIDX(ctx context.Context) uint {
+	id, err := uitq.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -131,8 +131,8 @@ func (_q *UserInstalledThemeQuery) FirstIDX(ctx context.Context) uint {
 // Only returns a single UserInstalledTheme entity found by the query, ensuring it only returns one.
 // Returns a *NotSingularError when more than one UserInstalledTheme entity is found.
 // Returns a *NotFoundError when no UserInstalledTheme entities are found.
-func (_q *UserInstalledThemeQuery) Only(ctx context.Context) (*UserInstalledTheme, error) {
-	nodes, err := _q.Limit(2).All(setContextOp(ctx, _q.ctx, ent.OpQueryOnly))
+func (uitq *UserInstalledThemeQuery) Only(ctx context.Context) (*UserInstalledTheme, error) {
+	nodes, err := uitq.Limit(2).All(setContextOp(ctx, uitq.ctx, ent.OpQueryOnly))
 	if err != nil {
 		return nil, err
 	}
@@ -147,8 +147,8 @@ func (_q *UserInstalledThemeQuery) Only(ctx context.Context) (*UserInstalledThem
 }
 
 // OnlyX is like Only, but panics if an error occurs.
-func (_q *UserInstalledThemeQuery) OnlyX(ctx context.Context) *UserInstalledTheme {
-	node, err := _q.Only(ctx)
+func (uitq *UserInstalledThemeQuery) OnlyX(ctx context.Context) *UserInstalledTheme {
+	node, err := uitq.Only(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -158,9 +158,9 @@ func (_q *UserInstalledThemeQuery) OnlyX(ctx context.Context) *UserInstalledThem
 // OnlyID is like Only, but returns the only UserInstalledTheme ID in the query.
 // Returns a *NotSingularError when more than one UserInstalledTheme ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (_q *UserInstalledThemeQuery) OnlyID(ctx context.Context) (id uint, err error) {
+func (uitq *UserInstalledThemeQuery) OnlyID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
+	if ids, err = uitq.Limit(2).IDs(setContextOp(ctx, uitq.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
 	switch len(ids) {
@@ -175,8 +175,8 @@ func (_q *UserInstalledThemeQuery) OnlyID(ctx context.Context) (id uint, err err
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (_q *UserInstalledThemeQuery) OnlyIDX(ctx context.Context) uint {
-	id, err := _q.OnlyID(ctx)
+func (uitq *UserInstalledThemeQuery) OnlyIDX(ctx context.Context) uint {
+	id, err := uitq.OnlyID(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -184,18 +184,18 @@ func (_q *UserInstalledThemeQuery) OnlyIDX(ctx context.Context) uint {
 }
 
 // All executes the query and returns a list of UserInstalledThemes.
-func (_q *UserInstalledThemeQuery) All(ctx context.Context) ([]*UserInstalledTheme, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryAll)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (uitq *UserInstalledThemeQuery) All(ctx context.Context) ([]*UserInstalledTheme, error) {
+	ctx = setContextOp(ctx, uitq.ctx, ent.OpQueryAll)
+	if err := uitq.prepareQuery(ctx); err != nil {
 		return nil, err
 	}
 	qr := querierAll[[]*UserInstalledTheme, *UserInstalledThemeQuery]()
-	return withInterceptors[[]*UserInstalledTheme](ctx, _q, qr, _q.inters)
+	return withInterceptors[[]*UserInstalledTheme](ctx, uitq, qr, uitq.inters)
 }
 
 // AllX is like All, but panics if an error occurs.
-func (_q *UserInstalledThemeQuery) AllX(ctx context.Context) []*UserInstalledTheme {
-	nodes, err := _q.All(ctx)
+func (uitq *UserInstalledThemeQuery) AllX(ctx context.Context) []*UserInstalledTheme {
+	nodes, err := uitq.All(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -203,20 +203,20 @@ func (_q *UserInstalledThemeQuery) AllX(ctx context.Context) []*UserInstalledThe
 }
 
 // IDs executes the query and returns a list of UserInstalledTheme IDs.
-func (_q *UserInstalledThemeQuery) IDs(ctx context.Context) (ids []uint, err error) {
-	if _q.ctx.Unique == nil && _q.path != nil {
-		_q.Unique(true)
+func (uitq *UserInstalledThemeQuery) IDs(ctx context.Context) (ids []uint, err error) {
+	if uitq.ctx.Unique == nil && uitq.path != nil {
+		uitq.Unique(true)
 	}
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryIDs)
-	if err = _q.Select(userinstalledtheme.FieldID).Scan(ctx, &ids); err != nil {
+	ctx = setContextOp(ctx, uitq.ctx, ent.OpQueryIDs)
+	if err = uitq.Select(userinstalledtheme.FieldID).Scan(ctx, &ids); err != nil {
 		return nil, err
 	}
 	return ids, nil
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (_q *UserInstalledThemeQuery) IDsX(ctx context.Context) []uint {
-	ids, err := _q.IDs(ctx)
+func (uitq *UserInstalledThemeQuery) IDsX(ctx context.Context) []uint {
+	ids, err := uitq.IDs(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -224,17 +224,17 @@ func (_q *UserInstalledThemeQuery) IDsX(ctx context.Context) []uint {
 }
 
 // Count returns the count of the given query.
-func (_q *UserInstalledThemeQuery) Count(ctx context.Context) (int, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryCount)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (uitq *UserInstalledThemeQuery) Count(ctx context.Context) (int, error) {
+	ctx = setContextOp(ctx, uitq.ctx, ent.OpQueryCount)
+	if err := uitq.prepareQuery(ctx); err != nil {
 		return 0, err
 	}
-	return withInterceptors[int](ctx, _q, querierCount[*UserInstalledThemeQuery](), _q.inters)
+	return withInterceptors[int](ctx, uitq, querierCount[*UserInstalledThemeQuery](), uitq.inters)
 }
 
 // CountX is like Count, but panics if an error occurs.
-func (_q *UserInstalledThemeQuery) CountX(ctx context.Context) int {
-	count, err := _q.Count(ctx)
+func (uitq *UserInstalledThemeQuery) CountX(ctx context.Context) int {
+	count, err := uitq.Count(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -242,9 +242,9 @@ func (_q *UserInstalledThemeQuery) CountX(ctx context.Context) int {
 }
 
 // Exist returns true if the query has elements in the graph.
-func (_q *UserInstalledThemeQuery) Exist(ctx context.Context) (bool, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryExist)
-	switch _, err := _q.FirstID(ctx); {
+func (uitq *UserInstalledThemeQuery) Exist(ctx context.Context) (bool, error) {
+	ctx = setContextOp(ctx, uitq.ctx, ent.OpQueryExist)
+	switch _, err := uitq.FirstID(ctx); {
 	case IsNotFound(err):
 		return false, nil
 	case err != nil:
@@ -255,8 +255,8 @@ func (_q *UserInstalledThemeQuery) Exist(ctx context.Context) (bool, error) {
 }
 
 // ExistX is like Exist, but panics if an error occurs.
-func (_q *UserInstalledThemeQuery) ExistX(ctx context.Context) bool {
-	exist, err := _q.Exist(ctx)
+func (uitq *UserInstalledThemeQuery) ExistX(ctx context.Context) bool {
+	exist, err := uitq.Exist(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -265,33 +265,33 @@ func (_q *UserInstalledThemeQuery) ExistX(ctx context.Context) bool {
 
 // Clone returns a duplicate of the UserInstalledThemeQuery builder, including all associated steps. It can be
 // used to prepare common query builders and use them differently after the clone is made.
-func (_q *UserInstalledThemeQuery) Clone() *UserInstalledThemeQuery {
-	if _q == nil {
+func (uitq *UserInstalledThemeQuery) Clone() *UserInstalledThemeQuery {
+	if uitq == nil {
 		return nil
 	}
 	return &UserInstalledThemeQuery{
-		config:     _q.config,
-		ctx:        _q.ctx.Clone(),
-		order:      append([]userinstalledtheme.OrderOption{}, _q.order...),
-		inters:     append([]Interceptor{}, _q.inters...),
-		predicates: append([]predicate.UserInstalledTheme{}, _q.predicates...),
-		withUser:   _q.withUser.Clone(),
+		config:     uitq.config,
+		ctx:        uitq.ctx.Clone(),
+		order:      append([]userinstalledtheme.OrderOption{}, uitq.order...),
+		inters:     append([]Interceptor{}, uitq.inters...),
+		predicates: append([]predicate.UserInstalledTheme{}, uitq.predicates...),
+		withUser:   uitq.withUser.Clone(),
 		// clone intermediate query.
-		sql:       _q.sql.Clone(),
-		path:      _q.path,
-		modifiers: append([]func(*sql.Selector){}, _q.modifiers...),
+		sql:       uitq.sql.Clone(),
+		path:      uitq.path,
+		modifiers: append([]func(*sql.Selector){}, uitq.modifiers...),
 	}
 }
 
 // WithUser tells the query-builder to eager-load the nodes that are connected to
 // the "user" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *UserInstalledThemeQuery) WithUser(opts ...func(*UserQuery)) *UserInstalledThemeQuery {
-	query := (&UserClient{config: _q.config}).Query()
+func (uitq *UserInstalledThemeQuery) WithUser(opts ...func(*UserQuery)) *UserInstalledThemeQuery {
+	query := (&UserClient{config: uitq.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withUser = query
-	return _q
+	uitq.withUser = query
+	return uitq
 }
 
 // GroupBy is used to group vertices by one or more fields/columns.
@@ -308,10 +308,10 @@ func (_q *UserInstalledThemeQuery) WithUser(opts ...func(*UserQuery)) *UserInsta
 //		GroupBy(userinstalledtheme.FieldDeletedAt).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
-func (_q *UserInstalledThemeQuery) GroupBy(field string, fields ...string) *UserInstalledThemeGroupBy {
-	_q.ctx.Fields = append([]string{field}, fields...)
-	grbuild := &UserInstalledThemeGroupBy{build: _q}
-	grbuild.flds = &_q.ctx.Fields
+func (uitq *UserInstalledThemeQuery) GroupBy(field string, fields ...string) *UserInstalledThemeGroupBy {
+	uitq.ctx.Fields = append([]string{field}, fields...)
+	grbuild := &UserInstalledThemeGroupBy{build: uitq}
+	grbuild.flds = &uitq.ctx.Fields
 	grbuild.label = userinstalledtheme.Label
 	grbuild.scan = grbuild.Scan
 	return grbuild
@@ -329,76 +329,76 @@ func (_q *UserInstalledThemeQuery) GroupBy(field string, fields ...string) *User
 //	client.UserInstalledTheme.Query().
 //		Select(userinstalledtheme.FieldDeletedAt).
 //		Scan(ctx, &v)
-func (_q *UserInstalledThemeQuery) Select(fields ...string) *UserInstalledThemeSelect {
-	_q.ctx.Fields = append(_q.ctx.Fields, fields...)
-	sbuild := &UserInstalledThemeSelect{UserInstalledThemeQuery: _q}
+func (uitq *UserInstalledThemeQuery) Select(fields ...string) *UserInstalledThemeSelect {
+	uitq.ctx.Fields = append(uitq.ctx.Fields, fields...)
+	sbuild := &UserInstalledThemeSelect{UserInstalledThemeQuery: uitq}
 	sbuild.label = userinstalledtheme.Label
-	sbuild.flds, sbuild.scan = &_q.ctx.Fields, sbuild.Scan
+	sbuild.flds, sbuild.scan = &uitq.ctx.Fields, sbuild.Scan
 	return sbuild
 }
 
 // Aggregate returns a UserInstalledThemeSelect configured with the given aggregations.
-func (_q *UserInstalledThemeQuery) Aggregate(fns ...AggregateFunc) *UserInstalledThemeSelect {
-	return _q.Select().Aggregate(fns...)
+func (uitq *UserInstalledThemeQuery) Aggregate(fns ...AggregateFunc) *UserInstalledThemeSelect {
+	return uitq.Select().Aggregate(fns...)
 }
 
-func (_q *UserInstalledThemeQuery) prepareQuery(ctx context.Context) error {
-	for _, inter := range _q.inters {
+func (uitq *UserInstalledThemeQuery) prepareQuery(ctx context.Context) error {
+	for _, inter := range uitq.inters {
 		if inter == nil {
 			return fmt.Errorf("ent: uninitialized interceptor (forgotten import ent/runtime?)")
 		}
 		if trv, ok := inter.(Traverser); ok {
-			if err := trv.Traverse(ctx, _q); err != nil {
+			if err := trv.Traverse(ctx, uitq); err != nil {
 				return err
 			}
 		}
 	}
-	for _, f := range _q.ctx.Fields {
+	for _, f := range uitq.ctx.Fields {
 		if !userinstalledtheme.ValidColumn(f) {
 			return &ValidationError{Name: f, err: fmt.Errorf("ent: invalid field %q for query", f)}
 		}
 	}
-	if _q.path != nil {
-		prev, err := _q.path(ctx)
+	if uitq.path != nil {
+		prev, err := uitq.path(ctx)
 		if err != nil {
 			return err
 		}
-		_q.sql = prev
+		uitq.sql = prev
 	}
 	return nil
 }
 
-func (_q *UserInstalledThemeQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*UserInstalledTheme, error) {
+func (uitq *UserInstalledThemeQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*UserInstalledTheme, error) {
 	var (
 		nodes       = []*UserInstalledTheme{}
-		_spec       = _q.querySpec()
+		_spec       = uitq.querySpec()
 		loadedTypes = [1]bool{
-			_q.withUser != nil,
+			uitq.withUser != nil,
 		}
 	)
 	_spec.ScanValues = func(columns []string) ([]any, error) {
 		return (*UserInstalledTheme).scanValues(nil, columns)
 	}
 	_spec.Assign = func(columns []string, values []any) error {
-		node := &UserInstalledTheme{config: _q.config}
+		node := &UserInstalledTheme{config: uitq.config}
 		nodes = append(nodes, node)
 		node.Edges.loadedTypes = loadedTypes
 		return node.assignValues(columns, values)
 	}
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+	if len(uitq.modifiers) > 0 {
+		_spec.Modifiers = uitq.modifiers
 	}
 	for i := range hooks {
 		hooks[i](ctx, _spec)
 	}
-	if err := sqlgraph.QueryNodes(ctx, _q.driver, _spec); err != nil {
+	if err := sqlgraph.QueryNodes(ctx, uitq.driver, _spec); err != nil {
 		return nil, err
 	}
 	if len(nodes) == 0 {
 		return nodes, nil
 	}
-	if query := _q.withUser; query != nil {
-		if err := _q.loadUser(ctx, query, nodes, nil,
+	if query := uitq.withUser; query != nil {
+		if err := uitq.loadUser(ctx, query, nodes, nil,
 			func(n *UserInstalledTheme, e *User) { n.Edges.User = e }); err != nil {
 			return nil, err
 		}
@@ -406,7 +406,7 @@ func (_q *UserInstalledThemeQuery) sqlAll(ctx context.Context, hooks ...queryHoo
 	return nodes, nil
 }
 
-func (_q *UserInstalledThemeQuery) loadUser(ctx context.Context, query *UserQuery, nodes []*UserInstalledTheme, init func(*UserInstalledTheme), assign func(*UserInstalledTheme, *User)) error {
+func (uitq *UserInstalledThemeQuery) loadUser(ctx context.Context, query *UserQuery, nodes []*UserInstalledTheme, init func(*UserInstalledTheme), assign func(*UserInstalledTheme, *User)) error {
 	ids := make([]uint, 0, len(nodes))
 	nodeids := make(map[uint][]*UserInstalledTheme)
 	for i := range nodes {
@@ -436,27 +436,27 @@ func (_q *UserInstalledThemeQuery) loadUser(ctx context.Context, query *UserQuer
 	return nil
 }
 
-func (_q *UserInstalledThemeQuery) sqlCount(ctx context.Context) (int, error) {
-	_spec := _q.querySpec()
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+func (uitq *UserInstalledThemeQuery) sqlCount(ctx context.Context) (int, error) {
+	_spec := uitq.querySpec()
+	if len(uitq.modifiers) > 0 {
+		_spec.Modifiers = uitq.modifiers
 	}
-	_spec.Node.Columns = _q.ctx.Fields
-	if len(_q.ctx.Fields) > 0 {
-		_spec.Unique = _q.ctx.Unique != nil && *_q.ctx.Unique
+	_spec.Node.Columns = uitq.ctx.Fields
+	if len(uitq.ctx.Fields) > 0 {
+		_spec.Unique = uitq.ctx.Unique != nil && *uitq.ctx.Unique
 	}
-	return sqlgraph.CountNodes(ctx, _q.driver, _spec)
+	return sqlgraph.CountNodes(ctx, uitq.driver, _spec)
 }
 
-func (_q *UserInstalledThemeQuery) querySpec() *sqlgraph.QuerySpec {
+func (uitq *UserInstalledThemeQuery) querySpec() *sqlgraph.QuerySpec {
 	_spec := sqlgraph.NewQuerySpec(userinstalledtheme.Table, userinstalledtheme.Columns, sqlgraph.NewFieldSpec(userinstalledtheme.FieldID, field.TypeUint))
-	_spec.From = _q.sql
-	if unique := _q.ctx.Unique; unique != nil {
+	_spec.From = uitq.sql
+	if unique := uitq.ctx.Unique; unique != nil {
 		_spec.Unique = *unique
-	} else if _q.path != nil {
+	} else if uitq.path != nil {
 		_spec.Unique = true
 	}
-	if fields := _q.ctx.Fields; len(fields) > 0 {
+	if fields := uitq.ctx.Fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, userinstalledtheme.FieldID)
 		for i := range fields {
@@ -464,24 +464,24 @@ func (_q *UserInstalledThemeQuery) querySpec() *sqlgraph.QuerySpec {
 				_spec.Node.Columns = append(_spec.Node.Columns, fields[i])
 			}
 		}
-		if _q.withUser != nil {
+		if uitq.withUser != nil {
 			_spec.Node.AddColumnOnce(userinstalledtheme.FieldUserID)
 		}
 	}
-	if ps := _q.predicates; len(ps) > 0 {
+	if ps := uitq.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := uitq.ctx.Limit; limit != nil {
 		_spec.Limit = *limit
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := uitq.ctx.Offset; offset != nil {
 		_spec.Offset = *offset
 	}
-	if ps := _q.order; len(ps) > 0 {
+	if ps := uitq.order; len(ps) > 0 {
 		_spec.Order = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
@@ -491,45 +491,45 @@ func (_q *UserInstalledThemeQuery) querySpec() *sqlgraph.QuerySpec {
 	return _spec
 }
 
-func (_q *UserInstalledThemeQuery) sqlQuery(ctx context.Context) *sql.Selector {
-	builder := sql.Dialect(_q.driver.Dialect())
+func (uitq *UserInstalledThemeQuery) sqlQuery(ctx context.Context) *sql.Selector {
+	builder := sql.Dialect(uitq.driver.Dialect())
 	t1 := builder.Table(userinstalledtheme.Table)
-	columns := _q.ctx.Fields
+	columns := uitq.ctx.Fields
 	if len(columns) == 0 {
 		columns = userinstalledtheme.Columns
 	}
 	selector := builder.Select(t1.Columns(columns...)...).From(t1)
-	if _q.sql != nil {
-		selector = _q.sql
+	if uitq.sql != nil {
+		selector = uitq.sql
 		selector.Select(selector.Columns(columns...)...)
 	}
-	if _q.ctx.Unique != nil && *_q.ctx.Unique {
+	if uitq.ctx.Unique != nil && *uitq.ctx.Unique {
 		selector.Distinct()
 	}
-	for _, m := range _q.modifiers {
+	for _, m := range uitq.modifiers {
 		m(selector)
 	}
-	for _, p := range _q.predicates {
+	for _, p := range uitq.predicates {
 		p(selector)
 	}
-	for _, p := range _q.order {
+	for _, p := range uitq.order {
 		p(selector)
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := uitq.ctx.Offset; offset != nil {
 		// limit is mandatory for offset clause. We start
 		// with default value, and override it below if needed.
 		selector.Offset(*offset).Limit(math.MaxInt32)
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := uitq.ctx.Limit; limit != nil {
 		selector.Limit(*limit)
 	}
 	return selector
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_q *UserInstalledThemeQuery) Modify(modifiers ...func(s *sql.Selector)) *UserInstalledThemeSelect {
-	_q.modifiers = append(_q.modifiers, modifiers...)
-	return _q.Select()
+func (uitq *UserInstalledThemeQuery) Modify(modifiers ...func(s *sql.Selector)) *UserInstalledThemeSelect {
+	uitq.modifiers = append(uitq.modifiers, modifiers...)
+	return uitq.Select()
 }
 
 // UserInstalledThemeGroupBy is the group-by builder for UserInstalledTheme entities.
@@ -539,41 +539,41 @@ type UserInstalledThemeGroupBy struct {
 }
 
 // Aggregate adds the given aggregation functions to the group-by query.
-func (_g *UserInstalledThemeGroupBy) Aggregate(fns ...AggregateFunc) *UserInstalledThemeGroupBy {
-	_g.fns = append(_g.fns, fns...)
-	return _g
+func (uitgb *UserInstalledThemeGroupBy) Aggregate(fns ...AggregateFunc) *UserInstalledThemeGroupBy {
+	uitgb.fns = append(uitgb.fns, fns...)
+	return uitgb
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_g *UserInstalledThemeGroupBy) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _g.build.ctx, ent.OpQueryGroupBy)
-	if err := _g.build.prepareQuery(ctx); err != nil {
+func (uitgb *UserInstalledThemeGroupBy) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, uitgb.build.ctx, ent.OpQueryGroupBy)
+	if err := uitgb.build.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*UserInstalledThemeQuery, *UserInstalledThemeGroupBy](ctx, _g.build, _g, _g.build.inters, v)
+	return scanWithInterceptors[*UserInstalledThemeQuery, *UserInstalledThemeGroupBy](ctx, uitgb.build, uitgb, uitgb.build.inters, v)
 }
 
-func (_g *UserInstalledThemeGroupBy) sqlScan(ctx context.Context, root *UserInstalledThemeQuery, v any) error {
+func (uitgb *UserInstalledThemeGroupBy) sqlScan(ctx context.Context, root *UserInstalledThemeQuery, v any) error {
 	selector := root.sqlQuery(ctx).Select()
-	aggregation := make([]string, 0, len(_g.fns))
-	for _, fn := range _g.fns {
+	aggregation := make([]string, 0, len(uitgb.fns))
+	for _, fn := range uitgb.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
 	if len(selector.SelectedColumns()) == 0 {
-		columns := make([]string, 0, len(*_g.flds)+len(_g.fns))
-		for _, f := range *_g.flds {
+		columns := make([]string, 0, len(*uitgb.flds)+len(uitgb.fns))
+		for _, f := range *uitgb.flds {
 			columns = append(columns, selector.C(f))
 		}
 		columns = append(columns, aggregation...)
 		selector.Select(columns...)
 	}
-	selector.GroupBy(selector.Columns(*_g.flds...)...)
+	selector.GroupBy(selector.Columns(*uitgb.flds...)...)
 	if err := selector.Err(); err != nil {
 		return err
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _g.build.driver.Query(ctx, query, args, rows); err != nil {
+	if err := uitgb.build.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -587,27 +587,27 @@ type UserInstalledThemeSelect struct {
 }
 
 // Aggregate adds the given aggregation functions to the selector query.
-func (_s *UserInstalledThemeSelect) Aggregate(fns ...AggregateFunc) *UserInstalledThemeSelect {
-	_s.fns = append(_s.fns, fns...)
-	return _s
+func (uits *UserInstalledThemeSelect) Aggregate(fns ...AggregateFunc) *UserInstalledThemeSelect {
+	uits.fns = append(uits.fns, fns...)
+	return uits
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_s *UserInstalledThemeSelect) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _s.ctx, ent.OpQuerySelect)
-	if err := _s.prepareQuery(ctx); err != nil {
+func (uits *UserInstalledThemeSelect) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, uits.ctx, ent.OpQuerySelect)
+	if err := uits.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*UserInstalledThemeQuery, *UserInstalledThemeSelect](ctx, _s.UserInstalledThemeQuery, _s, _s.inters, v)
+	return scanWithInterceptors[*UserInstalledThemeQuery, *UserInstalledThemeSelect](ctx, uits.UserInstalledThemeQuery, uits, uits.inters, v)
 }
 
-func (_s *UserInstalledThemeSelect) sqlScan(ctx context.Context, root *UserInstalledThemeQuery, v any) error {
+func (uits *UserInstalledThemeSelect) sqlScan(ctx context.Context, root *UserInstalledThemeQuery, v any) error {
 	selector := root.sqlQuery(ctx)
-	aggregation := make([]string, 0, len(_s.fns))
-	for _, fn := range _s.fns {
+	aggregation := make([]string, 0, len(uits.fns))
+	for _, fn := range uits.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
-	switch n := len(*_s.selector.flds); {
+	switch n := len(*uits.selector.flds); {
 	case n == 0 && len(aggregation) > 0:
 		selector.Select(aggregation...)
 	case n != 0 && len(aggregation) > 0:
@@ -615,7 +615,7 @@ func (_s *UserInstalledThemeSelect) sqlScan(ctx context.Context, root *UserInsta
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _s.driver.Query(ctx, query, args, rows); err != nil {
+	if err := uits.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -623,7 +623,7 @@ func (_s *UserInstalledThemeSelect) sqlScan(ctx context.Context, root *UserInsta
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_s *UserInstalledThemeSelect) Modify(modifiers ...func(s *sql.Selector)) *UserInstalledThemeSelect {
-	_s.modifiers = append(_s.modifiers, modifiers...)
-	return _s
+func (uits *UserInstalledThemeSelect) Modify(modifiers ...func(s *sql.Selector)) *UserInstalledThemeSelect {
+	uits.modifiers = append(uits.modifiers, modifiers...)
+	return uits
 }

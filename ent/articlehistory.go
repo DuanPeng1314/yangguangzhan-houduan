@@ -99,7 +99,7 @@ func (*ArticleHistory) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the ArticleHistory fields.
-func (_m *ArticleHistory) assignValues(columns []string, values []any) error {
+func (ah *ArticleHistory) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -110,60 +110,60 @@ func (_m *ArticleHistory) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint(value.Int64)
+			ah.ID = uint(value.Int64)
 		case articlehistory.FieldArticleID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field article_id", values[i])
 			} else if value.Valid {
-				_m.ArticleID = uint(value.Int64)
+				ah.ArticleID = uint(value.Int64)
 			}
 		case articlehistory.FieldVersion:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field version", values[i])
 			} else if value.Valid {
-				_m.Version = int(value.Int64)
+				ah.Version = int(value.Int64)
 			}
 		case articlehistory.FieldTitle:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field title", values[i])
 			} else if value.Valid {
-				_m.Title = value.String
+				ah.Title = value.String
 			}
 		case articlehistory.FieldContentMd:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field content_md", values[i])
 			} else if value.Valid {
-				_m.ContentMd = value.String
+				ah.ContentMd = value.String
 			}
 		case articlehistory.FieldContentHTML:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field content_html", values[i])
 			} else if value.Valid {
-				_m.ContentHTML = value.String
+				ah.ContentHTML = value.String
 			}
 		case articlehistory.FieldCoverURL:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field cover_url", values[i])
 			} else if value.Valid {
-				_m.CoverURL = value.String
+				ah.CoverURL = value.String
 			}
 		case articlehistory.FieldTopImgURL:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field top_img_url", values[i])
 			} else if value.Valid {
-				_m.TopImgURL = value.String
+				ah.TopImgURL = value.String
 			}
 		case articlehistory.FieldPrimaryColor:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field primary_color", values[i])
 			} else if value.Valid {
-				_m.PrimaryColor = value.String
+				ah.PrimaryColor = value.String
 			}
 		case articlehistory.FieldSummaries:
 			if value, ok := values[i].(*[]byte); !ok {
 				return fmt.Errorf("unexpected type %T for field summaries", values[i])
 			} else if value != nil && len(*value) > 0 {
-				if err := json.Unmarshal(*value, &_m.Summaries); err != nil {
+				if err := json.Unmarshal(*value, &ah.Summaries); err != nil {
 					return fmt.Errorf("unmarshal field summaries: %w", err)
 				}
 			}
@@ -171,48 +171,48 @@ func (_m *ArticleHistory) assignValues(columns []string, values []any) error {
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field word_count", values[i])
 			} else if value.Valid {
-				_m.WordCount = int(value.Int64)
+				ah.WordCount = int(value.Int64)
 			}
 		case articlehistory.FieldKeywords:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field keywords", values[i])
 			} else if value.Valid {
-				_m.Keywords = value.String
+				ah.Keywords = value.String
 			}
 		case articlehistory.FieldEditorID:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field editor_id", values[i])
 			} else if value.Valid {
-				_m.EditorID = uint(value.Int64)
+				ah.EditorID = uint(value.Int64)
 			}
 		case articlehistory.FieldEditorNickname:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field editor_nickname", values[i])
 			} else if value.Valid {
-				_m.EditorNickname = value.String
+				ah.EditorNickname = value.String
 			}
 		case articlehistory.FieldChangeNote:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field change_note", values[i])
 			} else if value.Valid {
-				_m.ChangeNote = value.String
+				ah.ChangeNote = value.String
 			}
 		case articlehistory.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
 			} else if value.Valid {
-				_m.CreatedAt = value.Time
+				ah.CreatedAt = value.Time
 			}
 		case articlehistory.FieldExtraData:
 			if value, ok := values[i].(*[]byte); !ok {
 				return fmt.Errorf("unexpected type %T for field extra_data", values[i])
 			} else if value != nil && len(*value) > 0 {
-				if err := json.Unmarshal(*value, &_m.ExtraData); err != nil {
+				if err := json.Unmarshal(*value, &ah.ExtraData); err != nil {
 					return fmt.Errorf("unmarshal field extra_data: %w", err)
 				}
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			ah.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -220,85 +220,85 @@ func (_m *ArticleHistory) assignValues(columns []string, values []any) error {
 
 // Value returns the ent.Value that was dynamically selected and assigned to the ArticleHistory.
 // This includes values selected through modifiers, order, etc.
-func (_m *ArticleHistory) Value(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (ah *ArticleHistory) Value(name string) (ent.Value, error) {
+	return ah.selectValues.Get(name)
 }
 
 // QueryArticle queries the "article" edge of the ArticleHistory entity.
-func (_m *ArticleHistory) QueryArticle() *ArticleQuery {
-	return NewArticleHistoryClient(_m.config).QueryArticle(_m)
+func (ah *ArticleHistory) QueryArticle() *ArticleQuery {
+	return NewArticleHistoryClient(ah.config).QueryArticle(ah)
 }
 
 // Update returns a builder for updating this ArticleHistory.
 // Note that you need to call ArticleHistory.Unwrap() before calling this method if this ArticleHistory
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *ArticleHistory) Update() *ArticleHistoryUpdateOne {
-	return NewArticleHistoryClient(_m.config).UpdateOne(_m)
+func (ah *ArticleHistory) Update() *ArticleHistoryUpdateOne {
+	return NewArticleHistoryClient(ah.config).UpdateOne(ah)
 }
 
 // Unwrap unwraps the ArticleHistory entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *ArticleHistory) Unwrap() *ArticleHistory {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (ah *ArticleHistory) Unwrap() *ArticleHistory {
+	_tx, ok := ah.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: ArticleHistory is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	ah.config.driver = _tx.drv
+	return ah
 }
 
 // String implements the fmt.Stringer.
-func (_m *ArticleHistory) String() string {
+func (ah *ArticleHistory) String() string {
 	var builder strings.Builder
 	builder.WriteString("ArticleHistory(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
+	builder.WriteString(fmt.Sprintf("id=%v, ", ah.ID))
 	builder.WriteString("article_id=")
-	builder.WriteString(fmt.Sprintf("%v", _m.ArticleID))
+	builder.WriteString(fmt.Sprintf("%v", ah.ArticleID))
 	builder.WriteString(", ")
 	builder.WriteString("version=")
-	builder.WriteString(fmt.Sprintf("%v", _m.Version))
+	builder.WriteString(fmt.Sprintf("%v", ah.Version))
 	builder.WriteString(", ")
 	builder.WriteString("title=")
-	builder.WriteString(_m.Title)
+	builder.WriteString(ah.Title)
 	builder.WriteString(", ")
 	builder.WriteString("content_md=")
-	builder.WriteString(_m.ContentMd)
+	builder.WriteString(ah.ContentMd)
 	builder.WriteString(", ")
 	builder.WriteString("content_html=")
-	builder.WriteString(_m.ContentHTML)
+	builder.WriteString(ah.ContentHTML)
 	builder.WriteString(", ")
 	builder.WriteString("cover_url=")
-	builder.WriteString(_m.CoverURL)
+	builder.WriteString(ah.CoverURL)
 	builder.WriteString(", ")
 	builder.WriteString("top_img_url=")
-	builder.WriteString(_m.TopImgURL)
+	builder.WriteString(ah.TopImgURL)
 	builder.WriteString(", ")
 	builder.WriteString("primary_color=")
-	builder.WriteString(_m.PrimaryColor)
+	builder.WriteString(ah.PrimaryColor)
 	builder.WriteString(", ")
 	builder.WriteString("summaries=")
-	builder.WriteString(fmt.Sprintf("%v", _m.Summaries))
+	builder.WriteString(fmt.Sprintf("%v", ah.Summaries))
 	builder.WriteString(", ")
 	builder.WriteString("word_count=")
-	builder.WriteString(fmt.Sprintf("%v", _m.WordCount))
+	builder.WriteString(fmt.Sprintf("%v", ah.WordCount))
 	builder.WriteString(", ")
 	builder.WriteString("keywords=")
-	builder.WriteString(_m.Keywords)
+	builder.WriteString(ah.Keywords)
 	builder.WriteString(", ")
 	builder.WriteString("editor_id=")
-	builder.WriteString(fmt.Sprintf("%v", _m.EditorID))
+	builder.WriteString(fmt.Sprintf("%v", ah.EditorID))
 	builder.WriteString(", ")
 	builder.WriteString("editor_nickname=")
-	builder.WriteString(_m.EditorNickname)
+	builder.WriteString(ah.EditorNickname)
 	builder.WriteString(", ")
 	builder.WriteString("change_note=")
-	builder.WriteString(_m.ChangeNote)
+	builder.WriteString(ah.ChangeNote)
 	builder.WriteString(", ")
 	builder.WriteString("created_at=")
-	builder.WriteString(_m.CreatedAt.Format(time.ANSIC))
+	builder.WriteString(ah.CreatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("extra_data=")
-	builder.WriteString(fmt.Sprintf("%v", _m.ExtraData))
+	builder.WriteString(fmt.Sprintf("%v", ah.ExtraData))
 	builder.WriteByte(')')
 	return builder.String()
 }

@@ -20,56 +20,56 @@ type LinkCategoryDelete struct {
 }
 
 // Where appends a list predicates to the LinkCategoryDelete builder.
-func (_d *LinkCategoryDelete) Where(ps ...predicate.LinkCategory) *LinkCategoryDelete {
-	_d.mutation.Where(ps...)
-	return _d
+func (lcd *LinkCategoryDelete) Where(ps ...predicate.LinkCategory) *LinkCategoryDelete {
+	lcd.mutation.Where(ps...)
+	return lcd
 }
 
 // Exec executes the deletion query and returns how many vertices were deleted.
-func (_d *LinkCategoryDelete) Exec(ctx context.Context) (int, error) {
-	return withHooks(ctx, _d.sqlExec, _d.mutation, _d.hooks)
+func (lcd *LinkCategoryDelete) Exec(ctx context.Context) (int, error) {
+	return withHooks(ctx, lcd.sqlExec, lcd.mutation, lcd.hooks)
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *LinkCategoryDelete) ExecX(ctx context.Context) int {
-	n, err := _d.Exec(ctx)
+func (lcd *LinkCategoryDelete) ExecX(ctx context.Context) int {
+	n, err := lcd.Exec(ctx)
 	if err != nil {
 		panic(err)
 	}
 	return n
 }
 
-func (_d *LinkCategoryDelete) sqlExec(ctx context.Context) (int, error) {
+func (lcd *LinkCategoryDelete) sqlExec(ctx context.Context) (int, error) {
 	_spec := sqlgraph.NewDeleteSpec(linkcategory.Table, sqlgraph.NewFieldSpec(linkcategory.FieldID, field.TypeInt))
-	if ps := _d.mutation.predicates; len(ps) > 0 {
+	if ps := lcd.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	affected, err := sqlgraph.DeleteNodes(ctx, _d.driver, _spec)
+	affected, err := sqlgraph.DeleteNodes(ctx, lcd.driver, _spec)
 	if err != nil && sqlgraph.IsConstraintError(err) {
 		err = &ConstraintError{msg: err.Error(), wrap: err}
 	}
-	_d.mutation.done = true
+	lcd.mutation.done = true
 	return affected, err
 }
 
 // LinkCategoryDeleteOne is the builder for deleting a single LinkCategory entity.
 type LinkCategoryDeleteOne struct {
-	_d *LinkCategoryDelete
+	lcd *LinkCategoryDelete
 }
 
 // Where appends a list predicates to the LinkCategoryDelete builder.
-func (_d *LinkCategoryDeleteOne) Where(ps ...predicate.LinkCategory) *LinkCategoryDeleteOne {
-	_d._d.mutation.Where(ps...)
-	return _d
+func (lcdo *LinkCategoryDeleteOne) Where(ps ...predicate.LinkCategory) *LinkCategoryDeleteOne {
+	lcdo.lcd.mutation.Where(ps...)
+	return lcdo
 }
 
 // Exec executes the deletion query.
-func (_d *LinkCategoryDeleteOne) Exec(ctx context.Context) error {
-	n, err := _d._d.Exec(ctx)
+func (lcdo *LinkCategoryDeleteOne) Exec(ctx context.Context) error {
+	n, err := lcdo.lcd.Exec(ctx)
 	switch {
 	case err != nil:
 		return err
@@ -81,8 +81,8 @@ func (_d *LinkCategoryDeleteOne) Exec(ctx context.Context) error {
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *LinkCategoryDeleteOne) ExecX(ctx context.Context) {
-	if err := _d.Exec(ctx); err != nil {
+func (lcdo *LinkCategoryDeleteOne) ExecX(ctx context.Context) {
+	if err := lcdo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }

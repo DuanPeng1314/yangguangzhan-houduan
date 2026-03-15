@@ -33,44 +33,44 @@ type FileEntityQuery struct {
 }
 
 // Where adds a new predicate for the FileEntityQuery builder.
-func (_q *FileEntityQuery) Where(ps ...predicate.FileEntity) *FileEntityQuery {
-	_q.predicates = append(_q.predicates, ps...)
-	return _q
+func (feq *FileEntityQuery) Where(ps ...predicate.FileEntity) *FileEntityQuery {
+	feq.predicates = append(feq.predicates, ps...)
+	return feq
 }
 
 // Limit the number of records to be returned by this query.
-func (_q *FileEntityQuery) Limit(limit int) *FileEntityQuery {
-	_q.ctx.Limit = &limit
-	return _q
+func (feq *FileEntityQuery) Limit(limit int) *FileEntityQuery {
+	feq.ctx.Limit = &limit
+	return feq
 }
 
 // Offset to start from.
-func (_q *FileEntityQuery) Offset(offset int) *FileEntityQuery {
-	_q.ctx.Offset = &offset
-	return _q
+func (feq *FileEntityQuery) Offset(offset int) *FileEntityQuery {
+	feq.ctx.Offset = &offset
+	return feq
 }
 
 // Unique configures the query builder to filter duplicate records on query.
 // By default, unique is set to true, and can be disabled using this method.
-func (_q *FileEntityQuery) Unique(unique bool) *FileEntityQuery {
-	_q.ctx.Unique = &unique
-	return _q
+func (feq *FileEntityQuery) Unique(unique bool) *FileEntityQuery {
+	feq.ctx.Unique = &unique
+	return feq
 }
 
 // Order specifies how the records should be ordered.
-func (_q *FileEntityQuery) Order(o ...fileentity.OrderOption) *FileEntityQuery {
-	_q.order = append(_q.order, o...)
-	return _q
+func (feq *FileEntityQuery) Order(o ...fileentity.OrderOption) *FileEntityQuery {
+	feq.order = append(feq.order, o...)
+	return feq
 }
 
 // QueryFile chains the current query on the "file" edge.
-func (_q *FileEntityQuery) QueryFile() *FileQuery {
-	query := (&FileClient{config: _q.config}).Query()
+func (feq *FileEntityQuery) QueryFile() *FileQuery {
+	query := (&FileClient{config: feq.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
+		if err := feq.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := _q.sqlQuery(ctx)
+		selector := feq.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -79,20 +79,20 @@ func (_q *FileEntityQuery) QueryFile() *FileQuery {
 			sqlgraph.To(file.Table, file.FieldID),
 			sqlgraph.Edge(sqlgraph.M2O, true, fileentity.FileTable, fileentity.FileColumn),
 		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(feq.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
 }
 
 // QueryEntity chains the current query on the "entity" edge.
-func (_q *FileEntityQuery) QueryEntity() *EntityQuery {
-	query := (&EntityClient{config: _q.config}).Query()
+func (feq *FileEntityQuery) QueryEntity() *EntityQuery {
+	query := (&EntityClient{config: feq.config}).Query()
 	query.path = func(ctx context.Context) (fromU *sql.Selector, err error) {
-		if err := _q.prepareQuery(ctx); err != nil {
+		if err := feq.prepareQuery(ctx); err != nil {
 			return nil, err
 		}
-		selector := _q.sqlQuery(ctx)
+		selector := feq.sqlQuery(ctx)
 		if err := selector.Err(); err != nil {
 			return nil, err
 		}
@@ -101,7 +101,7 @@ func (_q *FileEntityQuery) QueryEntity() *EntityQuery {
 			sqlgraph.To(entity.Table, entity.FieldID),
 			sqlgraph.Edge(sqlgraph.M2O, true, fileentity.EntityTable, fileentity.EntityColumn),
 		)
-		fromU = sqlgraph.SetNeighbors(_q.driver.Dialect(), step)
+		fromU = sqlgraph.SetNeighbors(feq.driver.Dialect(), step)
 		return fromU, nil
 	}
 	return query
@@ -109,8 +109,8 @@ func (_q *FileEntityQuery) QueryEntity() *EntityQuery {
 
 // First returns the first FileEntity entity from the query.
 // Returns a *NotFoundError when no FileEntity was found.
-func (_q *FileEntityQuery) First(ctx context.Context) (*FileEntity, error) {
-	nodes, err := _q.Limit(1).All(setContextOp(ctx, _q.ctx, ent.OpQueryFirst))
+func (feq *FileEntityQuery) First(ctx context.Context) (*FileEntity, error) {
+	nodes, err := feq.Limit(1).All(setContextOp(ctx, feq.ctx, ent.OpQueryFirst))
 	if err != nil {
 		return nil, err
 	}
@@ -121,8 +121,8 @@ func (_q *FileEntityQuery) First(ctx context.Context) (*FileEntity, error) {
 }
 
 // FirstX is like First, but panics if an error occurs.
-func (_q *FileEntityQuery) FirstX(ctx context.Context) *FileEntity {
-	node, err := _q.First(ctx)
+func (feq *FileEntityQuery) FirstX(ctx context.Context) *FileEntity {
+	node, err := feq.First(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -131,9 +131,9 @@ func (_q *FileEntityQuery) FirstX(ctx context.Context) *FileEntity {
 
 // FirstID returns the first FileEntity ID from the query.
 // Returns a *NotFoundError when no FileEntity ID was found.
-func (_q *FileEntityQuery) FirstID(ctx context.Context) (id uint, err error) {
+func (feq *FileEntityQuery) FirstID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(1).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryFirstID)); err != nil {
+	if ids, err = feq.Limit(1).IDs(setContextOp(ctx, feq.ctx, ent.OpQueryFirstID)); err != nil {
 		return
 	}
 	if len(ids) == 0 {
@@ -144,8 +144,8 @@ func (_q *FileEntityQuery) FirstID(ctx context.Context) (id uint, err error) {
 }
 
 // FirstIDX is like FirstID, but panics if an error occurs.
-func (_q *FileEntityQuery) FirstIDX(ctx context.Context) uint {
-	id, err := _q.FirstID(ctx)
+func (feq *FileEntityQuery) FirstIDX(ctx context.Context) uint {
+	id, err := feq.FirstID(ctx)
 	if err != nil && !IsNotFound(err) {
 		panic(err)
 	}
@@ -155,8 +155,8 @@ func (_q *FileEntityQuery) FirstIDX(ctx context.Context) uint {
 // Only returns a single FileEntity entity found by the query, ensuring it only returns one.
 // Returns a *NotSingularError when more than one FileEntity entity is found.
 // Returns a *NotFoundError when no FileEntity entities are found.
-func (_q *FileEntityQuery) Only(ctx context.Context) (*FileEntity, error) {
-	nodes, err := _q.Limit(2).All(setContextOp(ctx, _q.ctx, ent.OpQueryOnly))
+func (feq *FileEntityQuery) Only(ctx context.Context) (*FileEntity, error) {
+	nodes, err := feq.Limit(2).All(setContextOp(ctx, feq.ctx, ent.OpQueryOnly))
 	if err != nil {
 		return nil, err
 	}
@@ -171,8 +171,8 @@ func (_q *FileEntityQuery) Only(ctx context.Context) (*FileEntity, error) {
 }
 
 // OnlyX is like Only, but panics if an error occurs.
-func (_q *FileEntityQuery) OnlyX(ctx context.Context) *FileEntity {
-	node, err := _q.Only(ctx)
+func (feq *FileEntityQuery) OnlyX(ctx context.Context) *FileEntity {
+	node, err := feq.Only(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -182,9 +182,9 @@ func (_q *FileEntityQuery) OnlyX(ctx context.Context) *FileEntity {
 // OnlyID is like Only, but returns the only FileEntity ID in the query.
 // Returns a *NotSingularError when more than one FileEntity ID is found.
 // Returns a *NotFoundError when no entities are found.
-func (_q *FileEntityQuery) OnlyID(ctx context.Context) (id uint, err error) {
+func (feq *FileEntityQuery) OnlyID(ctx context.Context) (id uint, err error) {
 	var ids []uint
-	if ids, err = _q.Limit(2).IDs(setContextOp(ctx, _q.ctx, ent.OpQueryOnlyID)); err != nil {
+	if ids, err = feq.Limit(2).IDs(setContextOp(ctx, feq.ctx, ent.OpQueryOnlyID)); err != nil {
 		return
 	}
 	switch len(ids) {
@@ -199,8 +199,8 @@ func (_q *FileEntityQuery) OnlyID(ctx context.Context) (id uint, err error) {
 }
 
 // OnlyIDX is like OnlyID, but panics if an error occurs.
-func (_q *FileEntityQuery) OnlyIDX(ctx context.Context) uint {
-	id, err := _q.OnlyID(ctx)
+func (feq *FileEntityQuery) OnlyIDX(ctx context.Context) uint {
+	id, err := feq.OnlyID(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -208,18 +208,18 @@ func (_q *FileEntityQuery) OnlyIDX(ctx context.Context) uint {
 }
 
 // All executes the query and returns a list of FileEntities.
-func (_q *FileEntityQuery) All(ctx context.Context) ([]*FileEntity, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryAll)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (feq *FileEntityQuery) All(ctx context.Context) ([]*FileEntity, error) {
+	ctx = setContextOp(ctx, feq.ctx, ent.OpQueryAll)
+	if err := feq.prepareQuery(ctx); err != nil {
 		return nil, err
 	}
 	qr := querierAll[[]*FileEntity, *FileEntityQuery]()
-	return withInterceptors[[]*FileEntity](ctx, _q, qr, _q.inters)
+	return withInterceptors[[]*FileEntity](ctx, feq, qr, feq.inters)
 }
 
 // AllX is like All, but panics if an error occurs.
-func (_q *FileEntityQuery) AllX(ctx context.Context) []*FileEntity {
-	nodes, err := _q.All(ctx)
+func (feq *FileEntityQuery) AllX(ctx context.Context) []*FileEntity {
+	nodes, err := feq.All(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -227,20 +227,20 @@ func (_q *FileEntityQuery) AllX(ctx context.Context) []*FileEntity {
 }
 
 // IDs executes the query and returns a list of FileEntity IDs.
-func (_q *FileEntityQuery) IDs(ctx context.Context) (ids []uint, err error) {
-	if _q.ctx.Unique == nil && _q.path != nil {
-		_q.Unique(true)
+func (feq *FileEntityQuery) IDs(ctx context.Context) (ids []uint, err error) {
+	if feq.ctx.Unique == nil && feq.path != nil {
+		feq.Unique(true)
 	}
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryIDs)
-	if err = _q.Select(fileentity.FieldID).Scan(ctx, &ids); err != nil {
+	ctx = setContextOp(ctx, feq.ctx, ent.OpQueryIDs)
+	if err = feq.Select(fileentity.FieldID).Scan(ctx, &ids); err != nil {
 		return nil, err
 	}
 	return ids, nil
 }
 
 // IDsX is like IDs, but panics if an error occurs.
-func (_q *FileEntityQuery) IDsX(ctx context.Context) []uint {
-	ids, err := _q.IDs(ctx)
+func (feq *FileEntityQuery) IDsX(ctx context.Context) []uint {
+	ids, err := feq.IDs(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -248,17 +248,17 @@ func (_q *FileEntityQuery) IDsX(ctx context.Context) []uint {
 }
 
 // Count returns the count of the given query.
-func (_q *FileEntityQuery) Count(ctx context.Context) (int, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryCount)
-	if err := _q.prepareQuery(ctx); err != nil {
+func (feq *FileEntityQuery) Count(ctx context.Context) (int, error) {
+	ctx = setContextOp(ctx, feq.ctx, ent.OpQueryCount)
+	if err := feq.prepareQuery(ctx); err != nil {
 		return 0, err
 	}
-	return withInterceptors[int](ctx, _q, querierCount[*FileEntityQuery](), _q.inters)
+	return withInterceptors[int](ctx, feq, querierCount[*FileEntityQuery](), feq.inters)
 }
 
 // CountX is like Count, but panics if an error occurs.
-func (_q *FileEntityQuery) CountX(ctx context.Context) int {
-	count, err := _q.Count(ctx)
+func (feq *FileEntityQuery) CountX(ctx context.Context) int {
+	count, err := feq.Count(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -266,9 +266,9 @@ func (_q *FileEntityQuery) CountX(ctx context.Context) int {
 }
 
 // Exist returns true if the query has elements in the graph.
-func (_q *FileEntityQuery) Exist(ctx context.Context) (bool, error) {
-	ctx = setContextOp(ctx, _q.ctx, ent.OpQueryExist)
-	switch _, err := _q.FirstID(ctx); {
+func (feq *FileEntityQuery) Exist(ctx context.Context) (bool, error) {
+	ctx = setContextOp(ctx, feq.ctx, ent.OpQueryExist)
+	switch _, err := feq.FirstID(ctx); {
 	case IsNotFound(err):
 		return false, nil
 	case err != nil:
@@ -279,8 +279,8 @@ func (_q *FileEntityQuery) Exist(ctx context.Context) (bool, error) {
 }
 
 // ExistX is like Exist, but panics if an error occurs.
-func (_q *FileEntityQuery) ExistX(ctx context.Context) bool {
-	exist, err := _q.Exist(ctx)
+func (feq *FileEntityQuery) ExistX(ctx context.Context) bool {
+	exist, err := feq.Exist(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -289,45 +289,45 @@ func (_q *FileEntityQuery) ExistX(ctx context.Context) bool {
 
 // Clone returns a duplicate of the FileEntityQuery builder, including all associated steps. It can be
 // used to prepare common query builders and use them differently after the clone is made.
-func (_q *FileEntityQuery) Clone() *FileEntityQuery {
-	if _q == nil {
+func (feq *FileEntityQuery) Clone() *FileEntityQuery {
+	if feq == nil {
 		return nil
 	}
 	return &FileEntityQuery{
-		config:     _q.config,
-		ctx:        _q.ctx.Clone(),
-		order:      append([]fileentity.OrderOption{}, _q.order...),
-		inters:     append([]Interceptor{}, _q.inters...),
-		predicates: append([]predicate.FileEntity{}, _q.predicates...),
-		withFile:   _q.withFile.Clone(),
-		withEntity: _q.withEntity.Clone(),
+		config:     feq.config,
+		ctx:        feq.ctx.Clone(),
+		order:      append([]fileentity.OrderOption{}, feq.order...),
+		inters:     append([]Interceptor{}, feq.inters...),
+		predicates: append([]predicate.FileEntity{}, feq.predicates...),
+		withFile:   feq.withFile.Clone(),
+		withEntity: feq.withEntity.Clone(),
 		// clone intermediate query.
-		sql:       _q.sql.Clone(),
-		path:      _q.path,
-		modifiers: append([]func(*sql.Selector){}, _q.modifiers...),
+		sql:       feq.sql.Clone(),
+		path:      feq.path,
+		modifiers: append([]func(*sql.Selector){}, feq.modifiers...),
 	}
 }
 
 // WithFile tells the query-builder to eager-load the nodes that are connected to
 // the "file" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *FileEntityQuery) WithFile(opts ...func(*FileQuery)) *FileEntityQuery {
-	query := (&FileClient{config: _q.config}).Query()
+func (feq *FileEntityQuery) WithFile(opts ...func(*FileQuery)) *FileEntityQuery {
+	query := (&FileClient{config: feq.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withFile = query
-	return _q
+	feq.withFile = query
+	return feq
 }
 
 // WithEntity tells the query-builder to eager-load the nodes that are connected to
 // the "entity" edge. The optional arguments are used to configure the query builder of the edge.
-func (_q *FileEntityQuery) WithEntity(opts ...func(*EntityQuery)) *FileEntityQuery {
-	query := (&EntityClient{config: _q.config}).Query()
+func (feq *FileEntityQuery) WithEntity(opts ...func(*EntityQuery)) *FileEntityQuery {
+	query := (&EntityClient{config: feq.config}).Query()
 	for _, opt := range opts {
 		opt(query)
 	}
-	_q.withEntity = query
-	return _q
+	feq.withEntity = query
+	return feq
 }
 
 // GroupBy is used to group vertices by one or more fields/columns.
@@ -344,10 +344,10 @@ func (_q *FileEntityQuery) WithEntity(opts ...func(*EntityQuery)) *FileEntityQue
 //		GroupBy(fileentity.FieldDeletedAt).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
-func (_q *FileEntityQuery) GroupBy(field string, fields ...string) *FileEntityGroupBy {
-	_q.ctx.Fields = append([]string{field}, fields...)
-	grbuild := &FileEntityGroupBy{build: _q}
-	grbuild.flds = &_q.ctx.Fields
+func (feq *FileEntityQuery) GroupBy(field string, fields ...string) *FileEntityGroupBy {
+	feq.ctx.Fields = append([]string{field}, fields...)
+	grbuild := &FileEntityGroupBy{build: feq}
+	grbuild.flds = &feq.ctx.Fields
 	grbuild.label = fileentity.Label
 	grbuild.scan = grbuild.Scan
 	return grbuild
@@ -365,83 +365,83 @@ func (_q *FileEntityQuery) GroupBy(field string, fields ...string) *FileEntityGr
 //	client.FileEntity.Query().
 //		Select(fileentity.FieldDeletedAt).
 //		Scan(ctx, &v)
-func (_q *FileEntityQuery) Select(fields ...string) *FileEntitySelect {
-	_q.ctx.Fields = append(_q.ctx.Fields, fields...)
-	sbuild := &FileEntitySelect{FileEntityQuery: _q}
+func (feq *FileEntityQuery) Select(fields ...string) *FileEntitySelect {
+	feq.ctx.Fields = append(feq.ctx.Fields, fields...)
+	sbuild := &FileEntitySelect{FileEntityQuery: feq}
 	sbuild.label = fileentity.Label
-	sbuild.flds, sbuild.scan = &_q.ctx.Fields, sbuild.Scan
+	sbuild.flds, sbuild.scan = &feq.ctx.Fields, sbuild.Scan
 	return sbuild
 }
 
 // Aggregate returns a FileEntitySelect configured with the given aggregations.
-func (_q *FileEntityQuery) Aggregate(fns ...AggregateFunc) *FileEntitySelect {
-	return _q.Select().Aggregate(fns...)
+func (feq *FileEntityQuery) Aggregate(fns ...AggregateFunc) *FileEntitySelect {
+	return feq.Select().Aggregate(fns...)
 }
 
-func (_q *FileEntityQuery) prepareQuery(ctx context.Context) error {
-	for _, inter := range _q.inters {
+func (feq *FileEntityQuery) prepareQuery(ctx context.Context) error {
+	for _, inter := range feq.inters {
 		if inter == nil {
 			return fmt.Errorf("ent: uninitialized interceptor (forgotten import ent/runtime?)")
 		}
 		if trv, ok := inter.(Traverser); ok {
-			if err := trv.Traverse(ctx, _q); err != nil {
+			if err := trv.Traverse(ctx, feq); err != nil {
 				return err
 			}
 		}
 	}
-	for _, f := range _q.ctx.Fields {
+	for _, f := range feq.ctx.Fields {
 		if !fileentity.ValidColumn(f) {
 			return &ValidationError{Name: f, err: fmt.Errorf("ent: invalid field %q for query", f)}
 		}
 	}
-	if _q.path != nil {
-		prev, err := _q.path(ctx)
+	if feq.path != nil {
+		prev, err := feq.path(ctx)
 		if err != nil {
 			return err
 		}
-		_q.sql = prev
+		feq.sql = prev
 	}
 	return nil
 }
 
-func (_q *FileEntityQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*FileEntity, error) {
+func (feq *FileEntityQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*FileEntity, error) {
 	var (
 		nodes       = []*FileEntity{}
-		_spec       = _q.querySpec()
+		_spec       = feq.querySpec()
 		loadedTypes = [2]bool{
-			_q.withFile != nil,
-			_q.withEntity != nil,
+			feq.withFile != nil,
+			feq.withEntity != nil,
 		}
 	)
 	_spec.ScanValues = func(columns []string) ([]any, error) {
 		return (*FileEntity).scanValues(nil, columns)
 	}
 	_spec.Assign = func(columns []string, values []any) error {
-		node := &FileEntity{config: _q.config}
+		node := &FileEntity{config: feq.config}
 		nodes = append(nodes, node)
 		node.Edges.loadedTypes = loadedTypes
 		return node.assignValues(columns, values)
 	}
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+	if len(feq.modifiers) > 0 {
+		_spec.Modifiers = feq.modifiers
 	}
 	for i := range hooks {
 		hooks[i](ctx, _spec)
 	}
-	if err := sqlgraph.QueryNodes(ctx, _q.driver, _spec); err != nil {
+	if err := sqlgraph.QueryNodes(ctx, feq.driver, _spec); err != nil {
 		return nil, err
 	}
 	if len(nodes) == 0 {
 		return nodes, nil
 	}
-	if query := _q.withFile; query != nil {
-		if err := _q.loadFile(ctx, query, nodes, nil,
+	if query := feq.withFile; query != nil {
+		if err := feq.loadFile(ctx, query, nodes, nil,
 			func(n *FileEntity, e *File) { n.Edges.File = e }); err != nil {
 			return nil, err
 		}
 	}
-	if query := _q.withEntity; query != nil {
-		if err := _q.loadEntity(ctx, query, nodes, nil,
+	if query := feq.withEntity; query != nil {
+		if err := feq.loadEntity(ctx, query, nodes, nil,
 			func(n *FileEntity, e *Entity) { n.Edges.Entity = e }); err != nil {
 			return nil, err
 		}
@@ -449,7 +449,7 @@ func (_q *FileEntityQuery) sqlAll(ctx context.Context, hooks ...queryHook) ([]*F
 	return nodes, nil
 }
 
-func (_q *FileEntityQuery) loadFile(ctx context.Context, query *FileQuery, nodes []*FileEntity, init func(*FileEntity), assign func(*FileEntity, *File)) error {
+func (feq *FileEntityQuery) loadFile(ctx context.Context, query *FileQuery, nodes []*FileEntity, init func(*FileEntity), assign func(*FileEntity, *File)) error {
 	ids := make([]uint, 0, len(nodes))
 	nodeids := make(map[uint][]*FileEntity)
 	for i := range nodes {
@@ -478,7 +478,7 @@ func (_q *FileEntityQuery) loadFile(ctx context.Context, query *FileQuery, nodes
 	}
 	return nil
 }
-func (_q *FileEntityQuery) loadEntity(ctx context.Context, query *EntityQuery, nodes []*FileEntity, init func(*FileEntity), assign func(*FileEntity, *Entity)) error {
+func (feq *FileEntityQuery) loadEntity(ctx context.Context, query *EntityQuery, nodes []*FileEntity, init func(*FileEntity), assign func(*FileEntity, *Entity)) error {
 	ids := make([]uint, 0, len(nodes))
 	nodeids := make(map[uint][]*FileEntity)
 	for i := range nodes {
@@ -508,27 +508,27 @@ func (_q *FileEntityQuery) loadEntity(ctx context.Context, query *EntityQuery, n
 	return nil
 }
 
-func (_q *FileEntityQuery) sqlCount(ctx context.Context) (int, error) {
-	_spec := _q.querySpec()
-	if len(_q.modifiers) > 0 {
-		_spec.Modifiers = _q.modifiers
+func (feq *FileEntityQuery) sqlCount(ctx context.Context) (int, error) {
+	_spec := feq.querySpec()
+	if len(feq.modifiers) > 0 {
+		_spec.Modifiers = feq.modifiers
 	}
-	_spec.Node.Columns = _q.ctx.Fields
-	if len(_q.ctx.Fields) > 0 {
-		_spec.Unique = _q.ctx.Unique != nil && *_q.ctx.Unique
+	_spec.Node.Columns = feq.ctx.Fields
+	if len(feq.ctx.Fields) > 0 {
+		_spec.Unique = feq.ctx.Unique != nil && *feq.ctx.Unique
 	}
-	return sqlgraph.CountNodes(ctx, _q.driver, _spec)
+	return sqlgraph.CountNodes(ctx, feq.driver, _spec)
 }
 
-func (_q *FileEntityQuery) querySpec() *sqlgraph.QuerySpec {
+func (feq *FileEntityQuery) querySpec() *sqlgraph.QuerySpec {
 	_spec := sqlgraph.NewQuerySpec(fileentity.Table, fileentity.Columns, sqlgraph.NewFieldSpec(fileentity.FieldID, field.TypeUint))
-	_spec.From = _q.sql
-	if unique := _q.ctx.Unique; unique != nil {
+	_spec.From = feq.sql
+	if unique := feq.ctx.Unique; unique != nil {
 		_spec.Unique = *unique
-	} else if _q.path != nil {
+	} else if feq.path != nil {
 		_spec.Unique = true
 	}
-	if fields := _q.ctx.Fields; len(fields) > 0 {
+	if fields := feq.ctx.Fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, fileentity.FieldID)
 		for i := range fields {
@@ -536,27 +536,27 @@ func (_q *FileEntityQuery) querySpec() *sqlgraph.QuerySpec {
 				_spec.Node.Columns = append(_spec.Node.Columns, fields[i])
 			}
 		}
-		if _q.withFile != nil {
+		if feq.withFile != nil {
 			_spec.Node.AddColumnOnce(fileentity.FieldFileID)
 		}
-		if _q.withEntity != nil {
+		if feq.withEntity != nil {
 			_spec.Node.AddColumnOnce(fileentity.FieldEntityID)
 		}
 	}
-	if ps := _q.predicates; len(ps) > 0 {
+	if ps := feq.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := feq.ctx.Limit; limit != nil {
 		_spec.Limit = *limit
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := feq.ctx.Offset; offset != nil {
 		_spec.Offset = *offset
 	}
-	if ps := _q.order; len(ps) > 0 {
+	if ps := feq.order; len(ps) > 0 {
 		_spec.Order = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
@@ -566,45 +566,45 @@ func (_q *FileEntityQuery) querySpec() *sqlgraph.QuerySpec {
 	return _spec
 }
 
-func (_q *FileEntityQuery) sqlQuery(ctx context.Context) *sql.Selector {
-	builder := sql.Dialect(_q.driver.Dialect())
+func (feq *FileEntityQuery) sqlQuery(ctx context.Context) *sql.Selector {
+	builder := sql.Dialect(feq.driver.Dialect())
 	t1 := builder.Table(fileentity.Table)
-	columns := _q.ctx.Fields
+	columns := feq.ctx.Fields
 	if len(columns) == 0 {
 		columns = fileentity.Columns
 	}
 	selector := builder.Select(t1.Columns(columns...)...).From(t1)
-	if _q.sql != nil {
-		selector = _q.sql
+	if feq.sql != nil {
+		selector = feq.sql
 		selector.Select(selector.Columns(columns...)...)
 	}
-	if _q.ctx.Unique != nil && *_q.ctx.Unique {
+	if feq.ctx.Unique != nil && *feq.ctx.Unique {
 		selector.Distinct()
 	}
-	for _, m := range _q.modifiers {
+	for _, m := range feq.modifiers {
 		m(selector)
 	}
-	for _, p := range _q.predicates {
+	for _, p := range feq.predicates {
 		p(selector)
 	}
-	for _, p := range _q.order {
+	for _, p := range feq.order {
 		p(selector)
 	}
-	if offset := _q.ctx.Offset; offset != nil {
+	if offset := feq.ctx.Offset; offset != nil {
 		// limit is mandatory for offset clause. We start
 		// with default value, and override it below if needed.
 		selector.Offset(*offset).Limit(math.MaxInt32)
 	}
-	if limit := _q.ctx.Limit; limit != nil {
+	if limit := feq.ctx.Limit; limit != nil {
 		selector.Limit(*limit)
 	}
 	return selector
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_q *FileEntityQuery) Modify(modifiers ...func(s *sql.Selector)) *FileEntitySelect {
-	_q.modifiers = append(_q.modifiers, modifiers...)
-	return _q.Select()
+func (feq *FileEntityQuery) Modify(modifiers ...func(s *sql.Selector)) *FileEntitySelect {
+	feq.modifiers = append(feq.modifiers, modifiers...)
+	return feq.Select()
 }
 
 // FileEntityGroupBy is the group-by builder for FileEntity entities.
@@ -614,41 +614,41 @@ type FileEntityGroupBy struct {
 }
 
 // Aggregate adds the given aggregation functions to the group-by query.
-func (_g *FileEntityGroupBy) Aggregate(fns ...AggregateFunc) *FileEntityGroupBy {
-	_g.fns = append(_g.fns, fns...)
-	return _g
+func (fegb *FileEntityGroupBy) Aggregate(fns ...AggregateFunc) *FileEntityGroupBy {
+	fegb.fns = append(fegb.fns, fns...)
+	return fegb
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_g *FileEntityGroupBy) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _g.build.ctx, ent.OpQueryGroupBy)
-	if err := _g.build.prepareQuery(ctx); err != nil {
+func (fegb *FileEntityGroupBy) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, fegb.build.ctx, ent.OpQueryGroupBy)
+	if err := fegb.build.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*FileEntityQuery, *FileEntityGroupBy](ctx, _g.build, _g, _g.build.inters, v)
+	return scanWithInterceptors[*FileEntityQuery, *FileEntityGroupBy](ctx, fegb.build, fegb, fegb.build.inters, v)
 }
 
-func (_g *FileEntityGroupBy) sqlScan(ctx context.Context, root *FileEntityQuery, v any) error {
+func (fegb *FileEntityGroupBy) sqlScan(ctx context.Context, root *FileEntityQuery, v any) error {
 	selector := root.sqlQuery(ctx).Select()
-	aggregation := make([]string, 0, len(_g.fns))
-	for _, fn := range _g.fns {
+	aggregation := make([]string, 0, len(fegb.fns))
+	for _, fn := range fegb.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
 	if len(selector.SelectedColumns()) == 0 {
-		columns := make([]string, 0, len(*_g.flds)+len(_g.fns))
-		for _, f := range *_g.flds {
+		columns := make([]string, 0, len(*fegb.flds)+len(fegb.fns))
+		for _, f := range *fegb.flds {
 			columns = append(columns, selector.C(f))
 		}
 		columns = append(columns, aggregation...)
 		selector.Select(columns...)
 	}
-	selector.GroupBy(selector.Columns(*_g.flds...)...)
+	selector.GroupBy(selector.Columns(*fegb.flds...)...)
 	if err := selector.Err(); err != nil {
 		return err
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _g.build.driver.Query(ctx, query, args, rows); err != nil {
+	if err := fegb.build.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -662,27 +662,27 @@ type FileEntitySelect struct {
 }
 
 // Aggregate adds the given aggregation functions to the selector query.
-func (_s *FileEntitySelect) Aggregate(fns ...AggregateFunc) *FileEntitySelect {
-	_s.fns = append(_s.fns, fns...)
-	return _s
+func (fes *FileEntitySelect) Aggregate(fns ...AggregateFunc) *FileEntitySelect {
+	fes.fns = append(fes.fns, fns...)
+	return fes
 }
 
 // Scan applies the selector query and scans the result into the given value.
-func (_s *FileEntitySelect) Scan(ctx context.Context, v any) error {
-	ctx = setContextOp(ctx, _s.ctx, ent.OpQuerySelect)
-	if err := _s.prepareQuery(ctx); err != nil {
+func (fes *FileEntitySelect) Scan(ctx context.Context, v any) error {
+	ctx = setContextOp(ctx, fes.ctx, ent.OpQuerySelect)
+	if err := fes.prepareQuery(ctx); err != nil {
 		return err
 	}
-	return scanWithInterceptors[*FileEntityQuery, *FileEntitySelect](ctx, _s.FileEntityQuery, _s, _s.inters, v)
+	return scanWithInterceptors[*FileEntityQuery, *FileEntitySelect](ctx, fes.FileEntityQuery, fes, fes.inters, v)
 }
 
-func (_s *FileEntitySelect) sqlScan(ctx context.Context, root *FileEntityQuery, v any) error {
+func (fes *FileEntitySelect) sqlScan(ctx context.Context, root *FileEntityQuery, v any) error {
 	selector := root.sqlQuery(ctx)
-	aggregation := make([]string, 0, len(_s.fns))
-	for _, fn := range _s.fns {
+	aggregation := make([]string, 0, len(fes.fns))
+	for _, fn := range fes.fns {
 		aggregation = append(aggregation, fn(selector))
 	}
-	switch n := len(*_s.selector.flds); {
+	switch n := len(*fes.selector.flds); {
 	case n == 0 && len(aggregation) > 0:
 		selector.Select(aggregation...)
 	case n != 0 && len(aggregation) > 0:
@@ -690,7 +690,7 @@ func (_s *FileEntitySelect) sqlScan(ctx context.Context, root *FileEntityQuery, 
 	}
 	rows := &sql.Rows{}
 	query, args := selector.Query()
-	if err := _s.driver.Query(ctx, query, args, rows); err != nil {
+	if err := fes.driver.Query(ctx, query, args, rows); err != nil {
 		return err
 	}
 	defer rows.Close()
@@ -698,7 +698,7 @@ func (_s *FileEntitySelect) sqlScan(ctx context.Context, root *FileEntityQuery, 
 }
 
 // Modify adds a query modifier for attaching custom logic to queries.
-func (_s *FileEntitySelect) Modify(modifiers ...func(s *sql.Selector)) *FileEntitySelect {
-	_s.modifiers = append(_s.modifiers, modifiers...)
-	return _s
+func (fes *FileEntitySelect) Modify(modifiers ...func(s *sql.Selector)) *FileEntitySelect {
+	fes.modifiers = append(fes.modifiers, modifiers...)
+	return fes
 }

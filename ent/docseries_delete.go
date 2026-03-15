@@ -20,56 +20,56 @@ type DocSeriesDelete struct {
 }
 
 // Where appends a list predicates to the DocSeriesDelete builder.
-func (_d *DocSeriesDelete) Where(ps ...predicate.DocSeries) *DocSeriesDelete {
-	_d.mutation.Where(ps...)
-	return _d
+func (dsd *DocSeriesDelete) Where(ps ...predicate.DocSeries) *DocSeriesDelete {
+	dsd.mutation.Where(ps...)
+	return dsd
 }
 
 // Exec executes the deletion query and returns how many vertices were deleted.
-func (_d *DocSeriesDelete) Exec(ctx context.Context) (int, error) {
-	return withHooks(ctx, _d.sqlExec, _d.mutation, _d.hooks)
+func (dsd *DocSeriesDelete) Exec(ctx context.Context) (int, error) {
+	return withHooks(ctx, dsd.sqlExec, dsd.mutation, dsd.hooks)
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *DocSeriesDelete) ExecX(ctx context.Context) int {
-	n, err := _d.Exec(ctx)
+func (dsd *DocSeriesDelete) ExecX(ctx context.Context) int {
+	n, err := dsd.Exec(ctx)
 	if err != nil {
 		panic(err)
 	}
 	return n
 }
 
-func (_d *DocSeriesDelete) sqlExec(ctx context.Context) (int, error) {
+func (dsd *DocSeriesDelete) sqlExec(ctx context.Context) (int, error) {
 	_spec := sqlgraph.NewDeleteSpec(docseries.Table, sqlgraph.NewFieldSpec(docseries.FieldID, field.TypeUint))
-	if ps := _d.mutation.predicates; len(ps) > 0 {
+	if ps := dsd.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	affected, err := sqlgraph.DeleteNodes(ctx, _d.driver, _spec)
+	affected, err := sqlgraph.DeleteNodes(ctx, dsd.driver, _spec)
 	if err != nil && sqlgraph.IsConstraintError(err) {
 		err = &ConstraintError{msg: err.Error(), wrap: err}
 	}
-	_d.mutation.done = true
+	dsd.mutation.done = true
 	return affected, err
 }
 
 // DocSeriesDeleteOne is the builder for deleting a single DocSeries entity.
 type DocSeriesDeleteOne struct {
-	_d *DocSeriesDelete
+	dsd *DocSeriesDelete
 }
 
 // Where appends a list predicates to the DocSeriesDelete builder.
-func (_d *DocSeriesDeleteOne) Where(ps ...predicate.DocSeries) *DocSeriesDeleteOne {
-	_d._d.mutation.Where(ps...)
-	return _d
+func (dsdo *DocSeriesDeleteOne) Where(ps ...predicate.DocSeries) *DocSeriesDeleteOne {
+	dsdo.dsd.mutation.Where(ps...)
+	return dsdo
 }
 
 // Exec executes the deletion query.
-func (_d *DocSeriesDeleteOne) Exec(ctx context.Context) error {
-	n, err := _d._d.Exec(ctx)
+func (dsdo *DocSeriesDeleteOne) Exec(ctx context.Context) error {
+	n, err := dsdo.dsd.Exec(ctx)
 	switch {
 	case err != nil:
 		return err
@@ -81,8 +81,8 @@ func (_d *DocSeriesDeleteOne) Exec(ctx context.Context) error {
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *DocSeriesDeleteOne) ExecX(ctx context.Context) {
-	if err := _d.Exec(ctx); err != nil {
+func (dsdo *DocSeriesDeleteOne) ExecX(ctx context.Context) {
+	if err := dsdo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }

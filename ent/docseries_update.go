@@ -25,163 +25,163 @@ type DocSeriesUpdate struct {
 }
 
 // Where appends a list predicates to the DocSeriesUpdate builder.
-func (_u *DocSeriesUpdate) Where(ps ...predicate.DocSeries) *DocSeriesUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (dsu *DocSeriesUpdate) Where(ps ...predicate.DocSeries) *DocSeriesUpdate {
+	dsu.mutation.Where(ps...)
+	return dsu
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *DocSeriesUpdate) SetUpdatedAt(v time.Time) *DocSeriesUpdate {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (dsu *DocSeriesUpdate) SetUpdatedAt(t time.Time) *DocSeriesUpdate {
+	dsu.mutation.SetUpdatedAt(t)
+	return dsu
 }
 
 // SetName sets the "name" field.
-func (_u *DocSeriesUpdate) SetName(v string) *DocSeriesUpdate {
-	_u.mutation.SetName(v)
-	return _u
+func (dsu *DocSeriesUpdate) SetName(s string) *DocSeriesUpdate {
+	dsu.mutation.SetName(s)
+	return dsu
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *DocSeriesUpdate) SetNillableName(v *string) *DocSeriesUpdate {
-	if v != nil {
-		_u.SetName(*v)
+func (dsu *DocSeriesUpdate) SetNillableName(s *string) *DocSeriesUpdate {
+	if s != nil {
+		dsu.SetName(*s)
 	}
-	return _u
+	return dsu
 }
 
 // SetDescription sets the "description" field.
-func (_u *DocSeriesUpdate) SetDescription(v string) *DocSeriesUpdate {
-	_u.mutation.SetDescription(v)
-	return _u
+func (dsu *DocSeriesUpdate) SetDescription(s string) *DocSeriesUpdate {
+	dsu.mutation.SetDescription(s)
+	return dsu
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *DocSeriesUpdate) SetNillableDescription(v *string) *DocSeriesUpdate {
-	if v != nil {
-		_u.SetDescription(*v)
+func (dsu *DocSeriesUpdate) SetNillableDescription(s *string) *DocSeriesUpdate {
+	if s != nil {
+		dsu.SetDescription(*s)
 	}
-	return _u
+	return dsu
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *DocSeriesUpdate) ClearDescription() *DocSeriesUpdate {
-	_u.mutation.ClearDescription()
-	return _u
+func (dsu *DocSeriesUpdate) ClearDescription() *DocSeriesUpdate {
+	dsu.mutation.ClearDescription()
+	return dsu
 }
 
 // SetCoverURL sets the "cover_url" field.
-func (_u *DocSeriesUpdate) SetCoverURL(v string) *DocSeriesUpdate {
-	_u.mutation.SetCoverURL(v)
-	return _u
+func (dsu *DocSeriesUpdate) SetCoverURL(s string) *DocSeriesUpdate {
+	dsu.mutation.SetCoverURL(s)
+	return dsu
 }
 
 // SetNillableCoverURL sets the "cover_url" field if the given value is not nil.
-func (_u *DocSeriesUpdate) SetNillableCoverURL(v *string) *DocSeriesUpdate {
-	if v != nil {
-		_u.SetCoverURL(*v)
+func (dsu *DocSeriesUpdate) SetNillableCoverURL(s *string) *DocSeriesUpdate {
+	if s != nil {
+		dsu.SetCoverURL(*s)
 	}
-	return _u
+	return dsu
 }
 
 // ClearCoverURL clears the value of the "cover_url" field.
-func (_u *DocSeriesUpdate) ClearCoverURL() *DocSeriesUpdate {
-	_u.mutation.ClearCoverURL()
-	return _u
+func (dsu *DocSeriesUpdate) ClearCoverURL() *DocSeriesUpdate {
+	dsu.mutation.ClearCoverURL()
+	return dsu
 }
 
 // SetSort sets the "sort" field.
-func (_u *DocSeriesUpdate) SetSort(v int) *DocSeriesUpdate {
-	_u.mutation.ResetSort()
-	_u.mutation.SetSort(v)
-	return _u
+func (dsu *DocSeriesUpdate) SetSort(i int) *DocSeriesUpdate {
+	dsu.mutation.ResetSort()
+	dsu.mutation.SetSort(i)
+	return dsu
 }
 
 // SetNillableSort sets the "sort" field if the given value is not nil.
-func (_u *DocSeriesUpdate) SetNillableSort(v *int) *DocSeriesUpdate {
-	if v != nil {
-		_u.SetSort(*v)
+func (dsu *DocSeriesUpdate) SetNillableSort(i *int) *DocSeriesUpdate {
+	if i != nil {
+		dsu.SetSort(*i)
 	}
-	return _u
+	return dsu
 }
 
-// AddSort adds value to the "sort" field.
-func (_u *DocSeriesUpdate) AddSort(v int) *DocSeriesUpdate {
-	_u.mutation.AddSort(v)
-	return _u
+// AddSort adds i to the "sort" field.
+func (dsu *DocSeriesUpdate) AddSort(i int) *DocSeriesUpdate {
+	dsu.mutation.AddSort(i)
+	return dsu
 }
 
 // SetDocCount sets the "doc_count" field.
-func (_u *DocSeriesUpdate) SetDocCount(v int) *DocSeriesUpdate {
-	_u.mutation.ResetDocCount()
-	_u.mutation.SetDocCount(v)
-	return _u
+func (dsu *DocSeriesUpdate) SetDocCount(i int) *DocSeriesUpdate {
+	dsu.mutation.ResetDocCount()
+	dsu.mutation.SetDocCount(i)
+	return dsu
 }
 
 // SetNillableDocCount sets the "doc_count" field if the given value is not nil.
-func (_u *DocSeriesUpdate) SetNillableDocCount(v *int) *DocSeriesUpdate {
-	if v != nil {
-		_u.SetDocCount(*v)
+func (dsu *DocSeriesUpdate) SetNillableDocCount(i *int) *DocSeriesUpdate {
+	if i != nil {
+		dsu.SetDocCount(*i)
 	}
-	return _u
+	return dsu
 }
 
-// AddDocCount adds value to the "doc_count" field.
-func (_u *DocSeriesUpdate) AddDocCount(v int) *DocSeriesUpdate {
-	_u.mutation.AddDocCount(v)
-	return _u
+// AddDocCount adds i to the "doc_count" field.
+func (dsu *DocSeriesUpdate) AddDocCount(i int) *DocSeriesUpdate {
+	dsu.mutation.AddDocCount(i)
+	return dsu
 }
 
 // AddArticleIDs adds the "articles" edge to the Article entity by IDs.
-func (_u *DocSeriesUpdate) AddArticleIDs(ids ...uint) *DocSeriesUpdate {
-	_u.mutation.AddArticleIDs(ids...)
-	return _u
+func (dsu *DocSeriesUpdate) AddArticleIDs(ids ...uint) *DocSeriesUpdate {
+	dsu.mutation.AddArticleIDs(ids...)
+	return dsu
 }
 
 // AddArticles adds the "articles" edges to the Article entity.
-func (_u *DocSeriesUpdate) AddArticles(v ...*Article) *DocSeriesUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (dsu *DocSeriesUpdate) AddArticles(a ...*Article) *DocSeriesUpdate {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.AddArticleIDs(ids...)
+	return dsu.AddArticleIDs(ids...)
 }
 
 // Mutation returns the DocSeriesMutation object of the builder.
-func (_u *DocSeriesUpdate) Mutation() *DocSeriesMutation {
-	return _u.mutation
+func (dsu *DocSeriesUpdate) Mutation() *DocSeriesMutation {
+	return dsu.mutation
 }
 
 // ClearArticles clears all "articles" edges to the Article entity.
-func (_u *DocSeriesUpdate) ClearArticles() *DocSeriesUpdate {
-	_u.mutation.ClearArticles()
-	return _u
+func (dsu *DocSeriesUpdate) ClearArticles() *DocSeriesUpdate {
+	dsu.mutation.ClearArticles()
+	return dsu
 }
 
 // RemoveArticleIDs removes the "articles" edge to Article entities by IDs.
-func (_u *DocSeriesUpdate) RemoveArticleIDs(ids ...uint) *DocSeriesUpdate {
-	_u.mutation.RemoveArticleIDs(ids...)
-	return _u
+func (dsu *DocSeriesUpdate) RemoveArticleIDs(ids ...uint) *DocSeriesUpdate {
+	dsu.mutation.RemoveArticleIDs(ids...)
+	return dsu
 }
 
 // RemoveArticles removes "articles" edges to Article entities.
-func (_u *DocSeriesUpdate) RemoveArticles(v ...*Article) *DocSeriesUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (dsu *DocSeriesUpdate) RemoveArticles(a ...*Article) *DocSeriesUpdate {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.RemoveArticleIDs(ids...)
+	return dsu.RemoveArticleIDs(ids...)
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *DocSeriesUpdate) Save(ctx context.Context) (int, error) {
-	_u.defaults()
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (dsu *DocSeriesUpdate) Save(ctx context.Context) (int, error) {
+	dsu.defaults()
+	return withHooks(ctx, dsu.sqlSave, dsu.mutation, dsu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *DocSeriesUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (dsu *DocSeriesUpdate) SaveX(ctx context.Context) int {
+	affected, err := dsu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -189,39 +189,39 @@ func (_u *DocSeriesUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *DocSeriesUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (dsu *DocSeriesUpdate) Exec(ctx context.Context) error {
+	_, err := dsu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *DocSeriesUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (dsu *DocSeriesUpdate) ExecX(ctx context.Context) {
+	if err := dsu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *DocSeriesUpdate) defaults() {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (dsu *DocSeriesUpdate) defaults() {
+	if _, ok := dsu.mutation.UpdatedAt(); !ok {
 		v := docseries.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		dsu.mutation.SetUpdatedAt(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *DocSeriesUpdate) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (dsu *DocSeriesUpdate) check() error {
+	if v, ok := dsu.mutation.Name(); ok {
 		if err := docseries.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "DocSeries.name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Sort(); ok {
+	if v, ok := dsu.mutation.Sort(); ok {
 		if err := docseries.SortValidator(v); err != nil {
 			return &ValidationError{Name: "sort", err: fmt.Errorf(`ent: validator failed for field "DocSeries.sort": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.DocCount(); ok {
+	if v, ok := dsu.mutation.DocCount(); ok {
 		if err := docseries.DocCountValidator(v); err != nil {
 			return &ValidationError{Name: "doc_count", err: fmt.Errorf(`ent: validator failed for field "DocSeries.doc_count": %w`, err)}
 		}
@@ -230,54 +230,54 @@ func (_u *DocSeriesUpdate) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *DocSeriesUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *DocSeriesUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (dsu *DocSeriesUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *DocSeriesUpdate {
+	dsu.modifiers = append(dsu.modifiers, modifiers...)
+	return dsu
 }
 
-func (_u *DocSeriesUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (dsu *DocSeriesUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := dsu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(docseries.Table, docseries.Columns, sqlgraph.NewFieldSpec(docseries.FieldID, field.TypeUint))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := dsu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := dsu.mutation.UpdatedAt(); ok {
 		_spec.SetField(docseries.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := dsu.mutation.Name(); ok {
 		_spec.SetField(docseries.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := dsu.mutation.Description(); ok {
 		_spec.SetField(docseries.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if dsu.mutation.DescriptionCleared() {
 		_spec.ClearField(docseries.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.CoverURL(); ok {
+	if value, ok := dsu.mutation.CoverURL(); ok {
 		_spec.SetField(docseries.FieldCoverURL, field.TypeString, value)
 	}
-	if _u.mutation.CoverURLCleared() {
+	if dsu.mutation.CoverURLCleared() {
 		_spec.ClearField(docseries.FieldCoverURL, field.TypeString)
 	}
-	if value, ok := _u.mutation.Sort(); ok {
+	if value, ok := dsu.mutation.Sort(); ok {
 		_spec.SetField(docseries.FieldSort, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedSort(); ok {
+	if value, ok := dsu.mutation.AddedSort(); ok {
 		_spec.AddField(docseries.FieldSort, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.DocCount(); ok {
+	if value, ok := dsu.mutation.DocCount(); ok {
 		_spec.SetField(docseries.FieldDocCount, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedDocCount(); ok {
+	if value, ok := dsu.mutation.AddedDocCount(); ok {
 		_spec.AddField(docseries.FieldDocCount, field.TypeInt, value)
 	}
-	if _u.mutation.ArticlesCleared() {
+	if dsu.mutation.ArticlesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -290,7 +290,7 @@ func (_u *DocSeriesUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedArticlesIDs(); len(nodes) > 0 && !_u.mutation.ArticlesCleared() {
+	if nodes := dsu.mutation.RemovedArticlesIDs(); len(nodes) > 0 && !dsu.mutation.ArticlesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -306,7 +306,7 @@ func (_u *DocSeriesUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.ArticlesIDs(); len(nodes) > 0 {
+	if nodes := dsu.mutation.ArticlesIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -322,8 +322,8 @@ func (_u *DocSeriesUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(dsu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, dsu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{docseries.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -331,8 +331,8 @@ func (_u *DocSeriesUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	dsu.mutation.done = true
+	return n, nil
 }
 
 // DocSeriesUpdateOne is the builder for updating a single DocSeries entity.
@@ -345,170 +345,170 @@ type DocSeriesUpdateOne struct {
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *DocSeriesUpdateOne) SetUpdatedAt(v time.Time) *DocSeriesUpdateOne {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (dsuo *DocSeriesUpdateOne) SetUpdatedAt(t time.Time) *DocSeriesUpdateOne {
+	dsuo.mutation.SetUpdatedAt(t)
+	return dsuo
 }
 
 // SetName sets the "name" field.
-func (_u *DocSeriesUpdateOne) SetName(v string) *DocSeriesUpdateOne {
-	_u.mutation.SetName(v)
-	return _u
+func (dsuo *DocSeriesUpdateOne) SetName(s string) *DocSeriesUpdateOne {
+	dsuo.mutation.SetName(s)
+	return dsuo
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *DocSeriesUpdateOne) SetNillableName(v *string) *DocSeriesUpdateOne {
-	if v != nil {
-		_u.SetName(*v)
+func (dsuo *DocSeriesUpdateOne) SetNillableName(s *string) *DocSeriesUpdateOne {
+	if s != nil {
+		dsuo.SetName(*s)
 	}
-	return _u
+	return dsuo
 }
 
 // SetDescription sets the "description" field.
-func (_u *DocSeriesUpdateOne) SetDescription(v string) *DocSeriesUpdateOne {
-	_u.mutation.SetDescription(v)
-	return _u
+func (dsuo *DocSeriesUpdateOne) SetDescription(s string) *DocSeriesUpdateOne {
+	dsuo.mutation.SetDescription(s)
+	return dsuo
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *DocSeriesUpdateOne) SetNillableDescription(v *string) *DocSeriesUpdateOne {
-	if v != nil {
-		_u.SetDescription(*v)
+func (dsuo *DocSeriesUpdateOne) SetNillableDescription(s *string) *DocSeriesUpdateOne {
+	if s != nil {
+		dsuo.SetDescription(*s)
 	}
-	return _u
+	return dsuo
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *DocSeriesUpdateOne) ClearDescription() *DocSeriesUpdateOne {
-	_u.mutation.ClearDescription()
-	return _u
+func (dsuo *DocSeriesUpdateOne) ClearDescription() *DocSeriesUpdateOne {
+	dsuo.mutation.ClearDescription()
+	return dsuo
 }
 
 // SetCoverURL sets the "cover_url" field.
-func (_u *DocSeriesUpdateOne) SetCoverURL(v string) *DocSeriesUpdateOne {
-	_u.mutation.SetCoverURL(v)
-	return _u
+func (dsuo *DocSeriesUpdateOne) SetCoverURL(s string) *DocSeriesUpdateOne {
+	dsuo.mutation.SetCoverURL(s)
+	return dsuo
 }
 
 // SetNillableCoverURL sets the "cover_url" field if the given value is not nil.
-func (_u *DocSeriesUpdateOne) SetNillableCoverURL(v *string) *DocSeriesUpdateOne {
-	if v != nil {
-		_u.SetCoverURL(*v)
+func (dsuo *DocSeriesUpdateOne) SetNillableCoverURL(s *string) *DocSeriesUpdateOne {
+	if s != nil {
+		dsuo.SetCoverURL(*s)
 	}
-	return _u
+	return dsuo
 }
 
 // ClearCoverURL clears the value of the "cover_url" field.
-func (_u *DocSeriesUpdateOne) ClearCoverURL() *DocSeriesUpdateOne {
-	_u.mutation.ClearCoverURL()
-	return _u
+func (dsuo *DocSeriesUpdateOne) ClearCoverURL() *DocSeriesUpdateOne {
+	dsuo.mutation.ClearCoverURL()
+	return dsuo
 }
 
 // SetSort sets the "sort" field.
-func (_u *DocSeriesUpdateOne) SetSort(v int) *DocSeriesUpdateOne {
-	_u.mutation.ResetSort()
-	_u.mutation.SetSort(v)
-	return _u
+func (dsuo *DocSeriesUpdateOne) SetSort(i int) *DocSeriesUpdateOne {
+	dsuo.mutation.ResetSort()
+	dsuo.mutation.SetSort(i)
+	return dsuo
 }
 
 // SetNillableSort sets the "sort" field if the given value is not nil.
-func (_u *DocSeriesUpdateOne) SetNillableSort(v *int) *DocSeriesUpdateOne {
-	if v != nil {
-		_u.SetSort(*v)
+func (dsuo *DocSeriesUpdateOne) SetNillableSort(i *int) *DocSeriesUpdateOne {
+	if i != nil {
+		dsuo.SetSort(*i)
 	}
-	return _u
+	return dsuo
 }
 
-// AddSort adds value to the "sort" field.
-func (_u *DocSeriesUpdateOne) AddSort(v int) *DocSeriesUpdateOne {
-	_u.mutation.AddSort(v)
-	return _u
+// AddSort adds i to the "sort" field.
+func (dsuo *DocSeriesUpdateOne) AddSort(i int) *DocSeriesUpdateOne {
+	dsuo.mutation.AddSort(i)
+	return dsuo
 }
 
 // SetDocCount sets the "doc_count" field.
-func (_u *DocSeriesUpdateOne) SetDocCount(v int) *DocSeriesUpdateOne {
-	_u.mutation.ResetDocCount()
-	_u.mutation.SetDocCount(v)
-	return _u
+func (dsuo *DocSeriesUpdateOne) SetDocCount(i int) *DocSeriesUpdateOne {
+	dsuo.mutation.ResetDocCount()
+	dsuo.mutation.SetDocCount(i)
+	return dsuo
 }
 
 // SetNillableDocCount sets the "doc_count" field if the given value is not nil.
-func (_u *DocSeriesUpdateOne) SetNillableDocCount(v *int) *DocSeriesUpdateOne {
-	if v != nil {
-		_u.SetDocCount(*v)
+func (dsuo *DocSeriesUpdateOne) SetNillableDocCount(i *int) *DocSeriesUpdateOne {
+	if i != nil {
+		dsuo.SetDocCount(*i)
 	}
-	return _u
+	return dsuo
 }
 
-// AddDocCount adds value to the "doc_count" field.
-func (_u *DocSeriesUpdateOne) AddDocCount(v int) *DocSeriesUpdateOne {
-	_u.mutation.AddDocCount(v)
-	return _u
+// AddDocCount adds i to the "doc_count" field.
+func (dsuo *DocSeriesUpdateOne) AddDocCount(i int) *DocSeriesUpdateOne {
+	dsuo.mutation.AddDocCount(i)
+	return dsuo
 }
 
 // AddArticleIDs adds the "articles" edge to the Article entity by IDs.
-func (_u *DocSeriesUpdateOne) AddArticleIDs(ids ...uint) *DocSeriesUpdateOne {
-	_u.mutation.AddArticleIDs(ids...)
-	return _u
+func (dsuo *DocSeriesUpdateOne) AddArticleIDs(ids ...uint) *DocSeriesUpdateOne {
+	dsuo.mutation.AddArticleIDs(ids...)
+	return dsuo
 }
 
 // AddArticles adds the "articles" edges to the Article entity.
-func (_u *DocSeriesUpdateOne) AddArticles(v ...*Article) *DocSeriesUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (dsuo *DocSeriesUpdateOne) AddArticles(a ...*Article) *DocSeriesUpdateOne {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.AddArticleIDs(ids...)
+	return dsuo.AddArticleIDs(ids...)
 }
 
 // Mutation returns the DocSeriesMutation object of the builder.
-func (_u *DocSeriesUpdateOne) Mutation() *DocSeriesMutation {
-	return _u.mutation
+func (dsuo *DocSeriesUpdateOne) Mutation() *DocSeriesMutation {
+	return dsuo.mutation
 }
 
 // ClearArticles clears all "articles" edges to the Article entity.
-func (_u *DocSeriesUpdateOne) ClearArticles() *DocSeriesUpdateOne {
-	_u.mutation.ClearArticles()
-	return _u
+func (dsuo *DocSeriesUpdateOne) ClearArticles() *DocSeriesUpdateOne {
+	dsuo.mutation.ClearArticles()
+	return dsuo
 }
 
 // RemoveArticleIDs removes the "articles" edge to Article entities by IDs.
-func (_u *DocSeriesUpdateOne) RemoveArticleIDs(ids ...uint) *DocSeriesUpdateOne {
-	_u.mutation.RemoveArticleIDs(ids...)
-	return _u
+func (dsuo *DocSeriesUpdateOne) RemoveArticleIDs(ids ...uint) *DocSeriesUpdateOne {
+	dsuo.mutation.RemoveArticleIDs(ids...)
+	return dsuo
 }
 
 // RemoveArticles removes "articles" edges to Article entities.
-func (_u *DocSeriesUpdateOne) RemoveArticles(v ...*Article) *DocSeriesUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (dsuo *DocSeriesUpdateOne) RemoveArticles(a ...*Article) *DocSeriesUpdateOne {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.RemoveArticleIDs(ids...)
+	return dsuo.RemoveArticleIDs(ids...)
 }
 
 // Where appends a list predicates to the DocSeriesUpdate builder.
-func (_u *DocSeriesUpdateOne) Where(ps ...predicate.DocSeries) *DocSeriesUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (dsuo *DocSeriesUpdateOne) Where(ps ...predicate.DocSeries) *DocSeriesUpdateOne {
+	dsuo.mutation.Where(ps...)
+	return dsuo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *DocSeriesUpdateOne) Select(field string, fields ...string) *DocSeriesUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (dsuo *DocSeriesUpdateOne) Select(field string, fields ...string) *DocSeriesUpdateOne {
+	dsuo.fields = append([]string{field}, fields...)
+	return dsuo
 }
 
 // Save executes the query and returns the updated DocSeries entity.
-func (_u *DocSeriesUpdateOne) Save(ctx context.Context) (*DocSeries, error) {
-	_u.defaults()
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (dsuo *DocSeriesUpdateOne) Save(ctx context.Context) (*DocSeries, error) {
+	dsuo.defaults()
+	return withHooks(ctx, dsuo.sqlSave, dsuo.mutation, dsuo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *DocSeriesUpdateOne) SaveX(ctx context.Context) *DocSeries {
-	node, err := _u.Save(ctx)
+func (dsuo *DocSeriesUpdateOne) SaveX(ctx context.Context) *DocSeries {
+	node, err := dsuo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -516,39 +516,39 @@ func (_u *DocSeriesUpdateOne) SaveX(ctx context.Context) *DocSeries {
 }
 
 // Exec executes the query on the entity.
-func (_u *DocSeriesUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (dsuo *DocSeriesUpdateOne) Exec(ctx context.Context) error {
+	_, err := dsuo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *DocSeriesUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (dsuo *DocSeriesUpdateOne) ExecX(ctx context.Context) {
+	if err := dsuo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *DocSeriesUpdateOne) defaults() {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (dsuo *DocSeriesUpdateOne) defaults() {
+	if _, ok := dsuo.mutation.UpdatedAt(); !ok {
 		v := docseries.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		dsuo.mutation.SetUpdatedAt(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *DocSeriesUpdateOne) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (dsuo *DocSeriesUpdateOne) check() error {
+	if v, ok := dsuo.mutation.Name(); ok {
 		if err := docseries.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "DocSeries.name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Sort(); ok {
+	if v, ok := dsuo.mutation.Sort(); ok {
 		if err := docseries.SortValidator(v); err != nil {
 			return &ValidationError{Name: "sort", err: fmt.Errorf(`ent: validator failed for field "DocSeries.sort": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.DocCount(); ok {
+	if v, ok := dsuo.mutation.DocCount(); ok {
 		if err := docseries.DocCountValidator(v); err != nil {
 			return &ValidationError{Name: "doc_count", err: fmt.Errorf(`ent: validator failed for field "DocSeries.doc_count": %w`, err)}
 		}
@@ -557,22 +557,22 @@ func (_u *DocSeriesUpdateOne) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *DocSeriesUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *DocSeriesUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (dsuo *DocSeriesUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *DocSeriesUpdateOne {
+	dsuo.modifiers = append(dsuo.modifiers, modifiers...)
+	return dsuo
 }
 
-func (_u *DocSeriesUpdateOne) sqlSave(ctx context.Context) (_node *DocSeries, err error) {
-	if err := _u.check(); err != nil {
+func (dsuo *DocSeriesUpdateOne) sqlSave(ctx context.Context) (_node *DocSeries, err error) {
+	if err := dsuo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(docseries.Table, docseries.Columns, sqlgraph.NewFieldSpec(docseries.FieldID, field.TypeUint))
-	id, ok := _u.mutation.ID()
+	id, ok := dsuo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "DocSeries.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := dsuo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, docseries.FieldID)
 		for _, f := range fields {
@@ -584,44 +584,44 @@ func (_u *DocSeriesUpdateOne) sqlSave(ctx context.Context) (_node *DocSeries, er
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := dsuo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := dsuo.mutation.UpdatedAt(); ok {
 		_spec.SetField(docseries.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := dsuo.mutation.Name(); ok {
 		_spec.SetField(docseries.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := dsuo.mutation.Description(); ok {
 		_spec.SetField(docseries.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if dsuo.mutation.DescriptionCleared() {
 		_spec.ClearField(docseries.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.CoverURL(); ok {
+	if value, ok := dsuo.mutation.CoverURL(); ok {
 		_spec.SetField(docseries.FieldCoverURL, field.TypeString, value)
 	}
-	if _u.mutation.CoverURLCleared() {
+	if dsuo.mutation.CoverURLCleared() {
 		_spec.ClearField(docseries.FieldCoverURL, field.TypeString)
 	}
-	if value, ok := _u.mutation.Sort(); ok {
+	if value, ok := dsuo.mutation.Sort(); ok {
 		_spec.SetField(docseries.FieldSort, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedSort(); ok {
+	if value, ok := dsuo.mutation.AddedSort(); ok {
 		_spec.AddField(docseries.FieldSort, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.DocCount(); ok {
+	if value, ok := dsuo.mutation.DocCount(); ok {
 		_spec.SetField(docseries.FieldDocCount, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedDocCount(); ok {
+	if value, ok := dsuo.mutation.AddedDocCount(); ok {
 		_spec.AddField(docseries.FieldDocCount, field.TypeInt, value)
 	}
-	if _u.mutation.ArticlesCleared() {
+	if dsuo.mutation.ArticlesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -634,7 +634,7 @@ func (_u *DocSeriesUpdateOne) sqlSave(ctx context.Context) (_node *DocSeries, er
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedArticlesIDs(); len(nodes) > 0 && !_u.mutation.ArticlesCleared() {
+	if nodes := dsuo.mutation.RemovedArticlesIDs(); len(nodes) > 0 && !dsuo.mutation.ArticlesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -650,7 +650,7 @@ func (_u *DocSeriesUpdateOne) sqlSave(ctx context.Context) (_node *DocSeries, er
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.ArticlesIDs(); len(nodes) > 0 {
+	if nodes := dsuo.mutation.ArticlesIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -666,11 +666,11 @@ func (_u *DocSeriesUpdateOne) sqlSave(ctx context.Context) (_node *DocSeries, er
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &DocSeries{config: _u.config}
+	_spec.AddModifiers(dsuo.modifiers...)
+	_node = &DocSeries{config: dsuo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, dsuo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{docseries.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -678,6 +678,6 @@ func (_u *DocSeriesUpdateOne) sqlSave(ctx context.Context) (_node *DocSeries, er
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	dsuo.mutation.done = true
 	return _node, nil
 }

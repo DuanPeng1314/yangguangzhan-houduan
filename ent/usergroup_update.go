@@ -27,195 +27,195 @@ type UserGroupUpdate struct {
 }
 
 // Where appends a list predicates to the UserGroupUpdate builder.
-func (_u *UserGroupUpdate) Where(ps ...predicate.UserGroup) *UserGroupUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (ugu *UserGroupUpdate) Where(ps ...predicate.UserGroup) *UserGroupUpdate {
+	ugu.mutation.Where(ps...)
+	return ugu
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *UserGroupUpdate) SetDeletedAt(v time.Time) *UserGroupUpdate {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (ugu *UserGroupUpdate) SetDeletedAt(t time.Time) *UserGroupUpdate {
+	ugu.mutation.SetDeletedAt(t)
+	return ugu
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *UserGroupUpdate) SetNillableDeletedAt(v *time.Time) *UserGroupUpdate {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (ugu *UserGroupUpdate) SetNillableDeletedAt(t *time.Time) *UserGroupUpdate {
+	if t != nil {
+		ugu.SetDeletedAt(*t)
 	}
-	return _u
+	return ugu
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *UserGroupUpdate) ClearDeletedAt() *UserGroupUpdate {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (ugu *UserGroupUpdate) ClearDeletedAt() *UserGroupUpdate {
+	ugu.mutation.ClearDeletedAt()
+	return ugu
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *UserGroupUpdate) SetUpdatedAt(v time.Time) *UserGroupUpdate {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (ugu *UserGroupUpdate) SetUpdatedAt(t time.Time) *UserGroupUpdate {
+	ugu.mutation.SetUpdatedAt(t)
+	return ugu
 }
 
 // SetName sets the "name" field.
-func (_u *UserGroupUpdate) SetName(v string) *UserGroupUpdate {
-	_u.mutation.SetName(v)
-	return _u
+func (ugu *UserGroupUpdate) SetName(s string) *UserGroupUpdate {
+	ugu.mutation.SetName(s)
+	return ugu
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *UserGroupUpdate) SetNillableName(v *string) *UserGroupUpdate {
-	if v != nil {
-		_u.SetName(*v)
+func (ugu *UserGroupUpdate) SetNillableName(s *string) *UserGroupUpdate {
+	if s != nil {
+		ugu.SetName(*s)
 	}
-	return _u
+	return ugu
 }
 
 // SetDescription sets the "description" field.
-func (_u *UserGroupUpdate) SetDescription(v string) *UserGroupUpdate {
-	_u.mutation.SetDescription(v)
-	return _u
+func (ugu *UserGroupUpdate) SetDescription(s string) *UserGroupUpdate {
+	ugu.mutation.SetDescription(s)
+	return ugu
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *UserGroupUpdate) SetNillableDescription(v *string) *UserGroupUpdate {
-	if v != nil {
-		_u.SetDescription(*v)
+func (ugu *UserGroupUpdate) SetNillableDescription(s *string) *UserGroupUpdate {
+	if s != nil {
+		ugu.SetDescription(*s)
 	}
-	return _u
+	return ugu
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *UserGroupUpdate) ClearDescription() *UserGroupUpdate {
-	_u.mutation.ClearDescription()
-	return _u
+func (ugu *UserGroupUpdate) ClearDescription() *UserGroupUpdate {
+	ugu.mutation.ClearDescription()
+	return ugu
 }
 
 // SetPermissions sets the "permissions" field.
-func (_u *UserGroupUpdate) SetPermissions(v model.Boolset) *UserGroupUpdate {
-	_u.mutation.SetPermissions(v)
-	return _u
+func (ugu *UserGroupUpdate) SetPermissions(m model.Boolset) *UserGroupUpdate {
+	ugu.mutation.SetPermissions(m)
+	return ugu
 }
 
 // SetMaxStorage sets the "max_storage" field.
-func (_u *UserGroupUpdate) SetMaxStorage(v int64) *UserGroupUpdate {
-	_u.mutation.ResetMaxStorage()
-	_u.mutation.SetMaxStorage(v)
-	return _u
+func (ugu *UserGroupUpdate) SetMaxStorage(i int64) *UserGroupUpdate {
+	ugu.mutation.ResetMaxStorage()
+	ugu.mutation.SetMaxStorage(i)
+	return ugu
 }
 
 // SetNillableMaxStorage sets the "max_storage" field if the given value is not nil.
-func (_u *UserGroupUpdate) SetNillableMaxStorage(v *int64) *UserGroupUpdate {
-	if v != nil {
-		_u.SetMaxStorage(*v)
+func (ugu *UserGroupUpdate) SetNillableMaxStorage(i *int64) *UserGroupUpdate {
+	if i != nil {
+		ugu.SetMaxStorage(*i)
 	}
-	return _u
+	return ugu
 }
 
-// AddMaxStorage adds value to the "max_storage" field.
-func (_u *UserGroupUpdate) AddMaxStorage(v int64) *UserGroupUpdate {
-	_u.mutation.AddMaxStorage(v)
-	return _u
+// AddMaxStorage adds i to the "max_storage" field.
+func (ugu *UserGroupUpdate) AddMaxStorage(i int64) *UserGroupUpdate {
+	ugu.mutation.AddMaxStorage(i)
+	return ugu
 }
 
 // SetSpeedLimit sets the "speed_limit" field.
-func (_u *UserGroupUpdate) SetSpeedLimit(v int64) *UserGroupUpdate {
-	_u.mutation.ResetSpeedLimit()
-	_u.mutation.SetSpeedLimit(v)
-	return _u
+func (ugu *UserGroupUpdate) SetSpeedLimit(i int64) *UserGroupUpdate {
+	ugu.mutation.ResetSpeedLimit()
+	ugu.mutation.SetSpeedLimit(i)
+	return ugu
 }
 
 // SetNillableSpeedLimit sets the "speed_limit" field if the given value is not nil.
-func (_u *UserGroupUpdate) SetNillableSpeedLimit(v *int64) *UserGroupUpdate {
-	if v != nil {
-		_u.SetSpeedLimit(*v)
+func (ugu *UserGroupUpdate) SetNillableSpeedLimit(i *int64) *UserGroupUpdate {
+	if i != nil {
+		ugu.SetSpeedLimit(*i)
 	}
-	return _u
+	return ugu
 }
 
-// AddSpeedLimit adds value to the "speed_limit" field.
-func (_u *UserGroupUpdate) AddSpeedLimit(v int64) *UserGroupUpdate {
-	_u.mutation.AddSpeedLimit(v)
-	return _u
+// AddSpeedLimit adds i to the "speed_limit" field.
+func (ugu *UserGroupUpdate) AddSpeedLimit(i int64) *UserGroupUpdate {
+	ugu.mutation.AddSpeedLimit(i)
+	return ugu
 }
 
 // SetSettings sets the "settings" field.
-func (_u *UserGroupUpdate) SetSettings(v *model.GroupSettings) *UserGroupUpdate {
-	_u.mutation.SetSettings(v)
-	return _u
+func (ugu *UserGroupUpdate) SetSettings(ms *model.GroupSettings) *UserGroupUpdate {
+	ugu.mutation.SetSettings(ms)
+	return ugu
 }
 
 // SetStoragePolicyIds sets the "storage_policy_ids" field.
-func (_u *UserGroupUpdate) SetStoragePolicyIds(v []uint) *UserGroupUpdate {
-	_u.mutation.SetStoragePolicyIds(v)
-	return _u
+func (ugu *UserGroupUpdate) SetStoragePolicyIds(u []uint) *UserGroupUpdate {
+	ugu.mutation.SetStoragePolicyIds(u)
+	return ugu
 }
 
-// AppendStoragePolicyIds appends value to the "storage_policy_ids" field.
-func (_u *UserGroupUpdate) AppendStoragePolicyIds(v []uint) *UserGroupUpdate {
-	_u.mutation.AppendStoragePolicyIds(v)
-	return _u
+// AppendStoragePolicyIds appends u to the "storage_policy_ids" field.
+func (ugu *UserGroupUpdate) AppendStoragePolicyIds(u []uint) *UserGroupUpdate {
+	ugu.mutation.AppendStoragePolicyIds(u)
+	return ugu
 }
 
 // ClearStoragePolicyIds clears the value of the "storage_policy_ids" field.
-func (_u *UserGroupUpdate) ClearStoragePolicyIds() *UserGroupUpdate {
-	_u.mutation.ClearStoragePolicyIds()
-	return _u
+func (ugu *UserGroupUpdate) ClearStoragePolicyIds() *UserGroupUpdate {
+	ugu.mutation.ClearStoragePolicyIds()
+	return ugu
 }
 
 // AddUserIDs adds the "users" edge to the User entity by IDs.
-func (_u *UserGroupUpdate) AddUserIDs(ids ...uint) *UserGroupUpdate {
-	_u.mutation.AddUserIDs(ids...)
-	return _u
+func (ugu *UserGroupUpdate) AddUserIDs(ids ...uint) *UserGroupUpdate {
+	ugu.mutation.AddUserIDs(ids...)
+	return ugu
 }
 
 // AddUsers adds the "users" edges to the User entity.
-func (_u *UserGroupUpdate) AddUsers(v ...*User) *UserGroupUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (ugu *UserGroupUpdate) AddUsers(u ...*User) *UserGroupUpdate {
+	ids := make([]uint, len(u))
+	for i := range u {
+		ids[i] = u[i].ID
 	}
-	return _u.AddUserIDs(ids...)
+	return ugu.AddUserIDs(ids...)
 }
 
 // Mutation returns the UserGroupMutation object of the builder.
-func (_u *UserGroupUpdate) Mutation() *UserGroupMutation {
-	return _u.mutation
+func (ugu *UserGroupUpdate) Mutation() *UserGroupMutation {
+	return ugu.mutation
 }
 
 // ClearUsers clears all "users" edges to the User entity.
-func (_u *UserGroupUpdate) ClearUsers() *UserGroupUpdate {
-	_u.mutation.ClearUsers()
-	return _u
+func (ugu *UserGroupUpdate) ClearUsers() *UserGroupUpdate {
+	ugu.mutation.ClearUsers()
+	return ugu
 }
 
 // RemoveUserIDs removes the "users" edge to User entities by IDs.
-func (_u *UserGroupUpdate) RemoveUserIDs(ids ...uint) *UserGroupUpdate {
-	_u.mutation.RemoveUserIDs(ids...)
-	return _u
+func (ugu *UserGroupUpdate) RemoveUserIDs(ids ...uint) *UserGroupUpdate {
+	ugu.mutation.RemoveUserIDs(ids...)
+	return ugu
 }
 
 // RemoveUsers removes "users" edges to User entities.
-func (_u *UserGroupUpdate) RemoveUsers(v ...*User) *UserGroupUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (ugu *UserGroupUpdate) RemoveUsers(u ...*User) *UserGroupUpdate {
+	ids := make([]uint, len(u))
+	for i := range u {
+		ids[i] = u[i].ID
 	}
-	return _u.RemoveUserIDs(ids...)
+	return ugu.RemoveUserIDs(ids...)
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *UserGroupUpdate) Save(ctx context.Context) (int, error) {
-	if err := _u.defaults(); err != nil {
+func (ugu *UserGroupUpdate) Save(ctx context.Context) (int, error) {
+	if err := ugu.defaults(); err != nil {
 		return 0, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, ugu.sqlSave, ugu.mutation, ugu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *UserGroupUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (ugu *UserGroupUpdate) SaveX(ctx context.Context) int {
+	affected, err := ugu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -223,38 +223,38 @@ func (_u *UserGroupUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *UserGroupUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (ugu *UserGroupUpdate) Exec(ctx context.Context) error {
+	_, err := ugu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *UserGroupUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (ugu *UserGroupUpdate) ExecX(ctx context.Context) {
+	if err := ugu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *UserGroupUpdate) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (ugu *UserGroupUpdate) defaults() error {
+	if _, ok := ugu.mutation.UpdatedAt(); !ok {
 		if usergroup.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized usergroup.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := usergroup.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		ugu.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *UserGroupUpdate) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (ugu *UserGroupUpdate) check() error {
+	if v, ok := ugu.mutation.Name(); ok {
 		if err := usergroup.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "UserGroup.name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Description(); ok {
+	if v, ok := ugu.mutation.Description(); ok {
 		if err := usergroup.DescriptionValidator(v); err != nil {
 			return &ValidationError{Name: "description", err: fmt.Errorf(`ent: validator failed for field "UserGroup.description": %w`, err)}
 		}
@@ -263,71 +263,71 @@ func (_u *UserGroupUpdate) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *UserGroupUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *UserGroupUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (ugu *UserGroupUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *UserGroupUpdate {
+	ugu.modifiers = append(ugu.modifiers, modifiers...)
+	return ugu
 }
 
-func (_u *UserGroupUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (ugu *UserGroupUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := ugu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(usergroup.Table, usergroup.Columns, sqlgraph.NewFieldSpec(usergroup.FieldID, field.TypeUint))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := ugu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := ugu.mutation.DeletedAt(); ok {
 		_spec.SetField(usergroup.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if ugu.mutation.DeletedAtCleared() {
 		_spec.ClearField(usergroup.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := ugu.mutation.UpdatedAt(); ok {
 		_spec.SetField(usergroup.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := ugu.mutation.Name(); ok {
 		_spec.SetField(usergroup.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := ugu.mutation.Description(); ok {
 		_spec.SetField(usergroup.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if ugu.mutation.DescriptionCleared() {
 		_spec.ClearField(usergroup.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.Permissions(); ok {
+	if value, ok := ugu.mutation.Permissions(); ok {
 		_spec.SetField(usergroup.FieldPermissions, field.TypeOther, value)
 	}
-	if value, ok := _u.mutation.MaxStorage(); ok {
+	if value, ok := ugu.mutation.MaxStorage(); ok {
 		_spec.SetField(usergroup.FieldMaxStorage, field.TypeInt64, value)
 	}
-	if value, ok := _u.mutation.AddedMaxStorage(); ok {
+	if value, ok := ugu.mutation.AddedMaxStorage(); ok {
 		_spec.AddField(usergroup.FieldMaxStorage, field.TypeInt64, value)
 	}
-	if value, ok := _u.mutation.SpeedLimit(); ok {
+	if value, ok := ugu.mutation.SpeedLimit(); ok {
 		_spec.SetField(usergroup.FieldSpeedLimit, field.TypeInt64, value)
 	}
-	if value, ok := _u.mutation.AddedSpeedLimit(); ok {
+	if value, ok := ugu.mutation.AddedSpeedLimit(); ok {
 		_spec.AddField(usergroup.FieldSpeedLimit, field.TypeInt64, value)
 	}
-	if value, ok := _u.mutation.Settings(); ok {
+	if value, ok := ugu.mutation.Settings(); ok {
 		_spec.SetField(usergroup.FieldSettings, field.TypeOther, value)
 	}
-	if value, ok := _u.mutation.StoragePolicyIds(); ok {
+	if value, ok := ugu.mutation.StoragePolicyIds(); ok {
 		_spec.SetField(usergroup.FieldStoragePolicyIds, field.TypeJSON, value)
 	}
-	if value, ok := _u.mutation.AppendedStoragePolicyIds(); ok {
+	if value, ok := ugu.mutation.AppendedStoragePolicyIds(); ok {
 		_spec.AddModifier(func(u *sql.UpdateBuilder) {
 			sqljson.Append(u, usergroup.FieldStoragePolicyIds, value)
 		})
 	}
-	if _u.mutation.StoragePolicyIdsCleared() {
+	if ugu.mutation.StoragePolicyIdsCleared() {
 		_spec.ClearField(usergroup.FieldStoragePolicyIds, field.TypeJSON)
 	}
-	if _u.mutation.UsersCleared() {
+	if ugu.mutation.UsersCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -340,7 +340,7 @@ func (_u *UserGroupUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedUsersIDs(); len(nodes) > 0 && !_u.mutation.UsersCleared() {
+	if nodes := ugu.mutation.RemovedUsersIDs(); len(nodes) > 0 && !ugu.mutation.UsersCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -356,7 +356,7 @@ func (_u *UserGroupUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.UsersIDs(); len(nodes) > 0 {
+	if nodes := ugu.mutation.UsersIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -372,8 +372,8 @@ func (_u *UserGroupUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(ugu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, ugu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{usergroup.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -381,8 +381,8 @@ func (_u *UserGroupUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	ugu.mutation.done = true
+	return n, nil
 }
 
 // UserGroupUpdateOne is the builder for updating a single UserGroup entity.
@@ -395,202 +395,202 @@ type UserGroupUpdateOne struct {
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *UserGroupUpdateOne) SetDeletedAt(v time.Time) *UserGroupUpdateOne {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (uguo *UserGroupUpdateOne) SetDeletedAt(t time.Time) *UserGroupUpdateOne {
+	uguo.mutation.SetDeletedAt(t)
+	return uguo
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *UserGroupUpdateOne) SetNillableDeletedAt(v *time.Time) *UserGroupUpdateOne {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (uguo *UserGroupUpdateOne) SetNillableDeletedAt(t *time.Time) *UserGroupUpdateOne {
+	if t != nil {
+		uguo.SetDeletedAt(*t)
 	}
-	return _u
+	return uguo
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *UserGroupUpdateOne) ClearDeletedAt() *UserGroupUpdateOne {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (uguo *UserGroupUpdateOne) ClearDeletedAt() *UserGroupUpdateOne {
+	uguo.mutation.ClearDeletedAt()
+	return uguo
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *UserGroupUpdateOne) SetUpdatedAt(v time.Time) *UserGroupUpdateOne {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (uguo *UserGroupUpdateOne) SetUpdatedAt(t time.Time) *UserGroupUpdateOne {
+	uguo.mutation.SetUpdatedAt(t)
+	return uguo
 }
 
 // SetName sets the "name" field.
-func (_u *UserGroupUpdateOne) SetName(v string) *UserGroupUpdateOne {
-	_u.mutation.SetName(v)
-	return _u
+func (uguo *UserGroupUpdateOne) SetName(s string) *UserGroupUpdateOne {
+	uguo.mutation.SetName(s)
+	return uguo
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *UserGroupUpdateOne) SetNillableName(v *string) *UserGroupUpdateOne {
-	if v != nil {
-		_u.SetName(*v)
+func (uguo *UserGroupUpdateOne) SetNillableName(s *string) *UserGroupUpdateOne {
+	if s != nil {
+		uguo.SetName(*s)
 	}
-	return _u
+	return uguo
 }
 
 // SetDescription sets the "description" field.
-func (_u *UserGroupUpdateOne) SetDescription(v string) *UserGroupUpdateOne {
-	_u.mutation.SetDescription(v)
-	return _u
+func (uguo *UserGroupUpdateOne) SetDescription(s string) *UserGroupUpdateOne {
+	uguo.mutation.SetDescription(s)
+	return uguo
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *UserGroupUpdateOne) SetNillableDescription(v *string) *UserGroupUpdateOne {
-	if v != nil {
-		_u.SetDescription(*v)
+func (uguo *UserGroupUpdateOne) SetNillableDescription(s *string) *UserGroupUpdateOne {
+	if s != nil {
+		uguo.SetDescription(*s)
 	}
-	return _u
+	return uguo
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *UserGroupUpdateOne) ClearDescription() *UserGroupUpdateOne {
-	_u.mutation.ClearDescription()
-	return _u
+func (uguo *UserGroupUpdateOne) ClearDescription() *UserGroupUpdateOne {
+	uguo.mutation.ClearDescription()
+	return uguo
 }
 
 // SetPermissions sets the "permissions" field.
-func (_u *UserGroupUpdateOne) SetPermissions(v model.Boolset) *UserGroupUpdateOne {
-	_u.mutation.SetPermissions(v)
-	return _u
+func (uguo *UserGroupUpdateOne) SetPermissions(m model.Boolset) *UserGroupUpdateOne {
+	uguo.mutation.SetPermissions(m)
+	return uguo
 }
 
 // SetMaxStorage sets the "max_storage" field.
-func (_u *UserGroupUpdateOne) SetMaxStorage(v int64) *UserGroupUpdateOne {
-	_u.mutation.ResetMaxStorage()
-	_u.mutation.SetMaxStorage(v)
-	return _u
+func (uguo *UserGroupUpdateOne) SetMaxStorage(i int64) *UserGroupUpdateOne {
+	uguo.mutation.ResetMaxStorage()
+	uguo.mutation.SetMaxStorage(i)
+	return uguo
 }
 
 // SetNillableMaxStorage sets the "max_storage" field if the given value is not nil.
-func (_u *UserGroupUpdateOne) SetNillableMaxStorage(v *int64) *UserGroupUpdateOne {
-	if v != nil {
-		_u.SetMaxStorage(*v)
+func (uguo *UserGroupUpdateOne) SetNillableMaxStorage(i *int64) *UserGroupUpdateOne {
+	if i != nil {
+		uguo.SetMaxStorage(*i)
 	}
-	return _u
+	return uguo
 }
 
-// AddMaxStorage adds value to the "max_storage" field.
-func (_u *UserGroupUpdateOne) AddMaxStorage(v int64) *UserGroupUpdateOne {
-	_u.mutation.AddMaxStorage(v)
-	return _u
+// AddMaxStorage adds i to the "max_storage" field.
+func (uguo *UserGroupUpdateOne) AddMaxStorage(i int64) *UserGroupUpdateOne {
+	uguo.mutation.AddMaxStorage(i)
+	return uguo
 }
 
 // SetSpeedLimit sets the "speed_limit" field.
-func (_u *UserGroupUpdateOne) SetSpeedLimit(v int64) *UserGroupUpdateOne {
-	_u.mutation.ResetSpeedLimit()
-	_u.mutation.SetSpeedLimit(v)
-	return _u
+func (uguo *UserGroupUpdateOne) SetSpeedLimit(i int64) *UserGroupUpdateOne {
+	uguo.mutation.ResetSpeedLimit()
+	uguo.mutation.SetSpeedLimit(i)
+	return uguo
 }
 
 // SetNillableSpeedLimit sets the "speed_limit" field if the given value is not nil.
-func (_u *UserGroupUpdateOne) SetNillableSpeedLimit(v *int64) *UserGroupUpdateOne {
-	if v != nil {
-		_u.SetSpeedLimit(*v)
+func (uguo *UserGroupUpdateOne) SetNillableSpeedLimit(i *int64) *UserGroupUpdateOne {
+	if i != nil {
+		uguo.SetSpeedLimit(*i)
 	}
-	return _u
+	return uguo
 }
 
-// AddSpeedLimit adds value to the "speed_limit" field.
-func (_u *UserGroupUpdateOne) AddSpeedLimit(v int64) *UserGroupUpdateOne {
-	_u.mutation.AddSpeedLimit(v)
-	return _u
+// AddSpeedLimit adds i to the "speed_limit" field.
+func (uguo *UserGroupUpdateOne) AddSpeedLimit(i int64) *UserGroupUpdateOne {
+	uguo.mutation.AddSpeedLimit(i)
+	return uguo
 }
 
 // SetSettings sets the "settings" field.
-func (_u *UserGroupUpdateOne) SetSettings(v *model.GroupSettings) *UserGroupUpdateOne {
-	_u.mutation.SetSettings(v)
-	return _u
+func (uguo *UserGroupUpdateOne) SetSettings(ms *model.GroupSettings) *UserGroupUpdateOne {
+	uguo.mutation.SetSettings(ms)
+	return uguo
 }
 
 // SetStoragePolicyIds sets the "storage_policy_ids" field.
-func (_u *UserGroupUpdateOne) SetStoragePolicyIds(v []uint) *UserGroupUpdateOne {
-	_u.mutation.SetStoragePolicyIds(v)
-	return _u
+func (uguo *UserGroupUpdateOne) SetStoragePolicyIds(u []uint) *UserGroupUpdateOne {
+	uguo.mutation.SetStoragePolicyIds(u)
+	return uguo
 }
 
-// AppendStoragePolicyIds appends value to the "storage_policy_ids" field.
-func (_u *UserGroupUpdateOne) AppendStoragePolicyIds(v []uint) *UserGroupUpdateOne {
-	_u.mutation.AppendStoragePolicyIds(v)
-	return _u
+// AppendStoragePolicyIds appends u to the "storage_policy_ids" field.
+func (uguo *UserGroupUpdateOne) AppendStoragePolicyIds(u []uint) *UserGroupUpdateOne {
+	uguo.mutation.AppendStoragePolicyIds(u)
+	return uguo
 }
 
 // ClearStoragePolicyIds clears the value of the "storage_policy_ids" field.
-func (_u *UserGroupUpdateOne) ClearStoragePolicyIds() *UserGroupUpdateOne {
-	_u.mutation.ClearStoragePolicyIds()
-	return _u
+func (uguo *UserGroupUpdateOne) ClearStoragePolicyIds() *UserGroupUpdateOne {
+	uguo.mutation.ClearStoragePolicyIds()
+	return uguo
 }
 
 // AddUserIDs adds the "users" edge to the User entity by IDs.
-func (_u *UserGroupUpdateOne) AddUserIDs(ids ...uint) *UserGroupUpdateOne {
-	_u.mutation.AddUserIDs(ids...)
-	return _u
+func (uguo *UserGroupUpdateOne) AddUserIDs(ids ...uint) *UserGroupUpdateOne {
+	uguo.mutation.AddUserIDs(ids...)
+	return uguo
 }
 
 // AddUsers adds the "users" edges to the User entity.
-func (_u *UserGroupUpdateOne) AddUsers(v ...*User) *UserGroupUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (uguo *UserGroupUpdateOne) AddUsers(u ...*User) *UserGroupUpdateOne {
+	ids := make([]uint, len(u))
+	for i := range u {
+		ids[i] = u[i].ID
 	}
-	return _u.AddUserIDs(ids...)
+	return uguo.AddUserIDs(ids...)
 }
 
 // Mutation returns the UserGroupMutation object of the builder.
-func (_u *UserGroupUpdateOne) Mutation() *UserGroupMutation {
-	return _u.mutation
+func (uguo *UserGroupUpdateOne) Mutation() *UserGroupMutation {
+	return uguo.mutation
 }
 
 // ClearUsers clears all "users" edges to the User entity.
-func (_u *UserGroupUpdateOne) ClearUsers() *UserGroupUpdateOne {
-	_u.mutation.ClearUsers()
-	return _u
+func (uguo *UserGroupUpdateOne) ClearUsers() *UserGroupUpdateOne {
+	uguo.mutation.ClearUsers()
+	return uguo
 }
 
 // RemoveUserIDs removes the "users" edge to User entities by IDs.
-func (_u *UserGroupUpdateOne) RemoveUserIDs(ids ...uint) *UserGroupUpdateOne {
-	_u.mutation.RemoveUserIDs(ids...)
-	return _u
+func (uguo *UserGroupUpdateOne) RemoveUserIDs(ids ...uint) *UserGroupUpdateOne {
+	uguo.mutation.RemoveUserIDs(ids...)
+	return uguo
 }
 
 // RemoveUsers removes "users" edges to User entities.
-func (_u *UserGroupUpdateOne) RemoveUsers(v ...*User) *UserGroupUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (uguo *UserGroupUpdateOne) RemoveUsers(u ...*User) *UserGroupUpdateOne {
+	ids := make([]uint, len(u))
+	for i := range u {
+		ids[i] = u[i].ID
 	}
-	return _u.RemoveUserIDs(ids...)
+	return uguo.RemoveUserIDs(ids...)
 }
 
 // Where appends a list predicates to the UserGroupUpdate builder.
-func (_u *UserGroupUpdateOne) Where(ps ...predicate.UserGroup) *UserGroupUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (uguo *UserGroupUpdateOne) Where(ps ...predicate.UserGroup) *UserGroupUpdateOne {
+	uguo.mutation.Where(ps...)
+	return uguo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *UserGroupUpdateOne) Select(field string, fields ...string) *UserGroupUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (uguo *UserGroupUpdateOne) Select(field string, fields ...string) *UserGroupUpdateOne {
+	uguo.fields = append([]string{field}, fields...)
+	return uguo
 }
 
 // Save executes the query and returns the updated UserGroup entity.
-func (_u *UserGroupUpdateOne) Save(ctx context.Context) (*UserGroup, error) {
-	if err := _u.defaults(); err != nil {
+func (uguo *UserGroupUpdateOne) Save(ctx context.Context) (*UserGroup, error) {
+	if err := uguo.defaults(); err != nil {
 		return nil, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, uguo.sqlSave, uguo.mutation, uguo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *UserGroupUpdateOne) SaveX(ctx context.Context) *UserGroup {
-	node, err := _u.Save(ctx)
+func (uguo *UserGroupUpdateOne) SaveX(ctx context.Context) *UserGroup {
+	node, err := uguo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -598,38 +598,38 @@ func (_u *UserGroupUpdateOne) SaveX(ctx context.Context) *UserGroup {
 }
 
 // Exec executes the query on the entity.
-func (_u *UserGroupUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (uguo *UserGroupUpdateOne) Exec(ctx context.Context) error {
+	_, err := uguo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *UserGroupUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (uguo *UserGroupUpdateOne) ExecX(ctx context.Context) {
+	if err := uguo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *UserGroupUpdateOne) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (uguo *UserGroupUpdateOne) defaults() error {
+	if _, ok := uguo.mutation.UpdatedAt(); !ok {
 		if usergroup.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized usergroup.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := usergroup.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		uguo.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *UserGroupUpdateOne) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (uguo *UserGroupUpdateOne) check() error {
+	if v, ok := uguo.mutation.Name(); ok {
 		if err := usergroup.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "UserGroup.name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Description(); ok {
+	if v, ok := uguo.mutation.Description(); ok {
 		if err := usergroup.DescriptionValidator(v); err != nil {
 			return &ValidationError{Name: "description", err: fmt.Errorf(`ent: validator failed for field "UserGroup.description": %w`, err)}
 		}
@@ -638,22 +638,22 @@ func (_u *UserGroupUpdateOne) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *UserGroupUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *UserGroupUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (uguo *UserGroupUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *UserGroupUpdateOne {
+	uguo.modifiers = append(uguo.modifiers, modifiers...)
+	return uguo
 }
 
-func (_u *UserGroupUpdateOne) sqlSave(ctx context.Context) (_node *UserGroup, err error) {
-	if err := _u.check(); err != nil {
+func (uguo *UserGroupUpdateOne) sqlSave(ctx context.Context) (_node *UserGroup, err error) {
+	if err := uguo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(usergroup.Table, usergroup.Columns, sqlgraph.NewFieldSpec(usergroup.FieldID, field.TypeUint))
-	id, ok := _u.mutation.ID()
+	id, ok := uguo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "UserGroup.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := uguo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, usergroup.FieldID)
 		for _, f := range fields {
@@ -665,61 +665,61 @@ func (_u *UserGroupUpdateOne) sqlSave(ctx context.Context) (_node *UserGroup, er
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := uguo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := uguo.mutation.DeletedAt(); ok {
 		_spec.SetField(usergroup.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if uguo.mutation.DeletedAtCleared() {
 		_spec.ClearField(usergroup.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := uguo.mutation.UpdatedAt(); ok {
 		_spec.SetField(usergroup.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := uguo.mutation.Name(); ok {
 		_spec.SetField(usergroup.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := uguo.mutation.Description(); ok {
 		_spec.SetField(usergroup.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if uguo.mutation.DescriptionCleared() {
 		_spec.ClearField(usergroup.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.Permissions(); ok {
+	if value, ok := uguo.mutation.Permissions(); ok {
 		_spec.SetField(usergroup.FieldPermissions, field.TypeOther, value)
 	}
-	if value, ok := _u.mutation.MaxStorage(); ok {
+	if value, ok := uguo.mutation.MaxStorage(); ok {
 		_spec.SetField(usergroup.FieldMaxStorage, field.TypeInt64, value)
 	}
-	if value, ok := _u.mutation.AddedMaxStorage(); ok {
+	if value, ok := uguo.mutation.AddedMaxStorage(); ok {
 		_spec.AddField(usergroup.FieldMaxStorage, field.TypeInt64, value)
 	}
-	if value, ok := _u.mutation.SpeedLimit(); ok {
+	if value, ok := uguo.mutation.SpeedLimit(); ok {
 		_spec.SetField(usergroup.FieldSpeedLimit, field.TypeInt64, value)
 	}
-	if value, ok := _u.mutation.AddedSpeedLimit(); ok {
+	if value, ok := uguo.mutation.AddedSpeedLimit(); ok {
 		_spec.AddField(usergroup.FieldSpeedLimit, field.TypeInt64, value)
 	}
-	if value, ok := _u.mutation.Settings(); ok {
+	if value, ok := uguo.mutation.Settings(); ok {
 		_spec.SetField(usergroup.FieldSettings, field.TypeOther, value)
 	}
-	if value, ok := _u.mutation.StoragePolicyIds(); ok {
+	if value, ok := uguo.mutation.StoragePolicyIds(); ok {
 		_spec.SetField(usergroup.FieldStoragePolicyIds, field.TypeJSON, value)
 	}
-	if value, ok := _u.mutation.AppendedStoragePolicyIds(); ok {
+	if value, ok := uguo.mutation.AppendedStoragePolicyIds(); ok {
 		_spec.AddModifier(func(u *sql.UpdateBuilder) {
 			sqljson.Append(u, usergroup.FieldStoragePolicyIds, value)
 		})
 	}
-	if _u.mutation.StoragePolicyIdsCleared() {
+	if uguo.mutation.StoragePolicyIdsCleared() {
 		_spec.ClearField(usergroup.FieldStoragePolicyIds, field.TypeJSON)
 	}
-	if _u.mutation.UsersCleared() {
+	if uguo.mutation.UsersCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -732,7 +732,7 @@ func (_u *UserGroupUpdateOne) sqlSave(ctx context.Context) (_node *UserGroup, er
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedUsersIDs(); len(nodes) > 0 && !_u.mutation.UsersCleared() {
+	if nodes := uguo.mutation.RemovedUsersIDs(); len(nodes) > 0 && !uguo.mutation.UsersCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -748,7 +748,7 @@ func (_u *UserGroupUpdateOne) sqlSave(ctx context.Context) (_node *UserGroup, er
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.UsersIDs(); len(nodes) > 0 {
+	if nodes := uguo.mutation.UsersIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -764,11 +764,11 @@ func (_u *UserGroupUpdateOne) sqlSave(ctx context.Context) (_node *UserGroup, er
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &UserGroup{config: _u.config}
+	_spec.AddModifiers(uguo.modifiers...)
+	_node = &UserGroup{config: uguo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, uguo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{usergroup.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -776,6 +776,6 @@ func (_u *UserGroupUpdateOne) sqlSave(ctx context.Context) (_node *UserGroup, er
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	uguo.mutation.done = true
 	return _node, nil
 }

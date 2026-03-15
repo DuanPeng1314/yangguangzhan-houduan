@@ -57,6 +57,30 @@ func (f ArticleHistoryFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Val
 	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.ArticleHistoryMutation", m)
 }
 
+// The ArticlePaymentFunc type is an adapter to allow the use of ordinary
+// function as ArticlePayment mutator.
+type ArticlePaymentFunc func(context.Context, *ent.ArticlePaymentMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f ArticlePaymentFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.ArticlePaymentMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.ArticlePaymentMutation", m)
+}
+
+// The ArticlePurchaseFunc type is an adapter to allow the use of ordinary
+// function as ArticlePurchase mutator.
+type ArticlePurchaseFunc func(context.Context, *ent.ArticlePurchaseMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f ArticlePurchaseFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.ArticlePurchaseMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.ArticlePurchaseMutation", m)
+}
+
 // The CommentFunc type is an adapter to allow the use of ordinary
 // function as Comment mutator.
 type CommentFunc func(context.Context, *ent.CommentMutation) (ent.Value, error)

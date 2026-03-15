@@ -24,67 +24,67 @@ type TagUpdate struct {
 }
 
 // Where appends a list predicates to the TagUpdate builder.
-func (_u *TagUpdate) Where(ps ...predicate.Tag) *TagUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (tu *TagUpdate) Where(ps ...predicate.Tag) *TagUpdate {
+	tu.mutation.Where(ps...)
+	return tu
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *TagUpdate) SetDeletedAt(v time.Time) *TagUpdate {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (tu *TagUpdate) SetDeletedAt(t time.Time) *TagUpdate {
+	tu.mutation.SetDeletedAt(t)
+	return tu
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *TagUpdate) SetNillableDeletedAt(v *time.Time) *TagUpdate {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (tu *TagUpdate) SetNillableDeletedAt(t *time.Time) *TagUpdate {
+	if t != nil {
+		tu.SetDeletedAt(*t)
 	}
-	return _u
+	return tu
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *TagUpdate) ClearDeletedAt() *TagUpdate {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (tu *TagUpdate) ClearDeletedAt() *TagUpdate {
+	tu.mutation.ClearDeletedAt()
+	return tu
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *TagUpdate) SetUpdatedAt(v time.Time) *TagUpdate {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (tu *TagUpdate) SetUpdatedAt(t time.Time) *TagUpdate {
+	tu.mutation.SetUpdatedAt(t)
+	return tu
 }
 
 // SetName sets the "name" field.
-func (_u *TagUpdate) SetName(v string) *TagUpdate {
-	_u.mutation.SetName(v)
-	return _u
+func (tu *TagUpdate) SetName(s string) *TagUpdate {
+	tu.mutation.SetName(s)
+	return tu
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *TagUpdate) SetNillableName(v *string) *TagUpdate {
-	if v != nil {
-		_u.SetName(*v)
+func (tu *TagUpdate) SetNillableName(s *string) *TagUpdate {
+	if s != nil {
+		tu.SetName(*s)
 	}
-	return _u
+	return tu
 }
 
 // Mutation returns the TagMutation object of the builder.
-func (_u *TagUpdate) Mutation() *TagMutation {
-	return _u.mutation
+func (tu *TagUpdate) Mutation() *TagMutation {
+	return tu.mutation
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *TagUpdate) Save(ctx context.Context) (int, error) {
-	if err := _u.defaults(); err != nil {
+func (tu *TagUpdate) Save(ctx context.Context) (int, error) {
+	if err := tu.defaults(); err != nil {
 		return 0, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, tu.sqlSave, tu.mutation, tu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *TagUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (tu *TagUpdate) SaveX(ctx context.Context) int {
+	affected, err := tu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -92,33 +92,33 @@ func (_u *TagUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *TagUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (tu *TagUpdate) Exec(ctx context.Context) error {
+	_, err := tu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *TagUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (tu *TagUpdate) ExecX(ctx context.Context) {
+	if err := tu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *TagUpdate) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (tu *TagUpdate) defaults() error {
+	if _, ok := tu.mutation.UpdatedAt(); !ok {
 		if tag.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized tag.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := tag.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		tu.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *TagUpdate) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (tu *TagUpdate) check() error {
+	if v, ok := tu.mutation.Name(); ok {
 		if err := tag.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "Tag.name": %w`, err)}
 		}
@@ -127,37 +127,37 @@ func (_u *TagUpdate) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *TagUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *TagUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (tu *TagUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *TagUpdate {
+	tu.modifiers = append(tu.modifiers, modifiers...)
+	return tu
 }
 
-func (_u *TagUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (tu *TagUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := tu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(tag.Table, tag.Columns, sqlgraph.NewFieldSpec(tag.FieldID, field.TypeUint))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := tu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := tu.mutation.DeletedAt(); ok {
 		_spec.SetField(tag.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if tu.mutation.DeletedAtCleared() {
 		_spec.ClearField(tag.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := tu.mutation.UpdatedAt(); ok {
 		_spec.SetField(tag.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := tu.mutation.Name(); ok {
 		_spec.SetField(tag.FieldName, field.TypeString, value)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(tu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, tu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{tag.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -165,8 +165,8 @@ func (_u *TagUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	tu.mutation.done = true
+	return n, nil
 }
 
 // TagUpdateOne is the builder for updating a single Tag entity.
@@ -179,74 +179,74 @@ type TagUpdateOne struct {
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *TagUpdateOne) SetDeletedAt(v time.Time) *TagUpdateOne {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (tuo *TagUpdateOne) SetDeletedAt(t time.Time) *TagUpdateOne {
+	tuo.mutation.SetDeletedAt(t)
+	return tuo
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *TagUpdateOne) SetNillableDeletedAt(v *time.Time) *TagUpdateOne {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (tuo *TagUpdateOne) SetNillableDeletedAt(t *time.Time) *TagUpdateOne {
+	if t != nil {
+		tuo.SetDeletedAt(*t)
 	}
-	return _u
+	return tuo
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *TagUpdateOne) ClearDeletedAt() *TagUpdateOne {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (tuo *TagUpdateOne) ClearDeletedAt() *TagUpdateOne {
+	tuo.mutation.ClearDeletedAt()
+	return tuo
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *TagUpdateOne) SetUpdatedAt(v time.Time) *TagUpdateOne {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (tuo *TagUpdateOne) SetUpdatedAt(t time.Time) *TagUpdateOne {
+	tuo.mutation.SetUpdatedAt(t)
+	return tuo
 }
 
 // SetName sets the "name" field.
-func (_u *TagUpdateOne) SetName(v string) *TagUpdateOne {
-	_u.mutation.SetName(v)
-	return _u
+func (tuo *TagUpdateOne) SetName(s string) *TagUpdateOne {
+	tuo.mutation.SetName(s)
+	return tuo
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *TagUpdateOne) SetNillableName(v *string) *TagUpdateOne {
-	if v != nil {
-		_u.SetName(*v)
+func (tuo *TagUpdateOne) SetNillableName(s *string) *TagUpdateOne {
+	if s != nil {
+		tuo.SetName(*s)
 	}
-	return _u
+	return tuo
 }
 
 // Mutation returns the TagMutation object of the builder.
-func (_u *TagUpdateOne) Mutation() *TagMutation {
-	return _u.mutation
+func (tuo *TagUpdateOne) Mutation() *TagMutation {
+	return tuo.mutation
 }
 
 // Where appends a list predicates to the TagUpdate builder.
-func (_u *TagUpdateOne) Where(ps ...predicate.Tag) *TagUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (tuo *TagUpdateOne) Where(ps ...predicate.Tag) *TagUpdateOne {
+	tuo.mutation.Where(ps...)
+	return tuo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *TagUpdateOne) Select(field string, fields ...string) *TagUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (tuo *TagUpdateOne) Select(field string, fields ...string) *TagUpdateOne {
+	tuo.fields = append([]string{field}, fields...)
+	return tuo
 }
 
 // Save executes the query and returns the updated Tag entity.
-func (_u *TagUpdateOne) Save(ctx context.Context) (*Tag, error) {
-	if err := _u.defaults(); err != nil {
+func (tuo *TagUpdateOne) Save(ctx context.Context) (*Tag, error) {
+	if err := tuo.defaults(); err != nil {
 		return nil, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, tuo.sqlSave, tuo.mutation, tuo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *TagUpdateOne) SaveX(ctx context.Context) *Tag {
-	node, err := _u.Save(ctx)
+func (tuo *TagUpdateOne) SaveX(ctx context.Context) *Tag {
+	node, err := tuo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -254,33 +254,33 @@ func (_u *TagUpdateOne) SaveX(ctx context.Context) *Tag {
 }
 
 // Exec executes the query on the entity.
-func (_u *TagUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (tuo *TagUpdateOne) Exec(ctx context.Context) error {
+	_, err := tuo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *TagUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (tuo *TagUpdateOne) ExecX(ctx context.Context) {
+	if err := tuo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *TagUpdateOne) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (tuo *TagUpdateOne) defaults() error {
+	if _, ok := tuo.mutation.UpdatedAt(); !ok {
 		if tag.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized tag.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := tag.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		tuo.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *TagUpdateOne) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (tuo *TagUpdateOne) check() error {
+	if v, ok := tuo.mutation.Name(); ok {
 		if err := tag.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "Tag.name": %w`, err)}
 		}
@@ -289,22 +289,22 @@ func (_u *TagUpdateOne) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *TagUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *TagUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (tuo *TagUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *TagUpdateOne {
+	tuo.modifiers = append(tuo.modifiers, modifiers...)
+	return tuo
 }
 
-func (_u *TagUpdateOne) sqlSave(ctx context.Context) (_node *Tag, err error) {
-	if err := _u.check(); err != nil {
+func (tuo *TagUpdateOne) sqlSave(ctx context.Context) (_node *Tag, err error) {
+	if err := tuo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(tag.Table, tag.Columns, sqlgraph.NewFieldSpec(tag.FieldID, field.TypeUint))
-	id, ok := _u.mutation.ID()
+	id, ok := tuo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "Tag.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := tuo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, tag.FieldID)
 		for _, f := range fields {
@@ -316,30 +316,30 @@ func (_u *TagUpdateOne) sqlSave(ctx context.Context) (_node *Tag, err error) {
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := tuo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := tuo.mutation.DeletedAt(); ok {
 		_spec.SetField(tag.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if tuo.mutation.DeletedAtCleared() {
 		_spec.ClearField(tag.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := tuo.mutation.UpdatedAt(); ok {
 		_spec.SetField(tag.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := tuo.mutation.Name(); ok {
 		_spec.SetField(tag.FieldName, field.TypeString, value)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &Tag{config: _u.config}
+	_spec.AddModifiers(tuo.modifiers...)
+	_node = &Tag{config: tuo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, tuo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{tag.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -347,6 +347,6 @@ func (_u *TagUpdateOne) sqlSave(ctx context.Context) (_node *Tag, err error) {
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	tuo.mutation.done = true
 	return _node, nil
 }

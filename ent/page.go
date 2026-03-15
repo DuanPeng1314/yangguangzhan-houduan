@@ -68,7 +68,7 @@ func (*Page) scanValues(columns []string) ([]any, error) {
 
 // assignValues assigns the values that were returned from sql.Rows (after scanning)
 // to the Page fields.
-func (_m *Page) assignValues(columns []string, values []any) error {
+func (pa *Page) assignValues(columns []string, values []any) error {
 	if m, n := len(values), len(columns); m < n {
 		return fmt.Errorf("mismatch number of scan values: %d != %d", m, n)
 	}
@@ -79,88 +79,88 @@ func (_m *Page) assignValues(columns []string, values []any) error {
 			if !ok {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
-			_m.ID = uint(value.Int64)
+			pa.ID = uint(value.Int64)
 		case page.FieldDeletedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field deleted_at", values[i])
 			} else if value.Valid {
-				_m.DeletedAt = new(time.Time)
-				*_m.DeletedAt = value.Time
+				pa.DeletedAt = new(time.Time)
+				*pa.DeletedAt = value.Time
 			}
 		case page.FieldTitle:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field title", values[i])
 			} else if value.Valid {
-				_m.Title = value.String
+				pa.Title = value.String
 			}
 		case page.FieldPath:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field path", values[i])
 			} else if value.Valid {
-				_m.Path = value.String
+				pa.Path = value.String
 			}
 		case page.FieldContent:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field content", values[i])
 			} else if value.Valid {
-				_m.Content = value.String
+				pa.Content = value.String
 			}
 		case page.FieldMarkdownContent:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field markdown_content", values[i])
 			} else if value.Valid {
-				_m.MarkdownContent = value.String
+				pa.MarkdownContent = value.String
 			}
 		case page.FieldCustomJs:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field custom_js", values[i])
 			} else if value.Valid {
-				_m.CustomJs = value.String
+				pa.CustomJs = value.String
 			}
 		case page.FieldCustomCSS:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field custom_css", values[i])
 			} else if value.Valid {
-				_m.CustomCSS = value.String
+				pa.CustomCSS = value.String
 			}
 		case page.FieldDescription:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field description", values[i])
 			} else if value.Valid {
-				_m.Description = value.String
+				pa.Description = value.String
 			}
 		case page.FieldIsPublished:
 			if value, ok := values[i].(*sql.NullBool); !ok {
 				return fmt.Errorf("unexpected type %T for field is_published", values[i])
 			} else if value.Valid {
-				_m.IsPublished = value.Bool
+				pa.IsPublished = value.Bool
 			}
 		case page.FieldShowComment:
 			if value, ok := values[i].(*sql.NullBool); !ok {
 				return fmt.Errorf("unexpected type %T for field show_comment", values[i])
 			} else if value.Valid {
-				_m.ShowComment = value.Bool
+				pa.ShowComment = value.Bool
 			}
 		case page.FieldSort:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
 				return fmt.Errorf("unexpected type %T for field sort", values[i])
 			} else if value.Valid {
-				_m.Sort = int(value.Int64)
+				pa.Sort = int(value.Int64)
 			}
 		case page.FieldCreatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field created_at", values[i])
 			} else if value.Valid {
-				_m.CreatedAt = value.Time
+				pa.CreatedAt = value.Time
 			}
 		case page.FieldUpdatedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
 				return fmt.Errorf("unexpected type %T for field updated_at", values[i])
 			} else if value.Valid {
-				_m.UpdatedAt = value.Time
+				pa.UpdatedAt = value.Time
 			}
 		default:
-			_m.selectValues.Set(columns[i], values[i])
+			pa.selectValues.Set(columns[i], values[i])
 		}
 	}
 	return nil
@@ -168,73 +168,73 @@ func (_m *Page) assignValues(columns []string, values []any) error {
 
 // Value returns the ent.Value that was dynamically selected and assigned to the Page.
 // This includes values selected through modifiers, order, etc.
-func (_m *Page) Value(name string) (ent.Value, error) {
-	return _m.selectValues.Get(name)
+func (pa *Page) Value(name string) (ent.Value, error) {
+	return pa.selectValues.Get(name)
 }
 
 // Update returns a builder for updating this Page.
 // Note that you need to call Page.Unwrap() before calling this method if this Page
 // was returned from a transaction, and the transaction was committed or rolled back.
-func (_m *Page) Update() *PageUpdateOne {
-	return NewPageClient(_m.config).UpdateOne(_m)
+func (pa *Page) Update() *PageUpdateOne {
+	return NewPageClient(pa.config).UpdateOne(pa)
 }
 
 // Unwrap unwraps the Page entity that was returned from a transaction after it was closed,
 // so that all future queries will be executed through the driver which created the transaction.
-func (_m *Page) Unwrap() *Page {
-	_tx, ok := _m.config.driver.(*txDriver)
+func (pa *Page) Unwrap() *Page {
+	_tx, ok := pa.config.driver.(*txDriver)
 	if !ok {
 		panic("ent: Page is not a transactional entity")
 	}
-	_m.config.driver = _tx.drv
-	return _m
+	pa.config.driver = _tx.drv
+	return pa
 }
 
 // String implements the fmt.Stringer.
-func (_m *Page) String() string {
+func (pa *Page) String() string {
 	var builder strings.Builder
 	builder.WriteString("Page(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", _m.ID))
-	if v := _m.DeletedAt; v != nil {
+	builder.WriteString(fmt.Sprintf("id=%v, ", pa.ID))
+	if v := pa.DeletedAt; v != nil {
 		builder.WriteString("deleted_at=")
 		builder.WriteString(v.Format(time.ANSIC))
 	}
 	builder.WriteString(", ")
 	builder.WriteString("title=")
-	builder.WriteString(_m.Title)
+	builder.WriteString(pa.Title)
 	builder.WriteString(", ")
 	builder.WriteString("path=")
-	builder.WriteString(_m.Path)
+	builder.WriteString(pa.Path)
 	builder.WriteString(", ")
 	builder.WriteString("content=")
-	builder.WriteString(_m.Content)
+	builder.WriteString(pa.Content)
 	builder.WriteString(", ")
 	builder.WriteString("markdown_content=")
-	builder.WriteString(_m.MarkdownContent)
+	builder.WriteString(pa.MarkdownContent)
 	builder.WriteString(", ")
 	builder.WriteString("custom_js=")
-	builder.WriteString(_m.CustomJs)
+	builder.WriteString(pa.CustomJs)
 	builder.WriteString(", ")
 	builder.WriteString("custom_css=")
-	builder.WriteString(_m.CustomCSS)
+	builder.WriteString(pa.CustomCSS)
 	builder.WriteString(", ")
 	builder.WriteString("description=")
-	builder.WriteString(_m.Description)
+	builder.WriteString(pa.Description)
 	builder.WriteString(", ")
 	builder.WriteString("is_published=")
-	builder.WriteString(fmt.Sprintf("%v", _m.IsPublished))
+	builder.WriteString(fmt.Sprintf("%v", pa.IsPublished))
 	builder.WriteString(", ")
 	builder.WriteString("show_comment=")
-	builder.WriteString(fmt.Sprintf("%v", _m.ShowComment))
+	builder.WriteString(fmt.Sprintf("%v", pa.ShowComment))
 	builder.WriteString(", ")
 	builder.WriteString("sort=")
-	builder.WriteString(fmt.Sprintf("%v", _m.Sort))
+	builder.WriteString(fmt.Sprintf("%v", pa.Sort))
 	builder.WriteString(", ")
 	builder.WriteString("created_at=")
-	builder.WriteString(_m.CreatedAt.Format(time.ANSIC))
+	builder.WriteString(pa.CreatedAt.Format(time.ANSIC))
 	builder.WriteString(", ")
 	builder.WriteString("updated_at=")
-	builder.WriteString(_m.UpdatedAt.Format(time.ANSIC))
+	builder.WriteString(pa.UpdatedAt.Format(time.ANSIC))
 	builder.WriteByte(')')
 	return builder.String()
 }

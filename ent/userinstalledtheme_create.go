@@ -24,162 +24,162 @@ type UserInstalledThemeCreate struct {
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_c *UserInstalledThemeCreate) SetDeletedAt(v time.Time) *UserInstalledThemeCreate {
-	_c.mutation.SetDeletedAt(v)
-	return _c
+func (uitc *UserInstalledThemeCreate) SetDeletedAt(t time.Time) *UserInstalledThemeCreate {
+	uitc.mutation.SetDeletedAt(t)
+	return uitc
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_c *UserInstalledThemeCreate) SetNillableDeletedAt(v *time.Time) *UserInstalledThemeCreate {
-	if v != nil {
-		_c.SetDeletedAt(*v)
+func (uitc *UserInstalledThemeCreate) SetNillableDeletedAt(t *time.Time) *UserInstalledThemeCreate {
+	if t != nil {
+		uitc.SetDeletedAt(*t)
 	}
-	return _c
+	return uitc
 }
 
 // SetCreatedAt sets the "created_at" field.
-func (_c *UserInstalledThemeCreate) SetCreatedAt(v time.Time) *UserInstalledThemeCreate {
-	_c.mutation.SetCreatedAt(v)
-	return _c
+func (uitc *UserInstalledThemeCreate) SetCreatedAt(t time.Time) *UserInstalledThemeCreate {
+	uitc.mutation.SetCreatedAt(t)
+	return uitc
 }
 
 // SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (_c *UserInstalledThemeCreate) SetNillableCreatedAt(v *time.Time) *UserInstalledThemeCreate {
-	if v != nil {
-		_c.SetCreatedAt(*v)
+func (uitc *UserInstalledThemeCreate) SetNillableCreatedAt(t *time.Time) *UserInstalledThemeCreate {
+	if t != nil {
+		uitc.SetCreatedAt(*t)
 	}
-	return _c
+	return uitc
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_c *UserInstalledThemeCreate) SetUpdatedAt(v time.Time) *UserInstalledThemeCreate {
-	_c.mutation.SetUpdatedAt(v)
-	return _c
+func (uitc *UserInstalledThemeCreate) SetUpdatedAt(t time.Time) *UserInstalledThemeCreate {
+	uitc.mutation.SetUpdatedAt(t)
+	return uitc
 }
 
 // SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
-func (_c *UserInstalledThemeCreate) SetNillableUpdatedAt(v *time.Time) *UserInstalledThemeCreate {
-	if v != nil {
-		_c.SetUpdatedAt(*v)
+func (uitc *UserInstalledThemeCreate) SetNillableUpdatedAt(t *time.Time) *UserInstalledThemeCreate {
+	if t != nil {
+		uitc.SetUpdatedAt(*t)
 	}
-	return _c
+	return uitc
 }
 
 // SetUserID sets the "user_id" field.
-func (_c *UserInstalledThemeCreate) SetUserID(v uint) *UserInstalledThemeCreate {
-	_c.mutation.SetUserID(v)
-	return _c
+func (uitc *UserInstalledThemeCreate) SetUserID(u uint) *UserInstalledThemeCreate {
+	uitc.mutation.SetUserID(u)
+	return uitc
 }
 
 // SetThemeName sets the "theme_name" field.
-func (_c *UserInstalledThemeCreate) SetThemeName(v string) *UserInstalledThemeCreate {
-	_c.mutation.SetThemeName(v)
-	return _c
+func (uitc *UserInstalledThemeCreate) SetThemeName(s string) *UserInstalledThemeCreate {
+	uitc.mutation.SetThemeName(s)
+	return uitc
 }
 
 // SetThemeMarketID sets the "theme_market_id" field.
-func (_c *UserInstalledThemeCreate) SetThemeMarketID(v int) *UserInstalledThemeCreate {
-	_c.mutation.SetThemeMarketID(v)
-	return _c
+func (uitc *UserInstalledThemeCreate) SetThemeMarketID(i int) *UserInstalledThemeCreate {
+	uitc.mutation.SetThemeMarketID(i)
+	return uitc
 }
 
 // SetNillableThemeMarketID sets the "theme_market_id" field if the given value is not nil.
-func (_c *UserInstalledThemeCreate) SetNillableThemeMarketID(v *int) *UserInstalledThemeCreate {
-	if v != nil {
-		_c.SetThemeMarketID(*v)
+func (uitc *UserInstalledThemeCreate) SetNillableThemeMarketID(i *int) *UserInstalledThemeCreate {
+	if i != nil {
+		uitc.SetThemeMarketID(*i)
 	}
-	return _c
+	return uitc
 }
 
 // SetIsCurrent sets the "is_current" field.
-func (_c *UserInstalledThemeCreate) SetIsCurrent(v bool) *UserInstalledThemeCreate {
-	_c.mutation.SetIsCurrent(v)
-	return _c
+func (uitc *UserInstalledThemeCreate) SetIsCurrent(b bool) *UserInstalledThemeCreate {
+	uitc.mutation.SetIsCurrent(b)
+	return uitc
 }
 
 // SetNillableIsCurrent sets the "is_current" field if the given value is not nil.
-func (_c *UserInstalledThemeCreate) SetNillableIsCurrent(v *bool) *UserInstalledThemeCreate {
-	if v != nil {
-		_c.SetIsCurrent(*v)
+func (uitc *UserInstalledThemeCreate) SetNillableIsCurrent(b *bool) *UserInstalledThemeCreate {
+	if b != nil {
+		uitc.SetIsCurrent(*b)
 	}
-	return _c
+	return uitc
 }
 
 // SetInstallTime sets the "install_time" field.
-func (_c *UserInstalledThemeCreate) SetInstallTime(v time.Time) *UserInstalledThemeCreate {
-	_c.mutation.SetInstallTime(v)
-	return _c
+func (uitc *UserInstalledThemeCreate) SetInstallTime(t time.Time) *UserInstalledThemeCreate {
+	uitc.mutation.SetInstallTime(t)
+	return uitc
 }
 
 // SetNillableInstallTime sets the "install_time" field if the given value is not nil.
-func (_c *UserInstalledThemeCreate) SetNillableInstallTime(v *time.Time) *UserInstalledThemeCreate {
-	if v != nil {
-		_c.SetInstallTime(*v)
+func (uitc *UserInstalledThemeCreate) SetNillableInstallTime(t *time.Time) *UserInstalledThemeCreate {
+	if t != nil {
+		uitc.SetInstallTime(*t)
 	}
-	return _c
+	return uitc
 }
 
 // SetUserThemeConfig sets the "user_theme_config" field.
-func (_c *UserInstalledThemeCreate) SetUserThemeConfig(v map[string]interface{}) *UserInstalledThemeCreate {
-	_c.mutation.SetUserThemeConfig(v)
-	return _c
+func (uitc *UserInstalledThemeCreate) SetUserThemeConfig(m map[string]interface{}) *UserInstalledThemeCreate {
+	uitc.mutation.SetUserThemeConfig(m)
+	return uitc
 }
 
 // SetInstalledVersion sets the "installed_version" field.
-func (_c *UserInstalledThemeCreate) SetInstalledVersion(v string) *UserInstalledThemeCreate {
-	_c.mutation.SetInstalledVersion(v)
-	return _c
+func (uitc *UserInstalledThemeCreate) SetInstalledVersion(s string) *UserInstalledThemeCreate {
+	uitc.mutation.SetInstalledVersion(s)
+	return uitc
 }
 
 // SetNillableInstalledVersion sets the "installed_version" field if the given value is not nil.
-func (_c *UserInstalledThemeCreate) SetNillableInstalledVersion(v *string) *UserInstalledThemeCreate {
-	if v != nil {
-		_c.SetInstalledVersion(*v)
+func (uitc *UserInstalledThemeCreate) SetNillableInstalledVersion(s *string) *UserInstalledThemeCreate {
+	if s != nil {
+		uitc.SetInstalledVersion(*s)
 	}
-	return _c
+	return uitc
 }
 
 // SetDeployType sets the "deploy_type" field.
-func (_c *UserInstalledThemeCreate) SetDeployType(v userinstalledtheme.DeployType) *UserInstalledThemeCreate {
-	_c.mutation.SetDeployType(v)
-	return _c
+func (uitc *UserInstalledThemeCreate) SetDeployType(ut userinstalledtheme.DeployType) *UserInstalledThemeCreate {
+	uitc.mutation.SetDeployType(ut)
+	return uitc
 }
 
 // SetNillableDeployType sets the "deploy_type" field if the given value is not nil.
-func (_c *UserInstalledThemeCreate) SetNillableDeployType(v *userinstalledtheme.DeployType) *UserInstalledThemeCreate {
-	if v != nil {
-		_c.SetDeployType(*v)
+func (uitc *UserInstalledThemeCreate) SetNillableDeployType(ut *userinstalledtheme.DeployType) *UserInstalledThemeCreate {
+	if ut != nil {
+		uitc.SetDeployType(*ut)
 	}
-	return _c
+	return uitc
 }
 
 // SetID sets the "id" field.
-func (_c *UserInstalledThemeCreate) SetID(v uint) *UserInstalledThemeCreate {
-	_c.mutation.SetID(v)
-	return _c
+func (uitc *UserInstalledThemeCreate) SetID(u uint) *UserInstalledThemeCreate {
+	uitc.mutation.SetID(u)
+	return uitc
 }
 
 // SetUser sets the "user" edge to the User entity.
-func (_c *UserInstalledThemeCreate) SetUser(v *User) *UserInstalledThemeCreate {
-	return _c.SetUserID(v.ID)
+func (uitc *UserInstalledThemeCreate) SetUser(u *User) *UserInstalledThemeCreate {
+	return uitc.SetUserID(u.ID)
 }
 
 // Mutation returns the UserInstalledThemeMutation object of the builder.
-func (_c *UserInstalledThemeCreate) Mutation() *UserInstalledThemeMutation {
-	return _c.mutation
+func (uitc *UserInstalledThemeCreate) Mutation() *UserInstalledThemeMutation {
+	return uitc.mutation
 }
 
 // Save creates the UserInstalledTheme in the database.
-func (_c *UserInstalledThemeCreate) Save(ctx context.Context) (*UserInstalledTheme, error) {
-	if err := _c.defaults(); err != nil {
+func (uitc *UserInstalledThemeCreate) Save(ctx context.Context) (*UserInstalledTheme, error) {
+	if err := uitc.defaults(); err != nil {
 		return nil, err
 	}
-	return withHooks(ctx, _c.sqlSave, _c.mutation, _c.hooks)
+	return withHooks(ctx, uitc.sqlSave, uitc.mutation, uitc.hooks)
 }
 
 // SaveX calls Save and panics if Save returns an error.
-func (_c *UserInstalledThemeCreate) SaveX(ctx context.Context) *UserInstalledTheme {
-	v, err := _c.Save(ctx)
+func (uitc *UserInstalledThemeCreate) SaveX(ctx context.Context) *UserInstalledTheme {
+	v, err := uitc.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -187,102 +187,102 @@ func (_c *UserInstalledThemeCreate) SaveX(ctx context.Context) *UserInstalledThe
 }
 
 // Exec executes the query.
-func (_c *UserInstalledThemeCreate) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (uitc *UserInstalledThemeCreate) Exec(ctx context.Context) error {
+	_, err := uitc.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *UserInstalledThemeCreate) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (uitc *UserInstalledThemeCreate) ExecX(ctx context.Context) {
+	if err := uitc.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_c *UserInstalledThemeCreate) defaults() error {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (uitc *UserInstalledThemeCreate) defaults() error {
+	if _, ok := uitc.mutation.CreatedAt(); !ok {
 		if userinstalledtheme.DefaultCreatedAt == nil {
 			return fmt.Errorf("ent: uninitialized userinstalledtheme.DefaultCreatedAt (forgotten import ent/runtime?)")
 		}
 		v := userinstalledtheme.DefaultCreatedAt()
-		_c.mutation.SetCreatedAt(v)
+		uitc.mutation.SetCreatedAt(v)
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := uitc.mutation.UpdatedAt(); !ok {
 		if userinstalledtheme.DefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized userinstalledtheme.DefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := userinstalledtheme.DefaultUpdatedAt()
-		_c.mutation.SetUpdatedAt(v)
+		uitc.mutation.SetUpdatedAt(v)
 	}
-	if _, ok := _c.mutation.IsCurrent(); !ok {
+	if _, ok := uitc.mutation.IsCurrent(); !ok {
 		v := userinstalledtheme.DefaultIsCurrent
-		_c.mutation.SetIsCurrent(v)
+		uitc.mutation.SetIsCurrent(v)
 	}
-	if _, ok := _c.mutation.InstallTime(); !ok {
+	if _, ok := uitc.mutation.InstallTime(); !ok {
 		if userinstalledtheme.DefaultInstallTime == nil {
 			return fmt.Errorf("ent: uninitialized userinstalledtheme.DefaultInstallTime (forgotten import ent/runtime?)")
 		}
 		v := userinstalledtheme.DefaultInstallTime()
-		_c.mutation.SetInstallTime(v)
+		uitc.mutation.SetInstallTime(v)
 	}
-	if _, ok := _c.mutation.DeployType(); !ok {
+	if _, ok := uitc.mutation.DeployType(); !ok {
 		v := userinstalledtheme.DefaultDeployType
-		_c.mutation.SetDeployType(v)
+		uitc.mutation.SetDeployType(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_c *UserInstalledThemeCreate) check() error {
-	if _, ok := _c.mutation.CreatedAt(); !ok {
+func (uitc *UserInstalledThemeCreate) check() error {
+	if _, ok := uitc.mutation.CreatedAt(); !ok {
 		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "UserInstalledTheme.created_at"`)}
 	}
-	if _, ok := _c.mutation.UpdatedAt(); !ok {
+	if _, ok := uitc.mutation.UpdatedAt(); !ok {
 		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "UserInstalledTheme.updated_at"`)}
 	}
-	if _, ok := _c.mutation.UserID(); !ok {
+	if _, ok := uitc.mutation.UserID(); !ok {
 		return &ValidationError{Name: "user_id", err: errors.New(`ent: missing required field "UserInstalledTheme.user_id"`)}
 	}
-	if _, ok := _c.mutation.ThemeName(); !ok {
+	if _, ok := uitc.mutation.ThemeName(); !ok {
 		return &ValidationError{Name: "theme_name", err: errors.New(`ent: missing required field "UserInstalledTheme.theme_name"`)}
 	}
-	if v, ok := _c.mutation.ThemeName(); ok {
+	if v, ok := uitc.mutation.ThemeName(); ok {
 		if err := userinstalledtheme.ThemeNameValidator(v); err != nil {
 			return &ValidationError{Name: "theme_name", err: fmt.Errorf(`ent: validator failed for field "UserInstalledTheme.theme_name": %w`, err)}
 		}
 	}
-	if _, ok := _c.mutation.IsCurrent(); !ok {
+	if _, ok := uitc.mutation.IsCurrent(); !ok {
 		return &ValidationError{Name: "is_current", err: errors.New(`ent: missing required field "UserInstalledTheme.is_current"`)}
 	}
-	if _, ok := _c.mutation.InstallTime(); !ok {
+	if _, ok := uitc.mutation.InstallTime(); !ok {
 		return &ValidationError{Name: "install_time", err: errors.New(`ent: missing required field "UserInstalledTheme.install_time"`)}
 	}
-	if v, ok := _c.mutation.InstalledVersion(); ok {
+	if v, ok := uitc.mutation.InstalledVersion(); ok {
 		if err := userinstalledtheme.InstalledVersionValidator(v); err != nil {
 			return &ValidationError{Name: "installed_version", err: fmt.Errorf(`ent: validator failed for field "UserInstalledTheme.installed_version": %w`, err)}
 		}
 	}
-	if _, ok := _c.mutation.DeployType(); !ok {
+	if _, ok := uitc.mutation.DeployType(); !ok {
 		return &ValidationError{Name: "deploy_type", err: errors.New(`ent: missing required field "UserInstalledTheme.deploy_type"`)}
 	}
-	if v, ok := _c.mutation.DeployType(); ok {
+	if v, ok := uitc.mutation.DeployType(); ok {
 		if err := userinstalledtheme.DeployTypeValidator(v); err != nil {
 			return &ValidationError{Name: "deploy_type", err: fmt.Errorf(`ent: validator failed for field "UserInstalledTheme.deploy_type": %w`, err)}
 		}
 	}
-	if len(_c.mutation.UserIDs()) == 0 {
+	if len(uitc.mutation.UserIDs()) == 0 {
 		return &ValidationError{Name: "user", err: errors.New(`ent: missing required edge "UserInstalledTheme.user"`)}
 	}
 	return nil
 }
 
-func (_c *UserInstalledThemeCreate) sqlSave(ctx context.Context) (*UserInstalledTheme, error) {
-	if err := _c.check(); err != nil {
+func (uitc *UserInstalledThemeCreate) sqlSave(ctx context.Context) (*UserInstalledTheme, error) {
+	if err := uitc.check(); err != nil {
 		return nil, err
 	}
-	_node, _spec := _c.createSpec()
-	if err := sqlgraph.CreateNode(ctx, _c.driver, _spec); err != nil {
+	_node, _spec := uitc.createSpec()
+	if err := sqlgraph.CreateNode(ctx, uitc.driver, _spec); err != nil {
 		if sqlgraph.IsConstraintError(err) {
 			err = &ConstraintError{msg: err.Error(), wrap: err}
 		}
@@ -292,62 +292,62 @@ func (_c *UserInstalledThemeCreate) sqlSave(ctx context.Context) (*UserInstalled
 		id := _spec.ID.Value.(int64)
 		_node.ID = uint(id)
 	}
-	_c.mutation.id = &_node.ID
-	_c.mutation.done = true
+	uitc.mutation.id = &_node.ID
+	uitc.mutation.done = true
 	return _node, nil
 }
 
-func (_c *UserInstalledThemeCreate) createSpec() (*UserInstalledTheme, *sqlgraph.CreateSpec) {
+func (uitc *UserInstalledThemeCreate) createSpec() (*UserInstalledTheme, *sqlgraph.CreateSpec) {
 	var (
-		_node = &UserInstalledTheme{config: _c.config}
+		_node = &UserInstalledTheme{config: uitc.config}
 		_spec = sqlgraph.NewCreateSpec(userinstalledtheme.Table, sqlgraph.NewFieldSpec(userinstalledtheme.FieldID, field.TypeUint))
 	)
-	_spec.OnConflict = _c.conflict
-	if id, ok := _c.mutation.ID(); ok {
+	_spec.OnConflict = uitc.conflict
+	if id, ok := uitc.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
 	}
-	if value, ok := _c.mutation.DeletedAt(); ok {
+	if value, ok := uitc.mutation.DeletedAt(); ok {
 		_spec.SetField(userinstalledtheme.FieldDeletedAt, field.TypeTime, value)
 		_node.DeletedAt = &value
 	}
-	if value, ok := _c.mutation.CreatedAt(); ok {
+	if value, ok := uitc.mutation.CreatedAt(); ok {
 		_spec.SetField(userinstalledtheme.FieldCreatedAt, field.TypeTime, value)
 		_node.CreatedAt = value
 	}
-	if value, ok := _c.mutation.UpdatedAt(); ok {
+	if value, ok := uitc.mutation.UpdatedAt(); ok {
 		_spec.SetField(userinstalledtheme.FieldUpdatedAt, field.TypeTime, value)
 		_node.UpdatedAt = value
 	}
-	if value, ok := _c.mutation.ThemeName(); ok {
+	if value, ok := uitc.mutation.ThemeName(); ok {
 		_spec.SetField(userinstalledtheme.FieldThemeName, field.TypeString, value)
 		_node.ThemeName = value
 	}
-	if value, ok := _c.mutation.ThemeMarketID(); ok {
+	if value, ok := uitc.mutation.ThemeMarketID(); ok {
 		_spec.SetField(userinstalledtheme.FieldThemeMarketID, field.TypeInt, value)
 		_node.ThemeMarketID = value
 	}
-	if value, ok := _c.mutation.IsCurrent(); ok {
+	if value, ok := uitc.mutation.IsCurrent(); ok {
 		_spec.SetField(userinstalledtheme.FieldIsCurrent, field.TypeBool, value)
 		_node.IsCurrent = value
 	}
-	if value, ok := _c.mutation.InstallTime(); ok {
+	if value, ok := uitc.mutation.InstallTime(); ok {
 		_spec.SetField(userinstalledtheme.FieldInstallTime, field.TypeTime, value)
 		_node.InstallTime = value
 	}
-	if value, ok := _c.mutation.UserThemeConfig(); ok {
+	if value, ok := uitc.mutation.UserThemeConfig(); ok {
 		_spec.SetField(userinstalledtheme.FieldUserThemeConfig, field.TypeJSON, value)
 		_node.UserThemeConfig = value
 	}
-	if value, ok := _c.mutation.InstalledVersion(); ok {
+	if value, ok := uitc.mutation.InstalledVersion(); ok {
 		_spec.SetField(userinstalledtheme.FieldInstalledVersion, field.TypeString, value)
 		_node.InstalledVersion = value
 	}
-	if value, ok := _c.mutation.DeployType(); ok {
+	if value, ok := uitc.mutation.DeployType(); ok {
 		_spec.SetField(userinstalledtheme.FieldDeployType, field.TypeEnum, value)
 		_node.DeployType = value
 	}
-	if nodes := _c.mutation.UserIDs(); len(nodes) > 0 {
+	if nodes := uitc.mutation.UserIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2O,
 			Inverse: true,
@@ -383,10 +383,10 @@ func (_c *UserInstalledThemeCreate) createSpec() (*UserInstalledTheme, *sqlgraph
 //			SetDeletedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *UserInstalledThemeCreate) OnConflict(opts ...sql.ConflictOption) *UserInstalledThemeUpsertOne {
-	_c.conflict = opts
+func (uitc *UserInstalledThemeCreate) OnConflict(opts ...sql.ConflictOption) *UserInstalledThemeUpsertOne {
+	uitc.conflict = opts
 	return &UserInstalledThemeUpsertOne{
-		create: _c,
+		create: uitc,
 	}
 }
 
@@ -396,10 +396,10 @@ func (_c *UserInstalledThemeCreate) OnConflict(opts ...sql.ConflictOption) *User
 //	client.UserInstalledTheme.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *UserInstalledThemeCreate) OnConflictColumns(columns ...string) *UserInstalledThemeUpsertOne {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (uitc *UserInstalledThemeCreate) OnConflictColumns(columns ...string) *UserInstalledThemeUpsertOne {
+	uitc.conflict = append(uitc.conflict, sql.ConflictColumns(columns...))
 	return &UserInstalledThemeUpsertOne{
-		create: _c,
+		create: uitc,
 	}
 }
 
@@ -834,16 +834,16 @@ type UserInstalledThemeCreateBulk struct {
 }
 
 // Save creates the UserInstalledTheme entities in the database.
-func (_c *UserInstalledThemeCreateBulk) Save(ctx context.Context) ([]*UserInstalledTheme, error) {
-	if _c.err != nil {
-		return nil, _c.err
+func (uitcb *UserInstalledThemeCreateBulk) Save(ctx context.Context) ([]*UserInstalledTheme, error) {
+	if uitcb.err != nil {
+		return nil, uitcb.err
 	}
-	specs := make([]*sqlgraph.CreateSpec, len(_c.builders))
-	nodes := make([]*UserInstalledTheme, len(_c.builders))
-	mutators := make([]Mutator, len(_c.builders))
-	for i := range _c.builders {
+	specs := make([]*sqlgraph.CreateSpec, len(uitcb.builders))
+	nodes := make([]*UserInstalledTheme, len(uitcb.builders))
+	mutators := make([]Mutator, len(uitcb.builders))
+	for i := range uitcb.builders {
 		func(i int, root context.Context) {
-			builder := _c.builders[i]
+			builder := uitcb.builders[i]
 			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*UserInstalledThemeMutation)
@@ -857,12 +857,12 @@ func (_c *UserInstalledThemeCreateBulk) Save(ctx context.Context) ([]*UserInstal
 				var err error
 				nodes[i], specs[i] = builder.createSpec()
 				if i < len(mutators)-1 {
-					_, err = mutators[i+1].Mutate(root, _c.builders[i+1].mutation)
+					_, err = mutators[i+1].Mutate(root, uitcb.builders[i+1].mutation)
 				} else {
 					spec := &sqlgraph.BatchCreateSpec{Nodes: specs}
-					spec.OnConflict = _c.conflict
+					spec.OnConflict = uitcb.conflict
 					// Invoke the actual operation on the latest mutation in the chain.
-					if err = sqlgraph.BatchCreate(ctx, _c.driver, spec); err != nil {
+					if err = sqlgraph.BatchCreate(ctx, uitcb.driver, spec); err != nil {
 						if sqlgraph.IsConstraintError(err) {
 							err = &ConstraintError{msg: err.Error(), wrap: err}
 						}
@@ -886,7 +886,7 @@ func (_c *UserInstalledThemeCreateBulk) Save(ctx context.Context) ([]*UserInstal
 		}(i, ctx)
 	}
 	if len(mutators) > 0 {
-		if _, err := mutators[0].Mutate(ctx, _c.builders[0].mutation); err != nil {
+		if _, err := mutators[0].Mutate(ctx, uitcb.builders[0].mutation); err != nil {
 			return nil, err
 		}
 	}
@@ -894,8 +894,8 @@ func (_c *UserInstalledThemeCreateBulk) Save(ctx context.Context) ([]*UserInstal
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_c *UserInstalledThemeCreateBulk) SaveX(ctx context.Context) []*UserInstalledTheme {
-	v, err := _c.Save(ctx)
+func (uitcb *UserInstalledThemeCreateBulk) SaveX(ctx context.Context) []*UserInstalledTheme {
+	v, err := uitcb.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -903,14 +903,14 @@ func (_c *UserInstalledThemeCreateBulk) SaveX(ctx context.Context) []*UserInstal
 }
 
 // Exec executes the query.
-func (_c *UserInstalledThemeCreateBulk) Exec(ctx context.Context) error {
-	_, err := _c.Save(ctx)
+func (uitcb *UserInstalledThemeCreateBulk) Exec(ctx context.Context) error {
+	_, err := uitcb.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_c *UserInstalledThemeCreateBulk) ExecX(ctx context.Context) {
-	if err := _c.Exec(ctx); err != nil {
+func (uitcb *UserInstalledThemeCreateBulk) ExecX(ctx context.Context) {
+	if err := uitcb.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
@@ -930,10 +930,10 @@ func (_c *UserInstalledThemeCreateBulk) ExecX(ctx context.Context) {
 //			SetDeletedAt(v+v).
 //		}).
 //		Exec(ctx)
-func (_c *UserInstalledThemeCreateBulk) OnConflict(opts ...sql.ConflictOption) *UserInstalledThemeUpsertBulk {
-	_c.conflict = opts
+func (uitcb *UserInstalledThemeCreateBulk) OnConflict(opts ...sql.ConflictOption) *UserInstalledThemeUpsertBulk {
+	uitcb.conflict = opts
 	return &UserInstalledThemeUpsertBulk{
-		create: _c,
+		create: uitcb,
 	}
 }
 
@@ -943,10 +943,10 @@ func (_c *UserInstalledThemeCreateBulk) OnConflict(opts ...sql.ConflictOption) *
 //	client.UserInstalledTheme.Create().
 //		OnConflict(sql.ConflictColumns(columns...)).
 //		Exec(ctx)
-func (_c *UserInstalledThemeCreateBulk) OnConflictColumns(columns ...string) *UserInstalledThemeUpsertBulk {
-	_c.conflict = append(_c.conflict, sql.ConflictColumns(columns...))
+func (uitcb *UserInstalledThemeCreateBulk) OnConflictColumns(columns ...string) *UserInstalledThemeUpsertBulk {
+	uitcb.conflict = append(uitcb.conflict, sql.ConflictColumns(columns...))
 	return &UserInstalledThemeUpsertBulk{
-		create: _c,
+		create: uitcb,
 	}
 }
 

@@ -20,56 +20,56 @@ type AlbumCategoryDelete struct {
 }
 
 // Where appends a list predicates to the AlbumCategoryDelete builder.
-func (_d *AlbumCategoryDelete) Where(ps ...predicate.AlbumCategory) *AlbumCategoryDelete {
-	_d.mutation.Where(ps...)
-	return _d
+func (acd *AlbumCategoryDelete) Where(ps ...predicate.AlbumCategory) *AlbumCategoryDelete {
+	acd.mutation.Where(ps...)
+	return acd
 }
 
 // Exec executes the deletion query and returns how many vertices were deleted.
-func (_d *AlbumCategoryDelete) Exec(ctx context.Context) (int, error) {
-	return withHooks(ctx, _d.sqlExec, _d.mutation, _d.hooks)
+func (acd *AlbumCategoryDelete) Exec(ctx context.Context) (int, error) {
+	return withHooks(ctx, acd.sqlExec, acd.mutation, acd.hooks)
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *AlbumCategoryDelete) ExecX(ctx context.Context) int {
-	n, err := _d.Exec(ctx)
+func (acd *AlbumCategoryDelete) ExecX(ctx context.Context) int {
+	n, err := acd.Exec(ctx)
 	if err != nil {
 		panic(err)
 	}
 	return n
 }
 
-func (_d *AlbumCategoryDelete) sqlExec(ctx context.Context) (int, error) {
+func (acd *AlbumCategoryDelete) sqlExec(ctx context.Context) (int, error) {
 	_spec := sqlgraph.NewDeleteSpec(albumcategory.Table, sqlgraph.NewFieldSpec(albumcategory.FieldID, field.TypeUint))
-	if ps := _d.mutation.predicates; len(ps) > 0 {
+	if ps := acd.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	affected, err := sqlgraph.DeleteNodes(ctx, _d.driver, _spec)
+	affected, err := sqlgraph.DeleteNodes(ctx, acd.driver, _spec)
 	if err != nil && sqlgraph.IsConstraintError(err) {
 		err = &ConstraintError{msg: err.Error(), wrap: err}
 	}
-	_d.mutation.done = true
+	acd.mutation.done = true
 	return affected, err
 }
 
 // AlbumCategoryDeleteOne is the builder for deleting a single AlbumCategory entity.
 type AlbumCategoryDeleteOne struct {
-	_d *AlbumCategoryDelete
+	acd *AlbumCategoryDelete
 }
 
 // Where appends a list predicates to the AlbumCategoryDelete builder.
-func (_d *AlbumCategoryDeleteOne) Where(ps ...predicate.AlbumCategory) *AlbumCategoryDeleteOne {
-	_d._d.mutation.Where(ps...)
-	return _d
+func (acdo *AlbumCategoryDeleteOne) Where(ps ...predicate.AlbumCategory) *AlbumCategoryDeleteOne {
+	acdo.acd.mutation.Where(ps...)
+	return acdo
 }
 
 // Exec executes the deletion query.
-func (_d *AlbumCategoryDeleteOne) Exec(ctx context.Context) error {
-	n, err := _d._d.Exec(ctx)
+func (acdo *AlbumCategoryDeleteOne) Exec(ctx context.Context) error {
+	n, err := acdo.acd.Exec(ctx)
 	switch {
 	case err != nil:
 		return err
@@ -81,8 +81,8 @@ func (_d *AlbumCategoryDeleteOne) Exec(ctx context.Context) error {
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_d *AlbumCategoryDeleteOne) ExecX(ctx context.Context) {
-	if err := _d.Exec(ctx); err != nil {
+func (acdo *AlbumCategoryDeleteOne) ExecX(ctx context.Context) {
+	if err := acdo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }

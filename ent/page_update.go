@@ -24,206 +24,206 @@ type PageUpdate struct {
 }
 
 // Where appends a list predicates to the PageUpdate builder.
-func (_u *PageUpdate) Where(ps ...predicate.Page) *PageUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (pu *PageUpdate) Where(ps ...predicate.Page) *PageUpdate {
+	pu.mutation.Where(ps...)
+	return pu
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *PageUpdate) SetDeletedAt(v time.Time) *PageUpdate {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (pu *PageUpdate) SetDeletedAt(t time.Time) *PageUpdate {
+	pu.mutation.SetDeletedAt(t)
+	return pu
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *PageUpdate) SetNillableDeletedAt(v *time.Time) *PageUpdate {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (pu *PageUpdate) SetNillableDeletedAt(t *time.Time) *PageUpdate {
+	if t != nil {
+		pu.SetDeletedAt(*t)
 	}
-	return _u
+	return pu
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *PageUpdate) ClearDeletedAt() *PageUpdate {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (pu *PageUpdate) ClearDeletedAt() *PageUpdate {
+	pu.mutation.ClearDeletedAt()
+	return pu
 }
 
 // SetTitle sets the "title" field.
-func (_u *PageUpdate) SetTitle(v string) *PageUpdate {
-	_u.mutation.SetTitle(v)
-	return _u
+func (pu *PageUpdate) SetTitle(s string) *PageUpdate {
+	pu.mutation.SetTitle(s)
+	return pu
 }
 
 // SetNillableTitle sets the "title" field if the given value is not nil.
-func (_u *PageUpdate) SetNillableTitle(v *string) *PageUpdate {
-	if v != nil {
-		_u.SetTitle(*v)
+func (pu *PageUpdate) SetNillableTitle(s *string) *PageUpdate {
+	if s != nil {
+		pu.SetTitle(*s)
 	}
-	return _u
+	return pu
 }
 
 // SetPath sets the "path" field.
-func (_u *PageUpdate) SetPath(v string) *PageUpdate {
-	_u.mutation.SetPath(v)
-	return _u
+func (pu *PageUpdate) SetPath(s string) *PageUpdate {
+	pu.mutation.SetPath(s)
+	return pu
 }
 
 // SetNillablePath sets the "path" field if the given value is not nil.
-func (_u *PageUpdate) SetNillablePath(v *string) *PageUpdate {
-	if v != nil {
-		_u.SetPath(*v)
+func (pu *PageUpdate) SetNillablePath(s *string) *PageUpdate {
+	if s != nil {
+		pu.SetPath(*s)
 	}
-	return _u
+	return pu
 }
 
 // SetContent sets the "content" field.
-func (_u *PageUpdate) SetContent(v string) *PageUpdate {
-	_u.mutation.SetContent(v)
-	return _u
+func (pu *PageUpdate) SetContent(s string) *PageUpdate {
+	pu.mutation.SetContent(s)
+	return pu
 }
 
 // SetNillableContent sets the "content" field if the given value is not nil.
-func (_u *PageUpdate) SetNillableContent(v *string) *PageUpdate {
-	if v != nil {
-		_u.SetContent(*v)
+func (pu *PageUpdate) SetNillableContent(s *string) *PageUpdate {
+	if s != nil {
+		pu.SetContent(*s)
 	}
-	return _u
+	return pu
 }
 
 // SetMarkdownContent sets the "markdown_content" field.
-func (_u *PageUpdate) SetMarkdownContent(v string) *PageUpdate {
-	_u.mutation.SetMarkdownContent(v)
-	return _u
+func (pu *PageUpdate) SetMarkdownContent(s string) *PageUpdate {
+	pu.mutation.SetMarkdownContent(s)
+	return pu
 }
 
 // SetNillableMarkdownContent sets the "markdown_content" field if the given value is not nil.
-func (_u *PageUpdate) SetNillableMarkdownContent(v *string) *PageUpdate {
-	if v != nil {
-		_u.SetMarkdownContent(*v)
+func (pu *PageUpdate) SetNillableMarkdownContent(s *string) *PageUpdate {
+	if s != nil {
+		pu.SetMarkdownContent(*s)
 	}
-	return _u
+	return pu
 }
 
 // SetCustomJs sets the "custom_js" field.
-func (_u *PageUpdate) SetCustomJs(v string) *PageUpdate {
-	_u.mutation.SetCustomJs(v)
-	return _u
+func (pu *PageUpdate) SetCustomJs(s string) *PageUpdate {
+	pu.mutation.SetCustomJs(s)
+	return pu
 }
 
 // SetNillableCustomJs sets the "custom_js" field if the given value is not nil.
-func (_u *PageUpdate) SetNillableCustomJs(v *string) *PageUpdate {
-	if v != nil {
-		_u.SetCustomJs(*v)
+func (pu *PageUpdate) SetNillableCustomJs(s *string) *PageUpdate {
+	if s != nil {
+		pu.SetCustomJs(*s)
 	}
-	return _u
+	return pu
 }
 
 // SetCustomCSS sets the "custom_css" field.
-func (_u *PageUpdate) SetCustomCSS(v string) *PageUpdate {
-	_u.mutation.SetCustomCSS(v)
-	return _u
+func (pu *PageUpdate) SetCustomCSS(s string) *PageUpdate {
+	pu.mutation.SetCustomCSS(s)
+	return pu
 }
 
 // SetNillableCustomCSS sets the "custom_css" field if the given value is not nil.
-func (_u *PageUpdate) SetNillableCustomCSS(v *string) *PageUpdate {
-	if v != nil {
-		_u.SetCustomCSS(*v)
+func (pu *PageUpdate) SetNillableCustomCSS(s *string) *PageUpdate {
+	if s != nil {
+		pu.SetCustomCSS(*s)
 	}
-	return _u
+	return pu
 }
 
 // SetDescription sets the "description" field.
-func (_u *PageUpdate) SetDescription(v string) *PageUpdate {
-	_u.mutation.SetDescription(v)
-	return _u
+func (pu *PageUpdate) SetDescription(s string) *PageUpdate {
+	pu.mutation.SetDescription(s)
+	return pu
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *PageUpdate) SetNillableDescription(v *string) *PageUpdate {
-	if v != nil {
-		_u.SetDescription(*v)
+func (pu *PageUpdate) SetNillableDescription(s *string) *PageUpdate {
+	if s != nil {
+		pu.SetDescription(*s)
 	}
-	return _u
+	return pu
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *PageUpdate) ClearDescription() *PageUpdate {
-	_u.mutation.ClearDescription()
-	return _u
+func (pu *PageUpdate) ClearDescription() *PageUpdate {
+	pu.mutation.ClearDescription()
+	return pu
 }
 
 // SetIsPublished sets the "is_published" field.
-func (_u *PageUpdate) SetIsPublished(v bool) *PageUpdate {
-	_u.mutation.SetIsPublished(v)
-	return _u
+func (pu *PageUpdate) SetIsPublished(b bool) *PageUpdate {
+	pu.mutation.SetIsPublished(b)
+	return pu
 }
 
 // SetNillableIsPublished sets the "is_published" field if the given value is not nil.
-func (_u *PageUpdate) SetNillableIsPublished(v *bool) *PageUpdate {
-	if v != nil {
-		_u.SetIsPublished(*v)
+func (pu *PageUpdate) SetNillableIsPublished(b *bool) *PageUpdate {
+	if b != nil {
+		pu.SetIsPublished(*b)
 	}
-	return _u
+	return pu
 }
 
 // SetShowComment sets the "show_comment" field.
-func (_u *PageUpdate) SetShowComment(v bool) *PageUpdate {
-	_u.mutation.SetShowComment(v)
-	return _u
+func (pu *PageUpdate) SetShowComment(b bool) *PageUpdate {
+	pu.mutation.SetShowComment(b)
+	return pu
 }
 
 // SetNillableShowComment sets the "show_comment" field if the given value is not nil.
-func (_u *PageUpdate) SetNillableShowComment(v *bool) *PageUpdate {
-	if v != nil {
-		_u.SetShowComment(*v)
+func (pu *PageUpdate) SetNillableShowComment(b *bool) *PageUpdate {
+	if b != nil {
+		pu.SetShowComment(*b)
 	}
-	return _u
+	return pu
 }
 
 // SetSort sets the "sort" field.
-func (_u *PageUpdate) SetSort(v int) *PageUpdate {
-	_u.mutation.ResetSort()
-	_u.mutation.SetSort(v)
-	return _u
+func (pu *PageUpdate) SetSort(i int) *PageUpdate {
+	pu.mutation.ResetSort()
+	pu.mutation.SetSort(i)
+	return pu
 }
 
 // SetNillableSort sets the "sort" field if the given value is not nil.
-func (_u *PageUpdate) SetNillableSort(v *int) *PageUpdate {
-	if v != nil {
-		_u.SetSort(*v)
+func (pu *PageUpdate) SetNillableSort(i *int) *PageUpdate {
+	if i != nil {
+		pu.SetSort(*i)
 	}
-	return _u
+	return pu
 }
 
-// AddSort adds value to the "sort" field.
-func (_u *PageUpdate) AddSort(v int) *PageUpdate {
-	_u.mutation.AddSort(v)
-	return _u
+// AddSort adds i to the "sort" field.
+func (pu *PageUpdate) AddSort(i int) *PageUpdate {
+	pu.mutation.AddSort(i)
+	return pu
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *PageUpdate) SetUpdatedAt(v time.Time) *PageUpdate {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (pu *PageUpdate) SetUpdatedAt(t time.Time) *PageUpdate {
+	pu.mutation.SetUpdatedAt(t)
+	return pu
 }
 
 // Mutation returns the PageMutation object of the builder.
-func (_u *PageUpdate) Mutation() *PageMutation {
-	return _u.mutation
+func (pu *PageUpdate) Mutation() *PageMutation {
+	return pu.mutation
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *PageUpdate) Save(ctx context.Context) (int, error) {
-	if err := _u.defaults(); err != nil {
+func (pu *PageUpdate) Save(ctx context.Context) (int, error) {
+	if err := pu.defaults(); err != nil {
 		return 0, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, pu.sqlSave, pu.mutation, pu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *PageUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (pu *PageUpdate) SaveX(ctx context.Context) int {
+	affected, err := pu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -231,43 +231,43 @@ func (_u *PageUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *PageUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (pu *PageUpdate) Exec(ctx context.Context) error {
+	_, err := pu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *PageUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (pu *PageUpdate) ExecX(ctx context.Context) {
+	if err := pu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *PageUpdate) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (pu *PageUpdate) defaults() error {
+	if _, ok := pu.mutation.UpdatedAt(); !ok {
 		if page.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized page.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := page.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		pu.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *PageUpdate) check() error {
-	if v, ok := _u.mutation.Title(); ok {
+func (pu *PageUpdate) check() error {
+	if v, ok := pu.mutation.Title(); ok {
 		if err := page.TitleValidator(v); err != nil {
 			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "Page.title": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Path(); ok {
+	if v, ok := pu.mutation.Path(); ok {
 		if err := page.PathValidator(v); err != nil {
 			return &ValidationError{Name: "path", err: fmt.Errorf(`ent: validator failed for field "Page.path": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Description(); ok {
+	if v, ok := pu.mutation.Description(); ok {
 		if err := page.DescriptionValidator(v); err != nil {
 			return &ValidationError{Name: "description", err: fmt.Errorf(`ent: validator failed for field "Page.description": %w`, err)}
 		}
@@ -276,70 +276,70 @@ func (_u *PageUpdate) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *PageUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *PageUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (pu *PageUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *PageUpdate {
+	pu.modifiers = append(pu.modifiers, modifiers...)
+	return pu
 }
 
-func (_u *PageUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (pu *PageUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := pu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(page.Table, page.Columns, sqlgraph.NewFieldSpec(page.FieldID, field.TypeUint))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := pu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := pu.mutation.DeletedAt(); ok {
 		_spec.SetField(page.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if pu.mutation.DeletedAtCleared() {
 		_spec.ClearField(page.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.Title(); ok {
+	if value, ok := pu.mutation.Title(); ok {
 		_spec.SetField(page.FieldTitle, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Path(); ok {
+	if value, ok := pu.mutation.Path(); ok {
 		_spec.SetField(page.FieldPath, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Content(); ok {
+	if value, ok := pu.mutation.Content(); ok {
 		_spec.SetField(page.FieldContent, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.MarkdownContent(); ok {
+	if value, ok := pu.mutation.MarkdownContent(); ok {
 		_spec.SetField(page.FieldMarkdownContent, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.CustomJs(); ok {
+	if value, ok := pu.mutation.CustomJs(); ok {
 		_spec.SetField(page.FieldCustomJs, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.CustomCSS(); ok {
+	if value, ok := pu.mutation.CustomCSS(); ok {
 		_spec.SetField(page.FieldCustomCSS, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := pu.mutation.Description(); ok {
 		_spec.SetField(page.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if pu.mutation.DescriptionCleared() {
 		_spec.ClearField(page.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.IsPublished(); ok {
+	if value, ok := pu.mutation.IsPublished(); ok {
 		_spec.SetField(page.FieldIsPublished, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.ShowComment(); ok {
+	if value, ok := pu.mutation.ShowComment(); ok {
 		_spec.SetField(page.FieldShowComment, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.Sort(); ok {
+	if value, ok := pu.mutation.Sort(); ok {
 		_spec.SetField(page.FieldSort, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedSort(); ok {
+	if value, ok := pu.mutation.AddedSort(); ok {
 		_spec.AddField(page.FieldSort, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := pu.mutation.UpdatedAt(); ok {
 		_spec.SetField(page.FieldUpdatedAt, field.TypeTime, value)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(pu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, pu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{page.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -347,8 +347,8 @@ func (_u *PageUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	pu.mutation.done = true
+	return n, nil
 }
 
 // PageUpdateOne is the builder for updating a single Page entity.
@@ -361,213 +361,213 @@ type PageUpdateOne struct {
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *PageUpdateOne) SetDeletedAt(v time.Time) *PageUpdateOne {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (puo *PageUpdateOne) SetDeletedAt(t time.Time) *PageUpdateOne {
+	puo.mutation.SetDeletedAt(t)
+	return puo
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *PageUpdateOne) SetNillableDeletedAt(v *time.Time) *PageUpdateOne {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (puo *PageUpdateOne) SetNillableDeletedAt(t *time.Time) *PageUpdateOne {
+	if t != nil {
+		puo.SetDeletedAt(*t)
 	}
-	return _u
+	return puo
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *PageUpdateOne) ClearDeletedAt() *PageUpdateOne {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (puo *PageUpdateOne) ClearDeletedAt() *PageUpdateOne {
+	puo.mutation.ClearDeletedAt()
+	return puo
 }
 
 // SetTitle sets the "title" field.
-func (_u *PageUpdateOne) SetTitle(v string) *PageUpdateOne {
-	_u.mutation.SetTitle(v)
-	return _u
+func (puo *PageUpdateOne) SetTitle(s string) *PageUpdateOne {
+	puo.mutation.SetTitle(s)
+	return puo
 }
 
 // SetNillableTitle sets the "title" field if the given value is not nil.
-func (_u *PageUpdateOne) SetNillableTitle(v *string) *PageUpdateOne {
-	if v != nil {
-		_u.SetTitle(*v)
+func (puo *PageUpdateOne) SetNillableTitle(s *string) *PageUpdateOne {
+	if s != nil {
+		puo.SetTitle(*s)
 	}
-	return _u
+	return puo
 }
 
 // SetPath sets the "path" field.
-func (_u *PageUpdateOne) SetPath(v string) *PageUpdateOne {
-	_u.mutation.SetPath(v)
-	return _u
+func (puo *PageUpdateOne) SetPath(s string) *PageUpdateOne {
+	puo.mutation.SetPath(s)
+	return puo
 }
 
 // SetNillablePath sets the "path" field if the given value is not nil.
-func (_u *PageUpdateOne) SetNillablePath(v *string) *PageUpdateOne {
-	if v != nil {
-		_u.SetPath(*v)
+func (puo *PageUpdateOne) SetNillablePath(s *string) *PageUpdateOne {
+	if s != nil {
+		puo.SetPath(*s)
 	}
-	return _u
+	return puo
 }
 
 // SetContent sets the "content" field.
-func (_u *PageUpdateOne) SetContent(v string) *PageUpdateOne {
-	_u.mutation.SetContent(v)
-	return _u
+func (puo *PageUpdateOne) SetContent(s string) *PageUpdateOne {
+	puo.mutation.SetContent(s)
+	return puo
 }
 
 // SetNillableContent sets the "content" field if the given value is not nil.
-func (_u *PageUpdateOne) SetNillableContent(v *string) *PageUpdateOne {
-	if v != nil {
-		_u.SetContent(*v)
+func (puo *PageUpdateOne) SetNillableContent(s *string) *PageUpdateOne {
+	if s != nil {
+		puo.SetContent(*s)
 	}
-	return _u
+	return puo
 }
 
 // SetMarkdownContent sets the "markdown_content" field.
-func (_u *PageUpdateOne) SetMarkdownContent(v string) *PageUpdateOne {
-	_u.mutation.SetMarkdownContent(v)
-	return _u
+func (puo *PageUpdateOne) SetMarkdownContent(s string) *PageUpdateOne {
+	puo.mutation.SetMarkdownContent(s)
+	return puo
 }
 
 // SetNillableMarkdownContent sets the "markdown_content" field if the given value is not nil.
-func (_u *PageUpdateOne) SetNillableMarkdownContent(v *string) *PageUpdateOne {
-	if v != nil {
-		_u.SetMarkdownContent(*v)
+func (puo *PageUpdateOne) SetNillableMarkdownContent(s *string) *PageUpdateOne {
+	if s != nil {
+		puo.SetMarkdownContent(*s)
 	}
-	return _u
+	return puo
 }
 
 // SetCustomJs sets the "custom_js" field.
-func (_u *PageUpdateOne) SetCustomJs(v string) *PageUpdateOne {
-	_u.mutation.SetCustomJs(v)
-	return _u
+func (puo *PageUpdateOne) SetCustomJs(s string) *PageUpdateOne {
+	puo.mutation.SetCustomJs(s)
+	return puo
 }
 
 // SetNillableCustomJs sets the "custom_js" field if the given value is not nil.
-func (_u *PageUpdateOne) SetNillableCustomJs(v *string) *PageUpdateOne {
-	if v != nil {
-		_u.SetCustomJs(*v)
+func (puo *PageUpdateOne) SetNillableCustomJs(s *string) *PageUpdateOne {
+	if s != nil {
+		puo.SetCustomJs(*s)
 	}
-	return _u
+	return puo
 }
 
 // SetCustomCSS sets the "custom_css" field.
-func (_u *PageUpdateOne) SetCustomCSS(v string) *PageUpdateOne {
-	_u.mutation.SetCustomCSS(v)
-	return _u
+func (puo *PageUpdateOne) SetCustomCSS(s string) *PageUpdateOne {
+	puo.mutation.SetCustomCSS(s)
+	return puo
 }
 
 // SetNillableCustomCSS sets the "custom_css" field if the given value is not nil.
-func (_u *PageUpdateOne) SetNillableCustomCSS(v *string) *PageUpdateOne {
-	if v != nil {
-		_u.SetCustomCSS(*v)
+func (puo *PageUpdateOne) SetNillableCustomCSS(s *string) *PageUpdateOne {
+	if s != nil {
+		puo.SetCustomCSS(*s)
 	}
-	return _u
+	return puo
 }
 
 // SetDescription sets the "description" field.
-func (_u *PageUpdateOne) SetDescription(v string) *PageUpdateOne {
-	_u.mutation.SetDescription(v)
-	return _u
+func (puo *PageUpdateOne) SetDescription(s string) *PageUpdateOne {
+	puo.mutation.SetDescription(s)
+	return puo
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *PageUpdateOne) SetNillableDescription(v *string) *PageUpdateOne {
-	if v != nil {
-		_u.SetDescription(*v)
+func (puo *PageUpdateOne) SetNillableDescription(s *string) *PageUpdateOne {
+	if s != nil {
+		puo.SetDescription(*s)
 	}
-	return _u
+	return puo
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *PageUpdateOne) ClearDescription() *PageUpdateOne {
-	_u.mutation.ClearDescription()
-	return _u
+func (puo *PageUpdateOne) ClearDescription() *PageUpdateOne {
+	puo.mutation.ClearDescription()
+	return puo
 }
 
 // SetIsPublished sets the "is_published" field.
-func (_u *PageUpdateOne) SetIsPublished(v bool) *PageUpdateOne {
-	_u.mutation.SetIsPublished(v)
-	return _u
+func (puo *PageUpdateOne) SetIsPublished(b bool) *PageUpdateOne {
+	puo.mutation.SetIsPublished(b)
+	return puo
 }
 
 // SetNillableIsPublished sets the "is_published" field if the given value is not nil.
-func (_u *PageUpdateOne) SetNillableIsPublished(v *bool) *PageUpdateOne {
-	if v != nil {
-		_u.SetIsPublished(*v)
+func (puo *PageUpdateOne) SetNillableIsPublished(b *bool) *PageUpdateOne {
+	if b != nil {
+		puo.SetIsPublished(*b)
 	}
-	return _u
+	return puo
 }
 
 // SetShowComment sets the "show_comment" field.
-func (_u *PageUpdateOne) SetShowComment(v bool) *PageUpdateOne {
-	_u.mutation.SetShowComment(v)
-	return _u
+func (puo *PageUpdateOne) SetShowComment(b bool) *PageUpdateOne {
+	puo.mutation.SetShowComment(b)
+	return puo
 }
 
 // SetNillableShowComment sets the "show_comment" field if the given value is not nil.
-func (_u *PageUpdateOne) SetNillableShowComment(v *bool) *PageUpdateOne {
-	if v != nil {
-		_u.SetShowComment(*v)
+func (puo *PageUpdateOne) SetNillableShowComment(b *bool) *PageUpdateOne {
+	if b != nil {
+		puo.SetShowComment(*b)
 	}
-	return _u
+	return puo
 }
 
 // SetSort sets the "sort" field.
-func (_u *PageUpdateOne) SetSort(v int) *PageUpdateOne {
-	_u.mutation.ResetSort()
-	_u.mutation.SetSort(v)
-	return _u
+func (puo *PageUpdateOne) SetSort(i int) *PageUpdateOne {
+	puo.mutation.ResetSort()
+	puo.mutation.SetSort(i)
+	return puo
 }
 
 // SetNillableSort sets the "sort" field if the given value is not nil.
-func (_u *PageUpdateOne) SetNillableSort(v *int) *PageUpdateOne {
-	if v != nil {
-		_u.SetSort(*v)
+func (puo *PageUpdateOne) SetNillableSort(i *int) *PageUpdateOne {
+	if i != nil {
+		puo.SetSort(*i)
 	}
-	return _u
+	return puo
 }
 
-// AddSort adds value to the "sort" field.
-func (_u *PageUpdateOne) AddSort(v int) *PageUpdateOne {
-	_u.mutation.AddSort(v)
-	return _u
+// AddSort adds i to the "sort" field.
+func (puo *PageUpdateOne) AddSort(i int) *PageUpdateOne {
+	puo.mutation.AddSort(i)
+	return puo
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *PageUpdateOne) SetUpdatedAt(v time.Time) *PageUpdateOne {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (puo *PageUpdateOne) SetUpdatedAt(t time.Time) *PageUpdateOne {
+	puo.mutation.SetUpdatedAt(t)
+	return puo
 }
 
 // Mutation returns the PageMutation object of the builder.
-func (_u *PageUpdateOne) Mutation() *PageMutation {
-	return _u.mutation
+func (puo *PageUpdateOne) Mutation() *PageMutation {
+	return puo.mutation
 }
 
 // Where appends a list predicates to the PageUpdate builder.
-func (_u *PageUpdateOne) Where(ps ...predicate.Page) *PageUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (puo *PageUpdateOne) Where(ps ...predicate.Page) *PageUpdateOne {
+	puo.mutation.Where(ps...)
+	return puo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *PageUpdateOne) Select(field string, fields ...string) *PageUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (puo *PageUpdateOne) Select(field string, fields ...string) *PageUpdateOne {
+	puo.fields = append([]string{field}, fields...)
+	return puo
 }
 
 // Save executes the query and returns the updated Page entity.
-func (_u *PageUpdateOne) Save(ctx context.Context) (*Page, error) {
-	if err := _u.defaults(); err != nil {
+func (puo *PageUpdateOne) Save(ctx context.Context) (*Page, error) {
+	if err := puo.defaults(); err != nil {
 		return nil, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, puo.sqlSave, puo.mutation, puo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *PageUpdateOne) SaveX(ctx context.Context) *Page {
-	node, err := _u.Save(ctx)
+func (puo *PageUpdateOne) SaveX(ctx context.Context) *Page {
+	node, err := puo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -575,43 +575,43 @@ func (_u *PageUpdateOne) SaveX(ctx context.Context) *Page {
 }
 
 // Exec executes the query on the entity.
-func (_u *PageUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (puo *PageUpdateOne) Exec(ctx context.Context) error {
+	_, err := puo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *PageUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (puo *PageUpdateOne) ExecX(ctx context.Context) {
+	if err := puo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *PageUpdateOne) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (puo *PageUpdateOne) defaults() error {
+	if _, ok := puo.mutation.UpdatedAt(); !ok {
 		if page.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized page.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := page.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		puo.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *PageUpdateOne) check() error {
-	if v, ok := _u.mutation.Title(); ok {
+func (puo *PageUpdateOne) check() error {
+	if v, ok := puo.mutation.Title(); ok {
 		if err := page.TitleValidator(v); err != nil {
 			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "Page.title": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Path(); ok {
+	if v, ok := puo.mutation.Path(); ok {
 		if err := page.PathValidator(v); err != nil {
 			return &ValidationError{Name: "path", err: fmt.Errorf(`ent: validator failed for field "Page.path": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Description(); ok {
+	if v, ok := puo.mutation.Description(); ok {
 		if err := page.DescriptionValidator(v); err != nil {
 			return &ValidationError{Name: "description", err: fmt.Errorf(`ent: validator failed for field "Page.description": %w`, err)}
 		}
@@ -620,22 +620,22 @@ func (_u *PageUpdateOne) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *PageUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *PageUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (puo *PageUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *PageUpdateOne {
+	puo.modifiers = append(puo.modifiers, modifiers...)
+	return puo
 }
 
-func (_u *PageUpdateOne) sqlSave(ctx context.Context) (_node *Page, err error) {
-	if err := _u.check(); err != nil {
+func (puo *PageUpdateOne) sqlSave(ctx context.Context) (_node *Page, err error) {
+	if err := puo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(page.Table, page.Columns, sqlgraph.NewFieldSpec(page.FieldID, field.TypeUint))
-	id, ok := _u.mutation.ID()
+	id, ok := puo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "Page.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := puo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, page.FieldID)
 		for _, f := range fields {
@@ -647,63 +647,63 @@ func (_u *PageUpdateOne) sqlSave(ctx context.Context) (_node *Page, err error) {
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := puo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := puo.mutation.DeletedAt(); ok {
 		_spec.SetField(page.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if puo.mutation.DeletedAtCleared() {
 		_spec.ClearField(page.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.Title(); ok {
+	if value, ok := puo.mutation.Title(); ok {
 		_spec.SetField(page.FieldTitle, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Path(); ok {
+	if value, ok := puo.mutation.Path(); ok {
 		_spec.SetField(page.FieldPath, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Content(); ok {
+	if value, ok := puo.mutation.Content(); ok {
 		_spec.SetField(page.FieldContent, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.MarkdownContent(); ok {
+	if value, ok := puo.mutation.MarkdownContent(); ok {
 		_spec.SetField(page.FieldMarkdownContent, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.CustomJs(); ok {
+	if value, ok := puo.mutation.CustomJs(); ok {
 		_spec.SetField(page.FieldCustomJs, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.CustomCSS(); ok {
+	if value, ok := puo.mutation.CustomCSS(); ok {
 		_spec.SetField(page.FieldCustomCSS, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := puo.mutation.Description(); ok {
 		_spec.SetField(page.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if puo.mutation.DescriptionCleared() {
 		_spec.ClearField(page.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.IsPublished(); ok {
+	if value, ok := puo.mutation.IsPublished(); ok {
 		_spec.SetField(page.FieldIsPublished, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.ShowComment(); ok {
+	if value, ok := puo.mutation.ShowComment(); ok {
 		_spec.SetField(page.FieldShowComment, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.Sort(); ok {
+	if value, ok := puo.mutation.Sort(); ok {
 		_spec.SetField(page.FieldSort, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedSort(); ok {
+	if value, ok := puo.mutation.AddedSort(); ok {
 		_spec.AddField(page.FieldSort, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := puo.mutation.UpdatedAt(); ok {
 		_spec.SetField(page.FieldUpdatedAt, field.TypeTime, value)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &Page{config: _u.config}
+	_spec.AddModifiers(puo.modifiers...)
+	_node = &Page{config: puo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, puo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{page.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -711,6 +711,6 @@ func (_u *PageUpdateOne) sqlSave(ctx context.Context) (_node *Page, err error) {
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	puo.mutation.done = true
 	return _node, nil
 }

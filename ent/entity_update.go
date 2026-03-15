@@ -26,282 +26,282 @@ type EntityUpdate struct {
 }
 
 // Where appends a list predicates to the EntityUpdate builder.
-func (_u *EntityUpdate) Where(ps ...predicate.Entity) *EntityUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (eu *EntityUpdate) Where(ps ...predicate.Entity) *EntityUpdate {
+	eu.mutation.Where(ps...)
+	return eu
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *EntityUpdate) SetUpdatedAt(v time.Time) *EntityUpdate {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (eu *EntityUpdate) SetUpdatedAt(t time.Time) *EntityUpdate {
+	eu.mutation.SetUpdatedAt(t)
+	return eu
 }
 
 // SetType sets the "type" field.
-func (_u *EntityUpdate) SetType(v string) *EntityUpdate {
-	_u.mutation.SetType(v)
-	return _u
+func (eu *EntityUpdate) SetType(s string) *EntityUpdate {
+	eu.mutation.SetType(s)
+	return eu
 }
 
 // SetNillableType sets the "type" field if the given value is not nil.
-func (_u *EntityUpdate) SetNillableType(v *string) *EntityUpdate {
-	if v != nil {
-		_u.SetType(*v)
+func (eu *EntityUpdate) SetNillableType(s *string) *EntityUpdate {
+	if s != nil {
+		eu.SetType(*s)
 	}
-	return _u
+	return eu
 }
 
 // SetSource sets the "source" field.
-func (_u *EntityUpdate) SetSource(v string) *EntityUpdate {
-	_u.mutation.SetSource(v)
-	return _u
+func (eu *EntityUpdate) SetSource(s string) *EntityUpdate {
+	eu.mutation.SetSource(s)
+	return eu
 }
 
 // SetNillableSource sets the "source" field if the given value is not nil.
-func (_u *EntityUpdate) SetNillableSource(v *string) *EntityUpdate {
-	if v != nil {
-		_u.SetSource(*v)
+func (eu *EntityUpdate) SetNillableSource(s *string) *EntityUpdate {
+	if s != nil {
+		eu.SetSource(*s)
 	}
-	return _u
+	return eu
 }
 
 // ClearSource clears the value of the "source" field.
-func (_u *EntityUpdate) ClearSource() *EntityUpdate {
-	_u.mutation.ClearSource()
-	return _u
+func (eu *EntityUpdate) ClearSource() *EntityUpdate {
+	eu.mutation.ClearSource()
+	return eu
 }
 
 // SetSize sets the "size" field.
-func (_u *EntityUpdate) SetSize(v int64) *EntityUpdate {
-	_u.mutation.ResetSize()
-	_u.mutation.SetSize(v)
-	return _u
+func (eu *EntityUpdate) SetSize(i int64) *EntityUpdate {
+	eu.mutation.ResetSize()
+	eu.mutation.SetSize(i)
+	return eu
 }
 
 // SetNillableSize sets the "size" field if the given value is not nil.
-func (_u *EntityUpdate) SetNillableSize(v *int64) *EntityUpdate {
-	if v != nil {
-		_u.SetSize(*v)
+func (eu *EntityUpdate) SetNillableSize(i *int64) *EntityUpdate {
+	if i != nil {
+		eu.SetSize(*i)
 	}
-	return _u
+	return eu
 }
 
-// AddSize adds value to the "size" field.
-func (_u *EntityUpdate) AddSize(v int64) *EntityUpdate {
-	_u.mutation.AddSize(v)
-	return _u
+// AddSize adds i to the "size" field.
+func (eu *EntityUpdate) AddSize(i int64) *EntityUpdate {
+	eu.mutation.AddSize(i)
+	return eu
 }
 
 // SetUploadSessionID sets the "upload_session_id" field.
-func (_u *EntityUpdate) SetUploadSessionID(v string) *EntityUpdate {
-	_u.mutation.SetUploadSessionID(v)
-	return _u
+func (eu *EntityUpdate) SetUploadSessionID(s string) *EntityUpdate {
+	eu.mutation.SetUploadSessionID(s)
+	return eu
 }
 
 // SetNillableUploadSessionID sets the "upload_session_id" field if the given value is not nil.
-func (_u *EntityUpdate) SetNillableUploadSessionID(v *string) *EntityUpdate {
-	if v != nil {
-		_u.SetUploadSessionID(*v)
+func (eu *EntityUpdate) SetNillableUploadSessionID(s *string) *EntityUpdate {
+	if s != nil {
+		eu.SetUploadSessionID(*s)
 	}
-	return _u
+	return eu
 }
 
 // ClearUploadSessionID clears the value of the "upload_session_id" field.
-func (_u *EntityUpdate) ClearUploadSessionID() *EntityUpdate {
-	_u.mutation.ClearUploadSessionID()
-	return _u
+func (eu *EntityUpdate) ClearUploadSessionID() *EntityUpdate {
+	eu.mutation.ClearUploadSessionID()
+	return eu
 }
 
 // SetRecycleOptions sets the "recycle_options" field.
-func (_u *EntityUpdate) SetRecycleOptions(v string) *EntityUpdate {
-	_u.mutation.SetRecycleOptions(v)
-	return _u
+func (eu *EntityUpdate) SetRecycleOptions(s string) *EntityUpdate {
+	eu.mutation.SetRecycleOptions(s)
+	return eu
 }
 
 // SetNillableRecycleOptions sets the "recycle_options" field if the given value is not nil.
-func (_u *EntityUpdate) SetNillableRecycleOptions(v *string) *EntityUpdate {
-	if v != nil {
-		_u.SetRecycleOptions(*v)
+func (eu *EntityUpdate) SetNillableRecycleOptions(s *string) *EntityUpdate {
+	if s != nil {
+		eu.SetRecycleOptions(*s)
 	}
-	return _u
+	return eu
 }
 
 // ClearRecycleOptions clears the value of the "recycle_options" field.
-func (_u *EntityUpdate) ClearRecycleOptions() *EntityUpdate {
-	_u.mutation.ClearRecycleOptions()
-	return _u
+func (eu *EntityUpdate) ClearRecycleOptions() *EntityUpdate {
+	eu.mutation.ClearRecycleOptions()
+	return eu
 }
 
 // SetPolicyID sets the "policy_id" field.
-func (_u *EntityUpdate) SetPolicyID(v uint) *EntityUpdate {
-	_u.mutation.ResetPolicyID()
-	_u.mutation.SetPolicyID(v)
-	return _u
+func (eu *EntityUpdate) SetPolicyID(u uint) *EntityUpdate {
+	eu.mutation.ResetPolicyID()
+	eu.mutation.SetPolicyID(u)
+	return eu
 }
 
 // SetNillablePolicyID sets the "policy_id" field if the given value is not nil.
-func (_u *EntityUpdate) SetNillablePolicyID(v *uint) *EntityUpdate {
-	if v != nil {
-		_u.SetPolicyID(*v)
+func (eu *EntityUpdate) SetNillablePolicyID(u *uint) *EntityUpdate {
+	if u != nil {
+		eu.SetPolicyID(*u)
 	}
-	return _u
+	return eu
 }
 
-// AddPolicyID adds value to the "policy_id" field.
-func (_u *EntityUpdate) AddPolicyID(v int) *EntityUpdate {
-	_u.mutation.AddPolicyID(v)
-	return _u
+// AddPolicyID adds u to the "policy_id" field.
+func (eu *EntityUpdate) AddPolicyID(u int) *EntityUpdate {
+	eu.mutation.AddPolicyID(u)
+	return eu
 }
 
 // SetCreatedBy sets the "created_by" field.
-func (_u *EntityUpdate) SetCreatedBy(v uint64) *EntityUpdate {
-	_u.mutation.ResetCreatedBy()
-	_u.mutation.SetCreatedBy(v)
-	return _u
+func (eu *EntityUpdate) SetCreatedBy(u uint64) *EntityUpdate {
+	eu.mutation.ResetCreatedBy()
+	eu.mutation.SetCreatedBy(u)
+	return eu
 }
 
 // SetNillableCreatedBy sets the "created_by" field if the given value is not nil.
-func (_u *EntityUpdate) SetNillableCreatedBy(v *uint64) *EntityUpdate {
-	if v != nil {
-		_u.SetCreatedBy(*v)
+func (eu *EntityUpdate) SetNillableCreatedBy(u *uint64) *EntityUpdate {
+	if u != nil {
+		eu.SetCreatedBy(*u)
 	}
-	return _u
+	return eu
 }
 
-// AddCreatedBy adds value to the "created_by" field.
-func (_u *EntityUpdate) AddCreatedBy(v int64) *EntityUpdate {
-	_u.mutation.AddCreatedBy(v)
-	return _u
+// AddCreatedBy adds u to the "created_by" field.
+func (eu *EntityUpdate) AddCreatedBy(u int64) *EntityUpdate {
+	eu.mutation.AddCreatedBy(u)
+	return eu
 }
 
 // ClearCreatedBy clears the value of the "created_by" field.
-func (_u *EntityUpdate) ClearCreatedBy() *EntityUpdate {
-	_u.mutation.ClearCreatedBy()
-	return _u
+func (eu *EntityUpdate) ClearCreatedBy() *EntityUpdate {
+	eu.mutation.ClearCreatedBy()
+	return eu
 }
 
 // SetEtag sets the "etag" field.
-func (_u *EntityUpdate) SetEtag(v string) *EntityUpdate {
-	_u.mutation.SetEtag(v)
-	return _u
+func (eu *EntityUpdate) SetEtag(s string) *EntityUpdate {
+	eu.mutation.SetEtag(s)
+	return eu
 }
 
 // SetNillableEtag sets the "etag" field if the given value is not nil.
-func (_u *EntityUpdate) SetNillableEtag(v *string) *EntityUpdate {
-	if v != nil {
-		_u.SetEtag(*v)
+func (eu *EntityUpdate) SetNillableEtag(s *string) *EntityUpdate {
+	if s != nil {
+		eu.SetEtag(*s)
 	}
-	return _u
+	return eu
 }
 
 // ClearEtag clears the value of the "etag" field.
-func (_u *EntityUpdate) ClearEtag() *EntityUpdate {
-	_u.mutation.ClearEtag()
-	return _u
+func (eu *EntityUpdate) ClearEtag() *EntityUpdate {
+	eu.mutation.ClearEtag()
+	return eu
 }
 
 // SetMimeType sets the "mime_type" field.
-func (_u *EntityUpdate) SetMimeType(v string) *EntityUpdate {
-	_u.mutation.SetMimeType(v)
-	return _u
+func (eu *EntityUpdate) SetMimeType(s string) *EntityUpdate {
+	eu.mutation.SetMimeType(s)
+	return eu
 }
 
 // SetNillableMimeType sets the "mime_type" field if the given value is not nil.
-func (_u *EntityUpdate) SetNillableMimeType(v *string) *EntityUpdate {
-	if v != nil {
-		_u.SetMimeType(*v)
+func (eu *EntityUpdate) SetNillableMimeType(s *string) *EntityUpdate {
+	if s != nil {
+		eu.SetMimeType(*s)
 	}
-	return _u
+	return eu
 }
 
 // ClearMimeType clears the value of the "mime_type" field.
-func (_u *EntityUpdate) ClearMimeType() *EntityUpdate {
-	_u.mutation.ClearMimeType()
-	return _u
+func (eu *EntityUpdate) ClearMimeType() *EntityUpdate {
+	eu.mutation.ClearMimeType()
+	return eu
 }
 
 // SetDimension sets the "dimension" field.
-func (_u *EntityUpdate) SetDimension(v string) *EntityUpdate {
-	_u.mutation.SetDimension(v)
-	return _u
+func (eu *EntityUpdate) SetDimension(s string) *EntityUpdate {
+	eu.mutation.SetDimension(s)
+	return eu
 }
 
 // SetNillableDimension sets the "dimension" field if the given value is not nil.
-func (_u *EntityUpdate) SetNillableDimension(v *string) *EntityUpdate {
-	if v != nil {
-		_u.SetDimension(*v)
+func (eu *EntityUpdate) SetNillableDimension(s *string) *EntityUpdate {
+	if s != nil {
+		eu.SetDimension(*s)
 	}
-	return _u
+	return eu
 }
 
 // ClearDimension clears the value of the "dimension" field.
-func (_u *EntityUpdate) ClearDimension() *EntityUpdate {
-	_u.mutation.ClearDimension()
-	return _u
+func (eu *EntityUpdate) ClearDimension() *EntityUpdate {
+	eu.mutation.ClearDimension()
+	return eu
 }
 
 // SetStorageMetadata sets the "storage_metadata" field.
-func (_u *EntityUpdate) SetStorageMetadata(v model.JSONMap) *EntityUpdate {
-	_u.mutation.SetStorageMetadata(v)
-	return _u
+func (eu *EntityUpdate) SetStorageMetadata(mm model.JSONMap) *EntityUpdate {
+	eu.mutation.SetStorageMetadata(mm)
+	return eu
 }
 
 // ClearStorageMetadata clears the value of the "storage_metadata" field.
-func (_u *EntityUpdate) ClearStorageMetadata() *EntityUpdate {
-	_u.mutation.ClearStorageMetadata()
-	return _u
+func (eu *EntityUpdate) ClearStorageMetadata() *EntityUpdate {
+	eu.mutation.ClearStorageMetadata()
+	return eu
 }
 
 // AddFileVersionIDs adds the "file_versions" edge to the FileEntity entity by IDs.
-func (_u *EntityUpdate) AddFileVersionIDs(ids ...uint) *EntityUpdate {
-	_u.mutation.AddFileVersionIDs(ids...)
-	return _u
+func (eu *EntityUpdate) AddFileVersionIDs(ids ...uint) *EntityUpdate {
+	eu.mutation.AddFileVersionIDs(ids...)
+	return eu
 }
 
 // AddFileVersions adds the "file_versions" edges to the FileEntity entity.
-func (_u *EntityUpdate) AddFileVersions(v ...*FileEntity) *EntityUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (eu *EntityUpdate) AddFileVersions(f ...*FileEntity) *EntityUpdate {
+	ids := make([]uint, len(f))
+	for i := range f {
+		ids[i] = f[i].ID
 	}
-	return _u.AddFileVersionIDs(ids...)
+	return eu.AddFileVersionIDs(ids...)
 }
 
 // Mutation returns the EntityMutation object of the builder.
-func (_u *EntityUpdate) Mutation() *EntityMutation {
-	return _u.mutation
+func (eu *EntityUpdate) Mutation() *EntityMutation {
+	return eu.mutation
 }
 
 // ClearFileVersions clears all "file_versions" edges to the FileEntity entity.
-func (_u *EntityUpdate) ClearFileVersions() *EntityUpdate {
-	_u.mutation.ClearFileVersions()
-	return _u
+func (eu *EntityUpdate) ClearFileVersions() *EntityUpdate {
+	eu.mutation.ClearFileVersions()
+	return eu
 }
 
 // RemoveFileVersionIDs removes the "file_versions" edge to FileEntity entities by IDs.
-func (_u *EntityUpdate) RemoveFileVersionIDs(ids ...uint) *EntityUpdate {
-	_u.mutation.RemoveFileVersionIDs(ids...)
-	return _u
+func (eu *EntityUpdate) RemoveFileVersionIDs(ids ...uint) *EntityUpdate {
+	eu.mutation.RemoveFileVersionIDs(ids...)
+	return eu
 }
 
 // RemoveFileVersions removes "file_versions" edges to FileEntity entities.
-func (_u *EntityUpdate) RemoveFileVersions(v ...*FileEntity) *EntityUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (eu *EntityUpdate) RemoveFileVersions(f ...*FileEntity) *EntityUpdate {
+	ids := make([]uint, len(f))
+	for i := range f {
+		ids[i] = f[i].ID
 	}
-	return _u.RemoveFileVersionIDs(ids...)
+	return eu.RemoveFileVersionIDs(ids...)
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *EntityUpdate) Save(ctx context.Context) (int, error) {
-	_u.defaults()
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (eu *EntityUpdate) Save(ctx context.Context) (int, error) {
+	eu.defaults()
+	return withHooks(ctx, eu.sqlSave, eu.mutation, eu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *EntityUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (eu *EntityUpdate) SaveX(ctx context.Context) int {
+	affected, err := eu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -309,44 +309,44 @@ func (_u *EntityUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *EntityUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (eu *EntityUpdate) Exec(ctx context.Context) error {
+	_, err := eu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *EntityUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (eu *EntityUpdate) ExecX(ctx context.Context) {
+	if err := eu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *EntityUpdate) defaults() {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (eu *EntityUpdate) defaults() {
+	if _, ok := eu.mutation.UpdatedAt(); !ok {
 		v := entity.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		eu.mutation.SetUpdatedAt(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *EntityUpdate) check() error {
-	if v, ok := _u.mutation.UploadSessionID(); ok {
+func (eu *EntityUpdate) check() error {
+	if v, ok := eu.mutation.UploadSessionID(); ok {
 		if err := entity.UploadSessionIDValidator(v); err != nil {
 			return &ValidationError{Name: "upload_session_id", err: fmt.Errorf(`ent: validator failed for field "Entity.upload_session_id": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Etag(); ok {
+	if v, ok := eu.mutation.Etag(); ok {
 		if err := entity.EtagValidator(v); err != nil {
 			return &ValidationError{Name: "etag", err: fmt.Errorf(`ent: validator failed for field "Entity.etag": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.MimeType(); ok {
+	if v, ok := eu.mutation.MimeType(); ok {
 		if err := entity.MimeTypeValidator(v); err != nil {
 			return &ValidationError{Name: "mime_type", err: fmt.Errorf(`ent: validator failed for field "Entity.mime_type": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Dimension(); ok {
+	if v, ok := eu.mutation.Dimension(); ok {
 		if err := entity.DimensionValidator(v); err != nil {
 			return &ValidationError{Name: "dimension", err: fmt.Errorf(`ent: validator failed for field "Entity.dimension": %w`, err)}
 		}
@@ -355,93 +355,93 @@ func (_u *EntityUpdate) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *EntityUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *EntityUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (eu *EntityUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *EntityUpdate {
+	eu.modifiers = append(eu.modifiers, modifiers...)
+	return eu
 }
 
-func (_u *EntityUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (eu *EntityUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := eu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(entity.Table, entity.Columns, sqlgraph.NewFieldSpec(entity.FieldID, field.TypeUint))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := eu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := eu.mutation.UpdatedAt(); ok {
 		_spec.SetField(entity.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.GetType(); ok {
+	if value, ok := eu.mutation.GetType(); ok {
 		_spec.SetField(entity.FieldType, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Source(); ok {
+	if value, ok := eu.mutation.Source(); ok {
 		_spec.SetField(entity.FieldSource, field.TypeString, value)
 	}
-	if _u.mutation.SourceCleared() {
+	if eu.mutation.SourceCleared() {
 		_spec.ClearField(entity.FieldSource, field.TypeString)
 	}
-	if value, ok := _u.mutation.Size(); ok {
+	if value, ok := eu.mutation.Size(); ok {
 		_spec.SetField(entity.FieldSize, field.TypeInt64, value)
 	}
-	if value, ok := _u.mutation.AddedSize(); ok {
+	if value, ok := eu.mutation.AddedSize(); ok {
 		_spec.AddField(entity.FieldSize, field.TypeInt64, value)
 	}
-	if value, ok := _u.mutation.UploadSessionID(); ok {
+	if value, ok := eu.mutation.UploadSessionID(); ok {
 		_spec.SetField(entity.FieldUploadSessionID, field.TypeString, value)
 	}
-	if _u.mutation.UploadSessionIDCleared() {
+	if eu.mutation.UploadSessionIDCleared() {
 		_spec.ClearField(entity.FieldUploadSessionID, field.TypeString)
 	}
-	if value, ok := _u.mutation.RecycleOptions(); ok {
+	if value, ok := eu.mutation.RecycleOptions(); ok {
 		_spec.SetField(entity.FieldRecycleOptions, field.TypeString, value)
 	}
-	if _u.mutation.RecycleOptionsCleared() {
+	if eu.mutation.RecycleOptionsCleared() {
 		_spec.ClearField(entity.FieldRecycleOptions, field.TypeString)
 	}
-	if value, ok := _u.mutation.PolicyID(); ok {
+	if value, ok := eu.mutation.PolicyID(); ok {
 		_spec.SetField(entity.FieldPolicyID, field.TypeUint, value)
 	}
-	if value, ok := _u.mutation.AddedPolicyID(); ok {
+	if value, ok := eu.mutation.AddedPolicyID(); ok {
 		_spec.AddField(entity.FieldPolicyID, field.TypeUint, value)
 	}
-	if value, ok := _u.mutation.CreatedBy(); ok {
+	if value, ok := eu.mutation.CreatedBy(); ok {
 		_spec.SetField(entity.FieldCreatedBy, field.TypeUint64, value)
 	}
-	if value, ok := _u.mutation.AddedCreatedBy(); ok {
+	if value, ok := eu.mutation.AddedCreatedBy(); ok {
 		_spec.AddField(entity.FieldCreatedBy, field.TypeUint64, value)
 	}
-	if _u.mutation.CreatedByCleared() {
+	if eu.mutation.CreatedByCleared() {
 		_spec.ClearField(entity.FieldCreatedBy, field.TypeUint64)
 	}
-	if value, ok := _u.mutation.Etag(); ok {
+	if value, ok := eu.mutation.Etag(); ok {
 		_spec.SetField(entity.FieldEtag, field.TypeString, value)
 	}
-	if _u.mutation.EtagCleared() {
+	if eu.mutation.EtagCleared() {
 		_spec.ClearField(entity.FieldEtag, field.TypeString)
 	}
-	if value, ok := _u.mutation.MimeType(); ok {
+	if value, ok := eu.mutation.MimeType(); ok {
 		_spec.SetField(entity.FieldMimeType, field.TypeString, value)
 	}
-	if _u.mutation.MimeTypeCleared() {
+	if eu.mutation.MimeTypeCleared() {
 		_spec.ClearField(entity.FieldMimeType, field.TypeString)
 	}
-	if value, ok := _u.mutation.Dimension(); ok {
+	if value, ok := eu.mutation.Dimension(); ok {
 		_spec.SetField(entity.FieldDimension, field.TypeString, value)
 	}
-	if _u.mutation.DimensionCleared() {
+	if eu.mutation.DimensionCleared() {
 		_spec.ClearField(entity.FieldDimension, field.TypeString)
 	}
-	if value, ok := _u.mutation.StorageMetadata(); ok {
+	if value, ok := eu.mutation.StorageMetadata(); ok {
 		_spec.SetField(entity.FieldStorageMetadata, field.TypeOther, value)
 	}
-	if _u.mutation.StorageMetadataCleared() {
+	if eu.mutation.StorageMetadataCleared() {
 		_spec.ClearField(entity.FieldStorageMetadata, field.TypeOther)
 	}
-	if _u.mutation.FileVersionsCleared() {
+	if eu.mutation.FileVersionsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -454,7 +454,7 @@ func (_u *EntityUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedFileVersionsIDs(); len(nodes) > 0 && !_u.mutation.FileVersionsCleared() {
+	if nodes := eu.mutation.RemovedFileVersionsIDs(); len(nodes) > 0 && !eu.mutation.FileVersionsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -470,7 +470,7 @@ func (_u *EntityUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.FileVersionsIDs(); len(nodes) > 0 {
+	if nodes := eu.mutation.FileVersionsIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -486,8 +486,8 @@ func (_u *EntityUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(eu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, eu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{entity.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -495,8 +495,8 @@ func (_u *EntityUpdate) sqlSave(ctx context.Context) (_node int, err error) {
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	eu.mutation.done = true
+	return n, nil
 }
 
 // EntityUpdateOne is the builder for updating a single Entity entity.
@@ -509,289 +509,289 @@ type EntityUpdateOne struct {
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *EntityUpdateOne) SetUpdatedAt(v time.Time) *EntityUpdateOne {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (euo *EntityUpdateOne) SetUpdatedAt(t time.Time) *EntityUpdateOne {
+	euo.mutation.SetUpdatedAt(t)
+	return euo
 }
 
 // SetType sets the "type" field.
-func (_u *EntityUpdateOne) SetType(v string) *EntityUpdateOne {
-	_u.mutation.SetType(v)
-	return _u
+func (euo *EntityUpdateOne) SetType(s string) *EntityUpdateOne {
+	euo.mutation.SetType(s)
+	return euo
 }
 
 // SetNillableType sets the "type" field if the given value is not nil.
-func (_u *EntityUpdateOne) SetNillableType(v *string) *EntityUpdateOne {
-	if v != nil {
-		_u.SetType(*v)
+func (euo *EntityUpdateOne) SetNillableType(s *string) *EntityUpdateOne {
+	if s != nil {
+		euo.SetType(*s)
 	}
-	return _u
+	return euo
 }
 
 // SetSource sets the "source" field.
-func (_u *EntityUpdateOne) SetSource(v string) *EntityUpdateOne {
-	_u.mutation.SetSource(v)
-	return _u
+func (euo *EntityUpdateOne) SetSource(s string) *EntityUpdateOne {
+	euo.mutation.SetSource(s)
+	return euo
 }
 
 // SetNillableSource sets the "source" field if the given value is not nil.
-func (_u *EntityUpdateOne) SetNillableSource(v *string) *EntityUpdateOne {
-	if v != nil {
-		_u.SetSource(*v)
+func (euo *EntityUpdateOne) SetNillableSource(s *string) *EntityUpdateOne {
+	if s != nil {
+		euo.SetSource(*s)
 	}
-	return _u
+	return euo
 }
 
 // ClearSource clears the value of the "source" field.
-func (_u *EntityUpdateOne) ClearSource() *EntityUpdateOne {
-	_u.mutation.ClearSource()
-	return _u
+func (euo *EntityUpdateOne) ClearSource() *EntityUpdateOne {
+	euo.mutation.ClearSource()
+	return euo
 }
 
 // SetSize sets the "size" field.
-func (_u *EntityUpdateOne) SetSize(v int64) *EntityUpdateOne {
-	_u.mutation.ResetSize()
-	_u.mutation.SetSize(v)
-	return _u
+func (euo *EntityUpdateOne) SetSize(i int64) *EntityUpdateOne {
+	euo.mutation.ResetSize()
+	euo.mutation.SetSize(i)
+	return euo
 }
 
 // SetNillableSize sets the "size" field if the given value is not nil.
-func (_u *EntityUpdateOne) SetNillableSize(v *int64) *EntityUpdateOne {
-	if v != nil {
-		_u.SetSize(*v)
+func (euo *EntityUpdateOne) SetNillableSize(i *int64) *EntityUpdateOne {
+	if i != nil {
+		euo.SetSize(*i)
 	}
-	return _u
+	return euo
 }
 
-// AddSize adds value to the "size" field.
-func (_u *EntityUpdateOne) AddSize(v int64) *EntityUpdateOne {
-	_u.mutation.AddSize(v)
-	return _u
+// AddSize adds i to the "size" field.
+func (euo *EntityUpdateOne) AddSize(i int64) *EntityUpdateOne {
+	euo.mutation.AddSize(i)
+	return euo
 }
 
 // SetUploadSessionID sets the "upload_session_id" field.
-func (_u *EntityUpdateOne) SetUploadSessionID(v string) *EntityUpdateOne {
-	_u.mutation.SetUploadSessionID(v)
-	return _u
+func (euo *EntityUpdateOne) SetUploadSessionID(s string) *EntityUpdateOne {
+	euo.mutation.SetUploadSessionID(s)
+	return euo
 }
 
 // SetNillableUploadSessionID sets the "upload_session_id" field if the given value is not nil.
-func (_u *EntityUpdateOne) SetNillableUploadSessionID(v *string) *EntityUpdateOne {
-	if v != nil {
-		_u.SetUploadSessionID(*v)
+func (euo *EntityUpdateOne) SetNillableUploadSessionID(s *string) *EntityUpdateOne {
+	if s != nil {
+		euo.SetUploadSessionID(*s)
 	}
-	return _u
+	return euo
 }
 
 // ClearUploadSessionID clears the value of the "upload_session_id" field.
-func (_u *EntityUpdateOne) ClearUploadSessionID() *EntityUpdateOne {
-	_u.mutation.ClearUploadSessionID()
-	return _u
+func (euo *EntityUpdateOne) ClearUploadSessionID() *EntityUpdateOne {
+	euo.mutation.ClearUploadSessionID()
+	return euo
 }
 
 // SetRecycleOptions sets the "recycle_options" field.
-func (_u *EntityUpdateOne) SetRecycleOptions(v string) *EntityUpdateOne {
-	_u.mutation.SetRecycleOptions(v)
-	return _u
+func (euo *EntityUpdateOne) SetRecycleOptions(s string) *EntityUpdateOne {
+	euo.mutation.SetRecycleOptions(s)
+	return euo
 }
 
 // SetNillableRecycleOptions sets the "recycle_options" field if the given value is not nil.
-func (_u *EntityUpdateOne) SetNillableRecycleOptions(v *string) *EntityUpdateOne {
-	if v != nil {
-		_u.SetRecycleOptions(*v)
+func (euo *EntityUpdateOne) SetNillableRecycleOptions(s *string) *EntityUpdateOne {
+	if s != nil {
+		euo.SetRecycleOptions(*s)
 	}
-	return _u
+	return euo
 }
 
 // ClearRecycleOptions clears the value of the "recycle_options" field.
-func (_u *EntityUpdateOne) ClearRecycleOptions() *EntityUpdateOne {
-	_u.mutation.ClearRecycleOptions()
-	return _u
+func (euo *EntityUpdateOne) ClearRecycleOptions() *EntityUpdateOne {
+	euo.mutation.ClearRecycleOptions()
+	return euo
 }
 
 // SetPolicyID sets the "policy_id" field.
-func (_u *EntityUpdateOne) SetPolicyID(v uint) *EntityUpdateOne {
-	_u.mutation.ResetPolicyID()
-	_u.mutation.SetPolicyID(v)
-	return _u
+func (euo *EntityUpdateOne) SetPolicyID(u uint) *EntityUpdateOne {
+	euo.mutation.ResetPolicyID()
+	euo.mutation.SetPolicyID(u)
+	return euo
 }
 
 // SetNillablePolicyID sets the "policy_id" field if the given value is not nil.
-func (_u *EntityUpdateOne) SetNillablePolicyID(v *uint) *EntityUpdateOne {
-	if v != nil {
-		_u.SetPolicyID(*v)
+func (euo *EntityUpdateOne) SetNillablePolicyID(u *uint) *EntityUpdateOne {
+	if u != nil {
+		euo.SetPolicyID(*u)
 	}
-	return _u
+	return euo
 }
 
-// AddPolicyID adds value to the "policy_id" field.
-func (_u *EntityUpdateOne) AddPolicyID(v int) *EntityUpdateOne {
-	_u.mutation.AddPolicyID(v)
-	return _u
+// AddPolicyID adds u to the "policy_id" field.
+func (euo *EntityUpdateOne) AddPolicyID(u int) *EntityUpdateOne {
+	euo.mutation.AddPolicyID(u)
+	return euo
 }
 
 // SetCreatedBy sets the "created_by" field.
-func (_u *EntityUpdateOne) SetCreatedBy(v uint64) *EntityUpdateOne {
-	_u.mutation.ResetCreatedBy()
-	_u.mutation.SetCreatedBy(v)
-	return _u
+func (euo *EntityUpdateOne) SetCreatedBy(u uint64) *EntityUpdateOne {
+	euo.mutation.ResetCreatedBy()
+	euo.mutation.SetCreatedBy(u)
+	return euo
 }
 
 // SetNillableCreatedBy sets the "created_by" field if the given value is not nil.
-func (_u *EntityUpdateOne) SetNillableCreatedBy(v *uint64) *EntityUpdateOne {
-	if v != nil {
-		_u.SetCreatedBy(*v)
+func (euo *EntityUpdateOne) SetNillableCreatedBy(u *uint64) *EntityUpdateOne {
+	if u != nil {
+		euo.SetCreatedBy(*u)
 	}
-	return _u
+	return euo
 }
 
-// AddCreatedBy adds value to the "created_by" field.
-func (_u *EntityUpdateOne) AddCreatedBy(v int64) *EntityUpdateOne {
-	_u.mutation.AddCreatedBy(v)
-	return _u
+// AddCreatedBy adds u to the "created_by" field.
+func (euo *EntityUpdateOne) AddCreatedBy(u int64) *EntityUpdateOne {
+	euo.mutation.AddCreatedBy(u)
+	return euo
 }
 
 // ClearCreatedBy clears the value of the "created_by" field.
-func (_u *EntityUpdateOne) ClearCreatedBy() *EntityUpdateOne {
-	_u.mutation.ClearCreatedBy()
-	return _u
+func (euo *EntityUpdateOne) ClearCreatedBy() *EntityUpdateOne {
+	euo.mutation.ClearCreatedBy()
+	return euo
 }
 
 // SetEtag sets the "etag" field.
-func (_u *EntityUpdateOne) SetEtag(v string) *EntityUpdateOne {
-	_u.mutation.SetEtag(v)
-	return _u
+func (euo *EntityUpdateOne) SetEtag(s string) *EntityUpdateOne {
+	euo.mutation.SetEtag(s)
+	return euo
 }
 
 // SetNillableEtag sets the "etag" field if the given value is not nil.
-func (_u *EntityUpdateOne) SetNillableEtag(v *string) *EntityUpdateOne {
-	if v != nil {
-		_u.SetEtag(*v)
+func (euo *EntityUpdateOne) SetNillableEtag(s *string) *EntityUpdateOne {
+	if s != nil {
+		euo.SetEtag(*s)
 	}
-	return _u
+	return euo
 }
 
 // ClearEtag clears the value of the "etag" field.
-func (_u *EntityUpdateOne) ClearEtag() *EntityUpdateOne {
-	_u.mutation.ClearEtag()
-	return _u
+func (euo *EntityUpdateOne) ClearEtag() *EntityUpdateOne {
+	euo.mutation.ClearEtag()
+	return euo
 }
 
 // SetMimeType sets the "mime_type" field.
-func (_u *EntityUpdateOne) SetMimeType(v string) *EntityUpdateOne {
-	_u.mutation.SetMimeType(v)
-	return _u
+func (euo *EntityUpdateOne) SetMimeType(s string) *EntityUpdateOne {
+	euo.mutation.SetMimeType(s)
+	return euo
 }
 
 // SetNillableMimeType sets the "mime_type" field if the given value is not nil.
-func (_u *EntityUpdateOne) SetNillableMimeType(v *string) *EntityUpdateOne {
-	if v != nil {
-		_u.SetMimeType(*v)
+func (euo *EntityUpdateOne) SetNillableMimeType(s *string) *EntityUpdateOne {
+	if s != nil {
+		euo.SetMimeType(*s)
 	}
-	return _u
+	return euo
 }
 
 // ClearMimeType clears the value of the "mime_type" field.
-func (_u *EntityUpdateOne) ClearMimeType() *EntityUpdateOne {
-	_u.mutation.ClearMimeType()
-	return _u
+func (euo *EntityUpdateOne) ClearMimeType() *EntityUpdateOne {
+	euo.mutation.ClearMimeType()
+	return euo
 }
 
 // SetDimension sets the "dimension" field.
-func (_u *EntityUpdateOne) SetDimension(v string) *EntityUpdateOne {
-	_u.mutation.SetDimension(v)
-	return _u
+func (euo *EntityUpdateOne) SetDimension(s string) *EntityUpdateOne {
+	euo.mutation.SetDimension(s)
+	return euo
 }
 
 // SetNillableDimension sets the "dimension" field if the given value is not nil.
-func (_u *EntityUpdateOne) SetNillableDimension(v *string) *EntityUpdateOne {
-	if v != nil {
-		_u.SetDimension(*v)
+func (euo *EntityUpdateOne) SetNillableDimension(s *string) *EntityUpdateOne {
+	if s != nil {
+		euo.SetDimension(*s)
 	}
-	return _u
+	return euo
 }
 
 // ClearDimension clears the value of the "dimension" field.
-func (_u *EntityUpdateOne) ClearDimension() *EntityUpdateOne {
-	_u.mutation.ClearDimension()
-	return _u
+func (euo *EntityUpdateOne) ClearDimension() *EntityUpdateOne {
+	euo.mutation.ClearDimension()
+	return euo
 }
 
 // SetStorageMetadata sets the "storage_metadata" field.
-func (_u *EntityUpdateOne) SetStorageMetadata(v model.JSONMap) *EntityUpdateOne {
-	_u.mutation.SetStorageMetadata(v)
-	return _u
+func (euo *EntityUpdateOne) SetStorageMetadata(mm model.JSONMap) *EntityUpdateOne {
+	euo.mutation.SetStorageMetadata(mm)
+	return euo
 }
 
 // ClearStorageMetadata clears the value of the "storage_metadata" field.
-func (_u *EntityUpdateOne) ClearStorageMetadata() *EntityUpdateOne {
-	_u.mutation.ClearStorageMetadata()
-	return _u
+func (euo *EntityUpdateOne) ClearStorageMetadata() *EntityUpdateOne {
+	euo.mutation.ClearStorageMetadata()
+	return euo
 }
 
 // AddFileVersionIDs adds the "file_versions" edge to the FileEntity entity by IDs.
-func (_u *EntityUpdateOne) AddFileVersionIDs(ids ...uint) *EntityUpdateOne {
-	_u.mutation.AddFileVersionIDs(ids...)
-	return _u
+func (euo *EntityUpdateOne) AddFileVersionIDs(ids ...uint) *EntityUpdateOne {
+	euo.mutation.AddFileVersionIDs(ids...)
+	return euo
 }
 
 // AddFileVersions adds the "file_versions" edges to the FileEntity entity.
-func (_u *EntityUpdateOne) AddFileVersions(v ...*FileEntity) *EntityUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (euo *EntityUpdateOne) AddFileVersions(f ...*FileEntity) *EntityUpdateOne {
+	ids := make([]uint, len(f))
+	for i := range f {
+		ids[i] = f[i].ID
 	}
-	return _u.AddFileVersionIDs(ids...)
+	return euo.AddFileVersionIDs(ids...)
 }
 
 // Mutation returns the EntityMutation object of the builder.
-func (_u *EntityUpdateOne) Mutation() *EntityMutation {
-	return _u.mutation
+func (euo *EntityUpdateOne) Mutation() *EntityMutation {
+	return euo.mutation
 }
 
 // ClearFileVersions clears all "file_versions" edges to the FileEntity entity.
-func (_u *EntityUpdateOne) ClearFileVersions() *EntityUpdateOne {
-	_u.mutation.ClearFileVersions()
-	return _u
+func (euo *EntityUpdateOne) ClearFileVersions() *EntityUpdateOne {
+	euo.mutation.ClearFileVersions()
+	return euo
 }
 
 // RemoveFileVersionIDs removes the "file_versions" edge to FileEntity entities by IDs.
-func (_u *EntityUpdateOne) RemoveFileVersionIDs(ids ...uint) *EntityUpdateOne {
-	_u.mutation.RemoveFileVersionIDs(ids...)
-	return _u
+func (euo *EntityUpdateOne) RemoveFileVersionIDs(ids ...uint) *EntityUpdateOne {
+	euo.mutation.RemoveFileVersionIDs(ids...)
+	return euo
 }
 
 // RemoveFileVersions removes "file_versions" edges to FileEntity entities.
-func (_u *EntityUpdateOne) RemoveFileVersions(v ...*FileEntity) *EntityUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (euo *EntityUpdateOne) RemoveFileVersions(f ...*FileEntity) *EntityUpdateOne {
+	ids := make([]uint, len(f))
+	for i := range f {
+		ids[i] = f[i].ID
 	}
-	return _u.RemoveFileVersionIDs(ids...)
+	return euo.RemoveFileVersionIDs(ids...)
 }
 
 // Where appends a list predicates to the EntityUpdate builder.
-func (_u *EntityUpdateOne) Where(ps ...predicate.Entity) *EntityUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (euo *EntityUpdateOne) Where(ps ...predicate.Entity) *EntityUpdateOne {
+	euo.mutation.Where(ps...)
+	return euo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *EntityUpdateOne) Select(field string, fields ...string) *EntityUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (euo *EntityUpdateOne) Select(field string, fields ...string) *EntityUpdateOne {
+	euo.fields = append([]string{field}, fields...)
+	return euo
 }
 
 // Save executes the query and returns the updated Entity entity.
-func (_u *EntityUpdateOne) Save(ctx context.Context) (*Entity, error) {
-	_u.defaults()
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+func (euo *EntityUpdateOne) Save(ctx context.Context) (*Entity, error) {
+	euo.defaults()
+	return withHooks(ctx, euo.sqlSave, euo.mutation, euo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *EntityUpdateOne) SaveX(ctx context.Context) *Entity {
-	node, err := _u.Save(ctx)
+func (euo *EntityUpdateOne) SaveX(ctx context.Context) *Entity {
+	node, err := euo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -799,44 +799,44 @@ func (_u *EntityUpdateOne) SaveX(ctx context.Context) *Entity {
 }
 
 // Exec executes the query on the entity.
-func (_u *EntityUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (euo *EntityUpdateOne) Exec(ctx context.Context) error {
+	_, err := euo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *EntityUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (euo *EntityUpdateOne) ExecX(ctx context.Context) {
+	if err := euo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *EntityUpdateOne) defaults() {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (euo *EntityUpdateOne) defaults() {
+	if _, ok := euo.mutation.UpdatedAt(); !ok {
 		v := entity.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		euo.mutation.SetUpdatedAt(v)
 	}
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *EntityUpdateOne) check() error {
-	if v, ok := _u.mutation.UploadSessionID(); ok {
+func (euo *EntityUpdateOne) check() error {
+	if v, ok := euo.mutation.UploadSessionID(); ok {
 		if err := entity.UploadSessionIDValidator(v); err != nil {
 			return &ValidationError{Name: "upload_session_id", err: fmt.Errorf(`ent: validator failed for field "Entity.upload_session_id": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Etag(); ok {
+	if v, ok := euo.mutation.Etag(); ok {
 		if err := entity.EtagValidator(v); err != nil {
 			return &ValidationError{Name: "etag", err: fmt.Errorf(`ent: validator failed for field "Entity.etag": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.MimeType(); ok {
+	if v, ok := euo.mutation.MimeType(); ok {
 		if err := entity.MimeTypeValidator(v); err != nil {
 			return &ValidationError{Name: "mime_type", err: fmt.Errorf(`ent: validator failed for field "Entity.mime_type": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Dimension(); ok {
+	if v, ok := euo.mutation.Dimension(); ok {
 		if err := entity.DimensionValidator(v); err != nil {
 			return &ValidationError{Name: "dimension", err: fmt.Errorf(`ent: validator failed for field "Entity.dimension": %w`, err)}
 		}
@@ -845,22 +845,22 @@ func (_u *EntityUpdateOne) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *EntityUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *EntityUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (euo *EntityUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *EntityUpdateOne {
+	euo.modifiers = append(euo.modifiers, modifiers...)
+	return euo
 }
 
-func (_u *EntityUpdateOne) sqlSave(ctx context.Context) (_node *Entity, err error) {
-	if err := _u.check(); err != nil {
+func (euo *EntityUpdateOne) sqlSave(ctx context.Context) (_node *Entity, err error) {
+	if err := euo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(entity.Table, entity.Columns, sqlgraph.NewFieldSpec(entity.FieldID, field.TypeUint))
-	id, ok := _u.mutation.ID()
+	id, ok := euo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "Entity.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := euo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, entity.FieldID)
 		for _, f := range fields {
@@ -872,83 +872,83 @@ func (_u *EntityUpdateOne) sqlSave(ctx context.Context) (_node *Entity, err erro
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := euo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := euo.mutation.UpdatedAt(); ok {
 		_spec.SetField(entity.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.GetType(); ok {
+	if value, ok := euo.mutation.GetType(); ok {
 		_spec.SetField(entity.FieldType, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Source(); ok {
+	if value, ok := euo.mutation.Source(); ok {
 		_spec.SetField(entity.FieldSource, field.TypeString, value)
 	}
-	if _u.mutation.SourceCleared() {
+	if euo.mutation.SourceCleared() {
 		_spec.ClearField(entity.FieldSource, field.TypeString)
 	}
-	if value, ok := _u.mutation.Size(); ok {
+	if value, ok := euo.mutation.Size(); ok {
 		_spec.SetField(entity.FieldSize, field.TypeInt64, value)
 	}
-	if value, ok := _u.mutation.AddedSize(); ok {
+	if value, ok := euo.mutation.AddedSize(); ok {
 		_spec.AddField(entity.FieldSize, field.TypeInt64, value)
 	}
-	if value, ok := _u.mutation.UploadSessionID(); ok {
+	if value, ok := euo.mutation.UploadSessionID(); ok {
 		_spec.SetField(entity.FieldUploadSessionID, field.TypeString, value)
 	}
-	if _u.mutation.UploadSessionIDCleared() {
+	if euo.mutation.UploadSessionIDCleared() {
 		_spec.ClearField(entity.FieldUploadSessionID, field.TypeString)
 	}
-	if value, ok := _u.mutation.RecycleOptions(); ok {
+	if value, ok := euo.mutation.RecycleOptions(); ok {
 		_spec.SetField(entity.FieldRecycleOptions, field.TypeString, value)
 	}
-	if _u.mutation.RecycleOptionsCleared() {
+	if euo.mutation.RecycleOptionsCleared() {
 		_spec.ClearField(entity.FieldRecycleOptions, field.TypeString)
 	}
-	if value, ok := _u.mutation.PolicyID(); ok {
+	if value, ok := euo.mutation.PolicyID(); ok {
 		_spec.SetField(entity.FieldPolicyID, field.TypeUint, value)
 	}
-	if value, ok := _u.mutation.AddedPolicyID(); ok {
+	if value, ok := euo.mutation.AddedPolicyID(); ok {
 		_spec.AddField(entity.FieldPolicyID, field.TypeUint, value)
 	}
-	if value, ok := _u.mutation.CreatedBy(); ok {
+	if value, ok := euo.mutation.CreatedBy(); ok {
 		_spec.SetField(entity.FieldCreatedBy, field.TypeUint64, value)
 	}
-	if value, ok := _u.mutation.AddedCreatedBy(); ok {
+	if value, ok := euo.mutation.AddedCreatedBy(); ok {
 		_spec.AddField(entity.FieldCreatedBy, field.TypeUint64, value)
 	}
-	if _u.mutation.CreatedByCleared() {
+	if euo.mutation.CreatedByCleared() {
 		_spec.ClearField(entity.FieldCreatedBy, field.TypeUint64)
 	}
-	if value, ok := _u.mutation.Etag(); ok {
+	if value, ok := euo.mutation.Etag(); ok {
 		_spec.SetField(entity.FieldEtag, field.TypeString, value)
 	}
-	if _u.mutation.EtagCleared() {
+	if euo.mutation.EtagCleared() {
 		_spec.ClearField(entity.FieldEtag, field.TypeString)
 	}
-	if value, ok := _u.mutation.MimeType(); ok {
+	if value, ok := euo.mutation.MimeType(); ok {
 		_spec.SetField(entity.FieldMimeType, field.TypeString, value)
 	}
-	if _u.mutation.MimeTypeCleared() {
+	if euo.mutation.MimeTypeCleared() {
 		_spec.ClearField(entity.FieldMimeType, field.TypeString)
 	}
-	if value, ok := _u.mutation.Dimension(); ok {
+	if value, ok := euo.mutation.Dimension(); ok {
 		_spec.SetField(entity.FieldDimension, field.TypeString, value)
 	}
-	if _u.mutation.DimensionCleared() {
+	if euo.mutation.DimensionCleared() {
 		_spec.ClearField(entity.FieldDimension, field.TypeString)
 	}
-	if value, ok := _u.mutation.StorageMetadata(); ok {
+	if value, ok := euo.mutation.StorageMetadata(); ok {
 		_spec.SetField(entity.FieldStorageMetadata, field.TypeOther, value)
 	}
-	if _u.mutation.StorageMetadataCleared() {
+	if euo.mutation.StorageMetadataCleared() {
 		_spec.ClearField(entity.FieldStorageMetadata, field.TypeOther)
 	}
-	if _u.mutation.FileVersionsCleared() {
+	if euo.mutation.FileVersionsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -961,7 +961,7 @@ func (_u *EntityUpdateOne) sqlSave(ctx context.Context) (_node *Entity, err erro
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedFileVersionsIDs(); len(nodes) > 0 && !_u.mutation.FileVersionsCleared() {
+	if nodes := euo.mutation.RemovedFileVersionsIDs(); len(nodes) > 0 && !euo.mutation.FileVersionsCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -977,7 +977,7 @@ func (_u *EntityUpdateOne) sqlSave(ctx context.Context) (_node *Entity, err erro
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.FileVersionsIDs(); len(nodes) > 0 {
+	if nodes := euo.mutation.FileVersionsIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
 			Inverse: false,
@@ -993,11 +993,11 @@ func (_u *EntityUpdateOne) sqlSave(ctx context.Context) (_node *Entity, err erro
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &Entity{config: _u.config}
+	_spec.AddModifiers(euo.modifiers...)
+	_node = &Entity{config: euo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, euo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{entity.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -1005,6 +1005,6 @@ func (_u *EntityUpdateOne) sqlSave(ctx context.Context) (_node *Entity, err erro
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	euo.mutation.done = true
 	return _node, nil
 }

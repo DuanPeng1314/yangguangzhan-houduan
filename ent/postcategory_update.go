@@ -25,199 +25,199 @@ type PostCategoryUpdate struct {
 }
 
 // Where appends a list predicates to the PostCategoryUpdate builder.
-func (_u *PostCategoryUpdate) Where(ps ...predicate.PostCategory) *PostCategoryUpdate {
-	_u.mutation.Where(ps...)
-	return _u
+func (pcu *PostCategoryUpdate) Where(ps ...predicate.PostCategory) *PostCategoryUpdate {
+	pcu.mutation.Where(ps...)
+	return pcu
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *PostCategoryUpdate) SetDeletedAt(v time.Time) *PostCategoryUpdate {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (pcu *PostCategoryUpdate) SetDeletedAt(t time.Time) *PostCategoryUpdate {
+	pcu.mutation.SetDeletedAt(t)
+	return pcu
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *PostCategoryUpdate) SetNillableDeletedAt(v *time.Time) *PostCategoryUpdate {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (pcu *PostCategoryUpdate) SetNillableDeletedAt(t *time.Time) *PostCategoryUpdate {
+	if t != nil {
+		pcu.SetDeletedAt(*t)
 	}
-	return _u
+	return pcu
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *PostCategoryUpdate) ClearDeletedAt() *PostCategoryUpdate {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (pcu *PostCategoryUpdate) ClearDeletedAt() *PostCategoryUpdate {
+	pcu.mutation.ClearDeletedAt()
+	return pcu
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *PostCategoryUpdate) SetUpdatedAt(v time.Time) *PostCategoryUpdate {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (pcu *PostCategoryUpdate) SetUpdatedAt(t time.Time) *PostCategoryUpdate {
+	pcu.mutation.SetUpdatedAt(t)
+	return pcu
 }
 
 // SetName sets the "name" field.
-func (_u *PostCategoryUpdate) SetName(v string) *PostCategoryUpdate {
-	_u.mutation.SetName(v)
-	return _u
+func (pcu *PostCategoryUpdate) SetName(s string) *PostCategoryUpdate {
+	pcu.mutation.SetName(s)
+	return pcu
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *PostCategoryUpdate) SetNillableName(v *string) *PostCategoryUpdate {
-	if v != nil {
-		_u.SetName(*v)
+func (pcu *PostCategoryUpdate) SetNillableName(s *string) *PostCategoryUpdate {
+	if s != nil {
+		pcu.SetName(*s)
 	}
-	return _u
+	return pcu
 }
 
 // SetSlug sets the "slug" field.
-func (_u *PostCategoryUpdate) SetSlug(v string) *PostCategoryUpdate {
-	_u.mutation.SetSlug(v)
-	return _u
+func (pcu *PostCategoryUpdate) SetSlug(s string) *PostCategoryUpdate {
+	pcu.mutation.SetSlug(s)
+	return pcu
 }
 
 // SetNillableSlug sets the "slug" field if the given value is not nil.
-func (_u *PostCategoryUpdate) SetNillableSlug(v *string) *PostCategoryUpdate {
-	if v != nil {
-		_u.SetSlug(*v)
+func (pcu *PostCategoryUpdate) SetNillableSlug(s *string) *PostCategoryUpdate {
+	if s != nil {
+		pcu.SetSlug(*s)
 	}
-	return _u
+	return pcu
 }
 
 // ClearSlug clears the value of the "slug" field.
-func (_u *PostCategoryUpdate) ClearSlug() *PostCategoryUpdate {
-	_u.mutation.ClearSlug()
-	return _u
+func (pcu *PostCategoryUpdate) ClearSlug() *PostCategoryUpdate {
+	pcu.mutation.ClearSlug()
+	return pcu
 }
 
 // SetDescription sets the "description" field.
-func (_u *PostCategoryUpdate) SetDescription(v string) *PostCategoryUpdate {
-	_u.mutation.SetDescription(v)
-	return _u
+func (pcu *PostCategoryUpdate) SetDescription(s string) *PostCategoryUpdate {
+	pcu.mutation.SetDescription(s)
+	return pcu
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *PostCategoryUpdate) SetNillableDescription(v *string) *PostCategoryUpdate {
-	if v != nil {
-		_u.SetDescription(*v)
+func (pcu *PostCategoryUpdate) SetNillableDescription(s *string) *PostCategoryUpdate {
+	if s != nil {
+		pcu.SetDescription(*s)
 	}
-	return _u
+	return pcu
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *PostCategoryUpdate) ClearDescription() *PostCategoryUpdate {
-	_u.mutation.ClearDescription()
-	return _u
+func (pcu *PostCategoryUpdate) ClearDescription() *PostCategoryUpdate {
+	pcu.mutation.ClearDescription()
+	return pcu
 }
 
 // SetCount sets the "count" field.
-func (_u *PostCategoryUpdate) SetCount(v int) *PostCategoryUpdate {
-	_u.mutation.ResetCount()
-	_u.mutation.SetCount(v)
-	return _u
+func (pcu *PostCategoryUpdate) SetCount(i int) *PostCategoryUpdate {
+	pcu.mutation.ResetCount()
+	pcu.mutation.SetCount(i)
+	return pcu
 }
 
 // SetNillableCount sets the "count" field if the given value is not nil.
-func (_u *PostCategoryUpdate) SetNillableCount(v *int) *PostCategoryUpdate {
-	if v != nil {
-		_u.SetCount(*v)
+func (pcu *PostCategoryUpdate) SetNillableCount(i *int) *PostCategoryUpdate {
+	if i != nil {
+		pcu.SetCount(*i)
 	}
-	return _u
+	return pcu
 }
 
-// AddCount adds value to the "count" field.
-func (_u *PostCategoryUpdate) AddCount(v int) *PostCategoryUpdate {
-	_u.mutation.AddCount(v)
-	return _u
+// AddCount adds i to the "count" field.
+func (pcu *PostCategoryUpdate) AddCount(i int) *PostCategoryUpdate {
+	pcu.mutation.AddCount(i)
+	return pcu
 }
 
 // SetIsSeries sets the "is_series" field.
-func (_u *PostCategoryUpdate) SetIsSeries(v bool) *PostCategoryUpdate {
-	_u.mutation.SetIsSeries(v)
-	return _u
+func (pcu *PostCategoryUpdate) SetIsSeries(b bool) *PostCategoryUpdate {
+	pcu.mutation.SetIsSeries(b)
+	return pcu
 }
 
 // SetNillableIsSeries sets the "is_series" field if the given value is not nil.
-func (_u *PostCategoryUpdate) SetNillableIsSeries(v *bool) *PostCategoryUpdate {
-	if v != nil {
-		_u.SetIsSeries(*v)
+func (pcu *PostCategoryUpdate) SetNillableIsSeries(b *bool) *PostCategoryUpdate {
+	if b != nil {
+		pcu.SetIsSeries(*b)
 	}
-	return _u
+	return pcu
 }
 
 // SetSortOrder sets the "sort_order" field.
-func (_u *PostCategoryUpdate) SetSortOrder(v int) *PostCategoryUpdate {
-	_u.mutation.ResetSortOrder()
-	_u.mutation.SetSortOrder(v)
-	return _u
+func (pcu *PostCategoryUpdate) SetSortOrder(i int) *PostCategoryUpdate {
+	pcu.mutation.ResetSortOrder()
+	pcu.mutation.SetSortOrder(i)
+	return pcu
 }
 
 // SetNillableSortOrder sets the "sort_order" field if the given value is not nil.
-func (_u *PostCategoryUpdate) SetNillableSortOrder(v *int) *PostCategoryUpdate {
-	if v != nil {
-		_u.SetSortOrder(*v)
+func (pcu *PostCategoryUpdate) SetNillableSortOrder(i *int) *PostCategoryUpdate {
+	if i != nil {
+		pcu.SetSortOrder(*i)
 	}
-	return _u
+	return pcu
 }
 
-// AddSortOrder adds value to the "sort_order" field.
-func (_u *PostCategoryUpdate) AddSortOrder(v int) *PostCategoryUpdate {
-	_u.mutation.AddSortOrder(v)
-	return _u
+// AddSortOrder adds i to the "sort_order" field.
+func (pcu *PostCategoryUpdate) AddSortOrder(i int) *PostCategoryUpdate {
+	pcu.mutation.AddSortOrder(i)
+	return pcu
 }
 
 // AddArticleIDs adds the "articles" edge to the Article entity by IDs.
-func (_u *PostCategoryUpdate) AddArticleIDs(ids ...uint) *PostCategoryUpdate {
-	_u.mutation.AddArticleIDs(ids...)
-	return _u
+func (pcu *PostCategoryUpdate) AddArticleIDs(ids ...uint) *PostCategoryUpdate {
+	pcu.mutation.AddArticleIDs(ids...)
+	return pcu
 }
 
 // AddArticles adds the "articles" edges to the Article entity.
-func (_u *PostCategoryUpdate) AddArticles(v ...*Article) *PostCategoryUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (pcu *PostCategoryUpdate) AddArticles(a ...*Article) *PostCategoryUpdate {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.AddArticleIDs(ids...)
+	return pcu.AddArticleIDs(ids...)
 }
 
 // Mutation returns the PostCategoryMutation object of the builder.
-func (_u *PostCategoryUpdate) Mutation() *PostCategoryMutation {
-	return _u.mutation
+func (pcu *PostCategoryUpdate) Mutation() *PostCategoryMutation {
+	return pcu.mutation
 }
 
 // ClearArticles clears all "articles" edges to the Article entity.
-func (_u *PostCategoryUpdate) ClearArticles() *PostCategoryUpdate {
-	_u.mutation.ClearArticles()
-	return _u
+func (pcu *PostCategoryUpdate) ClearArticles() *PostCategoryUpdate {
+	pcu.mutation.ClearArticles()
+	return pcu
 }
 
 // RemoveArticleIDs removes the "articles" edge to Article entities by IDs.
-func (_u *PostCategoryUpdate) RemoveArticleIDs(ids ...uint) *PostCategoryUpdate {
-	_u.mutation.RemoveArticleIDs(ids...)
-	return _u
+func (pcu *PostCategoryUpdate) RemoveArticleIDs(ids ...uint) *PostCategoryUpdate {
+	pcu.mutation.RemoveArticleIDs(ids...)
+	return pcu
 }
 
 // RemoveArticles removes "articles" edges to Article entities.
-func (_u *PostCategoryUpdate) RemoveArticles(v ...*Article) *PostCategoryUpdate {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (pcu *PostCategoryUpdate) RemoveArticles(a ...*Article) *PostCategoryUpdate {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.RemoveArticleIDs(ids...)
+	return pcu.RemoveArticleIDs(ids...)
 }
 
 // Save executes the query and returns the number of nodes affected by the update operation.
-func (_u *PostCategoryUpdate) Save(ctx context.Context) (int, error) {
-	if err := _u.defaults(); err != nil {
+func (pcu *PostCategoryUpdate) Save(ctx context.Context) (int, error) {
+	if err := pcu.defaults(); err != nil {
 		return 0, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, pcu.sqlSave, pcu.mutation, pcu.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *PostCategoryUpdate) SaveX(ctx context.Context) int {
-	affected, err := _u.Save(ctx)
+func (pcu *PostCategoryUpdate) SaveX(ctx context.Context) int {
+	affected, err := pcu.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -225,48 +225,48 @@ func (_u *PostCategoryUpdate) SaveX(ctx context.Context) int {
 }
 
 // Exec executes the query.
-func (_u *PostCategoryUpdate) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (pcu *PostCategoryUpdate) Exec(ctx context.Context) error {
+	_, err := pcu.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *PostCategoryUpdate) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (pcu *PostCategoryUpdate) ExecX(ctx context.Context) {
+	if err := pcu.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *PostCategoryUpdate) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (pcu *PostCategoryUpdate) defaults() error {
+	if _, ok := pcu.mutation.UpdatedAt(); !ok {
 		if postcategory.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized postcategory.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := postcategory.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		pcu.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *PostCategoryUpdate) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (pcu *PostCategoryUpdate) check() error {
+	if v, ok := pcu.mutation.Name(); ok {
 		if err := postcategory.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "PostCategory.name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Slug(); ok {
+	if v, ok := pcu.mutation.Slug(); ok {
 		if err := postcategory.SlugValidator(v); err != nil {
 			return &ValidationError{Name: "slug", err: fmt.Errorf(`ent: validator failed for field "PostCategory.slug": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Count(); ok {
+	if v, ok := pcu.mutation.Count(); ok {
 		if err := postcategory.CountValidator(v); err != nil {
 			return &ValidationError{Name: "count", err: fmt.Errorf(`ent: validator failed for field "PostCategory.count": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.SortOrder(); ok {
+	if v, ok := pcu.mutation.SortOrder(); ok {
 		if err := postcategory.SortOrderValidator(v); err != nil {
 			return &ValidationError{Name: "sort_order", err: fmt.Errorf(`ent: validator failed for field "PostCategory.sort_order": %w`, err)}
 		}
@@ -275,63 +275,63 @@ func (_u *PostCategoryUpdate) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *PostCategoryUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *PostCategoryUpdate {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (pcu *PostCategoryUpdate) Modify(modifiers ...func(u *sql.UpdateBuilder)) *PostCategoryUpdate {
+	pcu.modifiers = append(pcu.modifiers, modifiers...)
+	return pcu
 }
 
-func (_u *PostCategoryUpdate) sqlSave(ctx context.Context) (_node int, err error) {
-	if err := _u.check(); err != nil {
-		return _node, err
+func (pcu *PostCategoryUpdate) sqlSave(ctx context.Context) (n int, err error) {
+	if err := pcu.check(); err != nil {
+		return n, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(postcategory.Table, postcategory.Columns, sqlgraph.NewFieldSpec(postcategory.FieldID, field.TypeUint))
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := pcu.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := pcu.mutation.DeletedAt(); ok {
 		_spec.SetField(postcategory.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if pcu.mutation.DeletedAtCleared() {
 		_spec.ClearField(postcategory.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := pcu.mutation.UpdatedAt(); ok {
 		_spec.SetField(postcategory.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := pcu.mutation.Name(); ok {
 		_spec.SetField(postcategory.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Slug(); ok {
+	if value, ok := pcu.mutation.Slug(); ok {
 		_spec.SetField(postcategory.FieldSlug, field.TypeString, value)
 	}
-	if _u.mutation.SlugCleared() {
+	if pcu.mutation.SlugCleared() {
 		_spec.ClearField(postcategory.FieldSlug, field.TypeString)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := pcu.mutation.Description(); ok {
 		_spec.SetField(postcategory.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if pcu.mutation.DescriptionCleared() {
 		_spec.ClearField(postcategory.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.Count(); ok {
+	if value, ok := pcu.mutation.Count(); ok {
 		_spec.SetField(postcategory.FieldCount, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedCount(); ok {
+	if value, ok := pcu.mutation.AddedCount(); ok {
 		_spec.AddField(postcategory.FieldCount, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.IsSeries(); ok {
+	if value, ok := pcu.mutation.IsSeries(); ok {
 		_spec.SetField(postcategory.FieldIsSeries, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.SortOrder(); ok {
+	if value, ok := pcu.mutation.SortOrder(); ok {
 		_spec.SetField(postcategory.FieldSortOrder, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedSortOrder(); ok {
+	if value, ok := pcu.mutation.AddedSortOrder(); ok {
 		_spec.AddField(postcategory.FieldSortOrder, field.TypeInt, value)
 	}
-	if _u.mutation.ArticlesCleared() {
+	if pcu.mutation.ArticlesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: true,
@@ -344,7 +344,7 @@ func (_u *PostCategoryUpdate) sqlSave(ctx context.Context) (_node int, err error
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedArticlesIDs(); len(nodes) > 0 && !_u.mutation.ArticlesCleared() {
+	if nodes := pcu.mutation.RemovedArticlesIDs(); len(nodes) > 0 && !pcu.mutation.ArticlesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: true,
@@ -360,7 +360,7 @@ func (_u *PostCategoryUpdate) sqlSave(ctx context.Context) (_node int, err error
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.ArticlesIDs(); len(nodes) > 0 {
+	if nodes := pcu.mutation.ArticlesIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: true,
@@ -376,8 +376,8 @@ func (_u *PostCategoryUpdate) sqlSave(ctx context.Context) (_node int, err error
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	if _node, err = sqlgraph.UpdateNodes(ctx, _u.driver, _spec); err != nil {
+	_spec.AddModifiers(pcu.modifiers...)
+	if n, err = sqlgraph.UpdateNodes(ctx, pcu.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{postcategory.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -385,8 +385,8 @@ func (_u *PostCategoryUpdate) sqlSave(ctx context.Context) (_node int, err error
 		}
 		return 0, err
 	}
-	_u.mutation.done = true
-	return _node, nil
+	pcu.mutation.done = true
+	return n, nil
 }
 
 // PostCategoryUpdateOne is the builder for updating a single PostCategory entity.
@@ -399,206 +399,206 @@ type PostCategoryUpdateOne struct {
 }
 
 // SetDeletedAt sets the "deleted_at" field.
-func (_u *PostCategoryUpdateOne) SetDeletedAt(v time.Time) *PostCategoryUpdateOne {
-	_u.mutation.SetDeletedAt(v)
-	return _u
+func (pcuo *PostCategoryUpdateOne) SetDeletedAt(t time.Time) *PostCategoryUpdateOne {
+	pcuo.mutation.SetDeletedAt(t)
+	return pcuo
 }
 
 // SetNillableDeletedAt sets the "deleted_at" field if the given value is not nil.
-func (_u *PostCategoryUpdateOne) SetNillableDeletedAt(v *time.Time) *PostCategoryUpdateOne {
-	if v != nil {
-		_u.SetDeletedAt(*v)
+func (pcuo *PostCategoryUpdateOne) SetNillableDeletedAt(t *time.Time) *PostCategoryUpdateOne {
+	if t != nil {
+		pcuo.SetDeletedAt(*t)
 	}
-	return _u
+	return pcuo
 }
 
 // ClearDeletedAt clears the value of the "deleted_at" field.
-func (_u *PostCategoryUpdateOne) ClearDeletedAt() *PostCategoryUpdateOne {
-	_u.mutation.ClearDeletedAt()
-	return _u
+func (pcuo *PostCategoryUpdateOne) ClearDeletedAt() *PostCategoryUpdateOne {
+	pcuo.mutation.ClearDeletedAt()
+	return pcuo
 }
 
 // SetUpdatedAt sets the "updated_at" field.
-func (_u *PostCategoryUpdateOne) SetUpdatedAt(v time.Time) *PostCategoryUpdateOne {
-	_u.mutation.SetUpdatedAt(v)
-	return _u
+func (pcuo *PostCategoryUpdateOne) SetUpdatedAt(t time.Time) *PostCategoryUpdateOne {
+	pcuo.mutation.SetUpdatedAt(t)
+	return pcuo
 }
 
 // SetName sets the "name" field.
-func (_u *PostCategoryUpdateOne) SetName(v string) *PostCategoryUpdateOne {
-	_u.mutation.SetName(v)
-	return _u
+func (pcuo *PostCategoryUpdateOne) SetName(s string) *PostCategoryUpdateOne {
+	pcuo.mutation.SetName(s)
+	return pcuo
 }
 
 // SetNillableName sets the "name" field if the given value is not nil.
-func (_u *PostCategoryUpdateOne) SetNillableName(v *string) *PostCategoryUpdateOne {
-	if v != nil {
-		_u.SetName(*v)
+func (pcuo *PostCategoryUpdateOne) SetNillableName(s *string) *PostCategoryUpdateOne {
+	if s != nil {
+		pcuo.SetName(*s)
 	}
-	return _u
+	return pcuo
 }
 
 // SetSlug sets the "slug" field.
-func (_u *PostCategoryUpdateOne) SetSlug(v string) *PostCategoryUpdateOne {
-	_u.mutation.SetSlug(v)
-	return _u
+func (pcuo *PostCategoryUpdateOne) SetSlug(s string) *PostCategoryUpdateOne {
+	pcuo.mutation.SetSlug(s)
+	return pcuo
 }
 
 // SetNillableSlug sets the "slug" field if the given value is not nil.
-func (_u *PostCategoryUpdateOne) SetNillableSlug(v *string) *PostCategoryUpdateOne {
-	if v != nil {
-		_u.SetSlug(*v)
+func (pcuo *PostCategoryUpdateOne) SetNillableSlug(s *string) *PostCategoryUpdateOne {
+	if s != nil {
+		pcuo.SetSlug(*s)
 	}
-	return _u
+	return pcuo
 }
 
 // ClearSlug clears the value of the "slug" field.
-func (_u *PostCategoryUpdateOne) ClearSlug() *PostCategoryUpdateOne {
-	_u.mutation.ClearSlug()
-	return _u
+func (pcuo *PostCategoryUpdateOne) ClearSlug() *PostCategoryUpdateOne {
+	pcuo.mutation.ClearSlug()
+	return pcuo
 }
 
 // SetDescription sets the "description" field.
-func (_u *PostCategoryUpdateOne) SetDescription(v string) *PostCategoryUpdateOne {
-	_u.mutation.SetDescription(v)
-	return _u
+func (pcuo *PostCategoryUpdateOne) SetDescription(s string) *PostCategoryUpdateOne {
+	pcuo.mutation.SetDescription(s)
+	return pcuo
 }
 
 // SetNillableDescription sets the "description" field if the given value is not nil.
-func (_u *PostCategoryUpdateOne) SetNillableDescription(v *string) *PostCategoryUpdateOne {
-	if v != nil {
-		_u.SetDescription(*v)
+func (pcuo *PostCategoryUpdateOne) SetNillableDescription(s *string) *PostCategoryUpdateOne {
+	if s != nil {
+		pcuo.SetDescription(*s)
 	}
-	return _u
+	return pcuo
 }
 
 // ClearDescription clears the value of the "description" field.
-func (_u *PostCategoryUpdateOne) ClearDescription() *PostCategoryUpdateOne {
-	_u.mutation.ClearDescription()
-	return _u
+func (pcuo *PostCategoryUpdateOne) ClearDescription() *PostCategoryUpdateOne {
+	pcuo.mutation.ClearDescription()
+	return pcuo
 }
 
 // SetCount sets the "count" field.
-func (_u *PostCategoryUpdateOne) SetCount(v int) *PostCategoryUpdateOne {
-	_u.mutation.ResetCount()
-	_u.mutation.SetCount(v)
-	return _u
+func (pcuo *PostCategoryUpdateOne) SetCount(i int) *PostCategoryUpdateOne {
+	pcuo.mutation.ResetCount()
+	pcuo.mutation.SetCount(i)
+	return pcuo
 }
 
 // SetNillableCount sets the "count" field if the given value is not nil.
-func (_u *PostCategoryUpdateOne) SetNillableCount(v *int) *PostCategoryUpdateOne {
-	if v != nil {
-		_u.SetCount(*v)
+func (pcuo *PostCategoryUpdateOne) SetNillableCount(i *int) *PostCategoryUpdateOne {
+	if i != nil {
+		pcuo.SetCount(*i)
 	}
-	return _u
+	return pcuo
 }
 
-// AddCount adds value to the "count" field.
-func (_u *PostCategoryUpdateOne) AddCount(v int) *PostCategoryUpdateOne {
-	_u.mutation.AddCount(v)
-	return _u
+// AddCount adds i to the "count" field.
+func (pcuo *PostCategoryUpdateOne) AddCount(i int) *PostCategoryUpdateOne {
+	pcuo.mutation.AddCount(i)
+	return pcuo
 }
 
 // SetIsSeries sets the "is_series" field.
-func (_u *PostCategoryUpdateOne) SetIsSeries(v bool) *PostCategoryUpdateOne {
-	_u.mutation.SetIsSeries(v)
-	return _u
+func (pcuo *PostCategoryUpdateOne) SetIsSeries(b bool) *PostCategoryUpdateOne {
+	pcuo.mutation.SetIsSeries(b)
+	return pcuo
 }
 
 // SetNillableIsSeries sets the "is_series" field if the given value is not nil.
-func (_u *PostCategoryUpdateOne) SetNillableIsSeries(v *bool) *PostCategoryUpdateOne {
-	if v != nil {
-		_u.SetIsSeries(*v)
+func (pcuo *PostCategoryUpdateOne) SetNillableIsSeries(b *bool) *PostCategoryUpdateOne {
+	if b != nil {
+		pcuo.SetIsSeries(*b)
 	}
-	return _u
+	return pcuo
 }
 
 // SetSortOrder sets the "sort_order" field.
-func (_u *PostCategoryUpdateOne) SetSortOrder(v int) *PostCategoryUpdateOne {
-	_u.mutation.ResetSortOrder()
-	_u.mutation.SetSortOrder(v)
-	return _u
+func (pcuo *PostCategoryUpdateOne) SetSortOrder(i int) *PostCategoryUpdateOne {
+	pcuo.mutation.ResetSortOrder()
+	pcuo.mutation.SetSortOrder(i)
+	return pcuo
 }
 
 // SetNillableSortOrder sets the "sort_order" field if the given value is not nil.
-func (_u *PostCategoryUpdateOne) SetNillableSortOrder(v *int) *PostCategoryUpdateOne {
-	if v != nil {
-		_u.SetSortOrder(*v)
+func (pcuo *PostCategoryUpdateOne) SetNillableSortOrder(i *int) *PostCategoryUpdateOne {
+	if i != nil {
+		pcuo.SetSortOrder(*i)
 	}
-	return _u
+	return pcuo
 }
 
-// AddSortOrder adds value to the "sort_order" field.
-func (_u *PostCategoryUpdateOne) AddSortOrder(v int) *PostCategoryUpdateOne {
-	_u.mutation.AddSortOrder(v)
-	return _u
+// AddSortOrder adds i to the "sort_order" field.
+func (pcuo *PostCategoryUpdateOne) AddSortOrder(i int) *PostCategoryUpdateOne {
+	pcuo.mutation.AddSortOrder(i)
+	return pcuo
 }
 
 // AddArticleIDs adds the "articles" edge to the Article entity by IDs.
-func (_u *PostCategoryUpdateOne) AddArticleIDs(ids ...uint) *PostCategoryUpdateOne {
-	_u.mutation.AddArticleIDs(ids...)
-	return _u
+func (pcuo *PostCategoryUpdateOne) AddArticleIDs(ids ...uint) *PostCategoryUpdateOne {
+	pcuo.mutation.AddArticleIDs(ids...)
+	return pcuo
 }
 
 // AddArticles adds the "articles" edges to the Article entity.
-func (_u *PostCategoryUpdateOne) AddArticles(v ...*Article) *PostCategoryUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (pcuo *PostCategoryUpdateOne) AddArticles(a ...*Article) *PostCategoryUpdateOne {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.AddArticleIDs(ids...)
+	return pcuo.AddArticleIDs(ids...)
 }
 
 // Mutation returns the PostCategoryMutation object of the builder.
-func (_u *PostCategoryUpdateOne) Mutation() *PostCategoryMutation {
-	return _u.mutation
+func (pcuo *PostCategoryUpdateOne) Mutation() *PostCategoryMutation {
+	return pcuo.mutation
 }
 
 // ClearArticles clears all "articles" edges to the Article entity.
-func (_u *PostCategoryUpdateOne) ClearArticles() *PostCategoryUpdateOne {
-	_u.mutation.ClearArticles()
-	return _u
+func (pcuo *PostCategoryUpdateOne) ClearArticles() *PostCategoryUpdateOne {
+	pcuo.mutation.ClearArticles()
+	return pcuo
 }
 
 // RemoveArticleIDs removes the "articles" edge to Article entities by IDs.
-func (_u *PostCategoryUpdateOne) RemoveArticleIDs(ids ...uint) *PostCategoryUpdateOne {
-	_u.mutation.RemoveArticleIDs(ids...)
-	return _u
+func (pcuo *PostCategoryUpdateOne) RemoveArticleIDs(ids ...uint) *PostCategoryUpdateOne {
+	pcuo.mutation.RemoveArticleIDs(ids...)
+	return pcuo
 }
 
 // RemoveArticles removes "articles" edges to Article entities.
-func (_u *PostCategoryUpdateOne) RemoveArticles(v ...*Article) *PostCategoryUpdateOne {
-	ids := make([]uint, len(v))
-	for i := range v {
-		ids[i] = v[i].ID
+func (pcuo *PostCategoryUpdateOne) RemoveArticles(a ...*Article) *PostCategoryUpdateOne {
+	ids := make([]uint, len(a))
+	for i := range a {
+		ids[i] = a[i].ID
 	}
-	return _u.RemoveArticleIDs(ids...)
+	return pcuo.RemoveArticleIDs(ids...)
 }
 
 // Where appends a list predicates to the PostCategoryUpdate builder.
-func (_u *PostCategoryUpdateOne) Where(ps ...predicate.PostCategory) *PostCategoryUpdateOne {
-	_u.mutation.Where(ps...)
-	return _u
+func (pcuo *PostCategoryUpdateOne) Where(ps ...predicate.PostCategory) *PostCategoryUpdateOne {
+	pcuo.mutation.Where(ps...)
+	return pcuo
 }
 
 // Select allows selecting one or more fields (columns) of the returned entity.
 // The default is selecting all fields defined in the entity schema.
-func (_u *PostCategoryUpdateOne) Select(field string, fields ...string) *PostCategoryUpdateOne {
-	_u.fields = append([]string{field}, fields...)
-	return _u
+func (pcuo *PostCategoryUpdateOne) Select(field string, fields ...string) *PostCategoryUpdateOne {
+	pcuo.fields = append([]string{field}, fields...)
+	return pcuo
 }
 
 // Save executes the query and returns the updated PostCategory entity.
-func (_u *PostCategoryUpdateOne) Save(ctx context.Context) (*PostCategory, error) {
-	if err := _u.defaults(); err != nil {
+func (pcuo *PostCategoryUpdateOne) Save(ctx context.Context) (*PostCategory, error) {
+	if err := pcuo.defaults(); err != nil {
 		return nil, err
 	}
-	return withHooks(ctx, _u.sqlSave, _u.mutation, _u.hooks)
+	return withHooks(ctx, pcuo.sqlSave, pcuo.mutation, pcuo.hooks)
 }
 
 // SaveX is like Save, but panics if an error occurs.
-func (_u *PostCategoryUpdateOne) SaveX(ctx context.Context) *PostCategory {
-	node, err := _u.Save(ctx)
+func (pcuo *PostCategoryUpdateOne) SaveX(ctx context.Context) *PostCategory {
+	node, err := pcuo.Save(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -606,48 +606,48 @@ func (_u *PostCategoryUpdateOne) SaveX(ctx context.Context) *PostCategory {
 }
 
 // Exec executes the query on the entity.
-func (_u *PostCategoryUpdateOne) Exec(ctx context.Context) error {
-	_, err := _u.Save(ctx)
+func (pcuo *PostCategoryUpdateOne) Exec(ctx context.Context) error {
+	_, err := pcuo.Save(ctx)
 	return err
 }
 
 // ExecX is like Exec, but panics if an error occurs.
-func (_u *PostCategoryUpdateOne) ExecX(ctx context.Context) {
-	if err := _u.Exec(ctx); err != nil {
+func (pcuo *PostCategoryUpdateOne) ExecX(ctx context.Context) {
+	if err := pcuo.Exec(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // defaults sets the default values of the builder before save.
-func (_u *PostCategoryUpdateOne) defaults() error {
-	if _, ok := _u.mutation.UpdatedAt(); !ok {
+func (pcuo *PostCategoryUpdateOne) defaults() error {
+	if _, ok := pcuo.mutation.UpdatedAt(); !ok {
 		if postcategory.UpdateDefaultUpdatedAt == nil {
 			return fmt.Errorf("ent: uninitialized postcategory.UpdateDefaultUpdatedAt (forgotten import ent/runtime?)")
 		}
 		v := postcategory.UpdateDefaultUpdatedAt()
-		_u.mutation.SetUpdatedAt(v)
+		pcuo.mutation.SetUpdatedAt(v)
 	}
 	return nil
 }
 
 // check runs all checks and user-defined validators on the builder.
-func (_u *PostCategoryUpdateOne) check() error {
-	if v, ok := _u.mutation.Name(); ok {
+func (pcuo *PostCategoryUpdateOne) check() error {
+	if v, ok := pcuo.mutation.Name(); ok {
 		if err := postcategory.NameValidator(v); err != nil {
 			return &ValidationError{Name: "name", err: fmt.Errorf(`ent: validator failed for field "PostCategory.name": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Slug(); ok {
+	if v, ok := pcuo.mutation.Slug(); ok {
 		if err := postcategory.SlugValidator(v); err != nil {
 			return &ValidationError{Name: "slug", err: fmt.Errorf(`ent: validator failed for field "PostCategory.slug": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.Count(); ok {
+	if v, ok := pcuo.mutation.Count(); ok {
 		if err := postcategory.CountValidator(v); err != nil {
 			return &ValidationError{Name: "count", err: fmt.Errorf(`ent: validator failed for field "PostCategory.count": %w`, err)}
 		}
 	}
-	if v, ok := _u.mutation.SortOrder(); ok {
+	if v, ok := pcuo.mutation.SortOrder(); ok {
 		if err := postcategory.SortOrderValidator(v); err != nil {
 			return &ValidationError{Name: "sort_order", err: fmt.Errorf(`ent: validator failed for field "PostCategory.sort_order": %w`, err)}
 		}
@@ -656,22 +656,22 @@ func (_u *PostCategoryUpdateOne) check() error {
 }
 
 // Modify adds a statement modifier for attaching custom logic to the UPDATE statement.
-func (_u *PostCategoryUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *PostCategoryUpdateOne {
-	_u.modifiers = append(_u.modifiers, modifiers...)
-	return _u
+func (pcuo *PostCategoryUpdateOne) Modify(modifiers ...func(u *sql.UpdateBuilder)) *PostCategoryUpdateOne {
+	pcuo.modifiers = append(pcuo.modifiers, modifiers...)
+	return pcuo
 }
 
-func (_u *PostCategoryUpdateOne) sqlSave(ctx context.Context) (_node *PostCategory, err error) {
-	if err := _u.check(); err != nil {
+func (pcuo *PostCategoryUpdateOne) sqlSave(ctx context.Context) (_node *PostCategory, err error) {
+	if err := pcuo.check(); err != nil {
 		return _node, err
 	}
 	_spec := sqlgraph.NewUpdateSpec(postcategory.Table, postcategory.Columns, sqlgraph.NewFieldSpec(postcategory.FieldID, field.TypeUint))
-	id, ok := _u.mutation.ID()
+	id, ok := pcuo.mutation.ID()
 	if !ok {
 		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "PostCategory.id" for update`)}
 	}
 	_spec.Node.ID.Value = id
-	if fields := _u.fields; len(fields) > 0 {
+	if fields := pcuo.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, postcategory.FieldID)
 		for _, f := range fields {
@@ -683,53 +683,53 @@ func (_u *PostCategoryUpdateOne) sqlSave(ctx context.Context) (_node *PostCatego
 			}
 		}
 	}
-	if ps := _u.mutation.predicates; len(ps) > 0 {
+	if ps := pcuo.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
 			for i := range ps {
 				ps[i](selector)
 			}
 		}
 	}
-	if value, ok := _u.mutation.DeletedAt(); ok {
+	if value, ok := pcuo.mutation.DeletedAt(); ok {
 		_spec.SetField(postcategory.FieldDeletedAt, field.TypeTime, value)
 	}
-	if _u.mutation.DeletedAtCleared() {
+	if pcuo.mutation.DeletedAtCleared() {
 		_spec.ClearField(postcategory.FieldDeletedAt, field.TypeTime)
 	}
-	if value, ok := _u.mutation.UpdatedAt(); ok {
+	if value, ok := pcuo.mutation.UpdatedAt(); ok {
 		_spec.SetField(postcategory.FieldUpdatedAt, field.TypeTime, value)
 	}
-	if value, ok := _u.mutation.Name(); ok {
+	if value, ok := pcuo.mutation.Name(); ok {
 		_spec.SetField(postcategory.FieldName, field.TypeString, value)
 	}
-	if value, ok := _u.mutation.Slug(); ok {
+	if value, ok := pcuo.mutation.Slug(); ok {
 		_spec.SetField(postcategory.FieldSlug, field.TypeString, value)
 	}
-	if _u.mutation.SlugCleared() {
+	if pcuo.mutation.SlugCleared() {
 		_spec.ClearField(postcategory.FieldSlug, field.TypeString)
 	}
-	if value, ok := _u.mutation.Description(); ok {
+	if value, ok := pcuo.mutation.Description(); ok {
 		_spec.SetField(postcategory.FieldDescription, field.TypeString, value)
 	}
-	if _u.mutation.DescriptionCleared() {
+	if pcuo.mutation.DescriptionCleared() {
 		_spec.ClearField(postcategory.FieldDescription, field.TypeString)
 	}
-	if value, ok := _u.mutation.Count(); ok {
+	if value, ok := pcuo.mutation.Count(); ok {
 		_spec.SetField(postcategory.FieldCount, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedCount(); ok {
+	if value, ok := pcuo.mutation.AddedCount(); ok {
 		_spec.AddField(postcategory.FieldCount, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.IsSeries(); ok {
+	if value, ok := pcuo.mutation.IsSeries(); ok {
 		_spec.SetField(postcategory.FieldIsSeries, field.TypeBool, value)
 	}
-	if value, ok := _u.mutation.SortOrder(); ok {
+	if value, ok := pcuo.mutation.SortOrder(); ok {
 		_spec.SetField(postcategory.FieldSortOrder, field.TypeInt, value)
 	}
-	if value, ok := _u.mutation.AddedSortOrder(); ok {
+	if value, ok := pcuo.mutation.AddedSortOrder(); ok {
 		_spec.AddField(postcategory.FieldSortOrder, field.TypeInt, value)
 	}
-	if _u.mutation.ArticlesCleared() {
+	if pcuo.mutation.ArticlesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: true,
@@ -742,7 +742,7 @@ func (_u *PostCategoryUpdateOne) sqlSave(ctx context.Context) (_node *PostCatego
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.RemovedArticlesIDs(); len(nodes) > 0 && !_u.mutation.ArticlesCleared() {
+	if nodes := pcuo.mutation.RemovedArticlesIDs(); len(nodes) > 0 && !pcuo.mutation.ArticlesCleared() {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: true,
@@ -758,7 +758,7 @@ func (_u *PostCategoryUpdateOne) sqlSave(ctx context.Context) (_node *PostCatego
 		}
 		_spec.Edges.Clear = append(_spec.Edges.Clear, edge)
 	}
-	if nodes := _u.mutation.ArticlesIDs(); len(nodes) > 0 {
+	if nodes := pcuo.mutation.ArticlesIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.M2M,
 			Inverse: true,
@@ -774,11 +774,11 @@ func (_u *PostCategoryUpdateOne) sqlSave(ctx context.Context) (_node *PostCatego
 		}
 		_spec.Edges.Add = append(_spec.Edges.Add, edge)
 	}
-	_spec.AddModifiers(_u.modifiers...)
-	_node = &PostCategory{config: _u.config}
+	_spec.AddModifiers(pcuo.modifiers...)
+	_node = &PostCategory{config: pcuo.config}
 	_spec.Assign = _node.assignValues
 	_spec.ScanValues = _node.scanValues
-	if err = sqlgraph.UpdateNode(ctx, _u.driver, _spec); err != nil {
+	if err = sqlgraph.UpdateNode(ctx, pcuo.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
 			err = &NotFoundError{postcategory.Label}
 		} else if sqlgraph.IsConstraintError(err) {
@@ -786,6 +786,6 @@ func (_u *PostCategoryUpdateOne) sqlSave(ctx context.Context) (_node *PostCatego
 		}
 		return nil, err
 	}
-	_u.mutation.done = true
+	pcuo.mutation.done = true
 	return _node, nil
 }
