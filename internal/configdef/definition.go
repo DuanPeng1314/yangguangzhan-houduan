@@ -518,6 +518,16 @@ var AllSettings = []Definition{
 	{Key: constant.KeySeoBingApiKey, Value: "", Comment: "Bing IndexNow API Key", IsPublic: false},
 	{Key: constant.KeySeoGoogleEnable, Value: "false", Comment: "是否启用 Google Indexing API 推送 (true/false)", IsPublic: true},
 	{Key: constant.KeySeoGoogleCredential, Value: "", Comment: "Google Service Account 凭证 JSON 内容", IsPublic: false},
+	{Key: constant.KeyCommerceEnabled, Value: "false", Comment: "是否启用统一认证与商业化接入 (true/false)", IsPublic: false},
+	{Key: constant.KeyCommerceAuthCenterURL, Value: "", Comment: "统一认证中心 API 地址（建议以 /api/v1 结尾）", IsPublic: false},
+	{Key: constant.KeyCommerceClientID, Value: "", Comment: "统一登录使用的客户端编号", IsPublic: false},
+	{Key: constant.KeyCommerceSiteID, Value: "", Comment: "当前站点在鉴权系统中的站点编号", IsPublic: false},
+	{Key: constant.KeyCommerceSiteAPIKey, Value: "", Comment: "当前站点用于权限校验的接口密钥", IsPublic: false},
+	{Key: constant.KeyCommerceSiteAPISecret, Value: "", Comment: "当前站点用于回调验签的签名密钥", IsPublic: false},
+	{Key: constant.KeyCommerceAllowGuest, Value: "true", Comment: "是否允许游客购买 (true/false)", IsPublic: false},
+	{Key: constant.KeyCommerceRequestTimeoutMs, Value: "10000", Comment: "统一认证中心请求超时时间（毫秒）", IsPublic: false},
+	{Key: constant.KeyCommercePollIntervalMs, Value: "3000", Comment: "支付状态轮询间隔（毫秒）", IsPublic: false},
+	{Key: constant.KeyCommercePollTimeoutMs, Value: "180000", Comment: "支付状态轮询超时时间（毫秒）", IsPublic: false},
 }
 
 // AllUserGroups 是所有默认用户组的"单一事实来源"

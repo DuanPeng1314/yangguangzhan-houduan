@@ -2,6 +2,7 @@ package ent
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"math/rand"
@@ -135,7 +136,17 @@ func convertExtraConfig(config map[string]interface{}) *model.ArticleExtraConfig
 		customJSCopy := customJS
 		result.CustomJS = &customJSCopy
 	}
-	if result.EnableAIPodcast == nil && result.CustomJS == nil {
+	if commerceRaw, ok := config["commerce"]; ok && commerceRaw != nil {
+		var commerce model.ArticleCommerceConfig
+		if payload, err := json.Marshal(commerceRaw); err != nil {
+			log.Printf("[convertExtraConfig] 序列化 commerce 配置失败: %v", err)
+		} else if err := json.Unmarshal(payload, &commerce); err != nil {
+			log.Printf("[convertExtraConfig] 反序列化 commerce 配置失败: %v", err)
+		} else {
+			result.Commerce = &commerce
+		}
+	}
+	if result.EnableAIPodcast == nil && result.CustomJS == nil && result.Commerce == nil {
 		return nil
 	}
 	return result
@@ -562,6 +573,9 @@ func (r *articleRepo) Create(ctx context.Context, params *model.CreateArticlePar
 				extraConfigMap["custom_js"] = *params.ExtraConfig.CustomJS
 			}
 		}
+		if params.ExtraConfig.Commerce != nil {
+			extraConfigMap["commerce"] = *params.ExtraConfig.Commerce
+		}
 		if len(extraConfigMap) > 0 {
 			creator.SetExtraConfig(extraConfigMap)
 		}
@@ -724,6 +738,9 @@ func (r *articleRepo) Update(ctx context.Context, publicID string, req *model.Up
 			} else {
 				extraConfigMap["custom_js"] = *req.ExtraConfig.CustomJS
 			}
+		}
+		if req.ExtraConfig.Commerce != nil {
+			extraConfigMap["commerce"] = *req.ExtraConfig.Commerce
 		}
 		updater.SetExtraConfig(extraConfigMap)
 	}

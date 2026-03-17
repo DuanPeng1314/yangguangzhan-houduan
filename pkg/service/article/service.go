@@ -1227,7 +1227,7 @@ func (s *serviceImpl) Get(ctx context.Context, publicID string) (*model.ArticleR
 	if err != nil {
 		return nil, err
 	}
-	resp := s.ToAPIResponse(article, false, false)
+	resp := s.ToAPIResponse(article, false, true)
 	s.fillOwnerNickname(ctx, resp, nil)
 	return resp, nil
 }

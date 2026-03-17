@@ -1,6 +1,7 @@
 package article
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -13,6 +14,7 @@ import (
 
 	"github.com/anzhiyu-c/anheyu-app/ent"
 	"github.com/anzhiyu-c/anheyu-app/internal/pkg/auth"
+	"github.com/anzhiyu-c/anheyu-app/modules/commerce"
 	"github.com/anzhiyu-c/anheyu-app/pkg/domain/model"
 	"github.com/anzhiyu-c/anheyu-app/pkg/idgen"
 	"github.com/anzhiyu-c/anheyu-app/pkg/response"
@@ -25,12 +27,13 @@ import (
 
 // Handler 封装了所有与文章相关的 HTTP 处理器。
 type Handler struct {
-	svc articleSvc.Service
+	svc         articleSvc.Service
+	commerceSvc *commerce.Service
 }
 
 // NewHandler 是 Handler 的构造函数。
-func NewHandler(svc articleSvc.Service) *Handler {
-	return &Handler{svc: svc}
+func NewHandler(svc articleSvc.Service, commerceSvc *commerce.Service) *Handler {
+	return &Handler{svc: svc, commerceSvc: commerceSvc}
 }
 
 // UploadImage 处理文章图片的上传请求。
@@ -311,7 +314,28 @@ func (h *Handler) GetPublic(c *gin.Context) {
 		return
 	}
 
+	if h.commerceSvc != nil {
+		articleResponse = h.commerceSvc.DecoratePublicArticle(c.Request.Context(), articleResponse, commerce.AccessContext{
+			Authorization:       c.GetHeader("Authorization"),
+			ArticleGuestToken:   c.GetHeader("X-Guest-Token"),
+			ResourceGuestTokens: parseGuestTokenMap(c.GetHeader("X-Guest-Token-Map")),
+			GuestEmail:          c.GetHeader("X-Guest-Email"),
+		})
+	}
+
 	response.Success(c, articleResponse, "获取成功")
+}
+
+func parseGuestTokenMap(raw string) map[string]string {
+	trimmed := strings.TrimSpace(raw)
+	if trimmed == "" {
+		return map[string]string{}
+	}
+	result := make(map[string]string)
+	if err := json.Unmarshal([]byte(trimmed), &result); err != nil {
+		return map[string]string{}
+	}
+	return result
 }
 
 // Get

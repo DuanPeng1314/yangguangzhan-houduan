@@ -31,6 +31,7 @@ import (
 	"github.com/anzhiyu-c/anheyu-app/internal/pkg/event"
 	"github.com/anzhiyu-c/anheyu-app/internal/pkg/version"
 	"github.com/anzhiyu-c/anheyu-app/internal/service/cache"
+	"github.com/anzhiyu-c/anheyu-app/modules/commerce"
 	"github.com/anzhiyu-c/anheyu-app/pkg/config"
 	"github.com/anzhiyu-c/anheyu-app/pkg/constant"
 	"github.com/anzhiyu-c/anheyu-app/pkg/domain/model"
@@ -92,10 +93,10 @@ import (
 	post_category_service "github.com/anzhiyu-c/anheyu-app/pkg/service/post_category"
 	post_tag_service "github.com/anzhiyu-c/anheyu-app/pkg/service/post_tag"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/process"
+	rss_service "github.com/anzhiyu-c/anheyu-app/pkg/service/rss"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/search"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/setting"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/sitemap"
-	rss_service "github.com/anzhiyu-c/anheyu-app/pkg/service/rss"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/statistics"
 	subscriber_service "github.com/anzhiyu-c/anheyu-app/pkg/service/subscriber"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/theme"
@@ -114,33 +115,33 @@ import (
 
 // App 结构体，用于封装应用的所有核心组件
 type App struct {
-	cfg                    *config.Config
-	engine                 *gin.Engine
-	taskBroker             *task.Broker
-	sqlDB                  *sql.DB
-	appVersion             string
-	articleService         article_service.Service
-	directLinkService      direct_link.Service
-	storagePolicyRepo      repository.StoragePolicyRepository
-	storagePolicyService   volume.IStoragePolicyService
-	fileService            file_service.FileService
-	mw                     *middleware.Middleware
-	settingRepo            repository.SettingRepository
-	settingSvc             setting.SettingService
-	tokenSvc               auth.TokenService
-	userSvc                user.UserService
-	fileRepo               repository.FileRepository
-	entityRepo             repository.EntityRepository
-	cacheSvc               utility.CacheService
-	eventBus               *event.EventBus
-	postCategorySvc        *post_category_service.Service
-	postTagSvc             *post_tag_service.Service
-	commentSvc             *comment_service.Service
-	themeSvc               theme.ThemeService
-	themeHandler           *theme_handler.Handler
-	ssrManager             *ssr.Manager
-	ssrThemeHandler        *ssrtheme_handler.Handler
-	configExtensionHolder  *configExtensionHolder // Pro 可通过 SetConfigExtension 注入支付配置导出/导入
+	cfg                   *config.Config
+	engine                *gin.Engine
+	taskBroker            *task.Broker
+	sqlDB                 *sql.DB
+	appVersion            string
+	articleService        article_service.Service
+	directLinkService     direct_link.Service
+	storagePolicyRepo     repository.StoragePolicyRepository
+	storagePolicyService  volume.IStoragePolicyService
+	fileService           file_service.FileService
+	mw                    *middleware.Middleware
+	settingRepo           repository.SettingRepository
+	settingSvc            setting.SettingService
+	tokenSvc              auth.TokenService
+	userSvc               user.UserService
+	fileRepo              repository.FileRepository
+	entityRepo            repository.EntityRepository
+	cacheSvc              utility.CacheService
+	eventBus              *event.EventBus
+	postCategorySvc       *post_category_service.Service
+	postTagSvc            *post_tag_service.Service
+	commentSvc            *comment_service.Service
+	themeSvc              theme.ThemeService
+	themeHandler          *theme_handler.Handler
+	ssrManager            *ssr.Manager
+	ssrThemeHandler       *ssrtheme_handler.Handler
+	configExtensionHolder *configExtensionHolder // Pro 可通过 SetConfigExtension 注入支付配置导出/导入
 }
 
 func (a *App) PrintBanner() {
@@ -560,7 +561,9 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 	directLinkHandler := direct_link_handler.NewDirectLinkHandler(directLinkSvc, storageProviders)
 	linkHandler := link_handler.NewHandler(linkSvc)
 	thumbnailHandler := thumbnail_handler.NewThumbnailHandler(taskBroker, metadataSvc, fileSvc, thumbnailSvc, settingSvc)
-	articleHandler := article_handler.NewHandler(articleSvc)
+	commerceSvc := commerce.NewService(settingSvc, articleRepo)
+	commerceHandler := commerce.NewHandler(commerceSvc)
+	articleHandler := article_handler.NewHandler(articleSvc, commerceSvc)
 	articleHistoryHandler := article_history_handler.NewHandler(articleHistorySvc)
 	postTagHandler := post_tag_handler.NewHandler(postTagSvc)
 	postCategoryHandler := post_category_handler.NewHandler(postCategorySvc)
@@ -636,6 +639,18 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 	}
 	engine.ForwardedByClientIP = true
 
+	commerceRoutes := engine.Group("/api/commerce")
+	commerceRoutes.Use(router.NoCacheMiddleware())
+	commerceRoutes.POST("/purchase", commerceHandler.CreateUserPurchase)
+	commerceRoutes.POST("/guest-purchase", commerceHandler.CreateGuestPurchase)
+	commerceRoutes.GET("/guest-orders/:orderNo/status", commerceHandler.GetGuestOrderStatus)
+	commerceRoutes.GET("/member-auth/authorize-url", commerceHandler.GetMemberAuthorizeURL)
+	commerceRoutes.POST("/member-auth/token", commerceHandler.ExchangeMemberToken)
+	commerceRoutes.POST("/member-auth/refresh", commerceHandler.RefreshMemberToken)
+	commerceRoutes.GET("/member-auth/dashboard", commerceHandler.GetMemberDashboard)
+	commerceRoutes.GET("/member-auth/tiers", commerceHandler.GetMemberTiers)
+	commerceRoutes.POST("/member-auth/redeem", commerceHandler.RedeemMemberKey)
+
 	siteURL := settingSvc.Get(constant.KeySiteURL.String())
 	if siteURL != "" {
 		middleware.SetCORSAllowedOrigins([]string{siteURL})
@@ -669,30 +684,30 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 
 	// 将所有初始化好的组件装配到 App 实例中
 	app := &App{
-		cfg:                  cfg,
-		engine:               engine,
-		taskBroker:           taskBroker,
-		sqlDB:                sqlDB,
-		appVersion:           appVersion,
-		articleService:       articleSvc,
-		directLinkService:    directLinkSvc,
-		storagePolicyRepo:    storagePolicyRepo,
-		storagePolicyService: storagePolicySvc,
-		fileService:          fileSvc,
-		mw:                   mw,
-		settingRepo:          settingRepo,
-		settingSvc:           settingSvc,
-		tokenSvc:             tokenSvc,
-		userSvc:              userSvc,
-		fileRepo:             fileRepo,
-		entityRepo:           entityRepo,
-		cacheSvc:             cacheSvc,
-		eventBus:             eventBus,
-		postCategorySvc:      postCategorySvc,
-		postTagSvc:           postTagSvc,
-		commentSvc:           commentSvc,
-		themeSvc:             themeSvc,
-		themeHandler:         themeHandler,
+		cfg:                   cfg,
+		engine:                engine,
+		taskBroker:            taskBroker,
+		sqlDB:                 sqlDB,
+		appVersion:            appVersion,
+		articleService:        articleSvc,
+		directLinkService:     directLinkSvc,
+		storagePolicyRepo:     storagePolicyRepo,
+		storagePolicyService:  storagePolicySvc,
+		fileService:           fileSvc,
+		mw:                    mw,
+		settingRepo:           settingRepo,
+		settingSvc:            settingSvc,
+		tokenSvc:              tokenSvc,
+		userSvc:               userSvc,
+		fileRepo:              fileRepo,
+		entityRepo:            entityRepo,
+		cacheSvc:              cacheSvc,
+		eventBus:              eventBus,
+		postCategorySvc:       postCategorySvc,
+		postTagSvc:            postTagSvc,
+		commentSvc:            commentSvc,
+		themeSvc:              themeSvc,
+		themeHandler:          themeHandler,
 		ssrManager:            ssrManager,
 		ssrThemeHandler:       ssrThemeHandler,
 		configExtensionHolder: configExtensionHolder,

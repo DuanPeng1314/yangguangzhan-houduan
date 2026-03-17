@@ -14,9 +14,81 @@ import "time"
 // ArticleExtraConfig 文章扩展配置结构体
 // 用于存储各种可选功能配置，支持未来扩展
 type ArticleExtraConfig struct {
-	EnableAIPodcast *bool   `json:"enable_ai_podcast,omitempty"` // AI播客开关
-	CustomJS        *string `json:"custom_js,omitempty"`         // 单文章自定义 JS（仅管理员）
+	EnableAIPodcast *bool                  `json:"enable_ai_podcast,omitempty"` // AI播客开关
+	CustomJS        *string                `json:"custom_js,omitempty"`         // 单文章自定义 JS（仅管理员）
+	Commerce        *ArticleCommerceConfig `json:"commerce,omitempty"`
 	// 未来可扩展更多配置...
+}
+
+type ArticleCommerceConfig struct {
+	Article   *ArticleCommerceArticleConfig    `json:"article,omitempty"`
+	Resources []*ArticleCommerceResourceConfig `json:"resources,omitempty"`
+}
+
+type ArticleCommerceArticleConfig struct {
+	AccessType     string `json:"access_type,omitempty"`
+	PriceCent      int    `json:"price_cent,omitempty"`
+	PreviewMode    string `json:"preview_mode,omitempty"`
+	PreviewText    string `json:"preview_text,omitempty"`
+	PreviewLimit   int    `json:"preview_limit,omitempty"`
+	MembershipFree *bool  `json:"membership_free,omitempty"`
+	ResourceType   string `json:"resource_type,omitempty"`
+	ResourceID     string `json:"resource_id,omitempty"`
+}
+
+type ArticleCommerceResourceConfig struct {
+	ID               string `json:"id,omitempty"`
+	Title            string `json:"title,omitempty"`
+	Description      string `json:"description,omitempty"`
+	Provider         string `json:"provider,omitempty"`
+	URL              string `json:"url,omitempty"`
+	ExtractCode      string `json:"extract_code,omitempty"`
+	AccessType       string `json:"access_type,omitempty"`
+	PriceCent        int    `json:"price_cent,omitempty"`
+	GrantWithArticle *bool  `json:"grant_with_article,omitempty"`
+	MembershipFree   *bool  `json:"membership_free,omitempty"`
+	Sort             int    `json:"sort,omitempty"`
+	ResourceType     string `json:"resource_type,omitempty"`
+	ResourceID       string `json:"resource_id,omitempty"`
+}
+
+type ArticleCommerceState struct {
+	Enabled         bool                            `json:"enabled"`
+	PurchaseEnabled bool                            `json:"purchase_enabled"`
+	Article         *ArticleCommerceArticleState    `json:"article,omitempty"`
+	Resources       []*ArticleCommerceResourceState `json:"resources,omitempty"`
+}
+
+type ArticleCommerceArticleState struct {
+	ResourceType     string `json:"resource_type,omitempty"`
+	ResourceID       string `json:"resource_id,omitempty"`
+	AccessType       string `json:"access_type"`
+	PriceCent        int    `json:"price_cent"`
+	PreviewMode      string `json:"preview_mode,omitempty"`
+	PreviewText      string `json:"preview_text,omitempty"`
+	PreviewLimit     int    `json:"preview_limit,omitempty"`
+	MembershipFree   bool   `json:"membership_free"`
+	HasAccess        bool   `json:"has_access"`
+	AccessSource     string `json:"access_source,omitempty"`
+	RequiresPurchase bool   `json:"requires_purchase"`
+}
+
+type ArticleCommerceResourceState struct {
+	ID               string `json:"id,omitempty"`
+	Title            string `json:"title,omitempty"`
+	Description      string `json:"description,omitempty"`
+	Provider         string `json:"provider,omitempty"`
+	URL              string `json:"url,omitempty"`
+	ExtractCode      string `json:"extract_code,omitempty"`
+	ResourceType     string `json:"resource_type,omitempty"`
+	ResourceID       string `json:"resource_id,omitempty"`
+	AccessType       string `json:"access_type"`
+	PriceCent        int    `json:"price_cent"`
+	GrantWithArticle bool   `json:"grant_with_article"`
+	MembershipFree   bool   `json:"membership_free"`
+	HasAccess        bool   `json:"has_access"`
+	AccessSource     string `json:"access_source,omitempty"`
+	Sort             int    `json:"sort,omitempty"`
 }
 
 // --- 核心领域对象 (Domain Object) ---
@@ -200,7 +272,8 @@ type ArticleResponse struct {
 	TakedownAt     *time.Time `json:"takedown_at,omitempty"`     // 下架时间
 	TakedownBy     *uint      `json:"takedown_by,omitempty"`     // 下架操作人ID
 	// 扩展配置
-	ExtraConfig *ArticleExtraConfig `json:"extra_config,omitempty"` // 文章扩展配置
+	ExtraConfig *ArticleExtraConfig   `json:"extra_config,omitempty"` // 文章扩展配置
+	Commerce    *ArticleCommerceState `json:"commerce,omitempty"`
 	// 文档模式相关字段
 	IsDoc       bool               `json:"is_doc,omitempty"`        // 是否为文档模式
 	DocSeriesID string             `json:"doc_series_id,omitempty"` // 文档系列ID (公共ID)
