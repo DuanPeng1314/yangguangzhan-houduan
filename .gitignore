@@ -19,3 +19,4 @@ themes
 backup
 static
 DEVELOPMENT_WORKFLOW.md
+.worktrees/
