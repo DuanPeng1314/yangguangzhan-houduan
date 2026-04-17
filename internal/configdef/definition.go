@@ -509,6 +509,18 @@ var AllSettings = []Definition{
 	{Key: constant.KeyImageCaptchaLength, Value: "4", Comment: "图形验证码字符长度 (默认4位)", IsPublic: true},
 	{Key: constant.KeyImageCaptchaExpire, Value: "300", Comment: "图形验证码过期时间（秒，默认300秒/5分钟）", IsPublic: true},
 
+	// --- SEO 推送配置 ---
+	{Key: constant.KeySeoAutoSubmit, Value: "false", Comment: "是否启用 SEO 自动推送 (true/false)", IsPublic: false},
+	{Key: constant.KeySeoRetryTimes, Value: "3", Comment: "SEO 推送失败后的最大重试次数", IsPublic: false},
+	{Key: constant.KeySeoRetryInterval, Value: "1000", Comment: "SEO 推送重试间隔（毫秒）", IsPublic: false},
+	{Key: constant.KeySeoBaiduEnable, Value: "false", Comment: "是否启用百度自动推送 (true/false)", IsPublic: false},
+	{Key: constant.KeySeoBaiduSite, Value: "", Comment: "百度推送站点地址（不带 https://）", IsPublic: false},
+	{Key: constant.KeySeoBaiduToken, Value: "", Comment: "百度推送 Token", IsPublic: false},
+	{Key: constant.KeySeoBingEnable, Value: "false", Comment: "是否启用 Bing IndexNow 推送 (true/false)", IsPublic: false},
+	{Key: constant.KeySeoBingApiKey, Value: "", Comment: "Bing IndexNow API Key", IsPublic: false},
+	{Key: constant.KeySeoGoogleEnable, Value: "false", Comment: "是否启用 Google Indexing API 推送 (true/false)", IsPublic: false},
+	{Key: constant.KeySeoGoogleCredential, Value: "", Comment: "Google Service Account 凭证 JSON", IsPublic: false},
+
 	// --- 顶栏用户面板配置 ---
 	{Key: constant.KeyUserPanelShowUserCenter, Value: "true", Comment: "是否显示用户中心按钮 (true/false)", IsPublic: true},
 	{Key: constant.KeyUserPanelShowNotifications, Value: "true", Comment: "是否显示通知中心按钮 (true/false)", IsPublic: true},
