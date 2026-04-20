@@ -18,11 +18,16 @@ import (
 	"github.com/anzhiyu-c/anheyu-app/ent/link"
 	"github.com/anzhiyu-c/anheyu-app/ent/linkcategory"
 	"github.com/anzhiyu-c/anheyu-app/ent/linktag"
+	"github.com/anzhiyu-c/anheyu-app/ent/memberbinding"
 	"github.com/anzhiyu-c/anheyu-app/ent/metadata"
 	"github.com/anzhiyu-c/anheyu-app/ent/notificationtype"
 	"github.com/anzhiyu-c/anheyu-app/ent/page"
 	"github.com/anzhiyu-c/anheyu-app/ent/postcategory"
 	"github.com/anzhiyu-c/anheyu-app/ent/posttag"
+	"github.com/anzhiyu-c/anheyu-app/ent/resource"
+	"github.com/anzhiyu-c/anheyu-app/ent/resourceaccessgrant"
+	"github.com/anzhiyu-c/anheyu-app/ent/resourceitem"
+	"github.com/anzhiyu-c/anheyu-app/ent/resourceorder"
 	"github.com/anzhiyu-c/anheyu-app/ent/schema"
 	"github.com/anzhiyu-c/anheyu-app/ent/setting"
 	"github.com/anzhiyu-c/anheyu-app/ent/storagepolicy"
@@ -538,6 +543,30 @@ func init() {
 	linktagDescColor := linktagFields[1].Descriptor()
 	// linktag.DefaultColor holds the default value on creation for the color field.
 	linktag.DefaultColor = linktagDescColor.Default.(string)
+	memberbindingFields := schema.MemberBinding{}.Fields()
+	_ = memberbindingFields
+	// memberbindingDescExternalUserID is the schema descriptor for external_user_id field.
+	memberbindingDescExternalUserID := memberbindingFields[1].Descriptor()
+	// memberbinding.ExternalUserIDValidator is a validator for the "external_user_id" field. It is called by the builders before save.
+	memberbinding.ExternalUserIDValidator = memberbindingDescExternalUserID.Validators[0].(func(string) error)
+	// memberbindingDescSiteID is the schema descriptor for site_id field.
+	memberbindingDescSiteID := memberbindingFields[2].Descriptor()
+	// memberbinding.SiteIDValidator is a validator for the "site_id" field. It is called by the builders before save.
+	memberbinding.SiteIDValidator = memberbindingDescSiteID.Validators[0].(func(string) error)
+	// memberbindingDescStatus is the schema descriptor for status field.
+	memberbindingDescStatus := memberbindingFields[3].Descriptor()
+	// memberbinding.DefaultStatus holds the default value on creation for the status field.
+	memberbinding.DefaultStatus = memberbindingDescStatus.Default.(string)
+	// memberbindingDescCreatedAt is the schema descriptor for created_at field.
+	memberbindingDescCreatedAt := memberbindingFields[5].Descriptor()
+	// memberbinding.DefaultCreatedAt holds the default value on creation for the created_at field.
+	memberbinding.DefaultCreatedAt = memberbindingDescCreatedAt.Default.(func() time.Time)
+	// memberbindingDescUpdatedAt is the schema descriptor for updated_at field.
+	memberbindingDescUpdatedAt := memberbindingFields[6].Descriptor()
+	// memberbinding.DefaultUpdatedAt holds the default value on creation for the updated_at field.
+	memberbinding.DefaultUpdatedAt = memberbindingDescUpdatedAt.Default.(func() time.Time)
+	// memberbinding.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
+	memberbinding.UpdateDefaultUpdatedAt = memberbindingDescUpdatedAt.UpdateDefault.(func() time.Time)
 	metadataMixin := schema.Metadata{}.Mixin()
 	metadataMixinHooks0 := metadataMixin[0].Hooks()
 	metadata.Hooks[0] = metadataMixinHooks0[0]
@@ -754,6 +783,212 @@ func init() {
 	posttag.DefaultCount = posttagDescCount.Default.(int)
 	// posttag.CountValidator is a validator for the "count" field. It is called by the builders before save.
 	posttag.CountValidator = posttagDescCount.Validators[0].(func(int) error)
+	resourceMixin := schema.Resource{}.Mixin()
+	resourceMixinHooks0 := resourceMixin[0].Hooks()
+	resource.Hooks[0] = resourceMixinHooks0[0]
+	resourceFields := schema.Resource{}.Fields()
+	_ = resourceFields
+	// resourceDescCreatedAt is the schema descriptor for created_at field.
+	resourceDescCreatedAt := resourceFields[1].Descriptor()
+	// resource.DefaultCreatedAt holds the default value on creation for the created_at field.
+	resource.DefaultCreatedAt = resourceDescCreatedAt.Default.(func() time.Time)
+	// resourceDescUpdatedAt is the schema descriptor for updated_at field.
+	resourceDescUpdatedAt := resourceFields[2].Descriptor()
+	// resource.DefaultUpdatedAt holds the default value on creation for the updated_at field.
+	resource.DefaultUpdatedAt = resourceDescUpdatedAt.Default.(func() time.Time)
+	// resource.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
+	resource.UpdateDefaultUpdatedAt = resourceDescUpdatedAt.UpdateDefault.(func() time.Time)
+	// resourceDescHostType is the schema descriptor for host_type field.
+	resourceDescHostType := resourceFields[3].Descriptor()
+	// resource.HostTypeValidator is a validator for the "host_type" field. It is called by the builders before save.
+	resource.HostTypeValidator = resourceDescHostType.Validators[0].(func(string) error)
+	// resourceDescHostID is the schema descriptor for host_id field.
+	resourceDescHostID := resourceFields[4].Descriptor()
+	// resource.HostIDValidator is a validator for the "host_id" field. It is called by the builders before save.
+	resource.HostIDValidator = resourceDescHostID.Validators[0].(func(string) error)
+	// resourceDescTitle is the schema descriptor for title field.
+	resourceDescTitle := resourceFields[5].Descriptor()
+	// resource.TitleValidator is a validator for the "title" field. It is called by the builders before save.
+	resource.TitleValidator = func() func(string) error {
+		validators := resourceDescTitle.Validators
+		fns := [...]func(string) error{
+			validators[0].(func(string) error),
+			validators[1].(func(string) error),
+		}
+		return func(title string) error {
+			for _, fn := range fns {
+				if err := fn(title); err != nil {
+					return err
+				}
+			}
+			return nil
+		}
+	}()
+	// resourceDescSummary is the schema descriptor for summary field.
+	resourceDescSummary := resourceFields[6].Descriptor()
+	// resource.SummaryValidator is a validator for the "summary" field. It is called by the builders before save.
+	resource.SummaryValidator = resourceDescSummary.Validators[0].(func(string) error)
+	// resourceDescCoverURL is the schema descriptor for cover_url field.
+	resourceDescCoverURL := resourceFields[7].Descriptor()
+	// resource.CoverURLValidator is a validator for the "cover_url" field. It is called by the builders before save.
+	resource.CoverURLValidator = resourceDescCoverURL.Validators[0].(func(string) error)
+	// resourceDescResourceType is the schema descriptor for resource_type field.
+	resourceDescResourceType := resourceFields[8].Descriptor()
+	// resource.DefaultResourceType holds the default value on creation for the resource_type field.
+	resource.DefaultResourceType = resourceDescResourceType.Default.(string)
+	// resource.ResourceTypeValidator is a validator for the "resource_type" field. It is called by the builders before save.
+	resource.ResourceTypeValidator = resourceDescResourceType.Validators[0].(func(string) error)
+	// resourceDescStatus is the schema descriptor for status field.
+	resourceDescStatus := resourceFields[9].Descriptor()
+	// resource.DefaultStatus holds the default value on creation for the status field.
+	resource.DefaultStatus = resourceDescStatus.Default.(string)
+	// resource.StatusValidator is a validator for the "status" field. It is called by the builders before save.
+	resource.StatusValidator = resourceDescStatus.Validators[0].(func(string) error)
+	// resourceDescSaleEnabled is the schema descriptor for sale_enabled field.
+	resourceDescSaleEnabled := resourceFields[10].Descriptor()
+	// resource.DefaultSaleEnabled holds the default value on creation for the sale_enabled field.
+	resource.DefaultSaleEnabled = resourceDescSaleEnabled.Default.(bool)
+	// resourceDescPrice is the schema descriptor for price field.
+	resourceDescPrice := resourceFields[11].Descriptor()
+	// resource.DefaultPrice holds the default value on creation for the price field.
+	resource.DefaultPrice = resourceDescPrice.Default.(float64)
+	// resourceDescOriginalPrice is the schema descriptor for original_price field.
+	resourceDescOriginalPrice := resourceFields[12].Descriptor()
+	// resource.DefaultOriginalPrice holds the default value on creation for the original_price field.
+	resource.DefaultOriginalPrice = resourceDescOriginalPrice.Default.(float64)
+	// resourceDescMemberFree is the schema descriptor for member_free field.
+	resourceDescMemberFree := resourceFields[13].Descriptor()
+	// resource.DefaultMemberFree holds the default value on creation for the member_free field.
+	resource.DefaultMemberFree = resourceDescMemberFree.Default.(bool)
+	// resourceDescSort is the schema descriptor for sort field.
+	resourceDescSort := resourceFields[14].Descriptor()
+	// resource.DefaultSort holds the default value on creation for the sort field.
+	resource.DefaultSort = resourceDescSort.Default.(int)
+	resourceaccessgrantFields := schema.ResourceAccessGrant{}.Fields()
+	_ = resourceaccessgrantFields
+	// resourceaccessgrantDescCreatedAt is the schema descriptor for created_at field.
+	resourceaccessgrantDescCreatedAt := resourceaccessgrantFields[1].Descriptor()
+	// resourceaccessgrant.DefaultCreatedAt holds the default value on creation for the created_at field.
+	resourceaccessgrant.DefaultCreatedAt = resourceaccessgrantDescCreatedAt.Default.(func() time.Time)
+	// resourceaccessgrantDescUpdatedAt is the schema descriptor for updated_at field.
+	resourceaccessgrantDescUpdatedAt := resourceaccessgrantFields[2].Descriptor()
+	// resourceaccessgrant.DefaultUpdatedAt holds the default value on creation for the updated_at field.
+	resourceaccessgrant.DefaultUpdatedAt = resourceaccessgrantDescUpdatedAt.Default.(func() time.Time)
+	// resourceaccessgrant.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
+	resourceaccessgrant.UpdateDefaultUpdatedAt = resourceaccessgrantDescUpdatedAt.UpdateDefault.(func() time.Time)
+	// resourceaccessgrantDescGrantType is the schema descriptor for grant_type field.
+	resourceaccessgrantDescGrantType := resourceaccessgrantFields[6].Descriptor()
+	// resourceaccessgrant.DefaultGrantType holds the default value on creation for the grant_type field.
+	resourceaccessgrant.DefaultGrantType = resourceaccessgrantDescGrantType.Default.(string)
+	// resourceaccessgrant.GrantTypeValidator is a validator for the "grant_type" field. It is called by the builders before save.
+	resourceaccessgrant.GrantTypeValidator = resourceaccessgrantDescGrantType.Validators[0].(func(string) error)
+	// resourceaccessgrantDescSourceOrderNo is the schema descriptor for source_order_no field.
+	resourceaccessgrantDescSourceOrderNo := resourceaccessgrantFields[7].Descriptor()
+	// resourceaccessgrant.SourceOrderNoValidator is a validator for the "source_order_no" field. It is called by the builders before save.
+	resourceaccessgrant.SourceOrderNoValidator = resourceaccessgrantDescSourceOrderNo.Validators[0].(func(string) error)
+	// resourceaccessgrantDescStatus is the schema descriptor for status field.
+	resourceaccessgrantDescStatus := resourceaccessgrantFields[8].Descriptor()
+	// resourceaccessgrant.DefaultStatus holds the default value on creation for the status field.
+	resourceaccessgrant.DefaultStatus = resourceaccessgrantDescStatus.Default.(string)
+	// resourceaccessgrant.StatusValidator is a validator for the "status" field. It is called by the builders before save.
+	resourceaccessgrant.StatusValidator = resourceaccessgrantDescStatus.Validators[0].(func(string) error)
+	// resourceaccessgrantDescGrantedAt is the schema descriptor for granted_at field.
+	resourceaccessgrantDescGrantedAt := resourceaccessgrantFields[9].Descriptor()
+	// resourceaccessgrant.DefaultGrantedAt holds the default value on creation for the granted_at field.
+	resourceaccessgrant.DefaultGrantedAt = resourceaccessgrantDescGrantedAt.Default.(func() time.Time)
+	resourceitemMixin := schema.ResourceItem{}.Mixin()
+	resourceitemMixinHooks0 := resourceitemMixin[0].Hooks()
+	resourceitem.Hooks[0] = resourceitemMixinHooks0[0]
+	resourceitemFields := schema.ResourceItem{}.Fields()
+	_ = resourceitemFields
+	// resourceitemDescCreatedAt is the schema descriptor for created_at field.
+	resourceitemDescCreatedAt := resourceitemFields[1].Descriptor()
+	// resourceitem.DefaultCreatedAt holds the default value on creation for the created_at field.
+	resourceitem.DefaultCreatedAt = resourceitemDescCreatedAt.Default.(func() time.Time)
+	// resourceitemDescUpdatedAt is the schema descriptor for updated_at field.
+	resourceitemDescUpdatedAt := resourceitemFields[2].Descriptor()
+	// resourceitem.DefaultUpdatedAt holds the default value on creation for the updated_at field.
+	resourceitem.DefaultUpdatedAt = resourceitemDescUpdatedAt.Default.(func() time.Time)
+	// resourceitem.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
+	resourceitem.UpdateDefaultUpdatedAt = resourceitemDescUpdatedAt.UpdateDefault.(func() time.Time)
+	// resourceitemDescItemType is the schema descriptor for item_type field.
+	resourceitemDescItemType := resourceitemFields[4].Descriptor()
+	// resourceitem.DefaultItemType holds the default value on creation for the item_type field.
+	resourceitem.DefaultItemType = resourceitemDescItemType.Default.(string)
+	// resourceitem.ItemTypeValidator is a validator for the "item_type" field. It is called by the builders before save.
+	resourceitem.ItemTypeValidator = resourceitemDescItemType.Validators[0].(func(string) error)
+	// resourceitemDescTitle is the schema descriptor for title field.
+	resourceitemDescTitle := resourceitemFields[5].Descriptor()
+	// resourceitem.TitleValidator is a validator for the "title" field. It is called by the builders before save.
+	resourceitem.TitleValidator = func() func(string) error {
+		validators := resourceitemDescTitle.Validators
+		fns := [...]func(string) error{
+			validators[0].(func(string) error),
+			validators[1].(func(string) error),
+		}
+		return func(title string) error {
+			for _, fn := range fns {
+				if err := fn(title); err != nil {
+					return err
+				}
+			}
+			return nil
+		}
+	}()
+	// resourceitemDescStatus is the schema descriptor for status field.
+	resourceitemDescStatus := resourceitemFields[7].Descriptor()
+	// resourceitem.DefaultStatus holds the default value on creation for the status field.
+	resourceitem.DefaultStatus = resourceitemDescStatus.Default.(string)
+	// resourceitem.StatusValidator is a validator for the "status" field. It is called by the builders before save.
+	resourceitem.StatusValidator = resourceitemDescStatus.Validators[0].(func(string) error)
+	// resourceitemDescSort is the schema descriptor for sort field.
+	resourceitemDescSort := resourceitemFields[8].Descriptor()
+	// resourceitem.DefaultSort holds the default value on creation for the sort field.
+	resourceitem.DefaultSort = resourceitemDescSort.Default.(int)
+	resourceorderFields := schema.ResourceOrder{}.Fields()
+	_ = resourceorderFields
+	// resourceorderDescCreatedAt is the schema descriptor for created_at field.
+	resourceorderDescCreatedAt := resourceorderFields[1].Descriptor()
+	// resourceorder.DefaultCreatedAt holds the default value on creation for the created_at field.
+	resourceorder.DefaultCreatedAt = resourceorderDescCreatedAt.Default.(func() time.Time)
+	// resourceorderDescUpdatedAt is the schema descriptor for updated_at field.
+	resourceorderDescUpdatedAt := resourceorderFields[2].Descriptor()
+	// resourceorder.DefaultUpdatedAt holds the default value on creation for the updated_at field.
+	resourceorder.DefaultUpdatedAt = resourceorderDescUpdatedAt.Default.(func() time.Time)
+	// resourceorder.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
+	resourceorder.UpdateDefaultUpdatedAt = resourceorderDescUpdatedAt.UpdateDefault.(func() time.Time)
+	// resourceorderDescBusinessOrderNo is the schema descriptor for business_order_no field.
+	resourceorderDescBusinessOrderNo := resourceorderFields[6].Descriptor()
+	// resourceorder.BusinessOrderNoValidator is a validator for the "business_order_no" field. It is called by the builders before save.
+	resourceorder.BusinessOrderNoValidator = func() func(string) error {
+		validators := resourceorderDescBusinessOrderNo.Validators
+		fns := [...]func(string) error{
+			validators[0].(func(string) error),
+			validators[1].(func(string) error),
+		}
+		return func(business_order_no string) error {
+			for _, fn := range fns {
+				if err := fn(business_order_no); err != nil {
+					return err
+				}
+			}
+			return nil
+		}
+	}()
+	// resourceorderDescExternalOrderNo is the schema descriptor for external_order_no field.
+	resourceorderDescExternalOrderNo := resourceorderFields[7].Descriptor()
+	// resourceorder.ExternalOrderNoValidator is a validator for the "external_order_no" field. It is called by the builders before save.
+	resourceorder.ExternalOrderNoValidator = resourceorderDescExternalOrderNo.Validators[0].(func(string) error)
+	// resourceorderDescAmount is the schema descriptor for amount field.
+	resourceorderDescAmount := resourceorderFields[8].Descriptor()
+	// resourceorder.DefaultAmount holds the default value on creation for the amount field.
+	resourceorder.DefaultAmount = resourceorderDescAmount.Default.(float64)
+	// resourceorderDescStatus is the schema descriptor for status field.
+	resourceorderDescStatus := resourceorderFields[9].Descriptor()
+	// resourceorder.DefaultStatus holds the default value on creation for the status field.
+	resourceorder.DefaultStatus = resourceorderDescStatus.Default.(string)
+	// resourceorder.StatusValidator is a validator for the "status" field. It is called by the builders before save.
+	resourceorder.StatusValidator = resourceorderDescStatus.Validators[0].(func(string) error)
 	settingMixin := schema.Setting{}.Mixin()
 	settingMixinHooks0 := settingMixin[0].Hooks()
 	setting.Hooks[0] = settingMixinHooks0[0]
@@ -1247,6 +1482,6 @@ func init() {
 }
 
 const (
-	Version = "v0.14.6"                                         // Version of ent codegen.
-	Sum     = "h1:/f2696BpwuWAEEG6PVGWflg6+Inrpq4pRWuNlWz/Skk=" // Sum of ent codegen.
+	Version = "v0.14.5"                                         // Version of ent codegen.
+	Sum     = "h1:Rj2WOYJtCkWyFo6a+5wB3EfBRP0rnx1fMk6gGA0UUe4=" // Sum of ent codegen.
 )

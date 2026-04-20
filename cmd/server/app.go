@@ -32,6 +32,7 @@ import (
 	"github.com/anzhiyu-c/anheyu-app/internal/pkg/event"
 	"github.com/anzhiyu-c/anheyu-app/internal/pkg/version"
 	"github.com/anzhiyu-c/anheyu-app/internal/service/cache"
+	"github.com/anzhiyu-c/anheyu-app/modules/commerce"
 	"github.com/anzhiyu-c/anheyu-app/pkg/config"
 	"github.com/anzhiyu-c/anheyu-app/pkg/constant"
 	"github.com/anzhiyu-c/anheyu-app/pkg/domain/model"
@@ -48,6 +49,7 @@ import (
 	doc_series_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/doc_series"
 	file_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/file"
 	link_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/link"
+	member_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/member"
 	music_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/music"
 	notification_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/notification"
 	page_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/page"
@@ -70,6 +72,7 @@ import (
 	version_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/version"
 	wechat_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/wechat"
 	"github.com/anzhiyu-c/anheyu-app/pkg/idgen"
+	"github.com/anzhiyu-c/anheyu-app/pkg/integration/dp7575"
 	"github.com/anzhiyu-c/anheyu-app/pkg/plugin"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/album"
 	album_category_service "github.com/anzhiyu-c/anheyu-app/pkg/service/album_category"
@@ -563,7 +566,14 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 
 	// --- Phase 6: 初始化表现层 (Handlers) ---
 	mw := middleware.NewMiddleware(tokenSvc)
-	authHandler := auth_handler.NewAuthHandler(authSvc, tokenSvc, settingSvc, captchaSvc)
+	memberClient := dp7575.NewClient(dp7575.Config{
+		BaseURL:   settingSvc.Get(constant.KeyDP7575BaseURL.String()),
+		SiteID:    settingSvc.Get(constant.KeyDP7575SiteID.String()),
+		APISecret: settingSvc.Get(constant.KeyDP7575APISecret.String()),
+	})
+	commerceModule := commerce.NewModule(entClient, memberClient)
+	commerceModule.Service().SetResourceRepositories(ent_impl.NewResourceRepo(entClient), ent_impl.NewResourceOrderRepo(entClient))
+	authHandler := auth_handler.NewAuthHandler(authSvc, tokenSvc, settingSvc, captchaSvc, commerceModule.Service())
 	albumHandler := album_handler.NewAlbumHandler(albumSvc)
 	albumCategoryHandler := album_category_handler.NewHandler(albumCategorySvc)
 	userHandler := user_handler.NewUserHandler(userSvc, settingSvc, fileSvc, directLinkSvc)
@@ -574,6 +584,7 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 	directLinkHandler := direct_link_handler.NewDirectLinkHandler(directLinkSvc, storageProviders)
 	linkHandler := link_handler.NewHandler(linkSvc)
 	thumbnailHandler := thumbnail_handler.NewThumbnailHandler(taskBroker, metadataSvc, fileSvc, thumbnailSvc, settingSvc)
+	memberHandler := member_handler.NewHandler(commerceModule.Service())
 	articleHandler := article_handler.NewHandler(articleSvc)
 	articleHistoryHandler := article_history_handler.NewHandler(articleHistorySvc)
 	postTagHandler := post_tag_handler.NewHandler(postTagSvc)
@@ -615,6 +626,7 @@ func NewAppWithOptions(content embed.FS, opts AppOptions) (*App, func(), error) 
 		docSeriesHandler,
 		commentHandler,
 		linkHandler,
+		memberHandler,
 		musicHandler,
 		pageHandler,
 		statisticsHandler,

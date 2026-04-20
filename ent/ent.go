@@ -25,11 +25,16 @@ import (
 	"github.com/anzhiyu-c/anheyu-app/ent/link"
 	"github.com/anzhiyu-c/anheyu-app/ent/linkcategory"
 	"github.com/anzhiyu-c/anheyu-app/ent/linktag"
+	"github.com/anzhiyu-c/anheyu-app/ent/memberbinding"
 	"github.com/anzhiyu-c/anheyu-app/ent/metadata"
 	"github.com/anzhiyu-c/anheyu-app/ent/notificationtype"
 	"github.com/anzhiyu-c/anheyu-app/ent/page"
 	"github.com/anzhiyu-c/anheyu-app/ent/postcategory"
 	"github.com/anzhiyu-c/anheyu-app/ent/posttag"
+	"github.com/anzhiyu-c/anheyu-app/ent/resource"
+	"github.com/anzhiyu-c/anheyu-app/ent/resourceaccessgrant"
+	"github.com/anzhiyu-c/anheyu-app/ent/resourceitem"
+	"github.com/anzhiyu-c/anheyu-app/ent/resourceorder"
 	"github.com/anzhiyu-c/anheyu-app/ent/setting"
 	"github.com/anzhiyu-c/anheyu-app/ent/storagepolicy"
 	"github.com/anzhiyu-c/anheyu-app/ent/subscriber"
@@ -114,11 +119,16 @@ func checkColumn(t, c string) error {
 			link.Table:                   link.ValidColumn,
 			linkcategory.Table:           linkcategory.ValidColumn,
 			linktag.Table:                linktag.ValidColumn,
+			memberbinding.Table:          memberbinding.ValidColumn,
 			metadata.Table:               metadata.ValidColumn,
 			notificationtype.Table:       notificationtype.ValidColumn,
 			page.Table:                   page.ValidColumn,
 			postcategory.Table:           postcategory.ValidColumn,
 			posttag.Table:                posttag.ValidColumn,
+			resource.Table:               resource.ValidColumn,
+			resourceaccessgrant.Table:    resourceaccessgrant.ValidColumn,
+			resourceitem.Table:           resourceitem.ValidColumn,
+			resourceorder.Table:          resourceorder.ValidColumn,
 			setting.Table:                setting.ValidColumn,
 			storagepolicy.Table:          storagepolicy.ValidColumn,
 			subscriber.Table:             subscriber.ValidColumn,

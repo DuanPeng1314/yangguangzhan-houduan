@@ -20,7 +20,7 @@ import (
 )
 
 type TokenService interface {
-	GenerateSessionTokens(ctx context.Context, user *model.User) (accessToken, refreshToken string, expiresAt int64, err error)
+	GenerateSessionTokens(ctx context.Context, user *model.User, externalUserID string) (accessToken, refreshToken string, expiresAt int64, err error)
 	RefreshAccessToken(ctx context.Context, refreshToken string) (accessToken string, expiresAt int64, err error)
 	GenerateSignedToken(identifier string, duration time.Duration) (string, error)
 	VerifySignedToken(identifier, sign string) error
@@ -49,7 +49,7 @@ func NewTokenService(
 
 // --- JWT 会话令牌实现 ---
 
-func (s *tokenService) GenerateSessionTokens(ctx context.Context, user *model.User) (string, string, int64, error) {
+func (s *tokenService) GenerateSessionTokens(ctx context.Context, user *model.User, externalUserID string) (string, string, int64, error) {
 	// 动态地从 SettingService 获取密钥
 	jwtSecret := s.settingSvc.Get(constant.KeyJWTSecret.String())
 	if jwtSecret == "" {
@@ -57,11 +57,11 @@ func (s *tokenService) GenerateSessionTokens(ctx context.Context, user *model.Us
 	}
 
 	// auth.GenerateToken 和 auth.GenerateRefreshToken 现在接收内部 uint ID，并在内部生成公共 ID
-	accessToken, err := auth.GenerateToken(user.ID, []byte(user.UserGroup.Permissions), user.UserGroup.ID, []byte(jwtSecret))
+	accessToken, err := auth.GenerateToken(user.ID, []byte(user.UserGroup.Permissions), user.UserGroup.ID, externalUserID, []byte(jwtSecret))
 	if err != nil {
 		return "", "", 0, err
 	}
-	refreshToken, err := auth.GenerateRefreshToken(user.ID, []byte(jwtSecret))
+	refreshToken, err := auth.GenerateRefreshToken(user.ID, externalUserID, []byte(jwtSecret))
 	if err != nil {
 		return "", "", 0, err
 	}
@@ -102,7 +102,7 @@ func (s *tokenService) RefreshAccessToken(ctx context.Context, refreshToken stri
 	}
 
 	// 3. 重新生成 Access Token，auth.GenerateToken 现在接收内部 uint ID
-	accessToken, err := auth.GenerateToken(user.ID, []byte(user.UserGroup.Permissions), user.UserGroup.ID, []byte(jwtSecret))
+	accessToken, err := auth.GenerateToken(user.ID, []byte(user.UserGroup.Permissions), user.UserGroup.ID, claims.ExternalUserID, []byte(jwtSecret))
 	if err != nil {
 		return "", 0, err
 	}

@@ -521,6 +521,11 @@ var AllSettings = []Definition{
 	{Key: constant.KeySeoGoogleEnable, Value: "false", Comment: "是否启用 Google Indexing API 推送 (true/false)", IsPublic: false},
 	{Key: constant.KeySeoGoogleCredential, Value: "", Comment: "Google Service Account 凭证 JSON", IsPublic: false},
 
+	// --- 极光库 DP7575 接入配置 ---
+	{Key: constant.KeyDP7575BaseURL, Value: "", Comment: "极光库 API 基础地址", IsPublic: false},
+	{Key: constant.KeyDP7575SiteID, Value: "", Comment: "极光库站点标识", IsPublic: false},
+	{Key: constant.KeyDP7575APISecret, Value: "", Comment: "极光库 API 签名密钥", IsPublic: false},
+
 	// --- 顶栏用户面板配置 ---
 	{Key: constant.KeyUserPanelShowUserCenter, Value: "true", Comment: "是否显示用户中心按钮 (true/false)", IsPublic: true},
 	{Key: constant.KeyUserPanelShowNotifications, Value: "true", Comment: "是否显示通知中心按钮 (true/false)", IsPublic: true},

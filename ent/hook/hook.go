@@ -165,6 +165,18 @@ func (f LinkTagFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, err
 	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.LinkTagMutation", m)
 }
 
+// The MemberBindingFunc type is an adapter to allow the use of ordinary
+// function as MemberBinding mutator.
+type MemberBindingFunc func(context.Context, *ent.MemberBindingMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f MemberBindingFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.MemberBindingMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.MemberBindingMutation", m)
+}
+
 // The MetadataFunc type is an adapter to allow the use of ordinary
 // function as Metadata mutator.
 type MetadataFunc func(context.Context, *ent.MetadataMutation) (ent.Value, error)
@@ -223,6 +235,54 @@ func (f PostTagFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, err
 		return f(ctx, mv)
 	}
 	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.PostTagMutation", m)
+}
+
+// The ResourceFunc type is an adapter to allow the use of ordinary
+// function as Resource mutator.
+type ResourceFunc func(context.Context, *ent.ResourceMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f ResourceFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.ResourceMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.ResourceMutation", m)
+}
+
+// The ResourceAccessGrantFunc type is an adapter to allow the use of ordinary
+// function as ResourceAccessGrant mutator.
+type ResourceAccessGrantFunc func(context.Context, *ent.ResourceAccessGrantMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f ResourceAccessGrantFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.ResourceAccessGrantMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.ResourceAccessGrantMutation", m)
+}
+
+// The ResourceItemFunc type is an adapter to allow the use of ordinary
+// function as ResourceItem mutator.
+type ResourceItemFunc func(context.Context, *ent.ResourceItemMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f ResourceItemFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.ResourceItemMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.ResourceItemMutation", m)
+}
+
+// The ResourceOrderFunc type is an adapter to allow the use of ordinary
+// function as ResourceOrder mutator.
+type ResourceOrderFunc func(context.Context, *ent.ResourceOrderMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f ResourceOrderFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.ResourceOrderMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.ResourceOrderMutation", m)
 }
 
 // The SettingFunc type is an adapter to allow the use of ordinary

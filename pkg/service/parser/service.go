@@ -130,6 +130,8 @@ func NewService(settingSvc setting.SettingService, bus *event.EventBus) *Service
 	policy.AllowAttrs("data-price", "data-original-price", "data-currency", "data-section-id").OnElements("div", "span", "button")
 	// 登录后可见内容
 	policy.AllowAttrs("data-login-action").OnElements("button")
+	// 高级会员可见内容
+	policy.AllowAttrs("data-content-id", "data-title", "data-placeholder-text", "data-content-length").OnElements("div", "span")
 	// 全文隐藏
 	policy.AllowAttrs("data-enabled", "data-button-text", "data-initial-height").OnElements("div")
 	// 通用

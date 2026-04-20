@@ -45,6 +45,10 @@ const (
 	EntityTypeTicketMessage   uint64 = 19 // 工单消息实体的类型标识
 	EntityTypeNotification    uint64 = 20 // 通知实体的类型标识
 	EntityTypeArticleHistory  uint64 = 21 // 文章历史版本实体的类型标识
+	EntityTypeResource        uint64 = 22 // 独立资源实体的类型标识
+	EntityTypeResourceItem    uint64 = 23 // 资源交付物实体的类型标识
+	EntityTypeResourceOrder   uint64 = 24 // 资源本地订单实体的类型标识
+	EntityTypeResourceGrant   uint64 = 25 // 资源访问权益实体的类型标识
 )
 
 // GenerateRandomSeed 生成一个随机的 16 字节种子（返回 32 字符的十六进制字符串）

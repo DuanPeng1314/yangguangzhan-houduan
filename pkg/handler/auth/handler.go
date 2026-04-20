@@ -1,12 +1,15 @@
 package auth_handler
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"strings"
 	"time"
 
+	internalauth "github.com/anzhiyu-c/anheyu-app/internal/pkg/auth"
 	"github.com/anzhiyu-c/anheyu-app/pkg/constant"
+	"github.com/anzhiyu-c/anheyu-app/pkg/domain/model"
 	"github.com/anzhiyu-c/anheyu-app/pkg/idgen"
 	"github.com/anzhiyu-c/anheyu-app/pkg/response"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/auth"
@@ -18,19 +21,35 @@ import (
 
 // AuthHandler 封装了所有认证相关的控制器方法
 type AuthHandler struct {
-	authSvc    auth.AuthService
-	tokenSvc   auth.TokenService
-	settingSvc setting.SettingService
-	captchaSvc captcha.CaptchaService
+	authSvc          auth.AuthService
+	tokenSvc         auth.TokenService
+	settingSvc       setting.SettingService
+	captchaSvc       captcha.CaptchaService
+	memberAutoBinder memberAutoBinder
+}
+
+type memberAutoBinder interface {
+	AutoBindAfterLogin(ctx context.Context, userID int64, publicUserID string) (string, error)
+}
+
+type noopMemberAutoBinder struct{}
+
+func (noopMemberAutoBinder) AutoBindAfterLogin(_ context.Context, _ int64, publicUserID string) (string, error) {
+	return publicUserID, nil
 }
 
 // NewAuthHandler 是 AuthHandler 的构造函数，用于依赖注入
-func NewAuthHandler(authSvc auth.AuthService, tokenSvc auth.TokenService, settingSvc setting.SettingService, captchaSvc captcha.CaptchaService) *AuthHandler {
+func NewAuthHandler(authSvc auth.AuthService, tokenSvc auth.TokenService, settingSvc setting.SettingService, captchaSvc captcha.CaptchaService, memberAutoBinder memberAutoBinder) *AuthHandler {
+	if memberAutoBinder == nil {
+		memberAutoBinder = noopMemberAutoBinder{}
+	}
+
 	return &AuthHandler{
-		authSvc:    authSvc,
-		tokenSvc:   tokenSvc,
-		settingSvc: settingSvc,
-		captchaSvc: captchaSvc,
+		authSvc:          authSvc,
+		tokenSvc:         tokenSvc,
+		settingSvc:       settingSvc,
+		captchaSvc:       captchaSvc,
+		memberAutoBinder: memberAutoBinder,
 	}
 }
 
@@ -153,25 +172,31 @@ func (h *AuthHandler) Login(c *gin.Context) {
 		return
 	}
 
-	// 2. 调用令牌服务生成会话令牌
-	// 注意：这里的 GenerateSessionTokens 内部也需要更新为使用 GeneratePublicID
-	accessToken, refreshToken, expires, err := h.tokenSvc.GenerateSessionTokens(c.Request.Context(), user)
-	if err != nil {
-		response.Fail(c, http.StatusInternalServerError, "生成令牌失败: "+err.Error())
-		return
-	}
-
-	// 3. 构建 roles 数组
+	// 2. 构建 roles 数组
 	roles := []string{fmt.Sprintf("%d", user.UserGroupID)}
 
-	// 4. 生成用户的公共 ID
+	// 3. 生成用户的公共 ID
 	publicUserID, err := idgen.GeneratePublicID(user.ID, idgen.EntityTypeUser) // 统一使用 GeneratePublicID
 	if err != nil {
 		response.Fail(c, http.StatusInternalServerError, "生成用户公共ID失败")
 		return
 	}
 
-	// 5. 生成用户组的公共 ID
+	// 4. 自动绑定会员映射，并尽量拿到稳定 external_user_id
+	externalUserID, err := h.resolveExternalUserID(c.Request.Context(), user.ID, publicUserID)
+	if err != nil {
+		response.Fail(c, http.StatusInternalServerError, "同步会员映射失败: "+err.Error())
+		return
+	}
+
+	// 5. 调用令牌服务生成会话令牌
+	accessToken, refreshToken, expires, err := h.tokenSvc.GenerateSessionTokens(c.Request.Context(), user, externalUserID)
+	if err != nil {
+		response.Fail(c, http.StatusInternalServerError, "生成令牌失败: "+err.Error())
+		return
+	}
+
+	// 6. 生成用户组的公共 ID
 	publicUserGroupID, err := idgen.GeneratePublicID(user.UserGroup.ID, idgen.EntityTypeUserGroup) // 统一使用 GeneratePublicID
 	if err != nil {
 		response.Fail(c, http.StatusInternalServerError, "生成用户组公共ID失败")
@@ -212,6 +237,17 @@ func (h *AuthHandler) Login(c *gin.Context) {
 		"refreshToken": refreshToken,
 		"expires":      expires,
 	}, "登录成功")
+}
+
+func (h *AuthHandler) resolveExternalUserID(ctx context.Context, userID uint, publicUserID string) (string, error) {
+	externalUserID, err := h.memberAutoBinder.AutoBindAfterLogin(ctx, int64(userID), publicUserID)
+	if err != nil {
+		return "", err
+	}
+	if strings.TrimSpace(externalUserID) == "" {
+		return publicUserID, nil
+	}
+	return externalUserID, nil
 }
 
 // Register 处理用户注册请求
@@ -292,17 +328,57 @@ func (h *AuthHandler) RefreshToken(c *gin.Context) {
 		return
 	}
 
-	// 注意：这里的 RefreshAccessToken 内部也需要更新为使用 DecodePublicID
-	accessToken, expires, err := h.tokenSvc.RefreshAccessToken(c.Request.Context(), refreshToken)
+	accessToken, nextRefreshToken, expires, err := h.refreshSessionTokens(c.Request.Context(), refreshToken)
 	if err != nil {
 		response.Fail(c, http.StatusUnauthorized, err.Error())
 		return
 	}
 
-	response.Success(c, gin.H{
+	data := gin.H{
 		"accessToken": accessToken,
 		"expires":     expires,
-	}, "刷新Token成功")
+	}
+	if nextRefreshToken != "" {
+		data["refreshToken"] = nextRefreshToken
+	}
+
+	response.Success(c, data, "刷新Token成功")
+}
+
+func (h *AuthHandler) refreshSessionTokens(ctx context.Context, refreshToken string) (string, string, int64, error) {
+	jwtSecret := h.settingSvc.Get(constant.KeyJWTSecret.String())
+	if jwtSecret == "" {
+		return "", "", 0, fmt.Errorf("JWT_SECRET 未配置，无法刷新令牌")
+	}
+
+	claims, err := internalauth.ParseToken(refreshToken, []byte(jwtSecret))
+	if err != nil {
+		return "", "", 0, err
+	}
+
+	userID, entityType, err := idgen.DecodePublicID(claims.UserID)
+	if err != nil {
+		return "", "", 0, err
+	}
+	if entityType != idgen.EntityTypeUser {
+		return "", "", 0, fmt.Errorf("令牌中的用户ID类型不匹配")
+	}
+
+	user, err := h.authSvc.GetUserByID(ctx, userID)
+	if err != nil || user == nil || user.Status != model.UserStatusActive {
+		return "", "", 0, fmt.Errorf("用户不存在或状态异常")
+	}
+
+	externalUserID, err := h.resolveExternalUserID(ctx, user.ID, claims.UserID)
+	if err != nil {
+		return "", "", 0, err
+	}
+
+	accessToken, nextRefreshToken, expires, err := h.tokenSvc.GenerateSessionTokens(ctx, user, externalUserID)
+	if err != nil {
+		return "", "", 0, err
+	}
+	return accessToken, nextRefreshToken, expires, nil
 }
 
 // ActivateUser 处理用户激活请求
@@ -346,8 +422,21 @@ func (h *AuthHandler) ActivateUser(c *gin.Context) {
 		return
 	}
 
+	publicUserID, err := idgen.GeneratePublicID(user.ID, idgen.EntityTypeUser)
+	if err != nil {
+		response.Fail(c, http.StatusInternalServerError, "生成用户公共ID失败")
+		return
+	}
+
+	// 激活后自动登录也需要走同一条会员映射收口路径，避免写入临时 publicUserID。
+	externalUserID, err := h.resolveExternalUserID(c.Request.Context(), user.ID, publicUserID)
+	if err != nil {
+		response.Fail(c, http.StatusInternalServerError, "激活成功，但同步会员映射失败: "+err.Error())
+		return
+	}
+
 	// 生成会话令牌
-	accessToken, refreshToken, expires, err := h.tokenSvc.GenerateSessionTokens(c.Request.Context(), user)
+	accessToken, refreshToken, expires, err := h.tokenSvc.GenerateSessionTokens(c.Request.Context(), user, externalUserID)
 	if err != nil {
 		response.Fail(c, http.StatusInternalServerError, "激活成功，但生成登录令牌失败")
 		return
@@ -355,13 +444,6 @@ func (h *AuthHandler) ActivateUser(c *gin.Context) {
 
 	// 构建 roles 数组
 	roles := []string{fmt.Sprintf("%d", user.UserGroupID)}
-
-	// 生成用户的公共 ID
-	publicUserID, err := idgen.GeneratePublicID(user.ID, idgen.EntityTypeUser)
-	if err != nil {
-		response.Fail(c, http.StatusInternalServerError, "生成用户公共ID失败")
-		return
-	}
 
 	// 生成用户组的公共 ID
 	publicUserGroupID, err := idgen.GeneratePublicID(user.UserGroup.ID, idgen.EntityTypeUserGroup)
