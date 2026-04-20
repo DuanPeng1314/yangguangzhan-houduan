@@ -45,6 +45,9 @@ type LinkCategory func(*sql.Selector)
 // LinkTag is the predicate function for linktag builders.
 type LinkTag func(*sql.Selector)
 
+// MemberBinding is the predicate function for memberbinding builders.
+type MemberBinding func(*sql.Selector)
+
 // Metadata is the predicate function for metadata builders.
 type Metadata func(*sql.Selector)
 
@@ -59,6 +62,18 @@ type PostCategory func(*sql.Selector)
 
 // PostTag is the predicate function for posttag builders.
 type PostTag func(*sql.Selector)
+
+// Resource is the predicate function for resource builders.
+type Resource func(*sql.Selector)
+
+// ResourceAccessGrant is the predicate function for resourceaccessgrant builders.
+type ResourceAccessGrant func(*sql.Selector)
+
+// ResourceItem is the predicate function for resourceitem builders.
+type ResourceItem func(*sql.Selector)
+
+// ResourceOrder is the predicate function for resourceorder builders.
+type ResourceOrder func(*sql.Selector)
 
 // Setting is the predicate function for setting builders.
 type Setting func(*sql.Selector)

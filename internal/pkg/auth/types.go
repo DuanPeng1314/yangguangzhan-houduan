@@ -16,6 +16,7 @@ const ClaimsKey = "user_claims"
 // UserID 和 UserGroupID 现在存储的是其公共 ID 字符串表示。
 type CustomClaims struct {
 	UserID      string `json:"user_id"`       // 用户公共ID
+	ExternalUserID string `json:"external_user_id,omitempty"` // 付费模块可选外部身份
 	UserGroupID string `json:"user_group_id"` // 用户组公共ID
 	Permissions []byte `json:"permissions"`   // 用户的权限信息
 	jwt.RegisteredClaims

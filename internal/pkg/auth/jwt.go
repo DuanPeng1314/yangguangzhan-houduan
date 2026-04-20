@@ -19,7 +19,7 @@ import (
 // ClaimsKey 和 CustomClaims 已移至 types.go
 
 // GenerateToken 生成一个新的 JWT Access Token
-func GenerateToken(userID uint, permissions []byte, userGroupID uint, secretKey []byte) (string, error) {
+func GenerateToken(userID uint, permissions []byte, userGroupID uint, externalUserID string, secretKey []byte) (string, error) {
 	if len(secretKey) == 0 {
 		return "", fmt.Errorf("JWT Secret 不能为空")
 	}
@@ -37,9 +37,10 @@ func GenerateToken(userID uint, permissions []byte, userGroupID uint, secretKey 
 	}
 
 	claims := CustomClaims{ // 此处 CustomClaims 来自同包下的 types.go
-		UserID:      publicUserID,
-		UserGroupID: publicUserGroupID,
-		Permissions: permissions,
+		UserID:         publicUserID,
+		ExternalUserID: externalUserID,
+		UserGroupID:    publicUserGroupID,
+		Permissions:    permissions,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(accessTokenExpires),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
@@ -53,7 +54,7 @@ func GenerateToken(userID uint, permissions []byte, userGroupID uint, secretKey 
 }
 
 // GenerateRefreshToken 生成一个新的 JWT Refresh Token
-func GenerateRefreshToken(userID uint, secretKey []byte) (string, error) {
+func GenerateRefreshToken(userID uint, externalUserID string, secretKey []byte) (string, error) {
 	if len(secretKey) == 0 {
 		return "", fmt.Errorf("JWT Secret 不能为空")
 	}
@@ -66,7 +67,8 @@ func GenerateRefreshToken(userID uint, secretKey []byte) (string, error) {
 	}
 
 	claims := CustomClaims{ // 此处 CustomClaims 来自同包下的 types.go
-		UserID: publicUserID,
+		UserID:         publicUserID,
+		ExternalUserID: externalUserID,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(refreshTokenExpires),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),

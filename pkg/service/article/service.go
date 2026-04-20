@@ -2,6 +2,7 @@
 package article
 
 import (
+	"bytes"
 	"context"
 	"errors"
 	"fmt"
@@ -30,6 +31,7 @@ import (
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/setting"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/subscriber"
 	"github.com/anzhiyu-c/anheyu-app/pkg/service/utility"
+	"golang.org/x/net/html"
 )
 
 // BatchDeleteResult 批量删除结果
@@ -658,9 +660,64 @@ func (s *serviceImpl) ToAPIResponse(a *model.Article, useAbbrlinkAsID bool, incl
 	}
 
 	if includeHTML {
-		resp.ContentHTML = a.ContentHTML
+		contentHTML := a.ContentHTML
+		if useAbbrlinkAsID {
+			contentHTML = stripPremiumMemberContentForPublic(contentHTML)
+		}
+		resp.ContentHTML = contentHTML
 	}
 	return resp
+}
+
+func stripPremiumMemberContentForPublic(contentHTML string) string {
+	if !strings.Contains(contentHTML, "premium-member-content-editor-preview") {
+		return contentHTML
+	}
+
+	doc, err := html.Parse(strings.NewReader("<body>" + contentHTML + "</body>"))
+	if err != nil {
+		return contentHTML
+	}
+
+	var walk func(*html.Node)
+	walk = func(n *html.Node) {
+		if n.Type == html.ElementNode && n.Data == "div" && articleNodeHasClass(n, "premium-member-content-preview") {
+			n.FirstChild = nil
+			n.LastChild = nil
+		}
+		for child := n.FirstChild; child != nil; child = child.NextSibling {
+			walk(child)
+		}
+	}
+	walk(doc)
+
+	body := doc.FirstChild.LastChild
+	if body == nil {
+		return contentHTML
+	}
+
+	var buf bytes.Buffer
+	for child := body.FirstChild; child != nil; child = child.NextSibling {
+		if err := html.Render(&buf, child); err != nil {
+			return contentHTML
+		}
+	}
+
+	return buf.String()
+}
+
+func articleNodeHasClass(node *html.Node, className string) bool {
+	for _, attr := range node.Attr {
+		if attr.Key != "class" {
+			continue
+		}
+		for _, class := range strings.Fields(attr.Val) {
+			if class == className {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 // 将领域模型转换为简化的 API 响应
@@ -928,6 +985,7 @@ func (s *serviceImpl) GetPublicBySlugOrID(ctx context.Context, slugOrID string) 
 	// 这样PRO版可以正确解码ID获取数据库ID
 	// abbrlink 信息仍然通过 Abbrlink 字段返回
 	mainArticleResponse := s.ToAPIResponse(article, false, true)
+	mainArticleResponse.ContentHTML = stripPremiumMemberContentForPublic(mainArticleResponse.ContentHTML)
 	s.fillOwnerNickname(ctx, mainArticleResponse, nil)
 	relatedResponses := make([]*model.SimpleArticleResponse, 0, len(relatedArticles))
 	for _, rel := range relatedArticles {

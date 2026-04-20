@@ -26,6 +26,7 @@ import (
 	doc_series_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/doc_series"
 	file_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/file"
 	link_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/link"
+	member_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/member"
 	music_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/music"
 	notification_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/notification"
 	page_handler "github.com/anzhiyu-c/anheyu-app/pkg/handler/page"
@@ -82,6 +83,7 @@ type Router struct {
 	docSeriesHandler          *doc_series_handler.Handler
 	commentHandler            *comment_handler.Handler
 	linkHandler               *link_handler.Handler
+	memberHandler             *member_handler.Handler
 	musicHandler              *music_handler.MusicHandler
 	pageHandler               *page_handler.Handler
 	statisticsHandler         *statistics_handler.StatisticsHandler
@@ -119,6 +121,7 @@ func NewRouter(
 	docSeriesHandler *doc_series_handler.Handler,
 	commentHandler *comment_handler.Handler,
 	linkHandler *link_handler.Handler,
+	memberHandler *member_handler.Handler,
 	musicHandler *music_handler.MusicHandler,
 	pageHandler *page_handler.Handler,
 	statisticsHandler *statistics_handler.StatisticsHandler,
@@ -154,6 +157,7 @@ func NewRouter(
 		docSeriesHandler:          docSeriesHandler,
 		commentHandler:            commentHandler,
 		linkHandler:               linkHandler,
+		memberHandler:             memberHandler,
 		musicHandler:              musicHandler,
 		pageHandler:               pageHandler,
 		statisticsHandler:         statisticsHandler,
@@ -215,6 +219,7 @@ func (r *Router) Setup(engine *gin.Engine) {
 	r.registerPageRoutes(apiGroup)
 	r.registerSearchRoutes(apiGroup)
 	r.registerLinkRoutes(apiGroup)
+	r.registerMemberRoutes(apiGroup)
 	r.registerMusicRoutes(apiGroup)
 	r.registerStatisticsRoutes(apiGroup)
 	r.registerThemeRoutes(apiGroup)
@@ -222,7 +227,7 @@ func (r *Router) Setup(engine *gin.Engine) {
 	r.registerNotificationRoutes(apiGroup)
 	r.registerConfigBackupRoutes(apiGroup)
 	r.registerSitemapRoutes(engine)    // 直接注册到engine，不使用/api前缀
-	r.registerRSSRoutes(engine)       // RSS/atom/feed 始终注册，与 SkipFrontend 无关
+	r.registerRSSRoutes(engine)        // RSS/atom/feed 始终注册，与 SkipFrontend 无关
 	r.registerSSRThemeRoutes(apiGroup) // 注册 SSR 主题管理路由
 }
 
@@ -259,6 +264,52 @@ func (r *Router) registerCommentRoutes(api *gin.RouterGroup) {
 		commentsAdmin.PUT("/:id/pin", r.commentHandler.SetPin)
 		commentsAdmin.POST("/export", r.commentHandler.ExportComments)
 		commentsAdmin.POST("/import", r.commentHandler.ImportComments)
+	}
+}
+
+func (r *Router) registerMemberRoutes(api *gin.RouterGroup) {
+	member := api.Group("/member").Use(r.mw.JWTAuth())
+	{
+		member.GET("/health", r.memberHandler.GetHealth)
+		member.GET("/purchase/catalog", r.memberHandler.GetPurchaseCatalog)
+		member.GET("/profile", r.memberHandler.GetProfile)
+		member.POST("/purchase/payment-detail", r.memberHandler.GetPurchasePaymentDetail)
+		member.POST("/purchase/card/redeem", r.memberHandler.RedeemCard)
+		member.POST("/purchase/order", r.memberHandler.CreatePurchaseOrder)
+		member.POST("/resource/order", r.memberHandler.CreateResourcePurchaseOrder)
+		member.POST("/resource/order/payment-detail", r.memberHandler.GetResourcePurchasePaymentDetail)
+		member.POST("/resource/order/status", r.memberHandler.GetResourcePurchaseOrderStatus)
+		member.GET("/status", r.memberHandler.GetStatus)
+		member.GET("/orders", r.memberHandler.GetMemberOrders)
+		member.POST("/orders/detail", r.memberHandler.GetMemberOrderDetail)
+		member.POST("/orders/status", r.memberHandler.GetMemberOrderStatus)
+	}
+
+	resourcePublic := api.Group("/public/resource").Use(r.mw.JWTAuthOptional())
+	{
+		resourcePublic.POST("/access-check", r.memberHandler.CheckResourceAccess)
+	}
+
+	resourcesAdmin := api.Group("/resources").Use(r.mw.JWTAuth(), r.mw.AdminAuth())
+	{
+		resourcesAdmin.GET("", r.memberHandler.ListAdminResources)
+		resourcesAdmin.GET("/article-hosts", r.memberHandler.SearchAdminArticleHosts)
+		resourcesAdmin.GET("/by-article/:id", r.memberHandler.GetAdminResourceByArticle)
+		resourcesAdmin.GET("/:id", r.memberHandler.GetAdminResourceDetail)
+		resourcesAdmin.POST("", r.memberHandler.CreateAdminResource)
+		resourcesAdmin.POST("/:id/bind-article", r.memberHandler.BindAdminResourceToArticle)
+		resourcesAdmin.PUT("/:id", r.memberHandler.UpdateAdminResource)
+		resourcesAdmin.DELETE("/:id", r.memberHandler.DeleteAdminResource)
+	}
+
+	ordersAdmin := api.Group("/admin/jiguangku/orders").Use(r.mw.JWTAuth(), r.mw.AdminAuth())
+	{
+		ordersAdmin.GET("", r.memberHandler.ListAdminOrderMappings)
+	}
+
+	cardsAdmin := api.Group("/admin/jiguangku/cards").Use(r.mw.JWTAuth(), r.mw.AdminAuth())
+	{
+		cardsAdmin.GET("", r.memberHandler.ListAdminCards)
 	}
 }
 
@@ -493,6 +544,7 @@ func (r *Router) registerPublicRoutes(api *gin.RouterGroup) {
 		public.POST("/subscribe/code", middleware.CustomRateLimit(3, 3), r.subscriberHandler.SendVerificationCode)
 		public.POST("/unsubscribe", r.subscriberHandler.Unsubscribe)
 		public.GET("/unsubscribe/:token", r.subscriberHandler.UnsubscribeByToken)
+		public.POST("/article/premium-block/content", r.mw.JWTAuth(), r.memberHandler.GetPremiumMemberBlockContent)
 	}
 }
 

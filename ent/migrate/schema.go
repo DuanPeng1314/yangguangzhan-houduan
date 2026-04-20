@@ -491,6 +491,36 @@ var (
 		Columns:    LinkTagsColumns,
 		PrimaryKey: []*schema.Column{LinkTagsColumns[0]},
 	}
+	// MemberBindingsColumns holds the columns for the "member_bindings" table.
+	MemberBindingsColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeInt, Increment: true},
+		{Name: "user_id", Type: field.TypeInt64, Unique: true, Comment: "阳光栈本地用户 ID"},
+		{Name: "external_user_id", Type: field.TypeString, Comment: "极光库外部用户标识"},
+		{Name: "site_id", Type: field.TypeString, Comment: "极光库站点标识"},
+		{Name: "status", Type: field.TypeString, Comment: "映射状态", Default: "active"},
+		{Name: "last_synced_at", Type: field.TypeTime, Nullable: true, Comment: "最近同步时间"},
+		{Name: "created_at", Type: field.TypeTime},
+		{Name: "updated_at", Type: field.TypeTime},
+	}
+	// MemberBindingsTable holds the schema information for the "member_bindings" table.
+	MemberBindingsTable = &schema.Table{
+		Name:       "member_bindings",
+		Comment:    "会员身份映射表",
+		Columns:    MemberBindingsColumns,
+		PrimaryKey: []*schema.Column{MemberBindingsColumns[0]},
+		Indexes: []*schema.Index{
+			{
+				Name:    "memberbinding_user_id",
+				Unique:  true,
+				Columns: []*schema.Column{MemberBindingsColumns[1]},
+			},
+			{
+				Name:    "memberbinding_site_id_external_user_id",
+				Unique:  true,
+				Columns: []*schema.Column{MemberBindingsColumns[3], MemberBindingsColumns[2]},
+			},
+		},
+	}
 	// MetadataColumns holds the columns for the "metadata" table.
 	MetadataColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint, Increment: true},
@@ -615,6 +645,169 @@ var (
 		Comment:    "文章标签表",
 		Columns:    PostTagsColumns,
 		PrimaryKey: []*schema.Column{PostTagsColumns[0]},
+	}
+	// ResourcesColumns holds the columns for the "resources" table.
+	ResourcesColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeUint, Increment: true},
+		{Name: "deleted_at", Type: field.TypeTime, Nullable: true},
+		{Name: "created_at", Type: field.TypeTime},
+		{Name: "updated_at", Type: field.TypeTime},
+		{Name: "host_type", Type: field.TypeString, Size: 50, Comment: "资源宿主类型，如 article 或 product"},
+		{Name: "host_id", Type: field.TypeString, Size: 128, Comment: "资源宿主公共 ID"},
+		{Name: "title", Type: field.TypeString, Size: 255, Comment: "资源标题"},
+		{Name: "summary", Type: field.TypeString, Nullable: true, Size: 1000, Comment: "资源摘要"},
+		{Name: "cover_url", Type: field.TypeString, Nullable: true, Size: 255, Comment: "资源封面图 URL"},
+		{Name: "resource_type", Type: field.TypeString, Size: 50, Comment: "资源类型", Default: "download_bundle"},
+		{Name: "status", Type: field.TypeString, Size: 20, Comment: "资源状态：draft/published/archived", Default: "draft"},
+		{Name: "sale_enabled", Type: field.TypeBool, Comment: "是否启用销售", Default: true},
+		{Name: "price", Type: field.TypeFloat64, Comment: "销售价格", Default: 0},
+		{Name: "original_price", Type: field.TypeFloat64, Comment: "划线价格", Default: 0},
+		{Name: "member_free", Type: field.TypeBool, Comment: "会员是否免费", Default: false},
+		{Name: "sort", Type: field.TypeInt, Comment: "同宿主内排序，越小越靠前", Default: 0},
+	}
+	// ResourcesTable holds the schema information for the "resources" table.
+	ResourcesTable = &schema.Table{
+		Name:       "resources",
+		Comment:    "独立资源销售单元表",
+		Columns:    ResourcesColumns,
+		PrimaryKey: []*schema.Column{ResourcesColumns[0]},
+		Indexes: []*schema.Index{
+			{
+				Name:    "resource_host_type_host_id_status_sort",
+				Unique:  false,
+				Columns: []*schema.Column{ResourcesColumns[4], ResourcesColumns[5], ResourcesColumns[10], ResourcesColumns[15]},
+			},
+		},
+	}
+	// ResourceAccessGrantsColumns holds the columns for the "resource_access_grants" table.
+	ResourceAccessGrantsColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeUint, Increment: true},
+		{Name: "created_at", Type: field.TypeTime},
+		{Name: "updated_at", Type: field.TypeTime},
+		{Name: "user_id", Type: field.TypeInt64, Comment: "阳光栈本地用户 ID"},
+		{Name: "grant_type", Type: field.TypeString, Size: 20, Comment: "权益来源类型", Default: "purchase"},
+		{Name: "source_order_no", Type: field.TypeString, Nullable: true, Size: 64, Comment: "来源业务订单号"},
+		{Name: "status", Type: field.TypeString, Size: 20, Comment: "权益状态", Default: "active"},
+		{Name: "granted_at", Type: field.TypeTime, Comment: "权益生效时间"},
+		{Name: "expired_at", Type: field.TypeTime, Nullable: true, Comment: "权益过期时间，可空"},
+		{Name: "resource_id", Type: field.TypeUint, Comment: "关联资源 ID"},
+		{Name: "resource_item_id", Type: field.TypeUint, Nullable: true, Comment: "关联资源交付物 ID，可空"},
+	}
+	// ResourceAccessGrantsTable holds the schema information for the "resource_access_grants" table.
+	ResourceAccessGrantsTable = &schema.Table{
+		Name:       "resource_access_grants",
+		Comment:    "资源访问权益表",
+		Columns:    ResourceAccessGrantsColumns,
+		PrimaryKey: []*schema.Column{ResourceAccessGrantsColumns[0]},
+		ForeignKeys: []*schema.ForeignKey{
+			{
+				Symbol:     "resource_access_grants_resources_access_grants",
+				Columns:    []*schema.Column{ResourceAccessGrantsColumns[9]},
+				RefColumns: []*schema.Column{ResourcesColumns[0]},
+				OnDelete:   schema.NoAction,
+			},
+			{
+				Symbol:     "resource_access_grants_resource_items_access_grants",
+				Columns:    []*schema.Column{ResourceAccessGrantsColumns[10]},
+				RefColumns: []*schema.Column{ResourceItemsColumns[0]},
+				OnDelete:   schema.SetNull,
+			},
+		},
+		Indexes: []*schema.Index{
+			{
+				Name:    "resourceaccessgrant_user_id_resource_id_status",
+				Unique:  false,
+				Columns: []*schema.Column{ResourceAccessGrantsColumns[3], ResourceAccessGrantsColumns[9], ResourceAccessGrantsColumns[6]},
+			},
+			{
+				Name:    "resourceaccessgrant_source_order_no",
+				Unique:  false,
+				Columns: []*schema.Column{ResourceAccessGrantsColumns[5]},
+			},
+		},
+	}
+	// ResourceItemsColumns holds the columns for the "resource_items" table.
+	ResourceItemsColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeUint, Increment: true},
+		{Name: "deleted_at", Type: field.TypeTime, Nullable: true},
+		{Name: "created_at", Type: field.TypeTime},
+		{Name: "updated_at", Type: field.TypeTime},
+		{Name: "item_type", Type: field.TypeString, Size: 30, Comment: "交付物类型，如 file 或 link", Default: "file"},
+		{Name: "title", Type: field.TypeString, Size: 255, Comment: "交付物标题"},
+		{Name: "payload", Type: field.TypeJSON, Nullable: true, Comment: "交付物差异化负载", SchemaType: map[string]string{"mysql": "json", "postgres": "jsonb", "sqlite3": "text"}},
+		{Name: "status", Type: field.TypeString, Size: 20, Comment: "交付物状态", Default: "active"},
+		{Name: "sort", Type: field.TypeInt, Comment: "资源内排序，越小越靠前", Default: 0},
+		{Name: "resource_id", Type: field.TypeUint, Comment: "关联资源 ID"},
+	}
+	// ResourceItemsTable holds the schema information for the "resource_items" table.
+	ResourceItemsTable = &schema.Table{
+		Name:       "resource_items",
+		Comment:    "资源交付物表",
+		Columns:    ResourceItemsColumns,
+		PrimaryKey: []*schema.Column{ResourceItemsColumns[0]},
+		ForeignKeys: []*schema.ForeignKey{
+			{
+				Symbol:     "resource_items_resources_items",
+				Columns:    []*schema.Column{ResourceItemsColumns[9]},
+				RefColumns: []*schema.Column{ResourcesColumns[0]},
+				OnDelete:   schema.NoAction,
+			},
+		},
+		Indexes: []*schema.Index{
+			{
+				Name:    "resourceitem_resource_id_status_sort",
+				Unique:  false,
+				Columns: []*schema.Column{ResourceItemsColumns[9], ResourceItemsColumns[7], ResourceItemsColumns[8]},
+			},
+		},
+	}
+	// ResourceOrdersColumns holds the columns for the "resource_orders" table.
+	ResourceOrdersColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeUint, Increment: true},
+		{Name: "created_at", Type: field.TypeTime},
+		{Name: "updated_at", Type: field.TypeTime},
+		{Name: "user_id", Type: field.TypeInt64, Comment: "阳光栈本地用户 ID"},
+		{Name: "business_order_no", Type: field.TypeString, Unique: true, Size: 64, Comment: "阳光栈业务订单号"},
+		{Name: "external_order_no", Type: field.TypeString, Nullable: true, Size: 64, Comment: "外部支付单号，如极光库订单号"},
+		{Name: "amount", Type: field.TypeFloat64, Comment: "订单金额", Default: 0},
+		{Name: "status", Type: field.TypeString, Size: 20, Comment: "订单状态", Default: "pending"},
+		{Name: "snapshot", Type: field.TypeJSON, Nullable: true, Comment: "下单时的业务快照", SchemaType: map[string]string{"mysql": "json", "postgres": "jsonb", "sqlite3": "text"}},
+		{Name: "paid_at", Type: field.TypeTime, Nullable: true, Comment: "支付完成时间"},
+		{Name: "resource_id", Type: field.TypeUint, Comment: "关联资源 ID"},
+		{Name: "resource_item_id", Type: field.TypeUint, Nullable: true, Comment: "关联资源交付物 ID，可空"},
+	}
+	// ResourceOrdersTable holds the schema information for the "resource_orders" table.
+	ResourceOrdersTable = &schema.Table{
+		Name:       "resource_orders",
+		Comment:    "资源本地业务订单映射表",
+		Columns:    ResourceOrdersColumns,
+		PrimaryKey: []*schema.Column{ResourceOrdersColumns[0]},
+		ForeignKeys: []*schema.ForeignKey{
+			{
+				Symbol:     "resource_orders_resources_orders",
+				Columns:    []*schema.Column{ResourceOrdersColumns[10]},
+				RefColumns: []*schema.Column{ResourcesColumns[0]},
+				OnDelete:   schema.NoAction,
+			},
+			{
+				Symbol:     "resource_orders_resource_items_orders",
+				Columns:    []*schema.Column{ResourceOrdersColumns[11]},
+				RefColumns: []*schema.Column{ResourceItemsColumns[0]},
+				OnDelete:   schema.SetNull,
+			},
+		},
+		Indexes: []*schema.Index{
+			{
+				Name:    "resourceorder_user_id_resource_id_status",
+				Unique:  false,
+				Columns: []*schema.Column{ResourceOrdersColumns[3], ResourceOrdersColumns[10], ResourceOrdersColumns[7]},
+			},
+			{
+				Name:    "resourceorder_external_order_no",
+				Unique:  false,
+				Columns: []*schema.Column{ResourceOrdersColumns[5]},
+			},
+		},
 	}
 	// SettingsColumns holds the columns for the "settings" table.
 	SettingsColumns = []*schema.Column{
@@ -1071,11 +1264,16 @@ var (
 		LinksTable,
 		LinkCategoriesTable,
 		LinkTagsTable,
+		MemberBindingsTable,
 		MetadataTable,
 		NotificationTypesTable,
 		PagesTable,
 		PostCategoriesTable,
 		PostTagsTable,
+		ResourcesTable,
+		ResourceAccessGrantsTable,
+		ResourceItemsTable,
+		ResourceOrdersTable,
 		SettingsTable,
 		StoragePoliciesTable,
 		SubscribersTable,
@@ -1108,6 +1306,11 @@ func init() {
 	FileEntitiesTable.ForeignKeys[1].RefTable = FilesTable
 	LinksTable.ForeignKeys[0].RefTable = LinkCategoriesTable
 	MetadataTable.ForeignKeys[0].RefTable = FilesTable
+	ResourceAccessGrantsTable.ForeignKeys[0].RefTable = ResourcesTable
+	ResourceAccessGrantsTable.ForeignKeys[1].RefTable = ResourceItemsTable
+	ResourceItemsTable.ForeignKeys[0].RefTable = ResourcesTable
+	ResourceOrdersTable.ForeignKeys[0].RefTable = ResourcesTable
+	ResourceOrdersTable.ForeignKeys[1].RefTable = ResourceItemsTable
 	UsersTable.ForeignKeys[0].RefTable = UserGroupsTable
 	UserInstalledThemesTable.ForeignKeys[0].RefTable = UsersTable
 	UserNotificationConfigsTable.ForeignKeys[0].RefTable = NotificationTypesTable

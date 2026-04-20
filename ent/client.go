@@ -28,11 +28,16 @@ import (
 	"github.com/anzhiyu-c/anheyu-app/ent/link"
 	"github.com/anzhiyu-c/anheyu-app/ent/linkcategory"
 	"github.com/anzhiyu-c/anheyu-app/ent/linktag"
+	"github.com/anzhiyu-c/anheyu-app/ent/memberbinding"
 	"github.com/anzhiyu-c/anheyu-app/ent/metadata"
 	"github.com/anzhiyu-c/anheyu-app/ent/notificationtype"
 	"github.com/anzhiyu-c/anheyu-app/ent/page"
 	"github.com/anzhiyu-c/anheyu-app/ent/postcategory"
 	"github.com/anzhiyu-c/anheyu-app/ent/posttag"
+	"github.com/anzhiyu-c/anheyu-app/ent/resource"
+	"github.com/anzhiyu-c/anheyu-app/ent/resourceaccessgrant"
+	"github.com/anzhiyu-c/anheyu-app/ent/resourceitem"
+	"github.com/anzhiyu-c/anheyu-app/ent/resourceorder"
 	"github.com/anzhiyu-c/anheyu-app/ent/setting"
 	"github.com/anzhiyu-c/anheyu-app/ent/storagepolicy"
 	"github.com/anzhiyu-c/anheyu-app/ent/subscriber"
@@ -77,6 +82,8 @@ type Client struct {
 	LinkCategory *LinkCategoryClient
 	// LinkTag is the client for interacting with the LinkTag builders.
 	LinkTag *LinkTagClient
+	// MemberBinding is the client for interacting with the MemberBinding builders.
+	MemberBinding *MemberBindingClient
 	// Metadata is the client for interacting with the Metadata builders.
 	Metadata *MetadataClient
 	// NotificationType is the client for interacting with the NotificationType builders.
@@ -87,6 +94,14 @@ type Client struct {
 	PostCategory *PostCategoryClient
 	// PostTag is the client for interacting with the PostTag builders.
 	PostTag *PostTagClient
+	// Resource is the client for interacting with the Resource builders.
+	Resource *ResourceClient
+	// ResourceAccessGrant is the client for interacting with the ResourceAccessGrant builders.
+	ResourceAccessGrant *ResourceAccessGrantClient
+	// ResourceItem is the client for interacting with the ResourceItem builders.
+	ResourceItem *ResourceItemClient
+	// ResourceOrder is the client for interacting with the ResourceOrder builders.
+	ResourceOrder *ResourceOrderClient
 	// Setting is the client for interacting with the Setting builders.
 	Setting *SettingClient
 	// StoragePolicy is the client for interacting with the StoragePolicy builders.
@@ -133,11 +148,16 @@ func (c *Client) init() {
 	c.Link = NewLinkClient(c.config)
 	c.LinkCategory = NewLinkCategoryClient(c.config)
 	c.LinkTag = NewLinkTagClient(c.config)
+	c.MemberBinding = NewMemberBindingClient(c.config)
 	c.Metadata = NewMetadataClient(c.config)
 	c.NotificationType = NewNotificationTypeClient(c.config)
 	c.Page = NewPageClient(c.config)
 	c.PostCategory = NewPostCategoryClient(c.config)
 	c.PostTag = NewPostTagClient(c.config)
+	c.Resource = NewResourceClient(c.config)
+	c.ResourceAccessGrant = NewResourceAccessGrantClient(c.config)
+	c.ResourceItem = NewResourceItemClient(c.config)
+	c.ResourceOrder = NewResourceOrderClient(c.config)
 	c.Setting = NewSettingClient(c.config)
 	c.StoragePolicy = NewStoragePolicyClient(c.config)
 	c.Subscriber = NewSubscriberClient(c.config)
@@ -254,11 +274,16 @@ func (c *Client) Tx(ctx context.Context) (*Tx, error) {
 		Link:                   NewLinkClient(cfg),
 		LinkCategory:           NewLinkCategoryClient(cfg),
 		LinkTag:                NewLinkTagClient(cfg),
+		MemberBinding:          NewMemberBindingClient(cfg),
 		Metadata:               NewMetadataClient(cfg),
 		NotificationType:       NewNotificationTypeClient(cfg),
 		Page:                   NewPageClient(cfg),
 		PostCategory:           NewPostCategoryClient(cfg),
 		PostTag:                NewPostTagClient(cfg),
+		Resource:               NewResourceClient(cfg),
+		ResourceAccessGrant:    NewResourceAccessGrantClient(cfg),
+		ResourceItem:           NewResourceItemClient(cfg),
+		ResourceOrder:          NewResourceOrderClient(cfg),
 		Setting:                NewSettingClient(cfg),
 		StoragePolicy:          NewStoragePolicyClient(cfg),
 		Subscriber:             NewSubscriberClient(cfg),
@@ -302,11 +327,16 @@ func (c *Client) BeginTx(ctx context.Context, opts *sql.TxOptions) (*Tx, error) 
 		Link:                   NewLinkClient(cfg),
 		LinkCategory:           NewLinkCategoryClient(cfg),
 		LinkTag:                NewLinkTagClient(cfg),
+		MemberBinding:          NewMemberBindingClient(cfg),
 		Metadata:               NewMetadataClient(cfg),
 		NotificationType:       NewNotificationTypeClient(cfg),
 		Page:                   NewPageClient(cfg),
 		PostCategory:           NewPostCategoryClient(cfg),
 		PostTag:                NewPostTagClient(cfg),
+		Resource:               NewResourceClient(cfg),
+		ResourceAccessGrant:    NewResourceAccessGrantClient(cfg),
+		ResourceItem:           NewResourceItemClient(cfg),
+		ResourceOrder:          NewResourceOrderClient(cfg),
 		Setting:                NewSettingClient(cfg),
 		StoragePolicy:          NewStoragePolicyClient(cfg),
 		Subscriber:             NewSubscriberClient(cfg),
@@ -349,9 +379,11 @@ func (c *Client) Use(hooks ...Hook) {
 	for _, n := range []interface{ Use(...Hook) }{
 		c.Album, c.AlbumCategory, c.Article, c.ArticleHistory, c.Comment, c.DirectLink,
 		c.DocSeries, c.Entity, c.File, c.FileEntity, c.Link, c.LinkCategory, c.LinkTag,
-		c.Metadata, c.NotificationType, c.Page, c.PostCategory, c.PostTag, c.Setting,
-		c.StoragePolicy, c.Subscriber, c.Tag, c.URLStat, c.User, c.UserGroup,
-		c.UserInstalledTheme, c.UserNotificationConfig, c.VisitorLog, c.VisitorStat,
+		c.MemberBinding, c.Metadata, c.NotificationType, c.Page, c.PostCategory,
+		c.PostTag, c.Resource, c.ResourceAccessGrant, c.ResourceItem, c.ResourceOrder,
+		c.Setting, c.StoragePolicy, c.Subscriber, c.Tag, c.URLStat, c.User,
+		c.UserGroup, c.UserInstalledTheme, c.UserNotificationConfig, c.VisitorLog,
+		c.VisitorStat,
 	} {
 		n.Use(hooks...)
 	}
@@ -363,9 +395,11 @@ func (c *Client) Intercept(interceptors ...Interceptor) {
 	for _, n := range []interface{ Intercept(...Interceptor) }{
 		c.Album, c.AlbumCategory, c.Article, c.ArticleHistory, c.Comment, c.DirectLink,
 		c.DocSeries, c.Entity, c.File, c.FileEntity, c.Link, c.LinkCategory, c.LinkTag,
-		c.Metadata, c.NotificationType, c.Page, c.PostCategory, c.PostTag, c.Setting,
-		c.StoragePolicy, c.Subscriber, c.Tag, c.URLStat, c.User, c.UserGroup,
-		c.UserInstalledTheme, c.UserNotificationConfig, c.VisitorLog, c.VisitorStat,
+		c.MemberBinding, c.Metadata, c.NotificationType, c.Page, c.PostCategory,
+		c.PostTag, c.Resource, c.ResourceAccessGrant, c.ResourceItem, c.ResourceOrder,
+		c.Setting, c.StoragePolicy, c.Subscriber, c.Tag, c.URLStat, c.User,
+		c.UserGroup, c.UserInstalledTheme, c.UserNotificationConfig, c.VisitorLog,
+		c.VisitorStat,
 	} {
 		n.Intercept(interceptors...)
 	}
@@ -400,6 +434,8 @@ func (c *Client) Mutate(ctx context.Context, m Mutation) (Value, error) {
 		return c.LinkCategory.mutate(ctx, m)
 	case *LinkTagMutation:
 		return c.LinkTag.mutate(ctx, m)
+	case *MemberBindingMutation:
+		return c.MemberBinding.mutate(ctx, m)
 	case *MetadataMutation:
 		return c.Metadata.mutate(ctx, m)
 	case *NotificationTypeMutation:
@@ -410,6 +446,14 @@ func (c *Client) Mutate(ctx context.Context, m Mutation) (Value, error) {
 		return c.PostCategory.mutate(ctx, m)
 	case *PostTagMutation:
 		return c.PostTag.mutate(ctx, m)
+	case *ResourceMutation:
+		return c.Resource.mutate(ctx, m)
+	case *ResourceAccessGrantMutation:
+		return c.ResourceAccessGrant.mutate(ctx, m)
+	case *ResourceItemMutation:
+		return c.ResourceItem.mutate(ctx, m)
+	case *ResourceOrderMutation:
+		return c.ResourceOrder.mutate(ctx, m)
 	case *SettingMutation:
 		return c.Setting.mutate(ctx, m)
 	case *StoragePolicyMutation:
@@ -2604,6 +2648,139 @@ func (c *LinkTagClient) mutate(ctx context.Context, m *LinkTagMutation) (Value, 
 	}
 }
 
+// MemberBindingClient is a client for the MemberBinding schema.
+type MemberBindingClient struct {
+	config
+}
+
+// NewMemberBindingClient returns a client for the MemberBinding from the given config.
+func NewMemberBindingClient(c config) *MemberBindingClient {
+	return &MemberBindingClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `memberbinding.Hooks(f(g(h())))`.
+func (c *MemberBindingClient) Use(hooks ...Hook) {
+	c.hooks.MemberBinding = append(c.hooks.MemberBinding, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `memberbinding.Intercept(f(g(h())))`.
+func (c *MemberBindingClient) Intercept(interceptors ...Interceptor) {
+	c.inters.MemberBinding = append(c.inters.MemberBinding, interceptors...)
+}
+
+// Create returns a builder for creating a MemberBinding entity.
+func (c *MemberBindingClient) Create() *MemberBindingCreate {
+	mutation := newMemberBindingMutation(c.config, OpCreate)
+	return &MemberBindingCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of MemberBinding entities.
+func (c *MemberBindingClient) CreateBulk(builders ...*MemberBindingCreate) *MemberBindingCreateBulk {
+	return &MemberBindingCreateBulk{config: c.config, builders: builders}
+}
+
+// MapCreateBulk creates a bulk creation builder from the given slice. For each item in the slice, the function creates
+// a builder and applies setFunc on it.
+func (c *MemberBindingClient) MapCreateBulk(slice any, setFunc func(*MemberBindingCreate, int)) *MemberBindingCreateBulk {
+	rv := reflect.ValueOf(slice)
+	if rv.Kind() != reflect.Slice {
+		return &MemberBindingCreateBulk{err: fmt.Errorf("calling to MemberBindingClient.MapCreateBulk with wrong type %T, need slice", slice)}
+	}
+	builders := make([]*MemberBindingCreate, rv.Len())
+	for i := 0; i < rv.Len(); i++ {
+		builders[i] = c.Create()
+		setFunc(builders[i], i)
+	}
+	return &MemberBindingCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for MemberBinding.
+func (c *MemberBindingClient) Update() *MemberBindingUpdate {
+	mutation := newMemberBindingMutation(c.config, OpUpdate)
+	return &MemberBindingUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *MemberBindingClient) UpdateOne(_m *MemberBinding) *MemberBindingUpdateOne {
+	mutation := newMemberBindingMutation(c.config, OpUpdateOne, withMemberBinding(_m))
+	return &MemberBindingUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *MemberBindingClient) UpdateOneID(id int) *MemberBindingUpdateOne {
+	mutation := newMemberBindingMutation(c.config, OpUpdateOne, withMemberBindingID(id))
+	return &MemberBindingUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for MemberBinding.
+func (c *MemberBindingClient) Delete() *MemberBindingDelete {
+	mutation := newMemberBindingMutation(c.config, OpDelete)
+	return &MemberBindingDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *MemberBindingClient) DeleteOne(_m *MemberBinding) *MemberBindingDeleteOne {
+	return c.DeleteOneID(_m.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *MemberBindingClient) DeleteOneID(id int) *MemberBindingDeleteOne {
+	builder := c.Delete().Where(memberbinding.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &MemberBindingDeleteOne{builder}
+}
+
+// Query returns a query builder for MemberBinding.
+func (c *MemberBindingClient) Query() *MemberBindingQuery {
+	return &MemberBindingQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeMemberBinding},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a MemberBinding entity by its id.
+func (c *MemberBindingClient) Get(ctx context.Context, id int) (*MemberBinding, error) {
+	return c.Query().Where(memberbinding.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *MemberBindingClient) GetX(ctx context.Context, id int) *MemberBinding {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// Hooks returns the client hooks.
+func (c *MemberBindingClient) Hooks() []Hook {
+	return c.hooks.MemberBinding
+}
+
+// Interceptors returns the client interceptors.
+func (c *MemberBindingClient) Interceptors() []Interceptor {
+	return c.inters.MemberBinding
+}
+
+func (c *MemberBindingClient) mutate(ctx context.Context, m *MemberBindingMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&MemberBindingCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&MemberBindingUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&MemberBindingUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&MemberBindingDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown MemberBinding mutation op: %q", m.Op())
+	}
+}
+
 // MetadataClient is a client for the Metadata schema.
 type MetadataClient struct {
 	config
@@ -3334,6 +3511,700 @@ func (c *PostTagClient) mutate(ctx context.Context, m *PostTagMutation) (Value, 
 		return (&PostTagDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
 	default:
 		return nil, fmt.Errorf("ent: unknown PostTag mutation op: %q", m.Op())
+	}
+}
+
+// ResourceClient is a client for the Resource schema.
+type ResourceClient struct {
+	config
+}
+
+// NewResourceClient returns a client for the Resource from the given config.
+func NewResourceClient(c config) *ResourceClient {
+	return &ResourceClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `resource.Hooks(f(g(h())))`.
+func (c *ResourceClient) Use(hooks ...Hook) {
+	c.hooks.Resource = append(c.hooks.Resource, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `resource.Intercept(f(g(h())))`.
+func (c *ResourceClient) Intercept(interceptors ...Interceptor) {
+	c.inters.Resource = append(c.inters.Resource, interceptors...)
+}
+
+// Create returns a builder for creating a Resource entity.
+func (c *ResourceClient) Create() *ResourceCreate {
+	mutation := newResourceMutation(c.config, OpCreate)
+	return &ResourceCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of Resource entities.
+func (c *ResourceClient) CreateBulk(builders ...*ResourceCreate) *ResourceCreateBulk {
+	return &ResourceCreateBulk{config: c.config, builders: builders}
+}
+
+// MapCreateBulk creates a bulk creation builder from the given slice. For each item in the slice, the function creates
+// a builder and applies setFunc on it.
+func (c *ResourceClient) MapCreateBulk(slice any, setFunc func(*ResourceCreate, int)) *ResourceCreateBulk {
+	rv := reflect.ValueOf(slice)
+	if rv.Kind() != reflect.Slice {
+		return &ResourceCreateBulk{err: fmt.Errorf("calling to ResourceClient.MapCreateBulk with wrong type %T, need slice", slice)}
+	}
+	builders := make([]*ResourceCreate, rv.Len())
+	for i := 0; i < rv.Len(); i++ {
+		builders[i] = c.Create()
+		setFunc(builders[i], i)
+	}
+	return &ResourceCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for Resource.
+func (c *ResourceClient) Update() *ResourceUpdate {
+	mutation := newResourceMutation(c.config, OpUpdate)
+	return &ResourceUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *ResourceClient) UpdateOne(_m *Resource) *ResourceUpdateOne {
+	mutation := newResourceMutation(c.config, OpUpdateOne, withResource(_m))
+	return &ResourceUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *ResourceClient) UpdateOneID(id uint) *ResourceUpdateOne {
+	mutation := newResourceMutation(c.config, OpUpdateOne, withResourceID(id))
+	return &ResourceUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for Resource.
+func (c *ResourceClient) Delete() *ResourceDelete {
+	mutation := newResourceMutation(c.config, OpDelete)
+	return &ResourceDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *ResourceClient) DeleteOne(_m *Resource) *ResourceDeleteOne {
+	return c.DeleteOneID(_m.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *ResourceClient) DeleteOneID(id uint) *ResourceDeleteOne {
+	builder := c.Delete().Where(resource.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &ResourceDeleteOne{builder}
+}
+
+// Query returns a query builder for Resource.
+func (c *ResourceClient) Query() *ResourceQuery {
+	return &ResourceQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeResource},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a Resource entity by its id.
+func (c *ResourceClient) Get(ctx context.Context, id uint) (*Resource, error) {
+	return c.Query().Where(resource.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *ResourceClient) GetX(ctx context.Context, id uint) *Resource {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// QueryItems queries the items edge of a Resource.
+func (c *ResourceClient) QueryItems(_m *Resource) *ResourceItemQuery {
+	query := (&ResourceItemClient{config: c.config}).Query()
+	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
+		id := _m.ID
+		step := sqlgraph.NewStep(
+			sqlgraph.From(resource.Table, resource.FieldID, id),
+			sqlgraph.To(resourceitem.Table, resourceitem.FieldID),
+			sqlgraph.Edge(sqlgraph.O2M, false, resource.ItemsTable, resource.ItemsColumn),
+		)
+		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
+		return fromV, nil
+	}
+	return query
+}
+
+// QueryOrders queries the orders edge of a Resource.
+func (c *ResourceClient) QueryOrders(_m *Resource) *ResourceOrderQuery {
+	query := (&ResourceOrderClient{config: c.config}).Query()
+	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
+		id := _m.ID
+		step := sqlgraph.NewStep(
+			sqlgraph.From(resource.Table, resource.FieldID, id),
+			sqlgraph.To(resourceorder.Table, resourceorder.FieldID),
+			sqlgraph.Edge(sqlgraph.O2M, false, resource.OrdersTable, resource.OrdersColumn),
+		)
+		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
+		return fromV, nil
+	}
+	return query
+}
+
+// QueryAccessGrants queries the access_grants edge of a Resource.
+func (c *ResourceClient) QueryAccessGrants(_m *Resource) *ResourceAccessGrantQuery {
+	query := (&ResourceAccessGrantClient{config: c.config}).Query()
+	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
+		id := _m.ID
+		step := sqlgraph.NewStep(
+			sqlgraph.From(resource.Table, resource.FieldID, id),
+			sqlgraph.To(resourceaccessgrant.Table, resourceaccessgrant.FieldID),
+			sqlgraph.Edge(sqlgraph.O2M, false, resource.AccessGrantsTable, resource.AccessGrantsColumn),
+		)
+		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
+		return fromV, nil
+	}
+	return query
+}
+
+// Hooks returns the client hooks.
+func (c *ResourceClient) Hooks() []Hook {
+	hooks := c.hooks.Resource
+	return append(hooks[:len(hooks):len(hooks)], resource.Hooks[:]...)
+}
+
+// Interceptors returns the client interceptors.
+func (c *ResourceClient) Interceptors() []Interceptor {
+	return c.inters.Resource
+}
+
+func (c *ResourceClient) mutate(ctx context.Context, m *ResourceMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&ResourceCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&ResourceUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&ResourceUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&ResourceDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown Resource mutation op: %q", m.Op())
+	}
+}
+
+// ResourceAccessGrantClient is a client for the ResourceAccessGrant schema.
+type ResourceAccessGrantClient struct {
+	config
+}
+
+// NewResourceAccessGrantClient returns a client for the ResourceAccessGrant from the given config.
+func NewResourceAccessGrantClient(c config) *ResourceAccessGrantClient {
+	return &ResourceAccessGrantClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `resourceaccessgrant.Hooks(f(g(h())))`.
+func (c *ResourceAccessGrantClient) Use(hooks ...Hook) {
+	c.hooks.ResourceAccessGrant = append(c.hooks.ResourceAccessGrant, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `resourceaccessgrant.Intercept(f(g(h())))`.
+func (c *ResourceAccessGrantClient) Intercept(interceptors ...Interceptor) {
+	c.inters.ResourceAccessGrant = append(c.inters.ResourceAccessGrant, interceptors...)
+}
+
+// Create returns a builder for creating a ResourceAccessGrant entity.
+func (c *ResourceAccessGrantClient) Create() *ResourceAccessGrantCreate {
+	mutation := newResourceAccessGrantMutation(c.config, OpCreate)
+	return &ResourceAccessGrantCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of ResourceAccessGrant entities.
+func (c *ResourceAccessGrantClient) CreateBulk(builders ...*ResourceAccessGrantCreate) *ResourceAccessGrantCreateBulk {
+	return &ResourceAccessGrantCreateBulk{config: c.config, builders: builders}
+}
+
+// MapCreateBulk creates a bulk creation builder from the given slice. For each item in the slice, the function creates
+// a builder and applies setFunc on it.
+func (c *ResourceAccessGrantClient) MapCreateBulk(slice any, setFunc func(*ResourceAccessGrantCreate, int)) *ResourceAccessGrantCreateBulk {
+	rv := reflect.ValueOf(slice)
+	if rv.Kind() != reflect.Slice {
+		return &ResourceAccessGrantCreateBulk{err: fmt.Errorf("calling to ResourceAccessGrantClient.MapCreateBulk with wrong type %T, need slice", slice)}
+	}
+	builders := make([]*ResourceAccessGrantCreate, rv.Len())
+	for i := 0; i < rv.Len(); i++ {
+		builders[i] = c.Create()
+		setFunc(builders[i], i)
+	}
+	return &ResourceAccessGrantCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for ResourceAccessGrant.
+func (c *ResourceAccessGrantClient) Update() *ResourceAccessGrantUpdate {
+	mutation := newResourceAccessGrantMutation(c.config, OpUpdate)
+	return &ResourceAccessGrantUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *ResourceAccessGrantClient) UpdateOne(_m *ResourceAccessGrant) *ResourceAccessGrantUpdateOne {
+	mutation := newResourceAccessGrantMutation(c.config, OpUpdateOne, withResourceAccessGrant(_m))
+	return &ResourceAccessGrantUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *ResourceAccessGrantClient) UpdateOneID(id uint) *ResourceAccessGrantUpdateOne {
+	mutation := newResourceAccessGrantMutation(c.config, OpUpdateOne, withResourceAccessGrantID(id))
+	return &ResourceAccessGrantUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for ResourceAccessGrant.
+func (c *ResourceAccessGrantClient) Delete() *ResourceAccessGrantDelete {
+	mutation := newResourceAccessGrantMutation(c.config, OpDelete)
+	return &ResourceAccessGrantDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *ResourceAccessGrantClient) DeleteOne(_m *ResourceAccessGrant) *ResourceAccessGrantDeleteOne {
+	return c.DeleteOneID(_m.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *ResourceAccessGrantClient) DeleteOneID(id uint) *ResourceAccessGrantDeleteOne {
+	builder := c.Delete().Where(resourceaccessgrant.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &ResourceAccessGrantDeleteOne{builder}
+}
+
+// Query returns a query builder for ResourceAccessGrant.
+func (c *ResourceAccessGrantClient) Query() *ResourceAccessGrantQuery {
+	return &ResourceAccessGrantQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeResourceAccessGrant},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a ResourceAccessGrant entity by its id.
+func (c *ResourceAccessGrantClient) Get(ctx context.Context, id uint) (*ResourceAccessGrant, error) {
+	return c.Query().Where(resourceaccessgrant.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *ResourceAccessGrantClient) GetX(ctx context.Context, id uint) *ResourceAccessGrant {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// QueryResource queries the resource edge of a ResourceAccessGrant.
+func (c *ResourceAccessGrantClient) QueryResource(_m *ResourceAccessGrant) *ResourceQuery {
+	query := (&ResourceClient{config: c.config}).Query()
+	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
+		id := _m.ID
+		step := sqlgraph.NewStep(
+			sqlgraph.From(resourceaccessgrant.Table, resourceaccessgrant.FieldID, id),
+			sqlgraph.To(resource.Table, resource.FieldID),
+			sqlgraph.Edge(sqlgraph.M2O, true, resourceaccessgrant.ResourceTable, resourceaccessgrant.ResourceColumn),
+		)
+		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
+		return fromV, nil
+	}
+	return query
+}
+
+// QueryResourceItem queries the resource_item edge of a ResourceAccessGrant.
+func (c *ResourceAccessGrantClient) QueryResourceItem(_m *ResourceAccessGrant) *ResourceItemQuery {
+	query := (&ResourceItemClient{config: c.config}).Query()
+	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
+		id := _m.ID
+		step := sqlgraph.NewStep(
+			sqlgraph.From(resourceaccessgrant.Table, resourceaccessgrant.FieldID, id),
+			sqlgraph.To(resourceitem.Table, resourceitem.FieldID),
+			sqlgraph.Edge(sqlgraph.M2O, true, resourceaccessgrant.ResourceItemTable, resourceaccessgrant.ResourceItemColumn),
+		)
+		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
+		return fromV, nil
+	}
+	return query
+}
+
+// Hooks returns the client hooks.
+func (c *ResourceAccessGrantClient) Hooks() []Hook {
+	return c.hooks.ResourceAccessGrant
+}
+
+// Interceptors returns the client interceptors.
+func (c *ResourceAccessGrantClient) Interceptors() []Interceptor {
+	return c.inters.ResourceAccessGrant
+}
+
+func (c *ResourceAccessGrantClient) mutate(ctx context.Context, m *ResourceAccessGrantMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&ResourceAccessGrantCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&ResourceAccessGrantUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&ResourceAccessGrantUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&ResourceAccessGrantDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown ResourceAccessGrant mutation op: %q", m.Op())
+	}
+}
+
+// ResourceItemClient is a client for the ResourceItem schema.
+type ResourceItemClient struct {
+	config
+}
+
+// NewResourceItemClient returns a client for the ResourceItem from the given config.
+func NewResourceItemClient(c config) *ResourceItemClient {
+	return &ResourceItemClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `resourceitem.Hooks(f(g(h())))`.
+func (c *ResourceItemClient) Use(hooks ...Hook) {
+	c.hooks.ResourceItem = append(c.hooks.ResourceItem, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `resourceitem.Intercept(f(g(h())))`.
+func (c *ResourceItemClient) Intercept(interceptors ...Interceptor) {
+	c.inters.ResourceItem = append(c.inters.ResourceItem, interceptors...)
+}
+
+// Create returns a builder for creating a ResourceItem entity.
+func (c *ResourceItemClient) Create() *ResourceItemCreate {
+	mutation := newResourceItemMutation(c.config, OpCreate)
+	return &ResourceItemCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of ResourceItem entities.
+func (c *ResourceItemClient) CreateBulk(builders ...*ResourceItemCreate) *ResourceItemCreateBulk {
+	return &ResourceItemCreateBulk{config: c.config, builders: builders}
+}
+
+// MapCreateBulk creates a bulk creation builder from the given slice. For each item in the slice, the function creates
+// a builder and applies setFunc on it.
+func (c *ResourceItemClient) MapCreateBulk(slice any, setFunc func(*ResourceItemCreate, int)) *ResourceItemCreateBulk {
+	rv := reflect.ValueOf(slice)
+	if rv.Kind() != reflect.Slice {
+		return &ResourceItemCreateBulk{err: fmt.Errorf("calling to ResourceItemClient.MapCreateBulk with wrong type %T, need slice", slice)}
+	}
+	builders := make([]*ResourceItemCreate, rv.Len())
+	for i := 0; i < rv.Len(); i++ {
+		builders[i] = c.Create()
+		setFunc(builders[i], i)
+	}
+	return &ResourceItemCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for ResourceItem.
+func (c *ResourceItemClient) Update() *ResourceItemUpdate {
+	mutation := newResourceItemMutation(c.config, OpUpdate)
+	return &ResourceItemUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *ResourceItemClient) UpdateOne(_m *ResourceItem) *ResourceItemUpdateOne {
+	mutation := newResourceItemMutation(c.config, OpUpdateOne, withResourceItem(_m))
+	return &ResourceItemUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *ResourceItemClient) UpdateOneID(id uint) *ResourceItemUpdateOne {
+	mutation := newResourceItemMutation(c.config, OpUpdateOne, withResourceItemID(id))
+	return &ResourceItemUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for ResourceItem.
+func (c *ResourceItemClient) Delete() *ResourceItemDelete {
+	mutation := newResourceItemMutation(c.config, OpDelete)
+	return &ResourceItemDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *ResourceItemClient) DeleteOne(_m *ResourceItem) *ResourceItemDeleteOne {
+	return c.DeleteOneID(_m.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *ResourceItemClient) DeleteOneID(id uint) *ResourceItemDeleteOne {
+	builder := c.Delete().Where(resourceitem.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &ResourceItemDeleteOne{builder}
+}
+
+// Query returns a query builder for ResourceItem.
+func (c *ResourceItemClient) Query() *ResourceItemQuery {
+	return &ResourceItemQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeResourceItem},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a ResourceItem entity by its id.
+func (c *ResourceItemClient) Get(ctx context.Context, id uint) (*ResourceItem, error) {
+	return c.Query().Where(resourceitem.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *ResourceItemClient) GetX(ctx context.Context, id uint) *ResourceItem {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// QueryResource queries the resource edge of a ResourceItem.
+func (c *ResourceItemClient) QueryResource(_m *ResourceItem) *ResourceQuery {
+	query := (&ResourceClient{config: c.config}).Query()
+	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
+		id := _m.ID
+		step := sqlgraph.NewStep(
+			sqlgraph.From(resourceitem.Table, resourceitem.FieldID, id),
+			sqlgraph.To(resource.Table, resource.FieldID),
+			sqlgraph.Edge(sqlgraph.M2O, true, resourceitem.ResourceTable, resourceitem.ResourceColumn),
+		)
+		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
+		return fromV, nil
+	}
+	return query
+}
+
+// QueryOrders queries the orders edge of a ResourceItem.
+func (c *ResourceItemClient) QueryOrders(_m *ResourceItem) *ResourceOrderQuery {
+	query := (&ResourceOrderClient{config: c.config}).Query()
+	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
+		id := _m.ID
+		step := sqlgraph.NewStep(
+			sqlgraph.From(resourceitem.Table, resourceitem.FieldID, id),
+			sqlgraph.To(resourceorder.Table, resourceorder.FieldID),
+			sqlgraph.Edge(sqlgraph.O2M, false, resourceitem.OrdersTable, resourceitem.OrdersColumn),
+		)
+		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
+		return fromV, nil
+	}
+	return query
+}
+
+// QueryAccessGrants queries the access_grants edge of a ResourceItem.
+func (c *ResourceItemClient) QueryAccessGrants(_m *ResourceItem) *ResourceAccessGrantQuery {
+	query := (&ResourceAccessGrantClient{config: c.config}).Query()
+	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
+		id := _m.ID
+		step := sqlgraph.NewStep(
+			sqlgraph.From(resourceitem.Table, resourceitem.FieldID, id),
+			sqlgraph.To(resourceaccessgrant.Table, resourceaccessgrant.FieldID),
+			sqlgraph.Edge(sqlgraph.O2M, false, resourceitem.AccessGrantsTable, resourceitem.AccessGrantsColumn),
+		)
+		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
+		return fromV, nil
+	}
+	return query
+}
+
+// Hooks returns the client hooks.
+func (c *ResourceItemClient) Hooks() []Hook {
+	hooks := c.hooks.ResourceItem
+	return append(hooks[:len(hooks):len(hooks)], resourceitem.Hooks[:]...)
+}
+
+// Interceptors returns the client interceptors.
+func (c *ResourceItemClient) Interceptors() []Interceptor {
+	return c.inters.ResourceItem
+}
+
+func (c *ResourceItemClient) mutate(ctx context.Context, m *ResourceItemMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&ResourceItemCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&ResourceItemUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&ResourceItemUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&ResourceItemDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown ResourceItem mutation op: %q", m.Op())
+	}
+}
+
+// ResourceOrderClient is a client for the ResourceOrder schema.
+type ResourceOrderClient struct {
+	config
+}
+
+// NewResourceOrderClient returns a client for the ResourceOrder from the given config.
+func NewResourceOrderClient(c config) *ResourceOrderClient {
+	return &ResourceOrderClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `resourceorder.Hooks(f(g(h())))`.
+func (c *ResourceOrderClient) Use(hooks ...Hook) {
+	c.hooks.ResourceOrder = append(c.hooks.ResourceOrder, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `resourceorder.Intercept(f(g(h())))`.
+func (c *ResourceOrderClient) Intercept(interceptors ...Interceptor) {
+	c.inters.ResourceOrder = append(c.inters.ResourceOrder, interceptors...)
+}
+
+// Create returns a builder for creating a ResourceOrder entity.
+func (c *ResourceOrderClient) Create() *ResourceOrderCreate {
+	mutation := newResourceOrderMutation(c.config, OpCreate)
+	return &ResourceOrderCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of ResourceOrder entities.
+func (c *ResourceOrderClient) CreateBulk(builders ...*ResourceOrderCreate) *ResourceOrderCreateBulk {
+	return &ResourceOrderCreateBulk{config: c.config, builders: builders}
+}
+
+// MapCreateBulk creates a bulk creation builder from the given slice. For each item in the slice, the function creates
+// a builder and applies setFunc on it.
+func (c *ResourceOrderClient) MapCreateBulk(slice any, setFunc func(*ResourceOrderCreate, int)) *ResourceOrderCreateBulk {
+	rv := reflect.ValueOf(slice)
+	if rv.Kind() != reflect.Slice {
+		return &ResourceOrderCreateBulk{err: fmt.Errorf("calling to ResourceOrderClient.MapCreateBulk with wrong type %T, need slice", slice)}
+	}
+	builders := make([]*ResourceOrderCreate, rv.Len())
+	for i := 0; i < rv.Len(); i++ {
+		builders[i] = c.Create()
+		setFunc(builders[i], i)
+	}
+	return &ResourceOrderCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for ResourceOrder.
+func (c *ResourceOrderClient) Update() *ResourceOrderUpdate {
+	mutation := newResourceOrderMutation(c.config, OpUpdate)
+	return &ResourceOrderUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *ResourceOrderClient) UpdateOne(_m *ResourceOrder) *ResourceOrderUpdateOne {
+	mutation := newResourceOrderMutation(c.config, OpUpdateOne, withResourceOrder(_m))
+	return &ResourceOrderUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *ResourceOrderClient) UpdateOneID(id uint) *ResourceOrderUpdateOne {
+	mutation := newResourceOrderMutation(c.config, OpUpdateOne, withResourceOrderID(id))
+	return &ResourceOrderUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for ResourceOrder.
+func (c *ResourceOrderClient) Delete() *ResourceOrderDelete {
+	mutation := newResourceOrderMutation(c.config, OpDelete)
+	return &ResourceOrderDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *ResourceOrderClient) DeleteOne(_m *ResourceOrder) *ResourceOrderDeleteOne {
+	return c.DeleteOneID(_m.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *ResourceOrderClient) DeleteOneID(id uint) *ResourceOrderDeleteOne {
+	builder := c.Delete().Where(resourceorder.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &ResourceOrderDeleteOne{builder}
+}
+
+// Query returns a query builder for ResourceOrder.
+func (c *ResourceOrderClient) Query() *ResourceOrderQuery {
+	return &ResourceOrderQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeResourceOrder},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a ResourceOrder entity by its id.
+func (c *ResourceOrderClient) Get(ctx context.Context, id uint) (*ResourceOrder, error) {
+	return c.Query().Where(resourceorder.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *ResourceOrderClient) GetX(ctx context.Context, id uint) *ResourceOrder {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// QueryResource queries the resource edge of a ResourceOrder.
+func (c *ResourceOrderClient) QueryResource(_m *ResourceOrder) *ResourceQuery {
+	query := (&ResourceClient{config: c.config}).Query()
+	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
+		id := _m.ID
+		step := sqlgraph.NewStep(
+			sqlgraph.From(resourceorder.Table, resourceorder.FieldID, id),
+			sqlgraph.To(resource.Table, resource.FieldID),
+			sqlgraph.Edge(sqlgraph.M2O, true, resourceorder.ResourceTable, resourceorder.ResourceColumn),
+		)
+		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
+		return fromV, nil
+	}
+	return query
+}
+
+// QueryResourceItem queries the resource_item edge of a ResourceOrder.
+func (c *ResourceOrderClient) QueryResourceItem(_m *ResourceOrder) *ResourceItemQuery {
+	query := (&ResourceItemClient{config: c.config}).Query()
+	query.path = func(context.Context) (fromV *sql.Selector, _ error) {
+		id := _m.ID
+		step := sqlgraph.NewStep(
+			sqlgraph.From(resourceorder.Table, resourceorder.FieldID, id),
+			sqlgraph.To(resourceitem.Table, resourceitem.FieldID),
+			sqlgraph.Edge(sqlgraph.M2O, true, resourceorder.ResourceItemTable, resourceorder.ResourceItemColumn),
+		)
+		fromV = sqlgraph.Neighbors(_m.driver.Dialect(), step)
+		return fromV, nil
+	}
+	return query
+}
+
+// Hooks returns the client hooks.
+func (c *ResourceOrderClient) Hooks() []Hook {
+	return c.hooks.ResourceOrder
+}
+
+// Interceptors returns the client interceptors.
+func (c *ResourceOrderClient) Interceptors() []Interceptor {
+	return c.inters.ResourceOrder
+}
+
+func (c *ResourceOrderClient) mutate(ctx context.Context, m *ResourceOrderMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&ResourceOrderCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&ResourceOrderUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&ResourceOrderUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&ResourceOrderDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown ResourceOrder mutation op: %q", m.Op())
 	}
 }
 
@@ -4954,16 +5825,18 @@ func (c *VisitorStatClient) mutate(ctx context.Context, m *VisitorStatMutation) 
 type (
 	hooks struct {
 		Album, AlbumCategory, Article, ArticleHistory, Comment, DirectLink, DocSeries,
-		Entity, File, FileEntity, Link, LinkCategory, LinkTag, Metadata,
-		NotificationType, Page, PostCategory, PostTag, Setting, StoragePolicy,
-		Subscriber, Tag, URLStat, User, UserGroup, UserInstalledTheme,
-		UserNotificationConfig, VisitorLog, VisitorStat []ent.Hook
+		Entity, File, FileEntity, Link, LinkCategory, LinkTag, MemberBinding, Metadata,
+		NotificationType, Page, PostCategory, PostTag, Resource, ResourceAccessGrant,
+		ResourceItem, ResourceOrder, Setting, StoragePolicy, Subscriber, Tag, URLStat,
+		User, UserGroup, UserInstalledTheme, UserNotificationConfig, VisitorLog,
+		VisitorStat []ent.Hook
 	}
 	inters struct {
 		Album, AlbumCategory, Article, ArticleHistory, Comment, DirectLink, DocSeries,
-		Entity, File, FileEntity, Link, LinkCategory, LinkTag, Metadata,
-		NotificationType, Page, PostCategory, PostTag, Setting, StoragePolicy,
-		Subscriber, Tag, URLStat, User, UserGroup, UserInstalledTheme,
-		UserNotificationConfig, VisitorLog, VisitorStat []ent.Interceptor
+		Entity, File, FileEntity, Link, LinkCategory, LinkTag, MemberBinding, Metadata,
+		NotificationType, Page, PostCategory, PostTag, Resource, ResourceAccessGrant,
+		ResourceItem, ResourceOrder, Setting, StoragePolicy, Subscriber, Tag, URLStat,
+		User, UserGroup, UserInstalledTheme, UserNotificationConfig, VisitorLog,
+		VisitorStat []ent.Interceptor
 	}
 )

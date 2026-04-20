@@ -38,6 +38,8 @@ type Tx struct {
 	LinkCategory *LinkCategoryClient
 	// LinkTag is the client for interacting with the LinkTag builders.
 	LinkTag *LinkTagClient
+	// MemberBinding is the client for interacting with the MemberBinding builders.
+	MemberBinding *MemberBindingClient
 	// Metadata is the client for interacting with the Metadata builders.
 	Metadata *MetadataClient
 	// NotificationType is the client for interacting with the NotificationType builders.
@@ -48,6 +50,14 @@ type Tx struct {
 	PostCategory *PostCategoryClient
 	// PostTag is the client for interacting with the PostTag builders.
 	PostTag *PostTagClient
+	// Resource is the client for interacting with the Resource builders.
+	Resource *ResourceClient
+	// ResourceAccessGrant is the client for interacting with the ResourceAccessGrant builders.
+	ResourceAccessGrant *ResourceAccessGrantClient
+	// ResourceItem is the client for interacting with the ResourceItem builders.
+	ResourceItem *ResourceItemClient
+	// ResourceOrder is the client for interacting with the ResourceOrder builders.
+	ResourceOrder *ResourceOrderClient
 	// Setting is the client for interacting with the Setting builders.
 	Setting *SettingClient
 	// StoragePolicy is the client for interacting with the StoragePolicy builders.
@@ -214,11 +224,16 @@ func (tx *Tx) init() {
 	tx.Link = NewLinkClient(tx.config)
 	tx.LinkCategory = NewLinkCategoryClient(tx.config)
 	tx.LinkTag = NewLinkTagClient(tx.config)
+	tx.MemberBinding = NewMemberBindingClient(tx.config)
 	tx.Metadata = NewMetadataClient(tx.config)
 	tx.NotificationType = NewNotificationTypeClient(tx.config)
 	tx.Page = NewPageClient(tx.config)
 	tx.PostCategory = NewPostCategoryClient(tx.config)
 	tx.PostTag = NewPostTagClient(tx.config)
+	tx.Resource = NewResourceClient(tx.config)
+	tx.ResourceAccessGrant = NewResourceAccessGrantClient(tx.config)
+	tx.ResourceItem = NewResourceItemClient(tx.config)
+	tx.ResourceOrder = NewResourceOrderClient(tx.config)
 	tx.Setting = NewSettingClient(tx.config)
 	tx.StoragePolicy = NewStoragePolicyClient(tx.config)
 	tx.Subscriber = NewSubscriberClient(tx.config)

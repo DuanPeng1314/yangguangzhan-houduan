@@ -415,6 +415,11 @@ const (
 	KeySeoGoogleEnable     SettingKey = "seo.google.enable"     // 启用 Google 推送
 	KeySeoGoogleCredential SettingKey = "seo.google.credential" // Google Service Account 凭证
 
+	// --- 极光库 DP7575 接入配置 ---
+	KeyDP7575BaseURL   SettingKey = "dp7575.base_url"
+	KeyDP7575SiteID    SettingKey = "dp7575.site_id"
+	KeyDP7575APISecret SettingKey = "dp7575.api_secret"
+
 	// --- 顶栏用户面板配置 ---
 	KeyUserPanelShowUserCenter     SettingKey = "userpanel.show_user_center"
 	KeyUserPanelShowNotifications  SettingKey = "userpanel.show_notifications"
