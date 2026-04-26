@@ -27,6 +27,7 @@ type resourceOrderRepository interface {
 	Create(ctx context.Context, input ResourceOrderCreateDTO) (ResourceOrderRecordDTO, error)
 	MarkPaid(ctx context.Context, businessOrderNo string, externalOrderNo string, paidAt *time.Time) (bool, error)
 	UpdateExternalOrderNo(ctx context.Context, businessOrderNo string, externalOrderNo string) error
+	FindLatestPendingByUserAndResource(ctx context.Context, userID int64, resourceID string) (ResourceOrderRecordDTO, error)
 	FindByBusinessOrderNo(ctx context.Context, businessOrderNo string) (ResourceOrderRecordDTO, error)
 	FindByExternalOrderNo(ctx context.Context, externalOrderNo string) (ResourceOrderRecordDTO, error)
 }

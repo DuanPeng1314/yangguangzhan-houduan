@@ -38,26 +38,26 @@ func (s *bindingRepositoryStub) Upsert(_ context.Context, dto commerce.MemberBin
 }
 
 type memberClientStub struct {
-	statusResp      dp7575.MemberStatusResponse
-	statusErr       error
-	statusReq       dp7575.MemberStatusRequest
-	catalogResp     dp7575.MemberProductsCatalogResponse
-	orderResp       dp7575.OrderCreateResponse
-	paymentResp     dp7575.OrderPaymentDetailResponse
-	redeemResp      dp7575.CardRedeemCreateResponse
-	ensureResp      dp7575.UserMapEnsureResponse
-	ensureErr       error
-	ensureReq       dp7575.UserMapEnsureRequest
-	orderReq        dp7575.OrderCreateRequest
-	paymentReq      dp7575.OrderPaymentDetailRequest
-	redeemReq       dp7575.CardRedeemCreateRequest
-	orderListResp   dp7575.OrderListResponse
-	orderDetailResp dp7575.OrderDetailResponse
-	orderStatusResp dp7575.OrderStatusResponse
-	adminOrderMappingsErr error
+	statusResp             dp7575.MemberStatusResponse
+	statusErr              error
+	statusReq              dp7575.MemberStatusRequest
+	catalogResp            dp7575.MemberProductsCatalogResponse
+	orderResp              dp7575.OrderCreateResponse
+	paymentResp            dp7575.OrderPaymentDetailResponse
+	redeemResp             dp7575.CardRedeemCreateResponse
+	ensureResp             dp7575.UserMapEnsureResponse
+	ensureErr              error
+	ensureReq              dp7575.UserMapEnsureRequest
+	orderReq               dp7575.OrderCreateRequest
+	paymentReq             dp7575.OrderPaymentDetailRequest
+	redeemReq              dp7575.CardRedeemCreateRequest
+	orderListResp          dp7575.OrderListResponse
+	orderDetailResp        dp7575.OrderDetailResponse
+	orderStatusResp        dp7575.OrderStatusResponse
+	adminOrderMappingsErr  error
 	adminOrderMappingsResp dp7575.AdminOrderMappingListResponse
-	adminCardsErr   error
-	adminCardsResp  dp7575.AdminCardListResponse
+	adminCardsErr          error
+	adminCardsResp         dp7575.AdminCardListResponse
 }
 
 type resourceRepositoryStub struct {
@@ -224,6 +224,13 @@ func (s *resourceOrderRepositoryStub) MarkPaid(_ context.Context, _, _ string, _
 
 func (s *resourceOrderRepositoryStub) UpdateExternalOrderNo(_ context.Context, _, _ string) error {
 	return nil
+}
+
+func (s *resourceOrderRepositoryStub) FindLatestPendingByUserAndResource(_ context.Context, userID int64, resourceID string) (commerce.ResourceOrderRecordDTO, error) {
+	if s.existing.BusinessOrderNo != "" && s.existing.UserID == userID && s.existing.ResourceID == resourceID && s.existing.Status == "pending" {
+		return s.existing, nil
+	}
+	return commerce.ResourceOrderRecordDTO{}, commerce.ErrResourceOrderNotFound
 }
 
 func (s *resourceOrderRepositoryStub) FindByBusinessOrderNo(_ context.Context, businessOrderNo string) (commerce.ResourceOrderRecordDTO, error) {
@@ -431,6 +438,20 @@ func TestHandler_CheckResourceAccess_NotFound(t *testing.T) {
 	require.Equal(t, http.StatusNotFound, recorder.Code)
 }
 
+func TestHandler_CheckResourceAccess_ArticleWithoutResourceReturnsSuccess(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	repo := &bindingRepositoryStub{binding: commerce.MemberBindingDTO{ExternalUserID: "oerx", SiteID: "yangguangzhan", Status: "active"}}
+	service := commerce.NewService(repo, &memberClientStub{})
+	service.SetResourceRepositories(&resourceRepositoryStub{err: commerce.ErrResourceNotFound}, &resourceOrderRepositoryStub{})
+	handler := NewHandler(service)
+
+	c, recorder := newOptionalMemberTestContext(t, http.MethodPost, "/api/public/resource/access-check", `{"abbrlink":"Y4hH"}`, true)
+	handler.CheckResourceAccess(c)
+
+	require.Equal(t, http.StatusOK, recorder.Code)
+	require.Contains(t, recorder.Body.String(), "resource_not_found")
+}
+
 func TestHandler_CheckResourceAccess_Unavailable(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	repo := &bindingRepositoryStub{binding: commerce.MemberBindingDTO{ExternalUserID: "oerx", SiteID: "yangguangzhan", Status: "active"}}
@@ -483,7 +504,7 @@ func TestExtractOptionalUserID_PreservesExplicitExternalUserID(t *testing.T) {
 
 func TestHandler_GetPremiumMemberBlockContent_UsesExplicitExternalIdentity(t *testing.T) {
 	gin.SetMode(gin.TestMode)
-    repo := &bindingRepositoryStub{err: commerce.ErrMemberBindingNotFound}
+	repo := &bindingRepositoryStub{err: commerce.ErrMemberBindingNotFound}
 	client := &memberClientStub{
 		statusResp: dp7575.MemberStatusResponse{IsMember: true, MemberLevel: json.RawMessage(`2`), MemberLevelName: "钻石会员"},
 		ensureResp: dp7575.UserMapEnsureResponse{SiteID: "yangguangzhan", ExternalUserID: "oerx", IsMapped: true},
@@ -718,8 +739,8 @@ func TestHandler_DeleteAdminResource(t *testing.T) {
 func TestHandler_ListAdminOrderMappings(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	service := commerce.NewService(&bindingRepositoryStub{}, &memberClientStub{adminOrderMappingsResp: dp7575.AdminOrderMappingListResponse{
-		Summary: dp7575.AdminOrderMappingSummary{Total: 2, SiteIDZeroCount: 1, LatestCreatedAt: "2026-04-19 15:58:07"},
-		List: []dp7575.AdminOrderMappingItem{{ZibOrderNum: "2604191558069513850", ExternalUserID: "oerx", WpUserID: 7, ProductType: "custom_amount", CreatedAt: "2026-04-19 15:58:07", StoredSiteID: "yangguangzhan", ResolvedSiteID: "yangguangzhan", SnapshotSiteID: "yangguangzhan", ContextSource: "snapshot"}},
+		Summary:    dp7575.AdminOrderMappingSummary{Total: 2, SiteIDZeroCount: 1, LatestCreatedAt: "2026-04-19 15:58:07"},
+		List:       []dp7575.AdminOrderMappingItem{{ZibOrderNum: "2604191558069513850", ExternalUserID: "oerx", WpUserID: 7, ProductType: "custom_amount", CreatedAt: "2026-04-19 15:58:07", StoredSiteID: "yangguangzhan", ResolvedSiteID: "yangguangzhan", SnapshotSiteID: "yangguangzhan", ContextSource: "snapshot"}},
 		Pagination: dp7575.OrderListPagination{Page: 1, PageSize: 20, Total: 2},
 	}})
 	handler := NewHandler(service)
@@ -735,7 +756,7 @@ func TestHandler_ListAdminOrderMappings(t *testing.T) {
 func TestHandler_ListAdminCards(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	service := commerce.NewService(&bindingRepositoryStub{}, &memberClientStub{adminCardsResp: dp7575.AdminCardListResponse{
-		List: []dp7575.AdminCardItem{{CardCode: "23282285775808818733", CardPassword: "Uu5WKelcw4Z86SfdonM9Kz1l09y6FBPrR7v", CardType: "vip_exchange", Status: "used", CreatedAt: "2026-04-18 22:27:00", UpdatedAt: "2026-04-18 22:33:43"}},
+		List:       []dp7575.AdminCardItem{{CardCode: "23282285775808818733", CardPassword: "Uu5WKelcw4Z86SfdonM9Kz1l09y6FBPrR7v", CardType: "vip_exchange", Status: "used", CreatedAt: "2026-04-18 22:27:00", UpdatedAt: "2026-04-18 22:33:43"}},
 		Pagination: dp7575.OrderListPagination{Page: 1, PageSize: 20, Total: 1},
 	}})
 	handler := NewHandler(service)

@@ -82,6 +82,30 @@ func (r *ResourceOrderRepo) UpdateExternalOrderNo(ctx context.Context, businessO
 	return err
 }
 
+func (r *ResourceOrderRepo) FindLatestPendingByUserAndResource(ctx context.Context, userID int64, resourceID string) (commerce.ResourceOrderRecordDTO, error) {
+	resourceDBID, err := decodeResourceID(resourceID)
+	if err != nil {
+		return commerce.ResourceOrderRecordDTO{}, err
+	}
+
+	entity, err := r.db.ResourceOrder.Query().
+		Where(
+			resourceorder.UserIDEQ(userID),
+			resourceorder.ResourceIDEQ(resourceDBID),
+			resourceorder.StatusEQ("pending"),
+		).
+		Order(ent.Desc(resourceorder.FieldUpdatedAt), ent.Desc(resourceorder.FieldID)).
+		First(ctx)
+	if err != nil {
+		if ent.IsNotFound(err) {
+			return commerce.ResourceOrderRecordDTO{}, commerce.ErrResourceOrderNotFound
+		}
+		return commerce.ResourceOrderRecordDTO{}, err
+	}
+
+	return toResourceOrderRecordDTO(entity)
+}
+
 func (r *ResourceOrderRepo) FindByBusinessOrderNo(ctx context.Context, businessOrderNo string) (commerce.ResourceOrderRecordDTO, error) {
 	entity, err := r.db.ResourceOrder.Query().
 		Where(resourceorder.BusinessOrderNoEQ(businessOrderNo)).

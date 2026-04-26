@@ -6,6 +6,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -20,6 +21,8 @@ type Client struct {
 	cfg        Config
 	httpClient *http.Client
 }
+
+var ErrNotConfigured = errors.New("dp7575 client not configured")
 
 func NewClient(cfg Config) *Client {
 	return &Client{
@@ -45,6 +48,10 @@ func (c *Client) BuildSignedHeaders(payload map[string]any) (http.Header, []byte
 }
 
 func (c *Client) doSignedPost(ctx context.Context, path string, payload map[string]any, out any, errorPrefix string) error {
+	if strings.TrimSpace(c.cfg.BaseURL) == "" {
+		return ErrNotConfigured
+	}
+
 	headers, body := c.BuildSignedHeaders(payload)
 
 	httpReq, err := http.NewRequestWithContext(ctx, http.MethodPost, strings.TrimRight(c.cfg.BaseURL, "/")+path, bytes.NewReader(body))

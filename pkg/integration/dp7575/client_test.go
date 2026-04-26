@@ -30,6 +30,16 @@ func TestClient_BuildHeaders(t *testing.T) {
 	require.Equal(t, "dp-user-001", payload["external_user_id"])
 }
 
+func TestClient_EnsureUserMapping_ReturnsNotConfiguredWhenBaseURLMissing(t *testing.T) {
+	client := NewClient(Config{
+		SiteID:    "yangguangzhan",
+		APISecret: "secret-123",
+	})
+
+	_, err := client.EnsureUserMapping(context.Background(), UserMapEnsureRequest{ExternalUserID: "dp-user-001"})
+	require.ErrorIs(t, err, ErrNotConfigured)
+}
+
 func TestClient_MemberStatus(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		require.Equal(t, http.MethodPost, r.Method)

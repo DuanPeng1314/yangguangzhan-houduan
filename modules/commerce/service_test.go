@@ -42,47 +42,47 @@ func (s *bindingRepositoryStub) Upsert(_ context.Context, dto MemberBindingDTO) 
 }
 
 type memberStatusClientStub struct {
-	status           MemberStatusDTO
-	err              error
-	req              dp7575.MemberStatusRequest
-	profileResp      dp7575.MemberProfileResponse
-	profileErr       error
-	profileReq       dp7575.MemberProfileRequest
-	probe            dp7575.HealthProbeResult
-	queryResp        dp7575.UserMapQueryResponse
-	queryErr         error
-	queryReq         dp7575.UserMapQueryRequest
-	queryCalls       int
-	ensureResp       dp7575.UserMapEnsureResponse
-	ensureErr        error
-	ensureReq        dp7575.UserMapEnsureRequest
-	ensureCalls      int
-	catalogResp      dp7575.MemberProductsCatalogResponse
-	catalogErr       error
-	orderResp        dp7575.OrderCreateResponse
-	orderErr         error
-	orderReq         dp7575.OrderCreateRequest
-	paymentResp      dp7575.OrderPaymentDetailResponse
-	paymentErr       error
-	paymentReq       dp7575.OrderPaymentDetailRequest
-	precheckResp     dp7575.CardRedeemPrecheckResponse
-	precheckErr      error
-	precheckReq      dp7575.CardRedeemPrecheckRequest
-	redeemResp       dp7575.CardRedeemCreateResponse
-	redeemErr        error
-	redeemReq        dp7575.CardRedeemCreateRequest
-	orderListResp    dp7575.OrderListResponse
-	orderListResps   []dp7575.OrderListResponse
-	orderListErr     error
-	orderListReq     dp7575.OrderListRequest
-	orderDetailResp  dp7575.OrderDetailResponse
-	orderDetailResps map[string]dp7575.OrderDetailResponse
-	orderDetailErr   error
-	orderDetailReq   dp7575.OrderDetailRequest
-	orderStatusResp  dp7575.OrderStatusResponse
-	orderStatusErr   error
-	orderStatusReq   dp7575.OrderStatusRequest
-	orderListCalls   int
+	status                 MemberStatusDTO
+	err                    error
+	req                    dp7575.MemberStatusRequest
+	profileResp            dp7575.MemberProfileResponse
+	profileErr             error
+	profileReq             dp7575.MemberProfileRequest
+	probe                  dp7575.HealthProbeResult
+	queryResp              dp7575.UserMapQueryResponse
+	queryErr               error
+	queryReq               dp7575.UserMapQueryRequest
+	queryCalls             int
+	ensureResp             dp7575.UserMapEnsureResponse
+	ensureErr              error
+	ensureReq              dp7575.UserMapEnsureRequest
+	ensureCalls            int
+	catalogResp            dp7575.MemberProductsCatalogResponse
+	catalogErr             error
+	orderResp              dp7575.OrderCreateResponse
+	orderErr               error
+	orderReq               dp7575.OrderCreateRequest
+	paymentResp            dp7575.OrderPaymentDetailResponse
+	paymentErr             error
+	paymentReq             dp7575.OrderPaymentDetailRequest
+	precheckResp           dp7575.CardRedeemPrecheckResponse
+	precheckErr            error
+	precheckReq            dp7575.CardRedeemPrecheckRequest
+	redeemResp             dp7575.CardRedeemCreateResponse
+	redeemErr              error
+	redeemReq              dp7575.CardRedeemCreateRequest
+	orderListResp          dp7575.OrderListResponse
+	orderListResps         []dp7575.OrderListResponse
+	orderListErr           error
+	orderListReq           dp7575.OrderListRequest
+	orderDetailResp        dp7575.OrderDetailResponse
+	orderDetailResps       map[string]dp7575.OrderDetailResponse
+	orderDetailErr         error
+	orderDetailReq         dp7575.OrderDetailRequest
+	orderStatusResp        dp7575.OrderStatusResponse
+	orderStatusErr         error
+	orderStatusReq         dp7575.OrderStatusRequest
+	orderListCalls         int
 	adminOrderMappingsResp dp7575.AdminOrderMappingListResponse
 	adminOrderMappingsErr  error
 	adminOrderMappingsReq  dp7575.AdminOrderMappingListRequest
@@ -294,6 +294,16 @@ func (s *resourceOrderRepositoryStub) UpdateExternalOrderNo(_ context.Context, b
 	s.existing.BusinessOrderNo = businessOrderNo
 	s.existing.ExternalOrderNo = externalOrderNo
 	return nil
+}
+
+func (s *resourceOrderRepositoryStub) FindLatestPendingByUserAndResource(_ context.Context, userID int64, resourceID string) (ResourceOrderRecordDTO, error) {
+	if s.err != nil {
+		return ResourceOrderRecordDTO{}, s.err
+	}
+	if s.existing.BusinessOrderNo != "" && s.existing.UserID == userID && s.existing.ResourceID == resourceID && s.existing.Status == "pending" {
+		return s.existing, nil
+	}
+	return ResourceOrderRecordDTO{}, ErrResourceOrderNotFound
 }
 
 func (s *resourceOrderRepositoryStub) FindByBusinessOrderNo(_ context.Context, businessOrderNo string) (ResourceOrderRecordDTO, error) {
@@ -668,6 +678,21 @@ func TestCheckResourceAccess_LoginRequiredWhenNotLoggedIn(t *testing.T) {
 	require.Equal(t, "login_required", result.Reason)
 }
 
+func TestCheckResourceAccess_ArticleWithoutBoundResourceReturnsNoResourceState(t *testing.T) {
+	repo := &bindingRepositoryStub{err: ErrMemberBindingNotFound}
+	svc := NewService(repo, &memberStatusClientStub{})
+	svc.resourceRepo = &resourceRepositoryStub{err: ErrResourceNotFound}
+
+	result, err := svc.CheckResourceAccess(context.Background(), &ResourceAccessCheckActorDTO{LoggedIn: false}, ResourceAccessCheckRequestDTO{Abbrlink: "Y4hH"})
+
+	require.NoError(t, err)
+	require.False(t, result.AccessGranted)
+	require.False(t, result.RequiresPurchase)
+	require.False(t, result.Payable)
+	require.Equal(t, "resource_not_found", result.Reason)
+	require.Empty(t, result.ResourceMeta.ResourceID)
+}
+
 func TestCheckResourceAccess_UnavailableWhenSaleDisabled(t *testing.T) {
 	svc := NewService(&bindingRepositoryStub{err: ErrMemberBindingNotFound}, &memberStatusClientStub{})
 	svc.resourceRepo = &resourceRepositoryStub{resourceByID: ResourceRecordDTO{ResourceID: "res_demo_1", Title: "演示资源", ResourceType: "download_bundle", Status: "published", SaleEnabled: false, Price: 9.9, OriginalPrice: 9.9, MemberFree: false}}
@@ -711,7 +736,17 @@ func TestCheckResourceAccess_AlreadyPurchasedWhenPaidSnapshotMatchesResource(t *
 		orderDetailResp: dp7575.OrderDetailResponse{Snapshot: map[string]any{"product": map[string]any{"resource_id": "res_demo_1"}}},
 	}
 	svc := NewService(repo, client)
-	svc.resourceRepo = &resourceRepositoryStub{resourceByID: ResourceRecordDTO{ResourceID: "res_demo_1", Title: "已购资源", ResourceType: "download_bundle", Status: "published", SaleEnabled: true, Price: 9.9, OriginalPrice: 9.9, MemberFree: false}}
+	svc.resourceRepo = &resourceRepositoryStub{resourceByID: ResourceRecordDTO{
+		ResourceID:    "res_demo_1",
+		Title:         "已购资源",
+		ResourceType:  "download_bundle",
+		Status:        "published",
+		SaleEnabled:   true,
+		Price:         9.9,
+		OriginalPrice: 9.9,
+		MemberFree:    false,
+		ResourceItems: []ResourceAccessItemDTO{{ID: "item_1", Title: "百度网盘", URL: "https://pan.example.com/x"}},
+	}}
 
 	result, err := svc.CheckResourceAccess(context.Background(), &ResourceAccessCheckActorDTO{UserID: 1001, ExternalUserID: "user_public_123", LoggedIn: true}, ResourceAccessCheckRequestDTO{ResourceID: "res_demo_1"})
 
@@ -719,6 +754,8 @@ func TestCheckResourceAccess_AlreadyPurchasedWhenPaidSnapshotMatchesResource(t *
 	require.True(t, result.AccessGranted)
 	require.Equal(t, "already_purchased", result.Reason)
 	require.True(t, result.AlreadyPurchased)
+	require.Len(t, result.ResourceItems, 1)
+	require.Equal(t, "百度网盘", result.ResourceItems[0].Title)
 }
 
 func TestCheckResourceAccess_PaginatesRemoteOrderFallback(t *testing.T) {
@@ -856,6 +893,71 @@ func TestCreateResourcePurchaseOrder_UsesRequestedPaymentMethod(t *testing.T) {
 	_, err := svc.CreateResourcePurchaseOrder(context.Background(), 1001, ResourceAccessCheckRequestDTO{ResourceID: "res_real_1", PaymentMethod: "wechat"})
 	require.NoError(t, err)
 	require.Equal(t, "wechat", client.orderReq.PaymentMethod)
+}
+
+func TestCreateResourcePurchaseOrder_ReusesExistingPendingOrderWithoutCreatingLocalDuplicate(t *testing.T) {
+	orderRepo := &resourceOrderRepositoryStub{
+		existing: ResourceOrderRecordDTO{
+			UserID:          1001,
+			ResourceID:      "res_real_1",
+			BusinessOrderNo: "YGZ_RES_OLD_001",
+			Amount:          29.9,
+			Status:          "pending",
+			Snapshot:        map[string]any{"product": map[string]any{"resource_id": "res_real_1"}},
+		},
+	}
+	resourceRepo := &resourceRepositoryStub{resourceByID: ResourceRecordDTO{
+		ResourceID:   "res_real_1",
+		Title:        "前端项目源码包",
+		ResourceType: "download_bundle",
+		Status:       "published",
+		SaleEnabled:  true,
+		Price:        29.9,
+	}}
+	client := newStubMemberClient()
+	client.orderResp = dp7575.OrderCreateResponse{ZibOrderNum: "ZGZ_EXT_001", PayURL: "https://pay.example.com/1", OrderPrice: 29.9, OrderStatus: "pending"}
+
+	svc := NewService(newStubBindingRepo(), client)
+	svc.SetResourceRepositories(resourceRepo, orderRepo)
+
+	result, err := svc.CreateResourcePurchaseOrder(context.Background(), 1001, ResourceAccessCheckRequestDTO{ResourceID: "res_real_1"})
+	require.NoError(t, err)
+	require.Empty(t, orderRepo.created.BusinessOrderNo)
+	require.Equal(t, "YGZ_RES_OLD_001", client.orderReq.BusinessOrderNo)
+	require.Equal(t, "YGZ_RES_OLD_001", result.BusinessOrderNo)
+	require.Equal(t, "ZGZ_EXT_001", orderRepo.updatedExternalOrderNo)
+}
+
+func TestCreateResourcePurchaseOrder_ReusesExistingPendingOrderWithExternalOrderNo(t *testing.T) {
+	orderRepo := &resourceOrderRepositoryStub{
+		existing: ResourceOrderRecordDTO{
+			UserID:          1001,
+			ResourceID:      "res_real_1",
+			BusinessOrderNo: "YGZ_RES_OLD_002",
+			ExternalOrderNo: "ZGZ_EXT_OLD_002",
+			Amount:          29.9,
+			Status:          "pending",
+		},
+	}
+	resourceRepo := &resourceRepositoryStub{resourceByID: ResourceRecordDTO{
+		ResourceID:   "res_real_1",
+		Title:        "前端项目源码包",
+		ResourceType: "download_bundle",
+		Status:       "published",
+		SaleEnabled:  true,
+		Price:        29.9,
+	}}
+	client := newStubMemberClient()
+
+	svc := NewService(newStubBindingRepo(), client)
+	svc.SetResourceRepositories(resourceRepo, orderRepo)
+
+	result, err := svc.CreateResourcePurchaseOrder(context.Background(), 1001, ResourceAccessCheckRequestDTO{ResourceID: "res_real_1"})
+	require.NoError(t, err)
+	require.Empty(t, orderRepo.created.BusinessOrderNo)
+	require.Empty(t, client.orderReq.BusinessOrderNo)
+	require.Equal(t, "YGZ_RES_OLD_002", result.BusinessOrderNo)
+	require.Empty(t, result.PayURL)
 }
 
 func TestCreateResourcePurchaseOrder_RejectsSaleDisabledResource(t *testing.T) {
@@ -1554,6 +1656,18 @@ func TestService_AutoBindAfterLogin_ReturnsErrorWhenEnsureFails(t *testing.T) {
 	svc := NewService(repo, client)
 	_, err := svc.AutoBindAfterLogin(context.Background(), 1001, "user_public_123")
 	require.ErrorIs(t, err, context.DeadlineExceeded)
+	require.Nil(t, repo.upserted)
+}
+
+func TestService_AutoBindAfterLogin_SkipsWhenEnsureClientNotConfigured(t *testing.T) {
+	repo := &bindingRepositoryStub{err: ErrMemberBindingNotFound}
+	client := &memberStatusClientStub{ensureErr: dp7575.ErrNotConfigured}
+
+	svc := NewService(repo, client)
+	externalUserID, err := svc.AutoBindAfterLogin(context.Background(), 1001, "user_public_123")
+	require.NoError(t, err)
+	require.Equal(t, "user_public_123", externalUserID)
+	require.Equal(t, 1, client.ensureCalls)
 	require.Nil(t, repo.upserted)
 }
 

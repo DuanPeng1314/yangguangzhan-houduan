@@ -157,7 +157,7 @@ func (s *Service) SetArticleRepository(articleRepo articleContentRepository) {
 }
 
 var (
-	ErrMemberBindingNotFound         = errors.New("member binding not found")
+	ErrMemberBindingNotFound       = errors.New("member binding not found")
 	ErrResourceNotFound            = errors.New("resource not found")
 	ErrResourceUnavailable         = errors.New("resource unavailable")
 	ErrResourcePurchaseNotRequired = errors.New("resource purchase not required")
@@ -184,6 +184,9 @@ func (s *Service) AutoBindAfterLogin(ctx context.Context, userID int64, publicUs
 
 	result, err := s.client.EnsureUserMapping(ctx, dp7575.UserMapEnsureRequest{ExternalUserID: publicUserID})
 	if err != nil {
+		if errors.Is(err, dp7575.ErrNotConfigured) {
+			return publicUserID, nil
+		}
 		return "", err
 	}
 	if !result.IsMapped {
@@ -570,6 +573,21 @@ func validateAdminResourceInput(input AdminResourceDetailDTO) error {
 func (s *Service) CheckResourceAccess(ctx context.Context, actor *ResourceAccessCheckActorDTO, input ResourceAccessCheckRequestDTO) (ResourceAccessCheckDTO, error) {
 	resourceRecord, err := s.resolveResource(ctx, input)
 	if err != nil {
+		if errors.Is(err, ErrResourceNotFound) && input.ResourceID == "" {
+			return ResourceAccessCheckDTO{
+				AccessGranted:    false,
+				Reason:           "resource_not_found",
+				RequiresLogin:    false,
+				RequiresPurchase: false,
+				MemberFree:       false,
+				UserIsMember:     false,
+				AlreadyPurchased: false,
+				Price:            0,
+				OriginalPrice:    0,
+				BusinessType:     "resource_purchase",
+				Payable:          false,
+			}, nil
+		}
 		return ResourceAccessCheckDTO{}, err
 	}
 	if resourceRecord.Status != "published" || !resourceRecord.SaleEnabled {
@@ -624,7 +642,7 @@ func (s *Service) CheckResourceAccess(ctx context.Context, actor *ResourceAccess
 	hasPurchased := s.hasPurchasedResource(ctx, binding, resource.ResourceID)
 	if hasPurchased {
 		decision := s.buildPaidAccessDecision(paidAccessDecisionInput{Kind: paidAccessKindResource, LoggedIn: true, HasPurchase: true, UserIsMember: memberStatus.IsMember, MemberFree: pricing.MemberFree})
-		return s.buildResourceAccessCheckDTO(decision, resource, pricing, nil, memberStatus.IsMember, true, "already_purchased"), nil
+		return s.buildResourceAccessCheckDTO(decision, resource, pricing, resourceItems, memberStatus.IsMember, true, "already_purchased"), nil
 	}
 
 	decision := s.buildPaidAccessDecision(paidAccessDecisionInput{Kind: paidAccessKindResource, LoggedIn: true, HasPurchase: false, MemberFree: pricing.MemberFree, UserIsMember: memberStatus.IsMember})
@@ -780,20 +798,43 @@ func (s *Service) CreateResourcePurchaseOrderForActor(ctx context.Context, actor
 		return ResourcePurchaseOrderDTO{}, ErrResourceUnavailable
 	}
 
+	pendingOrder, err := s.resourceOrderRepo.FindLatestPendingByUserAndResource(ctx, actor.UserID, resourceRecord.ResourceID)
+	if err != nil && !errors.Is(err, ErrResourceOrderNotFound) {
+		return ResourcePurchaseOrderDTO{}, err
+	}
+	if err == nil && pendingOrder.ExternalOrderNo != "" {
+		return ResourcePurchaseOrderDTO{
+			BusinessOrderNo: pendingOrder.BusinessOrderNo,
+			PayURL:          "",
+			Amount:          pendingOrder.Amount,
+			ResourceID:      pendingOrder.ResourceID,
+		}, nil
+	}
+
 	businessOrderNo := fmt.Sprintf("YGZ_RES_%d", time.Now().UnixNano())
+	orderAmount := resourceRecord.Price
 	snapshot := buildResourcePurchaseSnapshot(resourceRecord)
+	if err == nil {
+		businessOrderNo = pendingOrder.BusinessOrderNo
+		orderAmount = pendingOrder.Amount
+		if len(pendingOrder.Snapshot) > 0 {
+			snapshot = pendingOrder.Snapshot
+		}
+	}
 	attach, _ := snapshot["product"].(map[string]any)
 
-	_, err = s.resourceOrderRepo.Create(ctx, ResourceOrderCreateDTO{
-		UserID:          actor.UserID,
-		ResourceID:      resourceRecord.ResourceID,
-		BusinessOrderNo: businessOrderNo,
-		Amount:          resourceRecord.Price,
-		Status:          "pending",
-		Snapshot:        snapshot,
-	})
 	if err != nil {
-		return ResourcePurchaseOrderDTO{}, err
+		_, err = s.resourceOrderRepo.Create(ctx, ResourceOrderCreateDTO{
+			UserID:          actor.UserID,
+			ResourceID:      resourceRecord.ResourceID,
+			BusinessOrderNo: businessOrderNo,
+			Amount:          orderAmount,
+			Status:          "pending",
+			Snapshot:        snapshot,
+		})
+		if err != nil {
+			return ResourcePurchaseOrderDTO{}, err
+		}
 	}
 
 	result, err := s.client.CreateOrder(ctx, dp7575.OrderCreateRequest{
@@ -802,7 +843,7 @@ func (s *Service) CreateResourcePurchaseOrderForActor(ctx context.Context, actor
 		BusinessType:    "resource_purchase",
 		BusinessOrderNo: businessOrderNo,
 		Subject:         "资源购买：" + resourceRecord.Title,
-		Amount:          resourceRecord.Price,
+		Amount:          orderAmount,
 		Attach:          attach,
 	})
 	if err != nil {
@@ -817,7 +858,7 @@ func (s *Service) CreateResourcePurchaseOrderForActor(ctx context.Context, actor
 	return ResourcePurchaseOrderDTO{
 		BusinessOrderNo: businessOrderNo,
 		PayURL:          result.PayURL,
-		Amount:          resourceRecord.Price,
+		Amount:          orderAmount,
 		ResourceID:      resourceRecord.ResourceID,
 	}, nil
 }
@@ -1090,7 +1131,6 @@ func (s *Service) resolveResourceAccessBinding(ctx context.Context, actor *Resou
 	return MemberBindingDTO{UserID: identity.UserID, ExternalUserID: identity.ExternalUserID, SiteID: identity.SiteID, Status: "active"}, nil
 }
 
-
 func (s *Service) resolvePaidIdentity(ctx context.Context, actor *ResourceAccessCheckActorDTO) (PaidIdentityDTO, error) {
 	if actor == nil || !actor.LoggedIn {
 		return PaidIdentityDTO{}, nil
@@ -1119,7 +1159,6 @@ func (s *Service) resolvePaidIdentity(ctx context.Context, actor *ResourceAccess
 
 	return PaidIdentityDTO{LoggedIn: true, UserID: actor.UserID, ExternalUserID: binding.ExternalUserID, SiteID: binding.SiteID, BindingReady: true}, nil
 }
-
 
 func (s *Service) ensureMemberBinding(ctx context.Context, userID int64, externalUserID string) (MemberBindingDTO, bool, error) {
 	result, ensureErr := s.client.EnsureUserMapping(ctx, dp7575.UserMapEnsureRequest{ExternalUserID: externalUserID})
