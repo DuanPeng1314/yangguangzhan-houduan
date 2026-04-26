@@ -8,6 +8,7 @@ import (
 type resourceRepository interface {
 	FindResourceByID(ctx context.Context, resourceID string) (ResourceRecordDTO, error)
 	FindResourceByHost(ctx context.Context, hostType, hostID string) (ResourceRecordDTO, error)
+	ArticleHostExists(ctx context.Context, articleID string) (bool, error)
 	ListAdminResources(ctx context.Context, query AdminResourceListQueryDTO) (AdminResourceListDTO, error)
 	GetAdminResourceDetail(ctx context.Context, resourceID string) (AdminResourceDetailDTO, error)
 	CreateAdminResource(ctx context.Context, input AdminResourceDetailDTO) (AdminResourceDetailDTO, error)

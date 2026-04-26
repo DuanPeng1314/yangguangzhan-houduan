@@ -19,6 +19,7 @@ import (
 	"github.com/anzhiyu-c/anheyu-app/ent/linkcategory"
 	"github.com/anzhiyu-c/anheyu-app/ent/linktag"
 	"github.com/anzhiyu-c/anheyu-app/ent/memberbinding"
+	"github.com/anzhiyu-c/anheyu-app/ent/memberzonecontent"
 	"github.com/anzhiyu-c/anheyu-app/ent/metadata"
 	"github.com/anzhiyu-c/anheyu-app/ent/notificationtype"
 	"github.com/anzhiyu-c/anheyu-app/ent/page"
@@ -567,6 +568,85 @@ func init() {
 	memberbinding.DefaultUpdatedAt = memberbindingDescUpdatedAt.Default.(func() time.Time)
 	// memberbinding.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
 	memberbinding.UpdateDefaultUpdatedAt = memberbindingDescUpdatedAt.UpdateDefault.(func() time.Time)
+	memberzonecontentMixin := schema.MemberZoneContent{}.Mixin()
+	memberzonecontentMixinHooks0 := memberzonecontentMixin[0].Hooks()
+	memberzonecontent.Hooks[0] = memberzonecontentMixinHooks0[0]
+	memberzonecontentFields := schema.MemberZoneContent{}.Fields()
+	_ = memberzonecontentFields
+	// memberzonecontentDescCreatedAt is the schema descriptor for created_at field.
+	memberzonecontentDescCreatedAt := memberzonecontentFields[1].Descriptor()
+	// memberzonecontent.DefaultCreatedAt holds the default value on creation for the created_at field.
+	memberzonecontent.DefaultCreatedAt = memberzonecontentDescCreatedAt.Default.(func() time.Time)
+	// memberzonecontentDescUpdatedAt is the schema descriptor for updated_at field.
+	memberzonecontentDescUpdatedAt := memberzonecontentFields[2].Descriptor()
+	// memberzonecontent.DefaultUpdatedAt holds the default value on creation for the updated_at field.
+	memberzonecontent.DefaultUpdatedAt = memberzonecontentDescUpdatedAt.Default.(func() time.Time)
+	// memberzonecontent.UpdateDefaultUpdatedAt holds the default value on update for the updated_at field.
+	memberzonecontent.UpdateDefaultUpdatedAt = memberzonecontentDescUpdatedAt.UpdateDefault.(func() time.Time)
+	// memberzonecontentDescTitle is the schema descriptor for title field.
+	memberzonecontentDescTitle := memberzonecontentFields[3].Descriptor()
+	// memberzonecontent.TitleValidator is a validator for the "title" field. It is called by the builders before save.
+	memberzonecontent.TitleValidator = func() func(string) error {
+		validators := memberzonecontentDescTitle.Validators
+		fns := [...]func(string) error{
+			validators[0].(func(string) error),
+			validators[1].(func(string) error),
+		}
+		return func(title string) error {
+			for _, fn := range fns {
+				if err := fn(title); err != nil {
+					return err
+				}
+			}
+			return nil
+		}
+	}()
+	// memberzonecontentDescSlug is the schema descriptor for slug field.
+	memberzonecontentDescSlug := memberzonecontentFields[4].Descriptor()
+	// memberzonecontent.SlugValidator is a validator for the "slug" field. It is called by the builders before save.
+	memberzonecontent.SlugValidator = func() func(string) error {
+		validators := memberzonecontentDescSlug.Validators
+		fns := [...]func(string) error{
+			validators[0].(func(string) error),
+			validators[1].(func(string) error),
+		}
+		return func(slug string) error {
+			for _, fn := range fns {
+				if err := fn(slug); err != nil {
+					return err
+				}
+			}
+			return nil
+		}
+	}()
+	// memberzonecontentDescSummary is the schema descriptor for summary field.
+	memberzonecontentDescSummary := memberzonecontentFields[5].Descriptor()
+	// memberzonecontent.SummaryValidator is a validator for the "summary" field. It is called by the builders before save.
+	memberzonecontent.SummaryValidator = memberzonecontentDescSummary.Validators[0].(func(string) error)
+	// memberzonecontentDescCoverURL is the schema descriptor for cover_url field.
+	memberzonecontentDescCoverURL := memberzonecontentFields[6].Descriptor()
+	// memberzonecontent.CoverURLValidator is a validator for the "cover_url" field. It is called by the builders before save.
+	memberzonecontent.CoverURLValidator = memberzonecontentDescCoverURL.Validators[0].(func(string) error)
+	// memberzonecontentDescStatus is the schema descriptor for status field.
+	memberzonecontentDescStatus := memberzonecontentFields[9].Descriptor()
+	// memberzonecontent.DefaultStatus holds the default value on creation for the status field.
+	memberzonecontent.DefaultStatus = memberzonecontentDescStatus.Default.(string)
+	// memberzonecontent.StatusValidator is a validator for the "status" field. It is called by the builders before save.
+	memberzonecontent.StatusValidator = memberzonecontentDescStatus.Validators[0].(func(string) error)
+	// memberzonecontentDescAccessLevel is the schema descriptor for access_level field.
+	memberzonecontentDescAccessLevel := memberzonecontentFields[10].Descriptor()
+	// memberzonecontent.DefaultAccessLevel holds the default value on creation for the access_level field.
+	memberzonecontent.DefaultAccessLevel = memberzonecontentDescAccessLevel.Default.(string)
+	// memberzonecontent.AccessLevelValidator is a validator for the "access_level" field. It is called by the builders before save.
+	memberzonecontent.AccessLevelValidator = memberzonecontentDescAccessLevel.Validators[0].(func(string) error)
+	// memberzonecontentDescSort is the schema descriptor for sort field.
+	memberzonecontentDescSort := memberzonecontentFields[11].Descriptor()
+	// memberzonecontent.DefaultSort holds the default value on creation for the sort field.
+	memberzonecontent.DefaultSort = memberzonecontentDescSort.Default.(int)
+	// memberzonecontentDescSourceArticleID is the schema descriptor for source_article_id field.
+	memberzonecontentDescSourceArticleID := memberzonecontentFields[12].Descriptor()
+	// memberzonecontent.SourceArticleIDValidator is a validator for the "source_article_id" field. It is called by the builders before save.
+	memberzonecontent.SourceArticleIDValidator = memberzonecontentDescSourceArticleID.Validators[0].(func(string) error)
 	metadataMixin := schema.Metadata{}.Mixin()
 	metadataMixinHooks0 := metadataMixin[0].Hooks()
 	metadata.Hooks[0] = metadataMixinHooks0[0]

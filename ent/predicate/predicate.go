@@ -48,6 +48,9 @@ type LinkTag func(*sql.Selector)
 // MemberBinding is the predicate function for memberbinding builders.
 type MemberBinding func(*sql.Selector)
 
+// MemberZoneContent is the predicate function for memberzonecontent builders.
+type MemberZoneContent func(*sql.Selector)
+
 // Metadata is the predicate function for metadata builders.
 type Metadata func(*sql.Selector)
 

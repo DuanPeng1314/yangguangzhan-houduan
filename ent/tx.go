@@ -40,6 +40,8 @@ type Tx struct {
 	LinkTag *LinkTagClient
 	// MemberBinding is the client for interacting with the MemberBinding builders.
 	MemberBinding *MemberBindingClient
+	// MemberZoneContent is the client for interacting with the MemberZoneContent builders.
+	MemberZoneContent *MemberZoneContentClient
 	// Metadata is the client for interacting with the Metadata builders.
 	Metadata *MetadataClient
 	// NotificationType is the client for interacting with the NotificationType builders.
@@ -225,6 +227,7 @@ func (tx *Tx) init() {
 	tx.LinkCategory = NewLinkCategoryClient(tx.config)
 	tx.LinkTag = NewLinkTagClient(tx.config)
 	tx.MemberBinding = NewMemberBindingClient(tx.config)
+	tx.MemberZoneContent = NewMemberZoneContentClient(tx.config)
 	tx.Metadata = NewMetadataClient(tx.config)
 	tx.NotificationType = NewNotificationTypeClient(tx.config)
 	tx.Page = NewPageClient(tx.config)

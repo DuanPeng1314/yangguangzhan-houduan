@@ -177,6 +177,18 @@ func (f MemberBindingFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Valu
 	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.MemberBindingMutation", m)
 }
 
+// The MemberZoneContentFunc type is an adapter to allow the use of ordinary
+// function as MemberZoneContent mutator.
+type MemberZoneContentFunc func(context.Context, *ent.MemberZoneContentMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f MemberZoneContentFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.MemberZoneContentMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.MemberZoneContentMutation", m)
+}
+
 // The MetadataFunc type is an adapter to allow the use of ordinary
 // function as Metadata mutator.
 type MetadataFunc func(context.Context, *ent.MetadataMutation) (ent.Value, error)

@@ -36,6 +36,23 @@ func resourceErrorStatus(err error) int {
 	}
 }
 
+func memberZoneErrorStatus(err error) int {
+	switch {
+	case errors.Is(err, commerce.ErrMemberZoneInvalidInput):
+		return http.StatusBadRequest
+	case errors.Is(err, commerce.ErrMemberZoneNotFound):
+		return http.StatusNotFound
+	case errors.Is(err, commerce.ErrMemberZoneUnavailable):
+		return http.StatusUnauthorized
+	case errors.Is(err, commerce.ErrMemberZoneAccessDenied):
+		return http.StatusForbidden
+	case errors.Is(err, commerce.ErrMemberZoneConflict):
+		return http.StatusConflict
+	default:
+		return http.StatusInternalServerError
+	}
+}
+
 func validateResourceLocatorRequest(req commerce.ResourceAccessCheckRequestDTO) error {
 	if err := commerce.ValidateResourceLocatorForAPI(req); err != nil {
 		return err
@@ -128,43 +145,6 @@ func (h *Handler) GetStatus(c *gin.Context) {
 	response.Success(c, status, "获取会员状态成功")
 }
 
-type premiumMemberBlockAccessRequest struct {
-	ContentID string `json:"content_id" binding:"required"`
-}
-
-type premiumMemberBlockContentResponse struct {
-	Content string `json:"content"`
-}
-
-func (h *Handler) GetPremiumMemberBlockContent(c *gin.Context) {
-	var req premiumMemberBlockAccessRequest
-	if err := c.ShouldBindJSON(&req); err != nil || strings.TrimSpace(req.ContentID) == "" {
-		response.Fail(c, http.StatusBadRequest, "content_id 不能为空")
-		return
-	}
-
-	actor := extractOptionalUserID(c)
-	if actor == nil || !actor.LoggedIn {
-		response.Fail(c, http.StatusUnauthorized, "未登录或无法获取当前用户信息")
-		return
-	}
-
-	content, err := h.service.GetPremiumMemberBlockContentForActor(c.Request.Context(), actor, req.ContentID)
-	if err != nil {
-		switch {
-		case errors.Is(err, commerce.ErrPremiumBlockNotFound):
-			response.Fail(c, http.StatusNotFound, "高级会员内容不存在")
-		case errors.Is(err, commerce.ErrResourcePurchaseNotRequired):
-			response.Fail(c, http.StatusForbidden, "无权访问高级会员内容")
-		default:
-			response.Fail(c, http.StatusInternalServerError, "获取高级会员内容失败")
-		}
-		return
-	}
-
-	response.Success(c, premiumMemberBlockContentResponse{Content: content}, "获取成功")
-}
-
 func (h *Handler) GetProfile(c *gin.Context) {
 	userID, ok := extractUserID(c)
 	if !ok {
@@ -241,6 +221,21 @@ func (h *Handler) ListAdminResources(c *gin.Context) {
 	response.Success(c, result, "获取资源列表成功")
 }
 
+func (h *Handler) ListAdminMemberZones(c *gin.Context) {
+	result, err := h.service.ListAdminMemberZones(c.Request.Context(), commerce.AdminMemberZoneListQueryDTO{
+		Page:     parsePositiveInt(c.Query("page"), 1),
+		PageSize: parsePositiveInt(c.Query("pageSize"), 10),
+		Query:    c.Query("query"),
+		Status:   c.Query("status"),
+	})
+	if err != nil {
+		response.Fail(c, memberZoneErrorStatus(err), "获取会员专区列表失败")
+		return
+	}
+
+	response.Success(c, result, "获取会员专区列表成功")
+}
+
 func (h *Handler) ListAdminOrderMappings(c *gin.Context) {
 	result, err := h.service.ListAdminOrderMappings(c.Request.Context(), commerce.AdminOrderMappingListQueryDTO{
 		SiteID:      c.Query("site_id"),
@@ -289,6 +284,16 @@ func (h *Handler) GetAdminResourceDetail(c *gin.Context) {
 	response.Success(c, result, "获取资源详情成功")
 }
 
+func (h *Handler) GetAdminMemberZoneDetail(c *gin.Context) {
+	result, err := h.service.GetAdminMemberZoneDetail(c.Request.Context(), c.Param("id"))
+	if err != nil {
+		response.Fail(c, memberZoneErrorStatus(err), "获取会员专区详情失败")
+		return
+	}
+
+	response.Success(c, result, "获取会员专区详情成功")
+}
+
 func (h *Handler) CreateAdminResource(c *gin.Context) {
 	var req commerce.AdminResourceDetailDTO
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -305,6 +310,22 @@ func (h *Handler) CreateAdminResource(c *gin.Context) {
 	response.Success(c, result, "创建资源成功")
 }
 
+func (h *Handler) CreateAdminMemberZone(c *gin.Context) {
+	var req commerce.AdminMemberZoneDetailDTO
+	if err := c.ShouldBindJSON(&req); err != nil {
+		response.Fail(c, http.StatusBadRequest, "请求参数错误")
+		return
+	}
+
+	result, err := h.service.CreateAdminMemberZone(c.Request.Context(), req)
+	if err != nil {
+		response.Fail(c, memberZoneErrorStatus(err), "创建会员专区失败")
+		return
+	}
+
+	response.Success(c, result, "创建会员专区成功")
+}
+
 func (h *Handler) UpdateAdminResource(c *gin.Context) {
 	var req commerce.AdminResourceDetailDTO
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -319,6 +340,22 @@ func (h *Handler) UpdateAdminResource(c *gin.Context) {
 	}
 
 	response.Success(c, result, "更新资源成功")
+}
+
+func (h *Handler) UpdateAdminMemberZone(c *gin.Context) {
+	var req commerce.AdminMemberZoneDetailDTO
+	if err := c.ShouldBindJSON(&req); err != nil {
+		response.Fail(c, http.StatusBadRequest, "请求参数错误")
+		return
+	}
+
+	result, err := h.service.UpdateAdminMemberZone(c.Request.Context(), c.Param("id"), req)
+	if err != nil {
+		response.Fail(c, memberZoneErrorStatus(err), "更新会员专区失败")
+		return
+	}
+
+	response.Success(c, result, "更新会员专区成功")
 }
 
 func (h *Handler) BindAdminResourceToArticle(c *gin.Context) {
@@ -347,6 +384,15 @@ func (h *Handler) DeleteAdminResource(c *gin.Context) {
 	response.Success(c, nil, "删除资源成功")
 }
 
+func (h *Handler) DeleteAdminMemberZone(c *gin.Context) {
+	if err := h.service.DeleteAdminMemberZone(c.Request.Context(), c.Param("id")); err != nil {
+		response.Fail(c, memberZoneErrorStatus(err), "删除会员专区失败")
+		return
+	}
+
+	response.Success(c, nil, "删除会员专区成功")
+}
+
 func (h *Handler) SearchAdminArticleHosts(c *gin.Context) {
 	result, err := h.service.SearchAdminArticleHosts(c.Request.Context(), c.Query("query"))
 	if err != nil {
@@ -357,6 +403,16 @@ func (h *Handler) SearchAdminArticleHosts(c *gin.Context) {
 	response.Success(c, result, "搜索文章成功")
 }
 
+func (h *Handler) GetAdminMemberZoneByArticle(c *gin.Context) {
+	result, err := h.service.GetAdminMemberZoneByArticle(c.Request.Context(), c.Param("id"))
+	if err != nil {
+		response.Fail(c, memberZoneErrorStatus(err), "获取文章绑定会员专区失败")
+		return
+	}
+
+	response.Success(c, result, "获取文章绑定会员专区成功")
+}
+
 func (h *Handler) GetAdminResourceByArticle(c *gin.Context) {
 	result, err := h.service.GetAdminResourceByArticle(c.Request.Context(), c.Param("id"))
 	if err != nil {
@@ -365,6 +421,68 @@ func (h *Handler) GetAdminResourceByArticle(c *gin.Context) {
 	}
 
 	response.Success(c, result, "获取文章绑定资源成功")
+}
+
+func (h *Handler) ListPublishedMemberZones(c *gin.Context) {
+	result, err := h.service.ListPublishedMemberZones(c.Request.Context())
+	if err != nil {
+		response.Fail(c, memberZoneErrorStatus(err), "获取会员专区列表失败")
+		return
+	}
+
+	response.Success(c, result, "获取会员专区列表成功")
+}
+
+func (h *Handler) GetMemberZoneMeta(c *gin.Context) {
+	result, err := h.service.GetPublishedMemberZoneMetaBySlug(c.Request.Context(), c.Param("slug"))
+	if err != nil {
+		response.Fail(c, memberZoneErrorStatus(err), "获取会员专区信息失败")
+		return
+	}
+
+	response.Success(c, result, "获取会员专区信息成功")
+}
+
+func (h *Handler) GetPublicMemberZoneByArticle(c *gin.Context) {
+	result, err := h.service.GetPublishedMemberZoneByArticle(c.Request.Context(), c.Param("id"))
+	if err != nil {
+		response.Fail(c, memberZoneErrorStatus(err), "获取文章关联会员专区失败")
+		return
+	}
+
+	response.Success(c, result, "获取文章关联会员专区成功")
+}
+
+func (h *Handler) CheckMemberZoneAccess(c *gin.Context) {
+	var req commerce.MemberZoneAccessCheckRequestDTO
+	if err := c.ShouldBindJSON(&req); err != nil || strings.TrimSpace(req.Slug) == "" {
+		response.Fail(c, http.StatusBadRequest, "slug 不能为空")
+		return
+	}
+
+	result, err := h.service.CheckMemberZoneAccess(c.Request.Context(), extractOptionalUserID(c), req.Slug)
+	if err != nil {
+		response.Fail(c, memberZoneErrorStatus(err), "会员专区访问判定失败")
+		return
+	}
+
+	response.Success(c, result, "会员专区访问判定成功")
+}
+
+func (h *Handler) GetMemberZoneContent(c *gin.Context) {
+	var req commerce.MemberZoneAccessCheckRequestDTO
+	if err := c.ShouldBindJSON(&req); err != nil || strings.TrimSpace(req.Slug) == "" {
+		response.Fail(c, http.StatusBadRequest, "slug 不能为空")
+		return
+	}
+
+	result, err := h.service.GetMemberZoneContentForActor(c.Request.Context(), extractOptionalUserID(c), req.Slug)
+	if err != nil {
+		response.Fail(c, memberZoneErrorStatus(err), "获取会员专区正文失败")
+		return
+	}
+
+	response.Success(c, result, "获取会员专区正文成功")
 }
 
 func (h *Handler) CreatePurchaseOrder(c *gin.Context) {

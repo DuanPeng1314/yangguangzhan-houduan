@@ -230,9 +230,9 @@ func (r *Router) Setup(engine *gin.Engine) {
 	r.registerVersionRoutes(apiGroup)
 	r.registerNotificationRoutes(apiGroup)
 	r.registerConfigBackupRoutes(apiGroup)
-	r.registerSitemapRoutes(engine)     // 直接注册到engine，不使用/api前缀
-	r.registerRSSRoutes(engine)         // RSS/atom/feed 始终注册，与 SkipFrontend 无关
-	r.registerSSRThemeRoutes(apiGroup)  // 注册 SSR 主题管理路由
+	r.registerSitemapRoutes(engine)    // 直接注册到engine，不使用/api前缀
+	r.registerRSSRoutes(engine)        // RSS/atom/feed 始终注册，与 SkipFrontend 无关
+	r.registerSSRThemeRoutes(apiGroup) // 注册 SSR 主题管理路由
 	r.registerImageStyleRoutes(apiGroup)
 }
 
@@ -319,6 +319,26 @@ func (r *Router) registerMemberRoutes(api *gin.RouterGroup) {
 		resourcesAdmin.POST("/:id/bind-article", r.memberHandler.BindAdminResourceToArticle)
 		resourcesAdmin.PUT("/:id", r.memberHandler.UpdateAdminResource)
 		resourcesAdmin.DELETE("/:id", r.memberHandler.DeleteAdminResource)
+	}
+
+	memberZonePublic := api.Group("/public/member-zone").Use(r.mw.JWTAuthOptional())
+	{
+		memberZonePublic.GET("", r.memberHandler.ListPublishedMemberZones)
+		memberZonePublic.GET("/by-article/:id", r.memberHandler.GetPublicMemberZoneByArticle)
+		memberZonePublic.GET("/:slug/meta", r.memberHandler.GetMemberZoneMeta)
+		memberZonePublic.POST("/access-check", r.memberHandler.CheckMemberZoneAccess)
+		memberZonePublic.POST("/content", r.memberHandler.GetMemberZoneContent)
+	}
+
+	memberZoneAdmin := api.Group("/member-zone").Use(r.mw.JWTAuth(), r.mw.AdminAuth())
+	{
+		memberZoneAdmin.GET("", r.memberHandler.ListAdminMemberZones)
+		memberZoneAdmin.GET("/article-hosts", r.memberHandler.SearchAdminArticleHosts)
+		memberZoneAdmin.GET("/by-article/:id", r.memberHandler.GetAdminMemberZoneByArticle)
+		memberZoneAdmin.GET("/:id", r.memberHandler.GetAdminMemberZoneDetail)
+		memberZoneAdmin.POST("", r.memberHandler.CreateAdminMemberZone)
+		memberZoneAdmin.PUT("/:id", r.memberHandler.UpdateAdminMemberZone)
+		memberZoneAdmin.DELETE("/:id", r.memberHandler.DeleteAdminMemberZone)
 	}
 
 	ordersAdmin := api.Group("/admin/jiguangku/orders").Use(r.mw.JWTAuth(), r.mw.AdminAuth())
@@ -563,7 +583,6 @@ func (r *Router) registerPublicRoutes(api *gin.RouterGroup) {
 		public.POST("/subscribe/code", middleware.CustomRateLimit(3, 3), r.subscriberHandler.SendVerificationCode)
 		public.POST("/unsubscribe", r.subscriberHandler.Unsubscribe)
 		public.GET("/unsubscribe/:token", r.subscriberHandler.UnsubscribeByToken)
-		public.POST("/article/premium-block/content", r.mw.JWTAuth(), r.memberHandler.GetPremiumMemberBlockContent)
 	}
 }
 

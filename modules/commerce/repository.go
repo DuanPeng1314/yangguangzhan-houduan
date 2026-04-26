@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/anzhiyu-c/anheyu-app/ent"
-	"github.com/anzhiyu-c/anheyu-app/ent/article"
 	"github.com/anzhiyu-c/anheyu-app/ent/memberbinding"
 )
 
@@ -50,26 +49,4 @@ func (r *BindingRepository) FindByUserID(ctx context.Context, userID int64) (Mem
 		Status:         binding.Status,
 		LastSyncedAt:   binding.LastSyncedAt,
 	}, nil
-}
-
-type ArticleContentRepository struct {
-	client *ent.Client
-}
-
-func NewArticleContentRepository(client *ent.Client) *ArticleContentRepository {
-	return &ArticleContentRepository{client: client}
-}
-
-func (r *ArticleContentRepository) FindContentHTMLByPremiumContentID(ctx context.Context, contentID string) (string, error) {
-	entity, err := r.client.Article.Query().
-		Where(
-			article.DeletedAtIsNil(),
-			article.ContentHTMLContains(`data-content-id="`+contentID+`"`),
-		).
-		First(ctx)
-	if err != nil {
-		return "", ErrPremiumBlockNotFound
-	}
-
-	return entity.ContentHTML, nil
 }

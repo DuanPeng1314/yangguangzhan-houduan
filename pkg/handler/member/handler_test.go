@@ -2,7 +2,6 @@ package member_handler
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"net/http"
 	"net/http/httptest"
@@ -71,6 +70,7 @@ type resourceRepositoryStub struct {
 	resourceOrderCount  int
 	articleHostOptions  []commerce.AdminArticleHostOptionDTO
 	hasGrant            bool
+	articleHostExists   bool
 	err                 error
 }
 
@@ -176,6 +176,13 @@ func (s *resourceRepositoryStub) FindResourceByHost(_ context.Context, hostType,
 	return resource, nil
 }
 
+func (s *resourceRepositoryStub) ArticleHostExists(_ context.Context, _ string) (bool, error) {
+	if s.err != nil {
+		return false, s.err
+	}
+	return s.articleHostExists, nil
+}
+
 func (s *resourceRepositoryStub) ResolveArticleIDByAbbrlink(_ context.Context, abbrlink string) (string, error) {
 	if s.err != nil {
 		return "", s.err
@@ -202,16 +209,54 @@ type resourceOrderRepositoryStub struct {
 	existing commerce.ResourceOrderRecordDTO
 }
 
-type premiumArticleRepositoryStub struct {
-	articleContentHTML string
-	err                error
+type memberZoneRepositoryStub struct {
+	createErr error
 }
 
-func (s *premiumArticleRepositoryStub) FindContentHTMLByPremiumContentID(_ context.Context, _ string) (string, error) {
-	if s.err != nil {
-		return "", s.err
+func (s *memberZoneRepositoryStub) ListAdminMemberZones(_ context.Context, _ commerce.AdminMemberZoneListQueryDTO) (commerce.AdminMemberZoneListDTO, error) {
+	return commerce.AdminMemberZoneListDTO{}, nil
+}
+
+func (s *memberZoneRepositoryStub) GetAdminMemberZoneDetail(_ context.Context, _ string) (commerce.AdminMemberZoneDetailDTO, error) {
+	return commerce.AdminMemberZoneDetailDTO{}, s.createErr
+}
+
+func (s *memberZoneRepositoryStub) CreateAdminMemberZone(_ context.Context, input commerce.AdminMemberZoneDetailDTO) (commerce.AdminMemberZoneDetailDTO, error) {
+	if s.createErr != nil {
+		return commerce.AdminMemberZoneDetailDTO{}, s.createErr
 	}
-	return s.articleContentHTML, nil
+	return input, nil
+}
+
+func (s *memberZoneRepositoryStub) UpdateAdminMemberZone(_ context.Context, _ string, input commerce.AdminMemberZoneDetailDTO) (commerce.AdminMemberZoneDetailDTO, error) {
+	if s.createErr != nil {
+		return commerce.AdminMemberZoneDetailDTO{}, s.createErr
+	}
+	return input, nil
+}
+
+func (s *memberZoneRepositoryStub) DeleteAdminMemberZone(_ context.Context, _ string) error {
+	return s.createErr
+}
+
+func (s *memberZoneRepositoryStub) FindAdminMemberZoneByArticle(_ context.Context, _ string) (commerce.AdminMemberZoneDetailDTO, error) {
+	return commerce.AdminMemberZoneDetailDTO{}, s.createErr
+}
+
+func (s *memberZoneRepositoryStub) ListPublishedMemberZones(_ context.Context) ([]commerce.MemberZoneListItemDTO, error) {
+	return nil, s.createErr
+}
+
+func (s *memberZoneRepositoryStub) GetPublishedMemberZoneMetaBySlug(_ context.Context, _ string) (commerce.MemberZoneMetaDTO, error) {
+	return commerce.MemberZoneMetaDTO{}, s.createErr
+}
+
+func (s *memberZoneRepositoryStub) GetPublishedMemberZoneByArticle(_ context.Context, _ string) (commerce.MemberZoneMetaDTO, error) {
+	return commerce.MemberZoneMetaDTO{}, s.createErr
+}
+
+func (s *memberZoneRepositoryStub) GetPublishedMemberZoneContentBySlug(_ context.Context, _ string) (commerce.MemberZoneContentDTO, error) {
+	return commerce.MemberZoneContentDTO{}, s.createErr
 }
 
 func (s *resourceOrderRepositoryStub) Create(_ context.Context, input commerce.ResourceOrderCreateDTO) (commerce.ResourceOrderRecordDTO, error) {
@@ -465,27 +510,6 @@ func TestHandler_CheckResourceAccess_Unavailable(t *testing.T) {
 	require.Equal(t, http.StatusForbidden, recorder.Code)
 }
 
-func TestHandler_GetPremiumMemberBlockContent_PremiumMember(t *testing.T) {
-	gin.SetMode(gin.TestMode)
-	repo := &bindingRepositoryStub{binding: commerce.MemberBindingDTO{ExternalUserID: "oerx", SiteID: "yangguangzhan", Status: "active"}}
-	client := &memberClientStub{statusResp: dp7575.MemberStatusResponse{IsMember: true, MemberLevel: json.RawMessage(`2`), MemberLevelName: "钻石会员"}}
-	service := commerce.NewService(repo, client)
-	service.SetArticleRepository(&premiumArticleRepositoryStub{articleContentHTML: `<div class="premium-member-content-editor-preview" data-content-id="premium-10"><div class="premium-member-content-body"><div class="premium-member-content-preview"><p>会员正文内容</p></div></div></div>`})
-	handler := NewHandler(service)
-
-	c, recorder := newMemberTestContext(t, http.MethodPost, "/api/public/article/premium-block/content", `{"content_id":"premium-10"}`)
-	handler.GetPremiumMemberBlockContent(c)
-
-	require.Equal(t, http.StatusOK, recorder.Code)
-	var payload struct {
-		Data struct {
-			Content string `json:"content"`
-		} `json:"data"`
-	}
-	require.NoError(t, json.Unmarshal(recorder.Body.Bytes(), &payload))
-	require.Equal(t, `<p>会员正文内容</p>`, payload.Data.Content)
-}
-
 func TestExtractOptionalUserID_PreservesExplicitExternalUserID(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	recorder := httptest.NewRecorder()
@@ -500,30 +524,6 @@ func TestExtractOptionalUserID_PreservesExplicitExternalUserID(t *testing.T) {
 	require.True(t, actor.LoggedIn)
 	require.Equal(t, int64(1001), actor.UserID)
 	require.Equal(t, "dp-user-001", actor.ExternalUserID)
-}
-
-func TestHandler_GetPremiumMemberBlockContent_UsesExplicitExternalIdentity(t *testing.T) {
-	gin.SetMode(gin.TestMode)
-	repo := &bindingRepositoryStub{err: commerce.ErrMemberBindingNotFound}
-	client := &memberClientStub{
-		statusResp: dp7575.MemberStatusResponse{IsMember: true, MemberLevel: json.RawMessage(`2`), MemberLevelName: "钻石会员"},
-		ensureResp: dp7575.UserMapEnsureResponse{SiteID: "yangguangzhan", ExternalUserID: "oerx", IsMapped: true},
-	}
-	service := commerce.NewService(repo, client)
-	service.SetArticleRepository(&premiumArticleRepositoryStub{articleContentHTML: `<div class="premium-member-content-editor-preview" data-content-id="premium-10"><div class="premium-member-content-body"><div class="premium-member-content-preview"><p>会员正文内容</p></div></div></div>`})
-	handler := NewHandler(service)
-
-	c, recorder := newMemberTestContext(t, http.MethodPost, "/api/public/article/premium-block/content", `{"content_id":"premium-10"}`)
-	claimsValue, exists := c.Get(internalauth.ClaimsKey)
-	require.True(t, exists)
-	claims, ok := claimsValue.(*internalauth.CustomClaims)
-	require.True(t, ok)
-	claims.ExternalUserID = "dp-user-001"
-	handler.GetPremiumMemberBlockContent(c)
-
-	require.Equal(t, http.StatusOK, recorder.Code)
-	require.Equal(t, "dp-user-001", client.ensureReq.ExternalUserID)
-	require.Equal(t, "oerx", client.statusReq.ExternalUserID)
 }
 
 func TestHandler_GetPurchaseCatalog(t *testing.T) {
@@ -891,4 +891,30 @@ func TestHandler_GetMemberOrderStatus(t *testing.T) {
 	require.Contains(t, recorder.Body.String(), "VIP20260418001")
 	require.Contains(t, recorder.Body.String(), "member")
 	require.Contains(t, recorder.Body.String(), "已支付")
+}
+
+func TestHandler_CreateAdminMemberZone_BadRequestOnInvalidInput(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	svc := commerce.NewService(&bindingRepositoryStub{}, &memberClientStub{})
+	svc.SetMemberZoneRepository(&memberZoneRepositoryStub{})
+	handler := NewHandler(svc)
+
+	c, recorder := newMemberTestContext(t, http.MethodPost, "/api/member-zone", `{"title":"","slug":"vip-zone","content_md":"hello","content_html":"<p>hello</p>","status":"published","access_level":"member"}`)
+	handler.CreateAdminMemberZone(c)
+
+	require.Equal(t, http.StatusBadRequest, recorder.Code)
+	require.Contains(t, recorder.Body.String(), "创建会员专区失败")
+}
+
+func TestHandler_CreateAdminMemberZone_ConflictOnDuplicateSlug(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+	svc := commerce.NewService(&bindingRepositoryStub{}, &memberClientStub{})
+	svc.SetMemberZoneRepository(&memberZoneRepositoryStub{createErr: commerce.ErrMemberZoneConflict})
+	handler := NewHandler(svc)
+
+	c, recorder := newMemberTestContext(t, http.MethodPost, "/api/member-zone", `{"title":"会员内容","slug":"vip-zone","content_md":"hello","content_html":"<p>hello</p>","status":"published","access_level":"member"}`)
+	handler.CreateAdminMemberZone(c)
+
+	require.Equal(t, http.StatusConflict, recorder.Code)
+	require.Contains(t, recorder.Body.String(), "创建会员专区失败")
 }

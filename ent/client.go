@@ -29,6 +29,7 @@ import (
 	"github.com/anzhiyu-c/anheyu-app/ent/linkcategory"
 	"github.com/anzhiyu-c/anheyu-app/ent/linktag"
 	"github.com/anzhiyu-c/anheyu-app/ent/memberbinding"
+	"github.com/anzhiyu-c/anheyu-app/ent/memberzonecontent"
 	"github.com/anzhiyu-c/anheyu-app/ent/metadata"
 	"github.com/anzhiyu-c/anheyu-app/ent/notificationtype"
 	"github.com/anzhiyu-c/anheyu-app/ent/page"
@@ -84,6 +85,8 @@ type Client struct {
 	LinkTag *LinkTagClient
 	// MemberBinding is the client for interacting with the MemberBinding builders.
 	MemberBinding *MemberBindingClient
+	// MemberZoneContent is the client for interacting with the MemberZoneContent builders.
+	MemberZoneContent *MemberZoneContentClient
 	// Metadata is the client for interacting with the Metadata builders.
 	Metadata *MetadataClient
 	// NotificationType is the client for interacting with the NotificationType builders.
@@ -149,6 +152,7 @@ func (c *Client) init() {
 	c.LinkCategory = NewLinkCategoryClient(c.config)
 	c.LinkTag = NewLinkTagClient(c.config)
 	c.MemberBinding = NewMemberBindingClient(c.config)
+	c.MemberZoneContent = NewMemberZoneContentClient(c.config)
 	c.Metadata = NewMetadataClient(c.config)
 	c.NotificationType = NewNotificationTypeClient(c.config)
 	c.Page = NewPageClient(c.config)
@@ -275,6 +279,7 @@ func (c *Client) Tx(ctx context.Context) (*Tx, error) {
 		LinkCategory:           NewLinkCategoryClient(cfg),
 		LinkTag:                NewLinkTagClient(cfg),
 		MemberBinding:          NewMemberBindingClient(cfg),
+		MemberZoneContent:      NewMemberZoneContentClient(cfg),
 		Metadata:               NewMetadataClient(cfg),
 		NotificationType:       NewNotificationTypeClient(cfg),
 		Page:                   NewPageClient(cfg),
@@ -328,6 +333,7 @@ func (c *Client) BeginTx(ctx context.Context, opts *sql.TxOptions) (*Tx, error) 
 		LinkCategory:           NewLinkCategoryClient(cfg),
 		LinkTag:                NewLinkTagClient(cfg),
 		MemberBinding:          NewMemberBindingClient(cfg),
+		MemberZoneContent:      NewMemberZoneContentClient(cfg),
 		Metadata:               NewMetadataClient(cfg),
 		NotificationType:       NewNotificationTypeClient(cfg),
 		Page:                   NewPageClient(cfg),
@@ -379,11 +385,11 @@ func (c *Client) Use(hooks ...Hook) {
 	for _, n := range []interface{ Use(...Hook) }{
 		c.Album, c.AlbumCategory, c.Article, c.ArticleHistory, c.Comment, c.DirectLink,
 		c.DocSeries, c.Entity, c.File, c.FileEntity, c.Link, c.LinkCategory, c.LinkTag,
-		c.MemberBinding, c.Metadata, c.NotificationType, c.Page, c.PostCategory,
-		c.PostTag, c.Resource, c.ResourceAccessGrant, c.ResourceItem, c.ResourceOrder,
-		c.Setting, c.StoragePolicy, c.Subscriber, c.Tag, c.URLStat, c.User,
-		c.UserGroup, c.UserInstalledTheme, c.UserNotificationConfig, c.VisitorLog,
-		c.VisitorStat,
+		c.MemberBinding, c.MemberZoneContent, c.Metadata, c.NotificationType, c.Page,
+		c.PostCategory, c.PostTag, c.Resource, c.ResourceAccessGrant, c.ResourceItem,
+		c.ResourceOrder, c.Setting, c.StoragePolicy, c.Subscriber, c.Tag, c.URLStat,
+		c.User, c.UserGroup, c.UserInstalledTheme, c.UserNotificationConfig,
+		c.VisitorLog, c.VisitorStat,
 	} {
 		n.Use(hooks...)
 	}
@@ -395,11 +401,11 @@ func (c *Client) Intercept(interceptors ...Interceptor) {
 	for _, n := range []interface{ Intercept(...Interceptor) }{
 		c.Album, c.AlbumCategory, c.Article, c.ArticleHistory, c.Comment, c.DirectLink,
 		c.DocSeries, c.Entity, c.File, c.FileEntity, c.Link, c.LinkCategory, c.LinkTag,
-		c.MemberBinding, c.Metadata, c.NotificationType, c.Page, c.PostCategory,
-		c.PostTag, c.Resource, c.ResourceAccessGrant, c.ResourceItem, c.ResourceOrder,
-		c.Setting, c.StoragePolicy, c.Subscriber, c.Tag, c.URLStat, c.User,
-		c.UserGroup, c.UserInstalledTheme, c.UserNotificationConfig, c.VisitorLog,
-		c.VisitorStat,
+		c.MemberBinding, c.MemberZoneContent, c.Metadata, c.NotificationType, c.Page,
+		c.PostCategory, c.PostTag, c.Resource, c.ResourceAccessGrant, c.ResourceItem,
+		c.ResourceOrder, c.Setting, c.StoragePolicy, c.Subscriber, c.Tag, c.URLStat,
+		c.User, c.UserGroup, c.UserInstalledTheme, c.UserNotificationConfig,
+		c.VisitorLog, c.VisitorStat,
 	} {
 		n.Intercept(interceptors...)
 	}
@@ -436,6 +442,8 @@ func (c *Client) Mutate(ctx context.Context, m Mutation) (Value, error) {
 		return c.LinkTag.mutate(ctx, m)
 	case *MemberBindingMutation:
 		return c.MemberBinding.mutate(ctx, m)
+	case *MemberZoneContentMutation:
+		return c.MemberZoneContent.mutate(ctx, m)
 	case *MetadataMutation:
 		return c.Metadata.mutate(ctx, m)
 	case *NotificationTypeMutation:
@@ -2778,6 +2786,140 @@ func (c *MemberBindingClient) mutate(ctx context.Context, m *MemberBindingMutati
 		return (&MemberBindingDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
 	default:
 		return nil, fmt.Errorf("ent: unknown MemberBinding mutation op: %q", m.Op())
+	}
+}
+
+// MemberZoneContentClient is a client for the MemberZoneContent schema.
+type MemberZoneContentClient struct {
+	config
+}
+
+// NewMemberZoneContentClient returns a client for the MemberZoneContent from the given config.
+func NewMemberZoneContentClient(c config) *MemberZoneContentClient {
+	return &MemberZoneContentClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `memberzonecontent.Hooks(f(g(h())))`.
+func (c *MemberZoneContentClient) Use(hooks ...Hook) {
+	c.hooks.MemberZoneContent = append(c.hooks.MemberZoneContent, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `memberzonecontent.Intercept(f(g(h())))`.
+func (c *MemberZoneContentClient) Intercept(interceptors ...Interceptor) {
+	c.inters.MemberZoneContent = append(c.inters.MemberZoneContent, interceptors...)
+}
+
+// Create returns a builder for creating a MemberZoneContent entity.
+func (c *MemberZoneContentClient) Create() *MemberZoneContentCreate {
+	mutation := newMemberZoneContentMutation(c.config, OpCreate)
+	return &MemberZoneContentCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of MemberZoneContent entities.
+func (c *MemberZoneContentClient) CreateBulk(builders ...*MemberZoneContentCreate) *MemberZoneContentCreateBulk {
+	return &MemberZoneContentCreateBulk{config: c.config, builders: builders}
+}
+
+// MapCreateBulk creates a bulk creation builder from the given slice. For each item in the slice, the function creates
+// a builder and applies setFunc on it.
+func (c *MemberZoneContentClient) MapCreateBulk(slice any, setFunc func(*MemberZoneContentCreate, int)) *MemberZoneContentCreateBulk {
+	rv := reflect.ValueOf(slice)
+	if rv.Kind() != reflect.Slice {
+		return &MemberZoneContentCreateBulk{err: fmt.Errorf("calling to MemberZoneContentClient.MapCreateBulk with wrong type %T, need slice", slice)}
+	}
+	builders := make([]*MemberZoneContentCreate, rv.Len())
+	for i := 0; i < rv.Len(); i++ {
+		builders[i] = c.Create()
+		setFunc(builders[i], i)
+	}
+	return &MemberZoneContentCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for MemberZoneContent.
+func (c *MemberZoneContentClient) Update() *MemberZoneContentUpdate {
+	mutation := newMemberZoneContentMutation(c.config, OpUpdate)
+	return &MemberZoneContentUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *MemberZoneContentClient) UpdateOne(_m *MemberZoneContent) *MemberZoneContentUpdateOne {
+	mutation := newMemberZoneContentMutation(c.config, OpUpdateOne, withMemberZoneContent(_m))
+	return &MemberZoneContentUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *MemberZoneContentClient) UpdateOneID(id uint) *MemberZoneContentUpdateOne {
+	mutation := newMemberZoneContentMutation(c.config, OpUpdateOne, withMemberZoneContentID(id))
+	return &MemberZoneContentUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for MemberZoneContent.
+func (c *MemberZoneContentClient) Delete() *MemberZoneContentDelete {
+	mutation := newMemberZoneContentMutation(c.config, OpDelete)
+	return &MemberZoneContentDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *MemberZoneContentClient) DeleteOne(_m *MemberZoneContent) *MemberZoneContentDeleteOne {
+	return c.DeleteOneID(_m.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *MemberZoneContentClient) DeleteOneID(id uint) *MemberZoneContentDeleteOne {
+	builder := c.Delete().Where(memberzonecontent.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &MemberZoneContentDeleteOne{builder}
+}
+
+// Query returns a query builder for MemberZoneContent.
+func (c *MemberZoneContentClient) Query() *MemberZoneContentQuery {
+	return &MemberZoneContentQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeMemberZoneContent},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a MemberZoneContent entity by its id.
+func (c *MemberZoneContentClient) Get(ctx context.Context, id uint) (*MemberZoneContent, error) {
+	return c.Query().Where(memberzonecontent.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *MemberZoneContentClient) GetX(ctx context.Context, id uint) *MemberZoneContent {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// Hooks returns the client hooks.
+func (c *MemberZoneContentClient) Hooks() []Hook {
+	hooks := c.hooks.MemberZoneContent
+	return append(hooks[:len(hooks):len(hooks)], memberzonecontent.Hooks[:]...)
+}
+
+// Interceptors returns the client interceptors.
+func (c *MemberZoneContentClient) Interceptors() []Interceptor {
+	return c.inters.MemberZoneContent
+}
+
+func (c *MemberZoneContentClient) mutate(ctx context.Context, m *MemberZoneContentMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&MemberZoneContentCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&MemberZoneContentUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&MemberZoneContentUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&MemberZoneContentDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown MemberZoneContent mutation op: %q", m.Op())
 	}
 }
 
@@ -5825,18 +5967,18 @@ func (c *VisitorStatClient) mutate(ctx context.Context, m *VisitorStatMutation) 
 type (
 	hooks struct {
 		Album, AlbumCategory, Article, ArticleHistory, Comment, DirectLink, DocSeries,
-		Entity, File, FileEntity, Link, LinkCategory, LinkTag, MemberBinding, Metadata,
-		NotificationType, Page, PostCategory, PostTag, Resource, ResourceAccessGrant,
-		ResourceItem, ResourceOrder, Setting, StoragePolicy, Subscriber, Tag, URLStat,
-		User, UserGroup, UserInstalledTheme, UserNotificationConfig, VisitorLog,
-		VisitorStat []ent.Hook
+		Entity, File, FileEntity, Link, LinkCategory, LinkTag, MemberBinding,
+		MemberZoneContent, Metadata, NotificationType, Page, PostCategory, PostTag,
+		Resource, ResourceAccessGrant, ResourceItem, ResourceOrder, Setting,
+		StoragePolicy, Subscriber, Tag, URLStat, User, UserGroup, UserInstalledTheme,
+		UserNotificationConfig, VisitorLog, VisitorStat []ent.Hook
 	}
 	inters struct {
 		Album, AlbumCategory, Article, ArticleHistory, Comment, DirectLink, DocSeries,
-		Entity, File, FileEntity, Link, LinkCategory, LinkTag, MemberBinding, Metadata,
-		NotificationType, Page, PostCategory, PostTag, Resource, ResourceAccessGrant,
-		ResourceItem, ResourceOrder, Setting, StoragePolicy, Subscriber, Tag, URLStat,
-		User, UserGroup, UserInstalledTheme, UserNotificationConfig, VisitorLog,
-		VisitorStat []ent.Interceptor
+		Entity, File, FileEntity, Link, LinkCategory, LinkTag, MemberBinding,
+		MemberZoneContent, Metadata, NotificationType, Page, PostCategory, PostTag,
+		Resource, ResourceAccessGrant, ResourceItem, ResourceOrder, Setting,
+		StoragePolicy, Subscriber, Tag, URLStat, User, UserGroup, UserInstalledTheme,
+		UserNotificationConfig, VisitorLog, VisitorStat []ent.Interceptor
 	}
 )

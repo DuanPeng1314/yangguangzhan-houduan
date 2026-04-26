@@ -12,7 +12,6 @@ type Module struct {
 func NewModule(client *ent.Client, memberClient *dp7575.Client) *Module {
 	repo := NewBindingRepository(client)
 	service := NewService(repo, memberClient)
-	service.SetArticleRepository(NewArticleContentRepository(client))
 	return &Module{service: service}
 }
 

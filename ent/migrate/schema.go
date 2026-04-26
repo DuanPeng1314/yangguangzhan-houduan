@@ -521,6 +521,43 @@ var (
 			},
 		},
 	}
+	// MemberZoneContentsColumns holds the columns for the "member_zone_contents" table.
+	MemberZoneContentsColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeUint, Increment: true},
+		{Name: "deleted_at", Type: field.TypeTime, Nullable: true},
+		{Name: "created_at", Type: field.TypeTime},
+		{Name: "updated_at", Type: field.TypeTime},
+		{Name: "title", Type: field.TypeString, Size: 255, Comment: "内容标题"},
+		{Name: "slug", Type: field.TypeString, Unique: true, Size: 128, Comment: "内容短链"},
+		{Name: "summary", Type: field.TypeString, Nullable: true, Size: 1000, Comment: "内容摘要"},
+		{Name: "cover_url", Type: field.TypeString, Nullable: true, Size: 255, Comment: "封面图 URL"},
+		{Name: "content_md", Type: field.TypeString, Size: 2147483647, Comment: "Markdown 原文"},
+		{Name: "content_html", Type: field.TypeString, Size: 2147483647, Comment: "渲染后的 HTML"},
+		{Name: "status", Type: field.TypeString, Size: 20, Comment: "状态：draft/published/archived", Default: "draft"},
+		{Name: "access_level", Type: field.TypeString, Size: 20, Comment: "访问等级：member/premium", Default: "member"},
+		{Name: "sort", Type: field.TypeInt, Comment: "排序值，越小越靠前", Default: 0},
+		{Name: "source_article_id", Type: field.TypeString, Nullable: true, Size: 128, Comment: "关联文章公共 ID"},
+		{Name: "published_at", Type: field.TypeTime, Nullable: true, Comment: "发布时间"},
+	}
+	// MemberZoneContentsTable holds the schema information for the "member_zone_contents" table.
+	MemberZoneContentsTable = &schema.Table{
+		Name:       "member_zone_contents",
+		Comment:    "会员专区内容表",
+		Columns:    MemberZoneContentsColumns,
+		PrimaryKey: []*schema.Column{MemberZoneContentsColumns[0]},
+		Indexes: []*schema.Index{
+			{
+				Name:    "memberzonecontent_status_sort_published_at",
+				Unique:  false,
+				Columns: []*schema.Column{MemberZoneContentsColumns[10], MemberZoneContentsColumns[12], MemberZoneContentsColumns[14]},
+			},
+			{
+				Name:    "memberzonecontent_source_article_id",
+				Unique:  true,
+				Columns: []*schema.Column{MemberZoneContentsColumns[13]},
+			},
+		},
+	}
 	// MetadataColumns holds the columns for the "metadata" table.
 	MetadataColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeUint, Increment: true},
@@ -1265,6 +1302,7 @@ var (
 		LinkCategoriesTable,
 		LinkTagsTable,
 		MemberBindingsTable,
+		MemberZoneContentsTable,
 		MetadataTable,
 		NotificationTypesTable,
 		PagesTable,

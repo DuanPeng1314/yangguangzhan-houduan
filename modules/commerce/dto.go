@@ -259,6 +259,90 @@ type AdminOrderMappingListDTO struct {
 	Pagination AdminOrderMappingPaginationDTO `json:"pagination"`
 }
 
+type AdminMemberZoneListQueryDTO struct {
+	Page     int
+	PageSize int
+	Query    string
+	Status   string
+}
+
+type AdminMemberZoneListItemDTO struct {
+	ContentID          string `json:"content_id"`
+	Title              string `json:"title"`
+	Slug               string `json:"slug"`
+	Summary            string `json:"summary,omitempty"`
+	Status             string `json:"status"`
+	AccessLevel        string `json:"access_level"`
+	SourceArticleID    string `json:"source_article_id,omitempty"`
+	SourceArticleTitle string `json:"source_article_title,omitempty"`
+	UpdatedAt          string `json:"updated_at,omitempty"`
+	PublishedAt        string `json:"published_at,omitempty"`
+}
+
+type AdminMemberZoneListDTO struct {
+	List     []AdminMemberZoneListItemDTO `json:"list"`
+	Total    int                          `json:"total"`
+	Page     int                          `json:"page"`
+	PageSize int                          `json:"page_size"`
+}
+
+type AdminMemberZoneDetailDTO struct {
+	ContentID             string `json:"content_id"`
+	Title                 string `json:"title"`
+	Slug                  string `json:"slug"`
+	Summary               string `json:"summary,omitempty"`
+	CoverURL              string `json:"cover_url,omitempty"`
+	ContentMD             string `json:"content_md"`
+	ContentHTML           string `json:"content_html"`
+	Status                string `json:"status"`
+	AccessLevel           string `json:"access_level"`
+	Sort                  int    `json:"sort"`
+	SourceArticleID       string `json:"source_article_id,omitempty"`
+	SourceArticleTitle    string `json:"source_article_title,omitempty"`
+	SourceArticleAbbrlink string `json:"source_article_abbrlink,omitempty"`
+	UpdatedAt             string `json:"updated_at,omitempty"`
+	PublishedAt           string `json:"published_at,omitempty"`
+}
+
+type MemberZoneListItemDTO struct {
+	ContentID   string `json:"content_id"`
+	Title       string `json:"title"`
+	Slug        string `json:"slug"`
+	Summary     string `json:"summary,omitempty"`
+	CoverURL    string `json:"cover_url,omitempty"`
+	AccessLevel string `json:"access_level"`
+	PublishedAt string `json:"published_at,omitempty"`
+}
+
+type MemberZoneMetaDTO struct {
+	ContentID   string `json:"content_id"`
+	Title       string `json:"title"`
+	Slug        string `json:"slug"`
+	Summary     string `json:"summary,omitempty"`
+	CoverURL    string `json:"cover_url,omitempty"`
+	AccessLevel string `json:"access_level"`
+	PublishedAt string `json:"published_at,omitempty"`
+}
+
+type MemberZoneContentDTO struct {
+	ContentHTML string `json:"content_html"`
+}
+
+type MemberZoneAccessCheckRequestDTO struct {
+	Slug string `json:"slug"`
+}
+
+type MemberZoneAccessCheckDTO struct {
+	Allowed        bool              `json:"allowed"`
+	Reason         string            `json:"reason"`
+	RequiresLogin  bool              `json:"requires_login"`
+	RequiresMember bool              `json:"requires_member"`
+	RequiredLevel  string            `json:"required_level"`
+	UserIsMember   bool              `json:"user_is_member"`
+	UserLevel      string            `json:"user_level,omitempty"`
+	MemberZoneMeta MemberZoneMetaDTO `json:"member_zone_meta"`
+}
+
 type AdminCardListQueryDTO struct {
 	CardType string `json:"card_type,omitempty"`
 	Status   string `json:"status,omitempty"`
@@ -277,7 +361,7 @@ type AdminCardItemDTO struct {
 }
 
 type AdminCardListDTO struct {
-	List       []AdminCardItemDTO          `json:"list"`
+	List       []AdminCardItemDTO             `json:"list"`
 	Pagination AdminOrderMappingPaginationDTO `json:"pagination"`
 }
 

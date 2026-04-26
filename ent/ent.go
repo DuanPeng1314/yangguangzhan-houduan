@@ -26,6 +26,7 @@ import (
 	"github.com/anzhiyu-c/anheyu-app/ent/linkcategory"
 	"github.com/anzhiyu-c/anheyu-app/ent/linktag"
 	"github.com/anzhiyu-c/anheyu-app/ent/memberbinding"
+	"github.com/anzhiyu-c/anheyu-app/ent/memberzonecontent"
 	"github.com/anzhiyu-c/anheyu-app/ent/metadata"
 	"github.com/anzhiyu-c/anheyu-app/ent/notificationtype"
 	"github.com/anzhiyu-c/anheyu-app/ent/page"
@@ -120,6 +121,7 @@ func checkColumn(t, c string) error {
 			linkcategory.Table:           linkcategory.ValidColumn,
 			linktag.Table:                linktag.ValidColumn,
 			memberbinding.Table:          memberbinding.ValidColumn,
+			memberzonecontent.Table:      memberzonecontent.ValidColumn,
 			metadata.Table:               metadata.ValidColumn,
 			notificationtype.Table:       notificationtype.ValidColumn,
 			page.Table:                   page.ValidColumn,

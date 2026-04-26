@@ -25,6 +25,7 @@ import (
 	"github.com/anzhiyu-c/anheyu-app/ent/linkcategory"
 	"github.com/anzhiyu-c/anheyu-app/ent/linktag"
 	"github.com/anzhiyu-c/anheyu-app/ent/memberbinding"
+	"github.com/anzhiyu-c/anheyu-app/ent/memberzonecontent"
 	"github.com/anzhiyu-c/anheyu-app/ent/metadata"
 	"github.com/anzhiyu-c/anheyu-app/ent/notificationtype"
 	"github.com/anzhiyu-c/anheyu-app/ent/page"
@@ -72,6 +73,7 @@ const (
 	TypeLinkCategory           = "LinkCategory"
 	TypeLinkTag                = "LinkTag"
 	TypeMemberBinding          = "MemberBinding"
+	TypeMemberZoneContent      = "MemberZoneContent"
 	TypeMetadata               = "Metadata"
 	TypeNotificationType       = "NotificationType"
 	TypePage                   = "Page"
@@ -18399,6 +18401,1174 @@ func (m *MemberBindingMutation) ClearEdge(name string) error {
 // It returns an error if the edge is not defined in the schema.
 func (m *MemberBindingMutation) ResetEdge(name string) error {
 	return fmt.Errorf("unknown MemberBinding edge %s", name)
+}
+
+// MemberZoneContentMutation represents an operation that mutates the MemberZoneContent nodes in the graph.
+type MemberZoneContentMutation struct {
+	config
+	op                Op
+	typ               string
+	id                *uint
+	deleted_at        *time.Time
+	created_at        *time.Time
+	updated_at        *time.Time
+	title             *string
+	slug              *string
+	summary           *string
+	cover_url         *string
+	content_md        *string
+	content_html      *string
+	status            *string
+	access_level      *string
+	sort              *int
+	addsort           *int
+	source_article_id *string
+	published_at      *time.Time
+	clearedFields     map[string]struct{}
+	done              bool
+	oldValue          func(context.Context) (*MemberZoneContent, error)
+	predicates        []predicate.MemberZoneContent
+}
+
+var _ ent.Mutation = (*MemberZoneContentMutation)(nil)
+
+// memberzonecontentOption allows management of the mutation configuration using functional options.
+type memberzonecontentOption func(*MemberZoneContentMutation)
+
+// newMemberZoneContentMutation creates new mutation for the MemberZoneContent entity.
+func newMemberZoneContentMutation(c config, op Op, opts ...memberzonecontentOption) *MemberZoneContentMutation {
+	m := &MemberZoneContentMutation{
+		config:        c,
+		op:            op,
+		typ:           TypeMemberZoneContent,
+		clearedFields: make(map[string]struct{}),
+	}
+	for _, opt := range opts {
+		opt(m)
+	}
+	return m
+}
+
+// withMemberZoneContentID sets the ID field of the mutation.
+func withMemberZoneContentID(id uint) memberzonecontentOption {
+	return func(m *MemberZoneContentMutation) {
+		var (
+			err   error
+			once  sync.Once
+			value *MemberZoneContent
+		)
+		m.oldValue = func(ctx context.Context) (*MemberZoneContent, error) {
+			once.Do(func() {
+				if m.done {
+					err = errors.New("querying old values post mutation is not allowed")
+				} else {
+					value, err = m.Client().MemberZoneContent.Get(ctx, id)
+				}
+			})
+			return value, err
+		}
+		m.id = &id
+	}
+}
+
+// withMemberZoneContent sets the old MemberZoneContent of the mutation.
+func withMemberZoneContent(node *MemberZoneContent) memberzonecontentOption {
+	return func(m *MemberZoneContentMutation) {
+		m.oldValue = func(context.Context) (*MemberZoneContent, error) {
+			return node, nil
+		}
+		m.id = &node.ID
+	}
+}
+
+// Client returns a new `ent.Client` from the mutation. If the mutation was
+// executed in a transaction (ent.Tx), a transactional client is returned.
+func (m MemberZoneContentMutation) Client() *Client {
+	client := &Client{config: m.config}
+	client.init()
+	return client
+}
+
+// Tx returns an `ent.Tx` for mutations that were executed in transactions;
+// it returns an error otherwise.
+func (m MemberZoneContentMutation) Tx() (*Tx, error) {
+	if _, ok := m.driver.(*txDriver); !ok {
+		return nil, errors.New("ent: mutation is not running in a transaction")
+	}
+	tx := &Tx{config: m.config}
+	tx.init()
+	return tx, nil
+}
+
+// SetID sets the value of the id field. Note that this
+// operation is only accepted on creation of MemberZoneContent entities.
+func (m *MemberZoneContentMutation) SetID(id uint) {
+	m.id = &id
+}
+
+// ID returns the ID value in the mutation. Note that the ID is only available
+// if it was provided to the builder or after it was returned from the database.
+func (m *MemberZoneContentMutation) ID() (id uint, exists bool) {
+	if m.id == nil {
+		return
+	}
+	return *m.id, true
+}
+
+// IDs queries the database and returns the entity ids that match the mutation's predicate.
+// That means, if the mutation is applied within a transaction with an isolation level such
+// as sql.LevelSerializable, the returned ids match the ids of the rows that will be updated
+// or updated by the mutation.
+func (m *MemberZoneContentMutation) IDs(ctx context.Context) ([]uint, error) {
+	switch {
+	case m.op.Is(OpUpdateOne | OpDeleteOne):
+		id, exists := m.ID()
+		if exists {
+			return []uint{id}, nil
+		}
+		fallthrough
+	case m.op.Is(OpUpdate | OpDelete):
+		return m.Client().MemberZoneContent.Query().Where(m.predicates...).IDs(ctx)
+	default:
+		return nil, fmt.Errorf("IDs is not allowed on %s operations", m.op)
+	}
+}
+
+// SetDeletedAt sets the "deleted_at" field.
+func (m *MemberZoneContentMutation) SetDeletedAt(t time.Time) {
+	m.deleted_at = &t
+}
+
+// DeletedAt returns the value of the "deleted_at" field in the mutation.
+func (m *MemberZoneContentMutation) DeletedAt() (r time.Time, exists bool) {
+	v := m.deleted_at
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldDeletedAt returns the old "deleted_at" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldDeletedAt(ctx context.Context) (v *time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldDeletedAt is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldDeletedAt requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldDeletedAt: %w", err)
+	}
+	return oldValue.DeletedAt, nil
+}
+
+// ClearDeletedAt clears the value of the "deleted_at" field.
+func (m *MemberZoneContentMutation) ClearDeletedAt() {
+	m.deleted_at = nil
+	m.clearedFields[memberzonecontent.FieldDeletedAt] = struct{}{}
+}
+
+// DeletedAtCleared returns if the "deleted_at" field was cleared in this mutation.
+func (m *MemberZoneContentMutation) DeletedAtCleared() bool {
+	_, ok := m.clearedFields[memberzonecontent.FieldDeletedAt]
+	return ok
+}
+
+// ResetDeletedAt resets all changes to the "deleted_at" field.
+func (m *MemberZoneContentMutation) ResetDeletedAt() {
+	m.deleted_at = nil
+	delete(m.clearedFields, memberzonecontent.FieldDeletedAt)
+}
+
+// SetCreatedAt sets the "created_at" field.
+func (m *MemberZoneContentMutation) SetCreatedAt(t time.Time) {
+	m.created_at = &t
+}
+
+// CreatedAt returns the value of the "created_at" field in the mutation.
+func (m *MemberZoneContentMutation) CreatedAt() (r time.Time, exists bool) {
+	v := m.created_at
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCreatedAt returns the old "created_at" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldCreatedAt(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCreatedAt is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCreatedAt requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCreatedAt: %w", err)
+	}
+	return oldValue.CreatedAt, nil
+}
+
+// ResetCreatedAt resets all changes to the "created_at" field.
+func (m *MemberZoneContentMutation) ResetCreatedAt() {
+	m.created_at = nil
+}
+
+// SetUpdatedAt sets the "updated_at" field.
+func (m *MemberZoneContentMutation) SetUpdatedAt(t time.Time) {
+	m.updated_at = &t
+}
+
+// UpdatedAt returns the value of the "updated_at" field in the mutation.
+func (m *MemberZoneContentMutation) UpdatedAt() (r time.Time, exists bool) {
+	v := m.updated_at
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldUpdatedAt returns the old "updated_at" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldUpdatedAt(ctx context.Context) (v time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldUpdatedAt is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldUpdatedAt requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldUpdatedAt: %w", err)
+	}
+	return oldValue.UpdatedAt, nil
+}
+
+// ResetUpdatedAt resets all changes to the "updated_at" field.
+func (m *MemberZoneContentMutation) ResetUpdatedAt() {
+	m.updated_at = nil
+}
+
+// SetTitle sets the "title" field.
+func (m *MemberZoneContentMutation) SetTitle(s string) {
+	m.title = &s
+}
+
+// Title returns the value of the "title" field in the mutation.
+func (m *MemberZoneContentMutation) Title() (r string, exists bool) {
+	v := m.title
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldTitle returns the old "title" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldTitle(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldTitle is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldTitle requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldTitle: %w", err)
+	}
+	return oldValue.Title, nil
+}
+
+// ResetTitle resets all changes to the "title" field.
+func (m *MemberZoneContentMutation) ResetTitle() {
+	m.title = nil
+}
+
+// SetSlug sets the "slug" field.
+func (m *MemberZoneContentMutation) SetSlug(s string) {
+	m.slug = &s
+}
+
+// Slug returns the value of the "slug" field in the mutation.
+func (m *MemberZoneContentMutation) Slug() (r string, exists bool) {
+	v := m.slug
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldSlug returns the old "slug" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldSlug(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldSlug is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldSlug requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldSlug: %w", err)
+	}
+	return oldValue.Slug, nil
+}
+
+// ResetSlug resets all changes to the "slug" field.
+func (m *MemberZoneContentMutation) ResetSlug() {
+	m.slug = nil
+}
+
+// SetSummary sets the "summary" field.
+func (m *MemberZoneContentMutation) SetSummary(s string) {
+	m.summary = &s
+}
+
+// Summary returns the value of the "summary" field in the mutation.
+func (m *MemberZoneContentMutation) Summary() (r string, exists bool) {
+	v := m.summary
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldSummary returns the old "summary" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldSummary(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldSummary is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldSummary requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldSummary: %w", err)
+	}
+	return oldValue.Summary, nil
+}
+
+// ClearSummary clears the value of the "summary" field.
+func (m *MemberZoneContentMutation) ClearSummary() {
+	m.summary = nil
+	m.clearedFields[memberzonecontent.FieldSummary] = struct{}{}
+}
+
+// SummaryCleared returns if the "summary" field was cleared in this mutation.
+func (m *MemberZoneContentMutation) SummaryCleared() bool {
+	_, ok := m.clearedFields[memberzonecontent.FieldSummary]
+	return ok
+}
+
+// ResetSummary resets all changes to the "summary" field.
+func (m *MemberZoneContentMutation) ResetSummary() {
+	m.summary = nil
+	delete(m.clearedFields, memberzonecontent.FieldSummary)
+}
+
+// SetCoverURL sets the "cover_url" field.
+func (m *MemberZoneContentMutation) SetCoverURL(s string) {
+	m.cover_url = &s
+}
+
+// CoverURL returns the value of the "cover_url" field in the mutation.
+func (m *MemberZoneContentMutation) CoverURL() (r string, exists bool) {
+	v := m.cover_url
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCoverURL returns the old "cover_url" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldCoverURL(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCoverURL is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCoverURL requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCoverURL: %w", err)
+	}
+	return oldValue.CoverURL, nil
+}
+
+// ClearCoverURL clears the value of the "cover_url" field.
+func (m *MemberZoneContentMutation) ClearCoverURL() {
+	m.cover_url = nil
+	m.clearedFields[memberzonecontent.FieldCoverURL] = struct{}{}
+}
+
+// CoverURLCleared returns if the "cover_url" field was cleared in this mutation.
+func (m *MemberZoneContentMutation) CoverURLCleared() bool {
+	_, ok := m.clearedFields[memberzonecontent.FieldCoverURL]
+	return ok
+}
+
+// ResetCoverURL resets all changes to the "cover_url" field.
+func (m *MemberZoneContentMutation) ResetCoverURL() {
+	m.cover_url = nil
+	delete(m.clearedFields, memberzonecontent.FieldCoverURL)
+}
+
+// SetContentMd sets the "content_md" field.
+func (m *MemberZoneContentMutation) SetContentMd(s string) {
+	m.content_md = &s
+}
+
+// ContentMd returns the value of the "content_md" field in the mutation.
+func (m *MemberZoneContentMutation) ContentMd() (r string, exists bool) {
+	v := m.content_md
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldContentMd returns the old "content_md" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldContentMd(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldContentMd is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldContentMd requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldContentMd: %w", err)
+	}
+	return oldValue.ContentMd, nil
+}
+
+// ResetContentMd resets all changes to the "content_md" field.
+func (m *MemberZoneContentMutation) ResetContentMd() {
+	m.content_md = nil
+}
+
+// SetContentHTML sets the "content_html" field.
+func (m *MemberZoneContentMutation) SetContentHTML(s string) {
+	m.content_html = &s
+}
+
+// ContentHTML returns the value of the "content_html" field in the mutation.
+func (m *MemberZoneContentMutation) ContentHTML() (r string, exists bool) {
+	v := m.content_html
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldContentHTML returns the old "content_html" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldContentHTML(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldContentHTML is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldContentHTML requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldContentHTML: %w", err)
+	}
+	return oldValue.ContentHTML, nil
+}
+
+// ResetContentHTML resets all changes to the "content_html" field.
+func (m *MemberZoneContentMutation) ResetContentHTML() {
+	m.content_html = nil
+}
+
+// SetStatus sets the "status" field.
+func (m *MemberZoneContentMutation) SetStatus(s string) {
+	m.status = &s
+}
+
+// Status returns the value of the "status" field in the mutation.
+func (m *MemberZoneContentMutation) Status() (r string, exists bool) {
+	v := m.status
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldStatus returns the old "status" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldStatus(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldStatus is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldStatus requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldStatus: %w", err)
+	}
+	return oldValue.Status, nil
+}
+
+// ResetStatus resets all changes to the "status" field.
+func (m *MemberZoneContentMutation) ResetStatus() {
+	m.status = nil
+}
+
+// SetAccessLevel sets the "access_level" field.
+func (m *MemberZoneContentMutation) SetAccessLevel(s string) {
+	m.access_level = &s
+}
+
+// AccessLevel returns the value of the "access_level" field in the mutation.
+func (m *MemberZoneContentMutation) AccessLevel() (r string, exists bool) {
+	v := m.access_level
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldAccessLevel returns the old "access_level" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldAccessLevel(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldAccessLevel is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldAccessLevel requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldAccessLevel: %w", err)
+	}
+	return oldValue.AccessLevel, nil
+}
+
+// ResetAccessLevel resets all changes to the "access_level" field.
+func (m *MemberZoneContentMutation) ResetAccessLevel() {
+	m.access_level = nil
+}
+
+// SetSort sets the "sort" field.
+func (m *MemberZoneContentMutation) SetSort(i int) {
+	m.sort = &i
+	m.addsort = nil
+}
+
+// Sort returns the value of the "sort" field in the mutation.
+func (m *MemberZoneContentMutation) Sort() (r int, exists bool) {
+	v := m.sort
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldSort returns the old "sort" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldSort(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldSort is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldSort requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldSort: %w", err)
+	}
+	return oldValue.Sort, nil
+}
+
+// AddSort adds i to the "sort" field.
+func (m *MemberZoneContentMutation) AddSort(i int) {
+	if m.addsort != nil {
+		*m.addsort += i
+	} else {
+		m.addsort = &i
+	}
+}
+
+// AddedSort returns the value that was added to the "sort" field in this mutation.
+func (m *MemberZoneContentMutation) AddedSort() (r int, exists bool) {
+	v := m.addsort
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ResetSort resets all changes to the "sort" field.
+func (m *MemberZoneContentMutation) ResetSort() {
+	m.sort = nil
+	m.addsort = nil
+}
+
+// SetSourceArticleID sets the "source_article_id" field.
+func (m *MemberZoneContentMutation) SetSourceArticleID(s string) {
+	m.source_article_id = &s
+}
+
+// SourceArticleID returns the value of the "source_article_id" field in the mutation.
+func (m *MemberZoneContentMutation) SourceArticleID() (r string, exists bool) {
+	v := m.source_article_id
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldSourceArticleID returns the old "source_article_id" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldSourceArticleID(ctx context.Context) (v *string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldSourceArticleID is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldSourceArticleID requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldSourceArticleID: %w", err)
+	}
+	return oldValue.SourceArticleID, nil
+}
+
+// ClearSourceArticleID clears the value of the "source_article_id" field.
+func (m *MemberZoneContentMutation) ClearSourceArticleID() {
+	m.source_article_id = nil
+	m.clearedFields[memberzonecontent.FieldSourceArticleID] = struct{}{}
+}
+
+// SourceArticleIDCleared returns if the "source_article_id" field was cleared in this mutation.
+func (m *MemberZoneContentMutation) SourceArticleIDCleared() bool {
+	_, ok := m.clearedFields[memberzonecontent.FieldSourceArticleID]
+	return ok
+}
+
+// ResetSourceArticleID resets all changes to the "source_article_id" field.
+func (m *MemberZoneContentMutation) ResetSourceArticleID() {
+	m.source_article_id = nil
+	delete(m.clearedFields, memberzonecontent.FieldSourceArticleID)
+}
+
+// SetPublishedAt sets the "published_at" field.
+func (m *MemberZoneContentMutation) SetPublishedAt(t time.Time) {
+	m.published_at = &t
+}
+
+// PublishedAt returns the value of the "published_at" field in the mutation.
+func (m *MemberZoneContentMutation) PublishedAt() (r time.Time, exists bool) {
+	v := m.published_at
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldPublishedAt returns the old "published_at" field's value of the MemberZoneContent entity.
+// If the MemberZoneContent object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *MemberZoneContentMutation) OldPublishedAt(ctx context.Context) (v *time.Time, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldPublishedAt is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldPublishedAt requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldPublishedAt: %w", err)
+	}
+	return oldValue.PublishedAt, nil
+}
+
+// ClearPublishedAt clears the value of the "published_at" field.
+func (m *MemberZoneContentMutation) ClearPublishedAt() {
+	m.published_at = nil
+	m.clearedFields[memberzonecontent.FieldPublishedAt] = struct{}{}
+}
+
+// PublishedAtCleared returns if the "published_at" field was cleared in this mutation.
+func (m *MemberZoneContentMutation) PublishedAtCleared() bool {
+	_, ok := m.clearedFields[memberzonecontent.FieldPublishedAt]
+	return ok
+}
+
+// ResetPublishedAt resets all changes to the "published_at" field.
+func (m *MemberZoneContentMutation) ResetPublishedAt() {
+	m.published_at = nil
+	delete(m.clearedFields, memberzonecontent.FieldPublishedAt)
+}
+
+// Where appends a list predicates to the MemberZoneContentMutation builder.
+func (m *MemberZoneContentMutation) Where(ps ...predicate.MemberZoneContent) {
+	m.predicates = append(m.predicates, ps...)
+}
+
+// WhereP appends storage-level predicates to the MemberZoneContentMutation builder. Using this method,
+// users can use type-assertion to append predicates that do not depend on any generated package.
+func (m *MemberZoneContentMutation) WhereP(ps ...func(*sql.Selector)) {
+	p := make([]predicate.MemberZoneContent, len(ps))
+	for i := range ps {
+		p[i] = ps[i]
+	}
+	m.Where(p...)
+}
+
+// Op returns the operation name.
+func (m *MemberZoneContentMutation) Op() Op {
+	return m.op
+}
+
+// SetOp allows setting the mutation operation.
+func (m *MemberZoneContentMutation) SetOp(op Op) {
+	m.op = op
+}
+
+// Type returns the node type of this mutation (MemberZoneContent).
+func (m *MemberZoneContentMutation) Type() string {
+	return m.typ
+}
+
+// Fields returns all fields that were changed during this mutation. Note that in
+// order to get all numeric fields that were incremented/decremented, call
+// AddedFields().
+func (m *MemberZoneContentMutation) Fields() []string {
+	fields := make([]string, 0, 14)
+	if m.deleted_at != nil {
+		fields = append(fields, memberzonecontent.FieldDeletedAt)
+	}
+	if m.created_at != nil {
+		fields = append(fields, memberzonecontent.FieldCreatedAt)
+	}
+	if m.updated_at != nil {
+		fields = append(fields, memberzonecontent.FieldUpdatedAt)
+	}
+	if m.title != nil {
+		fields = append(fields, memberzonecontent.FieldTitle)
+	}
+	if m.slug != nil {
+		fields = append(fields, memberzonecontent.FieldSlug)
+	}
+	if m.summary != nil {
+		fields = append(fields, memberzonecontent.FieldSummary)
+	}
+	if m.cover_url != nil {
+		fields = append(fields, memberzonecontent.FieldCoverURL)
+	}
+	if m.content_md != nil {
+		fields = append(fields, memberzonecontent.FieldContentMd)
+	}
+	if m.content_html != nil {
+		fields = append(fields, memberzonecontent.FieldContentHTML)
+	}
+	if m.status != nil {
+		fields = append(fields, memberzonecontent.FieldStatus)
+	}
+	if m.access_level != nil {
+		fields = append(fields, memberzonecontent.FieldAccessLevel)
+	}
+	if m.sort != nil {
+		fields = append(fields, memberzonecontent.FieldSort)
+	}
+	if m.source_article_id != nil {
+		fields = append(fields, memberzonecontent.FieldSourceArticleID)
+	}
+	if m.published_at != nil {
+		fields = append(fields, memberzonecontent.FieldPublishedAt)
+	}
+	return fields
+}
+
+// Field returns the value of a field with the given name. The second boolean
+// return value indicates that this field was not set, or was not defined in the
+// schema.
+func (m *MemberZoneContentMutation) Field(name string) (ent.Value, bool) {
+	switch name {
+	case memberzonecontent.FieldDeletedAt:
+		return m.DeletedAt()
+	case memberzonecontent.FieldCreatedAt:
+		return m.CreatedAt()
+	case memberzonecontent.FieldUpdatedAt:
+		return m.UpdatedAt()
+	case memberzonecontent.FieldTitle:
+		return m.Title()
+	case memberzonecontent.FieldSlug:
+		return m.Slug()
+	case memberzonecontent.FieldSummary:
+		return m.Summary()
+	case memberzonecontent.FieldCoverURL:
+		return m.CoverURL()
+	case memberzonecontent.FieldContentMd:
+		return m.ContentMd()
+	case memberzonecontent.FieldContentHTML:
+		return m.ContentHTML()
+	case memberzonecontent.FieldStatus:
+		return m.Status()
+	case memberzonecontent.FieldAccessLevel:
+		return m.AccessLevel()
+	case memberzonecontent.FieldSort:
+		return m.Sort()
+	case memberzonecontent.FieldSourceArticleID:
+		return m.SourceArticleID()
+	case memberzonecontent.FieldPublishedAt:
+		return m.PublishedAt()
+	}
+	return nil, false
+}
+
+// OldField returns the old value of the field from the database. An error is
+// returned if the mutation operation is not UpdateOne, or the query to the
+// database failed.
+func (m *MemberZoneContentMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
+	switch name {
+	case memberzonecontent.FieldDeletedAt:
+		return m.OldDeletedAt(ctx)
+	case memberzonecontent.FieldCreatedAt:
+		return m.OldCreatedAt(ctx)
+	case memberzonecontent.FieldUpdatedAt:
+		return m.OldUpdatedAt(ctx)
+	case memberzonecontent.FieldTitle:
+		return m.OldTitle(ctx)
+	case memberzonecontent.FieldSlug:
+		return m.OldSlug(ctx)
+	case memberzonecontent.FieldSummary:
+		return m.OldSummary(ctx)
+	case memberzonecontent.FieldCoverURL:
+		return m.OldCoverURL(ctx)
+	case memberzonecontent.FieldContentMd:
+		return m.OldContentMd(ctx)
+	case memberzonecontent.FieldContentHTML:
+		return m.OldContentHTML(ctx)
+	case memberzonecontent.FieldStatus:
+		return m.OldStatus(ctx)
+	case memberzonecontent.FieldAccessLevel:
+		return m.OldAccessLevel(ctx)
+	case memberzonecontent.FieldSort:
+		return m.OldSort(ctx)
+	case memberzonecontent.FieldSourceArticleID:
+		return m.OldSourceArticleID(ctx)
+	case memberzonecontent.FieldPublishedAt:
+		return m.OldPublishedAt(ctx)
+	}
+	return nil, fmt.Errorf("unknown MemberZoneContent field %s", name)
+}
+
+// SetField sets the value of a field with the given name. It returns an error if
+// the field is not defined in the schema, or if the type mismatched the field
+// type.
+func (m *MemberZoneContentMutation) SetField(name string, value ent.Value) error {
+	switch name {
+	case memberzonecontent.FieldDeletedAt:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetDeletedAt(v)
+		return nil
+	case memberzonecontent.FieldCreatedAt:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCreatedAt(v)
+		return nil
+	case memberzonecontent.FieldUpdatedAt:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetUpdatedAt(v)
+		return nil
+	case memberzonecontent.FieldTitle:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetTitle(v)
+		return nil
+	case memberzonecontent.FieldSlug:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetSlug(v)
+		return nil
+	case memberzonecontent.FieldSummary:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetSummary(v)
+		return nil
+	case memberzonecontent.FieldCoverURL:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCoverURL(v)
+		return nil
+	case memberzonecontent.FieldContentMd:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetContentMd(v)
+		return nil
+	case memberzonecontent.FieldContentHTML:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetContentHTML(v)
+		return nil
+	case memberzonecontent.FieldStatus:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetStatus(v)
+		return nil
+	case memberzonecontent.FieldAccessLevel:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetAccessLevel(v)
+		return nil
+	case memberzonecontent.FieldSort:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetSort(v)
+		return nil
+	case memberzonecontent.FieldSourceArticleID:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetSourceArticleID(v)
+		return nil
+	case memberzonecontent.FieldPublishedAt:
+		v, ok := value.(time.Time)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetPublishedAt(v)
+		return nil
+	}
+	return fmt.Errorf("unknown MemberZoneContent field %s", name)
+}
+
+// AddedFields returns all numeric fields that were incremented/decremented during
+// this mutation.
+func (m *MemberZoneContentMutation) AddedFields() []string {
+	var fields []string
+	if m.addsort != nil {
+		fields = append(fields, memberzonecontent.FieldSort)
+	}
+	return fields
+}
+
+// AddedField returns the numeric value that was incremented/decremented on a field
+// with the given name. The second boolean return value indicates that this field
+// was not set, or was not defined in the schema.
+func (m *MemberZoneContentMutation) AddedField(name string) (ent.Value, bool) {
+	switch name {
+	case memberzonecontent.FieldSort:
+		return m.AddedSort()
+	}
+	return nil, false
+}
+
+// AddField adds the value to the field with the given name. It returns an error if
+// the field is not defined in the schema, or if the type mismatched the field
+// type.
+func (m *MemberZoneContentMutation) AddField(name string, value ent.Value) error {
+	switch name {
+	case memberzonecontent.FieldSort:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddSort(v)
+		return nil
+	}
+	return fmt.Errorf("unknown MemberZoneContent numeric field %s", name)
+}
+
+// ClearedFields returns all nullable fields that were cleared during this
+// mutation.
+func (m *MemberZoneContentMutation) ClearedFields() []string {
+	var fields []string
+	if m.FieldCleared(memberzonecontent.FieldDeletedAt) {
+		fields = append(fields, memberzonecontent.FieldDeletedAt)
+	}
+	if m.FieldCleared(memberzonecontent.FieldSummary) {
+		fields = append(fields, memberzonecontent.FieldSummary)
+	}
+	if m.FieldCleared(memberzonecontent.FieldCoverURL) {
+		fields = append(fields, memberzonecontent.FieldCoverURL)
+	}
+	if m.FieldCleared(memberzonecontent.FieldSourceArticleID) {
+		fields = append(fields, memberzonecontent.FieldSourceArticleID)
+	}
+	if m.FieldCleared(memberzonecontent.FieldPublishedAt) {
+		fields = append(fields, memberzonecontent.FieldPublishedAt)
+	}
+	return fields
+}
+
+// FieldCleared returns a boolean indicating if a field with the given name was
+// cleared in this mutation.
+func (m *MemberZoneContentMutation) FieldCleared(name string) bool {
+	_, ok := m.clearedFields[name]
+	return ok
+}
+
+// ClearField clears the value of the field with the given name. It returns an
+// error if the field is not defined in the schema.
+func (m *MemberZoneContentMutation) ClearField(name string) error {
+	switch name {
+	case memberzonecontent.FieldDeletedAt:
+		m.ClearDeletedAt()
+		return nil
+	case memberzonecontent.FieldSummary:
+		m.ClearSummary()
+		return nil
+	case memberzonecontent.FieldCoverURL:
+		m.ClearCoverURL()
+		return nil
+	case memberzonecontent.FieldSourceArticleID:
+		m.ClearSourceArticleID()
+		return nil
+	case memberzonecontent.FieldPublishedAt:
+		m.ClearPublishedAt()
+		return nil
+	}
+	return fmt.Errorf("unknown MemberZoneContent nullable field %s", name)
+}
+
+// ResetField resets all changes in the mutation for the field with the given name.
+// It returns an error if the field is not defined in the schema.
+func (m *MemberZoneContentMutation) ResetField(name string) error {
+	switch name {
+	case memberzonecontent.FieldDeletedAt:
+		m.ResetDeletedAt()
+		return nil
+	case memberzonecontent.FieldCreatedAt:
+		m.ResetCreatedAt()
+		return nil
+	case memberzonecontent.FieldUpdatedAt:
+		m.ResetUpdatedAt()
+		return nil
+	case memberzonecontent.FieldTitle:
+		m.ResetTitle()
+		return nil
+	case memberzonecontent.FieldSlug:
+		m.ResetSlug()
+		return nil
+	case memberzonecontent.FieldSummary:
+		m.ResetSummary()
+		return nil
+	case memberzonecontent.FieldCoverURL:
+		m.ResetCoverURL()
+		return nil
+	case memberzonecontent.FieldContentMd:
+		m.ResetContentMd()
+		return nil
+	case memberzonecontent.FieldContentHTML:
+		m.ResetContentHTML()
+		return nil
+	case memberzonecontent.FieldStatus:
+		m.ResetStatus()
+		return nil
+	case memberzonecontent.FieldAccessLevel:
+		m.ResetAccessLevel()
+		return nil
+	case memberzonecontent.FieldSort:
+		m.ResetSort()
+		return nil
+	case memberzonecontent.FieldSourceArticleID:
+		m.ResetSourceArticleID()
+		return nil
+	case memberzonecontent.FieldPublishedAt:
+		m.ResetPublishedAt()
+		return nil
+	}
+	return fmt.Errorf("unknown MemberZoneContent field %s", name)
+}
+
+// AddedEdges returns all edge names that were set/added in this mutation.
+func (m *MemberZoneContentMutation) AddedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// AddedIDs returns all IDs (to other nodes) that were added for the given edge
+// name in this mutation.
+func (m *MemberZoneContentMutation) AddedIDs(name string) []ent.Value {
+	return nil
+}
+
+// RemovedEdges returns all edge names that were removed in this mutation.
+func (m *MemberZoneContentMutation) RemovedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// RemovedIDs returns all IDs (to other nodes) that were removed for the edge with
+// the given name in this mutation.
+func (m *MemberZoneContentMutation) RemovedIDs(name string) []ent.Value {
+	return nil
+}
+
+// ClearedEdges returns all edge names that were cleared in this mutation.
+func (m *MemberZoneContentMutation) ClearedEdges() []string {
+	edges := make([]string, 0, 0)
+	return edges
+}
+
+// EdgeCleared returns a boolean which indicates if the edge with the given name
+// was cleared in this mutation.
+func (m *MemberZoneContentMutation) EdgeCleared(name string) bool {
+	return false
+}
+
+// ClearEdge clears the value of the edge with the given name. It returns an error
+// if that edge is not defined in the schema.
+func (m *MemberZoneContentMutation) ClearEdge(name string) error {
+	return fmt.Errorf("unknown MemberZoneContent unique edge %s", name)
+}
+
+// ResetEdge resets all changes to the edge with the given name in this mutation.
+// It returns an error if the edge is not defined in the schema.
+func (m *MemberZoneContentMutation) ResetEdge(name string) error {
+	return fmt.Errorf("unknown MemberZoneContent edge %s", name)
 }
 
 // MetadataMutation represents an operation that mutates the Metadata nodes in the graph.

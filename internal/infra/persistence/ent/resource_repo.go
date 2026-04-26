@@ -70,6 +70,17 @@ func (r *ResourceRepo) FindResourceByHost(ctx context.Context, hostType, hostID 
 	return toResourceRecordDTO(entity)
 }
 
+func (r *ResourceRepo) ArticleHostExists(ctx context.Context, articleID string) (bool, error) {
+	_, err := r.getArticleHostMeta(ctx, articleID)
+	if err != nil {
+		if errorsIsResourceNotFound(err) {
+			return false, nil
+		}
+		return false, err
+	}
+	return true, nil
+}
+
 func (r *ResourceRepo) ListAdminResources(ctx context.Context, query commerce.AdminResourceListQueryDTO) (commerce.AdminResourceListDTO, error) {
 	page := query.Page
 	if page <= 0 {

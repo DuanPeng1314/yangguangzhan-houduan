@@ -3,6 +3,7 @@ package commerce
 import (
 	"context"
 	"errors"
+	"strings"
 	"testing"
 	"time"
 
@@ -108,6 +109,8 @@ type resourceRepositoryStub struct {
 	hasGrantBySourceOrderNo bool
 	createGrantReq          *ResourceAccessGrantCreateDTO
 	createGrantCalls        int
+	articleHostExists       bool
+	articleHostExistsErr    error
 	err                     error
 }
 
@@ -218,6 +221,13 @@ func (s *resourceRepositoryStub) FindResourceByHost(_ context.Context, hostType,
 	return resource, nil
 }
 
+func (s *resourceRepositoryStub) ArticleHostExists(_ context.Context, _ string) (bool, error) {
+	if s.articleHostExistsErr != nil {
+		return false, s.articleHostExistsErr
+	}
+	return s.articleHostExists, nil
+}
+
 func (s *resourceRepositoryStub) ResolveArticleIDByAbbrlink(_ context.Context, abbrlink string) (string, error) {
 	if s.err != nil {
 		return "", s.err
@@ -260,6 +270,62 @@ type resourceOrderRepositoryStub struct {
 	markPaidUpdated        bool
 	updatedBusinessOrderNo string
 	updatedExternalOrderNo string
+}
+
+type memberZoneRepositoryStub struct {
+	createInput AdminMemberZoneDetailDTO
+	updateInput AdminMemberZoneDetailDTO
+	updateID    string
+	err         error
+}
+
+func (s *memberZoneRepositoryStub) ListAdminMemberZones(_ context.Context, _ AdminMemberZoneListQueryDTO) (AdminMemberZoneListDTO, error) {
+	return AdminMemberZoneListDTO{}, s.err
+}
+
+func (s *memberZoneRepositoryStub) GetAdminMemberZoneDetail(_ context.Context, _ string) (AdminMemberZoneDetailDTO, error) {
+	return AdminMemberZoneDetailDTO{}, s.err
+}
+
+func (s *memberZoneRepositoryStub) CreateAdminMemberZone(_ context.Context, input AdminMemberZoneDetailDTO) (AdminMemberZoneDetailDTO, error) {
+	if s.err != nil {
+		return AdminMemberZoneDetailDTO{}, s.err
+	}
+	s.createInput = input
+	return input, nil
+}
+
+func (s *memberZoneRepositoryStub) UpdateAdminMemberZone(_ context.Context, contentID string, input AdminMemberZoneDetailDTO) (AdminMemberZoneDetailDTO, error) {
+	if s.err != nil {
+		return AdminMemberZoneDetailDTO{}, s.err
+	}
+	s.updateID = contentID
+	s.updateInput = input
+	return input, nil
+}
+
+func (s *memberZoneRepositoryStub) DeleteAdminMemberZone(_ context.Context, _ string) error {
+	return s.err
+}
+
+func (s *memberZoneRepositoryStub) FindAdminMemberZoneByArticle(_ context.Context, _ string) (AdminMemberZoneDetailDTO, error) {
+	return AdminMemberZoneDetailDTO{}, s.err
+}
+
+func (s *memberZoneRepositoryStub) ListPublishedMemberZones(_ context.Context) ([]MemberZoneListItemDTO, error) {
+	return nil, s.err
+}
+
+func (s *memberZoneRepositoryStub) GetPublishedMemberZoneMetaBySlug(_ context.Context, _ string) (MemberZoneMetaDTO, error) {
+	return MemberZoneMetaDTO{}, s.err
+}
+
+func (s *memberZoneRepositoryStub) GetPublishedMemberZoneByArticle(_ context.Context, _ string) (MemberZoneMetaDTO, error) {
+	return MemberZoneMetaDTO{}, s.err
+}
+
+func (s *memberZoneRepositoryStub) GetPublishedMemberZoneContentBySlug(_ context.Context, _ string) (MemberZoneContentDTO, error) {
+	return MemberZoneContentDTO{}, s.err
 }
 
 func (s *resourceOrderRepositoryStub) Create(_ context.Context, input ResourceOrderCreateDTO) (ResourceOrderRecordDTO, error) {
@@ -781,46 +847,6 @@ func TestCheckResourceAccess_PaginatesRemoteOrderFallback(t *testing.T) {
 	require.Equal(t, 2, client.orderListReq.Page)
 }
 
-type premiumArticleRepositoryStub struct {
-	articleContentHTML string
-	err                error
-}
-
-func (s *premiumArticleRepositoryStub) FindContentHTMLByPremiumContentID(_ context.Context, _ string) (string, error) {
-	if s.err != nil {
-		return "", s.err
-	}
-	return s.articleContentHTML, nil
-}
-
-func TestService_GetPremiumMemberBlockContent_ReturnsPreviewHTML(t *testing.T) {
-	repo := &bindingRepositoryStub{binding: MemberBindingDTO{ExternalUserID: "oerx", SiteID: "yangguangzhan", Status: "active"}}
-	client := &memberStatusClientStub{status: MemberStatusDTO{IsMember: true, Level: "2"}}
-	svc := NewService(repo, client)
-	svc.SetArticleRepository(&premiumArticleRepositoryStub{articleContentHTML: `<div class="premium-member-content-editor-preview" data-content-id="premium-10"><div class="premium-member-content-body"><div class="premium-member-content-preview"><p>会员正文内容</p></div></div></div>`})
-
-	html, err := svc.GetPremiumMemberBlockContent(context.Background(), 1001, "premium-10")
-	require.NoError(t, err)
-	require.Equal(t, `<p>会员正文内容</p>`, html)
-}
-
-func TestService_GetPremiumMemberBlockContentForActor_UsesResolvedExternalIdentity(t *testing.T) {
-	repo := &bindingRepositoryStub{err: ErrMemberBindingNotFound}
-	client := &memberStatusClientStub{
-		status:     MemberStatusDTO{IsMember: true, Level: "2"},
-		ensureResp: dp7575.UserMapEnsureResponse{SiteID: "yangguangzhan", ExternalUserID: "oerx", IsMapped: true},
-	}
-	svc := NewService(repo, client)
-	svc.SetArticleRepository(&premiumArticleRepositoryStub{articleContentHTML: `<div class="premium-member-content-editor-preview" data-content-id="premium-10"><div class="premium-member-content-body"><div class="premium-member-content-preview"><p>会员正文内容</p></div></div></div>`})
-
-	html, err := svc.GetPremiumMemberBlockContentForActor(context.Background(), &ResourceAccessCheckActorDTO{UserID: 1001, ExternalUserID: "user_public_123", LoggedIn: true}, "premium-10")
-
-	require.NoError(t, err)
-	require.Equal(t, `<p>会员正文内容</p>`, html)
-	require.Equal(t, "user_public_123", client.ensureReq.ExternalUserID)
-	require.Equal(t, "oerx", client.req.ExternalUserID)
-}
-
 func TestCheckResourceAccess_StillReturnsPurchaseRequiredAfterDecisionRefactor(t *testing.T) {
 	repo := &bindingRepositoryStub{binding: MemberBindingDTO{ExternalUserID: "user_public_123", SiteID: "yangguangzhan", Status: "active"}}
 	client := &memberStatusClientStub{status: MemberStatusDTO{IsMember: false}}
@@ -832,16 +858,6 @@ func TestCheckResourceAccess_StillReturnsPurchaseRequiredAfterDecisionRefactor(t
 	require.Equal(t, "purchase_required", result.Reason)
 	require.False(t, result.AccessGranted)
 	require.True(t, result.RequiresPurchase)
-}
-
-func TestGetPremiumMemberBlockContentForActor_StillRejectsNonPremiumMember(t *testing.T) {
-	repo := &bindingRepositoryStub{binding: MemberBindingDTO{ExternalUserID: "oerx", SiteID: "yangguangzhan", Status: "active"}}
-	client := &memberStatusClientStub{status: MemberStatusDTO{IsMember: true, Level: "1"}}
-	svc := NewService(repo, client)
-	svc.SetArticleRepository(&premiumArticleRepositoryStub{articleContentHTML: `<div class="premium-member-content-editor-preview" data-content-id="premium-1"><div class="premium-member-content-body"><div class="premium-member-content-preview"><p>hidden</p></div></div></div>`})
-
-	_, err := svc.GetPremiumMemberBlockContentForActor(context.Background(), &ResourceAccessCheckActorDTO{UserID: 1001, ExternalUserID: "oerx", LoggedIn: true}, "premium-1")
-	require.ErrorIs(t, err, ErrResourcePurchaseNotRequired)
 }
 
 func TestCreateResourcePurchaseOrder_PersistsLocalOrderSnapshot(t *testing.T) {
@@ -1427,34 +1443,6 @@ func TestService_GetMemberStatus_ReturnsRepositoryErrorWhenBindingLookupFails(t 
 	require.Zero(t, client.ensureCalls)
 }
 
-func TestService_IsPremiumMember_WhenBindingMissing_EnsuresMapping(t *testing.T) {
-	require.NoError(t, idgen.InitSqidsEncoder())
-
-	repo := &bindingRepositoryStub{err: ErrMemberBindingNotFound}
-	client := &memberStatusClientStub{
-		ensureResp: dp7575.UserMapEnsureResponse{
-			SiteID:         "yangguangzhan",
-			ExternalUserID: memberExternalUserID(1001),
-			WPUserID:       7,
-			IsMapped:       true,
-			Mapped:         true,
-			Action:         "existing",
-		},
-		status: MemberStatusDTO{IsMember: true, Level: "2", ExpiresAt: "2027-04-18T00:00:00Z"},
-	}
-
-	svc := NewService(repo, client)
-	allowed, err := svc.IsPremiumMember(context.Background(), 1001)
-
-	require.NoError(t, err)
-	require.True(t, allowed)
-	require.Equal(t, 1, client.ensureCalls)
-	require.Equal(t, memberExternalUserID(1001), client.ensureReq.ExternalUserID)
-	require.NotNil(t, repo.upserted)
-	require.Equal(t, "yangguangzhan", repo.upserted.SiteID)
-	require.Equal(t, memberExternalUserID(1001), repo.upserted.ExternalUserID)
-}
-
 func TestService_CheckResourceAccess_ReconcilesLegacyBindingBeforeMemberLookup(t *testing.T) {
 	publicUserID := memberExternalUserID(1001)
 	repo := &bindingRepositoryStub{binding: MemberBindingDTO{ExternalUserID: publicUserID, SiteID: "yangguangzhan", Status: "active"}}
@@ -1959,4 +1947,53 @@ func TestService_GetMemberOrderStatus_UsesBindingExternalUserID(t *testing.T) {
 	require.Equal(t, "member", result.BusinessType)
 	require.Equal(t, "paid", result.Status)
 	require.Equal(t, "已支付", result.StatusLabel)
+}
+
+func TestService_CreateAdminMemberZone_SanitizesHTMLAndChecksArticleHost(t *testing.T) {
+	require.NoError(t, idgen.InitSqidsEncoder())
+	articleID, err := idgen.GeneratePublicID(1001, idgen.EntityTypeArticle)
+	require.NoError(t, err)
+
+	svc := NewService(newStubBindingRepo(), newStubMemberClient())
+	memberZoneRepo := &memberZoneRepositoryStub{}
+	svc.SetMemberZoneRepository(memberZoneRepo)
+	svc.SetResourceRepositories(&resourceRepositoryStub{articleHostExists: true}, &resourceOrderRepositoryStub{})
+	svc.SetHTMLSanitizer(func(content string) string {
+		return strings.ReplaceAll(content, "<script>alert(1)</script>", "")
+	})
+
+	result, err := svc.CreateAdminMemberZone(context.Background(), AdminMemberZoneDetailDTO{
+		Title:           "会员内容",
+		Slug:            "vip-intro",
+		ContentMD:       "hello",
+		ContentHTML:     "<p>safe</p><script>alert(1)</script>",
+		Status:          "published",
+		AccessLevel:     "member",
+		SourceArticleID: articleID,
+	})
+	require.NoError(t, err)
+	require.Equal(t, "<p>safe</p>", memberZoneRepo.createInput.ContentHTML)
+	require.Equal(t, "<p>safe</p>", result.ContentHTML)
+}
+
+func TestService_CreateAdminMemberZone_RejectsMissingArticleHost(t *testing.T) {
+	require.NoError(t, idgen.InitSqidsEncoder())
+	articleID, err := idgen.GeneratePublicID(1001, idgen.EntityTypeArticle)
+	require.NoError(t, err)
+
+	svc := NewService(newStubBindingRepo(), newStubMemberClient())
+	svc.SetMemberZoneRepository(&memberZoneRepositoryStub{})
+	svc.SetResourceRepositories(&resourceRepositoryStub{articleHostExists: false}, &resourceOrderRepositoryStub{})
+
+	_, err = svc.CreateAdminMemberZone(context.Background(), AdminMemberZoneDetailDTO{
+		Title:           "会员内容",
+		Slug:            "vip-intro",
+		ContentMD:       "hello",
+		ContentHTML:     "<p>safe</p>",
+		Status:          "published",
+		AccessLevel:     "member",
+		SourceArticleID: articleID,
+	})
+	require.Error(t, err)
+	require.ErrorIs(t, err, ErrMemberZoneInvalidInput)
 }

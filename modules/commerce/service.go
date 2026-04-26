@@ -1,7 +1,6 @@
 package commerce
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
@@ -13,7 +12,6 @@ import (
 
 	"github.com/anzhiyu-c/anheyu-app/pkg/idgen"
 	"github.com/anzhiyu-c/anheyu-app/pkg/integration/dp7575"
-	"golang.org/x/net/html"
 )
 
 type bindingRepository interface {
@@ -39,20 +37,21 @@ type memberStatusClient interface {
 	EnsureUserMapping(ctx context.Context, req dp7575.UserMapEnsureRequest) (dp7575.UserMapEnsureResponse, error)
 }
 
-type articleContentRepository interface {
-	FindContentHTMLByPremiumContentID(ctx context.Context, contentID string) (string, error)
-}
-
 type Service struct {
 	repo              bindingRepository
 	client            memberStatusClient
-	articleRepo       articleContentRepository
 	resourceRepo      resourceRepository
 	resourceOrderRepo resourceOrderRepository
+	memberZoneRepo    memberZoneRepository
+	sanitizeHTML      func(string) string
 }
 
 func NewService(repo bindingRepository, client memberStatusClient) *Service {
-	return &Service{repo: repo, client: client}
+	return &Service{
+		repo:         repo,
+		client:       client,
+		sanitizeHTML: func(content string) string { return content },
+	}
 }
 
 type paidAccessKind string
@@ -152,8 +151,16 @@ func (s *Service) SetResourceRepositories(resourceRepo resourceRepository, resou
 	s.resourceOrderRepo = resourceOrderRepo
 }
 
-func (s *Service) SetArticleRepository(articleRepo articleContentRepository) {
-	s.articleRepo = articleRepo
+func (s *Service) SetMemberZoneRepository(memberZoneRepo memberZoneRepository) {
+	s.memberZoneRepo = memberZoneRepo
+}
+
+func (s *Service) SetHTMLSanitizer(sanitizer func(string) string) {
+	if sanitizer == nil {
+		s.sanitizeHTML = func(content string) string { return content }
+		return
+	}
+	s.sanitizeHTML = sanitizer
 }
 
 var (
@@ -166,7 +173,11 @@ var (
 	ErrResourceOrderNotFound       = errors.New("resource order not found")
 	ErrResourceBoundToArticle      = errors.New("resource bound to article")
 	ErrResourceHasOrders           = errors.New("resource has orders")
-	ErrPremiumBlockNotFound        = errors.New("premium block not found")
+	ErrMemberZoneNotFound          = errors.New("member zone not found")
+	ErrMemberZoneUnavailable       = errors.New("member zone unavailable")
+	ErrMemberZoneAccessDenied      = errors.New("member zone access denied")
+	ErrMemberZoneInvalidInput      = errors.New("member zone invalid input")
+	ErrMemberZoneConflict          = errors.New("member zone conflict")
 )
 
 func (s *Service) AutoBindAfterLogin(ctx context.Context, userID int64, publicUserID string) (string, error) {
@@ -267,136 +278,6 @@ func (s *Service) GetMemberStatus(ctx context.Context, userID int64) (MemberStat
 		ExpiresAt: status.MemberExpireAt,
 		State:     "ready",
 	}, nil
-}
-
-func (s *Service) IsPremiumMember(ctx context.Context, userID int64) (bool, error) {
-	return s.isPremiumMemberForActor(ctx, &ResourceAccessCheckActorDTO{UserID: userID, ExternalUserID: memberExternalUserID(userID), LoggedIn: true})
-}
-
-func (s *Service) isPremiumMemberForActor(ctx context.Context, actor *ResourceAccessCheckActorDTO) (bool, error) {
-	identity, err := s.resolvePaidIdentity(ctx, actor)
-	if err != nil {
-		return false, err
-	}
-	if !identity.BindingReady {
-		return false, nil
-	}
-
-	status, err := s.client.MemberStatus(ctx, dp7575.MemberStatusRequest{
-		ExternalUserID: identity.ExternalUserID,
-		SiteID:         identity.SiteID,
-	})
-	if err != nil {
-		return false, err
-	}
-
-	if !status.IsMember {
-		return false, nil
-	}
-
-	return memberLevelNumber(status) >= 2, nil
-}
-
-func (s *Service) GetPremiumMemberBlockContent(ctx context.Context, userID int64, contentID string) (string, error) {
-	return s.GetPremiumMemberBlockContentForActor(ctx, &ResourceAccessCheckActorDTO{UserID: userID, ExternalUserID: memberExternalUserID(userID), LoggedIn: true}, contentID)
-}
-
-func (s *Service) GetPremiumMemberBlockContentForActor(ctx context.Context, actor *ResourceAccessCheckActorDTO, contentID string) (string, error) {
-	allowed, err := s.isPremiumMemberForActor(ctx, actor)
-	if err != nil {
-		return "", err
-	}
-	decision := s.buildPaidAccessDecision(paidAccessDecisionInput{
-		Kind:         paidAccessKindPremium,
-		LoggedIn:     actor != nil && actor.LoggedIn,
-		PremiumReady: allowed,
-	})
-	if !decision.Allowed {
-		return "", ErrResourcePurchaseNotRequired
-	}
-	if s.articleRepo == nil {
-		return "", ErrPremiumBlockNotFound
-	}
-
-	contentHTML, err := s.articleRepo.FindContentHTMLByPremiumContentID(ctx, contentID)
-	if err != nil {
-		return "", err
-	}
-
-	return extractPremiumMemberBlockContent(contentHTML, contentID)
-}
-
-func extractPremiumMemberBlockContent(contentHTML string, contentID string) (string, error) {
-	doc, err := html.Parse(strings.NewReader("<body>" + contentHTML + "</body>"))
-	if err != nil {
-		return "", err
-	}
-
-	body := doc.FirstChild.LastChild
-	if body == nil {
-		return "", ErrPremiumBlockNotFound
-	}
-
-	block := findPremiumBlockNode(body, contentID)
-	if block == nil {
-		return "", ErrPremiumBlockNotFound
-	}
-
-	preview := findFirstNode(block, func(n *html.Node) bool {
-		return n.Type == html.ElementNode && n.Data == "div" && hasClass(n, "premium-member-content-preview")
-	})
-	if preview == nil {
-		return "", ErrPremiumBlockNotFound
-	}
-
-	var buf bytes.Buffer
-	for child := preview.FirstChild; child != nil; child = child.NextSibling {
-		if err := html.Render(&buf, child); err != nil {
-			return "", err
-		}
-	}
-
-	return buf.String(), nil
-}
-
-func findPremiumBlockNode(root *html.Node, contentID string) *html.Node {
-	return findFirstNode(root, func(n *html.Node) bool {
-		return n.Type == html.ElementNode && n.Data == "div" && hasClass(n, "premium-member-content-editor-preview") && getAttr(n, "data-content-id") == contentID
-	})
-}
-
-func findFirstNode(root *html.Node, match func(*html.Node) bool) *html.Node {
-	if root == nil {
-		return nil
-	}
-	if match(root) {
-		return root
-	}
-	for child := root.FirstChild; child != nil; child = child.NextSibling {
-		if found := findFirstNode(child, match); found != nil {
-			return found
-		}
-	}
-	return nil
-}
-
-func hasClass(node *html.Node, className string) bool {
-	classes := strings.Fields(getAttr(node, "class"))
-	for _, class := range classes {
-		if class == className {
-			return true
-		}
-	}
-	return false
-}
-
-func getAttr(node *html.Node, key string) string {
-	for _, attr := range node.Attr {
-		if attr.Key == key {
-			return attr.Val
-		}
-	}
-	return ""
 }
 
 func (s *Service) ListAdminOrderMappings(ctx context.Context, query AdminOrderMappingListQueryDTO) (AdminOrderMappingListDTO, error) {
@@ -568,6 +449,250 @@ func validateAdminResourceInput(input AdminResourceDetailDTO) error {
 		return fmt.Errorf("resource host type must be article")
 	}
 	return nil
+}
+
+func (s *Service) ListAdminMemberZones(ctx context.Context, query AdminMemberZoneListQueryDTO) (AdminMemberZoneListDTO, error) {
+	if s.memberZoneRepo == nil {
+		return AdminMemberZoneListDTO{}, ErrMemberZoneNotFound
+	}
+	return s.memberZoneRepo.ListAdminMemberZones(ctx, query)
+}
+
+func (s *Service) GetAdminMemberZoneDetail(ctx context.Context, contentID string) (AdminMemberZoneDetailDTO, error) {
+	if s.memberZoneRepo == nil {
+		return AdminMemberZoneDetailDTO{}, ErrMemberZoneNotFound
+	}
+	return s.memberZoneRepo.GetAdminMemberZoneDetail(ctx, contentID)
+}
+
+func (s *Service) CreateAdminMemberZone(ctx context.Context, input AdminMemberZoneDetailDTO) (AdminMemberZoneDetailDTO, error) {
+	sanitizedInput, err := s.prepareAdminMemberZoneInput(ctx, input)
+	if err != nil {
+		return AdminMemberZoneDetailDTO{}, err
+	}
+	if s.memberZoneRepo == nil {
+		return AdminMemberZoneDetailDTO{}, ErrMemberZoneNotFound
+	}
+	return s.memberZoneRepo.CreateAdminMemberZone(ctx, sanitizedInput)
+}
+
+func (s *Service) UpdateAdminMemberZone(ctx context.Context, contentID string, input AdminMemberZoneDetailDTO) (AdminMemberZoneDetailDTO, error) {
+	if strings.TrimSpace(contentID) == "" {
+		return AdminMemberZoneDetailDTO{}, ErrMemberZoneNotFound
+	}
+	if s.memberZoneRepo == nil {
+		return AdminMemberZoneDetailDTO{}, ErrMemberZoneNotFound
+	}
+	sanitizedInput, err := s.prepareAdminMemberZoneInput(ctx, input)
+	if err != nil {
+		return AdminMemberZoneDetailDTO{}, err
+	}
+	return s.memberZoneRepo.UpdateAdminMemberZone(ctx, contentID, sanitizedInput)
+}
+
+func (s *Service) DeleteAdminMemberZone(ctx context.Context, contentID string) error {
+	if strings.TrimSpace(contentID) == "" {
+		return ErrMemberZoneNotFound
+	}
+	if s.memberZoneRepo == nil {
+		return ErrMemberZoneNotFound
+	}
+	return s.memberZoneRepo.DeleteAdminMemberZone(ctx, contentID)
+}
+
+func (s *Service) GetAdminMemberZoneByArticle(ctx context.Context, articleID string) (*AdminMemberZoneDetailDTO, error) {
+	if strings.TrimSpace(articleID) == "" || s.memberZoneRepo == nil {
+		return nil, nil
+	}
+	detail, err := s.memberZoneRepo.FindAdminMemberZoneByArticle(ctx, articleID)
+	if errors.Is(err, ErrMemberZoneNotFound) {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	return &detail, nil
+}
+
+func (s *Service) prepareAdminMemberZoneInput(ctx context.Context, input AdminMemberZoneDetailDTO) (AdminMemberZoneDetailDTO, error) {
+	if err := validateAdminMemberZoneInput(input); err != nil {
+		return AdminMemberZoneDetailDTO{}, err
+	}
+	if input.SourceArticleID != "" && s.resourceRepo != nil {
+		exists, err := s.resourceRepo.ArticleHostExists(ctx, input.SourceArticleID)
+		if err != nil {
+			return AdminMemberZoneDetailDTO{}, err
+		}
+		if !exists {
+			return AdminMemberZoneDetailDTO{}, fmt.Errorf("%w: member zone article id does not exist", ErrMemberZoneInvalidInput)
+		}
+	}
+
+	input.ContentHTML = strings.TrimSpace(s.sanitizeHTML(input.ContentHTML))
+	if input.ContentHTML == "" {
+		return AdminMemberZoneDetailDTO{}, fmt.Errorf("%w: member zone html content is invalid", ErrMemberZoneInvalidInput)
+	}
+
+	return input, nil
+}
+
+func validateAdminMemberZoneInput(input AdminMemberZoneDetailDTO) error {
+	if strings.TrimSpace(input.Title) == "" {
+		return fmt.Errorf("%w: member zone title is required", ErrMemberZoneInvalidInput)
+	}
+	if strings.TrimSpace(input.Slug) == "" {
+		return fmt.Errorf("%w: member zone slug is required", ErrMemberZoneInvalidInput)
+	}
+	if strings.TrimSpace(input.ContentMD) == "" {
+		return fmt.Errorf("%w: member zone markdown content is required", ErrMemberZoneInvalidInput)
+	}
+	if strings.TrimSpace(input.ContentHTML) == "" {
+		return fmt.Errorf("%w: member zone html content is required", ErrMemberZoneInvalidInput)
+	}
+	switch input.Status {
+	case "draft", "published", "archived":
+	default:
+		return fmt.Errorf("%w: member zone status is invalid", ErrMemberZoneInvalidInput)
+	}
+	switch input.AccessLevel {
+	case "member", "premium":
+	default:
+		return fmt.Errorf("%w: member zone access level is invalid", ErrMemberZoneInvalidInput)
+	}
+	if input.SourceArticleID != "" {
+		_, entityType, err := idgen.DecodePublicID(input.SourceArticleID)
+		if err != nil {
+			return fmt.Errorf("%w: member zone article id is invalid", ErrMemberZoneInvalidInput)
+		}
+		if entityType != idgen.EntityTypeArticle {
+			return fmt.Errorf("%w: member zone article id is invalid", ErrMemberZoneInvalidInput)
+		}
+	}
+	return nil
+}
+
+func (s *Service) ListPublishedMemberZones(ctx context.Context) ([]MemberZoneListItemDTO, error) {
+	if s.memberZoneRepo == nil {
+		return nil, nil
+	}
+	return s.memberZoneRepo.ListPublishedMemberZones(ctx)
+}
+
+func (s *Service) GetPublishedMemberZoneMetaBySlug(ctx context.Context, slug string) (MemberZoneMetaDTO, error) {
+	if strings.TrimSpace(slug) == "" || s.memberZoneRepo == nil {
+		return MemberZoneMetaDTO{}, ErrMemberZoneNotFound
+	}
+	return s.memberZoneRepo.GetPublishedMemberZoneMetaBySlug(ctx, strings.TrimSpace(slug))
+}
+
+func (s *Service) GetPublishedMemberZoneByArticle(ctx context.Context, articleID string) (*MemberZoneMetaDTO, error) {
+	if strings.TrimSpace(articleID) == "" || s.memberZoneRepo == nil {
+		return nil, nil
+	}
+	meta, err := s.memberZoneRepo.GetPublishedMemberZoneByArticle(ctx, articleID)
+	if errors.Is(err, ErrMemberZoneNotFound) {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	return &meta, nil
+}
+
+func (s *Service) CheckMemberZoneAccess(ctx context.Context, actor *ResourceAccessCheckActorDTO, slug string) (MemberZoneAccessCheckDTO, error) {
+	meta, err := s.GetPublishedMemberZoneMetaBySlug(ctx, slug)
+	if err != nil {
+		return MemberZoneAccessCheckDTO{}, err
+	}
+
+	if actor == nil || !actor.LoggedIn {
+		return MemberZoneAccessCheckDTO{
+			Allowed:        false,
+			Reason:         "login_required",
+			RequiresLogin:  true,
+			RequiresMember: false,
+			RequiredLevel:  meta.AccessLevel,
+			MemberZoneMeta: meta,
+		}, nil
+	}
+
+	identity, err := s.resolvePaidIdentity(ctx, actor)
+	if err != nil {
+		return MemberZoneAccessCheckDTO{}, err
+	}
+	if !identity.BindingReady {
+		return MemberZoneAccessCheckDTO{
+			Allowed:        false,
+			Reason:         "member_required",
+			RequiresLogin:  false,
+			RequiresMember: true,
+			RequiredLevel:  meta.AccessLevel,
+			MemberZoneMeta: meta,
+		}, nil
+	}
+
+	status, err := s.client.MemberStatus(ctx, dp7575.MemberStatusRequest{
+		ExternalUserID: identity.ExternalUserID,
+		SiteID:         identity.SiteID,
+	})
+	if err != nil {
+		return MemberZoneAccessCheckDTO{}, err
+	}
+
+	userLevel := normalizeMemberLevel(status)
+	if !status.IsMember {
+		return MemberZoneAccessCheckDTO{
+			Allowed:        false,
+			Reason:         "member_required",
+			RequiresLogin:  false,
+			RequiresMember: true,
+			RequiredLevel:  meta.AccessLevel,
+			UserIsMember:   false,
+			UserLevel:      userLevel,
+			MemberZoneMeta: meta,
+		}, nil
+	}
+
+	if meta.AccessLevel == "premium" && memberLevelNumber(status) < 2 {
+		return MemberZoneAccessCheckDTO{
+			Allowed:        false,
+			Reason:         "member_required",
+			RequiresLogin:  false,
+			RequiresMember: true,
+			RequiredLevel:  meta.AccessLevel,
+			UserIsMember:   true,
+			UserLevel:      userLevel,
+			MemberZoneMeta: meta,
+		}, nil
+	}
+
+	return MemberZoneAccessCheckDTO{
+		Allowed:        true,
+		Reason:         "allowed",
+		RequiresLogin:  false,
+		RequiresMember: false,
+		RequiredLevel:  meta.AccessLevel,
+		UserIsMember:   true,
+		UserLevel:      userLevel,
+		MemberZoneMeta: meta,
+	}, nil
+}
+
+func (s *Service) GetMemberZoneContentForActor(ctx context.Context, actor *ResourceAccessCheckActorDTO, slug string) (MemberZoneContentDTO, error) {
+	access, err := s.CheckMemberZoneAccess(ctx, actor, slug)
+	if err != nil {
+		return MemberZoneContentDTO{}, err
+	}
+	if !access.Allowed {
+		if access.RequiresLogin {
+			return MemberZoneContentDTO{}, ErrMemberZoneUnavailable
+		}
+		return MemberZoneContentDTO{}, ErrMemberZoneAccessDenied
+	}
+	if s.memberZoneRepo == nil {
+		return MemberZoneContentDTO{}, ErrMemberZoneNotFound
+	}
+	return s.memberZoneRepo.GetPublishedMemberZoneContentBySlug(ctx, strings.TrimSpace(slug))
 }
 
 func (s *Service) CheckResourceAccess(ctx context.Context, actor *ResourceAccessCheckActorDTO, input ResourceAccessCheckRequestDTO) (ResourceAccessCheckDTO, error) {
